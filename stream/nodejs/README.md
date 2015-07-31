@@ -7,7 +7,7 @@ git clone https://github.com/ieconomics/open-api.git
 
 #####2
 ```
-cd open-api//stream/nodejs
+cd open-api/stream/nodejs
 ```
 
 #####3
