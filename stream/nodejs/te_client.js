@@ -5,11 +5,11 @@ var events = require("events");
 
 var WebSocket = require('ws'),
 	defaultOptions = {
-		url: 'ws://stream.tradingeconomics.com/',
+		url: 'ws://stream.tradingeconomics.com/', 
 		key: 'guest',
 		secret: 'guest',
 		reconnect: true, //reconnect on error/disconnect 
-		reconnect_timeout: 60, //time (in seconds) to wait before attepmt to reconect
+		reconnect_timeout: 30000, //time (in miliseconds) to wait before attepmt to reconect
 		onMessage: function(){},
 		onError: function(){}
 	};
@@ -50,7 +50,7 @@ TEClient.prototype.connect = function(){
 		options = _this.options,
 		url = buildWsUrl(options);
 
-	console.log('\n Connection to ', url);
+	console.log('\n Connecting to ', url);
 	_this.ws = new WebSocket(url);
 
 		_this.ws.on('open', function(){
@@ -68,7 +68,9 @@ TEClient.prototype.connect = function(){
 				if(aux.act && aux.act!='keepalive'){
 					_this.emit('message', aux);
 				}
-			}catch(err){}
+			}catch(err){
+				//console.log(err);
+			}
 			
 		});
 
