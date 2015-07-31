@@ -7,10 +7,10 @@ git clone https://github.com/ieconomics/open-api.git
 
 #####2
 ```
-cd PATH_TO_REPOSITORY/stream/nodejs
+cd open-api//stream/nodejs
 ```
 
-#####3 - 
+#####3
 ```
 npm install
 ```
