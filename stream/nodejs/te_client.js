@@ -56,7 +56,7 @@ TEClient.prototype.connect = function(){
 		_this.ws.on('open', function(){
 			//subscribe to our list
 			_this.subArr.forEach(function(subject){
-				_this.ws.send('{"act": "subscribe", "to": "'+subject+'"}');
+				_this.ws.send('{"topic": "subscribe", "to": "'+subject+'"}');
 			});
 		});
 
@@ -65,7 +65,7 @@ TEClient.prototype.connect = function(){
 			try{
 				var aux = JSON.parse(data);
 
-				if(aux.act && aux.act!='keepalive'){
+				if(aux.topic && aux.topic!='keepalive'){
 					_this.emit('message', aux);
 				}
 			}catch(err){
@@ -114,7 +114,7 @@ TEClient.prototype.subscribe = function(to){
 
 
 	
-	_this.ws.send('{"act": "subscribe", "to": "'+to+'"}');
+	_this.ws.send('{"topic": "subscribe", "to": "'+to+'"}');
 
 
 	return _this;

@@ -18,7 +18,7 @@ Client.subscribe('EURUSD');
 
 
 Client.on('message', function(msg){
-	console.log('\n Data from TradingEconomics stream: ', msg.act);
+	console.log('\n Data from TradingEconomics stream: ', msg.topic);
 	console.log(msg);
 
 	//parse/save msg to DB

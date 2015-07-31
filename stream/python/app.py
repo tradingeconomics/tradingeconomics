@@ -19,7 +19,7 @@ def on_message(ws, message):
     print message
     data = json.loads(message)
 
-    if "act" in data and data["act"] != "keepalive":
+    if "topic" in data and data["topic"] != "keepalive":
         print "Save data to DB"
     
 
@@ -43,9 +43,9 @@ def on_close(ws):
 def on_open(ws):
     print "+++ Socket is open!"
     print "+++ Subscribe to calendar events..."
-    ws.send(json.dumps({'act': 'subscribe', 'to': 'calendar'}) )
+    ws.send(json.dumps({'topic': 'subscribe', 'to': 'calendar'}) )
     print "+++ Subscribe to EURUSD..."
-    ws.send(json.dumps({'act': 'subscribe', 'to': 'EURUSD'}) )
+    ws.send(json.dumps({'topic': 'subscribe', 'to': 'EURUSD'}) )
 
 
 
