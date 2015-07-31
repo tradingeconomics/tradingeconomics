@@ -50,6 +50,7 @@ TEClient.prototype.connect = function(){
 		options = _this.options,
 		url = buildWsUrl(options);
 
+	console.log('\n Connection to ', url);
 	_this.ws = new WebSocket(url);
 
 		_this.ws.on('open', function(){
@@ -63,7 +64,7 @@ TEClient.prototype.connect = function(){
 		_this.ws.on('message', function(data){
 			try{
 				var aux = JSON.parse(data);
-				
+
 				if(aux.act && aux.act!='keepalive'){
 					_this.emit('message', aux);
 				}
@@ -73,7 +74,9 @@ TEClient.prototype.connect = function(){
 
 
 		_this.ws.on('close', function(){
+			console.log('SOCKET CLOSED');
 			if(options.reconnect){
+				console.log('Trying to reconnect in ', options.reconnect_timeout);
 				setTimeout(function(){
 					_this.connect();
 				}, options.reconnect_timeout);
@@ -82,7 +85,9 @@ TEClient.prototype.connect = function(){
 
 
 		_this.ws.on('error', function(){
+			console.log('ERROR');
 			if(options.reconnect){
+				console.log('Trying to reconnect in ', options.reconnect_timeout);
 				setTimeout(function(){
 					_this.connect();
 				}, options.reconnect_timeout);
