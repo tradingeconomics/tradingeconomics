@@ -63,7 +63,7 @@ TEClient.prototype.connect = function(){
 		_this.ws.on('message', function(data){
 			try{
 				var aux = JSON.parse(data);
-
+				
 				if(aux.act && aux.act!='keepalive'){
 					_this.emit('message', aux);
 				}
