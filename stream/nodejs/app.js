@@ -12,8 +12,13 @@ var te_client = require('./te_client'),
 
 
 Client.subscribe('calendar'); //recive stream data for calendar events
+Client.subscribe('stream');
 
 Client.subscribe('EURUSD');
+
+
+//Client.subscribe('CL1');
+
 
 
 

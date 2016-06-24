@@ -54,6 +54,7 @@ TEClient.prototype.connect = function(){
 	_this.ws = new WebSocket(url);
 
 		_this.ws.on('open', function(){
+			console.log('SOCKET CONNECTED');
 			//subscribe to our list
 			_this.subArr.forEach(function(subject){
 				_this.ws.send('{"topic": "subscribe", "to": "'+subject+'"}');
