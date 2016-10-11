@@ -25,7 +25,7 @@ def parseData(data):
     return datafr
 
 def getData(country, indicator):
-    linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(indicator) + '?c=804c4586a88ff14:f2435414bda9b29'
+    linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(indicator) + '?c='
     webResults = json.load(urllib.urlopen(linkAPI))
     date = [d['DateTime'] for d in webResults]       
     value = [d[u'Value'] for d in webResults]
