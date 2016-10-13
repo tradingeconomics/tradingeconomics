@@ -24,8 +24,15 @@ def parseData(data):
             datafr[i] = datafr[i].set_index(times)
     return datafr
 
-def getData(country, indicator):
-    linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(indicator) + '?c='
+def getData(country, indicator, credentials = None):
+    if country == None:
+        raise getData(country, indicator, credentials = None)
+    if indicator == None:
+        raise getData(country, indicator, credentials = None)
+    if credentials == None:
+        credentials = 'guest:guest'
+    
+    linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(indicator) + '?c='+credentials;
     webResults = json.load(urllib.urlopen(linkAPI))
     date = [d['DateTime'] for d in webResults]       
     value = [d[u'Value'] for d in webResults]
@@ -33,5 +40,6 @@ def getData(country, indicator):
     results = parseData(results)
     return results
 
+    getData('Germany')
 
 
