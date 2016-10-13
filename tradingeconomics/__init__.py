@@ -1,1 +1,1 @@
-from tradingeconomics.dataImport import getData
+from tradingeconomics.getHistoricalData import getHistoricalData
