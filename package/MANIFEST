@@ -1,0 +1,2 @@
+include README.md LICENSE
+recursive-include awesome_pypi_package *.py *.html
