@@ -1,4 +1,1 @@
-"""
-some text ..
-explanation of package
-"""
+Python version of Trading Economics API library.
