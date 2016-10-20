@@ -7,7 +7,7 @@ def readme():
 setup(
   name = 'tradingeconomics',
   packages = find_packages(exclude=['tests*']),  
-  version = 'v0.1.604',
+  version = 'v0.1.605',
   description = 'Function to extract time series',
   long_description = readme(),
   author = 'Olexandr Baturin',
