@@ -7,7 +7,7 @@ def readme():
 setup(
   name = 'tradingeconomics',
   packages = find_packages(exclude=['tests*']),  
-  version = 'v0.1.605',
+  version = 'v0.1.606',
   description = 'Library to download data from Trading Economics API',
   long_description = readme(),
   author = 'Trading Economics',

@@ -4,14 +4,8 @@ import pandas as pd
 from datetime import *
 import re
 import itertools
+import functions as fn 
 
-
-def credCheck(credentials):
-    pattern = re.compile("^...............:...............$")
-    if pattern.match(credentials):
-        print("Correct credentials format.")
-    else:
-        raise ValueError('Invalid credentials.')
 
         
 def checkCountry(country):       
@@ -41,20 +35,6 @@ def getResults(webResults, country):
             maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
         maindf['Country'] =  maindf['Country'].map(lambda x: x.strip())
         return maindf    
- 
-
-def out_type(init_format):
-    list_of_countries= init_format.Country.unique()
-    list_of_cat= init_format.Category.unique()
-    dict_start = {el:{elm:0 for elm in list_of_cat} for el in list_of_countries} 
-    for i, j in itertools.product(range(len(list_of_countries)), range(len(list_of_cat))):
-        dict_cntry = init_format.loc[init_format['Country'] == list_of_countries[i]]
-        dict_cat = dict_cntry.loc[init_format['Category'] == list_of_cat[j]].to_dict('records')
-        dict_start[list_of_countries[i]][list_of_cat[j]] = dict_cat
-        for l in range(len(dict_cat)):
-            del dict_cat[l]['Country']
-            del dict_cat[l]['Category']
-    return dict_start
 
           
 def getIndicatorData(country = None, indicators = None, output_type = None, credentials = None):
@@ -99,7 +79,7 @@ def getIndicatorData(country = None, indicators = None, output_type = None, cred
     if credentials == None:
         credentials = 'guest:guest'
     else:
-        credCheck(credentials)
+        fn.credCheck(credentials)
     linkAPI = linkAPI + '?c=' + credentials
     webResults = json.load(urllib.urlopen(linkAPI))
     if country == None:
@@ -110,7 +90,7 @@ def getIndicatorData(country = None, indicators = None, output_type = None, cred
     else:
         maindf = getResults(webResults, country)    
         if output_type == None or output_type =='dict':
-            output = out_type(maindf)
+            output = fn.out_type(maindf)
         elif output_type == 'df': 
             output = maindf
         elif output_type == 'raw':

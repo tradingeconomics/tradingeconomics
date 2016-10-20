@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import *
 import re
 import itertools
-
+import functions as fn
 
 def paramCheck (country, indicator = None):
     if type(country) is str and indicator == None:
@@ -23,52 +23,8 @@ def paramCheck (country, indicator = None):
         multiIndicator = ",".join(indicator)
         linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(multiIndicator)
     return linkAPI
-
-    
-def credCheck(credentials):
-    #Check user's credentials
-    pattern = re.compile("^...............:...............$")
-    if pattern.match(credentials):
-        print("Correct credentials format")
-    else:
-        raise ValueError('Invalid credentials.')
         
-        
-def validate(date_text):      
-        try:
-            datetime.strptime(date_text, '%Y-%m-%d')
-        except ValueError:
-            raise ValueError("Incorrect data format, should be YYYY-MM-DD")
-
-            
-def validatePeriod(initDate, endDate):
-    if  datetime.strptime(initDate, '%Y-%m-%d') > datetime.strptime(endDate, '%Y-%m-%d'):
-        raise ValueError ('Invalid time period, check the supplied date parameters.')
-
-    
-def finalLink(link, prmtr):
-    linkAPI  = link
-    for i in range(len(prmtr)):
-        if type(prmtr) == str: 
-            linkAPI = linkAPI + '/' + prmtr
-        linkAPI = linkAPI + '/' + str( prmtr[i])            
-    return linkAPI
-    
-
-def out_type(init_format):
-    list_of_countries= init_format.Country.unique()
-    list_of_cat= init_format.Category.unique()
-    dict_start = {el:{elm:0 for elm in list_of_cat} for el in list_of_countries} 
-    for i, j in itertools.product(range(len(list_of_countries)), range(len(list_of_cat))):
-        dict_cntry = init_format.loc[init_format['Country'] == list_of_countries[i]]
-        dict_cat = dict_cntry.loc[init_format['Category'] == list_of_cat[j]].to_dict('records')
-        dict_start[list_of_countries[i]][list_of_cat[j]] = dict_cat
-        for l in range(len(dict_cat)):
-            del dict_cat[l]['Country']
-            del dict_cat[l]['Category']
-    return dict_start
-    
-    
+ 
 def getCalendarData(country = None, category = None, initDate = None, endDate = None, output_type = None,  credentials = None):
     
     """
@@ -119,23 +75,23 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
         raise ValueError ('End date could not be greater than actual date')
     else:
         try: 
-            validate(initDate)
+            fn.validate(initDate)
         except ValueError:
             raise ValueError ('Incorrect initial date format, should be YYYY-MM-DD ')
         try: 
-            validate(endDate)
+            fn.validate(endDate)
         except ValueError:
             raise ValueError ('Incorrect end date format, should be YYYY-MM-DD ')
         try:        
-            validatePeriod(initDate, endDate)
+            fn.validatePeriod(initDate, endDate)
         except ValueError:
             raise ValueError ('Invalid time period.') 
         param=[initDate, endDate]
-        linkAPI = finalLink(linkAPI, param)
+        linkAPI = fn.finalLink(linkAPI, param)
     if credentials == None:
         credentials = 'guest:guest'
     else:
-        credCheck(credentials)
+        fn.credCheck(credentials)
     linkAPI = linkAPI + '?c=' + credentials
     webResults = json.load(urllib.urlopen(linkAPI))
     names = ['date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast']
@@ -145,7 +101,7 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
         names[i] =  [d[names2[i]] for d in webResults]
         maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
     if output_type == None or output_type =='dict':
-        output = out_type(maindf)
+        output = fn.out_type(maindf)
     elif output_type == 'df': 
         output = maindf
     elif output_type == 'raw':

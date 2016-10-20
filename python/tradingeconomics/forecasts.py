@@ -4,14 +4,7 @@ import pandas as pd
 from datetime import *
 import re
 import itertools
-
-
-def credCheck(credentials):
-    pattern = re.compile("^...............:...............$")
-    if pattern.match(credentials):
-        print("Correct credentials format.")
-    else:
-        raise ValueError('Invalid credentials.')
+import functions as fn
 
         
 def checkCountry(country):
@@ -47,20 +40,6 @@ def getLink(country, indicator):
         multiIndic = ",".join(indicator)
         linkAPI = linkAPI + '/indicator/' + urllib.quote(multiIndic) 
     return linkAPI
-
-    
-def out_type(init_format):
-    list_of_countries= init_format.Country.unique()
-    list_of_cat= init_format.Category.unique()
-    dict_start = {el:{elm:0 for elm in list_of_cat} for el in list_of_countries} 
-    for i, j in itertools.product(range(len(list_of_countries)), range(len(list_of_cat))):
-        dict_cntry = init_format.loc[init_format['Country'] == list_of_countries[i]]
-        dict_cat = dict_cntry.loc[init_format['Category'] == list_of_cat[j]].to_dict('records')
-        dict_start[list_of_countries[i]][list_of_cat[j]] = dict_cat
-        for l in range(len(dict_cat)):
-            del dict_cat[l]['Country']
-            del dict_cat[l]['Category']
-    return dict_start
 
     
 def getForecastData(country = None, indicator = None, output_type = None, credentials = None):
@@ -105,7 +84,7 @@ def getForecastData(country = None, indicator = None, output_type = None, creden
     if credentials == None:
         credentials = 'guest:guest'
     else:
-        credCheck(credentials)
+        fn.credCheck(credentials)
     linkAPI = linkAPI + '?c=' + credentials
     webResults = json.load(urllib.urlopen(linkAPI))
     names = ['country', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
@@ -115,7 +94,7 @@ def getForecastData(country = None, indicator = None, output_type = None, creden
         names[i] =  [d[names2[i]] for d in webResults]
         maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)  
     if output_type == None or output_type =='dict':
-        output = out_type(maindf)
+        output = fn.out_type(maindf)
     elif output_type == 'df':  
         output = maindf
     elif output_type == 'raw':

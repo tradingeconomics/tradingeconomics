@@ -4,7 +4,8 @@ import pandas as pd
 from datetime import *
 import re
 import itertools
-    
+import functions as fn  
+  
 def parseData(data, frequency):
     if len(data) == 2:
         datafr = pd.DataFrame.from_dict(data)
@@ -92,46 +93,8 @@ def lowerDate(country, indicator, credentials):
     webResults = json.load(urllib.urlopen(linkAPI)) 
     date = [d['DateTime'] for d in webResults]
     iDate = datetime.strptime(date[0], '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')
-    return iDate
+    return iDate  
 
-    
-def higherDate(country, indicator, credentials):
-    if credentials == None:
-        credentials = 'guest:guest'
-    linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(indicator) + '?c='+credentials;
-    webResults = json.load(urllib.urlopen(linkAPI)) 
-    date = [d['DateTime'] for d in webResults]
-    eDate = datetime.strptime(date[len(date)-1], '%Y-%m-%dT%H:%M:%S').strftime('%Y-%m-%d')
-    return eDate    
-    
-    
-def validate(date_text):      
-        try:
-            datetime.strptime(date_text, '%Y-%m-%d')
-        except ValueError:
-            raise ValueError("Incorrect data format, should be YYYY-MM-DD")
-        
-
-def validatePeriod(initDate, endDate):
-    if  datetime.strptime(initDate, '%Y-%m-%d') > datetime.strptime(endDate, '%Y-%m-%d'):
-        raise ValueError ('Incorrect time period! ')
-
-        
-def finalLink(link, prmtr):
-    linkAPI  = link
-    for i in range(len(prmtr)):
-        if type(prmtr) == str: 
-            linkAPI = linkAPI + '/' + prmtr
-        linkAPI = linkAPI + '/' + str( prmtr[i])            
-    return linkAPI
-
-    
-def credCheck(credentials):
-    pattern = re.compile("^...............:...............$")
-    if pattern.match(credentials):
-        print("Correct credentials format")
-    else:
-        raise ValueError('Incorrect credentials format')
 
         
 def paramCheck (country, indicator):
@@ -190,44 +153,44 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     if initDate == None and (endDate is not None):
         iDate = lowerDate(country, indicator, credentials)
         try: 
-            validate(endDate)
+            fn.validate(endDate)
         except ValueError:
             raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try:
-            validatePeriod(iDate, endDate)
+            fn.validatePeriod(iDate, endDate)
         except ValueError:
             raise ValueError ('Incorrect time period.')  
         param=[iDate, endDate]
-        linkAPI = finalLink(linkAPI, param)    
+        linkAPI = fn.finalLink(linkAPI, param)    
     if (initDate is not None) and (endDate is not None) :
         try: 
-            validate(initDate)
+            fn.validate(initDate)
         except ValueError:
             raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try: 
-            validate(endDate)
+            fn.validate(endDate)
         except ValueError:
             raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try:        
-            validatePeriod(initDate, endDate)
+            fn.validatePeriod(initDate, endDate)
         except ValueError:
             raise ValueError ('Invalid time period.')
         param=[initDate, endDate]
-        linkAPI = finalLink(linkAPI, param)
+        linkAPI = fn.finalLink(linkAPI, param)
     if (initDate is not None) and endDate == None :
-        eDate = higherDate(country, indicator, credentials)
+        
         try: 
-            validate(initDate)
+            fn.validate(initDate)
         except ValueError:
             raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
             if initDate > str(date.today()):
                 raise ValueError ('Initial date out of range.')
-        param=[initDate, eDate]
-        linkAPI = finalLink(linkAPI, param)                 
+        
+        linkAPI = fn.finalLink(linkAPI, initDate)                 
     if credentials == None:
         credentials = 'guest:guest'
     else:
-        credCheck(credentials)
+        fn.credCheck(credentials)
     linkAPI = linkAPI + '?c='+credentials
     webResults = json.load(urllib.urlopen(linkAPI))
     if len(webResults) > 0:

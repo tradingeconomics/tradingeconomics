@@ -4,14 +4,8 @@ import pandas as pd
 from datetime import *
 import re
 import itertools
+import functions as fn 
 
-
-def credCheck(credentials):
-    pattern = re.compile("^...............:...............$")
-    if pattern.match(credentials):
-        print("Invalid credentials.")
-    else:
-        raise ValueError('Incorrect credentials format.')
 
 
 def getMarketsData(marketsField, output_type = None, credentials = None):
@@ -47,7 +41,7 @@ def getMarketsData(marketsField, output_type = None, credentials = None):
     if credentials == None:
         credentials = 'guest:guest'
     else:
-        credCheck(credentials)
+        fn.credCheck(credentials)
     linkAPI = linkAPI + '?c=' + credentials
     webResults = json.load(urllib.urlopen(linkAPI))
     names = ['symbol','ticker','name', 'country', 'date', 'last', 'group','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear']
