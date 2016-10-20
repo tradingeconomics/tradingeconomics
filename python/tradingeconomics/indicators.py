@@ -9,9 +9,9 @@ import itertools
 def credCheck(credentials):
     pattern = re.compile("^...............:...............$")
     if pattern.match(credentials):
-        print("Correct credentials format")
+        print("Correct credentials format.")
     else:
-        raise ValueError('Incorrect credentials format')
+        raise ValueError('Invalid credentials.')
 
         
 def checkCountry(country):       

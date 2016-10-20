@@ -31,7 +31,7 @@ def credCheck(credentials):
     if pattern.match(credentials):
         print("Correct credentials format")
     else:
-        raise ValueError('Incorrect credentials format')
+        raise ValueError('Invalid credentials.')
         
         
 def validate(date_text):      
@@ -43,7 +43,7 @@ def validate(date_text):
             
 def validatePeriod(initDate, endDate):
     if  datetime.strptime(initDate, '%Y-%m-%d') > datetime.strptime(endDate, '%Y-%m-%d'):
-        raise ValueError ('Incorrect time period! ')
+        raise ValueError ('Invalid time period, check the supplied date parameters.')
 
     
 def finalLink(link, prmtr):
@@ -69,7 +69,7 @@ def out_type(init_format):
     return dict_start
     
     
-def getCalendarData(country = None, event = None, initDate = None, endDate = None, output_type = None,  credentials = None):
+def getCalendarData(country = None, category = None, initDate = None, endDate = None, output_type = None,  credentials = None):
     
     """
     Return calendar events.
@@ -78,41 +78,41 @@ def getCalendarData(country = None, event = None, initDate = None, endDate = Non
     Parameters:
     -----------
     country: string or list.
-             String for one country information. List of strings for 
-             several countrys, for example country = ['country_name', 'country_name'].
-    event:   string or list.
-             String for one event information. List of strings for several events in a
-             calendar, for example event = 'event_name' or 
-             event = ['event_name', 'event_name']
+             String to get data for one country. List of strings to get data for
+             several countries. For example, country = ['United States', 'Australia'].
+    category:   string or list.
+             String  to get data for one category. List of strings to get data for several calendar events.
+             For example, category = 'GDP Growth Rate' or 
+             category = ['Exports', 'Imports']
     initDate: string with format: YYYY-MM-DD.
              For example: '2011-01-01' 
     endDate: string with format: YYYY-MM-DD.
     output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
-             'raw' for list of dictionaries directly from the web. 
+             'raw' for list of dictionaries without any parsing. 
     credentials: string.
              User's credentials.
 
     Notes
     -----
-    All parameters are optional. Without parameters all daily information will be provided. 
-    Without credentials default information will be provided.
+    All parameters are optional. When not supplying parameters, data for all countries and indicators will be provided. 
+    Without credentials, only sample data is returned.
 
     Example
     -------
-    getCalendarData(country = 'United States', event = 'Imports', initDate = '2011-01-01', endDate = '2016-01-01')
+    getCalendarData(country = 'United States', category = 'Imports', initDate = '2011-01-01', endDate = '2016-01-01')
 
-    getCalendarData(country = ['United States', 'Portugal'], event = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
+    getCalendarData(country = ['United States', 'India'], category = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
     """
-    if country == None and event == None:
+    if country == None and category == None:
         linkAPI = 'http://api.tradingeconomics.com/calendar'
-    elif country == None and event != None:
+    elif country == None and category != None:
         country_all = 'all'
-        linkAPI = paramCheck(country_all, event)
-    elif type(country) is str and type(event) is str:
-        linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(event)
+        linkAPI = paramCheck(country_all, category)
+    elif type(country) is str and type(category) is str:
+        linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(category)
     else:
-        linkAPI = paramCheck(country, event)
+        linkAPI = paramCheck(country, category)
     if  initDate == None and endDate == None:
         linkAPI = linkAPI
     elif endDate > str(datetime.now()):
@@ -121,15 +121,15 @@ def getCalendarData(country = None, event = None, initDate = None, endDate = Non
         try: 
             validate(initDate)
         except ValueError:
-            raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD ')
+            raise ValueError ('Incorrect initial date format, should be YYYY-MM-DD ')
         try: 
             validate(endDate)
         except ValueError:
-            raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD ')
+            raise ValueError ('Incorrect end date format, should be YYYY-MM-DD ')
         try:        
             validatePeriod(initDate, endDate)
         except ValueError:
-            raise ValueError ('Incorrect time period! ') 
+            raise ValueError ('Invalid time period.') 
         param=[initDate, endDate]
         linkAPI = finalLink(linkAPI, param)
     if credentials == None:
@@ -151,5 +151,5 @@ def getCalendarData(country = None, event = None, initDate = None, endDate = Non
     elif output_type == 'raw':
         output = webResults
     else:
-        raise ValueError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for results directly from web.') 
+        raise ValueError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
     return output

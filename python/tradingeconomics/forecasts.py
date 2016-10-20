@@ -9,9 +9,9 @@ import itertools
 def credCheck(credentials):
     pattern = re.compile("^...............:...............$")
     if pattern.match(credentials):
-        print("Correct credentials format")
+        print("Correct credentials format.")
     else:
-        raise ValueError('Incorrect credentials format')
+        raise ValueError('Invalid credentials.')
 
         
 def checkCountry(country):
@@ -71,31 +71,31 @@ def getForecastData(country = None, indicator = None, output_type = None, creden
     Parameters:
     -----------
     country: string or list.
-             String for one country information. List of strings for 
-             several countrys, for example country = ['country_name', 'country_name'].
+             String to get data for one country. List of strings to get data for
+             several countries. For example, country = ['United States', 'Australia'].
     indicator: string or list.
-             String for one indicator information. List of strings for several indicators, 
-             for example indicator = 'indicator_name' or 
-             indicator = ['indicator_name', 'indicator_name']
+             String  to get data for one category. List of strings to get data for several calendar events.
+             For example, category = 'GDP Growth Rate' or 
+             category = ['Exports', 'Imports']
     output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
-             'raw' for list of dictionaries directly from the web. 
+             'raw' for list of dictionaries without any parsing.  
     credentials: string.
              User's credentials.
 
     Notes
     -----
     At least one of parameters, country or indicator, should be provided. 
-    Without credentials default information will be provided.
+    Without credentials, only sample data is returned.
 
     Example
     -------
     getForecastData(country = 'United States', indicator = 'Imports')
 
-    getForecastData(country = ['United States', 'Portugal'], indicator = ['Imports','Exports'])
+    getForecastData(country = ['United States', 'India'], indicator = ['Imports','Exports'])
     """
     if country == None and indicator == None:
-        raise ValueError ('At least one of parameters, country or indicator, should be indicated. ')
+        raise ValueError ('At least one of the parameters, country or indicator, needs to be supplied.')
     elif country != None and indicator == None:
         linkAPI = checkCountry(country)
     elif country == None and indicator != None:
@@ -121,5 +121,5 @@ def getForecastData(country = None, indicator = None, output_type = None, creden
     elif output_type == 'raw':
         output = webResults
     else:
-        raise ValueError ('output_type options : df(defoult) for data frame, dict for dictionary by country, raw for results directly from web.')
+        raise ValueError ('output_type options : df(defoult) for data frame, dict for dictionary by country, raw for unparsed results')
     return output

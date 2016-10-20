@@ -1,6 +1,5 @@
 """
-
-This package was developed strictly for Trading Economics website users.
+This package allows Trading Economics clients to easily query the Trading Economics API to get data into their Python code.
 """
 
 from historical import getHistoricalData

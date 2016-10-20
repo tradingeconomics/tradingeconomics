@@ -9,31 +9,32 @@ import itertools
 def credCheck(credentials):
     pattern = re.compile("^...............:...............$")
     if pattern.match(credentials):
-        print("Correct credentials format")
+        print("Invalid credentials.")
     else:
-        raise ValueError('Incorrect credentials format')
+        raise ValueError('Incorrect credentials format.')
 
 
 def getMarketsData(marketsField, output_type = None, credentials = None):
     """
-    Return a list of available commodities, currency, index or 
-    bonds with latest values.
+    Returns a list of available commodities, currencies, indeces or 
+    bonds and their latest values.
     ==========================================================
 
     Parameters:
     -----------
-    marketsField: one of the strings 'commodities', 'currency',
-                  'index' or 'bonds'.
+    marketsField: string.
+            Takes either one of 'commodity','currency',
+            'index' or 'bond' as options.
              
     output_type: string.
              'df'(default) for data frame,
-             'raw' for list of dictionaries directly from the web. 
+             'raw' for list of unparsed data. 
     credentials: string.
              User's credentials.
 
     Notes
     ----- 
-    Without credentials default information will be provided.
+    Without credentials only sample information will be provided.
 
     Example
     -------
@@ -41,7 +42,7 @@ def getMarketsData(marketsField, output_type = None, credentials = None):
     """
     fields =['commodities', 'currency', 'index', 'bonds']
     if marketsField not in fields:
-        raise ValueError ('Possible values for marketsField are commodities, currency, index or bonds')
+        raise ValueError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bonds\'.')
     linkAPI = 'http://api.tradingeconomics.com/markets/' + urllib.quote(marketsField) 
     if credentials == None:
         credentials = 'guest:guest'
@@ -60,6 +61,6 @@ def getMarketsData(marketsField, output_type = None, credentials = None):
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ValueError ('output_type options : df(defoult) for data frame or raw for results directly from web.') 
+        raise ValueError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
     

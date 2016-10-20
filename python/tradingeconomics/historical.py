@@ -156,30 +156,30 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     Parameters:
     -----------
     country: string or list.
-             String for one country information. List of strings for 
-             several countrys, for example country = ['country_name', 'country_name'].
+             String to get data for one country. List of strings to get data for
+             several countries. For example, country = ['United States', 'Australia'].
     indicator: string or list.
-             String for one indicator. List of strings for several indicators, for example 
-             indicator = 'indicator_name' or 
-             indicator = ['indicator_name', 'indicator_name']
+             String  to get data for one category. List of strings to get data for several calendar events.
+             For example, category = 'GDP Growth Rate' or 
+             category = ['Exports', 'Imports']
     initDate: string with format: YYYY-MM-DD.
              For example: '2011-01-01' 
     endDate: string with format: YYYY-MM-DD.
     output_type: string.
-             'dict'(default) for dictionary format output or
-             'raw' for list of dictionaries directly from the web. 
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries without any parsing.
     credentials: string.
              User's credentials.
 
     Notes
     ----- 
-    Without credentials default information will be provided.
+    Without credentials only sample data will be provided.
 
     Example
     -------
     getHistoricalData(country = 'United States', indicator = 'Imports', initDate = '2011-01-01', endDate = '2016-01-01')
 
-    getHistoricalData(country = ['United States', 'Portugal'], indicator = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
+    getHistoricalData(country = ['United States', 'United Kingdom'], indicator = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
     """
     if type(country) is not str or type(indicator) is not str:  
         linkAPI = paramCheck(country, indicator)
@@ -192,26 +192,26 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
         try: 
             validate(endDate)
         except ValueError:
-            raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY')
+            raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try:
             validatePeriod(iDate, endDate)
         except ValueError:
-            raise ValueError ('Incorrect time period! ')  
+            raise ValueError ('Incorrect time period.')  
         param=[iDate, endDate]
         linkAPI = finalLink(linkAPI, param)    
     if (initDate is not None) and (endDate is not None) :
         try: 
             validate(initDate)
         except ValueError:
-            raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY')
+            raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try: 
             validate(endDate)
         except ValueError:
-            raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY')
+            raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try:        
             validatePeriod(initDate, endDate)
         except ValueError:
-            raise ValueError ('Incorrect time period! ')
+            raise ValueError ('Invalid time period.')
         param=[initDate, endDate]
         linkAPI = finalLink(linkAPI, param)
     if (initDate is not None) and endDate == None :
@@ -219,9 +219,9 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
         try: 
             validate(initDate)
         except ValueError:
-            raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY')
+            raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
             if initDate > str(date.today()):
-                raise ValueError ('Initial date should be ! ')
+                raise ValueError ('Initial date out of range.')
         param=[initDate, eDate]
         linkAPI = finalLink(linkAPI, param)                 
     if credentials == None:
@@ -250,12 +250,12 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
         else:
             results = multiParams(webResults)
     else:
-        raise ValueError ('No data for provided parameters.')    
+        raise ValueError ('No data available for the provided parameters.')    
     if output_type == None or output_type =='dict':        
         output = results
     elif output_type == 'raw':        
         output = webResults
     else:       
-        raise ValueError ('output_type options : df(defoult) for data frame or raw for results directly from web.')
+        raise ValueError ('output_type options : df(defoult) for data frame or raw for unparsed results.')
     return output
     
