@@ -1,0 +1,12 @@
+Package: tradingeconomics
+Type: Package
+Title: Library to download data from Trading Economics API
+Version: 0.1.0
+Author: person("Olexandr", "Baturin", email =
+    "olexandr.baturin@tradingeconomics.com", role = c("aut", "cre"))
+Maintainer: Trading Economics <olexandr.baturin@tradingeconomics.com>
+Description: R version of Trading Economics API library
+Depends: jsonlite
+License: LICENSE
+LazyData: TRUE
+RoxygenNote: 5.0.1
