@@ -2,10 +2,8 @@ import json
 import urllib 
 import pandas as pd
 from datetime import *
-import re
-import itertools
 import functions as fn
-
+import glob
         
 def checkCountry(country):
     linkAPI = 'http://api.tradingeconomics.com/forecast/country/'       
@@ -42,7 +40,7 @@ def getLink(country, indicator):
     return linkAPI
 
     
-def getForecastData(country = None, indicator = None, output_type = None, credentials = None):
+def getForecastData(country = None, indicator = None, output_type = None):
     """
      Return forecast values by country, by indicator, by country and indicator.
     ===========================================================================
@@ -59,13 +57,10 @@ def getForecastData(country = None, indicator = None, output_type = None, creden
     output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
              'raw' for list of dictionaries without any parsing.  
-    credentials: string.
-             User's credentials.
 
     Notes
     -----
     At least one of parameters, country or indicator, should be provided. 
-    Without credentials, only sample data is returned.
 
     Example
     -------
@@ -81,12 +76,14 @@ def getForecastData(country = None, indicator = None, output_type = None, creden
         linkAPI = checkIndic(indicator)
     else:
         linkAPI = getLink(country, indicator)
-    if credentials == None:
-        credentials = 'guest:guest'
-    else:
-        fn.credCheck(credentials)
-    linkAPI = linkAPI + '?c=' + credentials
-    webResults = json.load(urllib.urlopen(linkAPI))
+    try:
+        linkAPI = linkAPI + '?c=' + glob.apikey
+    except AttributeError:
+        raise AttributeError('You need to do login before making any request')
+    try:
+        webResults = json.load(urllib.urlopen(linkAPI))
+    except ValueError:
+        raise ValueError ('Invalid credentials')
     names = ['country', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
     names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
     maindf = pd.DataFrame()  
@@ -100,5 +97,5 @@ def getForecastData(country = None, indicator = None, output_type = None, creden
     elif output_type == 'raw':
         output = webResults
     else:
-        raise ValueError ('output_type options : df(defoult) for data frame, dict for dictionary by country, raw for unparsed results')
+        raise ValueError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results')
     return output

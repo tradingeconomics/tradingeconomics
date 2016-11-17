@@ -2,10 +2,8 @@ import json
 import urllib 
 import pandas as pd
 from datetime import *
-import re
-import itertools
 import functions as fn 
-
+import glob
 
         
 def checkCountry(country):       
@@ -37,7 +35,7 @@ def getResults(webResults, country):
         return maindf    
 
           
-def getIndicatorData(country = None, indicators = None, output_type = None, credentials = None):
+def getIndicatorData(country = None, indicators = None, output_type = None):
     """
     Return a list of all indicators, indicators by country or country-indicator pair.
     =================================================================================
@@ -54,13 +52,10 @@ def getIndicatorData(country = None, indicators = None, output_type = None, cred
     output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
              'raw' for list of dictionaries directly from the web. 
-    credentials: string.
-             User's credentials.
 
     Notes
     -----
     All parameters are optional. Without parameters a list of all indicators will be provided. 
-    Without credentials default information will be provided.
 
     Example
     -------
@@ -76,12 +71,14 @@ def getIndicatorData(country = None, indicators = None, output_type = None, cred
         linkAPI = linkAPI
     else:
         linkAPI = checkIndic(indicators, linkAPI)
-    if credentials == None:
-        credentials = 'guest:guest'
-    else:
-        fn.credCheck(credentials)
-    linkAPI = linkAPI + '?c=' + credentials
-    webResults = json.load(urllib.urlopen(linkAPI))
+    try:
+        linkAPI = linkAPI + '?c=' + glob.apikey
+    except AttributeError:
+        raise AttributeError('You need to do login before making any request')
+    try:
+        webResults = json.load(urllib.urlopen(linkAPI))
+    except ValueError:
+        raise ValueError ('Invalid credentials')        
     if country == None:
         print ('Without country indication only a list of available indicators will be returned...')
         category = [d['Category'] for d in webResults]       

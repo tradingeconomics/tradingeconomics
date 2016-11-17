@@ -1,15 +1,11 @@
-import json 
-import urllib 
-import pandas as pd
+
 from datetime import *
 import re
 import itertools
 
 def credCheck(credentials):
     pattern = re.compile("^...............:...............$")
-    if pattern.match(credentials):
-        print("Correct credentials format")
-    else:
+    if not(pattern.match(credentials)):
         raise ValueError('Invalid credentials.')
         
 def out_type(init_format):

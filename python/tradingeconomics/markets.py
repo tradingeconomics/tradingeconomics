@@ -2,13 +2,10 @@ import json
 import urllib 
 import pandas as pd
 from datetime import *
-import re
-import itertools
-import functions as fn 
+import glob
 
 
-
-def getMarketsData(marketsField, output_type = None, credentials = None):
+def getMarketsData(marketsField, output_type = None):
     """
     Returns a list of available commodities, currencies, indeces or 
     bonds and their latest values.
@@ -23,12 +20,6 @@ def getMarketsData(marketsField, output_type = None, credentials = None):
     output_type: string.
              'df'(default) for data frame,
              'raw' for list of unparsed data. 
-    credentials: string.
-             User's credentials.
-
-    Notes
-    ----- 
-    Without credentials only sample information will be provided.
 
     Example
     -------
@@ -38,14 +29,20 @@ def getMarketsData(marketsField, output_type = None, credentials = None):
     if marketsField not in fields:
         raise ValueError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bonds\'.')
     linkAPI = 'http://api.tradingeconomics.com/markets/' + urllib.quote(marketsField) 
-    if credentials == None:
-        credentials = 'guest:guest'
+    try:
+        linkAPI = linkAPI + '?c=' + glob.apikey
+    except AttributeError:
+        raise AttributeError('You need to do login before making any request')
+    try:        
+        webResults = json.load(urllib.urlopen(linkAPI))
+    except ValueError:
+        raise ValueError ('Invalid credentials')        
+    if marketsField == 'bonds':
+        names = ['symbol','name', 'country', 'date', 'last', 'group','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear']
+        names2 = ['Symbol','Name', 'Country', 'Date', 'Last', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear']
     else:
-        fn.credCheck(credentials)
-    linkAPI = linkAPI + '?c=' + credentials
-    webResults = json.load(urllib.urlopen(linkAPI))
-    names = ['symbol','ticker','name', 'country', 'date', 'last', 'group','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear']
-    names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Last', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear']    
+        names = ['symbol','ticker','name', 'country', 'date', 'last', 'group','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear']
+        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Last', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear']    
     maindf = pd.DataFrame()     
     for i in range(len(names)):
         names[i] =  [d[names2[i]] for d in webResults]

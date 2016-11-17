@@ -2,9 +2,8 @@ import json
 import urllib 
 import pandas as pd
 from datetime import *
-import re
-import itertools
 import functions as fn
+import glob
 
 def paramCheck (country, indicator = None):
     if type(country) is str and indicator == None:
@@ -25,7 +24,7 @@ def paramCheck (country, indicator = None):
     return linkAPI
         
  
-def getCalendarData(country = None, category = None, initDate = None, endDate = None, output_type = None,  credentials = None):
+def getCalendarData(country = None, category = None, initDate = None, endDate = None, output_type = None):
     
     """
     Return calendar events.
@@ -46,13 +45,11 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
              'raw' for list of dictionaries without any parsing. 
-    credentials: string.
-             User's credentials.
+
 
     Notes
     -----
     All parameters are optional. When not supplying parameters, data for all countries and indicators will be provided. 
-    Without credentials, only sample data is returned.
 
     Example
     -------
@@ -88,12 +85,14 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
             raise ValueError ('Invalid time period.') 
         param=[initDate, endDate]
         linkAPI = fn.finalLink(linkAPI, param)
-    if credentials == None:
-        credentials = 'guest:guest'
-    else:
-        fn.credCheck(credentials)
-    linkAPI = linkAPI + '?c=' + credentials
-    webResults = json.load(urllib.urlopen(linkAPI))
+    try:
+        linkAPI = linkAPI + '?c=' + glob.apikey
+    except AttributeError:
+        raise AttributeError('You need to do login before making any request')
+    try:
+        webResults = json.load(urllib.urlopen(linkAPI))
+    except ValueError:
+        raise ValueError ('Invalid credentials')
     names = ['date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast']
     names2 = ['Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast']
     maindf = pd.DataFrame()  
