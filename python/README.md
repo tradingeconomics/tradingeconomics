@@ -1,6 +1,5 @@
 ---
 title: "Trading Economics API"
-output: html_document
 ---
 
 
