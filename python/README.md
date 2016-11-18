@@ -12,9 +12,8 @@ pip install tradingeconomics
 
 There is a possibility to install package using easy_install 
 ```python
-easy_install https://pypi.python.org/packages/4c/b4/e2e2a9668be305a42c0644b3eb5d4d1034ae062653ef737d7e80c1423d28/tradingeconomics-0.2.x.tar.gz
+easy_install https://pypi.python.org/packages/4c/b4/e2e2a9668be305a42c0644b3eb5d4d1034ae062653ef737d7e80c1423d28/tradingeconomics-0.2.9.tar.gz
 ```
-Where 'x' is last version number.
 
 As alternatyive you can download package from https://pypi.python.org/pypi/tradingeconomics and then follow the install instructions for [Python 3.x](https://docs.python.org/3/install/) or [Python 2.x](https://docs.python.org/2/install/)  
 
