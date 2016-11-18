@@ -1,9 +1,7 @@
----
-title: "Trading Economics API"
----
 
+#Trading Economics API - Python
 
-#Load Data Directly Into Python
+##Instalation
 
 If you don’t already have a copy of Python installed on your computer, you can get it from oficial website https://www.python.org/downloads/.  
 
@@ -22,7 +20,7 @@ As alternatyive you can download package from https://pypi.python.org/pypi/tradi
 
 Another method is to download folder from GitHub https://github.com/ieconomics/open-api/tree/master/python and then place this folder in your Python library folder.
 
-###Lets start
+###Login
 In command window type
 
 ```python
