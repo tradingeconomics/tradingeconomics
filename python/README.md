@@ -3,11 +3,7 @@
 
 ##Python Installation
 
-If you don’t already have a copy of Python installed on your computer, you can get it from official website https://www.python.org/downloads/.  
-
-##Package Installation
-
-You can install the tradingeconomics package using a variety of ways.
+If you don’t already have a copy of Python installed on your computer, you can get it from official website https://www.python.org/downloads/.  Thenm you need to install the tradingeconomics package. And you can do so in a variety of ways.
 
 Install using pip, a package management system used to install and manage software packages written in Python.
 ```python
