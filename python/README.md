@@ -3,7 +3,7 @@
 
 ##Python Installation
 
-If you don’t already have a copy of Python installed on your computer, you can get it from oficial website https://www.python.org/downloads/.  
+If you don’t already have a copy of Python installed on your computer, you can get it from official website https://www.python.org/downloads/.  
 
 ##Package Installation
 
