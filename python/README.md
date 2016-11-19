@@ -23,7 +23,8 @@ python setup.py install
 ```
 
 
-###Login
+###Getting Started
+
 In command window type
 
 ```python
@@ -33,8 +34,6 @@ te.login('APIkey')
 If you don't have APIkey just left empty space in brackets.  
 
 **Note:** Without APIkey  datasets will default to returning sample data.
-
-###How to Use
 
 Results are available in differente formats, such as : JSON, pandas.DataFrame or dictionary.
 
