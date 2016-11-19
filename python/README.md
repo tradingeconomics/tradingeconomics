@@ -1,7 +1,8 @@
 
 #Trading Economics - Python
 
-The Trading Economics Application Programming Interface (API) provides direct access to our data. It allows clients to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. The API subscription plan starts at $2999 per quarter and its final pricing is adjusted accordingly to the features, requests and distribution you make.
+The Trading Economics Application Programming Interface (API) provides direct access to our data. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at http://www.tradingeconomics.com/analytics/api.aspx
+
 
 ## Installation
 
