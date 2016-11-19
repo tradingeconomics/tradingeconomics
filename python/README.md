@@ -1,11 +1,11 @@
 
-#Trading Economics API - Python
+#Access Trading Economics Using Python
 
-##Instalation
+##Installation
 
 If you don’t already have a copy of Python installed on your computer, you can get it from oficial website https://www.python.org/downloads/.  
 
-It's recomended to install pip, it is a package management system used to install and manage software packages written in Python. All information you can find on https://packaging.python.org/installing/. Then just type in Python (command line) 
+It's recommended to install pip, it is a package management system used to install and manage software packages written in Python. All information you can find on https://packaging.python.org/installing/. Then just type in Python (command line) 
 ```python
 pip install tradingeconomics
 ```
