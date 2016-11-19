@@ -7,25 +7,22 @@ If you don’t already have a copy of Python installed on your computer, you can
 
 ##Package Installation
 
-It's recommended to install pip, it is a package management system used to install and manage software packages written in Python. All information you can find on https://packaging.python.org/installing/.
+You can install the tradingeconomics package using a variety of ways.
+
+Install using pip, a package management system used to install and manage software packages written in Python.
 ```python
 pip install tradingeconomics
 ```
 
-There is a possibility to install package using easy_install 
+Install using easy_install 
 ```python
 easy_install https://pypi.python.org/packages/4c/b4/e2e2a9668be305a42c0644b3eb5d4d1034ae062653ef737d7e80c1423d28/tradingeconomics-0.2.9.tar.gz
 ```
 
-As alternatyive you can download package from https://pypi.python.org/pypi/tradingeconomics and then follow the install instructions for [Python 3.x](https://docs.python.org/3/install/) or [Python 2.x](https://docs.python.org/2/install/)  
-
-Another method is to download folder from GitHub https://github.com/ieconomics/open-api/tree/master/python and then place this folder in your Python library folder.
+Inntall directly from GitHub by downloading the latest folder from  https://github.com/ieconomics/open-api/tree/master/python and running.
 ```python
 python setup.py install
 ```
-
-
-
 
 
 ###Getting Started
