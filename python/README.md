@@ -18,6 +18,10 @@ easy_install https://pypi.python.org/packages/4c/b4/e2e2a9668be305a42c0644b3eb5d
 As alternatyive you can download package from https://pypi.python.org/pypi/tradingeconomics and then follow the install instructions for [Python 3.x](https://docs.python.org/3/install/) or [Python 2.x](https://docs.python.org/2/install/)  
 
 Another method is to download folder from GitHub https://github.com/ieconomics/open-api/tree/master/python and then place this folder in your Python library folder.
+```python
+python setup.py install
+```
+
 
 ###Login
 In command window type
