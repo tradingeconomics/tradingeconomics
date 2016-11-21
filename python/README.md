@@ -6,9 +6,13 @@ The Trading Economics Application Programming Interface (API) provides direct ac
 
 ## Installation
 
-If you don’t already have a copy of Python installed on your computer, you can get it from official website https://www.python.org/downloads/.  Then you need to install the tradingeconomics package. And you can do so in a variety of ways.
+If you don’t already have a copy of Python 2.7 installed on your computer, you can get it from official website https://www.python.org
 
-Install the tradingeconomics package using pip, a package management system used to install and manage software packages written in Python. In Windows Command Prompt or Linux bash type:
+```
+https://www.python.org/downloads/
+```
+
+Then you need to install the tradingeconomics package. And you can do so in a variety of ways. Install the tradingeconomics package using pip, a package management system used to install and manage software packages written in Python. In Windows Command Prompt or Linux bash type:
 ```bash
 pip install tradingeconomics
 ```
