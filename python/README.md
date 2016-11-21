@@ -13,7 +13,9 @@ https://www.python.org/downloads/
 We support Python 2.7
 
 
-Then you need to install the tradingeconomics package. And you can do so in a variety of ways. Install the tradingeconomics package using pip, a package management system used to install and manage software packages written in Python. In Windows Command Prompt or Linux bash type:
+Then you need to install the tradingeconomics package. You can do so in a variety of ways.
+
+Install the tradingeconomics package using pip, a package management system used to install and manage software packages written in Python. In Windows Command Prompt or Linux bash type:
 ```bash
 pip install tradingeconomics
 ```
@@ -23,7 +25,7 @@ Install using easy_install
 easy_install https://pypi.python.org/packages/4c/b4/e2e2a9668be305a42c0644b3eb5d4d1034ae062653ef737d7e80c1423d28/tradingeconomics-0.2.9.tar.gz
 ```
 
-Inntall directly from GitHub by downloading the latest folder from  https://github.com/ieconomics/open-api/tree/master/python and running.
+Install directly from GitHub by downloading the latest folder from  https://github.com/ieconomics/open-api/tree/master/python and running.
 ```python
 python setup.py install
 ```
