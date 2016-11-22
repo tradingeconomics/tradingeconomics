@@ -44,7 +44,7 @@ If you don't have APIkey just left empty space in brackets.
 
 **Note:** Without APIkey  datasets will default to returning sample data.
 
-Results are available in differente formats, such as : JSON, pandas.DataFrame or dictionary.
+Results are available in different formats, such as : JSON, pandas.DataFrame or dictionary.
 
 To get calendar data for specific country, in data frame format, just type
 ```python
@@ -92,7 +92,7 @@ To get stock market index just type
 te.getMarketsData(marketsField = 'index', output_type = 'df')
 ```
 
-Forecasted values for spcifique countrie, in this case Portugal. 
+Forecasted values for specific country, in this case Portugal. 
 ```python
 te.getForecastData(country = 'Portugal', output_type = 'df')
 ```
@@ -112,7 +112,7 @@ plt.plot(mydata)
 ```
 
 
-and some stratistics
+and some statistics
 ```python
 import numpy as np
 
