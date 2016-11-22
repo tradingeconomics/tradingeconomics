@@ -5,7 +5,7 @@
 \title{Return historical information from Trading Economics API.}
 \usage{
 getHistoricalData(country, indicator, initDate = NULL, endDate = NULL,
-  outType = NULL, credentials = NULL)
+  outType = NULL)
 }
 \arguments{
 \item{country}{string or list.
@@ -23,11 +23,8 @@ For example: '2011-01-01'.}
 \item{endDate}{string with format: YYYY-MM-DD.}
 
 \item{outType}{string.
-'dict'(default) for dictionary format output, 'df' for data frame,
-'raw' for list of dictionaries without any parsing.}
-
-\item{credentials}{string.
-User's credentials.}
+'df' for data frame,
+'lst'(default) for list.}
 }
 \value{
 Return a list or data frame of historical information for specific country and indicator.
@@ -40,10 +37,12 @@ Return historical information from Trading Economics API.
 Without credentials only sample data will be provided.
 }
 \examples{
-getHistoricalData(country = 'United States', indicator = 'Imports',
-                  initDate = '2011-01-01', endDate = '2016-01-01')
-getHistoricalData(country = c('United States', 'United Kingdom'), indicator = c('Imports','Exports'),
-                  initDate = '2011-01-01', endDate = '2016-01-01')
+\dontrun{ getHistoricalData(country = 'United States', indicator = 'Imports',
+initDate = '2011-01-01', endDate = '2016-01-01')
+getHistoricalData(country = c('United States', 'United Kingdom'),
+indicator = c('Imports','Exports'),
+initDate = '2011-01-01', endDate = '2016-01-01')
+}
 }
 \seealso{
 \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}

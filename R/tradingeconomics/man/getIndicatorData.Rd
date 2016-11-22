@@ -4,8 +4,7 @@
 \alias{getIndicatorData}
 \title{Return indicators information from Trading Economics API}
 \usage{
-getIndicatorData(country = NULL, indicator = NULL, outType = NULL,
-  credentials = NULL)
+getIndicatorData(country = NULL, indicator = NULL, outType = NULL)
 }
 \arguments{
 \item{country}{string or list.
@@ -18,11 +17,7 @@ indicators = 'indicator_name' or
 indicators = c('indicator_name', 'indicator_name').}
 
 \item{outType}{string.
-'dict'(default) for dictionary format output, 'df' for data frame,
-'raw' for list of dictionaries directly from the web.}
-
-\item{credentials}{string.
-User's credentials.}
+'lst'(default) for lis format output, 'df' for data frame,}
 }
 \value{
 Return a list or dictionary of all indicators, indicators by country or country-indicator pair.
@@ -36,8 +31,9 @@ All parameters are optional. Without parameters a list of all indicators will be
 Without credentials default information will be provided.
 }
 \examples{
-getIndicatorData(country = 'United States', indicators = 'Imports', output_type = 'df')
+\dontrun{ getIndicatorData(country = 'United States', indicators = 'Imports', output_type = 'df')
 getIndicatorData(country = c('United States', 'Portugal'), indicators = c('Imports','Exports'))
+}
 }
 \seealso{
 \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}

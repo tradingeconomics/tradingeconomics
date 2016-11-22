@@ -1,11 +1,6 @@
 
-credCheck <- function(credentials){
-  pattern <- "^...............:...............$"
-  if (!grepl(pattern, credentials)) stop('Incorrect credentials format!')
-}
-
-
 #'Return indicators information from Trading Economics API
+#'@export getIndicatorData
 #'
 #'@param country string or list.
 #'String for one country information. List of strings for
@@ -15,21 +10,20 @@ credCheck <- function(credentials){
 #'indicators = 'indicator_name' or
 #'indicators = c('indicator_name', 'indicator_name').
 #'@param outType string.
-#''dict'(default) for dictionary format output, 'df' for data frame,
-#''raw' for list of dictionaries directly from the web.
-#'@param credentials string.
-#'User's credentials.
+#''lst'(default) for lis format output, 'df' for data frame,
+#'
 #'@return Return a list or dictionary of all indicators, indicators by country or country-indicator pair.
 #'@section Notes:
 #'All parameters are optional. Without parameters a list of all indicators will be provided.
 #'Without credentials default information will be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
 #'@examples
-#'getIndicatorData(country = 'United States', indicators = 'Imports', output_type = 'df')
+#'\dontrun{ getIndicatorData(country = 'United States', indicators = 'Imports', output_type = 'df')
 #'getIndicatorData(country = c('United States', 'Portugal'), indicators = c('Imports','Exports'))
+#'}
 
 
-getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL, credentials = NULL){
+getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL){
   base <- "http://api.tradingeconomics.com"
   if (is.null(country) & is.null(indicator)){
     url <- "http://api.tradingeconomics.com/indicators"
@@ -42,13 +36,11 @@ getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL, c
     url <- paste(base, 'country', paste(country, collapse = ','),
                  paste(indicator, collapse = ','), sep = '/')
   }
-  if (is.null(credentials)){
-    credentials = 'guest:guest'
-  } else {
-    credCheck(credentials)
-  }
-  url <- paste(url, '?c=', credentials, sep = '')
+  url <- paste(url, '?c=', apiKey, sep = '')
   url <- URLencode(url)
+  if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
+    stop('Wrong credentials')
+  }
   webData <-fromJSON(url)
   if (is.null(country) & is.null(indicator)){
     webResults <- data.frame('Category' = webData$Category, 'CategoryGroup' = webData$CategoryGroup)

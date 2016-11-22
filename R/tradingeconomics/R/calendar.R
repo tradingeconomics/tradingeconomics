@@ -1,17 +1,15 @@
 
-
 dateCheck <- function(some_date){
   pattern <- "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
   if (!grepl(pattern, some_date)) stop('Incorrect date format!')
 }
 
-
-credCheck <- function(credentials){
-  pattern <- "^...............:...............$"
-  if (!grepl(pattern, credentials)) stop('Incorrect credentials format!')
-}
-
 #'Return calendar events from Trading Economics API
+#'@import jsonlite
+#'@importFrom utils URLencode
+#'
+#'
+#'@export getCalendarData
 #'
 #'
 #'@param country string or list.
@@ -25,20 +23,24 @@ credCheck <- function(credentials){
 #'For example: '2011-01-01'.
 #'@param endDate string with format: YYYY-MM-DD.
 #'@param outType string.
-#''dict'(default) for dictionary format output, 'df' for data frame,
-#''raw' for list of dictionaries without any parsing.
-#'@param credentials string.
-#'User's credentials.
+#''df' for data frame,
+#''lst'(default) for list.
+#'
 #' @return Return list or data frame of calendar events.
 #'@section Notes:
 #'All parameters are optional. When not supplying parameters, data for all countries and indicators will be provided.
 #'Without credentials, only sample data is returned.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'getCalendarData(country = 'United States', indicator = 'Composite Pmi', initDate = '2011-01-01', endDate = '2016-01-01')
-#'getCalendarData(country = c('United States', 'India'), indicator = c('Composite Pmi', 'Bankruptcies'),
-#'                 initDate = '2011-01-01', endDate = '2016-01-01')
-getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, endDate= NULL, outType = NULL, credentials = NULL){
+#'\dontrun{ getCalendarData(country = 'United States', indicator = 'Composite Pmi',
+#'  initDate = '2011-01-01', endDate = '2016-01-01')
+#' getCalendarData(country = c('United States', 'India'),
+#'  indicator = c('Composite Pmi', 'Bankruptcies'),
+#'   initDate = '2011-01-01', endDate = '2016-01-01')
+#'   }
+#'
+
+getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, endDate= NULL, outType = NULL) {
   base <- "http://api.tradingeconomics.com/calendar"
   if (is.null(country) & is.null(indicator)){
     url <- base
@@ -62,13 +64,11 @@ getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, en
   } else {
     url <- url
   }
-  if (is.null(credentials)){
-    credentials = 'guest:guest'
-  } else {
-    credCheck(credentials)
-  }
-  url <- paste(url, '?c=', credentials, sep = '')
+  url <- paste(url, '?c=', apiKey, sep = '')
   url <- URLencode(url)
+  if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
+    stop('Wrong credentials')
+  }
   webData <-fromJSON(url)
   webResults <- data.frame('Date' = webData$Date, 'Country' = webData$Country, 'Category' = webData$Category, 'Event' = webData$Event,
                            'Reference' = webData$Reference, 'Unit' = webData$Unit, 'Source' = webData$Source, 'Actual' = webData$Actual,
@@ -81,7 +81,7 @@ getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, en
     stop('output_type options : df for data frame, lst(defoult) for list by country and indicator')
   }
   return(webResults)
-}
+ }
 
 
 

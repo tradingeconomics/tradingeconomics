@@ -4,18 +4,15 @@
 \alias{getMarketsData}
 \title{Get markets values from Trading Economics API}
 \usage{
-getMarketsData(marketsField, outType = NULL, credentials = NULL)
+getMarketsData(marketsField, outType = NULL)
 }
 \arguments{
 \item{marketsField}{string. Takes either one of 'commodity','currency',
 'index' or 'bond' as options.}
 
 \item{outType}{string.
-'df'(default) for data frame,
-'raw' for list of unparsed data.}
-
-\item{credentials}{string.
-User's credentials.}
+'df' for data frame,
+'raw'(default) for list of unparsed data.}
 }
 \value{
 Returns a list or data frame of available commodities, currencies, indeces or bonds and their latest values.
@@ -28,7 +25,8 @@ Get markets values from Trading Economics API
 Without credentials only sample information will be provided.
 }
 \examples{
-getMarketsData(marketsField = 'index')
+\dontrun{ getMarketsData(marketsField = 'index')
+}
 }
 \seealso{
 \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}

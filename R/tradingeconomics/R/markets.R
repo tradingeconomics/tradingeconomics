@@ -1,31 +1,25 @@
 
-
-credCheck <- function(credentials){
-  pattern <- "^...............:...............$"
-  if (!grepl(pattern, credentials)) stop('Incorrect credentials format!')
-}
-
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
 
 #'Get markets values from Trading Economics API
-#'
+#'@export getMarketsData
 #'
 #' @param marketsField string. Takes either one of 'commodity','currency',
 #' 'index' or 'bond' as options.
 #' @param outType string.
-#''df'(default) for data frame,
-#''raw' for list of unparsed data.
-#' @param credentials string.
-#'User's credentials.
+#''df' for data frame,
+#''raw'(default) for list of unparsed data.
+#'
 #' @return Returns a list or data frame of available commodities, currencies, indeces or bonds and their latest values.
 #'@section Notes:
 #'Without credentials only sample information will be provided.
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'getMarketsData(marketsField = 'index')
+#'\dontrun{ getMarketsData(marketsField = 'index')
+#'}
 
-getMarketsData <- function(marketsField, outType = NULL, credentials = NULL){
+getMarketsData <- function(marketsField, outType = NULL){
   base <- "http://api.tradingeconomics.com/markets"
   fields <- c('commodities', 'currency', 'index', 'bonds')
   if (!(marketsField %in% fields)){
@@ -33,13 +27,11 @@ getMarketsData <- function(marketsField, outType = NULL, credentials = NULL){
   } else {
     url <- paste(base, marketsField, sep = '/')
   }
-  if (is.null(credentials)){
-    credentials = 'guest:guest'
-  } else {
-    credCheck(credentials)
-  }
-  url <- paste(url, '?c=', credentials, sep = '')
+  url <- paste(url, '?c=', apiKey, sep = '')
   url <- URLencode(url)
+  if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
+    stop('Wrong credentials')
+  }
   webData <-fromJSON(url)
   webData$Group <- trim(webData$Group)
   if (marketsField == 'bonds'){

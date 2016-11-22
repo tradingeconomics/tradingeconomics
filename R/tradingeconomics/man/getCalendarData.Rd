@@ -5,7 +5,7 @@
 \title{Return calendar events from Trading Economics API}
 \usage{
 getCalendarData(country = NULL, indicator = NULL, initDate = NULL,
-  endDate = NULL, outType = NULL, credentials = NULL)
+  endDate = NULL, outType = NULL)
 }
 \arguments{
 \item{country}{string or list.
@@ -23,11 +23,8 @@ For example: '2011-01-01'.}
 \item{endDate}{string with format: YYYY-MM-DD.}
 
 \item{outType}{string.
-'dict'(default) for dictionary format output, 'df' for data frame,
-'raw' for list of dictionaries without any parsing.}
-
-\item{credentials}{string.
-User's credentials.}
+'df' for data frame,
+'lst'(default) for list.}
 }
 \value{
 Return list or data frame of calendar events.
@@ -41,9 +38,13 @@ All parameters are optional. When not supplying parameters, data for all countri
 Without credentials, only sample data is returned.
 }
 \examples{
-getCalendarData(country = 'United States', indicator = 'Composite Pmi', initDate = '2011-01-01', endDate = '2016-01-01')
-getCalendarData(country = c('United States', 'India'), indicator = c('Composite Pmi', 'Bankruptcies'),
-                initDate = '2011-01-01', endDate = '2016-01-01')
+\dontrun{ getCalendarData(country = 'United States', indicator = 'Composite Pmi',
+ initDate = '2011-01-01', endDate = '2016-01-01')
+getCalendarData(country = c('United States', 'India'),
+ indicator = c('Composite Pmi', 'Bankruptcies'),
+  initDate = '2011-01-01', endDate = '2016-01-01')
+  }
+
 }
 \seealso{
 \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}

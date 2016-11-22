@@ -4,8 +4,7 @@
 \alias{getForecastData}
 \title{Return forecast values from Trading Economics API}
 \usage{
-getForecastData(country = NULL, indicator = NULL, outType = NULL,
-  credentials = NULL)
+getForecastData(country = NULL, indicator = NULL, outType = NULL)
 }
 \arguments{
 \item{country}{string or list.
@@ -18,11 +17,8 @@ For example, category = 'GDP Growth Rate' or
 category = c('Exports', 'Imports').}
 
 \item{outType}{string.
-'dict'(default) for dictionary format output, 'df' for data frame,
-'raw' for list of dictionaries without any parsing.}
-
-\item{credentials}{string.
-User's credentials.}
+'df' for data frame,
+'lst'(default) for list .}
 }
 \value{
 Return a list or dataframe of forecast values by country, by indicator, by country and indicator.
@@ -36,8 +32,9 @@ At least one of parameters, country or indicator, should be provided.
 Without credentials, only sample data is returned.
 }
 \examples{
-getForecastData(country = 'United States', indicator = 'Imports')
+\dontrun{ getForecastData(country = 'United States', indicator = 'Imports')
 getForecastData(country = c('United States', 'India'), indicator = c('Imports','Exports'))
+}
 }
 \seealso{
 \code{\link{getMarketsData}}, \code{\link{getIndicatorData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
