@@ -1,8 +1,44 @@
-R version of Trading Economics API library.
+# R version of Trading Economics API library.
 
 This package provides to Trading Economics API users easiest way to extract different kind of data.
 Available functions are:
 
+## Installation
+
+You can get R from official website: https://cran.r-project.org/
+
+Then you need to install the tradingeconomics package. At this moment our package available to download from GitHub repository. 
+
+How to install a package that’s sitting on GitHub?
+
+**Step 1.**   Install the devtools package. You can do this from CRAN. Invoke R and then type
+```r
+install.packages("devtools")
+```
+**Step 2.** Load the devtools package.
+```r
+library(devtools)
+```
+**Step 3.** Install the tradingeconomics package
+```r
+install_github("ieconomics/open-api/R/tradingeconomics")
+```
+
+##How to use ?
+In R Console type
+```r
+library(tradingeconomics)
+```
+than type
+```r
+login('users APIkey')
+```
+If you don't have APIkey just type
+```
+login()
+```
+**Note:** Without APIkey  data sets will default to returning sample data.
+##Examples
 * getForecastData - Return forecast values by country, by indicator, by country and indicator. 
 	Parameters:
 	 country - string or list. String to get data for one country. List of strings to get data for
@@ -13,6 +49,10 @@ Available functions are:
 	 outType - string. 'dict'(default) for dictionary format output, 'df' for data frame,
 		  	   'raw' for list of dictionaries without any parsing.
 	 credentials - string. User's credentials.
+Next code will provide forecasted values of all indicators of Portugal. 
+```r
+getForecastedData(country ='portugal')
+```
 * getHistoricalData - Return historical information for specific country and indicator.
 	Parameters:
 	 country - string or list. String to get data for one country. List of strings to get data for
@@ -28,13 +68,13 @@ Available functions are:
 * getIndicatorData -  Return a list of all indicators, indicators by country or country-indicator pair.
 	Parameters:
 	 country - string or list. String for one country information. List of strings for
-	           several countrys, for example country = c('country_name', 'country_name').
+	           several country's, for example country = c('country_name', 'country_name').
 	 indicator - string or list. String for one indicator. List of strings for several indicators, for example
                  indicators = 'indicator_name' or indicators = c('indicator_name', 'indicator_name').
 	 outType - string. 'dict'(default) for dictionary format output, 'df' for data frame,
 			   'raw' for list of dictionaries directly from the web.
   	 credentials - string. User's credentials.
-* getMarketsData - Returns a list of available commodities, currencies, indeces or bonds and their latest values.
+* getMarketsData - Returns a list of available commodities, currencies, indexes or bonds and their latest values.
 	Parameters:
      marketsField - string. Takes either one of 'commodity','currency',
 			       'index' or 'bond' as options.
@@ -53,4 +93,4 @@ Available functions are:
 	 outType - string. 'dict'(default) for dictionary format output, 'df' for data frame,
 			   'raw' for list of dictionaries without any parsing.
 	 credentials - string. User's credentials.
-Results are available in dataframe format or list. 
+Results are available in data frame format or list. 
