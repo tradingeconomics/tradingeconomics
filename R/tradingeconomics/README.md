@@ -39,34 +39,40 @@ login()
 ```
 **Note:** Without APIkey  data sets will default to returning sample data.
 ##Examples
-* getForecastData - Return forecast values by country, by indicator, by country and indicator. 
-	Parameters:
-	 country - string or list. String to get data for one country. List of strings to get data for
-			   several countries. For example, country = c('United States', 'Australia').
-	 indicator - string or list. String  to get data for one category. List of strings to get data for
+* getForecastData(country, indicator, outType) - Return forecast values by country, by indicator, by country and indicator.    
+   Parameters:   
+	 - country - string or list. String to get data for one country. List of strings to get data for
+			   several countries. For example, country = c('United States', 'Australia').   
+	 - indicator - string or list. String  to get data for one category. List of strings to get data for
 	 		     several calendar events. For example, category = 'GDP Growth Rate' or
-				 category = c('Exports', 'Imports').
-	 outType - string. 'dict'(default) for dictionary format output, 'df' for data frame,
-		  	   'raw' for list of dictionaries without any parsing.
-	 credentials - string. User's credentials.
-Next code will provide forecasted values of all indicators of Portugal. 
+				 category = c('Exports', 'Imports').   
+	 - outType - string. 'df' for data frame, 'lst'(default) for list.  
+	 
+   Next code will provide a list with forecasted values of all indicators of Portugal. 
 ```r
-getForecastedData(country ='portugal')
+getForecastData(country ='portugal')
 ```
-* getHistoricalData - Return historical information for specific country and indicator.
-	Parameters:
-	 country - string or list. String to get data for one country. List of strings to get data for
-               several countries. For example, country = c('United States', 'Australia').
- 	 indicator - string or list. String  to get data for one category. List of strings to get data for
- 	 			 several calendar events.For example, category = 'GDP Growth Rate' or 
- 	 			 category = c('Exports', 'Imports').
-	 initDate - string with format: YYYY-MM-DD. For example: '2011-01-01'.
-     endDate - string with format: YYYY-MM-DD.
-	 outType - string. dict'(default) for dictionary format output, 'df' for data frame,
-			   raw' for list of dictionaries without any parsing.
-	 credentials - string. User's credentials.
+      To get data in data frame format type 
+```r
+getForecastData(country ='portugal', outType = 'df')
+```
+* getHistoricalData(country, indicator, initDate, endDate, outTytpe) - Return historical information for specific country and indicator.   
+   Parameters:    
+    - country - string or list. String to get data for one country. List of strings to get data for
+               several countries. For example, country = c('United States', 'Australia').   
+    - indicator - string or list. String  to get data for one category. List of strings to get data for
+ 	 			 several calendar events.For example, indicator = 'GDP Growth Rate' or 
+ 	 			 indicator = c('Exports', 'Imports').
+    - initDate - string with format: YYYY-MM-DD. For example: '2011-01-01'.
+    - endDate - string with format: YYYY-MM-DD.
+    - outType - string. 'df' for data frame, 'lst'(default) for list.   
+    
+   For example, to get historical data of imports in United Kingdom type
+```r
+getHistoricalData(country = 'united kingdom', indicator = 'imports')
+```
 * getIndicatorData -  Return a list of all indicators, indicators by country or country-indicator pair.
-	Parameters:
+	Parameters:   
 	 country - string or list. String for one country information. List of strings for
 	           several country's, for example country = c('country_name', 'country_name').
 	 indicator - string or list. String for one indicator. List of strings for several indicators, for example
