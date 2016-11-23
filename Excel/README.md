@@ -42,8 +42,7 @@ For example, pick Home, to add your group to the Home tab.
 4. Select New Group.  
 That adds New Group (Custom) to the tab you picked.
 
-5. To use a better name for your new group, click Rename, type the name you want in the Display name box, and then click OK.  
-You can enter a space in the name. For example, type Trading Economics.
+5. To use a better name for your new group, click Rename, type the name you want in the Display name box, and then click OK. You can enter a space in the name. For example, type Trading Economics.
 
 6. To add a macro to the group, in the Choose commands from list, click Macros.
 
