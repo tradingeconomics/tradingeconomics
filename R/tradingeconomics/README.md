@@ -40,7 +40,7 @@ login()
 **Note:** Without APIkey  data sets will default to returning sample data.
 ##Examples
 * getForecastData(country, indicator, outType) - Return forecast values by country, by indicator, by country and indicator.    
-   Parameters:   
+   Parameters:  
 	 - country - string or list. String to get data for one country. List of strings to get data for
 			   several countries. For example, country = c('United States', 'Australia').   
 	 - indicator - string or list. String  to get data for one category. List of strings to get data for
@@ -51,8 +51,8 @@ login()
    Next code will provide a list with forecasted values of all indicators of Portugal. 
 ```r
 getForecastData(country ='portugal')
-```
-      To get data in data frame format type 
+```   
+  To get data in data frame format type          
 ```r
 getForecastData(country ='portugal', outType = 'df')
 ```
@@ -71,23 +71,31 @@ getForecastData(country ='portugal', outType = 'df')
 ```r
 getHistoricalData(country = 'united kingdom', indicator = 'imports')
 ```
-* getIndicatorData -  Return a list of all indicators, indicators by country or country-indicator pair.
-	Parameters:   
-	 country - string or list. String for one country information. List of strings for
+* getIndicatorData(country, indicator, outType) -  Return a list of all indicators, indicators by country or country-indicator pair.   
+   Parameters:     
+	 - country - string or list. String for one country information. List of strings for
 	           several country's, for example country = c('country_name', 'country_name').
-	 indicator - string or list. String for one indicator. List of strings for several indicators, for example
-                 indicators = 'indicator_name' or indicators = c('indicator_name', 'indicator_name').
-	 outType - string. 'dict'(default) for dictionary format output, 'df' for data frame,
-			   'raw' for list of dictionaries directly from the web.
-  	 credentials - string. User's credentials.
-* getMarketsData - Returns a list of available commodities, currencies, indexes or bonds and their latest values.
-	Parameters:
-     marketsField - string. Takes either one of 'commodity','currency',
-			       'index' or 'bond' as options.
-     outType - string. 'df'(default) for data frame,
-              'raw' for list of unparsed data.
-     credentials - string. User's credentials.
-* getCalendarData - Return calendar events.
+	 - indicator - string or list. String for one indicator. List of strings for several indicators, for example
+                 indicator = 'indicator_name' or indicator = c('indicator_name', 'indicator_name').
+	 - outType - string. 'df' for data frame, 'lst' for list.   
+	 
+   For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt
+```r
+getIndicatorData(country = 'italy', indicator = 'Bancruptcies', outType = 'df')
+
+  Country     Category              Title LatestValue     LatestValueDate Source      Unit                 URL CategoryGroup Frequency HistoricalDataSymbol PreviousValue   PreviousValueDate
+1   Italy Bankruptcies Italy Bankruptcies        3600 2016-03-31T00:00:00 Cerved Companies /italy/bankruptcies      Business Quarterly             ITALYBAN          4100 2015-12-31T00:00:00
+```
+* getMarketsData(marketsField, outType) - Returns a list of available commodities, currencies, indexes or bonds and their latest values.   
+  Parameters:  
+     - marketsField - string. Takes either one of 'commodity', 'currency', 'index' or 'bond' as options.
+     - outType - string. 'df' for data frame, 'lst'(default) for list.   
+     
+   To get information about commodities in data frame format type
+```r
+getMarketsData(marketsField = 'commodity', outType = 'df')
+```
+* getCalendarData(country, indicator, initDate, endDate, outType) - Return calendar events.
 	Parameters:
 	 country - string or list. String to get data for one country. List of strings to get data for
                several countries. For example, country = c('United States', 'Australia').
