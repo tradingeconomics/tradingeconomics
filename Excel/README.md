@@ -57,8 +57,9 @@ Information source https://support.office.com/en-us/article/Assign-a-macro-to-a-
 
 ###Using Trading Economics Add-In
 
-Notes:
-1. Red cross button of the popup window is disabled for the moment, to exit click Cancel button.
+**Notes:**
+
+1. Red cross button of the popup windows is disabled for the moment, to exit click Cancel button.
 2. Clicking on one of the buttons will appear a window to insert credentials, if you don't have them just click OK.
 3. Fields "Sheet name" and "Cell name" are optional, you can left them in blanc, so data will start from selected cell.
 
