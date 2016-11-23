@@ -16,17 +16,17 @@ then use regsvr32 through the command prompt to register the file (e.g. "regsvr3
 Message "DllRegisterServer in mscomct2.ocx succeeded." should appear.  
 Information source http://stackoverflow.com/questions/15816014/how-to-install-mscomct2-ocx-file-from-cab-file-excel-user-form-and-vba.
 
-Download Trading Economics.xlam from https://github.com/ieconomics/open-api/raw/master/Excel/Trading%20Economics.xlam
-
 ### To activate an Excel add-in    
 
-1. Click the File tab, click Options, and then click the Add-Ins category.
+1. Download Trading Economics.xlam from https://github.com/ieconomics/open-api/raw/master/Excel/Trading%20Economics.xlam
 
-2. In the Manage box, click Excel Add-ins, and then click Go. The Add-Ins dialog box appears.
+2. In Excel workbook click the File tab, click Options, and then click the Add-Ins category.
 
-3. Click the Browse... button then find a Trading Economics.xlam file  and select it.              
+3. In the Manage box, click Excel Add-ins, and then click Go. The Add-Ins dialog box appears.
 
-4. Click OK.  
+4. Click the Browse... button then find a Trading Economics.xlam file  and select it.              
+
+5. Click OK.  
 
 Information source https://support.office.com/en-us/article/Add-or-remove-add-ins-0af570c4-5cf3-4fa9-9b88-403625a0b460.
 
@@ -42,7 +42,8 @@ For example, pick Home, to add your group to the Home tab.
 4. Select New Group.  
 That adds New Group (Custom) to the tab you picked.
 
-5. To use a better name for your new group, click Rename, type the name you want in the Display name box, and then click OK. You can enter a space in the name. For example, type Trading Economics.
+5. To use a better name for your new group, click Rename, type the name you want in the Display name box, and then click OK. You can enter a space in the name.  
+For example, type Trading Economics.
 
 6. To add a macro to the group, in the Choose commands from list, click Macros.
 
@@ -54,7 +55,7 @@ That adds New Group (Custom) to the tab you picked.
 
 Information source https://support.office.com/en-us/article/Assign-a-macro-to-a-button-728c83ec-61d0-40bd-b6ba-927f84eb5d2c. 
 
-Using TE Add-In
+###Using Trading Economics Add-In
 
 Notes:
 1. Red cross button of the popup window is disabled for the moment, to exit click Cancel button.
