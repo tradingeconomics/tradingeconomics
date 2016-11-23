@@ -95,16 +95,34 @@ getIndicatorData(country = 'italy', indicator = 'Bancruptcies', outType = 'df')
 ```r
 getMarketsData(marketsField = 'commodity', outType = 'df')
 ```
-* getCalendarData(country, indicator, initDate, endDate, outType) - Return calendar events.
-	Parameters:
-	 country - string or list. String to get data for one country. List of strings to get data for
+* getCalendarData(country, indicator, initDate, endDate, outType) - Return calendar events.   
+   Parameters:   
+	- country - string or list. String to get data for one country. List of strings to get data for
                several countries. For example, country = c('United States', 'Australia').
-	 indicator -  string or list. String  to get data for one category. List of strings to get 
+	- indicator -  string or list. String  to get data for one category. List of strings to get 
 	              data for several calendar events. For example, category = 'GDP Growth Rate' or
                   category = c('Exports', 'Imports').
- 	 initDate - string with format: YYYY-MM-DD. For example: '2011-01-01'.
-	 endDate - string with format: YYYY-MM-DD.
-	 outType - string. 'dict'(default) for dictionary format output, 'df' for data frame,
-			   'raw' for list of dictionaries without any parsing.
-	 credentials - string. User's credentials.
-Results are available in data frame format or list. 
+ 	- initDate - string with format: YYYY-MM-DD. For example: '2011-01-01'.
+	- endDate - string with format: YYYY-MM-DD.
+	- outType - string. 'dict'(default) for dictionary format output, 'df' for data frame,
+			   'raw' for list of dictionaries without any parsing.   
+			   
+   Next code will provide a data frame with information about calendar events for United Kingdom 
+```r
+getCalendarData(country = 'united kingdom', outType = 'df')
+
+                  Date        Country               Category                                 Event Reference Unit                         Source Actual Previous Forecast TEForecast
+1  2016-11-23T11:30:00 United Kingdom          Interest Rate                     BoE Forbes Speech                               Bank of England                                    
+2  2016-11-23T11:40:00 United Kingdom          Interest Rate                       BoE Rule Speech                               Bank of England                                    
+3  2016-11-23T12:30:00 United Kingdom               Calendar Philip Hammond Makes Autumn Statement                                                                                  
+4  2016-11-24T09:30:00 United Kingdom               Calendar                BBA Mortgage Approvals       Oct                                               38.3K    38.8K      40.5K
+5  2016-11-25T09:30:00 United Kingdom        GDP Growth Rate           GDP Growth Rate QoQ 2nd Est        Q3      Office for National Statistics            0.7%     0.5%       0.5%
+6  2016-11-25T09:30:00 United Kingdom GDP Annual Growth Rate           GDP Growth Rate YoY 2nd Est        Q3      Office for National Statistics            2.1%     2.3%       2.3%
+7  2016-11-25T09:30:00 United Kingdom               Calendar          Business Investment YoY Prel       Sep                                               -0.8%    -2.1%      -0.3%
+8  2016-11-25T09:30:00 United Kingdom               Calendar          Business Investment QoQ Prel       Sep                                                  1%     0.6%       0.4%
+9  2016-11-25T11:00:00 United Kingdom               Calendar               CBI Distributive Trades       Nov                                                  21       12         15
+10 2016-11-29T09:30:00 United Kingdom               Calendar                      Mortgage Lending       Oct                                               £3.2B                    
+11 2016-11-29T09:30:00 United Kingdom               Calendar        Net Lending to Individuals MoM       Oct                                               £4.7B                    
+12 2016-11-29T09:30:00 United Kingdom        Consumer Credit                   BoE Consumer Credit       Oct                     Bank of England          £1405M             £ 1800M
+13 2016-11-29T09:30:00 United Kingdom     Mortgage Approvals                    Mortgage Approvals       Oct                     Bank of England          62.93K              61.23K
+```
