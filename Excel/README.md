@@ -1,7 +1,8 @@
-# Trading Economics - Excel
+# Trading Economics - Excel Add-In
+This add-in provides to Trading Economics API users easiest way to load different kind of data directly to Excel spreadsheet.
+**Note:** This add-in support only  32-bit version of the Excel  
 
-Note: This add-in support only  32-bit version of the Excel  
-
+## Installation
 If you never downloaded MSCOMCT2.OCX file, do it: 
 
 1. Download file from  https://www.ocxme.com/files/mscomct2_ocx
@@ -16,7 +17,7 @@ then use regsvr32 through the command prompt to register the file (e.g. "regsvr3
 Message "DllRegisterServer in mscomct2.ocx succeeded." should appear.  
 Information source http://stackoverflow.com/questions/15816014/how-to-install-mscomct2-ocx-file-from-cab-file-excel-user-form-and-vba.
 
-### To activate an Excel add-in    
+#### To activate an Excel add-in    
 
 1. Download Trading Economics.xlam from https://github.com/ieconomics/open-api/raw/master/Excel/Trading%20Economics.xlam
 
@@ -30,7 +31,7 @@ Information source http://stackoverflow.com/questions/15816014/how-to-install-ms
 
 Information source https://support.office.com/en-us/article/Add-or-remove-add-ins-0af570c4-5cf3-4fa9-9b88-403625a0b460.
 
-### Add a button to your own group on the ribbon
+#### Add a button to your own group on the ribbon
 
 1. Click File > Options > Customize Ribbon.
 
@@ -55,7 +56,7 @@ For example, type Trading Economics.
 
 Information source https://support.office.com/en-us/article/Assign-a-macro-to-a-button-728c83ec-61d0-40bd-b6ba-927f84eb5d2c. 
 
-###Using Trading Economics Add-In
+##Using Trading Economics Add-In
 
 **Notes:**
 
