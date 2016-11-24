@@ -43,8 +43,8 @@ login()
 	 - country - string or list. String to get data for one country. List of strings to get data for
 			   several countries. For example, country = c('United States', 'Australia').   
 	 - indicator - string or list. String  to get data for one category. List of strings to get data for
-	 		     several calendar events. For example, category = 'GDP Growth Rate' or
-				 category = c('Exports', 'Imports').   
+	 		     several calendar events. For example, indicator = 'GDP Growth Rate' or
+				 indicator = c('Exports', 'Imports').   
 	 - outType - string. 'df' for data frame, 'lst'(default) for list.  
 	 
    Next code will provide a list with forecasted values of all indicators of Portugal. 
