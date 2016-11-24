@@ -1,7 +1,6 @@
 # R version of Trading Economics API library.
 
 This package provides to Trading Economics API users easiest way to extract different kind of data.
-Available functions are:
 
 ## Installation
 
