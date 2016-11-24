@@ -25,7 +25,7 @@ Install using easy_install
 easy_install https://pypi.python.org/packages/4c/b4/e2e2a9668be305a42c0644b3eb5d4d1034ae062653ef737d7e80c1423d28/tradingeconomics-0.2.3.tar.gz
 ```
 
-Install directly from GitHub by downloading the latest folder from https://github.com/ieconomics/open-api/tree/master/python/dist and run
+Install directly from GitHub by downloading https://github.com/ieconomics/open-api/archive/v0.2.3.zip and run
 
 ```bash
 python setup.py install
