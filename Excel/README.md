@@ -61,6 +61,12 @@ Information source https://support.office.com/en-us/article/Assign-a-macro-to-a-
 **Notes:**
 
 1. Red cross button of the popup windows is disabled for the moment, to exit click Cancel button.
-2. Clicking on one of the buttons will appear a window to insert credentials, if you don't have them just click OK.
+2. Clicking on one of the buttons, for the first time, will appear a window to insert credentials, if you don't have them just click OK.
 3. Fields "Sheet name" and "Cell name" are optional, you can left them in blanc, so data will start from selected cell.
 
+**Markets:** In Category field click on drop down button(triangle) and then choose one of four available options.  
+**Indicators:** To get all indicators for some specific country just choose the country in Country field and click OK.  
+To get specific indicator for some country, first choose the country in Country field then choose available indicator in Indicator field and click OK.  
+**Historical:** Select country and indicator in respective fields, multiple selection is available. By defaulte you will get historical data for a year starting on the current day. You can change time range in Start Date and End Date fields.  
+**Forecast:** You can choose only country to get forecasted values for all indicators of the chosen country. You can choose only indicator to get forecasted values for specific indicator for all countries.Or you can choose country and indicator to get forecasted value for specific indicator of the chosen country.  
+**Calendar:** To get Calendar events for all countries just click OK. To get Calendar events for specific country, select country (multiple selection is available) and click Add button then click OK. You can change time range in Start Date and End Date fields. 
