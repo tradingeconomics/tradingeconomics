@@ -109,6 +109,7 @@ Easy graphical representation
 import matplotlib.pyplot as plt
 mydata = te.getHistoricalData(country = 'United Kingdom', indicator = 'GDP')
 plt.plot(mydata)
+plt.show()
 ```
 
 
