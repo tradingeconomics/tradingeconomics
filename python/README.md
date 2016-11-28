@@ -65,7 +65,7 @@ Out[1]:
 1       0.7%  
 2       0.1%  
 ``` 
-In some cases initial date and end date could be specified
+In some cases(getCalendarData and getHistoricalData), the start date(initDate) and end date(endDate) of the results can be specified
 ```python
 In [2]: te.getHistoricalData(country = 'United Kingdom', indicator = 'GDP', endDate= '2015-01-01')
 
@@ -81,7 +81,9 @@ Out[2]:
 2013-12-31  2712.30
 2014-12-31  2990.20
 ```
+**Note:** Making request for one country and one indicator, without puting country name and indicator name in square brackets, the result, by default, will be of the *pandas.DataFrame* type(example above).
 
+Putting country name or indicator name in square brackets the result, by default, will be of the *dictionary* type.
 For several countries and indicators
 ```python
 te.getHistoricalData(country = ['United States', 'Germany'], indicator = ['Exports','Imports', 'GDP'], initDate= '1990-01-01', endDate= '2015-01-01')
