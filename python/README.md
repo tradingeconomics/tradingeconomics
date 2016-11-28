@@ -25,7 +25,7 @@ Install using easy_install
 easy_install https://github.com/ieconomics/open-api/archive/v0.2.4.tar.gz
 ```
 
-Install directly from GitHub by downloading https://github.com/ieconomics/open-api/archive/v0.2.3.zip and run
+Install directly from GitHub by downloading https://github.com/ieconomics/open-api/archive/v0.2.4.zip and run
 
 ```bash
 python setup.py install
