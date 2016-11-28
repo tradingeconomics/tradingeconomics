@@ -65,7 +65,7 @@ Out[1]:
 1       0.7%  
 2       0.1%  
 ``` 
-In some cases initial date and end date could be specified
+In some cases(getCalendarData and getHistoricalData), the start date(initDate) and end date(endDate) of the results can be specified
 ```python
 In [2]: te.getHistoricalData(country = 'United Kingdom', indicator = 'GDP', endDate= '2015-01-01')
 
