@@ -14,7 +14,7 @@ def getMarketsData(marketsField, output_type = None):
     Parameters:
     -----------
     marketsField: string.
-            Takes either one of 'commodity','currency',
+            Takes either one of 'commoditys','currency',
             'index' or 'bond' as options.
              
     output_type: string.
