@@ -3,10 +3,17 @@ from datetime import *
 import re
 import itertools
 
+
+class DateError(ValueError):
+    pass
+
+class CredentialsError(ValueError):
+    pass
+
 def credCheck(credentials):
     pattern = re.compile("^...............:...............$")
     if not(pattern.match(credentials)):
-        raise ValueError('Invalid credentials.')
+        raise CredentialsError('Invalid credentials.')
         
 def out_type(init_format):
     list_of_countries= init_format.Country.unique()
@@ -26,12 +33,12 @@ def validate(date_text):
         try:
             datetime.strptime(date_text, '%Y-%m-%d')
         except ValueError:
-            raise ValueError("Incorrect data format, should be YYYY-MM-DD")
+            raise DateError("Incorrect data format, should be YYYY-MM-DD")
             
             
 def validatePeriod(initDate, endDate):
     if  datetime.strptime(initDate, '%Y-%m-%d') > datetime.strptime(endDate, '%Y-%m-%d'):
-        raise ValueError ('Invalid time period, check the supplied date parameters.')
+        raise DateError ('Invalid time period, check the supplied date parameters.')
         
 def finalLink(link, prmtr):
     linkAPI  = link

@@ -5,6 +5,19 @@ from datetime import *
 import functions as fn
 import glob
 
+
+class ParametersError(ValueError):
+    pass
+
+class DateError(ValueError):
+    pass
+
+class CredentialsError(ValueError):
+    pass
+
+class LoginError(AttributeError):
+    pass
+
 def paramCheck (country, indicator = None):
     if type(country) is str and indicator == None:
         linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(country)
@@ -69,36 +82,39 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     if  initDate == None and endDate == None:
         linkAPI = linkAPI
     elif endDate > str(datetime.now()):
-        raise ValueError ('End date could not be greater than actual date')
+        raise DateError ('End date could not be greater than actual date')
     else:
         try: 
             fn.validate(initDate)
         except ValueError:
-            raise ValueError ('Incorrect initial date format, should be YYYY-MM-DD ')
+            raise DateError ('Incorrect initial date format, should be YYYY-MM-DD ')
         try: 
             fn.validate(endDate)
         except ValueError:
-            raise ValueError ('Incorrect end date format, should be YYYY-MM-DD ')
+            raise DateError ('Incorrect end date format, should be YYYY-MM-DD ')
         try:        
             fn.validatePeriod(initDate, endDate)
         except ValueError:
-            raise ValueError ('Invalid time period.') 
+            raise DateError ('Invalid time period.') 
         param=[initDate, endDate]
         linkAPI = fn.finalLink(linkAPI, param)
     try:
         linkAPI = linkAPI + '?c=' + glob.apikey
     except AttributeError:
-        raise AttributeError('You need to do login before making any request')
+        raise LoginError('You need to do login before making any request')
     try:
         webResults = json.load(urllib.urlopen(linkAPI))
     except ValueError:
-        raise ValueError ('Invalid credentials')
-    names = ['date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast']
-    names2 = ['Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast']
-    maindf = pd.DataFrame()  
-    for i in range(len(names)):
-        names[i] =  [d[names2[i]] for d in webResults]
-        maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
+        raise CredentialsError ('Invalid credentials')
+    if len(webResults) > 0:
+        names = ['date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast']
+        names2 = ['Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast']
+        maindf = pd.DataFrame()  
+        for i in range(len(names)):
+            names[i] =  [d[names2[i]] for d in webResults]
+            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
+    else:
+        raise ParametersError ('No data available for the provided parameters.')  
     if output_type == None or output_type =='dict':
         output = fn.out_type(maindf)
     elif output_type == 'df': 
@@ -106,5 +122,5 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     elif output_type == 'raw':
         output = webResults
     else:
-        raise ValueError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
+        raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
     return output

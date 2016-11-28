@@ -5,6 +5,15 @@ from datetime import *
 import functions as fn 
 import glob
 
+
+class ParametersError(ValueError):
+    pass
+
+class CredentialsError(ValueError):
+    pass
+
+class LoginError(AttributeError):
+    pass
         
 def checkCountry(country):       
     if type(country) is str:
@@ -74,25 +83,28 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
     try:
         linkAPI = linkAPI + '?c=' + glob.apikey
     except AttributeError:
-        raise AttributeError('You need to do login before making any request')
+        raise LoginError('You need to do login before making any request')
     try:
         webResults = json.load(urllib.urlopen(linkAPI))
     except ValueError:
-        raise ValueError ('Invalid credentials')        
-    if country == None:
-        print ('Without country indication only a list of available indicators will be returned...')
-        category = [d['Category'] for d in webResults]       
-        category_group = [d['CategoryGroup'] for d in webResults]
-        output = {'Category': category, 'CategoryGroup': category_group}
-    else:
-        maindf = getResults(webResults, country)    
-        if output_type == None or output_type =='dict':
-            output = fn.out_type(maindf)
-        elif output_type == 'df': 
-            output = maindf
-        elif output_type == 'raw':
-            output = webResults
+        raise CredentialsError ('Invalid credentials')   
+    if len(webResults) > 0:
+        if country == None:
+            print ('Without country indication only a list of available indicators will be returned...')
+            category = [d['Category'] for d in webResults]       
+            category_group = [d['CategoryGroup'] for d in webResults]
+            output = {'Category': category, 'CategoryGroup': category_group}
         else:
-            raise ValueError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for results directly from web.')      
+            maindf = getResults(webResults, country)  
+    else:
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='dict':
+        output = fn.out_type(maindf)
+    elif output_type == 'df': 
+        output = maindf
+    elif output_type == 'raw':
+        output = webResults
+    else:
+        raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for results directly from web.')      
     return output
   

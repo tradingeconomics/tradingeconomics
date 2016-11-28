@@ -7,6 +7,17 @@ import functions as fn
 import glob
 from dateutil.relativedelta import relativedelta
 
+class ParametersError(ValueError):
+    pass
+
+class DateError(ValueError):
+    pass
+
+class CredentialsError(ValueError):
+    pass
+
+class LoginError(AttributeError):
+    pass
 
 def parseData(data):
         indx = pd.DatetimeIndex(data['dates'])
@@ -48,6 +59,20 @@ def multiParsedData(countryDict):
         empty_dict2[CNTRY[i]][INDCTR[j]] = answer[:1]
         del answer[0]       
     return empty_dict2      
+
+
+def out_type(init_format):
+    list_of_countries= init_format.Country.unique()
+    list_of_cat= init_format.Category.unique()
+    dict_start = {el:{elm:0 for elm in list_of_cat} for el in list_of_countries} 
+    for i, j in itertools.product(range(len(list_of_countries)), range(len(list_of_cat))):
+        dict_cntry = init_format.loc[init_format['Country'] == list_of_countries[i]]
+        dict_cat = dict_cntry.loc[init_format['Category'] == list_of_cat[j]].to_dict('records')
+        dict_start[list_of_countries[i]][list_of_cat[j]] = dict_cat
+        for l in range(len(dict_cat)):
+            del dict_cat[l]['Country']
+            del dict_cat[l]['Category']
+    return dict_start
     
         
 def paramCheck (country, indicator):
@@ -82,7 +107,7 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
              For example: '2011-01-01' 
     endDate: string with format: YYYY-MM-DD.
     output_type: string.
-             'dict'(default) for dictionary format output, 'df' for data frame,
+             'dict'(default) for dictionary format output,
              'raw' for list of dictionaries without any parsing.
 
     Notes
@@ -108,45 +133,45 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
         try: 
             fn.validate(endDate)
         except ValueError:
-            raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
+            raise DateError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try:
             fn.validatePeriod(iDate, endDate)
         except ValueError:
-            raise ValueError ('Incorrect time period.')  
+            raise DateError ('Incorrect time period.')  
         param=[iDate, endDate]
         linkAPI = fn.finalLink(linkAPI, param)    
     if (initDate is not None) and (endDate is not None) :
         try: 
             fn.validate(initDate)
         except ValueError:
-            raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
+            raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try: 
             fn.validate(endDate)
         except ValueError:
-            raise ValueError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
+            raise DateError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
         try:        
             fn.validatePeriod(initDate, endDate)
         except ValueError:
-            raise ValueError ('Invalid time period.')
+            raise DateError ('Invalid time period.')
         param=[initDate, endDate]
         linkAPI = fn.finalLink(linkAPI, param)
     if (initDate is not None) and endDate == None :        
         try: 
             fn.validate(initDate)
         except ValueError:
-            raise ValueError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
+            raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
             if initDate > str(date.today()):
-                raise ValueError ('Initial date out of range.')
+                raise DateError ('Initial date out of range.')
         myDate = [initDate]
         linkAPI = fn.finalLink(linkAPI, myDate)
     try:
         linkAPI = linkAPI + '?c='+glob.apikey
     except AttributeError:
-        raise AttributeError('You need to do login before making any request')
+        raise LoginError('You need to do login before making any request')
     try:
         webResults = json.load(urllib.urlopen(linkAPI))
     except ValueError:
-        raise ValueError ('Invalid credentials')
+        raise CredentialsError ('Invalid credentials')
     if len(webResults) > 0:
         date = [d['DateTime'] for d in webResults]        
         value = [d[u'Value'] for d in webResults]
@@ -156,12 +181,12 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
         else:
             results = multiParams(webResults)
     else:
-        raise ValueError ('No data available for the provided parameters.')    
-    if output_type == None or output_type =='df':        
+        raise ParametersError ('No data available for the provided parameters.')  
+    if output_type == None or output_type =='dict':        
         output = results
     elif output_type == 'raw':        
         output = webResults
     else:       
-        raise ValueError ('output_type options : df(defoult) for data frame or raw for unparsed results.')
+        raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
     return output
     
