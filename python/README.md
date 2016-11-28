@@ -81,7 +81,9 @@ Out[2]:
 2013-12-31  2712.30
 2014-12-31  2990.20
 ```
+**Note:** Making request for one country and one indicator, without puting country name and indicator name in square brackets, the result, by default, will be of the *pandas.DataFrame* type(example above).
 
+Putting country name or indicator name in square brackets the result, by default, will be of the *dictionary* type.
 For several countries and indicators
 ```python
 te.getHistoricalData(country = ['United States', 'Germany'], indicator = ['Exports','Imports', 'GDP'], initDate= '1990-01-01', endDate= '2015-01-01')
