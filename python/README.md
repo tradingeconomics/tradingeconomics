@@ -22,7 +22,7 @@ pip install tradingeconomics
 
 Install using easy_install 
 ```python
-easy_install https://github.com/ieconomics/open-api/archive/v0.2.4.tar.gz
+easy_install https://pypi.python.org/packages/67/ef/fce59528d5f772c8ecf8ae21f119a976c3c7aa740646a4eb4d536b3e4442/tradingeconomics-0.2.4.zip
 ```
 
 Install directly from GitHub by downloading https://github.com/ieconomics/open-api/archive/v0.2.4.zip and run
