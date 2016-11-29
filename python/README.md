@@ -42,7 +42,7 @@ te.login('APIkey')
 ```
 If you don't have APIkey just left empty space in brackets.  
 
-**Note:** Without APIkey  datasets will default to returning sample data.
+**Note:** Without APIkey  data sets will default to returning sample data.
 
 Results are available in different formats, such as : JSON, pandas.DataFrame or dictionary.
 
@@ -81,7 +81,7 @@ Out[2]:
 2013-12-31  2712.30
 2014-12-31  2990.20
 ```
-**Note:** Making request for one country and one indicator, without puting country name and indicator name in square brackets, the result, by default, will be of the *pandas.DataFrame* type(example above).
+**Note:** Making request for one country and one indicator, without putting country name and indicator name in square brackets, the result, by default, will be of the *pandas.DataFrame* type(example above).
 
 Putting country name or indicator name in square brackets the result, by default, will be of the *dictionary* type.
 For several countries and indicators
