@@ -131,11 +131,6 @@
         <ul class="search-results"></ul>
       <div id="toc">
       </div>
-        <ul class="toc-footer">
-            <li><a href='http://ueconomics.com/'>UECONOMICS</a></li>
-            <li><a href='https://ieconomics.com/'>IECONOMICS</a></li>
-            <li><a href='http://www.tradingeconomics.com/alerts/'>ALERTS</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
@@ -148,74 +143,71 @@ The API can be used to feed a custom developed application, a public website or 
 
 <h1 id="installation">Installation</h1>
 
-<p><strong>R</strong></p>
+<p>Before proceeding select your language tab on the right.</p>
 
 <blockquote class="lang-specific r">
 <p>Install the devtools package. You can do this from CRAN. Invoke R and then type:</p>
-</blockquote> 
+</blockquote>  
 <pre class="highlight r"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>Load the devtools package.</p>
-</blockquote> 
+</blockquote>     
 <pre class="highlight r"><code><span class="n">library</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>Install the tradingeconomics package.</p>
-</blockquote> 
+</blockquote>     
 <pre class="highlight r"><code><span class="n">install_github</span><span class="p">(</span><span class="s2">"ieconomics/open-api/R/tradingeconomics"</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific python">
 <p>Install the tradingeconomics package using pip, a package management system used to install and manage software packages written in Python.
    In Windows Command Prompt or Linux bash type:</p>
-</blockquote> 
+</blockquote>     
 <pre class="highlight python"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">tradingeconomics</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>Install using easy_install:</p>
-</blockquote> 
+</blockquote>     
 <pre class="highlight python"><code><span class="n">easy_install</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span><span class="mi">67</span><span class="o">/</span><span class="n">ef</span><span class="o">/</span><span class="n">fce59528d5f772c8ecf8ae21f119a976c3c7aa740646a4eb4d536b3e4442</span><span class="o">/</span><span class="n">tradingeconomics</span><span class="o">-</span><span class="mf">0.2</span><span class="o">.</span><span class="mf">4.</span><span class="nb">zip</span>
 </code></pre>
-<blockquote class="lang-specific python">
+<blockquote class="lang-specific python"> 
 <p>Install directly from GitHub by downloading <https://github.com/ieconomics/open-api/archive/v0.2.4.zip> and run:</p>
-</blockquote> 
+</blockquote>     
 <pre class="highlight python"><code><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </code></pre>
-<p>You can get R from official website:<br>
-<a href="https://cran.r-project.org/">https://cran.r-project.org/</a></p>
+<p><strong>R</strong><br>
+You can get R from the official website: <a href="https://cran.r-project.org/">https://cran.r-project.org/</a><br>
+Then you need to install the tradingeconomics package. At this moment our package is available to download from the <a href="https://github.com/ieconomics/open-api/tree/master/R">GitHub</a> repository.<br>
+See on the right how to install a package that’s sitting on GitHub.
+<br>
+<br></p>
 
-<p>Then you need to install the tradingeconomics package. At this moment our package available to download from <a href="https://github.com/ieconomics/open-api/tree/master/R">GitHub</a> repository.</p>
+<p><strong>Python</strong><br>
+You can get Python from: <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a><br>
+We support Python 2.7
+Then you need to install the tradingeconomics package. You can do so in a variety of ways.<br>
+See the installation instructions on the right.
+<br>
+<br></p>
 
-<p>How to install a package that’s sitting on GitHub?</p>
-
-<p><strong>Python</strong></p>
-
-<p>You can get Python from:<br>
-<a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a><br>
-We support Python 2.7</p>
-
-<p>Then you need to install the tradingeconomics package. You can do so in a variety of ways.<br>
-See the installation instructions on the right.</p>
-
-<p><strong>Excel</strong></p>
-
-<p>Download the <a href="https://github.com/ieconomics/excel-addin/raw/master/ExcelAddInDeploy.msi">Trading Economics Excel Add In</a> installer, launch it and follow instructions. </p>
-
-<p>We support Excel 2010, 2013, 2016 (32bit and 64bit). </p>
+<p><strong>Excel</strong><br>
+Download the <a href="https://github.com/ieconomics/excel-addin/raw/master/ExcelAddInDeploy.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>
+We support Excel 2010, 2013, 2016 (32bit and 64bit). </p>
 
 <h1 id="getting-started">Getting started</h1>
 <pre class="highlight r"><code><span class="w">  </span><span class="n">library</span><span class="p">(</span><span class="n">tradingeconomics</span><span class="p">)</span><span class="w">
   </span><span class="n">login</span><span class="p">(</span><span class="s1">'users APIkey'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-<p>If you don&rsquo;t have APIkey just type:</p>
+<p>If you you don’t have an APIkey and just want to try a demo of our API:</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="w">  </span><span class="n">login</span><span class="p">()</span><span class="w">
 </span></code></pre><pre class="highlight python"><code>  <span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
   <span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'APIkey'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
-<p>If you don&rsquo;t have APIkey just type:</p>
+<p>If you you don’t have an APIkey and just want to try a demo of our API:</p>
 </blockquote>
 <pre class="highlight python"><code>  <span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
 </code></pre>
@@ -227,17 +219,17 @@ See the installation instructions on the right.</p>
 
 <p>For <strong>Excel</strong>:
 <aside class="notice">
-Without APIkey data sets will default to returning sample data.
+Without APIkeys all requests will return the default sample data.
 </aside></p>
 
 <h1 id="examples">Examples</h1>
 
 <p>For <strong>R</strong> results are available in data frame or list format.</p>
 
-<p>For <strong>Python</strong> results are available in different formats, such as : JSON, pandas.DataFrame or dictionary.</p>
+<p>For <strong>Python</strong> results are available in: JSON, pandas.DataFrame or dictionary.</p>
 
 <aside class="warning">
-<strong>Excel:</strong> To be able to deleate cell/row/column  after getting data first change <strong>&ldquo;RunAutomatically = 1&rdquo;</strong> to <strong>&ldquo;RunAutomatically = 0&rdquo;</strong> in your formula!!!
+<strong>Excel:</strong> To be able to delete cell/row/column  after getting data first change <strong>&ldquo;RunAutomatically = 1&rdquo;</strong> to <strong>&ldquo;RunAutomatically = 0&rdquo;</strong> in your formula!
 </aside>
 
 <h2 id="get-forecast-data">Get Forecast Data</h2>
@@ -253,7 +245,7 @@ Without APIkey data sets will default to returning sample data.
 <pre class="highlight r"><code><span class="w">    </span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'portugal'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific python">
-<p>Forecasted values for specific country, in this case Portugal. </p>
+<p>Forecasted values for specific a country, in this case Portugal. </p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Portugal'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
 </code></pre>
@@ -271,7 +263,7 @@ Or type in any empty cell:</p>
 <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
     <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/forecast/country/country_name'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/forecast/country/{put country name here}'</span><span class="p">,</span>
     <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">};</span>
 <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
@@ -297,14 +289,16 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified , you can provide more than one of each, separated by comma. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
-<pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'http://api.tradingeconomics.com/forecast/country/country_name?c=guest:guest'</span><span class="p">;</span>
+<pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'http://api.tradingeconomics.com/forecast/country/{put country name here}?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
         <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
@@ -325,10 +319,12 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest </a> 
+
       
   </p>
 </blockquote>
@@ -342,7 +338,7 @@ Or type in any empty cell:</p>
     <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
     <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
     <span class="c1">//SET Parameters</span>
-    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/forecast/country/country_name"</span><span class="p">);</span>
+    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/forecast/country/{put country name here}"</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">//Your custom response parser code</span>
@@ -361,14 +357,16 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"http://api.tradingeconomics.com//forecast/country/country_name"</span><span class="o">;</span>
+<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"http://api.tradingeconomics.com//forecast/country/{put country name here}"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
@@ -387,10 +385,12 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -406,7 +406,7 @@ $handle = curl_init();
 
     $data = curl_exec($handle);
 curl_close($handle);
-//parse your data to satusfy your needs....
+//parse your data to satisfy your needs....
 </code></pre>
 <blockquote class="lang-specific php">
   <p> 
@@ -420,17 +420,19 @@ curl_close($handle);
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
 
 <p>Here you can get forecast values by country, by indicator, by country and indicator.</p>
 
-<p>Click <a href="http://api.tradingeconomics.com/forecast/country/country_name/indicator/indicator_name?c=guest:guest">here</a> and figure out what kind of data you can get. </p>
+<p>Click <a href="http://api.tradingeconomics.com/forecast/country/country_name/indicator/indicator_name?c=guest:guest">here</a> to see a sample of the kind of data you can get.</p>
 
 <h2 id="get-historical-data">Get Historical Data</h2>
 
@@ -440,7 +442,7 @@ curl_close($handle);
 <pre class="highlight r"><code><span class="w">    </span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">,</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'imports'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific python">
-<p>In some cases(getCalendarData and getHistoricalData), the start date(initDate) and end date(endDate) of the results can be specified.</p>
+<p>In some cases(getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'United Kingdom'</span><span class="p">,</span> <span class="n">indicator</span> <span class="o">=</span> <span class="s">'GDP'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span> <span class="s">'2015-01-01'</span><span class="p">)</span>
 
@@ -457,11 +459,11 @@ curl_close($handle);
 <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2990.20</span>
 </code></pre>
 <blockquote class="lang-specific python">
-<p>**Note:** Making request for one country and one indicator, without putting country name and indicator name in square brackets, the result, by default, will be of the *pandas.DataFrame* type(example above).</p>
+<p>**Note:** Making request for one country and one indicator, without putting country name and indicator name in square brackets, will return *pandas.DataFrame* type(example above).</p>
 </blockquote> 
 
 <blockquote class="lang-specific python">
-<p>Putting country name or indicator name in square brackets the result, by default, will be of the *dictionary* type.
+<p>Putting country name or indicator name in square brackets will return *dictionary* type.
 For several countries and indicators</p>
 </blockquote> 
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s">'United States'</span><span class="p">,</span> <span class="s">'Germany'</span><span class="p">],</span> <span class="n">indicator</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Exports'</span><span class="p">,</span><span class="s">'Imports'</span><span class="p">,</span> <span class="s">'GDP'</span><span class="p">],</span> <span class="n">initDate</span><span class="o">=</span> <span class="s">'1990-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span> <span class="s">'2015-01-01'</span><span class="p">)</span>
@@ -480,7 +482,7 @@ Or type in any empty cell:</p>
 <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
     <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/historical/country/country_name/indicator/indicator_name'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/historical/country/{put country name here}/indicator/{put indicator name here}'</span><span class="p">,</span>
     <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">};</span>
 <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
@@ -506,14 +508,16 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
-<pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name?c=guest:guest'</span><span class="p">;</span>
+<pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'http://api.tradingeconomics.com/historical/country/{put country name here}/indicator/{put indicator name here}?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
         <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
@@ -534,10 +538,12 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -551,7 +557,7 @@ Or type in any empty cell:</p>
     <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
     <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
     <span class="c1">//SET Parameters</span>
-    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/historical/country/country_name/indicator/indicator_name"</span><span class="p">);</span>
+    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/historical/country/{put country name here}/indicator/{put indicator name here}"</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="c1">//Your custom response parser code</span>
@@ -570,14 +576,16 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"http://api.tradingeconomics.com//historical/country/country_name/indicator/indicator_name"</span><span class="o">;</span>
+<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"http://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
@@ -596,10 +604,12 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -615,7 +625,7 @@ $handle = curl_init();
 
     $data = curl_exec($handle);
 curl_close($handle);
-//parse your data to satusfy your needs....
+//parse your data to satisfy your needs....
 </code></pre>
 <blockquote class="lang-specific php">
   <p> 
@@ -629,17 +639,19 @@ curl_close($handle);
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas. <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
 
-<p>Here you can get historical information for specific country and indicator.</p>
+<p>Here you can get historical information for specific a country and indicator.</p>
 
-<p>Click <a href="http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name?c=guest:guest">here</a> and figure out what kind of data you can get. </p>
+<p>Click <a href="http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name?c=guest:guest">here</a> to see a sample of the kind of data you can get.</p>
 
 <h2 id="get-indicator-data">Get Indicator Data</h2>
 
@@ -652,7 +664,7 @@ curl_close($handle);
   </span><span class="m">1</span><span class="w">   </span><span class="n">Italy</span><span class="w"> </span><span class="n">Bankruptcies</span><span class="w"> </span><span class="n">Italy</span><span class="w"> </span><span class="n">Bankruptcies</span><span class="w">        </span><span class="m">3600</span><span class="w"> </span><span class="m">2016-03-31</span><span class="nb">T</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">Cerved</span><span class="w"> </span><span class="n">Companies</span><span class="w"> </span><span class="o">/</span><span class="n">italy</span><span class="o">/</span><span class="n">bankruptcies</span><span class="w">      </span><span class="n">Business</span><span class="w"> </span><span class="n">Quarterly</span><span class="w">             </span><span class="n">ITALYBAN</span><span class="w">          </span><span class="m">4100</span><span class="w"> </span><span class="m">2015-12-31</span><span class="nb">T</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific python">
-<p>Next code will give you Country/Indicator pair. </p>
+<p>To get Country/Indicator pair: </p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'United Kingdom'</span><span class="p">,</span> <span class="n">indicators</span> <span class="o">=</span> <span class="s">'Imports'</span><span class="p">)</span>
 </code></pre>
@@ -696,10 +708,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -724,10 +739,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -760,10 +778,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -786,10 +807,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -819,17 +843,20 @@ curl_close($handle);
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
 
 <p>Here you can get a list of all indicators, indicators by country or country-indicator pair.</p>
 
-<p>Click <a href="http://api.tradingeconomics.com/country/country_name/indicator_name?c=guest:guest">here</a> and figure out what kind of data you can get. </p>
+<p>Click <a href="http://api.tradingeconomics.com/country/country_name/indicator_name?c=guest:guest">here</a> to see a sample of the kind of data you can get.</p>
 
 <h2 id="get-markets-data">Get Markets Data</h2>
 
@@ -839,7 +866,7 @@ curl_close($handle);
 <pre class="highlight r"><code><span class="w">    </span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'commodity'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific python">
-<p>To get stock market index just type:</p>
+<p>To get stock market index:</p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span> <span class="o">=</span> <span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
 </code></pre>
@@ -883,10 +910,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -911,10 +941,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -947,10 +980,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -973,10 +1009,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -1006,22 +1045,25 @@ curl_close($handle);
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
 
 <p>Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. </p>
 
-<p>Click <a href="http://api.tradingeconomics.com/markets/commodities?c=guest:guest">here</a> and figure out what kind of data you can get. </p>
+<p>Click <a href="http://api.tradingeconomics.com/markets/commodities?c=guest:guest">here</a> to see a sample of the kind of data you can get.</p>
 
 <h2 id="get-calendar-data">Get Calendar Data</h2>
 
 <blockquote class="lang-specific r">
-<p>Next code will provide a data frame with information about calendar events for United Kingdom  </p>
+<p>Shown next is how to get a data frame with information about calendar events for the United Kingdom</p>
 </blockquote>       
 <pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 
@@ -1041,7 +1083,7 @@ curl_close($handle);
 </span><span class="m">13</span><span class="w"> </span><span class="m">2016-11-29</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">     </span><span class="n">Mortgage</span><span class="w"> </span><span class="n">Approvals</span><span class="w">                    </span><span class="n">Mortgage</span><span class="w"> </span><span class="n">Approvals</span><span class="w">       </span><span class="n">Oct</span><span class="w">                     </span><span class="n">Bank</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">England</span><span class="w">          </span><span class="m">62.93</span><span class="n">K</span><span class="w">              </span><span class="m">61.23</span><span class="n">K</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific python">
-<p>To get calendar data for specific country, in data frame format, just type:</p>
+<p>To get calendar data for specific a country, in data frame format:</p>
 </blockquote>    
 <pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Italy'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> 
@@ -1100,10 +1142,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -1128,10 +1173,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -1164,10 +1212,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -1190,10 +1241,13 @@ Or type in any empty cell:</p>
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
@@ -1223,17 +1277,20 @@ curl_close($handle);
   <p>
     <strong>Multiple Parameters<br> </strong> 
 
-      &nbsp;Almost all of the Trading Economics WEB API methods supports multiple parameters. <br>
-      Whenever a method requires to specify a country name or indicator name, you can provide more than one of each, separated by comma. <br>
+      &nbsp;Almost all of the Trading Economics WEB API methods support multiple parameters. 
+ <br>
+      Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+ <br>
       Here is a practical example:<br>
-      http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency
+      <a href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest</a> 
+
       
   </p>
 </blockquote>
 
 <p>Here you can get calendar events. </p>
 
-<p>Click <a href="http://api.tradingeconomics.com/calendar/country/all/yyyy-mm-dd/yyyy-mm-dd2?c=guest:guest">here</a> and figure out what kind of data you can get. </p>
+<p>Click <a href="http://api.tradingeconomics.com/calendar/country/all/yyyy-mm-dd/yyyy-mm-dd2?c=guest:guest">here</a> to see a sample of the kind of data you can get.</p>
 
       </div>
       <div class="dark-box">

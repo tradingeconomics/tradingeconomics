@@ -358,7 +358,7 @@ Click [here](http://api.tradingeconomics.com/forecast/country/country_name/indic
   ```
 
 <blockquote class="lang-specific python">
-<p>In some cases(getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
+<p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
 ```python
 In [2]: te.getHistoricalData(country = 'United Kingdom', indicator = 'GDP', endDate= '2015-01-01')
@@ -384,7 +384,8 @@ Out[2]:
 For several countries and indicators</p>
 </blockquote> 
 ```python
-te.getHistoricalData(country = ['United States', 'Germany'], indicator = ['Exports','Imports', 'GDP'], initDate= '1990-01-01', endDate= '2015-01-01')
+te.getHistoricalData(country = ['United States', 'Germany'], indicator = ['Exports','Imports', 'GDP'], 
+                      initDate= '1990-01-01', endDate= '2015-01-01')
 ```
 
 <blockquote class="lang-specific shell">
