@@ -1,0 +1,17 @@
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+tradingeconomics/__init__.py
+tradingeconomics/calendar.py
+tradingeconomics/forecasts.py
+tradingeconomics/functions.py
+tradingeconomics/glob.py
+tradingeconomics/historical.py
+tradingeconomics/indicators.py
+tradingeconomics/markets.py
+tradingeconomics.egg-info/PKG-INFO
+tradingeconomics.egg-info/SOURCES.txt
+tradingeconomics.egg-info/dependency_links.txt
+tradingeconomics.egg-info/requires.txt
+tradingeconomics.egg-info/top_level.txt
