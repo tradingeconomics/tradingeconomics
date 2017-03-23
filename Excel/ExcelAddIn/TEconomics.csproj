@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -79,6 +80,9 @@
     <Compile Include="forecastsFrm.Designer.cs">
       <DependentUpon>forecastsFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="formulaColumns.cs" />
+    <Compile Include="frmClmRng.cs" />
+    <Compile Include="getDictionary.cs" />
     <Compile Include="helperClass.cs" />
     <Compile Include="historicalFrm.cs">
       <SubType>Form</SubType>
@@ -92,7 +96,8 @@
     <Compile Include="indicatorsFrm.Designer.cs">
       <DependentUpon>indicatorsFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="printDataClass.cs" />
+    <Compile Include="newPrintData.cs" />
+    <Compile Include="printTSData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -104,6 +109,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="requestData.cs" />
     <Compile Include="udfClass.cs" />
   </ItemGroup>
   <ItemGroup>

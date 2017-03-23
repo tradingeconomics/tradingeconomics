@@ -1,5 +1,4 @@
 ﻿using ExcelDna.Integration.CustomUI;
-//using Microsoft.Win32.Registry.CurrentUser;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using NLog;
+
 
 namespace testClassLib
 {

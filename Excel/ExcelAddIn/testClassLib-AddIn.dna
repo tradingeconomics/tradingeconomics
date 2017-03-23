@@ -2,11 +2,12 @@
   <ExternalLibrary Path="testClassLib.dll" LoadFromBytes="true" Pack="true" />
   <Reference Path="NLog.dll" Pack="true" />
   <Reference Path="Newtonsoft.Json.dll" Pack="true" />
-  <Image Name="imgTest" Path="C:\Users\Analyst.pc6\Documents\Visual Studio 2015\Projects\testClassLib\testClassLib\Images\Calendar_5.png" Pack="true" />
-  <Image Name="mrkts" Path="C:\Users\Analyst.pc6\Documents\Visual Studio 2015\Projects\testClassLib\testClassLib\Images\Bullish.png" Pack="true" />
-  <Image Name="fork" Path="C:\Users\Analyst.pc6\Documents\Visual Studio 2015\Projects\testClassLib\testClassLib\Images\Bar_Chart.png" Pack="true" />
-  <Image Name="indi" Path="C:\Users\Analyst.pc6\Documents\Visual Studio 2015\Projects\testClassLib\testClassLib\Images\arrow2.png" Pack="true" />
-  <Image Name="hist" Path="C:\Users\Analyst.pc6\Documents\Visual Studio 2015\Projects\testClassLib\testClassLib\Images\Line.png" Pack="true" />
+  <Image Name="imgTest" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Calendar_5.png" Pack="true" />
+  <Image Name="mrkts" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Bullish.png" Pack="true" />
+  <Image Name="fork" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Bar_Chart.png" Pack="true" />
+  <Image Name="indi" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\arrow2.png" Pack="true" />
+  <Image Name="hist" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Line.png" Pack="true" />
+  <Image Name="refresh" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\refresh.png" Pack="true" />
 
   <!-- 
        The RuntimeVersion attribute above allows two settings:
@@ -30,8 +31,8 @@
           <tab id='CustomTab' label='TE' >
             <group id='getDataGroup' label='Get Data'>
               <button id='btnHistorical' label='Historical' size='large' showImage="true" image="fork" onAction='OnHistoricalButtonPressed' getEnabled='getState'/>
-              <button id='btnCalendar' label='Calendar' size='large' showImage="true" image ='imgTest' onAction='OnCalendarButtonPressed' getEnabled='getState' />
-              <button id='btnIndicators' label='Indicators' size='large' showImage="true" image="hist" onAction='OnIndicatorsButtonPressed' getEnabled='getState'/>              
+              <button id='btnIndicators' label='Latest' size='large' showImage="true" image="hist" onAction='OnIndicatorsButtonPressed' getEnabled='getState'/> 
+              <button id='btnCalendar' label='Calendar' size='large' showImage="true" image ='imgTest' onAction='OnCalendarButtonPressed' getEnabled='getState' />                           
               <menu id='menuMarkets' size="large" showImage="true" image="indi" label="Markets" getEnabled='getState'>
                 <button id='btnM_1' label='Currency' onAction='OnMarkets2ButtonPressed' />
                 <button id='btnM_2' label='Index' onAction='OnMarkets2ButtonPressed' />
@@ -39,6 +40,8 @@
                 <button id='btnM_4' label='Bonds' onAction='OnMarkets2ButtonPressed' />
               </menu>
               <button id='btnForecasts' label='Forecasts' size='large' showImage="true" image="mrkts" onAction='OnForecastsButtonPressed' getEnabled='getState'/>
+               <!-- <button id='btnTimeSeries' label='Time Series' size='large' showImage="true" image="hist" onAction='OnTSButtonPressed' getEnabled='getState'/>   -->
+              <button id='btnRefresh' label='Refresh' size='large' showImage="true" image="refresh" onAction='OnRefreshButtonPressed' getEnabled='getState'/> 
             </group >
             <group id='ApiKeyGroup' label='Login'>
               <button id='btnApiKey' size='large' showImage="true" getImage="MyGetImage" onAction='OnApiKeyButtonPressed' getLabel='getLabelApi' />

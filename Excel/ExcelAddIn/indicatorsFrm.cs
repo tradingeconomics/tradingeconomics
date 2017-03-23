@@ -25,12 +25,21 @@ namespace testClassLib
                 countryLstBx.Items.Insert(i, helperClass.cntry[i]);
             }
 
+            for (int n = 0; n < helperClass.indNames.Length; n++)
+            {
+                columnsListBox.Items.Insert(n, helperClass.indNames[n]);
+                columnsListBox.SetItemChecked(n, true);
+            }
             this.cntryTextBox.KeyDown += new KeyEventHandler(cntryTextBox_KeyDown);
             this.indctrTextBox.KeyDown += new KeyEventHandler(indctrTextBox_KeyDown);
             this.countryLstBx.KeyDown += new KeyEventHandler(countryLstBx_KeyDown);
+            this.selectedCountryLstBx.KeyDown += new KeyEventHandler(selectedCountryLstBx_KeyDown);
             this.countryLstBx.MouseDoubleClick += new MouseEventHandler(countryLstBx_MouseDoubleClick);
+            this.selectedCountryLstBx.MouseDoubleClick += new MouseEventHandler(selectedCountryLstBx_MouseDoubleClick);
             this.indicatorsLstBx.KeyDown += new KeyEventHandler(indicatorLstBx_KeyDown);
+            this.selectedIndicatorsLstBx.KeyDown += new KeyEventHandler(selectedIndicatorLstBx_KeyDown);
             this.indicatorsLstBx.MouseDoubleClick += new MouseEventHandler(indicatorLstBx_MouseDoubleClick);
+            this.selectedIndicatorsLstBx.MouseDoubleClick += new MouseEventHandler(selectedIndicatorLstBx_MouseDoubleClick);
         }
 
         private void hideAutoCompleteMenu()
@@ -89,7 +98,8 @@ namespace testClassLib
                     break;
                 }
             }
-            if (selectedCountryLstBx.Items.Count == 1)
+
+            if ((selectedCountryLstBx.Items.Count == 1) && (selectedCountryLstBx.Items[0].ToString() != "All"))
             {
                 string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
                 try
@@ -101,7 +111,6 @@ namespace testClassLib
                         indicatorsLstBx.Items.Clear();
                         for (int i = 0; i < o.Count; i++)
                         {
-
                             indicatorsLstBx.Items.Insert(i, o[i]["Category"]);
                             indicatorsLstBx.Items[i] = indicatorsLstBx.Items[i].ToString();
                         }
@@ -126,6 +135,8 @@ namespace testClassLib
                         indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
                 }
             }
+            cntryTextBox.Focus();
+            countryLstBx.ClearSelected();
             AutoCompleteList = indics_list();
         }
 
@@ -134,6 +145,43 @@ namespace testClassLib
             for (int i = selectedCountryLstBx.SelectedIndices.Count - 1; i >= 0; i--)
             {
                 selectedCountryLstBx.Items.RemoveAt(selectedCountryLstBx.SelectedIndices[i]);
+            }
+
+            if ((selectedCountryLstBx.Items.Count == 1) && (selectedCountryLstBx.Items[0].ToString() != "All"))
+            {
+                string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
+                try
+                {
+                    using (WebClient wc = new WebClient())
+                    {
+                        var json = wc.DownloadString(url2);
+                        JArray o = JArray.Parse(json);
+                        indicatorsLstBx.Items.Clear();
+                        for (int i = 0; i < o.Count; i++)
+                        {
+                            indicatorsLstBx.Items.Insert(i, o[i]["Category"]);
+                            indicatorsLstBx.Items[i] = indicatorsLstBx.Items[i].ToString();
+                        }
+                        for (int i = 0; i < indicatorsLstBx.Items.Count; i++)
+                        {
+                            if (indicatorsLstBx.Items[i].ToString() == "Credit Rating") indicatorsLstBx.Items.RemoveAt(i);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    helperClass.log.Info("Something went wrong trying get indicators list for specific country.");
+                    helperClass.log.Trace(ex.StackTrace);
+                }
+            }
+            else
+            {
+                indicatorsLstBx.Items.Clear();
+                for (int i = 0; i < helperClass.category.Length; i++)
+                {
+                    if (!indicatorsLstBx.Items.Contains(helperClass.category[i]))
+                        indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
+                }
             }
         }
 
@@ -152,6 +200,8 @@ namespace testClassLib
                     break;
                 }
             }
+            indctrTextBox.Focus();
+            indicatorsLstBx.ClearSelected();
         }
 
         private void btnIndctrRemove_Click(object sender, EventArgs e)
@@ -166,8 +216,21 @@ namespace testClassLib
         
         string selectedCntry;
         string selectedIndic;
+        public static string[] selectedColumns = null;
+
         private void btnOK_Click(object sender, EventArgs e)
         {
+            if (selectedCountryLstBx.Items.Count == 0)
+            {
+                MessageBox.Show("Please select available country");
+                return;
+            }
+
+            if (selectedCountryLstBx.Items[0].ToString() == "All" && selectedIndicatorsLstBx.Items.Count == 0)
+            {
+                MessageBox.Show("Please select available indicator");
+                return;
+            }
             helperClass.log.Info("Indicators button OK is clicked");
             helperClass.origin = false;
             if (selectedCountryLstBx.Items.Count != 0 & selectedIndicatorsLstBx.Items.Count == 0)
@@ -196,15 +259,24 @@ namespace testClassLib
                 selectedIndic = String.Join(",", values1);
             }
 
-            //Microsoft.Office.Interop.Excel.Application app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-            //Microsoft.Office.Interop.Excel.Range cellRange = app.ActiveCell;
+            List<string> columns = new List<string>();
+            foreach (string item in columnsListBox.CheckedItems)
+            {
+                columns.Add(item.ToString());
+            }
+            string newColumns = String.Join(",", columns);
+
             helperClass.runFormula = "RunAutomatically = 1";
-            string rnFm = "RunAutomatically = 0";
-            string indFm = string.Format("=TEIndicators( \"{0}\", \"{1}\", \"{2}\")",
-                    selectedCntry, selectedIndic, rnFm);
-                helperClass.log.Info("Formula {0}", indFm);
-            helperClass.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
-            helperClass.cellRange.Formula = indFm;
+            Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
+            string indFm = string.Format("=TEIndicators( \"{0}\", \"{1}\", \"{2}\", {3})",
+                    selectedCntry, 
+                    selectedIndic, 
+                    newColumns,
+                    dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
+
+            helperClass.log.Info("Formula {0}", indFm);
+            MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
+            MyRibbon.cellRange.Formula = indFm;
             Close();
         }
 
@@ -241,8 +313,8 @@ namespace testClassLib
             {
                 Point point = this.cntryTextBox.GetPositionFromCharIndex
                  (cntryTextBox.SelectionStart);
-                point.Y += (int)Math.Ceiling(this.cntryTextBox.Font.GetHeight()) + 33;
-                point.X += 14;
+                point.Y += (int)Math.Ceiling(this.cntryTextBox.Font.GetHeight()) + 29;
+                point.X += 7;
                 countryLstBx.Location = point;
                 this.countryLstBx.BringToFront();
                 this.countryLstBx.Show();
@@ -252,35 +324,47 @@ namespace testClassLib
 
         private void countryLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            cntryTextBox.Focus();
             btnCntryAdd_Click(sender, e);
             cntryTextBox.SelectionStart = cntryTextBox.Text.Length + 1;
             cntryTextBox.SelectionLength = 0;
-            countryLstBx.ClearSelected();
+        }
+
+        private void selectedCountryLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
+        {            
+            btnCntryRemove_Click(sender, e);
         }
 
         private void indicatorLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             btnIndctrAdd_Click(sender, e);
-            indicatorsLstBx.ClearSelected();
+        }
+
+        private void selectedIndicatorLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            btnIndctrRemove_Click(sender, e);
         }
 
         private void countryLstBx_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                cntryTextBox.Focus();
                 btnCntryAdd_Click(sender, e);
                 cntryTextBox.SelectionStart = cntryTextBox.Text.Length + 1;
                 cntryTextBox.SelectionLength = 0;
-                countryLstBx.ClearSelected();
             }
 
             if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Back)
-
             {
                 cntryTextBox.Focus();
                 countryLstBx.ClearSelected();
+            }
+        }
+
+        private void selectedCountryLstBx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnCntryRemove_Click(sender, e);
             }
         }
 
@@ -289,13 +373,20 @@ namespace testClassLib
             if (e.KeyCode == Keys.Enter)
             {
                 btnIndctrAdd_Click(sender, e);
-                indicatorsLstBx.ClearSelected();
             }
 
             if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Back)
             {
                 indicatorsLstBx.ClearSelected();
                 indctrTextBox.Select();
+            }
+        }
+
+        private void selectedIndicatorLstBx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnIndctrRemove_Click(sender, e);
             }
         }
 
@@ -353,13 +444,37 @@ namespace testClassLib
             {
                 Point point = this.indctrTextBox.GetPositionFromCharIndex
                  (indctrTextBox.SelectionStart);
-                point.Y += (int)Math.Ceiling(this.indctrTextBox.Font.GetHeight()) + 222;
-                point.X += 14;
+                point.Y += (int)Math.Ceiling(this.indctrTextBox.Font.GetHeight()) + 261;
+                point.X += 7;
                 indicatorsLstBx.Location = point;
                 this.indicatorsLstBx.BringToFront();
                 this.indicatorsLstBx.Show();
             }
         }
+
+        private void allCountriesBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (allCountriesBox.Checked == true)
+            {
+                countryLstBx.Enabled = false;
+                selectedCountryLstBx.Items.Clear();
+                selectedCountryLstBx.Items.Add("All");
+                indicatorsLstBx.Items.Clear();
+                for (int i = 0; i < helperClass.category.Length; i++)
+                {
+                    if (!indicatorsLstBx.Items.Contains(helperClass.category[i]))
+                        indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
+                }
+                indctrTextBox.Focus();
+                AutoCompleteList = indics_list();
+            }
+            else
+            {
+                countryLstBx.Enabled = true;
+                selectedCountryLstBx.Items.Clear();
+            }
+        }
+        
     }
-    }
+ }
 

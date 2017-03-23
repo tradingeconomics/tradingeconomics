@@ -27,22 +27,33 @@ namespace testClassLib
             {
                 countryLstBx.Items.Insert(i, helperClass.cntry[i]);
             }
-            countryLstBx.Items.Insert(0, "All");
+
             indicatorLstBx.Items.Clear();
-            for (int i = 0; i < helperClass.category.Length; i++)
+            for (int i = 0; i < helperClass.calendarIndicator.Length; i++)
             {
-                if (!indicatorLstBx.Items.Contains(helperClass.category[i]))
-                    indicatorLstBx.Items.Insert(i, helperClass.category[i]);
+                if (!indicatorLstBx.Items.Contains(helperClass.calendarIndicator[i]))
+                    indicatorLstBx.Items.Insert(i, helperClass.calendarIndicator[i]);
             }
+
+            for (int n = 0; n < helperClass.calendNames.Length; n++)
+            {
+                columnsListBox.Items.Insert(n, helperClass.calendNames[n]);
+                columnsListBox.SetItemChecked(n, true);
+            }
+            
             dateTimePicker1.Value = DateTime.Today;
-            dateTimePicker2.Value = DateTime.Today.AddMonths(1);
+            dateTimePicker2.Value = DateTime.Today.AddMonths(3);
             AutoCompleteList = indics_list();
             this.cntryTextBox.KeyDown += new KeyEventHandler(cntryTextBox_KeyDown);
             this.indctrTextBox.KeyDown += new KeyEventHandler(indctrTextBox_KeyDown);
             this.countryLstBx.KeyDown += new KeyEventHandler(countryLstBx_KeyDown);
+            this.selectedCountryLstBx.KeyDown += new KeyEventHandler(selectedCountryLstBx_KeyDown);
             this.countryLstBx.MouseDoubleClick += new MouseEventHandler(countryLstBx_MouseDoubleClick);
+            this.selectedCountryLstBx.MouseDoubleClick += new MouseEventHandler(selectedCountryLstBx_MouseDoubleClick);
             this.indicatorLstBx.KeyDown += new KeyEventHandler(indicatorLstBx_KeyDown);
+            this.selectedIndicatorLstBx.KeyDown += new KeyEventHandler(selectedIndicatorLstBx_KeyDown);
             this.indicatorLstBx.MouseDoubleClick += new MouseEventHandler(indicatorLstBx_MouseDoubleClick);
+            this.selectedIndicatorLstBx.MouseDoubleClick += new MouseEventHandler(selectedIndicatorLstBx_MouseDoubleClick);
         }
 
 
@@ -82,55 +93,24 @@ namespace testClassLib
         private void btnCntryAdd_Click(object sender, EventArgs e)
         {
             helperClass.log.Info("Adding country(s)");
-            foreach (string item in countryLstBx.SelectedItems)
-            {
-                if (selectedCountryLstBx.Items.Count < 10)
+           
+                foreach (string item in countryLstBx.SelectedItems)
                 {
-                    if (!selectedCountryLstBx.Items.Contains(item))
-                        selectedCountryLstBx.Items.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("You hit max number of items");
-                    break;
-                }
-            }
-            if (selectedCountryLstBx.Items.ToString() == "All")
-            {
-                indicatorLstBx.Enabled = false;
-                btnIndctrAdd.Enabled = false;
-                btnIndctrRemove.Enabled = false;
-            }
-            if (selectedCountryLstBx.Items.Count == 1)
-            {
-                string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey;
-                using (WebClient wc = new WebClient())
-                {
-                    var json = wc.DownloadString(url2);
-                    JArray o = JArray.Parse(json);
-                    indicatorLstBx.Items.Clear();
-                    for (int i = 0; i < o.Count; i++)
+                    if (selectedCountryLstBx.Items.Count < 10)
                     {
-                        indicatorLstBx.Items.Insert(i, o[i]["Category"]);
-                        indicatorLstBx.Items[i] = indicatorLstBx.Items[i].ToString();
+                        if (!selectedCountryLstBx.Items.Contains(item))
+                            selectedCountryLstBx.Items.Add(item);
                     }
-                    for (int i = 0; i < indicatorLstBx.Items.Count; i++)
+                    else
                     {
-                        if (indicatorLstBx.Items[i].ToString() == "Credit Rating") indicatorLstBx.Items.RemoveAt(i);
+                        MessageBox.Show("You hit max number of items");
+                        break;
                     }
-                }
+                }                
+
+                AutoCompleteList = indics_list();
             }
-            else
-            {
-                indicatorLstBx.Items.Clear();
-                for (int i = 0; i < helperClass.category.Length; i++)
-                {
-                    if (!indicatorLstBx.Items.Contains(helperClass.category[i]))
-                        indicatorLstBx.Items.Insert(i, helperClass.category[i]);
-                }
-            }
-            AutoCompleteList = indics_list();
-        }
+           
 
         private void btnCntryRemove_Click(object sender, EventArgs e)
         {
@@ -138,7 +118,7 @@ namespace testClassLib
             for (int i = selectedCountryLstBx.SelectedIndices.Count - 1; i >= 0; i--)
             {
                 selectedCountryLstBx.Items.RemoveAt(selectedCountryLstBx.SelectedIndices[i]);
-            }
+            }            
         }
 
         private void btnIndctrAdd_Click(object sender, EventArgs e)
@@ -184,14 +164,16 @@ namespace testClassLib
         {
             DateTime dateValue = dateTimePicker2.Value;
             date2 = dateValue.ToString("yyyy-MM-dd");
+
         }
 
 
         string selectedCntry;
         string selectedIndic;
-        
+        public static string[] selectedColumns = null;
         private void btnOK_Click(object sender, EventArgs e)
-        {          
+        {
+
             helperClass.log.Info("Calendars button OK is clicked");
             helperClass.origin = false;
             if (date1 == null & date2 == null)
@@ -236,14 +218,21 @@ namespace testClassLib
                 }
                 selectedIndic = String.Join(",", values2);
             }
-
+            List<string> columns = new List<string>();
+            foreach (string item in columnsListBox.CheckedItems)
+            {
+                columns.Add(item.ToString());
+            }
+            
+            string newColumns = String.Join(",", columns);
             helperClass.runFormula = "RunAutomatically = 1";
-            string rnFm = "RunAutomatically = 0";
-            string indFm = string.Format("=TECalendar( \"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\")",
-                selectedCntry, selectedIndic, date1, date2, rnFm);
-            helperClass.log.Info("Formula {0}", indFm);
-            helperClass.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
-            helperClass.cellRange.Formula = indFm; 
+            
+            Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
+            string clndrFm = string.Format($"=TECalendar( \"{selectedCntry}\", \"{selectedIndic}\", \"{date1}\", \"{date2}\", \"{newColumns}\", {dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]})");
+
+            helperClass.log.Info("Formula {0}", clndrFm);
+            MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
+            MyRibbon.cellRange.Formula = clndrFm; 
             Close();
         }
 
@@ -280,8 +269,8 @@ namespace testClassLib
             {
                 Point point = this.cntryTextBox.GetPositionFromCharIndex
                  (cntryTextBox.SelectionStart);
-                point.Y += (int)Math.Ceiling(this.cntryTextBox.Font.GetHeight()) + 35;
-                point.X += 14;
+                point.Y += (int)Math.Ceiling(this.cntryTextBox.Font.GetHeight()) + 37;
+                point.X += 7;
                 countryLstBx.Location = point;
                 this.countryLstBx.BringToFront();
                 this.countryLstBx.Show();
@@ -298,10 +287,20 @@ namespace testClassLib
             countryLstBx.ClearSelected();
         }
 
+        private void selectedCountryLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            btnCntryRemove_Click(sender, e);
+        }
+
         private void indicatorLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             btnIndctrAdd_Click(sender, e);
             indicatorLstBx.ClearSelected();
+        }
+
+        private void selectedIndicatorLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            btnIndctrRemove_Click(sender, e);
         }
 
         private void countryLstBx_KeyDown(object sender, KeyEventArgs e)
@@ -322,6 +321,14 @@ namespace testClassLib
             }
         }
 
+        private void selectedCountryLstBx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnCntryRemove_Click(sender, e);
+            }
+        }
+
         private void indicatorLstBx_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -335,6 +342,15 @@ namespace testClassLib
                 indicatorLstBx.ClearSelected();
                 indctrTextBox.Select();
             }
+        }
+
+
+        private void selectedIndicatorLstBx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnIndctrRemove_Click(sender, e);                
+            }            
         }
 
         private void cntryTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -363,10 +379,10 @@ namespace testClassLib
                 hideAutoCompleteMenu2();
                 if (selectedCountryLstBx.Items.Count == 0)
                 {
-                    for (int i = 0; i < helperClass.category.Length; i++)
+                    for (int i = 0; i < helperClass.calendarIndicator.Length; i++)
                     {
-                        if (!indicatorLstBx.Items.Contains(helperClass.category[i]))
-                            indicatorLstBx.Items.Insert(i, helperClass.category[i]);
+                        if (!indicatorLstBx.Items.Contains(helperClass.calendarIndicator[i]))
+                            indicatorLstBx.Items.Insert(i, helperClass.calendarIndicator[i]);
                     }
                 }
                 else
@@ -394,11 +410,42 @@ namespace testClassLib
             {
                 Point point = this.indctrTextBox.GetPositionFromCharIndex
                  (indctrTextBox.SelectionStart);
-                point.Y += (int)Math.Ceiling(this.indctrTextBox.Font.GetHeight()) + 227;
-                point.X += 14;
+                point.Y += (int)Math.Ceiling(this.indctrTextBox.Font.GetHeight()) + 263;
+                point.X += 7;
                 indicatorLstBx.Location = point;
                 this.indicatorLstBx.BringToFront();
                 this.indicatorLstBx.Show();
+            }
+        }
+
+        private void allCountriesBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (allCountriesBox.Checked == true)
+            {
+                countryLstBx.Enabled = false;
+                selectedCountryLstBx.Items.Clear();
+                selectedCountryLstBx.Items.Add("All");               
+                indctrTextBox.Focus();
+            }
+            else
+            {
+                countryLstBx.Enabled = true;
+                selectedCountryLstBx.Items.Clear();
+            }
+        }
+
+        private void allIndicatorsBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (allIndicatorsBox.Checked == true)
+            {
+                indicatorLstBx.Enabled = false;
+                selectedIndicatorLstBx.Items.Clear();
+                selectedIndicatorLstBx.Items.Add("All");
+            }
+            else
+            {
+                indicatorLstBx.Enabled = true;
+                selectedIndicatorLstBx.Items.Clear();
             }
         }
     }

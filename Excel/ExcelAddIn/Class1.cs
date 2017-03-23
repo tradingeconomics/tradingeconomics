@@ -10,30 +10,48 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
-
+using Microsoft.Office.Interop.Excel;
+using System.Diagnostics;
 
 namespace testClassLib
 {
     [ComVisible(true)]
     public class MyRibbon : ExcelRibbon
     {
-
         private IRibbonUI ribbon = null;
+        public static Dictionary<string, Dictionary<string, formulaColumns>> myMainDict;
+        public static Dictionary<string, formulaColumns> myFormulasDict;
+        public static Dictionary<string, formulaColumns> myNewDict;
+        public static string selectedItem;
+        public static readonly string[] UserDefinedFunctions = { "TECalendar", "TEMarkets", "TEIndicators", "TEForecasts", "TEHistorical", "TESeries" };
+        public static bool refresh = false;
+
+        public static Microsoft.Office.Interop.Excel.Application app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
+        public static Microsoft.Office.Interop.Excel.Worksheet sheet;
+        public static Microsoft.Office.Interop.Excel.Range cellRange;
 
         public void OnLoad(IRibbonUI ribbon)
         {
             this.ribbon = ribbon;
+            myMainDict = new Dictionary<string, Dictionary<string, formulaColumns>>();
+            myFormulasDict = new Dictionary<string, formulaColumns>();            
         }
 
-        public static string selectedItem;
+
         public void OnMarkets2ButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On Markets2 button is pressed");
-
-            Microsoft.Office.Interop.Excel.Application app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-            helperClass.cellRange = app.ActiveCell;
+            
+            try
+            {
+                cellRange = app.ActiveCell;
+            }
+            catch (Exception)
+            {
+                app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
+                cellRange = app.ActiveCell;
+            }
             helperClass.runFormula = "RunAutomatically = 1";
-            string rnFm = "RunAutomatically = 0";
 
             switch (control.Id)
             {
@@ -43,14 +61,28 @@ namespace testClassLib
                 case "btnM_4": selectedItem = "bonds"; break;
                 default: MessageBox.Show("There was a problem."); break;
             }
+
             helperClass.log.Info("Selected market is {0}", selectedItem);
-            string fmFin = string.Format("=TEMarkets( \"{0}\", \"{1}\")",
-                selectedItem, rnFm);
+            string newColumns;
+            if (MyRibbon.selectedItem == "bonds")
+            {
+                newColumns = String.Join(",", helperClass.bondsNames);                
+            }
+            else
+            {
+                newColumns = String.Join(",", helperClass.marketsNames);
+            }
+
+            //Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(app.ActiveCell.Address[false,false].ToString());
+            cellRange = helperClass.CellAddress(app.ActiveCell.Address[false, false].ToString());
+            string fmFin = string.Format("=TEMarkets( \"{0}\", \"{1}\", {2})",
+                selectedItem, 
+                newColumns,
+                cellRange[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
             helperClass.log.Info("Formula {0}", fmFin);
-            helperClass.cellRange.Formula = fmFin;
+            cellRange.Formula = fmFin;
 
         }
-
 
         public void OnIndicatorsButtonPressed(IRibbonControl control)
         {
@@ -60,14 +92,13 @@ namespace testClassLib
         }
 
 
-
         public void OnCalendarButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On Calendar button is pressed");
                 var cFrm = new calendarFrm();
                 cFrm.ShowDialog();
-
         }
+
 
         public void OnForecastsButtonPressed(IRibbonControl control)
         {
@@ -76,6 +107,7 @@ namespace testClassLib
                 fFrm.ShowDialog();
         }
 
+
         public void OnHistoricalButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On Historical button is pressed");
@@ -83,7 +115,48 @@ namespace testClassLib
                 hFrm.ShowDialog();
         }
 
+        
+        public void OnRefreshButtonPressed(IRibbonControl control)
+        {
+            try
+            {
+                sheet = app.ActiveSheet;
+            }
+            catch (Exception)
+            {
+                app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
+                sheet = app.ActiveSheet;
+            }            
+            find_formula(sheet);
+            //InitTimer();
+        }
 
+       
+
+        public static void find_formula(Worksheet worksheet)
+        {
+            Range range;
+            try
+            {
+                range = worksheet.UsedRange.SpecialCells(XlCellType.xlCellTypeFormulas);
+            }
+                catch(COMException)
+            {
+                MessageBox.Show("No TradingEconomics formula's were found to update.");
+                return;
+            }
+           
+            foreach (Range c in range.Cells)
+            {
+                if (c.HasFormula)
+                {
+                    helperClass.runFormula = "RunAutomatically = 1";
+                    refresh = true;
+                    worksheet.Cells[c.Row, c.Column] = c.Formula;
+                    while (worksheet.Application.CalculationState != XlCalculationState.xlDone) { }
+                }
+            }
+        }
 
         public  string getLabelApi(IRibbonControl control)
         {
@@ -95,7 +168,6 @@ namespace testClassLib
             Assembly _assembly;
             Stream _imageStream;
             
-
             _assembly = Assembly.GetExecutingAssembly();
             _imageStream = _assembly.GetManifestResourceStream("testClassLib.red2.png");
             Bitmap red = new Bitmap(_imageStream);
@@ -113,7 +185,6 @@ namespace testClassLib
         }
 
 
-
         public void OnApiKeyButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On Api key button is pressed");
@@ -121,6 +192,10 @@ namespace testClassLib
             {
                 apiKeyFrm.validApiKey = false;
                 ribbon.Invalidate();
+                Marshal.ReleaseComObject(MyRibbon.sheet);
+                Marshal.ReleaseComObject(MyRibbon.app);
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
             else
             {
@@ -128,11 +203,11 @@ namespace testClassLib
                 apkFrm.ShowDialog();
                 if (ribbon != null)
                 {
-
-                    ribbon.Invalidate();
+                    ribbon.Invalidate();                    
                 }
-            }            
+            }           
         }
+
 
         public void OnCallButtonPressed(IRibbonControl control)
         {
@@ -149,7 +224,8 @@ namespace testClassLib
         public void OnAboutButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On About button is pressed");
-            System.Diagnostics.Process.Start("http://www.tradingeconomics.com/about-te.aspx");
+            //System.Diagnostics.Process.Start("http://www.tradingeconomics.com/about-te.aspx");
+            MessageBox.Show("The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. Youre Trading Economics Excel Add In Version: 1.2.0", "About");
         }
     }
 }

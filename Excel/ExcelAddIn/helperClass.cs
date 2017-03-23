@@ -1,15 +1,22 @@
 ﻿using ExcelDna.Integration;
+using Microsoft.Office.Interop.Excel;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static testClassLib.udfClass;
 
 namespace testClassLib
 {
@@ -580,15 +587,181 @@ namespace testClassLib
                                 "Lending Rate",
                                 "Tourism Revenues" };
 
+        public static string[] calendarIndicator = {
+                                                "2 Year Note Yield",
+                                                "3 Month Bill Yield",
+                                                "3 Year Note Yield",
+                                                "30 Year Bond Yield",
+                                                "4 Week Bill Yield",
+                                                "5 Year Note Yield",
+                                                "52 Week Bill Yield",
+                                                "6 Month Bill Yield",
+                                                "7 Year Note Yield",
+                                                "ADP Employment Change",
+                                                "Average Hourly Earnings",
+                                                "Average Weekly Hours",
+                                                "Balance of Trade",
+                                                "Banks Balance Sheet",
+                                                "Building Permits",
+                                                "Business Confidence",
+                                                "Business Inventories",
+                                                "Capacity Utilization",
+                                                "Capital Flows",
+                                                "Car Production",
+                                                "Car Registrations",
+                                                "Case Shiller Home Price Index",
+                                                "Cash Reserve Ratio",
+                                                "Cement Production",
+                                                "Challenger Job Cuts",
+                                                "Chicago Fed National Activity Index",
+                                                "Chicago Pmi",
+                                                "Claimant Count Change",
+                                                "Coincident Index",
+                                                "Composite Pmi",
+                                                "Construction Orders",
+                                                "Construction Output",
+                                                "Construction Pmi",
+                                                "Construction Spending",
+                                                "Consumer Confidence",
+                                                "Consumer Credit",
+                                                "Consumer Spending",
+                                                "Continuing Jobless Claims",
+                                                "Copper Production",
+                                                "Core Consumer Prices",
+                                                "Core Inflation Rate",
+                                                "Core Pce Price Index",
+                                                "Corporate Profits",
+                                                "Crude Oil Stocks Change",
+                                                "Current Account",
+                                                "Dallas Fed Manufacturing Index",
+                                                "Deposit Interest Rate",
+                                                "Durable Goods Orders",
+                                                "Durable Goods Orders Ex Defense",
+                                                "Durable Goods Orders Ex Transportation",
+                                                "Economic Optimism Index",
+                                                "Economy Watchers Survey",
+                                                "Employment Change",
+                                                "Employment Cost Index",
+                                                "Existing Home Sales",
+                                                "Export Prices",
+                                                "Exports",
+                                                "External Debt",
+                                                "Factory Orders",
+                                                "Factory Orders Ex Transportation",
+                                                "Fixed Asset Investment",
+                                                "Food Inflation",
+                                                "Foreign Bond Investment",
+                                                "Foreign Direct Investment",
+                                                "Foreign Exchange Reserves",
+                                                "Foreign Stock Investment",
+                                                "Full Time Employment",
+                                                "Gasoline Stocks Change",
+                                                "GDP Annual Growth Rate",
+                                                "GDP Deflator",
+                                                "Gdp Growth Annualized",
+                                                "GDP Growth Rate",
+                                                "Government Bond 10Y",
+                                                "Government Budget",
+                                                "Government Budget Value",
+                                                "Government Debt",
+                                                "Government Payrolls",
+                                                "Government Revenues",
+                                                "Gross Fixed Capital Formation",
+                                                "Harmonised Consumer Prices",
+                                                "Holidays",
+                                                "Household Spending",
+                                                "Housing Index",
+                                                "Housing Starts",
+                                                "Import Prices",
+                                                "Imports",
+                                                "Industrial Production",
+                                                "Industrial Production Mom",
+                                                "Inflation Rate",
+                                                "Inflation Rate Mom",
+                                                "Initial Jobless Claims",
+                                                "Interest Rate",
+                                                "Ism New York Index",
+                                                "Job Advertisements",
+                                                "Job Offers",
+                                                "Job Vacancies",
+                                                "Labor Force Participation Rate",
+                                                "Labor Market Conditions Index ",
+                                                "Labour Costs",
+                                                "Leading Composite Index",
+                                                "Leading Economic Index",
+                                                "Lending Rate",
+                                                "Loan Growth",
+                                                "Loans to Private Sector",
+                                                "Machinery Orders",
+                                                "Manufacturing Payrolls",
+                                                "Manufacturing Pmi",
+                                                "Manufacturing Production",
+                                                "Mining Production",
+                                                "Mni Consumer Sentiment",
+                                                "Money Supply M1",
+                                                "Money Supply M2",
+                                                "Money Supply M3",
+                                                "Mortgage Applications",
+                                                "Mortgage Approvals",
+                                                "Mortgage Rate",
+                                                "Nahb Housing Market Index",
+                                                "Natural Gas Stocks Change",
+                                                "Net Long-term Tic Flows",
+                                                "New Home Sales",
+                                                "New Orders",
+                                                "Nfib Business Optimism Index",
+                                                "Non Farm Payrolls",
+                                                "Non Manufacturing PMI",
+                                                "Nonfarm Payrolls Private",
+                                                "Ny Empire State Manufacturing Index",
+                                                "Part Time Employment",
+                                                "Pce Price Index",
+                                                "Pending Home Sales",
+                                                "Personal Income",
+                                                "Personal Spending",
+                                                "Philadelphia Fed Manufacturing Index",
+                                                "Private Investment",
+                                                "Private Sector Credit",
+                                                "Producer Prices",
+                                                "Producer Prices Change",
+                                                "Productivity",
+                                                "Redbook Index",
+                                                "Retail Sales Ex Autos",
+                                                "Retail Sales MoM",
+                                                "Retail Sales YoY",
+                                                "Richmond Fed Manufacturing Index",
+                                                "Services PMI",
+                                                "Small Business Sentiment",
+                                                "Terms of Trade",
+                                                "Total Vehicle Sales",
+                                                "Tourism Revenues",
+                                                "Tourist Arrivals",
+                                                "Unemployed Persons",
+                                                "Unemployment Change",
+                                                "Unemployment Rate",
+                                                "Wage Growth",
+                                                "Wholesale Inventories",
+                                                "Zew Economic Sentiment Index",
 
-        public static string[] bondsNames = { "Symbol", "Name", "Country", "Date", "Last", "Group", "URL", "Importance", "DailyChange",
+                                                };
+
+
+        public static string[] bondsNames = { "Symbol", "Name", "Country", "Date", "Last", "Importance", "DailyChange",
+            "DailyPercentChange", "WeeklyChange", "WeeklyPercentChange", "MonthlyChange", "MonthlyPercentChange", "YearlyChange",
+            "YearlyPercentChange", "YTDChange", "YTDPercentChange", "yesterday", "lastWeek", "lastMonth", "lastYear", "startYear" };
+
+        public static string[] bondsNamesFull = { "Symbol", "Name", "Country", "Date", "Last", "Importance", "DailyChange",
             "DailyPercentualChange", "WeeklyChange", "WeeklyPercentualChange", "MonthlyChange", "MonthlyPercentualChange", "YearlyChange",
             "YearlyPercentualChange", "YTDChange", "YTDPercentualChange", "yesterday", "lastWeek", "lastMonth", "lastYear", "startYear" };
 
-        public static string[] marketsNames = new string[] { "Symbol", "Ticker", "Name", "Country", "Date", "Last", "Group", "URL", "Importance",
-            "DailyChange", "DailyPercentualChange", "WeeklyChange", "WeeklyPercentualChange", "MonthlyChange", "MonthlyPercentualChange",
-            "YearlyChange", "YearlyPercentualChange", "YTDChange", "YTDPercentualChange", "yesterday", "lastWeek", "lastMonth", "lastYear", "startYear" };
+        public static string[] marketsNames = new string[] { "Symbol", "Ticker", "Name", "Country", "Date", "Last", "Importance" ,
+            "DailyChange", "DailyPercentChange", "WeeklyChange", "WeeklyPercentChange", "MonthlyChange", "MonthlyPercentChange",
+            "YearlyChange", "YearlyPercentChange", "YTDChange", "YTDPercentChange", "yesterday", "lastWeek", "lastMonth", "lastYear", "startYear"};
 
+        public static string[] marketsNamesFull = new string[] { "Symbol", "Ticker", "Name", "Country", "Date", "Last", "Importance" ,
+            "DailyChange", "DailyPercentualChange", "WeeklyChange", "WeeklyPercentualChange", "MonthlyChange", "MonthlyPercentualChange",
+            "YearlyChange", "YearlyPercentualChange", "YTDChange", "YTDPercentualChange", "yesterday", "lastWeek", "lastMonth", "lastYear", "startYear"};
+        
         public static string[] indNames = { "Country", "Category", "Title", "LatestValue", "LatestValueDate", "Source", "Unit", "URL",
             "CategoryGroup", "Frequency", "HistoricalDataSymbol", "PreviousValue", "PreviousValueDate" };
 
@@ -600,21 +773,42 @@ namespace testClassLib
 
         public static string[] histNames = { "Country", "Category", "DateTime", "Value", "Frequency", "HistoricalDataSymbol", "LastUpdate" };
 
+        public static string[] tsNames = {  "DateTime", "Value"};
+
+        public static bool fromHistorical = false;
+
+        public static string formula = "";
         public static string runFormula;
         public static bool origin = true;
+        public static List<string> fList = new List<string>();
+        public static Range oldRange;
+              
 
-        public static string AutoRun(string runFrmla)
+        public static void get_formulaList()
         {
-            string run;
-            if (runFormula == "RunAutomatically = 1")
+            Range range;
+            try
             {
-                run = "RunAutomatically = 1";
+                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
+                range = MyRibbon.sheet.UsedRange.SpecialCells(XlCellType.xlCellTypeFormulas);
+                oldRange = range;
             }
-            else
+            catch (COMException)
             {
-                run = runFrmla;
+                MessageBox.Show("No TradingEconomics formula's were found to update.");
+                return;
             }
-            return run;
+            
+            foreach (Range c in range.Cells)
+            {
+                if (c.HasFormula)
+                {
+                    if (!fList.Contains(c.Formula))
+                    {
+                        fList.Add(c.Formula);
+                    } 
+                }
+            }
         }
 
         // List of the countries for AutoComplete
@@ -624,40 +818,279 @@ namespace testClassLib
         // Command to ignore upper/lower case distinction
         public static StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
 
-        // Gives parsed json data from given URL
-        public static JArray o;
-        public static void parsed_json(string url)
+        public static string RangeAddress()
         {
-            helperClass.log.Info("Parsing JSon string");
-            using (WebClient wc = new WebClient())
+            try
             {
-                wc.Encoding = System.Text.Encoding.UTF8;
-                var json = wc.DownloadString(url);
-                o = JArray.Parse(json);
+                MyRibbon.cellRange = MyRibbon.app.ActiveCell;
+            }
+            catch (Exception)
+            {
+
+                MyRibbon.app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
+                MyRibbon.cellRange = MyRibbon.app.ActiveCell;
+            }            
+            return MyRibbon.cellRange.get_AddressLocal(false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1);
+        }
+
+        public static Microsoft.Office.Interop.Excel.Range CellAddress(string cellPosition)
+        {
+            MyRibbon.sheet = MyRibbon.app.ActiveSheet;
+            string position = MyRibbon.sheet.Name.ToString() + "!" + cellPosition;
+            return MyRibbon.sheet.Range[position];
+        }
+
+        public static dynamic ReferenceToRange(ExcelReference xlref)
+        {
+            dynamic app = ExcelDnaUtil.Application;
+            return app.Range[XlCall.Excel(XlCall.xlfReftext, xlref,
+                true)];
+        }
+
+        public static Dictionary<string, formulaColumns> getNewDict(bool fromTS = false)
+        {
+            try
+            {
+                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
+            }
+            catch (Exception)
+            {
+                MyRibbon.app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
+                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
+            }
+            
+            Range range = MyRibbon.sheet.UsedRange.SpecialCells(XlCellType.xlCellTypeFormulas);
+            Dictionary<string, formulaColumns> myNewDict = new Dictionary<string, formulaColumns>();
+            foreach (Range c in range.Cells)
+            {
+                formulaColumns newFclmObj = new formulaColumns(c.Formula, null, null, c);
+                string sheetKey = MyRibbon.sheet.Name + c.Address[false, false];
+                myNewDict.Add(c.Address[false, false], newFclmObj);
+            }
+            foreach (var item in MyRibbon.myFormulasDict.Keys)
+            {
+                // Comparing two strings
+                string normalized1;
+                try
+                {
+                    normalized1 = Regex.Replace(myNewDict[item]._formula, @"[^\w\d]", "");
+                }
+                catch (System.Collections.Generic.KeyNotFoundException)
+                {
+                    normalized1 = "";
+                }
+
+                string normalized2 = Regex.Replace(MyRibbon.myFormulasDict[item]._formula, @"[^\w\d]", "");
+                bool stringEquals = String.Equals(
+                    normalized1,
+                    normalized2,
+                    StringComparison.OrdinalIgnoreCase);
+                // End of comparison
+
+                if (myNewDict.ContainsKey(item) && !stringEquals)
+                {
+                    Range dtStrt = MyRibbon.myFormulasDict[item]._cells;
+                    Range hdrEnd;
+                    MyRibbon.myFormulasDict = MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()];
+                    if (fromTS)
+                    {
+                        hdrEnd = MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count + 1];
+                    }
+                    else
+                    {
+                        hdrEnd = MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
+                    }
+                    Range dtEnd = MyRibbon.myFormulasDict[item]._cells[MyRibbon.myFormulasDict[item]._cells.Rows.Count, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
+                    try
+                    {
+                        Range hdrRng = MyRibbon.sheet.Range[dtStrt[1, 2], hdrEnd];
+                        Range dtRng = MyRibbon.sheet.Range[dtStrt[2, 1], dtEnd];
+                        if (refError == true)
+                        {
+                             hdrRng = MyRibbon.sheet.Range[dtStrt, hdrEnd];
+                             dtRng = MyRibbon.sheet.Range[dtStrt, dtEnd];
+                        }
+                        dtRng.Clear();
+                        hdrRng.Clear();
+                    }
+                    catch (Exception)
+                    {
+                        MyRibbon.app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
+                        MyRibbon.sheet = MyRibbon.app.ActiveSheet;
+                        Range dtStrt_1 = dtStrt[1, 2];
+                        string dtStart = dtStrt_1.Address[false,false];
+                        string EndOfHeader = hdrEnd.Address[false, false];
+                        Range hdrRng = MyRibbon.sheet.Range[dtStart, EndOfHeader];
+                        Range dtStrt_2 = dtStrt[2, 1];
+                        string dtStart_2 = dtStrt_2.Address[false, false];
+                        string EndOfDate = dtEnd.Address[false, false];
+                        Range dtRng = MyRibbon.sheet.Range[dtStart_2, EndOfDate];
+                        dtRng.Clear();
+                        hdrRng.Clear();
+                    }                                       
+                }
+            }
+
+            foreach (var item in MyRibbon.myFormulasDict.Keys)
+            {
+                if (!myNewDict.ContainsKey(item))
+                {
+                    Range dtStrt = MyRibbon.myFormulasDict[item]._cells;
+                    Range hdrEnd;
+                    if (fromTS)
+                    {
+                        hdrEnd = MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count + 1];
+                    }
+                    else
+                    {
+                        hdrEnd = MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
+                    }
+                    
+                    Range dtEnd = MyRibbon.myFormulasDict[item]._cells[MyRibbon.myFormulasDict[item]._cells.Rows.Count, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
+                    Range hdrRng;
+                    Range dtRng;
+                    try
+                    {
+                        hdrRng = MyRibbon.sheet.Range[dtStrt[1, 2], hdrEnd];
+                        dtRng = MyRibbon.sheet.Range[dtStrt[2, 1], dtEnd];
+                        dtRng.Clear();
+                        hdrRng.Clear();
+                    }
+                    catch (System.Runtime.InteropServices.COMException)
+                    {
+
+                        continue;
+                    }  
+                }
+            }
+            return myNewDict;
+        }
+
+        public static void elseFunction(string columns, JArray jsData, string key, Range dataStartCell, string newFormula, Range formulaCell)
+        {
+            helperClass.log.Info("Starting function data_to_excel");
+            var retriever = new RetrieveAndWriteData(columns, jsData, key, dataStartCell, newFormula, formulaCell);
+            var thready = new Thread(retriever.fetchData);
+            thready.Priority = ThreadPriority.Normal;
+            thready.IsBackground = true;
+            thready.Start();
+        }
+
+        public static void RemoveOldKey(Dictionary<string, formulaColumns>  myNewDict)
+        {
+            Dictionary<string, formulaColumns> auxDict = new Dictionary<string, formulaColumns>(MyRibbon.myFormulasDict);
+            foreach (var item in auxDict.Keys)
+            {
+                if (!myNewDict.ContainsKey(item))
+                {
+                    MyRibbon.myFormulasDict.Remove(item);
+                }
             }
         }
 
-        public static string RangeAddress()
+
+        public static void setGlobalDict(string formulaCellAddress, formulaColumns frmlaColumnsPair)
+        {          
+            if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
+            {
+                if (MyRibbon.myFormulasDict.ContainsKey(formulaCellAddress))
+                {
+                    MyRibbon.myFormulasDict[formulaCellAddress] = frmlaColumnsPair;
+                }
+                else
+                {
+                    MyRibbon.myFormulasDict.Add(formulaCellAddress, frmlaColumnsPair);
+                }
+            }
+            else
+            {
+                MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
+                if (MyRibbon.myFormulasDict.ContainsKey(formulaCellAddress))
+                {
+                    MyRibbon.myFormulasDict[formulaCellAddress] = frmlaColumnsPair;
+                }
+                else
+                {
+                    MyRibbon.myFormulasDict.Add(formulaCellAddress, frmlaColumnsPair);
+                }
+            }
+            
+        }
+
+        public static string getHistUrl(string cntry, string indctr, string startDate, string endDate,  string key)
         {
-            Microsoft.Office.Interop.Excel.Application app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-            Microsoft.Office.Interop.Excel.Range rng = app.ActiveCell;
-            return rng.get_AddressLocal(false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1);
+            if (startDate.Length != 0 & endDate.Length == 0)
+            {
+                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else if (startDate.Length != 0 & endDate.Length != 0)
+            {
+                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else
+            {
+                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            return url;
         }
 
-        public static Microsoft.Office.Interop.Excel.Range cellRange;
-
-         public static Microsoft.Office.Interop.Excel.Range CellAddress( string cellPosition)
-         {
-            Microsoft.Office.Interop.Excel.Application app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-            Microsoft.Office.Interop.Excel.Worksheet sheet = app.ActiveSheet;
-            string position = sheet.Name.ToString() + "!" + cellPosition;
-            return sheet.Range[position];
+        public static string getForcUrl(string cntry, string indctr, string key)
+        {
+            if (cntry.Length == 0)
+            {
+                url = host + "forecast/indicator/" + indctr + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else if (indctr.Length == 0)
+            {
+                url = host + "forecast/country/" + cntry + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else
+            {
+                url = host + "forecast/country/" + cntry + "/indicator/" + indctr + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            return url;
         }
 
-        //public static readonly string UserDefinedFunctions =  "true_val" ;
+        public static string getClndrUrl(string cntry, string indctr, string startDate, string endDate, string key)
+        {
+            if (cntry.Length == 0 & indctr.Length == 0)
+            {
+                url = host + "calendar/country/All/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else if (cntry.Length != 0 & indctr.Length == 0)
+            {
+                url = host + "calendar/country/" + cntry + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else if (cntry.Length == 0 & indctr.Length != 0)
+            {
+                url = host + "calendar/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else if (cntry.Length != 0 & indctr.Length != 0)
+            {
+                url = host + "calendar/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            return url;
+        }
+
+        public static string getIndctrUrl(string cntry, string indctr, string key)
+        {
+            if (cntry.Length == 0 & indctr.Length == 0)
+            {
+                url = host + "indicators?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else if (cntry.Length != 0 & indctr.Length == 0)
+            {
+                url = host + "country/" + cntry + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else
+            {
+                url = host + "country/" + cntry + "/" + indctr + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            return url;
+        }
+
         public static string Determine_OfficeVersion()
         {
-
             string strEVersionSubKey = "\\Excel.Application\\CurVer"; //HKEY_CLASSES_ROOT/Excel.Application/Curver
 
             string strValue = null; //Value Present In Above Key
