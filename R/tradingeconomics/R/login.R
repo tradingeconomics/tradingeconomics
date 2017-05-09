@@ -1,5 +1,5 @@
 credCheck <- function(usersApiKey){
-  pattern <- "^...............:...............$"
+  pattern <- ":"
   if (!grepl(pattern, usersApiKey)) stop('Incorrect credentials format!')
 }
 
@@ -15,6 +15,7 @@ login <- function(usersApiKey = NULL) {
     } else {
       usersApiKey = 'guest:guest'
     }
+     usersApiKey = gsub("[[:space:]]", "", usersApiKey)
      assign("apiKey", usersApiKey, envir = .GlobalEnv)
     return(apiKey)
   }
