@@ -15,7 +15,7 @@ login <- function(usersApiKey = NULL) {
     } else {
       usersApiKey = 'guest:guest'
     }
-     assign("apiKey", usersApiKey, envir = .GlobalEnv)
+     assign("apiKey", gsub(space(), "", usersApiKey), envir = .GlobalEnv)
     return(apiKey)
   }
 
