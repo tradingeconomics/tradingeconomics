@@ -1,5 +1,5 @@
 credCheck <- function(usersApiKey){
-  pattern <- "^...............:...............$"
+  pattern <- ":"
   if (!grepl(pattern, usersApiKey)) stop('Incorrect credentials format!')
 }
 
