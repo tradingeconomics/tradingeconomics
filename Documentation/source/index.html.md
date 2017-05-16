@@ -46,7 +46,7 @@ python setup.py install
 
 <blockquote class="lang-specific shell">
 <p>
-  Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_v1.2.1.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
+  Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
 We support Excel 2010, 2013, 2016 (32bit and 64bit). 
 </p>
 <br>
