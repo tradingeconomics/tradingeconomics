@@ -11,7 +11,7 @@ Step 3.
 In opened window click Browse. Find downloaded folder and open it, than open folder "ExcelAddINXLL". 
 
 Step 4.
-If you have 32-bit Excel version select "testClassLib-AddIn-packed" file and if you have 64-bit Excel version select "testClassLib-AddIn64-packed" file and click OK. Now you are ready to use add-in.
+If you have 32-bit Excel version select "TE-AddIn-packed" file and if you have 64-bit Excel version select "TE-AddIn64-packed" file and click OK. Now you are ready to use add-in.
 
 Click on ApiKey button and insert your API key and click OK or just click OK if you dont have API key. 
            
