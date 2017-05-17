@@ -8,4 +8,4 @@ The TE API provides you with direct access to 300.000 economic indicators, excha
 
 # DOCUMENTATION
 
-http://api.tradingeconomics.com/documentation
+https://ieconomics.github.io/open-api/
