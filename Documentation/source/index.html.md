@@ -370,26 +370,26 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Get Specific Country and Indicator  
-<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name?c=guest:guest">/historical/country/country_name/indicator/indicator_name</a>    
+<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP?c=guest:guest">/historical/country/country_name/indicator/indicator_name</a>    
 You can specify only a start date for your historical data    
-<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd</a>   
+<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd</a>   
 or you can specify a start date and end date    
-<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
 
 * Get Multiple Indicators for Specific Country    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name,%20indicator_name2,%20indicator_name3?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator_name2, indicator_name3</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name,%20indicator_name2,%20indicator_name3/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator_name2, indicator_name3/yyyy-mm-dd</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name/indicator/indicator_name,%20indicator_name2,%20indicator_name3/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator_name2, indicator_name3/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3/yyyy-mm-dd</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3/yyyy-mm-dd/yyyy-mm-dd</a>
 
 * Get Specific Indicator for Multiple Countries    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name,country_name2,country_name3/indicator/indicator_name?c=guest:guest">/historical/country/country_name,country_name2,country_name3/indicator/indicator_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name,country_name2,country_name3/indicator/indicator_name/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country_name2,country_name3/indicator/indicator_name/yyyy-mm-dd</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name,country_name2,country_name3/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country_name2,country_name3/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name/yyyy-mm-dd</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
 
 * Get Multiple Indicators for Multiple Countries    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name,country_name2/indicator/indicator_name,indicator_name2?c=guest:guest">/historical/country/country_name,country_name2/indicator/indicator_name,indicator_name2</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name,country_name2/indicator/indicator_name,indicator_name2/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country_name2/indicator/indicator_name,indicator_name2/yyyy-mm-dd</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/country_name,country_name2/indicator/indicator_name,indicator_name2/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country_name2/indicator/indicator_name,indicator_name2/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3/yyyy-mm-dd</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3/yyyy-mm-dd/yyyy-mm-dd</a>
 
 </span> 
 
@@ -553,23 +553,23 @@ Click on any method below for a sample.
 <a target = '_blank' href="http://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a>
 
 * Get calendar events for specific country    
-  <a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/country_name?c=guest:guest">/calendar/country/country_name</a>    
-  <a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/country_name/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name/yyyy-mm-dd/yyyy-mm-dd</a>    
+  <a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States?c=guest:guest">/calendar/country/country_name</a>    
+  <a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name/yyyy-mm-dd/yyyy-mm-dd</a>    
 
 * Get calendar for a specific indicator category    
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/indicator/indicator_name?c=guest:guest">/calendar/indicator/indicator_name</a>      
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/calendar/indicator/GDP?c=guest:guest">/calendar/indicator/indicator_name</a>      
+<a target = '_blank' href="http://api.tradingeconomics.com/calendar/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
 
 * Get all calendar events for multiple countries   
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/country_name,country_name2,country_name3?c=guest:guest">/calendar/country/country_name,country_name2,country_name3</a>     
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/country_name,country_name2,country_name3/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name,country_name2,country_name3/yyyy-mm-dd/yyyy-mm-dd</a> 
+<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States,United Kingdom,Portugal?c=guest:guest">/calendar/country/country_name,country2,country3</a>     
+<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States,United Kingdom,Portugal/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name,country2,country3/yyyy-mm-dd/yyyy-mm-dd</a> 
 
 * Get calendar events for a specific country and specific indicator category   
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/country_name/indicator/indicator_name?c=guest:guest">/calendar/country/country_name/indicator/indicator_name</a>     
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a> 
+<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States/indicator/GDP?c=guest:guest">/calendar/country/country_name/indicator/indicator_name</a>     
+<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a> 
 
 * Filter Calendar Events by date    
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/All/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/All/yyyy-mm-dd/yyyy-mm-dd</a>
 
 </span> 
 
@@ -713,15 +713,15 @@ Click on any method below for a sample.
 <a target = '_blank' href="http://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
 
 * List of Indicators by Country    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/country_name?c=guest:guest">/country/country_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/country_name,country_name2,country_name3?c=guest:guest">/country/country_name,country_name2,country_name3</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/country/United States?c=guest:guest">/country/country_name</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/country/United States,United Kingdom,Portugal?c=guest:guest">/country/country_name,country2,country3</a>
 
 * Country/Indicator pair    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/country_name/indicator_name?c=guest:guest">/country/country_name/indicator_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/country_name/indicator_name,indicator_name2,indicator_name3?c=guest:guest">/country/country_name/indicator_name,indicator_name2,indicator_name3</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/country/United States/GDP?c=guest:guest">/country/country_name/indicator_name</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/country/United States/GDP,Exports,Imports?c=guest:guest">/country/country_name/indicator_name,indicator2,indicator3</a>
 
 * Several Countries and Indicators    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/country_name,country_name2,country_name3/indicator_name,indicator_name2,indicator_name3?c=guest:guest">/country/country_name,country_name2,country_name3/indicator_name,indicator_name2,indicator_name3</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/country/United States,United Kingdom,Portugal/GDP,Exports,Imports?c=guest:guest">/country/country_name,country2,country3/indicator_name,indicator2,indicator3</a>
 
 </span> 
 
@@ -1000,16 +1000,16 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Specific country  
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/country_name?c=guest:guest">/forecast/country/country_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/country_name,country_name2,country_name3?c=guest:guest">/forecast/country/country_name,country_name2,country_name3</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/United States?c=guest:guest">/forecast/country/country_name</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/United States,United Kingdom,Portugal?c=guest:guest">/forecast/country/country_name,country2,country3</a>
 
 * Specific indicator    
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/indicator/indicator_name?c=guest:guest">/forecast/indicator/indicator_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/indicator/indicator_name,indicator_name2,indicator_name3?c=guest:guest">/forecast/indicator/indicator_name,indicator_name2,indicator_name3</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/forecast/indicator/GDP?c=guest:guest">/forecast/indicator/indicator_name</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/forecast/indicator/GDP,Exports,Imports?c=guest:guest">/forecast/indicator/indicator_name,indicator2,indicator3</a>
 
 * Specific country and indicator  
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/country_name/indicator/indicator_name?c=guest:guest">/forecast/country/country_name/indicator/indicator_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/country_name,country_name2,country_name3/indicator/indicator_name,indicator_name2,indicator_name3?c=guest:guest">/forecast/country/country_name,country_name2,country_name3/indicator/indicator_name,indicator_name2,indicator_name3</a>  
+<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/United States/indicator/GDP?c=guest:guest">/forecast/country/country_name/indicator/indicator_name</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports?c=guest:guest">/forecast/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3</a>  
 
 </span> 
 
