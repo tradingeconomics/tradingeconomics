@@ -1,17 +1,12 @@
-﻿using ExcelDna.Integration;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace testClassLib
+namespace TE
 {
     public partial class indicatorsFrm : Form
     {
@@ -87,16 +82,8 @@ namespace testClassLib
         {
             foreach (string item in countryLstBx.SelectedItems)
             {
-                if (selectedCountryLstBx.Items.Count < 10)
-                {
                     if (!selectedCountryLstBx.Items.Contains(item))
                         selectedCountryLstBx.Items.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("You hit max number of items");
-                    break;
-                }
             }
 
             if ((selectedCountryLstBx.Items.Count == 1) && (selectedCountryLstBx.Items[0].ToString() != "All"))
@@ -189,16 +176,8 @@ namespace testClassLib
         {
             foreach (string item in indicatorsLstBx.SelectedItems)
             {
-                if (selectedIndicatorsLstBx.Items.Count < 10)
-                {
                     if (!selectedIndicatorsLstBx.Items.Contains(item))
                         selectedIndicatorsLstBx.Items.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("You hit max number of items");
-                    break;
-                }
             }
             indctrTextBox.Focus();
             indicatorsLstBx.ClearSelected();
@@ -212,9 +191,8 @@ namespace testClassLib
             }
         }
 
-
         
-        string selectedCntry;
+        string selectedIsoCntry;
         string selectedIndic;
         public static string[] selectedColumns = null;
 
@@ -235,21 +213,42 @@ namespace testClassLib
             helperClass.origin = false;
             if (selectedCountryLstBx.Items.Count != 0 & selectedIndicatorsLstBx.Items.Count == 0)
             {
-                List<string> values = new List<string>();
+                List<string> isoValues = new List<string>();
                 foreach (string item in selectedCountryLstBx.Items)
-                {                    
-                    values.Add(item.ToString());
+                {
+                    if (helperClass.myCountrysDict.ContainsKey(item))
+                    {
+                        isoValues.Add(helperClass.myCountrysDict[item]);
+                    }
+                    else
+                    {
+                        isoValues.Add(item.ToString());
+                    }
                 }
-                selectedCntry = String.Join(",", values);
+                selectedIsoCntry = String.Join(",", isoValues);
+
+                if (selectedIsoCntry.Length > 255)
+                {
+                    //MessageBox.Show("selectedIsoCntry: " + selectedIsoCntry.Length.ToString());
+                    MessageBox.Show("You selected too many countries. Please remove some of them.");
+                    return;
+                }
             }
             else
             {
-                List<string> values = new List<string>();
+                List<string> isoValues = new List<string>();
                 foreach (string item in selectedCountryLstBx.Items)
                 {
-                    values.Add(item.ToString());
+                    if (helperClass.myCountrysDict.ContainsKey(item))
+                    {
+                        isoValues.Add(helperClass.myCountrysDict[item]);
+                    }
+                    else
+                    {
+                        isoValues.Add(item.ToString());
+                    }                    
                 }
-                selectedCntry = String.Join(",", values);
+                selectedIsoCntry = String.Join(",", isoValues);
 
                 List<string> values1 = new List<string>();
                 foreach (string item in selectedIndicatorsLstBx.Items)
@@ -257,6 +256,20 @@ namespace testClassLib
                     values1.Add(item.ToString());
                 }
                 selectedIndic = String.Join(",", values1);
+
+                if (selectedIsoCntry.Length > 255)
+                {
+                    //MessageBox.Show("selectedIsoCntry: " + selectedIsoCntry.Length.ToString());
+                    MessageBox.Show("You selected too many countries. Please remove some of them.");
+                    return;
+                }
+
+                if (selectedIndic.Length > 255)
+                {
+                    //MessageBox.Show("selectedIndic: " + selectedIndic.Length.ToString());
+                    MessageBox.Show("You selected too many indicators. Please remove some of them.");
+                    return;
+                }
             }
 
             List<string> columns = new List<string>();
@@ -268,8 +281,9 @@ namespace testClassLib
 
             helperClass.runFormula = "RunAutomatically = 1";
             Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
+
             string indFm = string.Format("=TEIndicators( \"{0}\", \"{1}\", \"{2}\", {3})",
-                    selectedCntry, 
+                    selectedIsoCntry, 
                     selectedIndic, 
                     newColumns,
                     dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);

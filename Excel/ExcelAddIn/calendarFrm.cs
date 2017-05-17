@@ -1,23 +1,15 @@
-﻿using ExcelDna.Integration;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace testClassLib
+namespace TE
 {
     public partial class calendarFrm : Form
     {
-        
-
+                
         public calendarFrm()
         {
             InitializeComponent();
@@ -96,16 +88,8 @@ namespace testClassLib
            
                 foreach (string item in countryLstBx.SelectedItems)
                 {
-                    if (selectedCountryLstBx.Items.Count < 10)
-                    {
                         if (!selectedCountryLstBx.Items.Contains(item))
                             selectedCountryLstBx.Items.Add(item);
-                    }
-                    else
-                    {
-                        MessageBox.Show("You hit max number of items");
-                        break;
-                    }
                 }                
 
                 AutoCompleteList = indics_list();
@@ -130,16 +114,8 @@ namespace testClassLib
             }
             foreach (string item in indicatorLstBx.SelectedItems)
             {
-                if (selectedIndicatorLstBx.Items.Count < 10)
-                {
                     if (!selectedIndicatorLstBx.Items.Contains(item))
                         selectedIndicatorLstBx.Items.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("You hit max number of items (max = 10)");
-                    break;
-                }
             }
         }
 
@@ -168,7 +144,7 @@ namespace testClassLib
         }
 
 
-        string selectedCntry;
+        string selectedIsoCntry;
         string selectedIndic;
         public static string[] selectedColumns = null;
         private void btnOK_Click(object sender, EventArgs e)
@@ -185,13 +161,25 @@ namespace testClassLib
             }
            if (selectedCountryLstBx.Items.Count != 0 & selectedIndicatorLstBx.Items.Count == 0)
             {
-                List<string> values = new List<string>();
+                List<string> isoValues = new List<string>();
                 foreach (string item in selectedCountryLstBx.Items)
                 {
-                    values.Add(item.ToString());
+                    if (helperClass.myCountrysDict.ContainsKey(item))
+                    {
+                        isoValues.Add(helperClass.myCountrysDict[item]);                        
+                    }
+                    else
+                    {
+                        isoValues.Add(item.ToString());
+                    }                    
                 }
-                selectedCntry = String.Join(",", values);
-                
+                selectedIsoCntry = String.Join(",", isoValues);
+
+                if (selectedIsoCntry.Length > 255)
+                {
+                    MessageBox.Show("You selected too many countries. Please remove some of them.");
+                    return;
+                }
             }
             else if (selectedCountryLstBx.Items.Count == 0 & selectedIndicatorLstBx.Items.Count != 0)
             {
@@ -201,15 +189,28 @@ namespace testClassLib
                     values.Add(item.ToString());
                 }
                 selectedIndic = String.Join(",", values);
+
+                if (selectedIndic.Length > 255)
+                {
+                    MessageBox.Show("You selected too many indicators. Please remove some of them.");
+                    return;
+                }
             }
             else if (selectedCountryLstBx.Items.Count != 0 & selectedIndicatorLstBx.Items.Count != 0)
             {
-                List<string> values = new List<string>();
+                List<string> isoValues = new List<string>();
                 foreach (string item in selectedCountryLstBx.Items)
                 {
-                    values.Add(item.ToString());
+                    if (helperClass.myCountrysDict.ContainsKey(item))
+                    {
+                        isoValues.Add(helperClass.myCountrysDict[item]);                        
+                    }
+                    else
+                    {
+                        isoValues.Add(item.ToString());
+                    }                    
                 }
-                selectedCntry = String.Join(",", values);
+                selectedIsoCntry = String.Join(",", isoValues);
 
                 List<string> values2 = new List<string>();
                 foreach (string item in selectedIndicatorLstBx.Items)
@@ -217,6 +218,18 @@ namespace testClassLib
                     values2.Add(item.ToString());
                 }
                 selectedIndic = String.Join(",", values2);
+
+                if (selectedIsoCntry.Length > 255)
+                {
+                    MessageBox.Show("You selected too many countries. Please remove some of them.");
+                    return;
+                }
+
+                if (selectedIndic.Length > 255)
+                {
+                    MessageBox.Show("You selected too many indicators. Please remove some of them.");
+                    return;
+                }
             }
             List<string> columns = new List<string>();
             foreach (string item in columnsListBox.CheckedItems)
@@ -225,11 +238,10 @@ namespace testClassLib
             }
             
             string newColumns = String.Join(",", columns);
-            helperClass.runFormula = "RunAutomatically = 1";
-            
+            helperClass.runFormula = "RunAutomatically = 1";            
             Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
-            string clndrFm = string.Format($"=TECalendar( \"{selectedCntry}\", \"{selectedIndic}\", \"{date1}\", \"{date2}\", \"{newColumns}\", {dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]})");
-
+           
+            string clndrFm = string.Format($"=TECalendar( \"{selectedIsoCntry}\", \"{selectedIndic}\", \"{date1}\", \"{date2}\", \"{newColumns}\", {dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]})");
             helperClass.log.Info("Formula {0}", clndrFm);
             MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
             MyRibbon.cellRange.Formula = clndrFm; 

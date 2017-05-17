@@ -1,17 +1,14 @@
 ﻿using ExcelDna.Integration;
 using Microsoft.Office.Interop.Excel;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace testClassLib
+namespace TE
 {
     public class printTSData
     {        
@@ -50,8 +47,13 @@ namespace testClassLib
         {
             var newData = new object[data.Count, names.Length + 1];
             for (var r = 0; r != data.Count; r++)
-             {               
-                 newData[r, 0] = data.Keys.ElementAt(r);                
+             {
+                 //Debug.WriteLine("In: " + data.Keys.ElementAt(r));
+                IFormatProvider culture = System.Threading.Thread.CurrentThread.CurrentCulture;
+                //Debug.WriteLine("In 2: " + DateTime.Parse(data.Keys.ElementAt(r), culture, System.Globalization.DateTimeStyles.AssumeLocal));
+                //Debug.WriteLine("In 2: " + data.Keys.ElementAt(r));
+                //newData[r, 0] = DateTime.Parse(data.Keys.ElementAt(r), culture, System.Globalization.DateTimeStyles.AssumeLocal);//data.Keys.ElementAt(r);       
+                newData[r, 0] = data.Keys.ElementAt(r);
                  for (var c = 0; c < names.Length; c++)
                  {
                     string value ;
@@ -61,6 +63,8 @@ namespace testClassLib
                     }
                     else
                     {
+                        //Debug.WriteLine(data[data.Keys.ElementAt(r)][names[c]]);
+                        //Debug.WriteLine("Out: "+ newData[r, 0]);
                         newData[r, c + 1] = data[data.Keys.ElementAt(r)][names[c]];
                     }
                  }
@@ -72,6 +76,7 @@ namespace testClassLib
 
         public void PopulateData()
         {
+            helperClass.log.Info("PopulateData from printTSData");
             try
             {
                 // Acquire Mutex to avoid multiple functions writing at the same time.
@@ -106,8 +111,10 @@ namespace testClassLib
             }
             catch (COMException e)
             {
-                Trace.WriteLine(e.Message);
+                helperClass.log.Info(e.Message);
+                helperClass.log.Trace(e.StackTrace);
 
+                Trace.WriteLine(e.Message);                
                 // Release Mutex to allow another function to write data.
                 DataWriteMutex.ReleaseMutex();
 
@@ -129,20 +136,42 @@ namespace testClassLib
 
         private void header_to_excel()
         {
-            var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Split(',').Length ];
-            var dl = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1];
-            var writeRange = _currentWorksheet.Range[dl, endCell];
-            writeRange.Value2 = _names.Split(',').ToArray();
+            helperClass.log.Info("header_to_excel from printTSData");
+            try
+            {
+                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Split(',').Length];
+                var dl = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1];
+                var writeRange = _currentWorksheet.Range[dl, endCell];
+                writeRange.Value2 = _names.Split(',').ToArray();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Info(ex.Message);
+                helperClass.log.Trace(ex.StackTrace);
+                throw;
+            }
+            
         }
 
         private void data_to_excel()
         {
-            var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row + _dict.Count, _dataStartCell.Column + _names.Split(',').Length];
-            var writeRange = _currentWorksheet.Range[_dataStartCell[2, 1], endCell];            
-            string[] stringOld = _names.Split(',');
-            var data = ConvertDictionaryToArray(_dict, stringOld);
-            writeRange.ClearFormats();
-            writeRange.Value = data;
+            helperClass.log.Info("data_to_excel from printTSData");
+            try
+            {
+                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row + _dict.Count, _dataStartCell.Column + _names.Split(',').Length];
+                var writeRange = _currentWorksheet.Range[_dataStartCell[2, 1], endCell];
+                var data = ConvertDictionaryToArray(_dict, _names.Split(','));
+                writeRange.ClearFormats();
+                //Debug.WriteLine(data);
+                writeRange.Value = data;
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Info(ex.Message);
+                helperClass.log.Trace(ex.StackTrace);
+                throw;
+            }
+            
         }
 
         public void SetCellVolatile(bool value)

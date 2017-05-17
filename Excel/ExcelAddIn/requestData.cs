@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace testClassLib
+namespace TE
 {
     public class requestData
     {
@@ -20,14 +15,24 @@ namespace testClassLib
 
         public JArray getJSON()
         {
-            var jsonData = new JArray();
-            helperClass.log.Info("Parsing JSon string");
-            using (WebClient wc = new WebClient())
+            JArray jsonData = new JArray();
+            helperClass.log.Info("Parsing JSon string (requestData)");
+            try
             {
-                wc.Encoding = System.Text.Encoding.UTF8;
-                var json = wc.DownloadString(_url);
-                jsonData = JArray.Parse(json);
+                using (WebClient wc = new WebClient())
+                {
+                    wc.Encoding = System.Text.Encoding.UTF8;
+                    var json = wc.DownloadString(_url);                    
+                    jsonData = JArray.Parse(json);
+                }
             }
+            catch (System.Exception ex)
+            {
+                helperClass.log.Info(ex.Message);
+                helperClass.log.Trace(ex.StackTrace);
+                throw;
+            }
+           
             return jsonData;
         }
     }

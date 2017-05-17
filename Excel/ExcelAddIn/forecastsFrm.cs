@@ -1,17 +1,12 @@
-﻿using ExcelDna.Integration;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace testClassLib
+namespace TE
 {
     public partial class forecastsFrm : Form
     {
@@ -21,7 +16,7 @@ namespace testClassLib
         {
             InitializeComponent();
             cntryTextBox.Select();
-            activeCellPositionBox.Text = helperClass.RangeAddress();
+            activeCellPositionBox.Text = helperClass.RangeAddress(); 
             for (int i = 0; i < helperClass.cntry2.Length; i++)
             {
                 countryLstBx.Items.Insert(i, helperClass.cntry2[i]);
@@ -87,16 +82,8 @@ namespace testClassLib
             helperClass.log.Info("Adding countrys in forecasts");
             foreach (string item in countryLstBx.SelectedItems)
             {
-                if (selectedCountryLstBx.Items.Count < 10)
-                {
                     if (!selectedCountryLstBx.Items.Contains(item))
                         selectedCountryLstBx.Items.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("You hit max number of items");
-                    break;
-                }
             }
 
             if (selectedCountryLstBx.Items.Count == 1)
@@ -210,16 +197,8 @@ namespace testClassLib
         {
             foreach (string item in indicatorLstBx.SelectedItems)
             {
-                if (selectedIndicatorLstBx.Items.Count < 10)
-                {
                     if (!selectedIndicatorLstBx.Items.Contains(item))
                         selectedIndicatorLstBx.Items.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("You hit max number of items");
-                    break;
-                }
             }
             indctrTextBox.Focus();
             indicatorLstBx.ClearSelected();
@@ -234,7 +213,7 @@ namespace testClassLib
         }
 
 
-        string selectedCntry;
+        string selectedIsoCntry;
         string selectedIndic;
         public static string[] selectedColumns = null;
         private void btnOK_Click(object sender, EventArgs e)
@@ -254,12 +233,20 @@ namespace testClassLib
                 }
                 selectedIndic = String.Join(",", values1);
 
-                List<string> values = new List<string>();
+                List<string> isoValues = new List<string>();
                 foreach (string item in selectedCountryLstBx.Items)
                 {
-                    values.Add(item.ToString());
+                    if (helperClass.myCountrysDict.ContainsKey(item))
+                    {
+                        isoValues.Add(helperClass.myCountrysDict[item]);                        
+                    }
+                    else
+                    {
+                        isoValues.Add(item.ToString());
+                    }
+                    
                 }
-                selectedCntry = String.Join(",", values);
+                selectedIsoCntry = String.Join(",", isoValues);
 
                 List<string> columns = new List<string>();
                 foreach (string item in columnsListBox.CheckedItems)
@@ -269,9 +256,22 @@ namespace testClassLib
                
                 string newColumns = String.Join(",", columns);
                 Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
-                helperClass.runFormula = "RunAutomatically = 1";                
+                helperClass.runFormula = "RunAutomatically = 1";
+
+                if (selectedIsoCntry.Length > 255)
+                {
+                    MessageBox.Show("You selected too many countries. Please remove some of them.");
+                    return;
+                }
+
+                if (selectedIndic.Length > 255)
+                {
+                    MessageBox.Show("You selected too many indicators. Please remove some of them.");
+                    return;
+                }
+
                 string indFm = string.Format("=TEForecasts( \"{0}\", \"{1}\", \"{2}\", {3})",
-                    selectedCntry, 
+                    selectedIsoCntry, 
                     selectedIndic, 
                     newColumns, 
                     dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);

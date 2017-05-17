@@ -2,16 +2,13 @@
 using Microsoft.Office.Interop.Excel;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace testClassLib
+namespace TE
 {
     public class newPrintData
     {
@@ -67,6 +64,7 @@ namespace testClassLib
 
         public void PopulateData()
         {
+            helperClass.log.Info("PopulateData from newPrintData");
             try
              {
                 // Acquire Mutex to avoid multiple functions writing at the same time.
@@ -98,15 +96,18 @@ namespace testClassLib
                 }
                 DataWriteMutex.ReleaseMutex();                
             }
-            catch (COMException e)
+            catch (COMException ex)
             {
-                Trace.WriteLine(e.Message);
+                Trace.WriteLine(ex.Message);
+
+                helperClass.log.Info(ex.Message);
+                helperClass.log.Trace(ex.StackTrace);
 
                 // Release Mutex to allow another function to write data.
                 DataWriteMutex.ReleaseMutex();
 
                 // The excel RPC server is busy. We need to wait and then retry (RPC_E_SERVERCALL_RETRYLATER or VBA_E_IGNORE)
-                if (e.HResult == -2147417846 || e.HResult == -2146777998)
+                if (ex.HResult == -2147417846 || ex.HResult == -2146777998)
                 {
                     Thread.Sleep(RetryWaitTimeMs);
                     PopulateData();
@@ -124,27 +125,54 @@ namespace testClassLib
 
         private void header_to_excel()
         {
-            var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Split(',').Length - 1];
-            var dl = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1];
-            var writeRange = _currentWorksheet.Range[dl, endCell];
-            writeRange.Value2 = _names.Split(',').Skip(1).ToArray();
+            helperClass.log.Info("header_to_excel from newPrintData");
+            try
+            {
+                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Split(',').Length - 1];
+                var dl = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1];
+                var writeRange = _currentWorksheet.Range[dl, endCell];
+                writeRange.Value2 = _names.Split(',').Skip(1).ToArray();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Info(ex.Message);
+                helperClass.log.Trace(ex.StackTrace);
+                throw;
+            }
+            
         }
 
         private void data_to_excel()
         {
-            var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Split(',').Length - 1];
-            var writeRange = _currentWorksheet.Range[_dataStartCell[2, 1], endCell ];
-            var data = ConvertNestedListToArray(_data, _names);
-            writeRange.ClearFormats();                
-            writeRange.Value =  data;
-
-            // This sort method works perfectly !!! Ready to implement only for Historycal data 
-            if (helperClass.fromHistorical == true)
+            helperClass.log.Info("data_to_excel from newPrintData");
+            try
             {
-                writeRange.Sort(writeRange.Columns[1], Microsoft.Office.Interop.Excel.XlSortOrder.xlAscending,
-                    writeRange.Columns[2], Type.Missing, Microsoft.Office.Interop.Excel.XlSortOrder.xlAscending);
-                helperClass.fromHistorical = false;
-            }            
+                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Split(',').Length - 1];
+                var writeRange = _currentWorksheet.Range[_dataStartCell[2, 1], endCell];
+                var data = ConvertNestedListToArray(_data, _names);
+                writeRange.ClearFormats();
+                writeRange.Value = data;
+                //writeRange.Value = data;
+                // This sort method works perfectly !!! Ready to implement only for Historycal data 
+                if (helperClass.fromHistorical == true)
+                {
+                    writeRange.Sort(writeRange.Columns[1], XlSortOrder.xlAscending,
+                        writeRange.Columns[2], Type.Missing, XlSortOrder.xlAscending);
+                    helperClass.fromHistorical = false;
+                }
+
+                if (helperClass.fromCalendar == true)
+                {
+                    writeRange.Sort(writeRange.Columns[1], XlSortOrder.xlAscending);
+                    helperClass.fromCalendar = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Info(ex.Message);
+                helperClass.log.Trace(ex.StackTrace);
+                throw;
+            }                      
         }
 
         public void SetCellVolatile(bool value)
@@ -160,7 +188,6 @@ namespace testClassLib
                 helperClass.log.Trace(ex.StackTrace);
                 throw;
             }
-
         }
 
 

@@ -1,5 +1,5 @@
 <DnaLibrary Name="TEconomics Add-In" RuntimeVersion="v4.0">
-  <ExternalLibrary Path="testClassLib.dll" LoadFromBytes="true" Pack="true" />
+  <ExternalLibrary Path="TE.dll" LoadFromBytes="true" Pack="true" />
   <Reference Path="NLog.dll" Pack="true" />
   <Reference Path="Newtonsoft.Json.dll" Pack="true" />
   <Image Name="imgTest" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Calendar_5.png" Pack="true" />
@@ -25,13 +25,13 @@
        See the main Excel-DNA site at http://excel-dna.net for downloads of the full distribution.
   -->
   <CustomUI>
-    <customUI xmlns='http://schemas.microsoft.com/office/2009/07/customui' loadImage='LoadImage' onLoad='OnLoad'>
+    <customUI xmlns='http://schemas.microsoft.com/office/2009/07/customui' loadImage='LoadImage'  onLoad='OnLoad'>
       <ribbon>
         <tabs>
           <tab id='CustomTab' label='TE' >
             <group id='getDataGroup' label='Get Data'>
-              <button id='btnHistorical' label='Historical' size='large' showImage="true" image="fork" onAction='OnHistoricalButtonPressed' getEnabled='getState'/>
-              <button id='btnIndicators' label='Latest' size='large' showImage="true" image="hist" onAction='OnIndicatorsButtonPressed' getEnabled='getState'/> 
+              <button id='btnIndicators' label='Indicators' size='large' showImage="true" image="hist" onAction='OnIndicatorsButtonPressed' getEnabled='getState'/>
+              <button id='btnHistorical' label='Historical' size='large' showImage="true" image="fork" onAction='OnHistoricalButtonPressed' getEnabled='getState'/>               
               <button id='btnCalendar' label='Calendar' size='large' showImage="true" image ='imgTest' onAction='OnCalendarButtonPressed' getEnabled='getState' />                           
               <menu id='menuMarkets' size="large" showImage="true" image="indi" label="Markets" getEnabled='getState'>
                 <button id='btnM_1' label='Currency' onAction='OnMarkets2ButtonPressed' />

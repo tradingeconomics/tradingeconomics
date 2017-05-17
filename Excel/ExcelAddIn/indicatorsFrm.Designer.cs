@@ -1,4 +1,4 @@
-﻿namespace testClassLib
+﻿namespace TE
 {
     partial class indicatorsFrm
     {
@@ -68,6 +68,7 @@
             this.countryLstBx.ScrollAlwaysVisible = true;
             this.countryLstBx.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.countryLstBx.Size = new System.Drawing.Size(214, 144);
+            this.countryLstBx.Sorted = true;
             this.countryLstBx.TabIndex = 0;
             // 
             // selectedCountryLstBx
@@ -226,7 +227,6 @@
             this.cntryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cntryTextBox.Location = new System.Drawing.Point(7, 25);
             this.cntryTextBox.Name = "cntryTextBox";
-            this.cntryTextBox.AutoSize = false;
             this.cntryTextBox.Size = new System.Drawing.Size(214, 16);
             this.cntryTextBox.TabIndex = 14;
             this.cntryTextBox.TextChanged += new System.EventHandler(this.cntryTextBox_TextChanged);
@@ -237,7 +237,6 @@
             this.indctrTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.indctrTextBox.Location = new System.Drawing.Point(7, 257);
             this.indctrTextBox.Name = "indctrTextBox";
-            this.indctrTextBox.AutoSize = false;
             this.indctrTextBox.Size = new System.Drawing.Size(214, 16);
             this.indctrTextBox.TabIndex = 15;
             this.indctrTextBox.TextChanged += new System.EventHandler(this.indctrTextBox_TextChanged);

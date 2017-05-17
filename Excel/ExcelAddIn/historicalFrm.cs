@@ -1,18 +1,14 @@
-﻿using ExcelDna.Integration;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using NLog;
 
-namespace testClassLib
+
+namespace TE
 {
     public partial class historicalFrm : Form
     {
@@ -84,16 +80,8 @@ namespace testClassLib
         {
             foreach (string item in countryLstBx.SelectedItems)
             {
-                if (selectedCountryLstBx.Items.Count < 10)
-                {
                     if (!selectedCountryLstBx.Items.Contains(item))
                         selectedCountryLstBx.Items.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("You hit max number of items");
-                    break;
-                }
             }
             if (selectedCountryLstBx.Items.Count == 1)
             {
@@ -193,16 +181,8 @@ namespace testClassLib
             }
             foreach (string item in indicatorLstBx.SelectedItems)
             {
-                if (selectedIndicatorLstBx.Items.Count < 10)
-                {
                     if (!selectedIndicatorLstBx.Items.Contains(item))
                         selectedIndicatorLstBx.Items.Add(item);
-                }
-                else
-                {
-                    MessageBox.Show("You hit max number of items (max = 10)");
-                    break;
-                }
             }
         }
 
@@ -229,7 +209,7 @@ namespace testClassLib
         }
 
         string selectedIndic;
-        string selectedCntry;
+        string selectedIsoCntry;
         public static string[] selectedColumns = null;
         private void btnOK_Click(object sender, EventArgs e)
         {
@@ -246,12 +226,19 @@ namespace testClassLib
             }
             else
             {
-                List<string> values = new List<string>();
+                List<string> isoValues = new List<string>();
                 foreach (string item in selectedCountryLstBx.Items)
                 {
-                    values.Add(item.ToString());
+                    if (helperClass.myCountrysDict.ContainsKey(item))
+                    {
+                        isoValues.Add(helperClass.myCountrysDict[item]);                      
+                    }
+                    else
+                    {
+                        isoValues.Add(item.ToString());
+                    }                    
                 }
-                selectedCntry = String.Join(",", values);
+                selectedIsoCntry = String.Join(",", isoValues);
 
                 List<string> values1 = new List<string>();
                 foreach (string item in selectedIndicatorLstBx.Items)
@@ -274,10 +261,22 @@ namespace testClassLib
                 }
                 helperClass.runFormula = "RunAutomatically = 1";
                 Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
+
+                if (selectedIsoCntry.Length > 255)
+                {
+                    MessageBox.Show("You selected too many countries. Please remove some of them.");
+                    return;
+                }
+
+                if (selectedIndic.Length > 255)
+                {
+                    MessageBox.Show("You selected too many indicators. Please remove some of them.");
+                    return;
+                }
                 if (columnsListBox.CheckedItems.Count > 0)
                 {
                     helperClass.formula = string.Format("=TEHistorical( \"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\", {5})",
-                      selectedCntry,
+                      selectedIsoCntry,
                       selectedIndic,
                       date1,
                       date2,
@@ -287,7 +286,7 @@ namespace testClassLib
                 else
                 {
                     helperClass.formula = string.Format("=TESeries( \"{0}\", \"{1}\", \"{2}\", \"{3}\", {4})", 
-                      selectedCntry,
+                      selectedIsoCntry,
                       selectedIndic,
                       date1,
                       date2,
@@ -296,7 +295,7 @@ namespace testClassLib
 
                 helperClass.log.Info("Formula {0}", helperClass.formula);
                 MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
-                MyRibbon.cellRange.Value2 = helperClass.formula; 
+                MyRibbon.cellRange.Formula = helperClass.formula; 
                 helperClass.log.Info("Executing Close from historicalFrm");
                 Close();
             }

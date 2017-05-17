@@ -1,4 +1,4 @@
-﻿namespace testClassLib
+﻿namespace TE
 {
     partial class forecastsFrm
     {

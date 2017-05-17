@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace testClassLib
+namespace TE
 {
     public class formulaColumns
     {

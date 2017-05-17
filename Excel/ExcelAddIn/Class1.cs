@@ -3,17 +3,16 @@ using ExcelDna.Integration.CustomUI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using Microsoft.Office.Interop.Excel;
-using System.Diagnostics;
 
-namespace testClassLib
+using NLog;
+using NLog.Targets;
+
+namespace TE
 {
     [ComVisible(true)]
     public class MyRibbon : ExcelRibbon
@@ -27,14 +26,14 @@ namespace testClassLib
         public static bool refresh = false;
 
         public static Microsoft.Office.Interop.Excel.Application app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-        public static Microsoft.Office.Interop.Excel.Worksheet sheet;
-        public static Microsoft.Office.Interop.Excel.Range cellRange;
+        public static Worksheet sheet;
+        public static Range cellRange;
 
         public void OnLoad(IRibbonUI ribbon)
         {
             this.ribbon = ribbon;
             myMainDict = new Dictionary<string, Dictionary<string, formulaColumns>>();
-            myFormulasDict = new Dictionary<string, formulaColumns>();            
+            myFormulasDict = new Dictionary<string, formulaColumns>();
         }
 
 
@@ -73,12 +72,11 @@ namespace testClassLib
                 newColumns = String.Join(",", helperClass.marketsNames);
             }
 
-            //Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(app.ActiveCell.Address[false,false].ToString());
             cellRange = helperClass.CellAddress(app.ActiveCell.Address[false, false].ToString());
             string fmFin = string.Format("=TEMarkets( \"{0}\", \"{1}\", {2})",
                 selectedItem, 
                 newColumns,
-                cellRange[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
+                cellRange[2, 2].Address[false, false, XlReferenceStyle.xlA1]);
             helperClass.log.Info("Formula {0}", fmFin);
             cellRange.Formula = fmFin;
 
@@ -118,6 +116,7 @@ namespace testClassLib
         
         public void OnRefreshButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("On Refresh button is pressed");
             try
             {
                 sheet = app.ActiveSheet;
@@ -135,6 +134,7 @@ namespace testClassLib
 
         public static void find_formula(Worksheet worksheet)
         {
+            helperClass.log.Info("Starting find_formula(Class1)");
             Range range;
             try
             {
@@ -192,10 +192,6 @@ namespace testClassLib
             {
                 apiKeyFrm.validApiKey = false;
                 ribbon.Invalidate();
-                Marshal.ReleaseComObject(MyRibbon.sheet);
-                Marshal.ReleaseComObject(MyRibbon.app);
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
             }
             else
             {
@@ -224,8 +220,7 @@ namespace testClassLib
         public void OnAboutButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On About button is pressed");
-            //System.Diagnostics.Process.Start("http://www.tradingeconomics.com/about-te.aspx");
-            MessageBox.Show("The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. Youre Trading Economics Excel Add In Version: 1.2.0", "About");
+            MessageBox.Show("The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. Youre Trading Economics Excel Add In Version: 1.2.2", "About");
         }
     }
 }

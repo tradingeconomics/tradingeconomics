@@ -1,32 +1,543 @@
 ﻿using ExcelDna.Integration;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static testClassLib.udfClass;
+using static TE.udfClass;
 
-namespace testClassLib
+namespace TE
 {
     class helperClass
     {
+
         public static string host = "http://api.tradingeconomics.com/";
 
         public static Logger log = LogManager.GetCurrentClassLogger();
 
-        public static string[] cntry = {"Afghanistan",
+        public static Dictionary<string, string> myCountrysDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            {"Afghanistan" , "AFG"},
+            {"Albania" , "ALB"},
+            {"Algeria" , "DZA"},
+            {"American Samoa" , "ASM"},
+            {"Andorra" , "AND"},
+            {"Angola" , "AGO"},
+            {"Anguilla" , "AIA"},
+            {"Antigua and Barbuda" , "ATG"},
+            {"Argentina" , "ARG"},
+            {"Armenia" , "ARM"},
+            {"Aruba" , "ABW"},
+            {"Australia" , "AUS"},
+            {"Austria" , "AUT"},
+            {"Azerbaijan" , "AZE"},
+            {"Bahamas" , "BHS"},
+            {"Bahrain" , "BHR"},
+            {"Bangladesh" , "BGD"},
+            {"Barbados" , "BRB"},
+            {"Belarus" , "BLR"},
+            {"Belgium" , "BEL"},
+            {"Belize" , "BLZ"},
+            {"Benin" , "BEN"},
+            {"Bermuda" , "BMU"},
+            {"Bhutan" , "BTN"},
+            {"Bolivia" , "BOL"},
+            {"Bosnia and Herzegovina" , "BIH"},
+            {"Botswana" , "BWA"},
+            {"Brazil" , "BRA"},
+            {"Brunei" , "BRN"},
+            {"Bulgaria" , "BGR"},
+            {"Burkina Faso" , "BFA"},
+            {"Burundi" , "BDI"},
+            {"Cambodia" , "KHM"},
+            {"Cameroon" , "CMR"},
+            {"Canada" , "CAN"},
+            {"Cape Verde" , "CPV"},
+            {"Cayman Islands" , "CYM"},
+            {"Central African Republic" , "CAF"},
+            {"Chad" , "TCD"},
+            {"Channel Islands" , "CHI"},
+            {"Chile" , "CHL"},
+            {"China" , "CHN"},
+            {"Christmas Island" , "CXR"},
+            {"Colombia" , "COL"},
+            {"Commodity" , "CCC"},
+            {"Comoros" , "COM"},
+            {"Congo" , "COD"},
+            {"Cook Islands" , "COK"},
+            {"Costa Rica" , "CRI"},
+            {"Croatia" , "HRV"},
+            {"Cuba" , "CUB"},
+            {"Cyprus" , "CYP"},
+            {"Czech Republic" , "CZE"},
+            {"Denmark" , "DNK"},
+            {"Djibouti" , "DJI"},
+            {"Dominica" , "DMA"},
+            {"Dominican Republic" , "DOM"},
+            {"East Asia and Pacific" , "EAP"},
+            {"East Timor" , "TLS"},
+            {"Ecuador" , "ECU"},
+            {"Egypt" , "EGY"},
+            {"El Salvador" , "SLV"},
+            {"Equatorial Guinea" , "GNQ"},
+            {"Eritrea" , "ERI"},
+            {"Estonia" , "EST"},
+            {"Ethiopia" , "ETH"},
+            {"Euro area" , "EMU"},
+            {"Europe and Central Asia" , "ECA"},
+            {"European Union" , "EUN"},
+            {"Falkland Islands" , "FLK"},
+            {"Faroe Islands" , "FRO"},
+            {"Fiji" , "FJI"},
+            {"Finland" , "FIN"},
+            {"France" , "FRA"},
+            {"French Polynesia" , "PYF"},
+            {"Gabon" , "GAB"},
+            {"Gambia" , "GMB"},
+            {"Georgia" , "GEO"},
+            {"Germany" , "DEU"},
+            {"Ghana" , "GHA"},
+            {"Gibraltar" , "GIB"},
+            {"Greece" , "GRC"},
+            {"Greenland" , "GRL"},
+            {"Grenada" , "GRD"},
+            {"Guam" , "GUM"},
+            {"Guatemala" , "GTM"},
+            {"Guinea" , "GIN"},
+            {"Guinea Bissau" , "GNB"},
+            {"Guyana" , "GUY"},
+            {"Haiti" , "HTI"},
+            {"Heavily Indebted Poor Countries HIPC" , "HPC"},
+            {"High income" , "HIC"},
+            {"High income nonOECD" , "NOC"},
+            {"High income OECD" , "OEC"},
+            {"Honduras" , "HND"},
+            {"Hong Kong" , "HKG"},
+            {"Hungary" , "HUN"},
+            {"Iceland" , "ISL"},
+            {"India" , "IND"},
+            {"Indonesia" , "IDN"},
+            {"Iran" , "IRN"},
+            {"Iraq" , "IRQ"},
+            {"Ireland" , "IRL"},
+            {"Isle of Man" , "IMY"},
+            {"Israel" , "ISR"},
+            {"Italy" , "ITA"},
+            {"Ivory Coast" , "CIV"},
+            {"Jamaica" , "JAM"},
+            {"Japan" , "JPN"},
+            {"Jordan" , "JOR"},
+            {"Kazakhstan" , "KAZ"},
+            {"Kenya" , "KEN"},
+            {"Kiribati" , "KIR"},
+            {"Kosovo" , "UNK"},
+            {"Kuwait" , "KWT"},
+            {"Kyrgyzstan" , "KGZ"},
+            {"Laos" , "LAO"},
+            {"Latin America and Caribbean" , "LAC"},
+            {"Latvia" , "LVA"},
+            {"Least developed Countries UN Classification" , "LDC"},
+            {"Lebanon" , "LBN"},
+            {"Lesotho" , "LSO"},
+            {"Liberia" , "LBR"},
+            {"Libya" , "LBY"},
+            {"Liechtenstein" , "LIE"},
+            {"Lithuania" , "LTU"},
+            {"Low and Middle Income" , "LMY"},
+            {"Low income" , "LIC"},
+            {"Lower middle income" , "LMC"},
+            {"Luxembourg" , "LUX"},
+            {"Macau" , "MAC"},
+            {"Macedonia" , "MKD"},
+            {"Madagascar" , "MDG"},
+            {"Malawi" , "MWI"},
+            {"Malaysia" , "MYS"},
+            {"Maldives" , "MDV"},
+            {"Mali" , "MLI"},
+            {"Malta" , "MLT"},
+            {"Marshall Islands" , "MHL"},
+            {"Mauritania" , "MRT"},
+            {"Mauritius" , "MUS"},
+            {"Mayotte" , "MYT"},
+            {"Mexico" , "MEX"},
+            {"Micronesia" , "FSM"},
+            {"Middle East and North Africa" , "MNA"},
+            {"Middle income" , "MIC"},
+            {"Moldova" , "MDA"},
+            {"Monaco" , "MCO"},
+            {"Mongolia" , "MNG"},
+            {"Montenegro" , "MNE"},
+            {"Montserrat" , "MSR"},
+            {"Morocco" , "MAR"},
+            {"Mozambique" , "MOZ"},
+            {"Myanmar" , "MMR"},
+            {"Namibia" , "NAM"},
+            {"Nepal" , "NPL"},
+            {"Netherlands" , "NLD"},
+            {"Netherlands Antilles" , "ANT"},
+            {"New Caledonia" , "NCL"},
+            {"New Zealand" , "NZL"},
+            {"Nicaragua" , "NIC"},
+            {"Niger" , "NER"},
+            {"Nigeria" , "NGA"},
+            {"Norfolk Island" , "NFK"},
+            {"North Korea" , "PRK"},
+            {"Northern Mariana Islands" , "MNP"},
+            {"Norway" , "NOR"},
+            {"Oman" , "OMN"},
+            {"Other" , "OTH"},
+            {"Pakistan" , "PAK"},
+            {"Palau" , "PLW"},
+            {"Palestine" , "PSE"},
+            {"Panama" , "PAN"},
+            {"Papua New Guinea" , "PNG"},
+            {"Paraguay" , "PRY"},
+            {"Peru" , "PER"},
+            {"Philippines" , "PHL"},
+            {"Pitcairn Islands" , "PCN"},
+            {"Poland" , "POL"},
+            {"Portugal" , "PRT"},
+            {"Puerto Rico" , "PRI"},
+            {"Qatar" , "QAT"},
+            {"Republic of the Congo" , "COG"},
+            {"Reunion" , "REU"},
+            {"Romania" , "ROU"},
+            {"Russia" , "RUS"},
+            {"Rwanda" , "RWA"},
+            {"Samoa" , "WSM"},
+            {"San Marino" , "SMR"},
+            {"Sao Tome and Principe" , "STP"},
+            {"Saudi Arabia" , "SAU"},
+            {"Senegal" , "SEN"},
+            {"Serbia" , "SRB"},
+            {"Seychelles" , "SYC"},
+            {"Sierra Leone" , "SLE"},
+            {"Singapore" , "SGP"},
+            {"Slovakia" , "SVK"},
+            {"Slovenia" , "SVN"},
+            {"Solomon Islands" , "SLB"},
+            {"Somalia" , "SOM"},
+            {"South Africa" , "ZAF"},
+            {"South Asia" , "SAS"},
+            {"South Korea" , "KOR"},
+            {"South Sudan" , "SSD"},
+            {"Spain" , "ESP"},
+            {"Sri Lanka" , "LKA"},
+            {"St Helena" , "SHN"},
+            {"St Kitts and Nevis" , "KNA"},
+            {"St Lucia" , "LCA"},
+            {"St Pierre and Miquelon" , "SPM"},
+            {"St Vincent and the Grenadines" , "VCT"},
+            {"Sub Saharan Africa" , "SSA"},
+            {"Sudan" , "SDN"},
+            {"Suriname" , "SUR"},
+            {"Swaziland" , "SWZ"},
+            {"Sweden" , "SWE"},
+            {"Switzerland" , "CHE"},
+            {"Syria" , "SYR"},
+            {"Taiwan" , "TWN"},
+            {"Tajikistan" , "TJK"},
+            {"Tanzania" , "TZA"},
+            {"Thailand" , "THA"},
+            {"Togo" , "TGO"},
+            {"Tokelau" , "TKL"},
+            {"Tonga" , "TON"},
+            {"Trinidad and Tobago" , "TTO"},
+            {"Tunisia" , "TUN"},
+            {"Turkey" , "TUR"},
+            {"Turkmenistan" , "TKM"},
+            {"Tuvalu" , "TUV"},
+            {"Uganda" , "UGA"},
+            {"Ukraine" , "UKR"},
+            {"United Arab Emirates" , "ARE"},
+            {"United Kingdom" , "GBR"},
+            {"United States" , "USA"},
+            {"Upper middle income" , "UMC"},
+            {"Uruguay" , "URY"},
+            {"Uzbekistan" , "UZB"},
+            {"Vanuatu" , "VUT"},
+            {"Venezuela" , "VEN"},
+            {"Vietnam" , "VNM"},
+            {"Virgin Islands" , "VIR"},
+            {"Wallis and Futuna" , "WLF"},
+            {"West Bank and Gaza" , "WBG"},
+            {"World" , "WLD"},
+            {"Yemen" , "YEM"},
+            {"Zambia" , "ZMB"},
+            {"Zimbabwe" , "ZWE"}
+        };
+        public static Dictionary<string, string> myLongCountrysDict = new Dictionary<string, string>
+        {
+            {"AFG","Afghanistan"},
+            {"ALB","Albania"},
+            {"DZA","Algeria"},
+            {"ASM","American Samoa"},
+            {"AND","Andorra"},
+            {"AGO","Angola"},
+            {"AIA","Anguilla"},
+            {"ATG","Antigua and Barbuda"},
+            {"ARG","Argentina"},
+            {"ARM","Armenia"},
+            {"ABW","Aruba"},
+            {"AUS","Australia"},
+            {"AUT","Austria"},
+            {"AZE","Azerbaijan"},
+            {"BHS","Bahamas"},
+            {"BHR","Bahrain"},
+            {"BGD","Bangladesh"},
+            {"BRB","Barbados"},
+            {"BLR","Belarus"},
+            {"BEL","Belgium"},
+            {"BLZ","Belize"},
+            {"BEN","Benin"},
+            {"BMU","Bermuda"},
+            {"BTN","Bhutan"},
+            {"BOL","Bolivia"},
+            {"BIH","Bosnia and Herzegovina"},
+            {"BWA","Botswana"},
+            {"BRA","Brazil"},
+            {"BRN","Brunei"},
+            {"BGR","Bulgaria"},
+            {"BFA","Burkina Faso"},
+            {"BDI","Burundi"},
+            {"KHM","Cambodia"},
+            {"CMR","Cameroon"},
+            {"CAN","Canada"},
+            {"CPV","Cape Verde"},
+            {"CYM","Cayman Islands"},
+            {"CAF","Central African Republic"},
+            {"TCD","Chad"},
+            {"CHI","Channel Islands"},
+            {"CHL","Chile"},
+            {"CHN","China"},
+            {"CXR","Christmas Island"},
+            {"COL","Colombia"},
+            {"CCC","Commodity"},
+            {"COM","Comoros"},
+            {"COD","Congo"},
+            {"COK","Cook Islands"},
+            {"CRI","Costa Rica"},
+            {"HRV","Croatia"},
+            {"CUB","Cuba"},
+            {"CYP","Cyprus"},
+            {"CZE","Czech Republic"},
+            {"DNK","Denmark"},
+            {"DJI","Djibouti"},
+            {"DMA","Dominica"},
+            {"DOM","Dominican Republic"},
+            {"EAP","East Asia and Pacific"},
+            {"TLS","East Timor"},
+            {"ECU","Ecuador"},
+            {"EGY","Egypt"},
+            {"SLV","El Salvador"},
+            {"GNQ","Equatorial Guinea"},
+            {"ERI","Eritrea"},
+            {"EST","Estonia"},
+            {"ETH","Ethiopia"},
+            {"EMU","Euro area"},
+            {"ECA","Europe and Central Asia"},
+            {"EUN","European Union"},
+            {"FLK","Falkland Islands"},
+            {"FRO","Faroe Islands"},
+            {"FJI","Fiji"},
+            {"FIN","Finland"},
+            {"FRA","France"},
+            {"PYF","French Polynesia"},
+            {"GAB","Gabon"},
+            {"GMB","Gambia"},
+            {"GEO","Georgia"},
+            {"DEU","Germany"},
+            {"GHA","Ghana"},
+            {"GIB","Gibraltar"},
+            {"GRC","Greece"},
+            {"GRL","Greenland"},
+            {"GRD","Grenada"},
+            {"GUM","Guam"},
+            {"GTM","Guatemala"},
+            {"GIN","Guinea"},
+            {"GNB","Guinea Bissau"},
+            {"GUY","Guyana"},
+            {"HTI","Haiti"},
+            {"HPC","Heavily Indebted Poor Countries HIPC"},
+            {"HIC","High income"},
+            {"NOC","High income nonOECD"},
+            {"OEC","High income OECD"},
+            {"HND","Honduras"},
+            {"HKG","Hong Kong"},
+            {"HUN","Hungary"},
+            {"ISL","Iceland"},
+            {"IND","India"},
+            {"IDN","Indonesia"},
+            {"IRN","Iran"},
+            {"IRQ","Iraq"},
+            {"IRL","Ireland"},
+            {"IMY","Isle of Man"},
+            {"ISR","Israel"},
+            {"ITA","Italy"},
+            {"CIV","Ivory Coast"},
+            {"JAM","Jamaica"},
+            {"JPN","Japan"},
+            {"JOR","Jordan"},
+            {"KAZ","Kazakhstan"},
+            {"KEN","Kenya"},
+            {"KIR","Kiribati"},
+            {"UNK","Kosovo"},
+            {"KWT","Kuwait"},
+            {"KGZ","Kyrgyzstan"},
+            {"LAO","Laos"},
+            {"LAC","Latin America and Caribbean"},
+            {"LVA","Latvia"},
+            {"LDC","Least developed Countries UN Classification"},
+            {"LBN","Lebanon"},
+            {"LSO","Lesotho"},
+            {"LBR","Liberia"},
+            {"LBY","Libya"},
+            {"LIE","Liechtenstein"},
+            {"LTU","Lithuania"},
+            {"LMY","Low and Middle Income"},
+            {"LIC","Low income"},
+            {"LMC","Lower middle income"},
+            {"LUX","Luxembourg"},
+            {"MAC","Macau"},
+            {"MKD","Macedonia"},
+            {"MDG","Madagascar"},
+            {"MWI","Malawi"},
+            {"MYS","Malaysia"},
+            {"MDV","Maldives"},
+            {"MLI","Mali"},
+            {"MLT","Malta"},
+            {"MHL","Marshall Islands"},
+            {"MRT","Mauritania"},
+            {"MUS","Mauritius"},
+            {"MYT","Mayotte"},
+            {"MEX","Mexico"},
+            {"FSM","Micronesia"},
+            {"MNA","Middle East and North Africa"},
+            {"MIC","Middle income"},
+            {"MDA","Moldova"},
+            {"MCO","Monaco"},
+            {"MNG","Mongolia"},
+            {"MNE","Montenegro"},
+            {"MSR","Montserrat"},
+            {"MAR","Morocco"},
+            {"MOZ","Mozambique"},
+            {"MMR","Myanmar"},
+            {"NAM","Namibia"},
+            {"NPL","Nepal"},
+            {"NLD","Netherlands"},
+            {"ANT","Netherlands Antilles"},
+            {"NCL","New Caledonia"},
+            {"NZL","New Zealand"},
+            {"NIC","Nicaragua"},
+            {"NER","Niger"},
+            {"NGA","Nigeria"},
+            {"NFK","Norfolk Island"},
+            {"PRK","North Korea"},
+            {"MNP","Northern Mariana Islands"},
+            {"NOR","Norway"},
+            {"OMN","Oman"},
+            {"OTH","Other"},
+            {"PAK","Pakistan"},
+            {"PLW","Palau"},
+            {"PSE","Palestine"},
+            {"PAN","Panama"},
+            {"PNG","Papua New Guinea"},
+            {"PRY","Paraguay"},
+            {"PER","Peru"},
+            {"PHL","Philippines"},
+            {"PCN","Pitcairn Islands"},
+            {"POL","Poland"},
+            {"PRT","Portugal"},
+            {"PRI","Puerto Rico"},
+            {"QAT","Qatar"},
+            {"COG","Republic of the Congo"},
+            {"REU","Reunion"},
+            {"ROU","Romania"},
+            {"RUS","Russia"},
+            {"RWA","Rwanda"},
+            {"WSM","Samoa"},
+            {"SMR","San Marino"},
+            {"STP","Sao Tome and Principe"},
+            {"SAU","Saudi Arabia"},
+            {"SEN","Senegal"},
+            {"SRB","Serbia"},
+            {"SYC","Seychelles"},
+            {"SLE","Sierra Leone"},
+            {"SGP","Singapore"},
+            {"SVK","Slovakia"},
+            {"SVN","Slovenia"},
+            {"SLB","Solomon Islands"},
+            {"SOM","Somalia"},
+            {"ZAF","South Africa"},
+            {"SAS","South Asia"},
+            {"KOR","South Korea"},
+            {"SSD","South Sudan"},
+            {"ESP","Spain"},
+            {"LKA","Sri Lanka"},
+            {"SHN","St Helena"},
+            {"KNA","St Kitts and Nevis"},
+            {"LCA","St Lucia"},
+            {"SPM","St Pierre and Miquelon"},
+            {"VCT","St Vincent and the Grenadines"},
+            {"SSA","Sub Saharan Africa"},
+            {"SDN","Sudan"},
+            {"SUR","Suriname"},
+            {"SWZ","Swaziland"},
+            {"SWE","Sweden"},
+            {"CHE","Switzerland"},
+            {"SYR","Syria"},
+            {"TWN","Taiwan"},
+            {"TJK","Tajikistan"},
+            {"TZA","Tanzania"},
+            {"THA","Thailand"},
+            {"TGO","Togo"},
+            {"TKL","Tokelau"},
+            {"TON","Tonga"},
+            {"TTO","Trinidad and Tobago"},
+            {"TUN","Tunisia"},
+            {"TUR","Turkey"},
+            {"TKM","Turkmenistan"},
+            {"TUV","Tuvalu"},
+            {"UGA","Uganda"},
+            {"UKR","Ukraine"},
+            {"ARE","United Arab Emirates"},
+            {"GBR","United Kingdom"},
+            {"USA","United States"},
+            {"UMC","Upper middle income"},
+            {"URY","Uruguay"},
+            {"UZB","Uzbekistan"},
+            {"VUT","Vanuatu"},
+            {"VEN","Venezuela"},
+            {"VNM","Vietnam"},
+            {"VIR","Virgin Islands"},
+            {"WLF","Wallis and Futuna"},
+            {"WBG","West Bank and Gaza"},
+            {"WLD","World"},
+            {"YEM","Yemen"},
+            {"ZMB","Zambia"},
+            {"ZWE","Zimbabwe"}
+        };
+
+        public static string[] cntry = {"United States",
+                            "Euro Area",
+                            "Japan",
+                            "United Kingdom",
+                            "Germany",
+                            "France",
+                            "Australia",
+                            "Canada",
+                            "China",
+                            "India",
+                            "Brazil",
+                            "Russia",
+                            "Afghanistan",
                             "Albania",
                             "Algeria",
                             "Andorra",
@@ -34,8 +545,7 @@ namespace testClassLib
                             "Antigua and Barbuda",
                             "Argentina",
                             "Armenia",
-                            "Aruba",
-                            "Australia",
+                            "Aruba",                            
                             "Austria",
                             "Azerbaijan",
                             "Bahamas",
@@ -50,22 +560,19 @@ namespace testClassLib
                             "Bhutan",
                             "Bolivia",
                             "Bosnia and Herzegovina",
-                            "Botswana",
-                            "Brazil",
+                            "Botswana",                            
                             "Brunei",
                             "Bulgaria",
                             "Burkina Faso",
                             "Burundi",
                             "Cabo Verde",
                             "Cambodia",
-                            "Cameroon",
-                            "Canada",
+                            "Cameroon",                            
                             "Cape Verde",
                             "Cayman Islands",
                             "Central African Republic",
                             "Chad",
-                            "Chile",
-                            "China",
+                            "Chile",                            
                             "Colombia",
                             "Comoros",
                             "Congo",
@@ -85,16 +592,13 @@ namespace testClassLib
                             "Equatorial Guinea",
                             "Eritrea",
                             "Estonia",
-                            "Ethiopia",
-                            "Euro Area",
+                            "Ethiopia",                            
                             "European Union",
                             "Fiji",
-                            "Finland",
-                            "France",
+                            "Finland",                            
                             "Gabon",
                             "Gambia",
-                            "Georgia",
-                            "Germany",
+                            "Georgia",                            
                             "Ghana",
                             "Greece",
                             "Greenland",
@@ -108,8 +612,7 @@ namespace testClassLib
                             "Honduras",
                             "Hong Kong",
                             "Hungary",
-                            "Iceland",
-                            "India",
+                            "Iceland",                            
                             "Indonesia",
                             "Iran",
                             "Iraq",
@@ -118,8 +621,7 @@ namespace testClassLib
                             "Israel",
                             "Italy",
                             "Ivory Coast",
-                            "Jamaica",
-                            "Japan",
+                            "Jamaica",                            
                             "Jordan",
                             "Kazakhstan",
                             "Kenya",
@@ -183,8 +685,7 @@ namespace testClassLib
                             "Puerto Rico",
                             "Qatar",
                             "Republic of the Congo",
-                            "Romania",
-                            "Russia",
+                            "Romania",                            
                             "Rwanda",
                             "Samoa",
                             "San Marino",
@@ -224,9 +725,7 @@ namespace testClassLib
                             "Turkmenistan",
                             "Uganda",
                             "Ukraine",
-                            "United Arab Emirates",
-                            "United Kingdom",
-                            "United States",
+                            "United Arab Emirates",                                                        
                             "Uruguay",
                             "Uzbekistan",
                             "Vanuatu",
@@ -776,13 +1275,15 @@ namespace testClassLib
         public static string[] tsNames = {  "DateTime", "Value"};
 
         public static bool fromHistorical = false;
+        public static bool fromCalendar = false;
 
         public static string formula = "";
         public static string runFormula;
         public static bool origin = true;
         public static List<string> fList = new List<string>();
-        public static Range oldRange;
-              
+        public static Range oldRange;        
+
+
 
         public static void get_formulaList()
         {
@@ -836,7 +1337,7 @@ namespace testClassLib
         public static Microsoft.Office.Interop.Excel.Range CellAddress(string cellPosition)
         {
             MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            string position = MyRibbon.sheet.Name.ToString() + "!" + cellPosition;
+            string position = MyRibbon.sheet.Name.ToString()  + "!" + cellPosition;
             return MyRibbon.sheet.Range[position];
         }
 
@@ -968,7 +1469,7 @@ namespace testClassLib
 
         public static void elseFunction(string columns, JArray jsData, string key, Range dataStartCell, string newFormula, Range formulaCell)
         {
-            helperClass.log.Info("Starting function data_to_excel");
+            helperClass.log.Info("Starting function elseFunction");
             var retriever = new RetrieveAndWriteData(columns, jsData, key, dataStartCell, newFormula, formulaCell);
             var thready = new Thread(retriever.fetchData);
             thready.Priority = ThreadPriority.Normal;
@@ -1017,8 +1518,27 @@ namespace testClassLib
             
         }
 
-        public static string getHistUrl(string cntry, string indctr, string startDate, string endDate,  string key)
+        public static string getHistUrl(string cntry, string indctr, string key, string startDate, string endDate)
         {
+            List<string> fullCntryNm = new List<string>();
+            string[] longCntryNames = cntry.Split(',');
+
+            int i = 0;
+            var query = from s in longCntryNames
+                        let num = i++
+                        group s by num / 3 into g
+                        select g.ToArray();
+            var results = query.ToArray();
+
+            foreach (var item in longCntryNames)
+            {
+                if (myCountrysDict.ContainsValue(item))
+                {
+                    fullCntryNm.Add(myLongCountrysDict[item]);
+                }
+            }
+            cntry = String.Join(",", fullCntryNm);
+
             if (startDate.Length != 0 & endDate.Length == 0)
             {
                 url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
@@ -1036,6 +1556,25 @@ namespace testClassLib
 
         public static string getForcUrl(string cntry, string indctr, string key)
         {
+            List<string> fullCntryNm = new List<string>();
+            string[] longCntryNames = cntry.Split(',');
+
+            int i = 0;
+            var query = from s in longCntryNames
+                        let num = i++
+                        group s by num / 3 into g
+                        select g.ToArray();
+            var results = query.ToArray();
+
+            foreach (var item in longCntryNames)
+            {
+                if (myCountrysDict.ContainsValue(item))
+                {
+                    fullCntryNm.Add(myLongCountrysDict[item]);
+                }
+            }
+            cntry = String.Join(",", fullCntryNm);
+
             if (cntry.Length == 0)
             {
                 url = host + "forecast/indicator/" + indctr + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
@@ -1051,8 +1590,27 @@ namespace testClassLib
             return url;
         }
 
-        public static string getClndrUrl(string cntry, string indctr, string startDate, string endDate, string key)
+        public static string getClndrUrl(string cntry, string indctr, string key, string startDate, string endDate)
         {
+            List<string> fullCntryNm = new List<string>();
+            string[] longCntryNames = cntry.Split(',');
+
+            int i = 0;
+            var query = from s in longCntryNames
+                        let num = i++
+                        group s by num / 3 into g
+                        select g.ToArray();
+            var results = query.ToArray();
+
+            foreach (var item in longCntryNames)
+            {
+                if (myCountrysDict.ContainsValue(item))
+                {
+                    fullCntryNm.Add(myLongCountrysDict[item]);
+                }
+            }
+            cntry = String.Join(",", fullCntryNm);
+
             if (cntry.Length == 0 & indctr.Length == 0)
             {
                 url = host + "calendar/country/All/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
@@ -1074,6 +1632,41 @@ namespace testClassLib
 
         public static string getIndctrUrl(string cntry, string indctr, string key)
         {
+            if (cntry != "All")
+            {
+
+
+                //Debug.WriteLine("Start ofgetIndctrUrl: " + cntry);
+                List<string> fullCntryNm = new List<string>();
+                string[] longCntryNames = cntry.Split(',');
+                // This "query" slit string of countries in chunks
+                int i = 0;
+                var query = from s in longCntryNames
+                            let num = i++
+                            group s by num / 3 into g
+                            select g.ToArray();
+                var results = query.ToArray();
+
+                //foreach (var item in results)
+                //{
+                //    Debug.WriteLine("---------------" );
+                //    foreach (var item2 in item)
+                //    {
+                //        Debug.WriteLine("Chunks: " + item2);
+                //    }
+                //}
+
+                foreach (var item in longCntryNames)
+                {
+                    if (myCountrysDict.ContainsValue(item))
+                    {
+                        //Debug.WriteLine("myLongCountrysDict[item]: " + myLongCountrysDict[item]);
+                        fullCntryNm.Add(myLongCountrysDict[item]);
+                    }
+                }
+                cntry = String.Join(",", fullCntryNm);
+            }
+
             if (cntry.Length == 0 & indctr.Length == 0)
             {
                 url = host + "indicators?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
@@ -1088,6 +1681,107 @@ namespace testClassLib
             }
             return url;
         }
+
+        public static string getTsUrl(string cntry, string indctr, string key, string startDate, string endDate)
+        {
+            List<string> fullCntryNm = new List<string>();
+            string[] longCntryNames = cntry.Split(',');
+
+            int i = 0;
+            var query = from s in longCntryNames
+                        let num = i++
+                        group s by num / 3 into g
+                        select g.ToArray();
+            var results = query.ToArray();
+
+            foreach (var item in longCntryNames)
+            {
+                if (myCountrysDict.ContainsValue(item))
+                {
+                    fullCntryNm.Add(myLongCountrysDict[item]);
+                }
+            }
+            cntry = String.Join(",", fullCntryNm);
+
+            if (startDate.Length != 0 & endDate.Length == 0)
+            {
+                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else if (startDate.Length != 0 & endDate.Length != 0)
+            {
+                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            else
+            {
+                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+            }
+            return url;
+        }
+
+        public static string[][] getStaff(string staffTocheck)
+        {
+            //*************************
+            string[] KKK = staffTocheck.Split(',');
+            // This "query" slit string of countries in chunks
+            int i = 0;
+            var query = from s in KKK
+                        let num = i++
+                        group s by num / 10 into g
+                        select g.ToArray();
+            var results = query.ToArray();
+
+            //foreach (var item in results)
+            //{
+            //    Debug.WriteLine("---------------");
+            //    foreach (var item2 in item)
+            //    {
+            //        Debug.WriteLine("Chunks: " + item2);
+            //    }
+            //}
+            return results;
+        }
+
+
+        public static JArray SOmeName(string cntry, string indctr, string key, string caller, string iniDate = "", string clsDate = "")
+        {
+            //Debug.WriteLine("SomeName cntry: " + cntry);
+            JArray jsData = new JArray();
+            string[][] cntrStaff = helperClass.getStaff(cntry);
+            for (int j = 0; j < cntrStaff.Length; j++)
+            {
+                string chunk = "";
+                for (int i = 0; i < cntrStaff[j].Length; i++)
+                {
+                    chunk += cntrStaff[j][i] + ",";
+                }
+                chunk = chunk.TrimEnd(',');
+                //Debug.WriteLine("Cntry to URL: " + chunk);
+                switch(caller)
+                {
+                    case "Ind":
+                        url = helperClass.getIndctrUrl(chunk, indctr, key);
+                        break;
+                    case "Hist":
+                        url = getHistUrl (chunk, indctr, key, iniDate, clsDate);
+                        break;
+                    case "Cal":
+                        url = getClndrUrl(chunk, indctr, key, iniDate, clsDate);
+                        break;
+                    case "For":
+                        url = getForcUrl(chunk, indctr, key);
+                        break;
+                }
+                
+                //Debug.WriteLine(url);
+                var jsnData = new requestData(url);
+                foreach (var k in jsnData.getJSON())
+                {
+                    jsData.Add(k);
+                }
+            }
+            return jsData;
+        }
+
 
         public static string Determine_OfficeVersion()
         {

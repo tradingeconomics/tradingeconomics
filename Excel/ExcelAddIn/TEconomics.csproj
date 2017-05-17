@@ -121,27 +121,26 @@
     <Content Include="Images\Gold.png" />
     <Content Include="Images\Line.png" />
     <EmbeddedResource Include="red2.png" />
-    <Content Include="testClassLib-AddIn.dna">
+    <Content Include="TE-AddIn.dna">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
-    <Content Include="testClassLib-AddIn.xll.config">
+    <Content Include="TE-AddIn.xll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="testClassLib-AddIn64.xll.config">
+    <Content Include="TE-AddIn64.xll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
