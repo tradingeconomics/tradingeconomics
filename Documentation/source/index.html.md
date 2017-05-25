@@ -19,7 +19,7 @@ search: true
 
 The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
 Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. 
-The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at <a target = '_blank' href="http://www.tradingeconomics.com/analytics/api.aspx">Trading Economics</a>.
+The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at <a target = '_blank' href="https://www.tradingeconomics.com/analytics/api.aspx">Trading Economics</a>.
 
 <blockquote class="lang-specific python">
   <p>You can get Python from: <a target = '_blank' href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>   
@@ -131,7 +131,7 @@ Before proceeding select your language tab on the right.
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
 
 <blockquote class="lang-specific javascript">
@@ -146,7 +146,7 @@ Before proceeding select your language tab on the right.
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
 
 <blockquote class="lang-specific csharp">
@@ -161,7 +161,7 @@ Before proceeding select your language tab on the right.
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
 
 <blockquote class="lang-specific java">
@@ -176,7 +176,7 @@ Before proceeding select your language tab on the right.
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
 
 <blockquote class="lang-specific php">
@@ -191,7 +191,7 @@ Before proceeding select your language tab on the right.
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="http://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
 
 **Data Types**  
@@ -199,13 +199,13 @@ Before proceeding select your language tab on the right.
 You can request data in several formats:<br>
   
   * json   
-  <a target = '_blank' href="http://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=json">http://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=json</a>
+  <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=json">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=json</a>
 
   * xml    
-  <a target = '_blank' href="http://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=xml">http://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=xml</a>
+  <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=xml">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=xml</a>
 
   * csv    
-  <a target = '_blank' href="http://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=csv">http://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=csv</a>
+  <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=csv">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=csv</a>
 
 **Authentication**
 
@@ -224,9 +224,9 @@ Header example:
 Authorization parameters must be provided in the URL query or in the Request Reader. 
 
 Using URL auth:    
-`curl -i "http://api.tradingeconomics.com/country/united%20states/?client=guest:guest"`    
+`curl -i "https://api.tradingeconomics.com/country/united%20states/?client=guest:guest"`    
 Using Headers auth:     
-`curl -i "http://api.tradingeconomics.com/country/united%20states/" -H "Authorization: Client guest:guest"`
+`curl -i "https://api.tradingeconomics.com/country/united%20states/" -H "Authorization: Client guest:guest"`
 
 Without APIkeys all requests will return the default sample data.
 
@@ -280,7 +280,7 @@ Or type in any empty cell:</p>
 ```
 
 ```javascript
-var http = require('http');
+var http = require('https');
 var headers = {
     'Accept': 'Application/xml',
     'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
@@ -305,7 +305,7 @@ var req = http.get(options, callback).end();
 ```
 
 ```jsonnet
-var url = 'http://api.tradingeconomics.com/historical/country/{put country name here}/indicator/{put indicator name here}?c=guest:guest';
+var url = 'https://api.tradingeconomics.com/historical/country/{put country name here}/indicator/{put indicator name here}?c=guest:guest';
 $.ajax({
         url: url,
         type: "GET",
@@ -318,7 +318,7 @@ $.ajax({
 ```csharp
 using (var client = new HttpClient())
 {
-    client.BaseAddress = new Uri("http://api.tradingeconomics.com/");
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
     client.DefaultRequestHeaders.Clear();
     //ADD Acept Header to tell the server what data type you want
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
@@ -335,7 +335,7 @@ using (var client = new HttpClient())
 ```
 
 ```java
-String uri = "http://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}";
+String uri = "https://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}";
 URL url = new URL(uri);
 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
@@ -345,7 +345,7 @@ InputStream xml = connection.getInputStream();
 
 ```php
 <?php
-$url = 'http://api.tradingeconomics.com/country';
+$url = 'https://api.tradingeconomics.com/country';
 $headers = array(
     "Accept: application/xml",
     "Authorization: OAuth YOUR_TOKEN_VALUE"
@@ -370,26 +370,26 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Get Specific Country and Indicator  
-<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP?c=guest:guest">/historical/country/country_name/indicator/indicator_name</a>    
+<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP?c=guest:guest">/historical/country/country_name/indicator/indicator_name</a>    
 You can specify only a start date for your historical data    
-<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd</a>   
+<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd</a>   
 or you can specify a start date and end date    
-<a target = '_blank'  href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
 
 * Get Multiple Indicators for Specific Country    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3/yyyy-mm-dd</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3/yyyy-mm-dd</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Exports,Imports/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name/indicator/indicator_name, indicator2, indicator3/yyyy-mm-dd/yyyy-mm-dd</a>
 
 * Get Specific Indicator for Multiple Countries    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name/yyyy-mm-dd</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name/yyyy-mm-dd</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
 
 * Get Multiple Indicators for Multiple Countries    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3/yyyy-mm-dd</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3/yyyy-mm-dd</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/historical/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3/yyyy-mm-dd/yyyy-mm-dd</a>
 
 </span> 
 
@@ -460,7 +460,7 @@ Or type in any empty cell:</p>
 ```
 
 ```javascript
-var http = require('http');
+var http = require('https');
 var headers = {
     'Accept': 'Application/xml',
     'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
@@ -485,7 +485,7 @@ var req = http.get(options, callback).end();
 ```
 
 ```jsonnet
-var url = 'http://api.tradingeconomics.com/calendar?c=guest:guest';
+var url = 'https://api.tradingeconomics.com/calendar?c=guest:guest';
 $.ajax({
         url: url,
         type: "GET",
@@ -498,7 +498,7 @@ $.ajax({
 ```csharp
 using (var client = new HttpClient())
 {
-    client.BaseAddress = new Uri("http://api.tradingeconomics.com/");
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
     client.DefaultRequestHeaders.Clear();
     //ADD Acept Header to tell the server what data type you want
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
@@ -515,7 +515,7 @@ using (var client = new HttpClient())
 ```
 
 ```java
-String uri = "http://api.tradingeconomics.com//calendar";
+String uri = "https://api.tradingeconomics.com//calendar";
 URL url = new URL(uri);
 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
@@ -525,7 +525,7 @@ InputStream xml = connection.getInputStream();
 
 ```php
 <?php
-$url = 'http://api.tradingeconomics.com/country';
+$url = 'https://api.tradingeconomics.com/country';
 $headers = array(
     "Accept: application/xml",
     "Authorization: OAuth YOUR_TOKEN_VALUE"
@@ -550,26 +550,26 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Get all calendar events    
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a>
 
 * Get calendar events for specific country    
-  <a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States?c=guest:guest">/calendar/country/country_name</a>    
-  <a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name/yyyy-mm-dd/yyyy-mm-dd</a>    
+  <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States?c=guest:guest">/calendar/country/country_name</a>    
+  <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name/yyyy-mm-dd/yyyy-mm-dd</a>    
 
 * Get calendar for a specific indicator category    
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/indicator/GDP?c=guest:guest">/calendar/indicator/indicator_name</a>      
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/GDP?c=guest:guest">/calendar/indicator/indicator_name</a>      
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a>
 
 * Get all calendar events for multiple countries   
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States,United Kingdom,Portugal?c=guest:guest">/calendar/country/country_name,country2,country3</a>     
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States,United Kingdom,Portugal/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name,country2,country3/yyyy-mm-dd/yyyy-mm-dd</a> 
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States,United Kingdom,Portugal?c=guest:guest">/calendar/country/country_name,country2,country3</a>     
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States,United Kingdom,Portugal/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name,country2,country3/yyyy-mm-dd/yyyy-mm-dd</a> 
 
 * Get calendar events for a specific country and specific indicator category   
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States/indicator/GDP?c=guest:guest">/calendar/country/country_name/indicator/indicator_name</a>     
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/United States/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a> 
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States/indicator/GDP?c=guest:guest">/calendar/country/country_name/indicator/indicator_name</a>     
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States/indicator/GDP/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/country_name/indicator/indicator_name/yyyy-mm-dd/yyyy-mm-dd</a> 
 
 * Filter Calendar Events by date    
-<a target = '_blank' href="http://api.tradingeconomics.com/calendar/country/All/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/All/yyyy-mm-dd/yyyy-mm-dd</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/yyyy-mm-dd/yyyy-mm-dd?c=guest:guest">/calendar/country/All/yyyy-mm-dd/yyyy-mm-dd</a>
 
 </span> 
 
@@ -619,7 +619,7 @@ Or type in any empty cell:</p>
 =TEIndicators( "United States", "Bankruptcies", "Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate", B2)
 ```
 ```javascript
-var http = require('http');
+var http = require('https');
 var headers = {
     'Accept': 'Application/xml',
     'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
@@ -644,7 +644,7 @@ var req = http.get(options, callback).end();
 ```
 
 ```jsonnet
-var url = 'http://api.tradingeconomics.com/indicators?c=guest:guest';
+var url = 'https://api.tradingeconomics.com/indicators?c=guest:guest';
 $.ajax({
         url: url,
         type: "GET",
@@ -657,7 +657,7 @@ $.ajax({
 ```csharp
 using (var client = new HttpClient())
 {
-    client.BaseAddress = new Uri("http://api.tradingeconomics.com/");
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
     client.DefaultRequestHeaders.Clear();
     //ADD Acept Header to tell the server what data type you want
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
@@ -674,7 +674,7 @@ using (var client = new HttpClient())
 ```
 
 ```java
-String uri = "http://api.tradingeconomics.com//indicators";
+String uri = "https://api.tradingeconomics.com//indicators";
 URL url = new URL(uri);
 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
@@ -684,7 +684,7 @@ InputStream xml = connection.getInputStream();
 
 ```php
 <?php
-$url = 'http://api.tradingeconomics.com/country';
+$url = 'https://api.tradingeconomics.com/country';
 $headers = array(
     "Accept: application/xml",
     "Authorization: OAuth YOUR_TOKEN_VALUE"
@@ -710,18 +710,18 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Get list of all indicators  
-<a target = '_blank' href="http://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
 
 * List of Indicators by Country    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/United States?c=guest:guest">/country/country_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/United States,United Kingdom,Portugal?c=guest:guest">/country/country_name,country2,country3</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/country/United States?c=guest:guest">/country/country_name</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/United States,United Kingdom,Portugal?c=guest:guest">/country/country_name,country2,country3</a>
 
 * Country/Indicator pair    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/United States/GDP?c=guest:guest">/country/country_name/indicator_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/United States/GDP,Exports,Imports?c=guest:guest">/country/country_name/indicator_name,indicator2,indicator3</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/country/United States/GDP?c=guest:guest">/country/country_name/indicator_name</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/United States/GDP,Exports,Imports?c=guest:guest">/country/country_name/indicator_name,indicator2,indicator3</a>
 
 * Several Countries and Indicators    
-<a target = '_blank' href="http://api.tradingeconomics.com/country/United States,United Kingdom,Portugal/GDP,Exports,Imports?c=guest:guest">/country/country_name,country2,country3/indicator_name,indicator2,indicator3</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/country/United States,United Kingdom,Portugal/GDP,Exports,Imports?c=guest:guest">/country/country_name,country2,country3/indicator_name,indicator2,indicator3</a>
 
 </span> 
 
@@ -763,7 +763,7 @@ Or type in any empty cell:</p>
 ```
 
 ```javascript
-var http = require('http');
+var http = require('https');
 var headers = {
     'Accept': 'Application/xml',
     'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
@@ -788,7 +788,7 @@ var req = http.get(options, callback).end();
 ```
 
 ```jsonnet
-var url = 'http://api.tradingeconomics.com/markets/commodities?c=guest:guest';
+var url = 'https://api.tradingeconomics.com/markets/commodities?c=guest:guest';
 $.ajax({
         url: url,
         type: "GET",
@@ -801,7 +801,7 @@ $.ajax({
 ```csharp
 using (var client = new HttpClient())
 {
-    client.BaseAddress = new Uri("http://api.tradingeconomics.com/");
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
     client.DefaultRequestHeaders.Clear();
     //ADD Acept Header to tell the server what data type you want
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
@@ -818,7 +818,7 @@ using (var client = new HttpClient())
 ```
 
 ```java
-String uri = "http://api.tradingeconomics.com//markets/commodities";
+String uri = "https://api.tradingeconomics.com//markets/commodities";
 URL url = new URL(uri);
 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
@@ -828,7 +828,7 @@ InputStream xml = connection.getInputStream();
 
 ```php
 <?php
-$url = 'http://api.tradingeconomics.com/country';
+$url = 'https://api.tradingeconomics.com/country';
 $headers = array(
     "Accept: application/xml",
     "Authorization: OAuth YOUR_TOKEN_VALUE"
@@ -853,16 +853,16 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Get list of available Commodities with latest values and symbols   
-<a target = '_blank' href="http://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a>
 
 * Get list of available Currencies with latest values and symbols   
-<a target = '_blank' href="http://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> 
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> 
 
 * Get list of available Indexes with latest values and symbols   
-<a target = '_blank' href="http://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a>
 
 * Get list of available Bonds with latest values and symbols    
-<a target = '_blank' href="http://api.tradingeconomics.com/markets/bonds?c=guest:guest">/markets/bonds</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/bonds?c=guest:guest">/markets/bonds</a>
 
 </span> 
 
@@ -911,7 +911,7 @@ Or type in any empty cell:</p>
 ```
 
 ```javascript
-var http = require('http');
+var http = require('https');
 var headers = {
     'Accept': 'Application/xml',
     'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
@@ -936,7 +936,7 @@ var req = http.get(options, callback).end();
 ```
 
 ```jsonnet
-var url = 'http://api.tradingeconomics.com/forecast/country/{put country name here}?c=guest:guest';
+var url = 'https://api.tradingeconomics.com/forecast/country/{put country name here}?c=guest:guest';
 $.ajax({
         url: url,
         type: "GET",
@@ -949,7 +949,7 @@ $.ajax({
 ```csharp
 using (var client = new HttpClient())
 {
-    client.BaseAddress = new Uri("http://api.tradingeconomics.com/");
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
     client.DefaultRequestHeaders.Clear();
     //ADD Acept Header to tell the server what data type you want
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
@@ -966,7 +966,7 @@ using (var client = new HttpClient())
 ```
 
 ```java
-String uri = "http://api.tradingeconomics.com//forecast/country/{put country name here}";
+String uri = "https://api.tradingeconomics.com//forecast/country/{put country name here}";
 URL url = new URL(uri);
 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestMethod("GET");
@@ -976,7 +976,7 @@ InputStream xml = connection.getInputStream();
 
 ```php
 <?php
-$url = 'http://api.tradingeconomics.com/country';
+$url = 'https://api.tradingeconomics.com/country';
 $headers = array(
     "Accept: application/xml",
     "Authorization: OAuth YOUR_TOKEN_VALUE"
@@ -1000,16 +1000,16 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Specific country  
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/United States?c=guest:guest">/forecast/country/country_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/United States,United Kingdom,Portugal?c=guest:guest">/forecast/country/country_name,country2,country3</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/United States?c=guest:guest">/forecast/country/country_name</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/United States,United Kingdom,Portugal?c=guest:guest">/forecast/country/country_name,country2,country3</a>
 
 * Specific indicator    
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/indicator/GDP?c=guest:guest">/forecast/indicator/indicator_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/indicator/GDP,Exports,Imports?c=guest:guest">/forecast/indicator/indicator_name,indicator2,indicator3</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/GDP?c=guest:guest">/forecast/indicator/indicator_name</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/GDP,Exports,Imports?c=guest:guest">/forecast/indicator/indicator_name,indicator2,indicator3</a>
 
 * Specific country and indicator  
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/United States/indicator/GDP?c=guest:guest">/forecast/country/country_name/indicator/indicator_name</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/forecast/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports?c=guest:guest">/forecast/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3</a>  
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/United States/indicator/GDP?c=guest:guest">/forecast/country/country_name/indicator/indicator_name</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/United States,United Kingdom,Portugal/indicator/GDP,Exports,Imports?c=guest:guest">/forecast/country/country_name,country2,country3/indicator/indicator_name,indicator2,indicator3</a>  
 
 </span> 
 
@@ -1032,16 +1032,16 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Get latest news of data    
-<a target = '_blank' href="http://api.tradingeconomics.com/news?c=guest:guest">/news</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/news</a>
 
 * Get news of data by country   
-<a target = '_blank' href="http://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/country_name</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/country_name</a>
 
 * Get news of data by indicator    
-<a target = '_blank' href="http://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/indicator_name</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/indicator_name</a>
 
 * Get news of data by country and indicator    
-<a target = '_blank' href="http://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/country_name/indicator_name</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/country_name/indicator_name</a>
 
 </span> 
 
@@ -1067,25 +1067,25 @@ Click on any method below for a sample.
 <span class="methods">
 
 * Latest articles    
-<a target = '_blank' href="http://api.tradingeconomics.com/news?c=guest:guest">/articles</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/articles</a>
 
 * Paginate over articles   
-<a target = '_blank' href="http://api.tradingeconomics.com/articles?c=guest:guest&skip=10&lim=10">/articles?c=guest:guest&skip=X&lim=Y</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&skip=10&lim=10">/articles?c=guest:guest&skip=X&lim=Y</a>
 
 * Latest articles by country    
-<a target = '_blank' href="http://api.tradingeconomics.com/articles/country/united%20states?c=guest:guest">/articles/country/country_name</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states?c=guest:guest">/articles/country/country_name</a>
 
 * Articles by country within DateTime interval    
-<a target = '_blank' href="http://api.tradingeconomics.com/articles/country/united%20states/from/2016-01-01/2016-03-30?c=guest:guest">/articles/country/country_name/from/start_date/end_date</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/from/2016-01-01/2016-03-30?c=guest:guest">/articles/country/country_name/from/start_date/end_date</a>    
 
 * Latest articles by indicator   
-<a target = '_blank' href="http://api.tradingeconomics.com/articles/indicator/interest%20rate?c=guest:guest">/articles/indicator/indicator_name</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/indicator/interest%20rate?c=guest:guest">/articles/indicator/indicator_name</a>
 
 * Latest articles by country and indicator    
-<a target = '_blank' href="http://api.tradingeconomics.com/articles/country/united%20states/interest%20rate?c=guest:guest">/articles/country/country_name/indicator_name</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/interest%20rate?c=guest:guest">/articles/country/country_name/indicator_name</a>    
 
 * Article by ID    
-<a target = '_blank' href="http://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a>
 
 </span> 
 
