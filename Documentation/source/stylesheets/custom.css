@@ -23,4 +23,6 @@
 
 code.prettyprint {
     background-color: rgba(147, 147, 147, 0.15);
+    white-space: pre-line;
+    display: -webkit-inline-box;
 }

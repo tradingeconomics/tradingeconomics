@@ -19,7 +19,7 @@ search: true
 
 The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
 Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. 
-The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at <a target = '_blank' href="https://www.tradingeconomics.com/analytics/api.aspx">Trading Economics</a>.
+The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at <a target = '_blank' href="https://tradingeconomics.com/analytics/api.aspx">Trading Economics</a>.
 
 <blockquote class="lang-specific python">
   <p>You can get Python from: <a target = '_blank' href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>   
@@ -1102,20 +1102,68 @@ Click on any method below for a sample.
 |    **Symbol**   | Unique symbol used by TradingEconomics                                                                                          |
 |     **Url**     | Url linking to related indicator                                                                                                |
 
+# Streaming
 
+<blockquote class="lang-specific python">
+<p>In Windows Command Prompt or Linux bash execute next steps: <br>  
+    Step 1 - Clone repository</p>
+</blockquote>
+```python
+  git clone https://github.com/ieconomics/open-api.git
+```
+<blockquote class="lang-specific python">
+<p>Step 2</p>
+</blockquote>
+```python
+  cd open-api/stream/python
+```
+<blockquote class="lang-specific python">
+<p>Step 3 - Install dependencies</p>
+</blockquote>
+```python
+  pip install websocket-client
+```
+<blockquote class="lang-specific python">
+<p>Step 4 - In app.py file, set-up your client key/secret</p>
+</blockquote>
+```python
+  client_key = "API_CLIENT_KEY"
+  client_secret = "API_CLIENT_KEY"
+```
+<blockquote class="lang-specific python">
+<p>Step 5 - Run it</p>
+</blockquote>
+```python
+  python app.py
+```
 
+The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data.   
+You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. 
 
+**Streaming Endpoint**    
+`ws://stream.tradingeconomics.com/`
 
+**Connecting to Stream**    
+Our data is Streamed using <a target = '_blank' href="https://en.wikipedia.org/wiki/WebSocket">websocket protocol</a>. Meaning you can use programming language of your choice, as long as it supports websockets.
 
+**Opening the connection:**    
+Only Authorized users may establish a persistent real time connection with Trading Economics API Stream. In order to do so, you have to start a handshaking process. On the handshake, you have to use client key/secret in order to Authorize. These credentials must be added to the connection query:
 
+**Client key/secret**    
+`ws://stream.tradingeconomics.com/?client=YOUR_CLIENT_KEY:YOUR_CLIENT_SECRET`
 
+**Subscribe to a Channel**    
+After establishing the connection, you are able to subscribe to one or more topics. In order to subscribe to a channel, you must send a message to the stream server passing the topic name as the argument.    
+Our streaming service provides live data on Economic Data, Markets and Commodities.
 
+**Example:** (<a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">Get detailed list of available live data </a>)    
+`'{"topic": "subscribe", "to": "calendar"}'
+'{"topic": "subscribe", "to": "EURUSD"}'
+'{"topic": "subscribe", "to": "GBPUSD"}'
+'{"topic": "subscribe", "to": "CL1"}'  //Crude oil
+'{"topic": "subscribe", "to": "GC1"}'  //Gold`
 
-
-
-
-
-
-
-
+**Sample Code:**    
+<a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/python">Python</a>    
+<a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">NodeJS (JavaScript)</a>
 
