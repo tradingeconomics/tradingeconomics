@@ -1137,6 +1137,43 @@ Click on any method below for a sample.
   python app.py
 ```
 
+<blockquote class="lang-specific javascript">
+<p>In Windows Command Prompt or Linux bash execute next steps: <br>  
+    Step 1 - Clone repository</p>
+</blockquote>
+```javascript
+  git clone https://github.com/ieconomics/open-api.git
+```
+<blockquote class="lang-specific javascript">
+<p>Step 2</p>
+</blockquote>
+```javascript
+  cd open-api/stream/nodejs
+```
+<blockquote class="lang-specific javascript">
+<p>Step 3 - Install dependencies</p>
+</blockquote>
+```javascript
+  npm install
+```
+<blockquote class="lang-specific javascript">
+<p>Step 4 - In app.js file, set-up your client key/secret</p>
+</blockquote>
+```javascript
+  Client = new te_client({
+    url: 'ws://stream.tradingeconomics.com/',
+    key: 'API_CLIENT_KEY', // <--
+    secret: 'API_CLIENT_SECRET' // <--
+    //reconnect: true
+  });
+```
+<blockquote class="lang-specific javascript">
+<p>Step 5 - Run it</p>
+</blockquote>
+```javascript
+  node app.js
+```
+
 The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data.   
 You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. 
 
