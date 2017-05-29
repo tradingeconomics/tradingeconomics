@@ -19,7 +19,7 @@
       showEffectSpeed: 0,
       hideEffectSpeed: 180,
       ignoreSelector: '.toc-ignore',
-      highlightOffset: 60,
+      highlightOffset: 160,
       scrollTo: -1,
       scrollHistory: true,
       hashGenerator: function (text, element) {
@@ -54,4 +54,3 @@
     });
   });
 })(window);
-
