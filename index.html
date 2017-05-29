@@ -1314,6 +1314,37 @@ Click on any method below for a sample.</p>
 </blockquote>
 <pre class="highlight python"><code>  <span class="n">python</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
 </code></pre>
+<blockquote class="lang-specific javascript">
+<p>In Windows Command Prompt or Linux bash execute next steps: <br>  
+    Step 1 - Clone repository</p>
+</blockquote>
+<pre class="highlight javascript"><code>  <span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/ieconomics/open-api.git</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 2</p>
+</blockquote>
+<pre class="highlight javascript"><code>  <span class="nx">cd</span> <span class="nx">open</span><span class="o">-</span><span class="nx">api</span><span class="o">/</span><span class="nx">stream</span><span class="o">/</span><span class="nx">nodejs</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 3 - Install dependencies</p>
+</blockquote>
+<pre class="highlight javascript"><code>  <span class="nx">npm</span> <span class="nx">install</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 4 - In app.js file, set-up your client key/secret</p>
+</blockquote>
+<pre class="highlight javascript"><code>  <span class="nx">Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">te_client</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'ws://stream.tradingeconomics.com/'</span><span class="p">,</span>
+    <span class="na">key</span><span class="p">:</span> <span class="s1">'API_CLIENT_KEY'</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+    <span class="na">secret</span><span class="p">:</span> <span class="s1">'API_CLIENT_SECRET'</span> <span class="c1">// &lt;--</span>
+    <span class="c1">//reconnect: true</span>
+  <span class="p">});</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 5 - Run it</p>
+</blockquote>
+<pre class="highlight javascript"><code>  <span class="nx">node</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
+</code></pre>
 <p>The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data.<br>
 You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. </p>
 
