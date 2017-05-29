@@ -1174,8 +1174,7 @@ Click on any method below for a sample.
   node app.js
 ```
 
-The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data.   
-You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. 
+The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. 
 
 **Streaming Endpoint**    
 `ws://stream.tradingeconomics.com/`
@@ -1201,6 +1200,6 @@ Our streaming service provides live data on Economic Data, Markets and Commoditi
 '{"topic": "subscribe", "to": "GC1"}'  //Gold`
 
 **Sample Code:**    
-<a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/python">Python</a>    
-<a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">NodeJS (JavaScript)</a>
+<a target = '_blank' href="https://ieconomics.github.io/open-api/?python#streaming">Python</a>    
+<a target = '_blank' href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a>
 
