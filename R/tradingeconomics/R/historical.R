@@ -1,7 +1,7 @@
 
 
 lower.Date <- function(country, indicator, apiKey){
-  base <-  "http://api.tradingeconomics.com/historical/country"
+  base <-  "https://api.tradingeconomics.com/historical/country"
   url_base <- paste(base, paste(country, collapse = ','), 'indicator',
                     paste(indicator, collapse = ','), sep = '/')
   if (is.null(apiKey))
@@ -51,45 +51,61 @@ dateCheck <- function(some_date){
 
 
 getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL, outType = NULL){
-  base <-  "http://api.tradingeconomics.com/historical/country"
-  url_base <- paste(base, paste(country, collapse = ','), 'indicator',
-                    paste(indicator, collapse = ','), sep = '/')
-  if (is.null(initDate) & is.null(endDate)){
-      initDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
-      url_base <- paste(url_base, paste(initDate, sep = '/'), sep = '/')
-  } else if (is.null(initDate) & !is.null(endDate)){
-      dateCheck(endDate)
-      lowDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
-      if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
-      url_base <- paste(url_base, paste(lowDate, endDate, sep = '/'), sep = '/')
-  } else if (!is.null(initDate) & is.null(endDate)){
-      dateCheck(initDate)
-      if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
-      url_base <- paste(url_base, initDate, sep = '/')
-  } else {
-      dateCheck(initDate)
-      dateCheck(endDate)
-      if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
-      if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
-      if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
-      url_base <- paste(url_base, paste(initDate, endDate, sep = '/'), sep = '/')
+  base <-  "https://api.tradingeconomics.com/historical/country"
+
+  df_final = data.frame()
+  step = 10
+  for(i in seq(1, length(country), by = step)){
+    init = as.numeric(i)
+    finit = as.numeric(i)+step
+    url_base <- paste(base, paste(country[init:finit], collapse = ','), 'indicator',
+                      paste(indicator, collapse = ','), sep = '/')
+
+    if (is.null(initDate) & is.null(endDate)){
+        initDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
+        url_base <- paste(url_base, paste(initDate, sep = '/'), sep = '/')
+    } else if (is.null(initDate) & !is.null(endDate)){
+        dateCheck(endDate)
+        lowDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
+        if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
+        url_base <- paste(url_base, paste(lowDate, endDate, sep = '/'), sep = '/')
+    } else if (!is.null(initDate) & is.null(endDate)){
+        dateCheck(initDate)
+        if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+        url_base <- paste(url_base, initDate, sep = '/')
+    } else {
+        dateCheck(initDate)
+        dateCheck(endDate)
+        if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+        if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
+        if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
+        url_base <- paste(url_base, paste(initDate, endDate, sep = '/'), sep = '/')
+    }
+
+    url <- paste(url_base, '?c=', apiKey, sep = '')
+    url <- URLencode(url)
+
+    if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
+      stop('Wrong credentials')
+    }
+
+    webData <-fromJSON(url)
+    webResults <- data.frame('Country' = webData$Country, 'Category' = webData$Category,
+                             'Date'= webData$DateTime, 'Value' = webData$Value,
+                             'Frequency' = webData$Frequency)
+    df_final = rbind(df_final, webResults)
   }
-  url <- paste(url_base, '?c=', apiKey, sep = '')
-  url <- URLencode(url)
-  if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-    stop('Wrong credentials')
-  }
-  webData <-fromJSON(url)
-  webResults <- data.frame('Country' = webData$Country,'Category' = webData$Category,'Date'= webData$DateTime,
-                           'Value' = webData$Value, 'Frequency' = webData$Frequency)
+
   if (is.null(outType)| identical(outType, 'lst')){
-    webResults <- split(webResults , f =  paste(webResults$Country,webResults$Category))
+    df_final <- split(df_final , f =  paste(df_final$Country, df_final$Category))
   } else if (identical(outType, 'df')){
-    webResults = webResults
+    df_final = df_final[order(as.Date(df_final$Date)),]
+    rownames(df_final) <- 1:nrow(df_final)
   } else {
     stop('output_type options : df for data frame, lst(defoult) for list by country and indicator')
   }
-  return(webResults)
+
+  return(df_final)
 }
 
 

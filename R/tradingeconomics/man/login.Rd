@@ -12,4 +12,3 @@ login(usersApiKey = NULL)
 \description{
 Insert users APIkey
 }
-

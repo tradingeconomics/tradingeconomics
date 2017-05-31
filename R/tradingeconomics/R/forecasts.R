@@ -25,37 +25,51 @@
 
 
 getForecastData <- function(country = NULL, indicator = NULL, outType = NULL){
-  base <- "http://api.tradingeconomics.com/forecast"
-  if (is.null(country) & is.null(indicator)){
-    stop('At least one of parameters, country or indicator, should be indicated. ')
-  } else if (is.null(country) & !is.null(indicator)){
-    url <- paste(base, 'indicator',
-                 paste(indicator, collapse = ','), sep = '/')
-  } else if (!is.null(country) & is.null(indicator)){
-    url <- paste(base, 'country',
-                 paste(country, collapse = ','), sep = '/')
-  } else {
-    url <- paste(base, 'country', paste(country, collapse = ','), 'indicator',
-                 paste(indicator, collapse = ','), sep = '/')
+  base <- "https://api.tradingeconomics.com/forecast"
+
+  df_final = data.frame()
+  step = 10
+  for(i in seq(1, length(country), by = step)){
+    init = as.numeric(i)
+    finit = as.numeric(i)+step
+
+    if (is.null(country) & is.null(indicator)){
+      stop('At least one of parameters, country or indicator, should be indicated. ')
+    } else if (is.null(country) & !is.null(indicator)){
+      url <- paste(base, 'indicator',
+                   paste(indicator, collapse = ','), sep = '/')
+    } else if (!is.null(country) & is.null(indicator)){
+      url <- paste(base, 'country',
+                   paste(country[init:finit], collapse = ','), sep = '/')
+    } else {
+      url <- paste(base, 'country', paste(country[init:finit], collapse = ','), 'indicator',
+                   paste(indicator, collapse = ','), sep = '/')
+    }
+
+    url <- paste(url, '?c=', apiKey, sep = '')
+    url <- URLencode(url)
+
+    if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
+      stop('Wrong credentials')
+    }
+
+    webData <-fromJSON(url)
+    webResults <- data.frame('Country' =webData$Country, 'Category' = webData$Category, 'LatestValue' = webData$LatestValue,
+                             'LatestValueDate' = webData$LatestValueDate,  'YearEnd' = webData$YearEnd, 'YearEnd2' = webData$YearEnd2,
+                             'YearEnd3' = webData$YearEnd3, 'q1' = webData$q1, 'q1_date' = webData$q1_date, 'q2' = webData$q2, 'q2_date' = webData$q2_date,
+                             'q3' = webData$q3, 'q3_date' = webData$q3_date, 'q4' = webData$q4, 'q4_date' = webData$q4_date)
+    df_final = rbind(df_final, webResults)
   }
-  url <- paste(url, '?c=', apiKey, sep = '')
-  url <- URLencode(url)
-  if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-    stop('Wrong credentials')
-  }
-  webData <-fromJSON(url)
-  webResults <- data.frame('Country' =webData$Country, 'Category' = webData$Category, 'LatestValue' = webData$LatestValue,
-                           'LatestValueDate' = webData$LatestValueDate,  'YearEnd' = webData$YearEnd, 'YearEnd2' = webData$YearEnd2,
-                           'YearEnd3' = webData$YearEnd3, 'q1' = webData$q1, 'q1_date' = webData$q1_date, 'q2' = webData$q2, 'q2_date' = webData$q2_date,
-                           'q3' = webData$q3, 'q3_date' = webData$q3_date, 'q4' = webData$q4, 'q4_date' = webData$q4_date)
+
   if (is.null(outType)| identical(outType, 'lst')){
-    webResults <- split(webResults , f = webResults$Country)
+    df_final <- split(df_final , f = df_final$Country)
   } else if (identical(outType, 'df')){
-    webResults = webResults
+    df_final = df_final
   } else {
     stop('output_type options : df for data frame, lst(defoult) for list by country ')
   }
-  return(webResults)
+
+  return(df_final)
 }
 
 

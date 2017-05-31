@@ -24,43 +24,53 @@
 
 
 getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL){
-  base <- "http://api.tradingeconomics.com"
-  if (is.null(country) & is.null(indicator)){
-    url <- "http://api.tradingeconomics.com/indicators"
-  } else if (is.null(country) & !is.null(indicator)){
-    stop('Country name should be provided')
-  } else if (!is.null(country) & is.null(indicator)){
-    url <- paste(base, 'country',
-                 paste(country, collapse = ','), sep = '/')
-  } else {
-    url <- paste(base, 'country', paste(country, collapse = ','),
-                 paste(indicator, collapse = ','), sep = '/')
-  }
-  url <- paste(url, '?c=', apiKey, sep = '')
-  url <- URLencode(url)
-  if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-    stop('Wrong credentials')
-  }
-  webData <-fromJSON(url)
-  if (is.null(country) & is.null(indicator)){
-    webResults <- data.frame('Category' = webData$Category, 'CategoryGroup' = webData$CategoryGroup)
-  } else {
-    webResults <- data.frame('Country' =webData$Country, 'Category' = webData$Category, 'Title' = webData$Title,  'LatestValue' = webData$LatestValue,
-                           'LatestValueDate' = webData$LatestValueDate,  'Source' = webData$Source, 'Unit' = webData$Unit,
-                           'URL' = webData$URL, 'CategoryGroup' = webData$CategoryGroup, 'Frequency' = webData$Frequency,
-                           'HistoricalDataSymbol' = webData$HistoricalDataSymbol, 'PreviousValue' = webData$PreviousValue,
-                           'PreviousValueDate' = webData$PreviousValueDate)
-
-    if (is.null(outType)| identical(outType, 'lst')){
-      webResults <- split(webResults , f = paste(webResults$Country,webResults$Category))
-    } else if (identical(outType, 'df')){
-      webResults = webResults
+  base <- "https://api.tradingeconomics.com"
+  df_final = data.frame()
+  step = 10
+  for(i in seq(1, length(country), by = step)){
+    init = as.numeric(i)
+    finit = as.numeric(i)+step
+    if (is.null(country) & is.null(indicator)){
+      url <- "https://api.tradingeconomics.com/indicators"
+    } else if (is.null(country) & !is.null(indicator)){
+      stop('Country name should be provided')
+    } else if (!is.null(country) & is.null(indicator)){
+      url <- paste(base, 'country',
+                   paste(country[init:finit], collapse = ','), sep = '/')
     } else {
-      stop('output_type options : df for data frame, lst(defoult) for list by country ')
+      url <- paste(base, 'country', paste(country[init:finit], collapse = ','),
+                   paste(indicator, collapse = ','), sep = '/')
     }
-  }
 
-  return(webResults)
+    url <- paste(url, '?c=', apiKey, sep = '')
+    url <- URLencode(url)
+
+    if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
+      stop('Wrong credentials')
+    }
+
+    webData <-fromJSON(url)
+
+    if (is.null(country) & is.null(indicator)){
+      webResults <- data.frame('Category' = webData$Category, 'CategoryGroup' = webData$CategoryGroup)
+    } else {
+      webResults <- data.frame('Country' =webData$Country, 'Category' = webData$Category, 'Title' = webData$Title,  'LatestValue' = webData$LatestValue,
+                             'LatestValueDate' = webData$LatestValueDate,  'Source' = webData$Source, 'Unit' = webData$Unit,
+                             'URL' = webData$URL, 'CategoryGroup' = webData$CategoryGroup, 'Frequency' = webData$Frequency,
+                             'HistoricalDataSymbol' = webData$HistoricalDataSymbol, 'PreviousValue' = webData$PreviousValue,
+                             'PreviousValueDate' = webData$PreviousValueDate)
+    }
+    df_final = rbind(df_final, webResults)
+  }
+      if (is.null(outType)| identical(outType, 'lst')){
+        df_final <- split(df_final , f = paste(df_final$Country,df_final$Category))
+      } else if (identical(outType, 'df')){
+        df_final = df_final
+      } else {
+        stop('output_type options : df for data frame, lst(defoult) for list by country ')
+      }
+
+  return(df_final)
 }
 
 

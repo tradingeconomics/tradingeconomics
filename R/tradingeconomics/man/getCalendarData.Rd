@@ -37,6 +37,7 @@ Return calendar events from Trading Economics API
 All parameters are optional. When not supplying parameters, data for all countries and indicators will be provided.
 Without credentials, only sample data is returned.
 }
+
 \examples{
 \dontrun{ getCalendarData(country = 'United States', indicator = 'Composite Pmi',
  initDate = '2011-01-01', endDate = '2016-01-01')
@@ -49,4 +50,3 @@ getCalendarData(country = c('United States', 'India'),
 \seealso{
 \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 }
-

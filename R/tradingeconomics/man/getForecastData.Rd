@@ -31,6 +31,7 @@ Return forecast values from Trading Economics API
 At least one of parameters, country or indicator, should be provided.
 Without credentials, only sample data is returned.
 }
+
 \examples{
 \dontrun{ getForecastData(country = 'United States', indicator = 'Imports')
 getForecastData(country = c('United States', 'India'), indicator = c('Imports','Exports'))
@@ -39,4 +40,3 @@ getForecastData(country = c('United States', 'India'), indicator = c('Imports','
 \seealso{
 \code{\link{getMarketsData}}, \code{\link{getIndicatorData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
 }
-

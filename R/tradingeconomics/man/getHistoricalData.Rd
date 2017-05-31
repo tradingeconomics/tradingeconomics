@@ -36,6 +36,7 @@ Return historical information from Trading Economics API.
 
 Without credentials only sample data will be provided.
 }
+
 \examples{
 \dontrun{ getHistoricalData(country = 'United States', indicator = 'Imports',
 initDate = '2011-01-01', endDate = '2016-01-01')
@@ -47,4 +48,3 @@ initDate = '2011-01-01', endDate = '2016-01-01')
 \seealso{
 \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
 }
-

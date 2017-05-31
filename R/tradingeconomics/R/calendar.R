@@ -41,46 +41,64 @@ dateCheck <- function(some_date){
 #'
 
 getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, endDate= NULL, outType = NULL) {
-  base <- "http://api.tradingeconomics.com/calendar"
-  if (is.null(country) & is.null(indicator)){
-    url <- base
-  } else if (is.null(country) & !is.null(indicator)){
-    url <- paste(base, 'country/all', 'indicator',
-                      paste(indicator, collapse = ','), sep = '/')
-  } else if (!is.null(country) & is.null(indicator)){
-    url <- paste(base, 'country',
-                 paste(country, collapse = ','), sep = '/')
-  } else {
-    url <- paste(base, 'country', paste(country, collapse = ','), 'indicator',
-                 paste(indicator, collapse = ','), sep = '/')
+  base <- "https://api.tradingeconomics.com/calendar"
+
+  df_final = data.frame()
+  step = 10
+  for(i in seq(1, length(country), by = step)){
+    init = as.numeric(i)
+    finit = as.numeric(i)+step
+
+    if (is.null(country) & is.null(indicator)){
+      url <- base
+    } else if (is.null(country) & !is.null(indicator)){
+      url <- paste(base, 'country/all', 'indicator',
+                        paste(indicator, collapse = ','), sep = '/')
+    } else if (!is.null(country) & is.null(indicator)){
+      url <- paste(base, 'country',
+                   paste(country[init:finit], collapse = ','), sep = '/')
+    } else {
+      url <- paste(base, 'country', paste(country[init:finit], collapse = ','), 'indicator',
+                   paste(indicator, collapse = ','), sep = '/')
+    }
+
+    if (!is.null(initDate) & !is.null(endDate)){
+      dateCheck(initDate)
+      dateCheck(endDate)
+      if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+      if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
+      if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
+      url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
+    } else {
+      url <- url
+    }
+
+    url <- paste(url, '?c=', apiKey, sep = '')
+    url <- URLencode(url)
+
+    if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
+      stop('Wrong credentials')
+    }
+
+    webData <-fromJSON(url)
+    webResults <- data.frame('Date' = webData$Date, 'Country' = webData$Country, 'Category' = webData$Category, 'Event' = webData$Event,
+                             'Reference' = webData$Reference, 'Unit' = webData$Unit, 'Source' = webData$Source, 'Actual' = webData$Actual,
+                             'Previous' = webData$Previous, 'Forecast' = webData$Forecast, 'TEForecast' = webData$TEForecast)
+    df_final = rbind(df_final, webResults)
   }
-  if (!is.null(initDate) & !is.null(endDate)){
-    dateCheck(initDate)
-    dateCheck(endDate)
-    if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
-    if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
-    if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
-    url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
-  } else {
-    url <- url
-  }
-  url <- paste(url, '?c=', apiKey, sep = '')
-  url <- URLencode(url)
-  if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-    stop('Wrong credentials')
-  }
-  webData <-fromJSON(url)
-  webResults <- data.frame('Date' = webData$Date, 'Country' = webData$Country, 'Category' = webData$Category, 'Event' = webData$Event,
-                           'Reference' = webData$Reference, 'Unit' = webData$Unit, 'Source' = webData$Source, 'Actual' = webData$Actual,
-                           'Previous' = webData$Previous, 'Forecast' = webData$Forecast, 'TEForecast' = webData$TEForecast)
+
   if (is.null(outType)| identical(outType, 'lst')){
-    webResults <- split(webResults , f =  paste(webResults$Country,webResults$Category))
+    df_final <- split(df_final , f =  paste(df_final$Country,df_final$Category))
   } else if (identical(outType, 'df')){
-    webResults = webResults
+    df_final$Date <- strptime(as.character(df_final$Date),'%Y-%m-%dT%H:%M')
+    #df_final = df_final[order(as.Date(df_final$Date)),]
+    df_final <- df_final[order(df_final$Date),]
+    rownames(df_final) <- 1:nrow(df_final)
   } else {
     stop('output_type options : df for data frame, lst(defoult) for list by country and indicator')
   }
-  return(webResults)
+
+  return(df_final)
  }
 
 

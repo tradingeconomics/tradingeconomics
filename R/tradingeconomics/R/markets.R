@@ -20,20 +20,25 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 #'}
 
 getMarketsData <- function(marketsField, outType = NULL){
-  base <- "http://api.tradingeconomics.com/markets"
+  base <- "https://api.tradingeconomics.com/markets"
   fields <- c('commodities', 'currency', 'index', 'bonds')
+
   if (!(marketsField %in% fields)){
     stop('Possible values for marketsField are commodities, currency, index or bonds')
   } else {
     url <- paste(base, marketsField, sep = '/')
   }
+
   url <- paste(url, '?c=', apiKey, sep = '')
   url <- URLencode(url)
+
   if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
     stop('Wrong credentials')
   }
+
   webData <-fromJSON(url)
   webData$Group <- trim(webData$Group)
+
   if (marketsField == 'bonds'){
     webData$Ticker <- rep(NA, length(webData$Symbol))
   }
@@ -43,6 +48,7 @@ getMarketsData <- function(marketsField, outType = NULL){
                            'MonthlyChange' = webData$MonthlyChange,'MonthlyPercentualChange' = webData$MonthlyPercentualChange,'YearlyChange' = webData$YearlyChange,'YearlyPercentualChange' = webData$YearlyPercentualChange,
                            'YTDChange' = webData$YTDChange,'YTDPercentualChange' = webData$YTDPercentualChange,'yesterday' = webData$yesterday,'lastWeek' = webData$lastWeek,'lastMonth' = webData$lastMonth,
                            'lastYear' = webData$lastYear,'startYear' = webData$startYear)
+
   if (is.null(outType)| identical(outType, 'lst')){
     webResults <- split(webResults , f =paste(webResults$Country,webResults$Group))
   } else if (identical(outType, 'df')){

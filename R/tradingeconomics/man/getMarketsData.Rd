@@ -24,6 +24,7 @@ Get markets values from Trading Economics API
 
 Without credentials only sample information will be provided.
 }
+
 \examples{
 \dontrun{ getMarketsData(marketsField = 'index')
 }
@@ -31,4 +32,3 @@ Without credentials only sample information will be provided.
 \seealso{
 \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 }
-

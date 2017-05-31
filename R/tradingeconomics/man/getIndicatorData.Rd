@@ -30,6 +30,7 @@ Return indicators information from Trading Economics API
 All parameters are optional. Without parameters a list of all indicators will be provided.
 Without credentials default information will be provided.
 }
+
 \examples{
 \dontrun{ getIndicatorData(country = 'United States', indicators = 'Imports', output_type = 'df')
 getIndicatorData(country = c('United States', 'Portugal'), indicators = c('Imports','Exports'))
@@ -38,4 +39,3 @@ getIndicatorData(country = c('United States', 'Portugal'), indicators = c('Impor
 \seealso{
 \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
 }
-
