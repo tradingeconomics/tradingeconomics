@@ -572,8 +572,8 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china/2016-02-10/2016-02-11?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
 
 * Get calendar events for a specific country and specific indicator category   
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/inflation rate?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a>     
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/inflation rate/2016-07-15/2016-12-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a>     
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
 
 </span> 
 
