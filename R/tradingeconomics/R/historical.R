@@ -84,9 +84,9 @@ getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL,
 
     url <- paste(url_base, '?c=', apiKey, sep = '')
     url <- URLencode(url)
-
+    print(http_status(GET(url))$message)
     if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-      stop('Wrong credentials')
+      stop('Wrong credentials '+ http_status(GET(url))$message)
     }
 
     webData <-fromJSON(url)

@@ -556,24 +556,24 @@ Please note the sample request is limited in scope to a few countries and indica
 * Get all calendar events    
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a>
 
+* Filter Calendar Events by date    
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-01/2016-12-02?c=guest:guest">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+
 * Get calendar events for specific country    
-  <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States?c=guest:guest">/calendar/country/{countries}</a>    
-  <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States/2016-02-01/2016-02-10?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    
+  <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states?c=guest:guest">/calendar/country/{countries}</a>    
+  <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/2016-02-01/2016-02-10?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    
 
 * Get calendar for a specific indicator category    
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/GDP Growth Rate?c=guest:guest">/calendar/indicator/{indicators}</a>      
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/GDP Growth Rate/2016-03-01/2016-03-03?c=guest:guest">/calendar/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate?c=guest:guest">/calendar/indicator/{indicators}</a>      
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate/2016-03-01/2016-03-03?c=guest:guest">/calendar/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Get all calendar events for multiple countries   
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States,China?c=guest:guest">/calendar/country/{countries}</a>     
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States,China/2016-02-10/2016-02-11?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china?c=guest:guest">/calendar/country/{countries}</a>     
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china/2016-02-10/2016-02-11?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
 
 * Get calendar events for a specific country and specific indicator category   
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States/indicator/Inflation Rate?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a>     
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/United States/indicator/Inflation Rate/2016-07-15/2016-12-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
-
-* Filter Calendar Events by date    
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-03-15/2016-04-15?c=guest:guest">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/inflation rate?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a>     
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/inflation rate/2016-07-15/2016-12-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
 
 </span> 
 
