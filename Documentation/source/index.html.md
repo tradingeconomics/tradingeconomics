@@ -401,7 +401,7 @@ or you can specify a start date and end date
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
 |     **Country**     |                                                           Country name                                                          |
-|     **Category**    | Indicator Name in TE database (when category equals to calendar, there is no historical data for this indicator in TE database) |
+|     **Category**    |                                                      Indicator Category Name                                                    |
 |   **Date Time**     |                                                   Release time and date in UTC                                                  |
 |      **Close**      |                                                           Value                                                 |
 |    **Frequency**    |                                           Frequency of the indicator                                          |
@@ -583,8 +583,8 @@ Please note the sample request is limited in scope to a few countries and indica
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
 |       **Date**      |                                                   Release time and date in UTC                                                  |
 |     **Country**     |                                                           Country name                                                          |
-|     **Category**    | Indicator Name in TE database (when category equals to calendar, there is no historical data for this indicator in TE database) |
-|      **Event**      |                                                Specificevent name in the calendar                                               |
+|     **Category**    |                                                     Indicator Category Name                                                     |
+|      **Event**      |                                                Specific event name in the calendar                                              |
 |    **Reference**    |                                           The period for which released data refers to                                          |
 |      **Source**     |                                                          Source of data                                                         |
 |      **Actual**     |                                                      Latest released value                                                      |
@@ -592,8 +592,8 @@ Please note the sample request is limited in scope to a few countries and indica
 |     **Revised**     |               Value reported in the previous period before revision (if there is no revision field remains empty)               |
 |     **Forecast**    |                                   Average forecast among a representative group of economists                                   |
 |    **TEForecast**   |                                                        TE own projections                                                       |
-|       **URL**       |                                       Link to historical data for event in the TE database                                      |
-|    **Importance**   |                                                           1 to 3 scale                                                          |
+|       **URL**       |                                               Indicator Hyperlink at Trading Economics                                          |
+|    **Importance**   |                                                   1 = low, 2 = medium, 3 = high                                                 |
 |    **LastUpdate**   |                                            Time when new data was inserted or changed                                           |
 
 # Indicators
@@ -734,11 +734,11 @@ Please note the sample request is limited in scope to a few countries and indica
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
 |     **Country**     |                                                           Country name                                                          |
-|     **Category**    | Indicator Name in TE database (when category equals to calendar, there is no historical data for this indicator in TE database) |
+|     **Category**    |                                                     Indicator Category Name                                                     |
 |      **Title**      |                                                 Combination of country/category                                                 |
 |      **Source**     |                                                          Source of data                                                         |
 |    **Frequency**    |                                           Frequency of the indicator                                                            |
-|       **URL**       |                                       Link to historical data for event in the TE database                                      |
+|       **URL**       |                                       Indicator Hyperlink at Trading Economicse                                                 |
 |**HistoricalDataSymbol**|                               Unique symbol used by TradingEconomics                                                         |
 
 
@@ -881,7 +881,6 @@ Please note the sample request is limited in scope to a few countries and indica
 |     **Last**    | Latest value available                                   |
 |    **Group**    | Group of commodity                                       |
 |    **Symbol**   | Unique symbol used by TradingEconomics                   |
-|     **Url**     | Link to historical data for commodity in the TE database |
 | **LastUpdate**  | Time when new data was inserted or changed               |
 
 # Forecast
@@ -1024,7 +1023,7 @@ Please note the sample request is limited in scope to a few countries and indica
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
 |     **Country**     |                                                           Country name                                                          |
-|     **Category**    | Indicator Name in TE database (when category equals to calendar, there is no historical data for this indicator in TE database) |
+|     **Category**    |                                                      Indicator Category Name                                                    |
 |      **Title**      |                                                 Combination of country/category                                                 |
 |    **Frequency**    |                                           Frequency of the indicator                                          |
 |**HistoricalDataSymbol**|                               Unique symbol used by TradingEconomics                                                         |
@@ -1061,9 +1060,9 @@ Please note the sample request is limited in scope to a few countries and indica
 | **Description** | Description of the event                                                                                                        |
 |     **Date**    | Release time and date in UTC                                                                                                    |
 |   **Country**   | Country name                                                                                                                    |
-|   **Category**  | Indicator Name in TE database (when category equals to calendar, there is no historical data for this indicator in TE database) |
+|   **Category**  | Indicator Category Name                                                                                                         |
 |    **Symbol**   | Unique symbol used by TradingEconomics                                                                                          |
-|     **Url**     | Url linking to related indicator                                                                                                |
+|     **Url**     | Indicator Hyperlink at Trading Economics                                                                                        |
 
 # Articles
 
@@ -1106,9 +1105,9 @@ Please note the sample request is limited in scope to a few countries and indica
 | **Description** | Description of the article                                                                                                      |
 |     **Date**    | Release time and date in UTC                                                                                                    |
 |   **Country**   | Country name                                                                                                                    |
-|   **Category**  | Indicator Name in TE database (when category equals to calendar, there is no historical data for this indicator in TE database) |
+|   **Category**  | Indicator Category Name                                                                                                         |
 |    **Symbol**   | Unique symbol used by TradingEconomics                                                                                          |
-|     **Url**     | Url linking to related indicator                                                                                                |
+|     **Url**     | Indicator Hyperlink at Trading Economics                                                                                        |
 
 # Streaming
 
