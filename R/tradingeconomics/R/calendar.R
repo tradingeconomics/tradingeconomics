@@ -75,7 +75,7 @@ getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, en
 
     url <- paste(url, '?c=', apiKey, sep = '')
     url <- URLencode(url)
-
+    #http <- http_status(GET(url))
     if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
       stop('Wrong credentials')
     }
@@ -91,7 +91,6 @@ getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, en
     df_final <- split(df_final , f =  paste(df_final$Country,df_final$Category))
   } else if (identical(outType, 'df')){
     df_final$Date <- strptime(as.character(df_final$Date),'%Y-%m-%dT%H:%M')
-    #df_final = df_final[order(as.Date(df_final$Date)),]
     df_final <- df_final[order(df_final$Date),]
     rownames(df_final) <- 1:nrow(df_final)
   } else {

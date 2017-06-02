@@ -84,9 +84,9 @@ getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL,
 
     url <- paste(url_base, '?c=', apiKey, sep = '')
     url <- URLencode(url)
-    print(http_status(GET(url))$message)
+    http <- http_status(GET(url))
     if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-      stop('Wrong credentials '+ http_status(GET(url))$message)
+      stop(paste('Something went wrong: ', http$message, sep=" "))
     }
 
     webData <-fromJSON(url)
@@ -99,8 +99,14 @@ getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL,
   if (is.null(outType)| identical(outType, 'lst')){
     df_final <- split(df_final , f =  paste(df_final$Country, df_final$Category))
   } else if (identical(outType, 'df')){
-    df_final = df_final[order(as.Date(df_final$Date)),]
-    rownames(df_final) <- 1:nrow(df_final)
+
+    if (length(df_final) == 0){
+      print ("No data provided for selected parameters")
+    } else {
+      df_final = df_final[order(as.Date(df_final$Date)),]
+      rownames(df_final) <- 1:nrow(df_final)
+    }
+
   } else {
     stop('output_type options : df for data frame, lst(defoult) for list by country and indicator')
   }
