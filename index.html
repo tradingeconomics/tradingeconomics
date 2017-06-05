@@ -1320,6 +1320,10 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote>
 <pre class="highlight python"><code>  <span class="n">python</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span>
 </code></pre>
+<blockquote class="lang-specific python">
+<p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/stream/python/app.py">Check here for the complete sample code.</a></p>
+</blockquote>
+
 <blockquote class="lang-specific javascript">
 <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
     Step 1 - Clone repository</p>
@@ -1351,6 +1355,10 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote>
 <pre class="highlight javascript"><code>  <span class="nx">node</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
 </code></pre>
+<blockquote class="lang-specific javascript">
+<p><a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">Check here for the complete sample code.</a></p>
+</blockquote>
+
 <p>The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. </p>
 
 <p><strong>Streaming Endpoint</strong><br>
@@ -1370,15 +1378,10 @@ After establishing the connection, you are able to subscribe to one or more topi
 Our streaming service provides live data on Economic Data, Markets and Commodities.</p>
 
 <p><strong>Example:</strong> (<a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">Get detailed list of available live data </a>)<br>
-<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;calendar&quot;}&#39;
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;EURUSD&quot;}&#39;
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;GBPUSD&quot;}&#39;
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;CL1&quot;}&#39;  //Crude oil
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;GC1&quot;}&#39;  //Gold</code></p>
+<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;calendar&quot;}&#39;</code><br>
+Other channels: currencies, stoccks, commodities, bonds, EURUSD, etc</p>
 
-<p><strong>Sample Code:</strong><br>
-<a target = '_blank' href="https://ieconomics.github.io/open-api/?python#streaming">Python</a><br>
-<a target = '_blank' href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a></p>
+<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a></p>
 
       </div>
       <div class="dark-box">
