@@ -461,7 +461,7 @@ or you can specify a start date and end date<br>
 <li><p>Get Multiple Indicators for Specific Country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population/2015-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
 <li><p>Get Specific Indicator for Multiple Countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
@@ -1377,11 +1377,26 @@ Only Authorized users may establish a persistent real time connection with Tradi
 After establishing the connection, you are able to subscribe to one or more topics. In order to subscribe to a channel, you must send a message to the stream server passing the topic name as the argument.<br>
 Our streaming service provides live data on Economic Data, Markets and Commodities.</p>
 
-<p><strong>Example:</strong> (<a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">Get detailed list of available live data </a>)<br>
-<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;calendar&quot;}&#39;</code><br>
-Other channels: currencies, stoccks, commodities, bonds, EURUSD, etc</p>
+<p><strong>Subscribe to Calendar Events:</strong><br>
+<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;calendar&quot;}&#39;</code> </p>
+
+<p><strong>Subscribe to Markets in Bulk:</strong><br>
+<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;currencies&quot;}&#39;    
+&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;stocks&quot;}&#39;    
+&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;commodities&quot;}&#39;    
+&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;bonds&quot;}&#39;</code> </p>
+
+<p><strong>Subscribe to Individual Markets:</strong><br>
+<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;EURUSD&quot;}&#39;    
+&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;DXY&quot;}&#39;    
+&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;INDU&quot;}&#39;    
+&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;XAUUSD:CUR&quot;}&#39;   
+&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;AAPL:US&quot;}&#39;</code><br>
+Plus any indicator listed at Trading Economics.</p>
 
 <p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a></p>
+
+<p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 
       </div>
       <div class="dark-box">
