@@ -382,7 +382,7 @@ or you can specify a start date and end date
 * Get Multiple Indicators for Specific Country    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population/2015-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Get Specific Indicator for Multiple Countries    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
@@ -1205,9 +1205,23 @@ Only Authorized users may establish a persistent real time connection with Tradi
 After establishing the connection, you are able to subscribe to one or more topics. In order to subscribe to a channel, you must send a message to the stream server passing the topic name as the argument.    
 Our streaming service provides live data on Economic Data, Markets and Commodities.
 
-**Example:** (<a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">Get detailed list of available live data </a>)    
-`'{"topic": "subscribe", "to": "calendar"}'`    
-Other channels: currencies, stoccks, commodities, bonds, EURUSD, etc
+**Subscribe to Calendar Events:**  
+`'{"topic": "subscribe", "to": "calendar"}'` 
+
+**Subscribe to Markets in Bulk:**      
+`'{"topic": "subscribe", "to": "currencies"}'    
+'{"topic": "subscribe", "to": "stocks"}'    
+'{"topic": "subscribe", "to": "commodities"}'    
+'{"topic": "subscribe", "to": "bonds"}'` 
+
+**Subscribe to Individual Markets:**    
+`'{"topic": "subscribe", "to": "EURUSD"}'    
+'{"topic": "subscribe", "to": "DXY"}'    
+'{"topic": "subscribe", "to": "INDU"}'    
+'{"topic": "subscribe", "to": "XAUUSD:CUR"}'   
+'{"topic": "subscribe", "to": "AAPL:US"}' `     
+Plus any indicator listed at Trading Economics.
 
 **Check how to use it with** <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> **or** <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a>
 
+For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a>
