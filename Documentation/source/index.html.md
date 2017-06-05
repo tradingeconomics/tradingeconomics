@@ -1143,6 +1143,9 @@ Please note the sample request is limited in scope to a few countries and indica
 ```python
   python app.py
 ```
+<blockquote class="lang-specific python">
+<p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/stream/python/app.py">Check here for the complete sample code.</a></p>
+</blockquote>
 
 <blockquote class="lang-specific javascript">
 <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
@@ -1180,6 +1183,9 @@ Please note the sample request is limited in scope to a few countries and indica
 ```javascript
   node app.js
 ```
+<blockquote class="lang-specific javascript">
+<p><a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">Check here for the complete sample code.</a></p>
+</blockquote>
 
 The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. 
 
@@ -1200,13 +1206,8 @@ After establishing the connection, you are able to subscribe to one or more topi
 Our streaming service provides live data on Economic Data, Markets and Commodities.
 
 **Example:** (<a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">Get detailed list of available live data </a>)    
-`'{"topic": "subscribe", "to": "calendar"}'
-'{"topic": "subscribe", "to": "EURUSD"}'
-'{"topic": "subscribe", "to": "GBPUSD"}'
-'{"topic": "subscribe", "to": "CL1"}'  //Crude oil
-'{"topic": "subscribe", "to": "GC1"}'  //Gold`
+`'{"topic": "subscribe", "to": "calendar"}'`    
+Other channels: currencies, stoccks, commodities, bonds, EURUSD, etc
 
-**Sample Code:**    
-<a target = '_blank' href="https://ieconomics.github.io/open-api/?python#streaming">Python</a>    
-<a target = '_blank' href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a>
+**Check how to use it with** <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> **or** <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a>
 

@@ -48,9 +48,10 @@ getForecastData <- function(country = NULL, indicator = NULL, outType = NULL){
 
     url <- paste(url, '?c=', apiKey, sep = '')
     url <- URLencode(url)
+    http <- http_status(GET(url))
 
     if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-      stop('Wrong credentials')
+      stop(paste('Something went wrong: ', http$message, sep=" "))
     }
 
     webData <-fromJSON(url)
