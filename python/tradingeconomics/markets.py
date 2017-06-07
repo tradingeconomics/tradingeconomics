@@ -37,7 +37,7 @@ def getMarketsData(marketsField, output_type = None):
     fields =['commodities', 'currency', 'index', 'bonds']
     if marketsField not in fields:
         raise ParametersError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bonds\'.')
-    linkAPI = 'http://api.tradingeconomics.com/markets/' + urllib.quote(marketsField) 
+    linkAPI = 'https://api.tradingeconomics.com/markets/' + urllib.quote(marketsField) 
     try:
         linkAPI = linkAPI + '?c=' + glob.apikey
     except AttributeError:

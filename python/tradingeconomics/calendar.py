@@ -20,20 +20,20 @@ class LoginError(AttributeError):
 
 def paramCheck (country, indicator = None):
     if type(country) is str and indicator == None:
-        linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(country)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(country)
     elif type(country) is not str and indicator == None:
         multiCountry = ",".join(country)
-        linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry)
     elif type(country) is not str and type(indicator) is str:  
         multiCountry = ",".join(country)
-        linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(indicator)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(indicator)
     elif type(country) is str and type(indicator) is not str:
         multiIndicator = ",".join(indicator)
-        linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(multiIndicator) 
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(multiIndicator) 
     else:
         multiCountry = ",".join(country)
         multiIndicator = ",".join(indicator)
-        linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(multiIndicator)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(multiIndicator)
     return linkAPI
         
  
@@ -71,18 +71,16 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     getCalendarData(country = ['United States', 'India'], category = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
     """
     if country == None and category == None:
-        linkAPI = 'http://api.tradingeconomics.com/calendar'
+        linkAPI = 'https://api.tradingeconomics.com/calendar'
     elif country == None and category != None:
         country_all = 'all'
         linkAPI = paramCheck(country_all, category)
     elif type(country) is str and type(category) is str:
-        linkAPI = 'http://api.tradingeconomics.com/calendar/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(category)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(category)
     else:
         linkAPI = paramCheck(country, category)
     if  initDate == None and endDate == None:
         linkAPI = linkAPI
-    elif endDate > str(datetime.now()):
-        raise DateError ('End date could not be greater than actual date')
     else:
         try: 
             fn.validate(initDate)

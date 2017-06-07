@@ -1,7 +1,7 @@
 
 #Trading Economics - Python
 
-The Trading Economics Application Programming Interface (API) provides direct access to our data. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at http://www.tradingeconomics.com/analytics/api.aspx
+The Trading Economics Application Programming Interface (API) provides direct access to our data. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at https://tradingeconomics.com/analytics/api.aspx
 
 
 ## Installation
@@ -22,10 +22,10 @@ pip install tradingeconomics
 
 Install using easy_install 
 ```python
-easy_install https://pypi.python.org/packages/67/ef/fce59528d5f772c8ecf8ae21f119a976c3c7aa740646a4eb4d536b3e4442/tradingeconomics-0.2.4.zip
+easy_install https://pypi.python.org/packages/67/ef/fce59528d5f772c8ecf8ae21f119a976c3c7aa740646a4eb4d536b3e4442/tradingeconomics-0.2.7.zip
 ```
 
-Install directly from GitHub by downloading https://github.com/ieconomics/open-api/archive/v0.2.4.zip and run
+Install directly from GitHub by downloading https://github.com/ieconomics/open-api/archive/v0.2.7.zip and run
 
 ```bash
 python setup.py install

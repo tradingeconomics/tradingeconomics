@@ -78,14 +78,14 @@ def out_type(init_format):
 def paramCheck (country, indicator):
     if type(country) is not str and type(indicator) is str:  
         multiCountry = ",".join(country)
-        linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(indicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(indicator)
     if type(country) is str and type(indicator) is not str:
         multiIndicator = ",".join(indicator)
-        linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(multiIndicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(multiIndicator)
     if type(country) is not str and type(indicator) is not str: 
         multiCountry = ",".join(country)
         multiIndicator = ",".join(indicator)
-        linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(multiIndicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(multiIndicator)
     return linkAPI
     
     
@@ -124,7 +124,7 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     if type(country) is not str or type(indicator) is not str:  
         linkAPI = paramCheck(country, indicator)
     else:
-        linkAPI = 'http://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(indicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(indicator)
     if initDate == None and endDate == None:
         minDate = [(datetime.now() - relativedelta(years=10)).strftime('%Y-%m-%d') ]
         linkAPI = fn.finalLink(linkAPI, minDate) 

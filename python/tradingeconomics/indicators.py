@@ -17,10 +17,10 @@ class LoginError(AttributeError):
         
 def checkCountry(country):       
     if type(country) is str:
-        linkAPI = 'http://api.tradingeconomics.com/country/' + urllib.quote(country)
+        linkAPI = 'https://api.tradingeconomics.com/country/' + urllib.quote(country)
     else:
         multiCountry = ",".join(country)
-        linkAPI = 'http://api.tradingeconomics.com/country/' + urllib.quote(multiCountry)
+        linkAPI = 'https://api.tradingeconomics.com/country/' + urllib.quote(multiCountry)
     return linkAPI
     
     
@@ -73,7 +73,7 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
     getIndicatorData(country = ['United States', 'Portugal'], indicators = ['Imports','Exports'])
     """
     if country == None:
-        linkAPI = 'http://api.tradingeconomics.com/indicators/'
+        linkAPI = 'https://api.tradingeconomics.com/indicators/'
     else:
         linkAPI = checkCountry(country)
     if indicators == None:

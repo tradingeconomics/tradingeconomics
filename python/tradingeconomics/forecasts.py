@@ -16,7 +16,7 @@ class LoginError(AttributeError):
     pass
   
 def checkCountry(country):
-    linkAPI = 'http://api.tradingeconomics.com/forecast/country/'       
+    linkAPI = 'https://api.tradingeconomics.com/forecast/country/'       
     if type(country) is str:
         linkAPI = linkAPI + urllib.quote(country)
     else:
@@ -26,7 +26,7 @@ def checkCountry(country):
     
     
 def checkIndic(indicator):
-    linkAPI = 'http://api.tradingeconomics.com/forecast/indicator/'        
+    linkAPI = 'https://api.tradingeconomics.com/forecast/indicator/'        
     if type(indicator) is str:
         linkAPI = linkAPI + urllib.quote(indicator)
     else:
@@ -36,7 +36,7 @@ def checkIndic(indicator):
 
 
 def getLink(country, indicator):
-    linkAPI = 'http://api.tradingeconomics.com/forecast/country/'
+    linkAPI = 'https://api.tradingeconomics.com/forecast/country/'
     if type(country) is str:
         linkAPI = linkAPI + urllib.quote(country)
     else:
