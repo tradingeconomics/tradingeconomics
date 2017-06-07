@@ -6,6 +6,7 @@ dateCheck <- function(some_date){
 
 #'Return calendar events from Trading Economics API
 #'@import jsonlite
+#'@import httr
 #'@importFrom utils URLencode
 #'
 #'
@@ -66,7 +67,6 @@ getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, en
       dateCheck(initDate)
       dateCheck(endDate)
       if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
-      if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
       if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
       url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
     } else {
