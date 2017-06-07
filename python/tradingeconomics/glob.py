@@ -1,4 +1,4 @@
-import functions as fn
+from . import functions as fn
 
 def login(userkey = None):
     global apikey

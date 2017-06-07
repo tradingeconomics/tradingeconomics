@@ -1,9 +1,19 @@
 import json 
 import urllib 
 import pandas as pd
+import sys
 from datetime import *
-import functions as fn 
-import glob
+from . import functions as fn
+from . import glob
+
+PY3 = sys.version_info[0] == 3
+
+if PY3: # Python 3+
+    from urllib.request import urlopen
+    from urllib.parse import quote
+else: # Python 2.X
+    from urllib import urlopen
+    from urllib import quote
 
 
 class ParametersError(ValueError):
@@ -17,19 +27,19 @@ class LoginError(AttributeError):
         
 def checkCountry(country):       
     if type(country) is str:
-        linkAPI = 'https://api.tradingeconomics.com/country/' + urllib.quote(country)
+        linkAPI = 'https://api.tradingeconomics.com/country/' + quote(country)
     else:
         multiCountry = ",".join(country)
-        linkAPI = 'https://api.tradingeconomics.com/country/' + urllib.quote(multiCountry)
+        linkAPI = 'https://api.tradingeconomics.com/country/' + quote(multiCountry)
     return linkAPI
     
     
 def checkIndic(indicators, linkAPI):       
     if type(indicators) is str:
-        linkAPI = linkAPI + '/' + urllib.quote(indicators)
+        linkAPI = linkAPI + '/' + quote(indicators)
     else:
         multiIndic = ",".join(indicators)
-        linkAPI = linkAPI + '/' + urllib.quote(multiIndic)
+        linkAPI = linkAPI + '/' + quote(multiIndic)
     return linkAPI
 
  
@@ -85,7 +95,7 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
-        webResults = json.load(urllib.urlopen(linkAPI))
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
         raise CredentialsError ('Invalid credentials')   
     if len(webResults) > 0:

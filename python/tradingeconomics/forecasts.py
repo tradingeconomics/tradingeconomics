@@ -2,8 +2,18 @@ import json
 import urllib 
 import pandas as pd
 from datetime import *
-import functions as fn
-import glob
+import sys
+from . import functions as fn
+from . import glob
+
+PY3 = sys.version_info[0] == 3
+
+if PY3: # Python 3+
+    from urllib.request import urlopen
+    from urllib.parse import quote
+else: # Python 2.X
+    from urllib import urlopen
+    from urllib import quote
       
 
 class ParametersError(ValueError):
@@ -18,35 +28,35 @@ class LoginError(AttributeError):
 def checkCountry(country):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'       
     if type(country) is str:
-        linkAPI = linkAPI + urllib.quote(country)
+        linkAPI = linkAPI + quote(country)
     else:
         multiCountry = ",".join(country)
-        linkAPI = linkAPI + urllib.quote(multiCountry)
+        linkAPI = linkAPI + quote(multiCountry)
     return linkAPI
     
     
 def checkIndic(indicator):
     linkAPI = 'https://api.tradingeconomics.com/forecast/indicator/'        
     if type(indicator) is str:
-        linkAPI = linkAPI + urllib.quote(indicator)
+        linkAPI = linkAPI + quote(indicator)
     else:
         multiIndic = ",".join(indicator)
-        linkAPI = linkAPI  + urllib.quote(multiIndic)
+        linkAPI = linkAPI  + quote(multiIndic)
     return linkAPI
 
 
 def getLink(country, indicator):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'
     if type(country) is str:
-        linkAPI = linkAPI + urllib.quote(country)
+        linkAPI = linkAPI + quote(country)
     else:
         multiCountry = ",".join(country)
-        linkAPI = linkAPI + urllib.quote(multiCountry) 
+        linkAPI = linkAPI + quote(multiCountry) 
     if type(indicator) is str:
-        linkAPI = linkAPI + '/indicator/' + urllib.quote(indicator)
+        linkAPI = linkAPI + '/indicator/' + quote(indicator)
     else:
         multiIndic = ",".join(indicator)
-        linkAPI = linkAPI + '/indicator/' + urllib.quote(multiIndic) 
+        linkAPI = linkAPI + '/indicator/' + quote(multiIndic) 
     return linkAPI
 
     
@@ -91,7 +101,7 @@ def getForecastData(country = None, indicator = None, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
-        webResults = json.load(urllib.urlopen(linkAPI))
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
         raise CredentialsError ('Invalid credentials')
     if len(webResults) > 0:
@@ -112,3 +122,4 @@ def getForecastData(country = None, indicator = None, output_type = None):
     else:
         raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results')
     return output
+

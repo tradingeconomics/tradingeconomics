@@ -1,9 +1,19 @@
 import json 
 import urllib 
 import pandas as pd
+import sys
 from datetime import *
-import functions as fn
-import glob
+from . import functions as fn
+from . import glob
+
+PY3 = sys.version_info[0] == 3
+
+if PY3: # Python 3+
+    from urllib.request import urlopen
+    from urllib.parse import quote
+else: # Python 2.X
+    from urllib import urlopen
+    from urllib import quote
 
 
 class ParametersError(ValueError):
@@ -20,20 +30,20 @@ class LoginError(AttributeError):
 
 def paramCheck (country, indicator = None):
     if type(country) is str and indicator == None:
-        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(country)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(country)
     elif type(country) is not str and indicator == None:
         multiCountry = ",".join(country)
-        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(multiCountry)
     elif type(country) is not str and type(indicator) is str:  
         multiCountry = ",".join(country)
-        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(indicator)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(multiCountry) + '/indicator/' + quote(indicator)
     elif type(country) is str and type(indicator) is not str:
         multiIndicator = ",".join(indicator)
-        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(multiIndicator) 
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(country) + '/indicator/' + quote(multiIndicator) 
     else:
         multiCountry = ",".join(country)
         multiIndicator = ",".join(indicator)
-        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(multiIndicator)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(multiCountry) + '/indicator/' + quote(multiIndicator)
     return linkAPI
         
  
@@ -76,11 +86,13 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
         country_all = 'all'
         linkAPI = paramCheck(country_all, category)
     elif type(country) is str and type(category) is str:
-        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(category)
+        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(country) + '/indicator/' + quote(category)
     else:
         linkAPI = paramCheck(country, category)
     if  initDate == None and endDate == None:
         linkAPI = linkAPI
+    elif endDate > str(datetime.now()):
+        raise DateError ('Now testing pip upgrade')
     else:
         try: 
             fn.validate(initDate)
@@ -101,7 +113,7 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
-        webResults = json.load(urllib.urlopen(linkAPI))
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
         raise CredentialsError ('Invalid credentials')
     if len(webResults) > 0:
@@ -122,3 +134,4 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     else:
         raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
     return output
+
