@@ -250,10 +250,6 @@ getHistoricalData(country = c("united states","china"), indicator = c("gdp","pop
                   outType = "df")
 ```
 
-
-getHistoricalData(country = c("united states","china"), indicator = c("gdp","population"), initDate = "2006-01-01",
-                endDate = "2016-12-31", outType = "df")
-
 <blockquote class="lang-specific python">
 <p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
