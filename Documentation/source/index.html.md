@@ -258,7 +258,7 @@ getHistoricalData(country = c("united states","china"), indicator = c("gdp","pop
 <p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
 ```python
-In [2]: te.getHistoricalData(country = 'United Kingdom', indicator = 'GDP', endDate= '2015-01-01')
+In [2]: te.getHistoricalData(country = 'united kingdom', indicator = 'gdp', endDate= '2015-01-01')
 
 Out[2]: 
                   0
@@ -281,7 +281,7 @@ Out[2]:
 For several countries and indicators</p>
 </blockquote> 
 ```python
-te.getHistoricalData(country = ['United States', 'Germany'], indicator = ['Exports','Imports', 'GDP'], 
+te.getHistoricalData(country = ['united states', 'china'], indicator = ['exports','imports', 'gdp'], 
                      initDate= '1990-01-01', endDate= '2015-01-01')
 ```
 
@@ -290,7 +290,7 @@ te.getHistoricalData(country = ['United States', 'Germany'], indicator = ['Expor
 Or type in any empty cell:</p>
 </blockquote>
 ```shell
-=TEHistorical( "Andorra", "GDP Per Capita", "2010-01-01", "2017-10-29", "Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate", B2)
+=TEHistorical( "andorra", "gdp per capita", "2010-01-01", "2017-10-29", "Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate", B2)
 ```
 
 ```javascript
@@ -456,7 +456,7 @@ getCalendarData(country = c("united states","china"), indicator = c("gdp growth 
 <p>To get calendar data for a specific country, in data frame format, run:</p>
 </blockquote>    
 ```python
-In [1]: te.getCalendarData(country = 'Italy', output_type = 'df')
+In [1]: te.getCalendarData(country = 'italy', output_type = 'df')
 Out[1]: 
                   Date Country         Category               Event Reference  \
 0  2016-11-18T10:00:00   Italy  Current Account     Current Account       Sep   
@@ -477,7 +477,7 @@ Out[1]:
 <p>For several countries and indicators, in data frame format, run:</p>
 </blockquote>  
 ```python
-te.getCalendarData(country = ['United States', 'China'], category = ['Imports','Exports'],
+te.getCalendarData(country = ['united states', 'china'], category = ['imports','exports'],
                    initDate = '2017-06-07', endDate = '2017-12-31',
                    output_type = 'df')
 ```
@@ -486,7 +486,7 @@ te.getCalendarData(country = ['United States', 'China'], category = ['Imports','
 Or type in any empty cell:</p>
 </blockquote>
 ```shell
-=TECalendar( "Germany", "Services PMI", "2017-03-24", "2017-06-24", "Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate", B2)
+=TECalendar( "germany", "services pmi", "2017-03-24", "2017-06-24", "Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate", B2)
 ```
 
 ```javascript
@@ -629,7 +629,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <p>For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt </p>
 </blockquote>   
 ```r
-getIndicatorData(country = 'italy', indicator = 'Bankruptcies', outType = 'df')
+getIndicatorData(country = 'italy', indicator = 'bankruptcies', outType = 'df')
 
     Country     Category              Title LatestValue     LatestValueDate Source      Unit                 URL CategoryGroup Frequency HistoricalDataSymbol PreviousValue   PreviousValueDate
   1   Italy Bankruptcies Italy Bankruptcies        3600 2016-03-31T00:00:00 Cerved Companies /italy/bankruptcies      Business Quarterly             ITALYBAN          4100 2015-12-31T00:00:00
@@ -645,19 +645,19 @@ getIndicatorData(country = c("united states","china"), indicator = c("gdp","infl
 <p>To get List of Indicators by Country: </p>
 </blockquote>
 ```python
-te.getIndicatorData(country = ['United States', 'China'])
+te.getIndicatorData(country = ['united states', 'china'])
 ```
 <blockquote class="lang-specific python">
 <p>To get Country/Indicator pair: </p>
 </blockquote>
 ```python
-te.getIndicatorData(country = 'United States', indicators = 'GDP')
+te.getIndicatorData(country = 'united states', indicators = 'gdp')
 ```
 <blockquote class="lang-specific python">
 <p>To get Several Countries and Indicators: </p>
 </blockquote>
 ```python
-te.getIndicatorData(country = ['United States', 'China'], indicators = ['GDP', 'Population'])
+te.getIndicatorData(country = ['united states', 'china'], indicators = ['gdp', 'population'])
 ```
 
 <blockquote class="lang-specific shell">
@@ -665,7 +665,7 @@ te.getIndicatorData(country = ['United States', 'China'], indicators = ['GDP', '
 Or type in any empty cell:</p>
 </blockquote>
 ```shell
-=TEIndicators( "United States", "Bankruptcies", "Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate", B2)
+=TEIndicators( "united states", "bankruptcies", "Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate", B2)
 ```
 ```javascript
 var http = require('https');
@@ -934,14 +934,14 @@ Please note the sample request is limited in scope to a few countries and indica
 <p>Next code will provide a list with forecasted values of all indicators of United States </p>
 </blockquote> 
 ```r
-getForecastData(country ='United States')
+getForecastData(country ='united states')
 ``` 
 
 <blockquote class="lang-specific r">
 <p>To get data in data frame format type:</p>
 </blockquote> 
 ```r
-getForecastData(country ='United States', outType = 'df')
+getForecastData(country ='united states', outType = 'df')
 ```  
 <blockquote class="lang-specific r">
 <p>To get data in data frame format type for several countries and indicators:</p>
@@ -955,13 +955,13 @@ getForecastData(country =c("united states","china"), indicator = c("gdp","inflat
 <p>Forecasted values for specific a country, in this case United States. </p>
 </blockquote>
 ```python
-te.getForecastData(country = 'United States', output_type = 'df')
+te.getForecastData(country = 'united states', output_type = 'df')
 ```
 <blockquote class="lang-specific python">
 <p>Forecasted values for several countries and indicators. </p>
 </blockquote>
 ```python
-te.getForecastData(country = ['United States', 'China'], indicator = ['GDP', 'Population'], output_type = 'df')
+te.getForecastData(country = ['united states', 'china'], indicator = ['gdp', 'population'], output_type = 'df')
 ```
 
 <blockquote class="lang-specific shell">
@@ -969,7 +969,7 @@ te.getForecastData(country = ['United States', 'China'], indicator = ['GDP', 'Po
 Or type in any empty cell:</p>
 </blockquote>
 ```shell
-=TEForecasts( "United States", "GDP", "Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date", B2)
+=TEForecasts( "united states", "gdp", "Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date", B2)
 ```
 
 ```javascript
