@@ -245,9 +245,9 @@ getHistoricalData(country = 'united kingdom', indicator = 'imports')
 <p>To get historical data for several countries and indicators:</p>
 </blockquote>  
 ```r
-getHistoricalData(country = c("united states","china"), indicator = c("gdp","population"),
-                  initDate = "2006-01-01", endDate = "2016-12-31",
-                  outType = "df")
+getHistoricalData(country = c('united states','china'), indicator = c('gdp','population'),
+                  initDate = '2006-01-01', endDate = '2016-12-31',
+                  outType = 'df')
 ```
 
 <blockquote class="lang-specific python">
@@ -443,9 +443,9 @@ getCalendarData(country = 'united kingdom', outType = 'df')
 <p>Shown next is how to get a data frame with information about calendar events for several countries and indicators</p>
 </blockquote>       
 ```r
-getCalendarData(country = c("united states","china"), indicator = c("gdp growth rate","inflation rate"),
-                initDate = "2006-01-01", endDate = "2016-12-31",
-                outType = "df")
+getCalendarData(country = c('united states','china'), indicator = c('gdp growth rate','inflation rate'),
+                initDate = '2006-01-01', endDate = '2016-12-31',
+                outType = 'df')
 ```
 
 <blockquote class="lang-specific python">
@@ -631,10 +631,10 @@ getIndicatorData(country = 'italy', indicator = 'bankruptcies', outType = 'df')
   1   Italy Bankruptcies Italy Bankruptcies        3600 2016-03-31T00:00:00 Cerved Companies /italy/bankruptcies      Business Quarterly             ITALYBAN          4100 2015-12-31T00:00:00
 ```
 <blockquote class="lang-specific r">
-<p>To get Several Countries and Indicators </p>
+<p>To get several countries and indicators </p>
 </blockquote>   
 ```r
-getIndicatorData(country = c("united states","china"), indicator = c("gdp","inflation rate"), outType = 'df')
+getIndicatorData(country = c('united states','china'), indicator = c('gdp','inflation rate'), outType = 'df')
 ```
 
 <blockquote class="lang-specific python">
@@ -943,7 +943,7 @@ getForecastData(country ='united states', outType = 'df')
 <p>To get data in data frame format type for several countries and indicators:</p>
 </blockquote> 
 ```r
-getForecastData(country =c("united states","china"), indicator = c("gdp","inflation rate"), outType = 'df')
+getForecastData(country =c('united states','china'), indicator = c('gdp','inflation rate'), outType = 'df')
 ```  
 
 
