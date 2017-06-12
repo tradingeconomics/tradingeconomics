@@ -1,11 +1,21 @@
-import json 
+import json
+import itertools
 import urllib 
 import pandas as pd
+import sys
 from datetime import *
-import itertools
-import functions as fn  
-import glob
 from dateutil.relativedelta import relativedelta
+from . import functions as fn
+from . import glob
+
+PY3 = sys.version_info[0] == 3
+
+if PY3: # Python 3+
+    from urllib.request import urlopen
+    from urllib.parse import quote
+else: # Python 2.X
+    from urllib import urlopen
+    from urllib import quote
 
 class ParametersError(ValueError):
     pass
@@ -78,14 +88,14 @@ def out_type(init_format):
 def paramCheck (country, indicator):
     if type(country) is not str and type(indicator) is str:  
         multiCountry = ",".join(country)
-        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(indicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(multiCountry) + '/indicator/' + quote(indicator)
     if type(country) is str and type(indicator) is not str:
         multiIndicator = ",".join(indicator)
-        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(multiIndicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(country) + '/indicator/' + quote(multiIndicator)
     if type(country) is not str and type(indicator) is not str: 
         multiCountry = ",".join(country)
         multiIndicator = ",".join(indicator)
-        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + urllib.quote(multiCountry) + '/indicator/' + urllib.quote(multiIndicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(multiCountry) + '/indicator/' + quote(multiIndicator)
     return linkAPI
     
     
@@ -124,7 +134,7 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     if type(country) is not str or type(indicator) is not str:  
         linkAPI = paramCheck(country, indicator)
     else:
-        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + urllib.quote(country) + '/indicator/' + urllib.quote(indicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(country) + '/indicator/' + quote(indicator)
     if initDate == None and endDate == None:
         minDate = [(datetime.now() - relativedelta(years=10)).strftime('%Y-%m-%d') ]
         linkAPI = fn.finalLink(linkAPI, minDate) 
@@ -169,9 +179,9 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
-        code = urllib.urlopen(linkAPI)
+        code = urlopen(linkAPI).read().decode('utf-8')
         code = code.getcode() 
-        webResults = json.load(urllib.urlopen(linkAPI))
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
         print "Error code = " + str(code)
         raise CredentialsError ('Invalid credentials')
@@ -193,3 +203,4 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
         raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
     return output
     
+

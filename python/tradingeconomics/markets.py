@@ -1,8 +1,18 @@
 import json 
 import urllib 
 import pandas as pd
+import sys
 from datetime import *
-import glob
+from . import glob
+
+PY3 = sys.version_info[0] == 3
+
+if PY3: # Python 3+
+    from urllib.request import urlopen
+    from urllib.parse import quote
+else: # Python 2.X
+    from urllib import urlopen
+    from urllib import quote
 
 
 class ParametersError(ValueError):
@@ -37,15 +47,15 @@ def getMarketsData(marketsField, output_type = None):
     fields =['commodities', 'currency', 'index', 'bonds']
     if marketsField not in fields:
         raise ParametersError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bonds\'.')
-    linkAPI = 'https://api.tradingeconomics.com/markets/' + urllib.quote(marketsField) 
+    linkAPI = 'https://api.tradingeconomics.com/markets/' + quote(marketsField) 
     try:
         linkAPI = linkAPI + '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urllib.urlopen(linkAPI)
+        code = urlopen(linkAPI).read().decode('utf-8')
         code = code.getcode() 
-        webResults = json.load(urllib.urlopen(linkAPI))
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
         print "Error code = " + str(code)
         raise CredentialsError ('Invalid credentials')   
@@ -70,3 +80,4 @@ def getMarketsData(marketsField, output_type = None):
         raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
     
+
