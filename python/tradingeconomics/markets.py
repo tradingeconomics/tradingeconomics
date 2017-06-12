@@ -53,12 +53,11 @@ def getMarketsData(marketsField, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI).read().decode('utf-8')
+        code = urlopen(linkAPI)
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        print "Error code = " + str(code)
-        raise CredentialsError ('Invalid credentials')   
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
         if marketsField == 'bonds':
             names = ['symbol','name', 'country', 'date', 'last', 'group','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear']

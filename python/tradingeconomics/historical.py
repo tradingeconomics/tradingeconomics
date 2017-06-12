@@ -179,12 +179,11 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
-        code = urlopen(linkAPI).read().decode('utf-8')
+        code = urlopen(linkAPI)
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        print "Error code = " + str(code)
-        raise CredentialsError ('Invalid credentials')
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code))
     if len(webResults) > 0:
         date = [d['DateTime'] for d in webResults]        
         value = [d[u'Value'] for d in webResults]
