@@ -91,8 +91,11 @@ def getForecastData(country = None, indicator = None, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
+        code = urllib.urlopen(linkAPI)
+        code = code.getcode()
         webResults = json.load(urllib.urlopen(linkAPI))
     except ValueError:
+        print "Error code = " + str(code)
         raise CredentialsError ('Invalid credentials')
     if len(webResults) > 0:
         names = ['country', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
