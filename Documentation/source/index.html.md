@@ -104,19 +104,19 @@ login()
 <p>To start using the Trading Economics Python package, open the python command line, and type:</p>
 </blockquote>
 ```python
-  import tradingeconomics as te
+import tradingeconomics as te
 ```
 <blockquote class="lang-specific python">
 <p>If you already have an APIkey then type:</p>
 </blockquote>
 ```python
-  te.login('Your_Key:Your_Secret')
+te.login('Your_Key:Your_Secret')
 ```
 <blockquote class="lang-specific python">
 <p>If you don’t have an APIkey and just want to try a demo of our API:</p>
 </blockquote>
 ```python
-  te.login()
+te.login()
 ```
 
 Before proceeding select your language tab on the right. 
@@ -238,15 +238,23 @@ Without APIkeys all requests will return the default sample data.
 <blockquote class="lang-specific r">
 <p>For example, to get historical data of imports in United Kingdom type:</p>
 </blockquote>  
-  ```r
-    getHistoricalData(country = 'united kingdom', indicator = 'imports')
-  ```
+```r
+getHistoricalData(country = 'united kingdom', indicator = 'imports')
+```
+<blockquote class="lang-specific r">
+<p>To get historical data for several countries and indicators:</p>
+</blockquote>  
+```r
+getHistoricalData(country = c('united states','china'), indicator = c('gdp','population'),
+                  initDate = '2006-01-01', endDate = '2016-12-31',
+                  outType = 'df')
+```
 
 <blockquote class="lang-specific python">
 <p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
 ```python
-In [2]: te.getHistoricalData(country = 'United Kingdom', indicator = 'GDP', endDate= '2015-01-01')
+In [2]: te.getHistoricalData(country = 'united kingdom', indicator = 'gdp', endDate= '2015-01-01')
 
 Out[2]: 
                   0
@@ -269,8 +277,8 @@ Out[2]:
 For several countries and indicators</p>
 </blockquote> 
 ```python
-te.getHistoricalData(country = ['United States', 'Germany'], indicator = ['Exports','Imports', 'GDP'], 
-                      initDate= '1990-01-01', endDate= '2015-01-01')
+te.getHistoricalData(country = ['united states', 'china'], indicator = ['exports','imports', 'gdp'], 
+                     initDate= '1990-01-01', endDate= '2015-01-01')
 ```
 
 <blockquote class="lang-specific shell">
@@ -278,7 +286,7 @@ te.getHistoricalData(country = ['United States', 'Germany'], indicator = ['Expor
 Or type in any empty cell:</p>
 </blockquote>
 ```shell
-=TEHistorical( "Andorra", "GDP Per Capita", "2010-01-01", "2017-10-29", "Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate", B2)
+=TEHistorical( "andorra", "gdp per capita", "2010-01-01", "2017-10-29", "Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate", B2)
 ```
 
 ```javascript
@@ -373,26 +381,26 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="methods">
 
 * Get Specific Country and Indicator  
-<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
+<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
 You can specify only a start date for your historical data    
-<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>   
+<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>   
 or you can specify a start date and end date    
-<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+<a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Get Multiple Indicators for Specific Country    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States/indicator/GDP,Population/2015-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population/2015-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Get Specific Indicator for Multiple Countries    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Get Multiple Indicators for Multiple Countries    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP,Population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP,Population/2015-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/United States,China/indicator/GDP,Population/2016-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population/2015-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population/2016-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 </span> 
 
@@ -431,12 +439,20 @@ getCalendarData(country = 'united kingdom', outType = 'df')
 12 2016-11-29T09:30:00 United Kingdom        Consumer Credit                   BoE Consumer Credit       Oct                     Bank of England          £1405M             £ 1800M
 13 2016-11-29T09:30:00 United Kingdom     Mortgage Approvals                    Mortgage Approvals       Oct                     Bank of England          62.93K              61.23K
 ```
+<blockquote class="lang-specific r">
+<p>Shown next is how to get a data frame with information about calendar events for several countries and indicators</p>
+</blockquote>       
+```r
+getCalendarData(country = c('united states','china'), indicator = c('gdp growth rate','inflation rate'),
+                initDate = '2006-01-01', endDate = '2016-12-31',
+                outType = 'df')
+```
 
 <blockquote class="lang-specific python">
 <p>To get calendar data for a specific country, in data frame format, run:</p>
 </blockquote>    
 ```python
-In [1]: te.getCalendarData(country = 'Italy', output_type = 'df')
+In [1]: te.getCalendarData(country = 'italy', output_type = 'df')
 Out[1]: 
                   Date Country         Category               Event Reference  \
 0  2016-11-18T10:00:00   Italy  Current Account     Current Account       Sep   
@@ -453,13 +469,20 @@ Out[1]:
 1       0.7%  
 2       0.1%  
 ``` 
-
+<blockquote class="lang-specific python">
+<p>For several countries and indicators, in data frame format, run:</p>
+</blockquote>  
+```python
+te.getCalendarData(country = ['united states', 'china'], category = ['imports','exports'],
+                   initDate = '2017-06-07', endDate = '2017-12-31',
+                   output_type = 'df')
+```
 <blockquote class="lang-specific shell">
 <p>Click Calendar button on TE ribbon and then follow the instructions in the dialog box.    
 Or type in any empty cell:</p>
 </blockquote>
 ```shell
-=TECalendar( "Germany", "Services PMI", "2017-03-24", "2017-06-24", "Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate", B2)
+=TECalendar( "germany", "services pmi", "2017-03-24", "2017-06-24", "Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate", B2)
 ```
 
 ```javascript
@@ -602,17 +625,35 @@ Please note the sample request is limited in scope to a few countries and indica
 <p>For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt </p>
 </blockquote>   
 ```r
-getIndicatorData(country = 'italy', indicator = 'Bankruptcies', outType = 'df')
+getIndicatorData(country = 'italy', indicator = 'bankruptcies', outType = 'df')
 
     Country     Category              Title LatestValue     LatestValueDate Source      Unit                 URL CategoryGroup Frequency HistoricalDataSymbol PreviousValue   PreviousValueDate
   1   Italy Bankruptcies Italy Bankruptcies        3600 2016-03-31T00:00:00 Cerved Companies /italy/bankruptcies      Business Quarterly             ITALYBAN          4100 2015-12-31T00:00:00
 ```
+<blockquote class="lang-specific r">
+<p>To get several countries and indicators </p>
+</blockquote>   
+```r
+getIndicatorData(country = c('united states','china'), indicator = c('gdp','inflation rate'), outType = 'df')
+```
 
+<blockquote class="lang-specific python">
+<p>To get List of Indicators by Country: </p>
+</blockquote>
+```python
+te.getIndicatorData(country = ['united states', 'china'])
+```
 <blockquote class="lang-specific python">
 <p>To get Country/Indicator pair: </p>
 </blockquote>
 ```python
-te.getIndicatorData(country = 'United Kingdom', indicators = 'Imports')
+te.getIndicatorData(country = 'united states', indicators = 'gdp')
+```
+<blockquote class="lang-specific python">
+<p>To get Several Countries and Indicators: </p>
+</blockquote>
+```python
+te.getIndicatorData(country = ['united states', 'china'], indicators = ['gdp', 'population'])
 ```
 
 <blockquote class="lang-specific shell">
@@ -620,7 +661,7 @@ te.getIndicatorData(country = 'United Kingdom', indicators = 'Imports')
 Or type in any empty cell:</p>
 </blockquote>
 ```shell
-=TEIndicators( "United States", "Bankruptcies", "Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate", B2)
+=TEIndicators( "united states", "bankruptcies", "Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate", B2)
 ```
 ```javascript
 var http = require('https');
@@ -717,15 +758,15 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
 
 * List of Indicators by Country    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/United States?c=guest:guest">/country/{countries}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/United States,China?c=guest:guest">/country/{countries}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{countries}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china?c=guest:guest">/country/{countries}</a>
 
 * Country/Indicator pair    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/United States/GDP?c=guest:guest">/country/{countries}/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/United States/GDP,Population?c=guest:guest">/country/{countries}/{indicators}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp?c=guest:guest">/country/{countries}/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
 
 * Several Countries and Indicators    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/United States,China/GDP,Population?c=guest:guest">/country/{countries}/{indicators}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
 
 </span> 
 
@@ -747,9 +788,9 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific r">
 <p>To get information about commodities in data frame format type:</p>
 </blockquote>   
-  ```r
-    getMarketsData(marketsField = 'commodities', outType = 'df')
-  ``` 
+```r
+getMarketsData(marketsField = 'commodities', outType = 'df')
+``` 
 
 <blockquote class="lang-specific python">
 <p>To get stock market index data:</p>
@@ -888,22 +929,35 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific r">
 <p>Next code will provide a list with forecasted values of all indicators of United States </p>
 </blockquote> 
-  ```r
-     getForecastData(country ='United States')
-  ``` 
+```r
+getForecastData(country ='united states')
+``` 
 
 <blockquote class="lang-specific r">
 <p>To get data in data frame format type:</p>
 </blockquote> 
-  ```r
-    getForecastData(country ='United States', outType = 'df')
-  ```  
+```r
+getForecastData(country ='united states', outType = 'df')
+```  
+<blockquote class="lang-specific r">
+<p>To get data in data frame format type for several countries and indicators:</p>
+</blockquote> 
+```r
+getForecastData(country =c('united states','china'), indicator = c('gdp','inflation rate'), outType = 'df')
+```  
+
 
 <blockquote class="lang-specific python">
 <p>Forecasted values for specific a country, in this case United States. </p>
 </blockquote>
 ```python
-te.getForecastData(country = 'United States', output_type = 'df')
+te.getForecastData(country = 'united states', output_type = 'df')
+```
+<blockquote class="lang-specific python">
+<p>Forecasted values for several countries and indicators. </p>
+</blockquote>
+```python
+te.getForecastData(country = ['united states', 'china'], indicator = ['gdp', 'population'], output_type = 'df')
 ```
 
 <blockquote class="lang-specific shell">
@@ -911,7 +965,7 @@ te.getForecastData(country = 'United States', output_type = 'df')
 Or type in any empty cell:</p>
 </blockquote>
 ```shell
-=TEForecasts( "United States", "GDP", "Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date", B2)
+=TEForecasts( "united states", "gdp", "Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date", B2)
 ```
 
 ```javascript
@@ -1005,16 +1059,16 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="methods">
 
 * Specific country  
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/United States?c=guest:guest">/forecast/country/{countries}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/United States,China?c=guest:guest">/forecast/country/{countries}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states?c=guest:guest">/forecast/country/{countries}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states,china?c=guest:guest">/forecast/country/{countries}</a>
 
 * Specific indicator    
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/GDP?c=guest:guest">/forecast/indicator/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/GDP,Population?c=guest:guest">/forecast/indicator/{indicators}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp?c=guest:guest">/forecast/indicator/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp,population?c=guest:guest">/forecast/indicator/{indicators}</a>
 
 * Specific country and indicator  
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/United States/indicator/GDP?c=guest:guest">/forecast/country/{countries}/indicator/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/United States,China/indicator/GDP,Population?c=guest:guest">/forecast/country/{countries}/indicator/{indicators}</a>  
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states/indicator/gdp?c=guest:guest">/forecast/country/{countries}/indicator/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states,china/indicator/gdp,population?c=guest:guest">/forecast/country/{countries}/indicator/{indicators}</a>  
 
 </span> 
 
@@ -1041,13 +1095,13 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/news</a>
 
 * Get news of data by country   
-<a target = '_blank' href="https://api.tradingeconomics.com/news/country/United%20States?c=guest:guest">/news/country/{countries}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/{countries}</a>
 
 * Get news of data by indicator    
-<a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/Inflation%20Rate?c=guest:guest">/news/indicator/{indicators}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/{indicators}</a>
 
 * Get news of data by country and indicator    
-<a target = '_blank' href="https://api.tradingeconomics.com/news/country/United%20States/Inflation%20Rate?c=guest:guest">/news/country/{countries}/{indicators}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/{countries}/{indicators}</a>
 
 </span> 
 
@@ -1080,16 +1134,16 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&skip=10&lim=10">/articles?c=guest:guest&skip=X&lim=Y</a>
 
 * Latest articles by country    
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/United%20States?c=guest:guest">/articles/country/{countries}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states?c=guest:guest">/articles/country/{countries}</a>
 
 * Articles by country within DateTime interval    
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/United%20States/from/2016-12-01/2016-12-31?c=guest:guest">/articles/country/{countries}/from/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/from/2016-12-01/2016-12-31?c=guest:guest">/articles/country/{countries}/from/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    
 
 * Latest articles by indicator   
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/indicator/Interest%20Rate?c=guest:guest">/articles/indicator/{indicators}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/indicator/interest%20rate?c=guest:guest">/articles/indicator/{indicators}</a>
 
 * Latest articles by country and indicator    
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/United%20States/Interest%20Rate?c=guest:guest">/articles/country/{countries}/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/interest%20rate?c=guest:guest">/articles/country/{countries}/{indicators}</a>    
 
 * Article by ID    
 <a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a>
@@ -1116,32 +1170,32 @@ Please note the sample request is limited in scope to a few countries and indica
     Step 1 - Clone repository</p>
 </blockquote>
 ```python
-  git clone https://github.com/ieconomics/open-api.git
+git clone https://github.com/ieconomics/open-api.git
 ```
 <blockquote class="lang-specific python">
 <p>Step 2</p>
 </blockquote>
 ```python
-  cd open-api/stream/python
+cd open-api/stream/python
 ```
 <blockquote class="lang-specific python">
 <p>Step 3 - Install dependencies</p>
 </blockquote>
 ```python
-  pip install websocket-client
+pip install websocket-client
 ```
 <blockquote class="lang-specific python">
 <p>Step 4 - In app.py file, set-up your client key/secret</p>
 </blockquote>
 ```python
-  client_key = "API_CLIENT_KEY"
-  client_secret = "API_CLIENT_KEY"
+client_key = "API_CLIENT_KEY"
+client_secret = "API_CLIENT_KEY"
 ```
 <blockquote class="lang-specific python">
 <p>Step 5 - Run it</p>
 </blockquote>
 ```python
-  python app.py
+python app.py
 ```
 <blockquote class="lang-specific python">
 <p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/stream/python/app.py">Check here for the complete sample code.</a></p>
@@ -1152,36 +1206,36 @@ Please note the sample request is limited in scope to a few countries and indica
     Step 1 - Clone repository</p>
 </blockquote>
 ```javascript
-  git clone https://github.com/ieconomics/open-api.git
+git clone https://github.com/ieconomics/open-api.git
 ```
 <blockquote class="lang-specific javascript">
 <p>Step 2</p>
 </blockquote>
 ```javascript
-  cd open-api/stream/nodejs
+cd open-api/stream/nodejs
 ```
 <blockquote class="lang-specific javascript">
 <p>Step 3 - Install dependencies</p>
 </blockquote>
 ```javascript
-  npm install
+npm install
 ```
 <blockquote class="lang-specific javascript">
 <p>Step 4 - In app.js file, set-up your client key/secret</p>
 </blockquote>
 ```javascript
-  Client = new te_client({
-    url: 'ws://stream.tradingeconomics.com/',
-    key: 'API_CLIENT_KEY', // <--
-    secret: 'API_CLIENT_SECRET' // <--
-    //reconnect: true
-  });
+Client = new te_client({
+  url: 'ws://stream.tradingeconomics.com/',
+  key: 'API_CLIENT_KEY', // <--
+  secret: 'API_CLIENT_SECRET' // <--
+  //reconnect: true
+});
 ```
 <blockquote class="lang-specific javascript">
 <p>Step 5 - Run it</p>
 </blockquote>
 ```javascript
-  node app.js
+node app.js
 ```
 <blockquote class="lang-specific javascript">
 <p><a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">Check here for the complete sample code.</a></p>

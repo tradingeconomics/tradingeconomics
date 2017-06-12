@@ -111,8 +111,12 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
+        code = urlopen(linkAPI).read().decode('utf-8')
+        code = code.getcode()
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+
     except ValueError:
+        print "Error code = " + str(code)
         raise CredentialsError ('Invalid credentials')
     if len(webResults) > 0:
         names = ['date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast']
