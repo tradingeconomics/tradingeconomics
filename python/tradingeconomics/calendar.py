@@ -91,8 +91,6 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
         linkAPI = paramCheck(country, category)
     if  initDate == None and endDate == None:
         linkAPI = linkAPI
-    elif endDate > str(datetime.now()):
-        raise DateError ('Now testing pip upgrade')
     else:
         try: 
             fn.validate(initDate)
