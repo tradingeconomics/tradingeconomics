@@ -1262,6 +1262,22 @@ Our streaming service provides live data on Economic Data, Markets and Commoditi
 **Subscribe to Calendar Events:**  
 `'{"topic": "subscribe", "to": "calendar"}'` 
 
+**Response fields for the calendar subscription:**
+
+|                     |                                                                                                                                 |
+|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|       **date**      |                                                   Release time and date in UTC                                                  |
+|     **country**     |                                                           Country name                                                          |
+|     **category**    |                                                     Indicator Category Name                                                     |
+|      **event**      |                                                Specific event name in the calendar                                              |
+|    **reference**    |                                           The period for which released data refers to                                          |
+|      **source**     |                                                          Source of data                                                         |
+|      **actual**     |                                                      Latest released value                                                      |
+|     **previous**    |                           Value for the previous period after the revision (if revision is applicable)                          |
+|     **forecast**    |                                   Average forecast among a representative group of economists                                   |
+|    **teforecast**   |                                                        TE own projections                                                       |
+|    **importance**   |                                                   1 = low, 2 = medium, 3 = high                                                 |
+
 **Subscribe to Markets in Bulk:**      
 `'{"topic": "subscribe", "to": "currencies"}'    
 '{"topic": "subscribe", "to": "stocks"}'    
@@ -1275,6 +1291,20 @@ Our streaming service provides live data on Economic Data, Markets and Commoditi
 '{"topic": "subscribe", "to": "XAUUSD:CUR"}'   
 '{"topic": "subscribe", "to": "AAPL:US"}' `     
 Plus any indicator listed at Trading Economics.
+
+**Response fields for the markets subscription:**
+
+|                 |                                                                                                                                 |
+|:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|      **s**      | symbol                                                                                                                          |
+|     **bid**     | latest market bid price                                                                                                         |
+|     **ask**     | latest maket ask price                                                                                                          |
+|    **price**    | latest market price                                                                                                             |
+|     **dt**      | timestamp of last market price (epoch)                                                                                          |
+|    **state**    | market state (open/close)                                                                                                       |
+|     **type**    | type of market (currency/stocks/commodity)                                                                                      |
+|    **dhigh**    | daily high                                                                                                                      |
+|    **dlow**     | daily low                                                                                                                       |
 
 **Check how to use it with** <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> **or** <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a>
 
