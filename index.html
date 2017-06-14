@@ -1426,6 +1426,60 @@ Our streaming service provides live data on Economic Data, Markets and Commoditi
 <p><strong>Subscribe to Calendar Events:</strong><br>
 <code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;calendar&quot;}&#39;</code> </p>
 
+<p><strong>Response fields for the calendar subscription:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>category</strong></td>
+<td style="text-align: left">Indicator Category Name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>event</strong></td>
+<td style="text-align: left">Specific event name in the calendar</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>reference</strong></td>
+<td style="text-align: left">The period for which released data refers to</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>source</strong></td>
+<td style="text-align: left">Source of data</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>actual</strong></td>
+<td style="text-align: left">Latest released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>previous</strong></td>
+<td style="text-align: left">Value for the previous period after the revision (if revision is applicable)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>forecast</strong></td>
+<td style="text-align: left">Average forecast among a representative group of economists</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>teforecast</strong></td>
+<td style="text-align: left">TE own projections</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>importance</strong></td>
+<td style="text-align: left">1 = low, 2 = medium, 3 = high</td>
+</tr>
+</tbody></table>
+
 <p><strong>Subscribe to Markets in Bulk:</strong><br>
 <code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;currencies&quot;}&#39;    
 &#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;stocks&quot;}&#39;    
@@ -1439,6 +1493,52 @@ Our streaming service provides live data on Economic Data, Markets and Commoditi
 &#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;XAUUSD:CUR&quot;}&#39;   
 &#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;AAPL:US&quot;}&#39;</code><br>
 Plus any indicator listed at Trading Economics.</p>
+
+<p><strong>Response fields for the markets subscription:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>s</strong></td>
+<td style="text-align: left">symbol</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>bid</strong></td>
+<td style="text-align: left">latest market bid price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>ask</strong></td>
+<td style="text-align: left">latest maket ask price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>price</strong></td>
+<td style="text-align: left">latest market price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>dt</strong></td>
+<td style="text-align: left">timestamp of last market price (epoch)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>state</strong></td>
+<td style="text-align: left">market state (open/close)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>type</strong></td>
+<td style="text-align: left">type of market (currency/stocks/commodity)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>dhigh</strong></td>
+<td style="text-align: left">daily high</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>dlow</strong></td>
+<td style="text-align: left">daily low</td>
+</tr>
+</tbody></table>
 
 <p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a></p>
 
