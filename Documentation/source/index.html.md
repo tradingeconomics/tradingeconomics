@@ -1280,7 +1280,7 @@ Our streaming service provides live data on Economic Data, Markets and Commoditi
 
 **Subscribe to Markets in Bulk:**      
 `'{"topic": "subscribe", "to": "currencies"}'    
-'{"topic": "subscribe", "to": "stocks"}'    
+'{"topic": "subscribe", "to": "indexes"}'    
 '{"topic": "subscribe", "to": "commodities"}'    
 '{"topic": "subscribe", "to": "bonds"}'` 
 
@@ -1302,7 +1302,7 @@ Plus any indicator listed at Trading Economics.
 |    **price**    | latest market price                                                                                                             |
 |     **dt**      | timestamp of last market price (epoch)                                                                                          |
 |    **state**    | market state (open/close)                                                                                                       |
-|     **type**    | type of market (currency/stocks/commodity)                                                                                      |
+|     **type**    | type of market (currency/indexes/commodity)                                                                                      |
 |    **dhigh**    | daily high                                                                                                                      |
 |    **dlow**     | daily low                                                                                                                       |
 
