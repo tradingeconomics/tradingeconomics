@@ -48,6 +48,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.allIndicatorsBox = new System.Windows.Forms.CheckBox();
             this.allCountriesBox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
@@ -91,7 +92,7 @@
             this.indicatorsLstBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.indicatorsLstBx.FormattingEnabled = true;
             this.indicatorsLstBx.ItemHeight = 16;
-            this.indicatorsLstBx.Location = new System.Drawing.Point(7, 276);
+            this.indicatorsLstBx.Location = new System.Drawing.Point(7, 264);
             this.indicatorsLstBx.Name = "indicatorsLstBx";
             this.indicatorsLstBx.ScrollAlwaysVisible = true;
             this.indicatorsLstBx.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
@@ -105,7 +106,7 @@
             this.selectedIndicatorsLstBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.selectedIndicatorsLstBx.FormattingEnabled = true;
             this.selectedIndicatorsLstBx.ItemHeight = 16;
-            this.selectedIndicatorsLstBx.Location = new System.Drawing.Point(336, 276);
+            this.selectedIndicatorsLstBx.Location = new System.Drawing.Point(336, 264);
             this.selectedIndicatorsLstBx.Name = "selectedIndicatorsLstBx";
             this.selectedIndicatorsLstBx.ScrollAlwaysVisible = true;
             this.selectedIndicatorsLstBx.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
@@ -138,7 +139,7 @@
             // btnIndctrAdd
             // 
             this.btnIndctrAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIndctrAdd.Location = new System.Drawing.Point(229, 317);
+            this.btnIndctrAdd.Location = new System.Drawing.Point(229, 305);
             this.btnIndctrAdd.Name = "btnIndctrAdd";
             this.btnIndctrAdd.Size = new System.Drawing.Size(99, 31);
             this.btnIndctrAdd.TabIndex = 6;
@@ -149,7 +150,7 @@
             // btnIndctrRemove
             // 
             this.btnIndctrRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIndctrRemove.Location = new System.Drawing.Point(229, 355);
+            this.btnIndctrRemove.Location = new System.Drawing.Point(229, 343);
             this.btnIndctrRemove.Name = "btnIndctrRemove";
             this.btnIndctrRemove.Size = new System.Drawing.Size(99, 31);
             this.btnIndctrRemove.TabIndex = 7;
@@ -161,7 +162,7 @@
             // 
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(355, 488);
+            this.btnOK.Location = new System.Drawing.Point(355, 496);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(99, 31);
             this.btnOK.TabIndex = 8;
@@ -173,7 +174,7 @@
             // 
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(469, 488);
+            this.btnCancel.Location = new System.Drawing.Point(469, 496);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(99, 31);
             this.btnCancel.TabIndex = 9;
@@ -205,7 +206,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(56, 236);
+            this.label3.Location = new System.Drawing.Point(56, 224);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 16);
             this.label3.TabIndex = 12;
@@ -215,7 +216,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(374, 236);
+            this.label4.Location = new System.Drawing.Point(374, 224);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 16);
             this.label4.TabIndex = 13;
@@ -227,7 +228,7 @@
             this.cntryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cntryTextBox.Location = new System.Drawing.Point(7, 25);
             this.cntryTextBox.Name = "cntryTextBox";
-            this.cntryTextBox.Size = new System.Drawing.Size(214, 16);
+            this.cntryTextBox.Size = new System.Drawing.Size(214, 15);
             this.cntryTextBox.TabIndex = 14;
             this.cntryTextBox.TextChanged += new System.EventHandler(this.cntryTextBox_TextChanged);
             // 
@@ -235,9 +236,9 @@
             // 
             this.indctrTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.indctrTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.indctrTextBox.Location = new System.Drawing.Point(7, 257);
+            this.indctrTextBox.Location = new System.Drawing.Point(7, 245);
             this.indctrTextBox.Name = "indctrTextBox";
-            this.indctrTextBox.Size = new System.Drawing.Size(214, 16);
+            this.indctrTextBox.Size = new System.Drawing.Size(214, 15);
             this.indctrTextBox.TabIndex = 15;
             this.indctrTextBox.TextChanged += new System.EventHandler(this.indctrTextBox_TextChanged);
             // 
@@ -267,12 +268,13 @@
             this.tabControl1.Location = new System.Drawing.Point(14, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(564, 469);
+            this.tabControl1.Size = new System.Drawing.Size(564, 476);
             this.tabControl1.TabIndex = 18;
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.allIndicatorsBox);
             this.tabPage1.Controls.Add(this.allCountriesBox);
             this.tabPage1.Controls.Add(this.indicatorsLstBx);
             this.tabPage1.Controls.Add(this.countryLstBx);
@@ -291,9 +293,20 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 28);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(556, 437);
+            this.tabPage1.Size = new System.Drawing.Size(556, 444);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Options";
+            // 
+            // allIndicatorsBox
+            // 
+            this.allIndicatorsBox.AutoSize = true;
+            this.allIndicatorsBox.Location = new System.Drawing.Point(7, 414);
+            this.allIndicatorsBox.Name = "allIndicatorsBox";
+            this.allIndicatorsBox.Size = new System.Drawing.Size(103, 20);
+            this.allIndicatorsBox.TabIndex = 17;
+            this.allIndicatorsBox.Text = "All indicators";
+            this.allIndicatorsBox.UseVisualStyleBackColor = true;
+            this.allIndicatorsBox.CheckedChanged += new System.EventHandler(this.allIndicatorsBox_CheckedChanged);
             // 
             // allCountriesBox
             // 
@@ -316,7 +329,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(556, 437);
+            this.tabPage2.Size = new System.Drawing.Size(556, 450);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Advanced";
             // 
@@ -343,7 +356,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 543);
+            this.ClientSize = new System.Drawing.Size(588, 539);
             this.ControlBox = false;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCancel);
@@ -388,5 +401,6 @@
         private System.Windows.Forms.CheckedListBox columnsListBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox allCountriesBox;
+        private System.Windows.Forms.CheckBox allIndicatorsBox;
     }
 }

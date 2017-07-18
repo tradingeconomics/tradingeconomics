@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net;
+using System.Windows.Forms;
 
 namespace TE
 {
@@ -21,8 +22,23 @@ namespace TE
             {
                 using (WebClient wc = new WebClient())
                 {
+                    string json;
                     wc.Encoding = System.Text.Encoding.UTF8;
-                    var json = wc.DownloadString(_url);                    
+                    helperClass.log.Info("requestData - getJSON, _url = " + _url);
+                    try
+                    {
+                        json = wc.DownloadString(_url);
+                    }
+                    catch (WebException ex)
+                    {
+                        
+                        var statusCode = ((HttpWebResponse)ex.Response).StatusCode;
+                        MessageBox.Show("An error occurred, status code: " + statusCode);
+                        helperClass.log.Info(ex.Message);
+                        helperClass.log.Trace(ex.StackTrace);                        
+                        throw;                        
+                    }
+                                        
                     jsonData = JArray.Parse(json);
                 }
             }

@@ -85,15 +85,16 @@ namespace TE
         private void btnCntryAdd_Click(object sender, EventArgs e)
         {
             helperClass.log.Info("Adding country(s)");
-           
-                foreach (string item in countryLstBx.SelectedItems)
-                {
-                        if (!selectedCountryLstBx.Items.Contains(item))
-                            selectedCountryLstBx.Items.Add(item);
-                }                
 
-                AutoCompleteList = indics_list();
+            foreach (string item in countryLstBx.SelectedItems)
+            {
+                if (!selectedCountryLstBx.Items.Contains(item))
+                    selectedCountryLstBx.Items.Add(item);
             }
+            cntryTextBox.Focus();
+            countryLstBx.ClearSelected();
+            AutoCompleteList = indics_list();
+        }
            
 
         private void btnCntryRemove_Click(object sender, EventArgs e)
@@ -102,7 +103,8 @@ namespace TE
             for (int i = selectedCountryLstBx.SelectedIndices.Count - 1; i >= 0; i--)
             {
                 selectedCountryLstBx.Items.RemoveAt(selectedCountryLstBx.SelectedIndices[i]);
-            }            
+            }
+            selectedCountryLstBx.Focus();
         }
 
         private void btnIndctrAdd_Click(object sender, EventArgs e)
@@ -117,6 +119,8 @@ namespace TE
                     if (!selectedIndicatorLstBx.Items.Contains(item))
                         selectedIndicatorLstBx.Items.Add(item);
             }
+            indctrTextBox.Focus();
+            indicatorLstBx.ClearSelected();
         }
 
         private void btnIndctrRemove_Click(object sender, EventArgs e)
@@ -126,6 +130,7 @@ namespace TE
             {
                 selectedIndicatorLstBx.Items.RemoveAt(selectedIndicatorLstBx.SelectedIndices[i]);
             }
+            selectedIndicatorLstBx.Focus();
         }
 
         string date1;

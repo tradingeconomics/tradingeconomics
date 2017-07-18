@@ -18,8 +18,6 @@ namespace TE
 
         public getDictionary(string cntry, string indctr, string key, string iniDate, string clsDate)//string url)
         {
-            //Debug.WriteLine("getDictionary cntry: " + cntry);
-            //Debug.WriteLine("getDictionary indctr: " + indctr);
 
             //_url = url;
             _cntry = cntry;
@@ -29,7 +27,8 @@ namespace TE
             _clsDate = clsDate;
         }
 
-        public Dictionary<string, Dictionary<string, string>> getDic()
+        //public Dictionary<string, Dictionary<string, string>> getDic()
+        public Dictionary<DateTime, Dictionary<string, string>> getDic()
         {
             helperClass.log.Info("getDictionary");
             //var jsnData = new requestData(_url);
@@ -44,9 +43,7 @@ namespace TE
                 {
                     chunk += cntrStaff[j][i] + ",";
                 }
-                //Debug.WriteLine("Cntry to URL: " + chunk);
-                 string url = helperClass.getTsUrl(chunk, _indctr, _key, _iniDate, _clsDate);
-                //Debug.WriteLine(url);
+                string url = helperClass.getTsUrl(chunk, _indctr, _key, _iniDate, _clsDate);
                 var jsnData = new requestData(url);
                 foreach (var k in jsnData.getJSON())
                 {
@@ -54,25 +51,23 @@ namespace TE
                 }
             }
 
-            //for (int r = 0; r < jsData.Count; r++)
-            //{
-            //    Debug.WriteLine(jsData[r]);
-            //}
-
-            Dictionary<string, Dictionary<string, string>> myDictDict = new Dictionary<string, Dictionary<string, string>>();
-            List<string> column_keys = new List<string>();
+            //Dictionary<string, Dictionary<string, string>> myDictDict = new Dictionary<string, Dictionary<string, string>>();
+            Dictionary<DateTime, Dictionary<string, string>> myDictDict = new Dictionary<DateTime, Dictionary<string, string>>();
+            //List<string> column_keys = new List<string>();
             for (int r = 0; r < jsData.Count; r++)
             {
                 Dictionary<string, string> dict = new Dictionary<string, string>();                
-                dict.Add(jsData[r]["Country"].ToString() + " " + jsData[r]["Category"].ToString(), jsData[r]["Value"].ToString());           
-
-                if (myDictDict.ContainsKey(jsData[r]["DateTime"].ToString()))
+                dict.Add(jsData[r]["Country"].ToString() + "-" + jsData[r]["Category"].ToString(), jsData[r]["Value"].ToString());
+                //if (myDictDict.ContainsKey(jsData[r]["DateTime"].ToString()))
+                if (myDictDict.ContainsKey(Convert.ToDateTime(jsData[r]["DateTime"])))
                 {
-                    myDictDict[jsData[r]["DateTime"].ToString()].Add(jsData[r]["Country"].ToString() + " " + jsData[r]["Category"].ToString(), jsData[r]["Value"].ToString());              
+                    //myDictDict[jsData[r]["DateTime"].ToString()].Add(jsData[r]["Country"].ToString() + "-" + jsData[r]["Category"].ToString(), jsData[r]["Value"].ToString());              
+                    myDictDict[Convert.ToDateTime(jsData[r]["DateTime"])].Add(jsData[r]["Country"].ToString() + "-" + jsData[r]["Category"].ToString(), jsData[r]["Value"].ToString());
                 }
                 else
                 {
-                    myDictDict.Add(jsData[r]["DateTime"].ToString(), dict);
+                    //myDictDict.Add(jsData[r]["DateTime"].ToString(), dict);
+                    myDictDict.Add(Convert.ToDateTime(jsData[r]["DateTime"]), dict);
                 }
             }
             return myDictDict;
@@ -94,9 +89,7 @@ namespace TE
                 {
                     chunk += cntrStaff[j][i] + ",";
                 }
-                //Debug.WriteLine("Cntry to URL: " + chunk);
                 string url = helperClass.getTsUrl(chunk, _indctr, _key, _iniDate, _clsDate);
-                //Debug.WriteLine(url);
                 var jsnData = new requestData(url);
                 foreach (var k in jsnData.getJSON())
                 {
@@ -106,12 +99,12 @@ namespace TE
 
             for (int r = 0; r < jsData.Count; r++)
             {
-                if (!column_keys.Contains(jsData[r]["Country"].ToString() + " " + jsData[r]["Category"].ToString(), StringComparer.OrdinalIgnoreCase))
+                if (!column_keys.Contains(jsData[r]["Country"].ToString() + "-" + jsData[r]["Category"].ToString(), StringComparer.OrdinalIgnoreCase))
                 {
-                    column_keys.Add(jsData[r]["Country"].ToString() + " " + jsData[r]["Category"].ToString());
+                    column_keys.Add(jsData[r]["Country"].ToString() + "-" + jsData[r]["Category"].ToString());
                 }
             }
-            return column_keys;
+            return column_keys.OrderBy(a => a.Split('.', '-')[1]).ToList();
         }
     }
 }

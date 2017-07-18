@@ -86,6 +86,7 @@ namespace TE
             if (selectedCountryLstBx.Items.Count == 1)
             {
                 string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
+                helperClass.log.Info("historicalFrm - btnCntryAdd_Click, url2 = " + url2);
                 using (WebClient wc = new WebClient())
                 {
                     var json = wc.DownloadString(url2);
@@ -124,6 +125,8 @@ namespace TE
                     if ( indicatorLstBx.Items[i].ToString() == "Commodity") indicatorLstBx.Items.RemoveAt(i);
                 }
             }
+            cntryTextBox.Focus();
+            countryLstBx.ClearSelected();
             AutoCompleteList = indics_list();
         }
 
@@ -137,6 +140,7 @@ namespace TE
             if (selectedCountryLstBx.Items.Count == 1)
             {
                 string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
+                helperClass.log.Info("historicalFrm - btnCntryRemove_Click, url2 = " + url2);
                 using (WebClient wc = new WebClient())
                 {
                     var json = wc.DownloadString(url2);
@@ -170,6 +174,7 @@ namespace TE
                         indicatorLstBx.Items.Insert(i, helperClass.category[i]);
                 }
             }
+            selectedCountryLstBx.Focus();
         }
 
 
@@ -184,6 +189,8 @@ namespace TE
                     if (!selectedIndicatorLstBx.Items.Contains(item))
                         selectedIndicatorLstBx.Items.Add(item);
             }
+            indctrTextBox.Focus();
+            indicatorLstBx.ClearSelected();
         }
 
         private void btnIndctrRemove_Click(object sender, EventArgs e)
@@ -192,6 +199,7 @@ namespace TE
             {
                 selectedIndicatorLstBx.Items.RemoveAt(selectedIndicatorLstBx.SelectedIndices[i]);
             }
+            selectedIndicatorLstBx.Focus();
         }
 
         string date1;
@@ -252,6 +260,7 @@ namespace TE
                 {
                     columns.Add(item.ToString());
                 }
+                
                 string newColumns = String.Join(",", columns);
                 
                 if (StartDateCheckBox.Checked)
@@ -275,6 +284,11 @@ namespace TE
                 }
                 if (columnsListBox.CheckedItems.Count > 0)
                 {
+                    if (columns.Count == 1)
+                    {
+                        MessageBox.Show("Please select at least two columns");
+                        return;
+                    }
                     helperClass.formula = string.Format("=TEHistorical( \"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\", {5})",
                       selectedIsoCntry,
                       selectedIndic,

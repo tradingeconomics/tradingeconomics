@@ -753,7 +753,7 @@ namespace TE
                 }
 
                 Dictionary<string, formulaColumns> myNewDict = helperClass.getNewDict();
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "His", startDate, endDate);
+                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "Hist", startDate, endDate);
 
                 if (jsData.Count == 0)
                 {
@@ -862,10 +862,12 @@ namespace TE
                 try
                 {
                     var dict = new getDictionary(cntry, indctr, key, startDate, endDate);
-                    Dictionary<string, Dictionary<string, string>> dicts = dict.getDic();
+                    //Dictionary<string, Dictionary<string, string>> dicts = dict.getDic();
+                    Dictionary<DateTime, Dictionary<string, string>> dicts = dict.getDic();
                     var columns = dict.getColumns();
                     string[] clms = columns.ToArray();
                     helperClass.log.Info("Starting function data_to_excel");
+                    
                     var retriever = new RetrieveAndWriteTSData(clms, dicts, key, dataStartCell, newFormula, formulaCell);
                     var thready = new Thread(retriever.fetchData);
                     thready.Priority = ThreadPriority.Normal;
@@ -906,10 +908,11 @@ namespace TE
                 try
                 {
                     var dict = new getDictionary(cntry, indctr, key, startDate, endDate);
-                    Dictionary<string, Dictionary<string, string>> dicts = dict.getDic();
+                    //Dictionary<string, Dictionary<string, string>> dicts = dict.getDic();
+                    Dictionary<DateTime, Dictionary<string, string>> dicts = dict.getDic();
                     var columns = dict.getColumns();
                     string[] clms = columns.ToArray();
-                    helperClass.log.Info("Starting function data_to_excel");
+                    helperClass.log.Info("Starting function data_to_excel");                    
                     var retriever = new RetrieveAndWriteTSData(clms, dicts, key, dataStartCell, newFormula, formulaCell);
                     var thready = new Thread(retriever.fetchData);
                     thready.Priority = ThreadPriority.Normal;
@@ -981,11 +984,13 @@ namespace TE
             private string[] names;
             private string key;
             private Range dataStartCell;
-            private Dictionary<string, Dictionary<string, string>> dict;
+            //private Dictionary<string, Dictionary<string, string>> dict;
+            private Dictionary<DateTime, Dictionary<string, string>> dict;
             private string newFormula;
             private Range formulaCell;
 
-            public RetrieveAndWriteTSData(string[] names, Dictionary<string, Dictionary<string, string>> dict, string key, Range dataStartCell, string nFrmla, Range formulaCell)
+            //public RetrieveAndWriteTSData(string[] names, Dictionary<string, Dictionary<string, string>> dict, string key, Range dataStartCell, string nFrmla, Range formulaCell)
+            public RetrieveAndWriteTSData(string[] names, Dictionary<DateTime, Dictionary<string, string>> dict, string key, Range dataStartCell, string nFrmla, Range formulaCell)
             {
                 this.names = names;
                 this.dict = dict;
@@ -1004,7 +1009,7 @@ namespace TE
                 {
                     do
                     {
-                        printTSData testprint = new printTSData(names, dict, key, dataStartCell, newFormula, formulaCell);
+                        printTSData testprint = new printTSData(names, dict, key, dataStartCell, newFormula, formulaCell);                           
                         testprint.PopulateData();
                     } while (!string.IsNullOrWhiteSpace(nextCursorId));
                 }

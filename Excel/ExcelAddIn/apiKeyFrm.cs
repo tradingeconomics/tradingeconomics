@@ -47,6 +47,7 @@ namespace TE
                 {
                     helperClass.log.Info("Checking credentials...");
                     string url = helperClass.host + "markets/bonds?client=" + apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
+                    helperClass.log.Info("apiKeyFrm - btnOK_Click, url = " + url);
                     var json = wc.DownloadString(url);
                     JArray o = JArray.Parse(json);
                 }
@@ -55,9 +56,9 @@ namespace TE
                 Properties.Settings.Default.Save();                
                 Properties.Settings.Default.Reload();
             }
-            catch (System.Net.WebException)
+            catch (System.Net.WebException ex)
             {
-                MessageBox.Show("Wrong API Key");
+                MessageBox.Show("Wrong API Key" );
                 validApiKey = false;                               
                 return;
             }
@@ -72,7 +73,7 @@ namespace TE
 
         private void btnGetKey_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.tradingeconomics.com/analytics/");// ("http://sso.tradingeconomics.com/?returnurl=analytics.tradingeconomics.com/api/");
+            System.Diagnostics.Process.Start("https://sso.tradingeconomics.com/?returnurl=analytics.tradingeconomics.com/api/");
             helperClass.log.Info("On API key form, GetKey button is pressed");
         }
     }

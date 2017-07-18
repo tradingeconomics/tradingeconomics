@@ -14,6 +14,7 @@ namespace TE
         {
             InitializeComponent();
             cntryTextBox.Select();
+            allIndicatorsBox.Enabled = false;
             activeCellPositionBox.Text = helperClass.RangeAddress();
             for (int i = 0; i < helperClass.cntry.Length; i++)
             {
@@ -80,6 +81,7 @@ namespace TE
 
         private void btnCntryAdd_Click(object sender, EventArgs e)
         {
+            allIndicatorsBox.Enabled = true;
             foreach (string item in countryLstBx.SelectedItems)
             {
                     if (!selectedCountryLstBx.Items.Contains(item))
@@ -91,6 +93,7 @@ namespace TE
                 string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
                 try
                 {
+                    helperClass.log.Info("indicatorsFrm - btnCntryAdd_Click, url2 = " + url2);
                     using (WebClient wc = new WebClient())
                     {
                         var json = wc.DownloadString(url2);
@@ -139,6 +142,7 @@ namespace TE
                 string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
                 try
                 {
+                    helperClass.log.Info("indicatorsFrm - btnCntryRemove_Click, url2 = " + url2);
                     using (WebClient wc = new WebClient())
                     {
                         var json = wc.DownloadString(url2);
@@ -170,6 +174,7 @@ namespace TE
                         indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
                 }
             }
+            selectedCountryLstBx.Focus();
         }
 
         private void btnIndctrAdd_Click(object sender, EventArgs e)
@@ -189,6 +194,7 @@ namespace TE
             {
                 selectedIndicatorsLstBx.Items.RemoveAt(selectedIndicatorsLstBx.SelectedIndices[i]);
             }
+            selectedIndicatorsLstBx.Focus();
         }
 
         
@@ -471,6 +477,7 @@ namespace TE
             if (allCountriesBox.Checked == true)
             {
                 countryLstBx.Enabled = false;
+                allIndicatorsBox.Enabled = false;
                 selectedCountryLstBx.Items.Clear();
                 selectedCountryLstBx.Items.Add("All");
                 indicatorsLstBx.Items.Clear();
@@ -485,10 +492,27 @@ namespace TE
             else
             {
                 countryLstBx.Enabled = true;
+                allIndicatorsBox.Enabled = true;
                 selectedCountryLstBx.Items.Clear();
             }
         }
-        
+
+        private void allIndicatorsBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (allIndicatorsBox.Checked == true)
+            {
+                indicatorsLstBx.Enabled = false;
+                allCountriesBox.Enabled = false;
+                selectedIndicatorsLstBx.Items.Clear();
+                selectedIndicatorsLstBx.Items.Add("All");
+            }
+            else
+            {
+                indicatorsLstBx.Enabled = true;
+                allCountriesBox.Enabled = true;
+                selectedIndicatorsLstBx.Items.Clear();
+            }
+        }
     }
  }
 

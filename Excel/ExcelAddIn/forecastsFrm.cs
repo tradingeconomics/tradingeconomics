@@ -91,6 +91,7 @@ namespace TE
                 string url2 = helperClass.host + "forecast/country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
                 try
                 {
+                    helperClass.log.Info("forecastsFrm - btnCntryAdd_Click, url2 = " + url2);
                     using (WebClient wc = new WebClient())
                     {
                         var json = wc.DownloadString(url2);
@@ -150,6 +151,7 @@ namespace TE
                 string url2 = helperClass.host + "forecast/country/" + selectedCountryLstBx.Items[0].ToString() + "?client=" + apiKeyFrm.apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
                 try
                 {
+                    helperClass.log.Info("forecastsFrm - btnCntryRemove_Click, url2 = " + url2);
                     using (WebClient wc = new WebClient())
                     {
                         var json = wc.DownloadString(url2);
@@ -191,6 +193,7 @@ namespace TE
                         indicatorLstBx.Items.Insert(i, helperClass.category[i]);
                 }
             }
+            selectedCountryLstBx.Focus();
         }
 
         private void btnIndctrAdd_Click(object sender, EventArgs e)
@@ -210,6 +213,7 @@ namespace TE
             {
                 selectedIndicatorLstBx.Items.RemoveAt(selectedIndicatorLstBx.SelectedIndices[i]);
             }
+            selectedIndicatorLstBx.Focus();
         }
 
 
@@ -455,6 +459,48 @@ namespace TE
                 indicatorLstBx.Location = point;
                 this.indicatorLstBx.BringToFront();
                 this.indicatorLstBx.Show();
+            }
+        }
+
+        private void allIndicatorsChckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (allIndicatorsChckBox.Checked == true)
+            {                
+                indicatorLstBx.Enabled = false;
+                allCountriesChckBox.Enabled = false;
+                selectedIndicatorLstBx.Items.Clear();
+                selectedIndicatorLstBx.Items.Add("All");
+            }
+            else
+            {
+                indicatorLstBx.Enabled = true;
+                allCountriesChckBox.Enabled = true;
+                selectedIndicatorLstBx.Items.Clear();
+            }
+        }
+
+        private void allCountriesChckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (allCountriesChckBox.Checked == true)
+            {
+                countryLstBx.Enabled = false;
+                allIndicatorsChckBox.Enabled = false;
+                selectedCountryLstBx.Items.Clear();
+                selectedCountryLstBx.Items.Add("All");
+                /*indicatorLstBx.Items.Clear();
+                for (int i = 0; i < helperClass.category.Length; i++)
+                {
+                    if (!indicatorLstBx.Items.Contains(helperClass.category[i]))
+                        indicatorLstBx.Items.Insert(i, helperClass.category[i]);
+                }*/
+                indctrTextBox.Focus();
+                AutoCompleteList = indics_list();
+            }
+            else
+            {
+                countryLstBx.Enabled = true;
+                allIndicatorsChckBox.Enabled = true;
+                selectedCountryLstBx.Items.Clear();
             }
         }
     }

@@ -18,7 +18,7 @@ namespace TE
     class helperClass
     {
 
-        public static string host = "http://api.tradingeconomics.com/";
+        public static string host = "https://api.tradingeconomics.com/";
 
         public static Logger log = LogManager.GetCurrentClassLogger();
 
@@ -1579,7 +1579,7 @@ namespace TE
             {
                 url = host + "forecast/indicator/" + indctr + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
             }
-            else if (indctr.Length == 0)
+            else if (indctr.Length == 0 || indctr == "All")
             {
                 url = host + "forecast/country/" + cntry + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
             }
@@ -1671,7 +1671,7 @@ namespace TE
             {
                 url = host + "indicators?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
             }
-            else if (cntry.Length != 0 & indctr.Length == 0)
+            else if ((cntry.Length != 0 & indctr.Length == 0) || indctr == "All")
             {
                 url = host + "country/" + cntry + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
             }
@@ -1744,7 +1744,6 @@ namespace TE
 
         public static JArray SOmeName(string cntry, string indctr, string key, string caller, string iniDate = "", string clsDate = "")
         {
-            //Debug.WriteLine("SomeName cntry: " + cntry);
             JArray jsData = new JArray();
             string[][] cntrStaff = helperClass.getStaff(cntry);
             for (int j = 0; j < cntrStaff.Length; j++)
@@ -1772,7 +1771,6 @@ namespace TE
                         break;
                 }
                 
-                //Debug.WriteLine(url);
                 var jsnData = new requestData(url);
                 foreach (var k in jsnData.getJSON())
                 {

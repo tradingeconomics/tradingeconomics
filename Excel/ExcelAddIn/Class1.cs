@@ -169,10 +169,10 @@ namespace TE
             Stream _imageStream;
             
             _assembly = Assembly.GetExecutingAssembly();
-            _imageStream = _assembly.GetManifestResourceStream("testClassLib.red2.png");
+            _imageStream = _assembly.GetManifestResourceStream("TE.red2.png");
             Bitmap red = new Bitmap(_imageStream);
 
-            _imageStream = _assembly.GetManifestResourceStream("testClassLib.green2.png");
+            _imageStream = _assembly.GetManifestResourceStream("TE.green2.png");
             Bitmap green = new Bitmap(_imageStream);
 
             return ((apiKeyFrm.validApiKey == true) ? new Bitmap(red) : new Bitmap(green));
@@ -208,19 +208,19 @@ namespace TE
         public void OnCallButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On Call button is pressed");
-            System.Diagnostics.Process.Start("http://www.tradingeconomics.com/contact.aspx?subject=excel");
+            System.Diagnostics.Process.Start("http://tradingeconomics.com/contact.aspx?subject=excel");
         }
 
         public void OnHelpButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On Help button is pressed");
-            System.Diagnostics.Process.Start("https://github.com/ieconomics/excel-addin/wiki");
+            System.Diagnostics.Process.Start("http://github.com/ieconomics/excel-addin/wiki");
         }
 
         public void OnAboutButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On About button is pressed");
-            MessageBox.Show("The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. Youre Trading Economics Excel Add In Version: 1.2.2", "About");
+            MessageBox.Show("The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. Youre Trading Economics Excel Add In Version: 1.2.4", "About");
         }
     }
 }

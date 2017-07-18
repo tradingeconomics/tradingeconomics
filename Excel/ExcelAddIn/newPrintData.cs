@@ -22,7 +22,7 @@ namespace TE
         private readonly Range _formulaCell;
         private readonly Range _dataStartCell;
         private Worksheet _currentWorksheet => _dataStartCell.Worksheet;
-        public readonly string _names;
+        public readonly string[] _names;
         public readonly string _key_value;
         public readonly string _curCel;
         public readonly bool _threaded;
@@ -33,7 +33,7 @@ namespace TE
 
         public newPrintData(string names, JArray data, string key_value, Range dataStartCell, string newFormula, Range formulaCell, bool threaded = false)
         {
-            _names = names;
+            _names = names.Split(',');
             _data = data;
             _key_value = key_value;
             _dataStartCell = dataStartCell;
@@ -42,17 +42,17 @@ namespace TE
             _formulaCell = formulaCell;
         }
 
-        private object[,] ConvertNestedListToArray(JArray data, string names)
+        private object[,] ConvertNestedListToArray(JArray data, string[] names)
         {
             
-            var newData = new object[data.Count, names.Split(',').Length];
+            var newData = new object[data.Count, names.Length];//.Split(',').Length];
 
             for (var r = 0; r != data.Count; r++)
-                for (var c = 0; c < names.Split(',').Length; c++)
+                for (var c = 0; c < names.Length; c++)//.Split(',').Length; c++)
                 {
                   try
                     {
-                        newData[r, c] = data[r][names.Split(',')[c]];
+                        newData[r, c] = data[r][names[c]];//.Split(',')[c]];
                     }
                     catch(NullReferenceException )
                     {
@@ -81,9 +81,9 @@ namespace TE
 
                 //Writing final dictionary
                 WaitForExcelToBeReady();
-                Range endCell = _currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Split(',').Length - 1];
+                Range endCell = _currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Length - 1];//.Split(',').Length - 1];
                 Range used = _currentWorksheet.Range[_dataStartCell, endCell];                   
-                formulaColumns frmlaColumnsPair2 = new formulaColumns(_newFormula, _names, used, _formulaCell);
+                formulaColumns frmlaColumnsPair2 = new formulaColumns(_newFormula, String.Join(",", _names), used, _formulaCell);//_names, used, _formulaCell);
                 MyRibbon.myFormulasDict[_formulaCell.Address[false, false]] = frmlaColumnsPair2;                
 
                 if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
@@ -128,10 +128,10 @@ namespace TE
             helperClass.log.Info("header_to_excel from newPrintData");
             try
             {
-                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Split(',').Length - 1];
+                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Length - 1];//.Split(',').Length - 1];
                 var dl = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1];
                 var writeRange = _currentWorksheet.Range[dl, endCell];
-                writeRange.Value2 = _names.Split(',').Skip(1).ToArray();
+                writeRange.Value2 = _names.Skip(1).ToArray();//.Split(',').Skip(1).ToArray();
             }
             catch (Exception ex)
             {
@@ -147,18 +147,17 @@ namespace TE
             helperClass.log.Info("data_to_excel from newPrintData");
             try
             {
-                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Split(',').Length - 1];
+                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Length - 1];//.Split(',').Length - 1];
                 var writeRange = _currentWorksheet.Range[_dataStartCell[2, 1], endCell];
                 var data = ConvertNestedListToArray(_data, _names);
                 writeRange.ClearFormats();
                 writeRange.Value = data;
-                //writeRange.Value = data;
                 // This sort method works perfectly !!! Ready to implement only for Historycal data 
                 if (helperClass.fromHistorical == true)
                 {
                     writeRange.Sort(writeRange.Columns[1], XlSortOrder.xlAscending,
-                        writeRange.Columns[2], Type.Missing, XlSortOrder.xlAscending);
-                    helperClass.fromHistorical = false;
+                    writeRange.Columns[2], Type.Missing, XlSortOrder.xlAscending);
+                    helperClass.fromHistorical = false;                    
                 }
 
                 if (helperClass.fromCalendar == true)
