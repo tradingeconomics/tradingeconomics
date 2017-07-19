@@ -758,11 +758,15 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
 
 * List of Indicators by Country    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{countries}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a> 
+
+* List of Indicators with multiple countries        
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china?c=guest:guest">/country/{countries}</a>
 
 * Country/Indicator pair    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp?c=guest:guest">/country/{countries}/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp?c=guest:guest">/country/{country}/{indicator}</a>    
+
+* Country/Indicator pairs with multiple indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
 
 * Several Countries and Indicators    
@@ -1059,15 +1063,21 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="methods">
 
 * Specific country  
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states?c=guest:guest">/forecast/country/{countries}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states?c=guest:guest">/forecast/country/{country}</a>   
+
+* Multiple countries  
 <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states,china?c=guest:guest">/forecast/country/{countries}</a>
 
 * Specific indicator    
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp?c=guest:guest">/forecast/indicator/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp?c=guest:guest">/forecast/indicator/{indicator}</a>    
+
+* Multiple indicator    
 <a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp,population?c=guest:guest">/forecast/indicator/{indicators}</a>
 
 * Specific country and indicator  
-<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states/indicator/gdp?c=guest:guest">/forecast/country/{countries}/indicator/{indicators}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states/indicator/gdp?c=guest:guest">/forecast/country/{country}/indicator/{indicator}</a>    
+
+* Multiple countries and indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states,china/indicator/gdp,population?c=guest:guest">/forecast/country/{countries}/indicator/{indicators}</a>  
 
 </span> 
