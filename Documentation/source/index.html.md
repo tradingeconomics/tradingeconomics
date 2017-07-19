@@ -767,7 +767,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp?c=guest:guest">/country/{country}/{indicator}</a>    
 
 * Country/Indicator pairs with multiple indicators    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{country}/{indicators}</a>
 
 * Several Countries and Indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
@@ -1071,7 +1071,7 @@ Please note the sample request is limited in scope to a few countries and indica
 * Specific indicator    
 <a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp?c=guest:guest">/forecast/indicator/{indicator}</a>    
 
-* Multiple indicator    
+* Multiple indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp,population?c=guest:guest">/forecast/indicator/{indicators}</a>
 
 * Specific country and indicator  
