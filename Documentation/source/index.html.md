@@ -37,15 +37,6 @@ The API can be used to feed a custom developed application, a public website or 
 pip install tradingeconomics
 ```
 
-<blockquote class="lang-specific python"> 
-<p>Or install directly from GitHub:</p>
-</blockquote>     
-```python
-git clone  git@github.com:ieconomics/open-api.git
-cd python
-python setup.py install
-```    
-
 <blockquote class="lang-specific shell">
 <p>
   Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
@@ -196,7 +187,7 @@ Before proceeding select your language tab on the right.
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
 
-**Data Types**  
+### Data Types  
 
 You can request data in several formats:<br>
   
@@ -209,20 +200,12 @@ You can request data in several formats:<br>
   * csv    
   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=csv">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=csv</a>
 
-**Authentication**
+### Authentication
 
 The API provides different methods of authorization. Each request made against API must be supplied with authentication credentials.
 
 
-<!---
-your comment goes here
-and here
 
-Client credentials must be provided in the URL query or in the Request Reader. URL Query example: [Try it](http://api.tradingeconomics.com/country/?client=guest:guest)    
-`http://api.tradingeconomics.com/country/united states/?client=YOUR_CLIENT_KEY:YOUR_CLIENT_SECRET`    
-Header example:     
-`Authorization: Client YOUR_CLIENT_KEY:YOUR_CLIENT_SECRET`
--->
 Authorization parameters must be provided in the URL query or in the Request Reader. 
 
 Using URL auth:    
@@ -375,36 +358,35 @@ Here you can get historical information for specific a country and indicator.
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
 
-**Methods**
-
+### Methods
 
 <span class="methods">
 
-* Get Specific Country and Indicator  
+* Specific country and indicator  
 <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
 You can specify only a start date for your historical data    
 <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>   
 or you can specify a start date and end date    
 <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
-* Get Multiple Indicators for Specific Country    
+* Multiple indicators for specific country    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population/2015-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
-* Get Specific Indicator for Multiple Countries    
+* Specific indicator for multiple countries    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
-* Get Multiple Indicators for Multiple Countries    
+* Multiple indicators for multiple countries    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population/2015-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population/2016-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 </span> 
 
-**Response Fields:**
+### Response Fields
 
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
@@ -571,36 +553,36 @@ Here you can get calendar events.
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
 
-**Methods**
+### Methods
 
 
 <span class="methods">
 
-* Get all calendar events    
+* All calendar events    
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a>
 
 * Filter Calendar Events by date    
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-01/2016-12-02?c=guest:guest">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
-* Get calendar events for specific country    
+* Calendar events for specific country    
   <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states?c=guest:guest">/calendar/country/{countries}</a>    
   <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/2016-02-01/2016-02-10?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    
 
-* Get calendar for a specific indicator category    
+* Calendar events for a specific indicator category    
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate?c=guest:guest">/calendar/indicator/{indicators}</a>      
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate/2016-03-01/2016-03-03?c=guest:guest">/calendar/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
-* Get all calendar events for multiple countries   
+* All calendar events for multiple countries   
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china?c=guest:guest">/calendar/country/{countries}</a>     
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china/2016-02-10/2016-02-11?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
 
-* Get calendar events for a specific country and specific indicator category   
+* Calendar events for a specific country and specific indicator category   
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a>     
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
 
 </span> 
 
-**Response Fields:**
+### Response Fields
 
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
@@ -749,18 +731,18 @@ Here you can get a list of all indicators, indicators by country or country-indi
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
 
-**Methods**
+### Methods
 
 
 <span class="methods">
 
-* Get list of all indicators  
+* List of all indicators  
 <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
 
-* List of Indicators by Country    
+* List of indicators by country    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a> 
 
-* List of Indicators with multiple countries        
+* List of indicators with multiple countries        
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china?c=guest:guest">/country/{countries}</a>
 
 * Country/Indicator pair    
@@ -769,12 +751,12 @@ Please note the sample request is limited in scope to a few countries and indica
 * Country/Indicator pairs with multiple indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{country}/{indicators}</a>
 
-* Several Countries and Indicators    
+* Several countries and indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
 
 </span> 
 
-**Response Fields:**
+### Response Fields
 
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
@@ -787,146 +769,6 @@ Please note the sample request is limited in scope to a few countries and indica
 |**HistoricalDataSymbol**|                               Unique symbol used by TradingEconomics                                                         |
 
 
-# Markets
-   
-<blockquote class="lang-specific r">
-<p>To get information about commodities in data frame format type:</p>
-</blockquote>   
-```r
-getMarketsData(marketsField = 'commodities', outType = 'df')
-``` 
-
-<blockquote class="lang-specific python">
-<p>To get stock market index data:</p>
-</blockquote>
-```python
-te.getMarketsData(marketsField = 'index', output_type = 'df')
-```
-
-<blockquote class="lang-specific shell">
-<p>Click Markets button on TE ribbon and then follow the instructions in the dialog box.    
-Or type in any empty cell:</p>
-</blockquote>
-```shell
-=TEMarkets( "currency", "Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear", B2)
-```
-
-```javascript
-var http = require('https');
-var headers = {
-    'Accept': 'Application/xml',
-    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
-};
-var buffer = '';
-var options = {
-    host: 'api.tradingeconomics.com',
-    port: 80,
-    path: '/markets/commodities',
-    headers: headers
-};
-callback = function(response) {
-    response.on('data', function (chunk) {
-    buffer += chunk;
-});
-response.on('end', function () {
-    // your code here if you want to use the results !
-});
-}
-  
-var req = http.get(options, callback).end();         
-```
-
-```jsonnet
-var url = 'https://api.tradingeconomics.com/markets/commodities?c=guest:guest';
-$.ajax({
-        url: url,
-        type: "GET",
-        dataType: 'json'
-}).done(function (data) {
-    console.log(data);
-});
-```
-
-```csharp
-using (var client = new HttpClient())
-{
-    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
-    client.DefaultRequestHeaders.Clear();
-    //ADD Acept Header to tell the server what data type you want
-    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
-    //ADD Authorization
-    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
-    client.DefaultRequestHeaders.Authorization = auth;
-    //SET Parameters
-    HttpResponseMessage response = await client.GetAsync("/markets/commodities");
-    if (response.IsSuccessStatusCode)
-    {
-        //Your custom response parser code
-    }
-}
-```
-
-```java
-String uri = "https://api.tradingeconomics.com//markets/commodities";
-URL url = new URL(uri);
-HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-    connection.setRequestMethod("GET");
-    connection.setRequestProperty("Accept", "application/xml");
-InputStream xml = connection.getInputStream();
-```
-
-```php
-<?php
-$url = 'https://api.tradingeconomics.com/country';
-$headers = array(
-    "Accept: application/xml",
-    "Authorization: OAuth YOUR_TOKEN_VALUE"
-);
-$handle = curl_init(); 
-    curl_setopt($handle, CURLOPT_URL, $url);
-    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    
-    $data = curl_exec($handle);
-curl_close($handle);
-//parse your data to satusfy your needs....
-?>
-```
-
-Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
-
-**Methods**
-
-
-<span class="methods">
-
-* Get list of available Commodities with latest values and symbols   
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a>
-
-* Get list of available Currencies with latest values and symbols   
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> 
-
-* Get list of available Indexes with latest values and symbols   
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a>
-
-* Get list of available Bonds with latest values and symbols    
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/bonds?c=guest:guest">/markets/bonds</a>
-
-</span> 
-
-**Response Fields:**
-
-|                 |                                                          |
-|:----------------|:---------------------------------------------------------|
-|     **Name**    | Commodity name                                           |
-|   **Country**   | Country field of a commodity if always "Commodity"       |
-|     **Date**    | Release time and date in UTC                             |
-|     **Last**    | Latest value available                                   |
-|    **Group**    | Group of commodity                                       |
-|    **Symbol**   | Unique symbol used by TradingEconomics                   |
-| **LastUpdate**  | Time when new data was inserted or changed               |
 
 # Forecast
 
@@ -1058,7 +900,7 @@ Here you can get forecast values by country, by indicator, by country and indica
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
 
-**Methods**
+### Methods
 
 <span class="methods">
 
@@ -1082,7 +924,7 @@ Please note the sample request is limited in scope to a few countries and indica
 
 </span> 
 
-**Response Fields:**
+### Response Fields
 
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
@@ -1092,86 +934,222 @@ Please note the sample request is limited in scope to a few countries and indica
 |    **Frequency**    |                                           Frequency of the indicator                                          |
 |**HistoricalDataSymbol**|                               Unique symbol used by TradingEconomics                                                         |
 
-# News
 
+# Markets
+   
+<blockquote class="lang-specific r">
+<p>To get information about commodities in data frame format type:</p>
+</blockquote>   
+```r
+getMarketsData(marketsField = 'commodities', outType = 'df')
+``` 
+
+<blockquote class="lang-specific python">
+<p>To get stock market index data:</p>
+</blockquote>
+```python
+te.getMarketsData(marketsField = 'index', output_type = 'df')
+```
+
+<blockquote class="lang-specific shell">
+<p>Click Markets button on TE ribbon and then follow the instructions in the dialog box.    
+Or type in any empty cell:</p>
+</blockquote>
+```shell
+=TEMarkets( "currency", "Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear", B2)
+```
+
+```javascript
+var http = require('https');
+var headers = {
+    'Accept': 'Application/xml',
+    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
+};
+var buffer = '';
+var options = {
+    host: 'api.tradingeconomics.com',
+    port: 80,
+    path: '/markets/commodities',
+    headers: headers
+};
+callback = function(response) {
+    response.on('data', function (chunk) {
+    buffer += chunk;
+});
+response.on('end', function () {
+    // your code here if you want to use the results !
+});
+}
+  
+var req = http.get(options, callback).end();         
+```
+
+```jsonnet
+var url = 'https://api.tradingeconomics.com/markets/commodities?c=guest:guest';
+$.ajax({
+        url: url,
+        type: "GET",
+        dataType: 'json'
+}).done(function (data) {
+    console.log(data);
+});
+```
+
+```csharp
+using (var client = new HttpClient())
+{
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
+    client.DefaultRequestHeaders.Clear();
+    //ADD Acept Header to tell the server what data type you want
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+    //ADD Authorization
+    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
+    client.DefaultRequestHeaders.Authorization = auth;
+    //SET Parameters
+    HttpResponseMessage response = await client.GetAsync("/markets/commodities");
+    if (response.IsSuccessStatusCode)
+    {
+        //Your custom response parser code
+    }
+}
+```
+
+```java
+String uri = "https://api.tradingeconomics.com//markets/commodities";
+URL url = new URL(uri);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Accept", "application/xml");
+InputStream xml = connection.getInputStream();
+```
+
+```php
+<?php
+$url = 'https://api.tradingeconomics.com/country';
+$headers = array(
+    "Accept: application/xml",
+    "Authorization: OAuth YOUR_TOKEN_VALUE"
+);
+$handle = curl_init(); 
+    curl_setopt($handle, CURLOPT_URL, $url);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    
+    $data = curl_exec($handle);
+curl_close($handle);
+//parse your data to satusfy your needs....
+?>
+```
+
+Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
 Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
+Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.     
+**Please consider that all market-related methods are beta and under heavy development.**
 
-**Methods**
+### Snapshot of latest quotes
 
 <span class="methods">
 
-* Get latest news of data    
-<a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/news</a>
+* Commodities   
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a>
 
-* Get news of data by country   
-<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/{countries}</a>
+* Major Currencies     
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> 
 
-* Get news of data by indicator    
-<a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/{indicators}</a>
+* Currency Crosses    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest&cross=EUR">/markets/currency?cross=eur</a>
 
-* Get news of data by country and indicator    
-<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/{countries}/{indicators}</a>
+* Stock Market Indexes   
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a>
+
+* Government Bonds    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/bonds?c=guest:guest">/markets/bonds</a>
+
+* Individual Market (stock, index, currency, commodity or bond)    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest">/markets/symbol/{symbol}</a>
+
+* Multiple Markets   
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a>
+
+### Historical  
+
+* Historical markets data by market    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest">/markets/historical/{symbol}</a>
+
+* Historical markets data for multiple markets    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us,indu:ind?c=guest:guest">/markets/historical/{symbols}</a>
+
+* Filter historical markets data by date    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01">/markets/historical/{symbol}?d1=yyyy-mm-dd</a>
+
+* Filter historical markets data by date    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/historical/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>
+
+### Intraday
+
+* Intraday prices for a single market     
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest">/markets/intraday/{symbol}</a>
+
+* Filter intraday prices by date and hour    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-10%2015:30">/markets/intraday/{symbol}?d1=yyyy-mm-dd hh:mm</a>
+
+* Filter intraday prices by date    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>
+
+### Earnings
+
+* An earnings calendar     
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    
+
+* Filter earnings calendar by date    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01">/earnings?d1=yyyy-mm-dd</a>    
+
+* Filter earnings calendar by market and date   
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2010-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a>    
+
+* Filter earnings calendar by market and date    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2010-01-01&d2=2015-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>    
+
+* Filter earnings calendar by country    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a>    
+
+### Market Lists
+
+* A snapshot of latest peers prices by market    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a>
+
+* Stock Market Index Components     
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a>
+
+### Search
+* Search method    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a>
+
+### JSON CSV XML
+For all methods listed above, you can get data in next formats:
+
+* JSON        
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}?c=guest:guest&f=json</a>    
+
+* CSV    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=csv">/markets/symbol/{symbol}?c=guest:guest&f=csv</a>
+
+* XML     
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=xml">/markets/symbol/{symbol}?c=guest:guest&f=xml</a>
 
 </span> 
 
-**Response Fields:**
+### Response Fields
 
-|                 |                                                                                                                                 |
-|:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
-|      **Id**     | Unique ID                                                                                                                       |
-|    **Title**    | Title of the news event                                                                                                         |
-| **Description** | Description of the event                                                                                                        |
-|     **Date**    | Release time and date in UTC                                                                                                    |
-|   **Country**   | Country name                                                                                                                    |
-|   **Category**  | Indicator Category Name                                                                                                         |
-|    **Symbol**   | Unique symbol used by TradingEconomics                                                                                          |
-|     **Url**     | Indicator Hyperlink at Trading Economics                                                                                        |
-
-# Articles
-
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
-
-**Methods**
-
-<span class="methods">
-
-* Latest articles    
-<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest">/articles</a>
-
-* Paginate over articles   
-<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&skip=10&lim=10">/articles?c=guest:guest&skip=X&lim=Y</a>
-
-* Latest articles by country    
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states?c=guest:guest">/articles/country/{countries}</a>
-
-* Articles by country within DateTime interval    
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/from/2016-12-01/2016-12-31?c=guest:guest">/articles/country/{countries}/from/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    
-
-* Latest articles by indicator   
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/indicator/interest%20rate?c=guest:guest">/articles/indicator/{indicators}</a>
-
-* Latest articles by country and indicator    
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/interest%20rate?c=guest:guest">/articles/country/{countries}/{indicators}</a>    
-
-* Article by ID    
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a>
-
-</span> 
-
-**Response Fields:**
-
-|                 |                                                                                                                                 |
-|:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
-|      **Id**     | Unique ID                                                                                                                       |
-|    **Title**    | Title of the article                                                                                                            |
-| **Description** | Description of the article                                                                                                      |
-|     **Date**    | Release time and date in UTC                                                                                                    |
-|   **Country**   | Country name                                                                                                                    |
-|   **Category**  | Indicator Category Name                                                                                                         |
-|    **Symbol**   | Unique symbol used by TradingEconomics                                                                                          |
-|     **Url**     | Indicator Hyperlink at Trading Economics                                                                                        |
+|                 |                                                          |
+|:----------------|:---------------------------------------------------------|
+|     **Name**    | Commodity name                                           |
+|   **Country**   | Country field of a commodity if always "Commodity"       |
+|     **Date**    | Release time and date in UTC                             |
+|     **Last**    | Latest value available                                   |
+|    **Group**    | Group of commodity                                       |
+|    **Symbol**   | Unique symbol used by TradingEconomics                   |
+| **LastUpdate**  | Time when new data was inserted or changed               |
 
 # Streaming
 
@@ -1319,3 +1297,71 @@ Plus any indicator listed at Trading Economics.
 **Check how to use it with** <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> **or** <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a>
 
 For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a>
+
+
+
+
+
+
+# News
+
+Click on any method below for a sample.
+Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
+
+### Latest news
+
+<span class="methods">
+
+* Get latest news of data    
+<a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/news</a>
+
+* Get news of data by country   
+<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/{countries}</a>
+
+* Get news of data by indicator    
+<a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/{indicators}</a>
+
+* Get news of data by country and indicator    
+<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/{countries}/{indicators}</a>
+
+</span> 
+
+### Latest articles
+
+<span class="methods">
+
+* Latest articles    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest">/articles</a>
+
+* Paginate over articles   
+<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&skip=10&lim=10">/articles?c=guest:guest&skip=X&lim=Y</a>
+
+* Latest articles by country    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states?c=guest:guest">/articles/country/{countries}</a>
+
+* Articles by country within DateTime interval    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/from/2016-12-01/2016-12-31?c=guest:guest">/articles/country/{countries}/from/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    
+
+* Latest articles by indicator   
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/indicator/interest%20rate?c=guest:guest">/articles/indicator/{indicators}</a>
+
+* Latest articles by country and indicator    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/interest%20rate?c=guest:guest">/articles/country/{countries}/{indicators}</a>    
+
+* Article by ID    
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a>
+
+</span> 
+
+### Response Fields
+
+|                 |                                                                                                                                 |
+|:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|      **Id**     | Unique ID                                                                                                                       |
+|    **Title**    | Title of the event                                                                                                              |
+| **Description** | Description of the event                                                                                                        |
+|     **Date**    | Release time and date in UTC                                                                                                    |
+|   **Country**   | Country name                                                                                                                    |
+|   **Category**  | Indicator Category Name                                                                                                         |
+|    **Symbol**   | Unique symbol used by TradingEconomics                                                                                          |
+|     **Url**     | Indicator Hyperlink at Trading Economics                                                                                        |
