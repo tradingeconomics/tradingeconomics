@@ -157,13 +157,6 @@ The API can be used to feed a custom developed application, a public website or 
 </blockquote>     
 <pre class="highlight python"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">tradingeconomics</span>
 </code></pre>
-<blockquote class="lang-specific python"> 
-<p>Or install directly from GitHub:</p>
-</blockquote>     
-<pre class="highlight python"><code><span class="n">git</span> <span class="n">clone</span>  <span class="n">git</span><span class="nd">@github.com</span><span class="p">:</span><span class="n">ieconomics</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">api</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">python</span>
-<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
-</code></pre>
 <blockquote class="lang-specific shell">
 <p>
   Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
@@ -299,7 +292,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
 
-<p><strong>Data Types</strong>  </p>
+<h3 id="data-types">Data Types</h3>
 
 <p>You can request data in several formats:<br></p>
 
@@ -312,19 +305,9 @@ See below how to install a package that’s sitting on GitHub.</p>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=csv">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;format=csv</a></p></li>
 </ul>
 
-<p><strong>Authentication</strong></p>
+<h3 id="authentication">Authentication</h3>
 
 <p>The API provides different methods of authorization. Each request made against API must be supplied with authentication credentials.</p>
-
-<!---
-your comment goes here
-and here
-
-Client credentials must be provided in the URL query or in the Request Reader. URL Query example: [Try it](http://api.tradingeconomics.com/country/?client=guest:guest)    
-`http://api.tradingeconomics.com/country/united states/?client=YOUR_CLIENT_KEY:YOUR_CLIENT_SECRET`    
-Header example:     
-`Authorization: Client YOUR_CLIENT_KEY:YOUR_CLIENT_SECRET`
--->
 
 <p>Authorization parameters must be provided in the URL query or in the Request Reader. </p>
 
@@ -454,26 +437,26 @@ Or type in any empty cell:</p>
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
 
-<p><strong>Methods</strong></p>
+<h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
 
 <ul>
-<li><p>Get Specific Country and Indicator<br>
+<li><p>Specific country and indicator<br>
 <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a><br>
 You can specify only a start date for your historical data<br>
 <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
 or you can specify a start date and end date<br>
 <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
-<li><p>Get Multiple Indicators for Specific Country<br>
+<li><p>Multiple indicators for specific country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population/2015-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
-<li><p>Get Specific Indicator for Multiple Countries<br>
+<li><p>Specific indicator for multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
-<li><p>Get Multiple Indicators for Multiple Countries<br>
+<li><p>Multiple indicators for multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population/2015-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population/2016-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
@@ -481,7 +464,7 @@ or you can specify a start date and end date<br>
 
 <p></span> </p>
 
-<p><strong>Response Fields:</strong></p>
+<h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
 <tr>
@@ -652,32 +635,32 @@ Or type in any empty cell:</p>
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
 
-<p><strong>Methods</strong></p>
+<h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
 
 <ul>
-<li><p>Get all calendar events<br>
+<li><p>All calendar events<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a></p></li>
 <li><p>Filter Calendar Events by date<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-01/2016-12-02?c=guest:guest">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
-<li><p>Get calendar events for specific country<br>
+<li><p>Calendar events for specific country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states?c=guest:guest">/calendar/country/{countries}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/2016-02-01/2016-02-10?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    </p></li>
-<li><p>Get calendar for a specific indicator category<br>
+<li><p>Calendar events for a specific indicator category<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate?c=guest:guest">/calendar/indicator/{indicators}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate/2016-03-01/2016-03-03?c=guest:guest">/calendar/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
-<li><p>Get all calendar events for multiple countries<br>
+<li><p>All calendar events for multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china?c=guest:guest">/calendar/country/{countries}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china/2016-02-10/2016-02-11?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> </p></li>
-<li><p>Get calendar events for a specific country and specific indicator category<br>
+<li><p>Calendar events for a specific country and specific indicator category<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a><br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> </p></li>
 </ul>
 
 <p></span> </p>
 
-<p><strong>Response Fields:</strong></p>
+<h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
 <tr>
@@ -850,28 +833,28 @@ Or type in any empty cell:</p>
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
 
-<p><strong>Methods</strong></p>
+<h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
 
 <ul>
-<li><p>Get list of all indicators<br>
+<li><p>List of all indicators<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a></p></li>
-<li><p>List of Indicators by Country<br>
+<li><p>List of indicators by country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a> </p></li>
-<li><p>List of Indicators with multiple countries<br>
+<li><p>List of indicators with multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china?c=guest:guest">/country/{countries}</a></p></li>
 <li><p>Country/Indicator pair<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp?c=guest:guest">/country/{country}/{indicator}</a>    </p></li>
 <li><p>Country/Indicator pairs with multiple indicators<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{country}/{indicators}</a></p></li>
-<li><p>Several Countries and Indicators<br>
+<li><p>Several countries and indicators<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a></p></li>
 </ul>
 
 <p></span> </p>
 
-<p><strong>Response Fields:</strong></p>
+<h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
 <tr>
@@ -906,150 +889,6 @@ Please note the sample request is limited in scope to a few countries and indica
 <tr>
 <td style="text-align: left"><strong>HistoricalDataSymbol</strong></td>
 <td style="text-align: left">Unique symbol used by TradingEconomics</td>
-</tr>
-</tbody></table>
-
-<h1 id="markets">Markets</h1>
-
-<blockquote class="lang-specific r">
-<p>To get information about commodities in data frame format type:</p>
-</blockquote>   
-<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'commodities'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-</span></code></pre>
-<blockquote class="lang-specific python">
-<p>To get stock market index data:</p>
-</blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span> <span class="o">=</span> <span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-</code></pre>
-<blockquote class="lang-specific shell">
-<p>Click Markets button on TE ribbon and then follow the instructions in the dialog box.    
-Or type in any empty cell:</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="o">=</span>TEMarkets<span class="o">(</span> <span class="s2">"currency"</span>, <span class="s2">"Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear"</span>, B2<span class="o">)</span>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'OAuth2 YOUR_TOKEN_VALUE'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/commodities'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/markets/commodities?c=guest:guest'</span><span class="p">;</span>
-<span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-        <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
-        <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
-        <span class="nx">dataType</span><span class="p">:</span> <span class="s">'json'</span>
-<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
-<span class="p">{</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
-    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
-    <span class="c1">//ADD Authorization</span>
-    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
-    <span class="c1">//SET Parameters</span>
-    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/markets/commodities"</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Your custom response parser code</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//markets/commodities"</span><span class="o">;</span>
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
-<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
-<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
-    <span class="s2">"Authorization: OAuth YOUR_TOKEN_VALUE"</span>
-<span class="p">);</span>
-<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
-    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
-    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
-    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-
-    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
-<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
-<span class="c1">//parse your data to satusfy your needs....
-</span><span class="cp">?&gt;</span>
-</code></pre>
-<p>Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
-
-<p><strong>Methods</strong></p>
-
-<p><span class="methods"></p>
-
-<ul>
-<li><p>Get list of available Commodities with latest values and symbols<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a></p></li>
-<li><p>Get list of available Currencies with latest values and symbols<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> </p></li>
-<li><p>Get list of available Indexes with latest values and symbols<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a></p></li>
-<li><p>Get list of available Bonds with latest values and symbols<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/bonds?c=guest:guest">/markets/bonds</a></p></li>
-</ul>
-
-<p></span> </p>
-
-<p><strong>Response Fields:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>Name</strong></td>
-<td style="text-align: left">Commodity name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country field of a commodity if always &ldquo;Commodity&rdquo;</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Release time and date in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Last</strong></td>
-<td style="text-align: left">Latest value available</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Group</strong></td>
-<td style="text-align: left">Group of commodity</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Symbol</strong></td>
-<td style="text-align: left">Unique symbol used by TradingEconomics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastUpdate</strong></td>
-<td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
 
@@ -1157,7 +996,7 @@ Or type in any empty cell:</p>
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
 
-<p><strong>Methods</strong></p>
+<h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
 
@@ -1178,7 +1017,7 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <p></span> </p>
 
-<p><strong>Response Fields:</strong></p>
+<h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
 <tr>
@@ -1208,29 +1047,188 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 </tbody></table>
 
-<h1 id="news">News</h1>
+<h1 id="markets">Markets</h1>
 
-<p>Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
+<blockquote class="lang-specific r">
+<p>To get information about commodities in data frame format type:</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'commodities'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific python">
+<p>To get stock market index data:</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span> <span class="o">=</span> <span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific shell">
+<p>Click Markets button on TE ribbon and then follow the instructions in the dialog box.    
+Or type in any empty cell:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="o">=</span>TEMarkets<span class="o">(</span> <span class="s2">"currency"</span>, <span class="s2">"Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear"</span>, B2<span class="o">)</span>
+</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'OAuth2 YOUR_TOKEN_VALUE'</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/commodities'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">};</span>
+<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// your code here if you want to use the results !</span>
+<span class="p">});</span>
+<span class="p">}</span>
 
-<p><strong>Methods</strong></p>
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/markets/commodities?c=guest:guest'</span><span class="p">;</span>
+<span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
+        <span class="nx">dataType</span><span class="p">:</span> <span class="s">'json'</span>
+<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
+    <span class="c1">//ADD Authorization</span>
+    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
+    <span class="c1">//SET Parameters</span>
+    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/markets/commodities"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Your custom response parser code</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//markets/commodities"</span><span class="o">;</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: OAuth YOUR_TOKEN_VALUE"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satusfy your needs....
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<p>Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
+Click on any method below for a sample.
+Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.<br>
+<strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
+
+<h3 id="snapshot-of-latest-quotes">Snapshot of latest quotes</h3>
 
 <p><span class="methods"></p>
 
 <ul>
-<li><p>Get latest news of data<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/news</a></p></li>
-<li><p>Get news of data by country<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/{countries}</a></p></li>
-<li><p>Get news of data by indicator<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/{indicators}</a></p></li>
-<li><p>Get news of data by country and indicator<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/{countries}/{indicators}</a></p></li>
+<li><p>Commodities<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a></p></li>
+<li><p>Major Currencies<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> </p></li>
+<li><p>Currency Crosses<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest&cross=EUR">/markets/currency?cross=eur</a></p></li>
+<li><p>Stock Market Indexes<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a></p></li>
+<li><p>Government Bonds<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/bonds?c=guest:guest">/markets/bonds</a></p></li>
+<li><p>Individual Market (stock, index, currency, commodity or bond)<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest">/markets/symbol/{symbol}</a></p></li>
+<li><p>Multiple Markets<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a></p></li>
+</ul>
+
+<h3 id="historical">Historical</h3>
+
+<ul>
+<li><p>Historical markets data by market<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest">/markets/historical/{symbol}</a></p></li>
+<li><p>Historical markets data for multiple markets<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us,indu:ind?c=guest:guest">/markets/historical/{symbols}</a></p></li>
+<li><p>Filter historical markets data by date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01">/markets/historical/{symbol}?d1=yyyy-mm-dd</a></p></li>
+<li><p>Filter historical markets data by date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/historical/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a></p></li>
+</ul>
+
+<h3 id="intraday">Intraday</h3>
+
+<ul>
+<li><p>Intraday prices for a single market<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest">/markets/intraday/{symbol}</a></p></li>
+<li><p>Filter intraday prices by date and hour<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-10%2015:30">/markets/intraday/{symbol}?d1=yyyy-mm-dd hh:mm</a></p></li>
+<li><p>Filter intraday prices by date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a></p></li>
+</ul>
+
+<h3 id="earnings">Earnings</h3>
+
+<ul>
+<li><p>An earnings calendar<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    </p></li>
+<li><p>Filter earnings calendar by date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01">/earnings?d1=yyyy-mm-dd</a>    </p></li>
+<li><p>Filter earnings calendar by market and date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2010-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a>    </p></li>
+<li><p>Filter earnings calendar by market and date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2010-01-01&d2=2015-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
+<li><p>Filter earnings calendar by country<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a>    </p></li>
+</ul>
+
+<h3 id="market-lists">Market Lists</h3>
+
+<ul>
+<li><p>A snapshot of latest peers prices by market<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a></p></li>
+<li><p>Stock Market Index Components<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a></p></li>
+</ul>
+
+<h3 id="search">Search</h3>
+
+<ul>
+<li>Search method<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a></li>
+</ul>
+
+<h3 id="json-csv-xml">JSON CSV XML</h3>
+
+<p>For all methods listed above, you can get data in next formats:</p>
+
+<ul>
+<li><p>JSON<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}?c=guest:guest&amp;f=json</a>    </p></li>
+<li><p>CSV<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=csv">/markets/symbol/{symbol}?c=guest:guest&amp;f=csv</a></p></li>
+<li><p>XML<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=xml">/markets/symbol/{symbol}?c=guest:guest&amp;f=xml</a></p></li>
 </ul>
 
 <p></span> </p>
 
-<p><strong>Response Fields:</strong></p>
+<h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
 <tr>
@@ -1239,106 +1237,32 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><strong>Id</strong></td>
-<td style="text-align: left">Unique ID</td>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">Commodity name</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Title</strong></td>
-<td style="text-align: left">Title of the news event</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Description</strong></td>
-<td style="text-align: left">Description of the event</td>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country field of a commodity if always &ldquo;Commodity&rdquo;</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Date</strong></td>
 <td style="text-align: left">Release time and date in UTC</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country name</td>
+<td style="text-align: left"><strong>Last</strong></td>
+<td style="text-align: left">Latest value available</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Category</strong></td>
-<td style="text-align: left">Indicator Category Name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Symbol</strong></td>
-<td style="text-align: left">Unique symbol used by TradingEconomics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Url</strong></td>
-<td style="text-align: left">Indicator Hyperlink at Trading Economics</td>
-</tr>
-</tbody></table>
-
-<h1 id="articles">Articles</h1>
-
-<p>Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
-
-<p><strong>Methods</strong></p>
-
-<p><span class="methods"></p>
-
-<ul>
-<li><p>Latest articles<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest">/articles</a></p></li>
-<li><p>Paginate over articles<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&skip=10&lim=10">/articles?c=guest:guest&amp;skip=X&amp;lim=Y</a></p></li>
-<li><p>Latest articles by country<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states?c=guest:guest">/articles/country/{countries}</a></p></li>
-<li><p>Articles by country within DateTime interval<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/from/2016-12-01/2016-12-31?c=guest:guest">/articles/country/{countries}/from/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    </p></li>
-<li><p>Latest articles by indicator<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/indicator/interest%20rate?c=guest:guest">/articles/indicator/{indicators}</a></p></li>
-<li><p>Latest articles by country and indicator<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/interest%20rate?c=guest:guest">/articles/country/{countries}/{indicators}</a>    </p></li>
-<li><p>Article by ID<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a></p></li>
-</ul>
-
-<p></span> </p>
-
-<p><strong>Response Fields:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>Id</strong></td>
-<td style="text-align: left">Unique ID</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Title</strong></td>
-<td style="text-align: left">Title of the article</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Description</strong></td>
-<td style="text-align: left">Description of the article</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Release time and date in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Category</strong></td>
-<td style="text-align: left">Indicator Category Name</td>
+<td style="text-align: left"><strong>Group</strong></td>
+<td style="text-align: left">Group of commodity</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Symbol</strong></td>
 <td style="text-align: left">Unique symbol used by TradingEconomics</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Url</strong></td>
-<td style="text-align: left">Indicator Hyperlink at Trading Economics</td>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
 
@@ -1548,6 +1472,93 @@ Plus any indicator listed at Trading Economics.</p>
 <p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a></p>
 
 <p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
+
+<h1 id="news">News</h1>
+
+<p>Click on any method below for a sample.
+Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
+
+<h3 id="latest-news">Latest news</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>Get latest news of data<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/news</a></p></li>
+<li><p>Get news of data by country<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/{countries}</a></p></li>
+<li><p>Get news of data by indicator<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/{indicators}</a></p></li>
+<li><p>Get news of data by country and indicator<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/{countries}/{indicators}</a></p></li>
+</ul>
+
+<p></span> </p>
+
+<h3 id="latest-articles">Latest articles</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>Latest articles<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest">/articles</a></p></li>
+<li><p>Paginate over articles<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&skip=10&lim=10">/articles?c=guest:guest&amp;skip=X&amp;lim=Y</a></p></li>
+<li><p>Latest articles by country<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states?c=guest:guest">/articles/country/{countries}</a></p></li>
+<li><p>Articles by country within DateTime interval<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/from/2016-12-01/2016-12-31?c=guest:guest">/articles/country/{countries}/from/{yyyy-mm-dd}/{yyyy-mm-dd}</a>    </p></li>
+<li><p>Latest articles by indicator<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/indicator/interest%20rate?c=guest:guest">/articles/indicator/{indicators}</a></p></li>
+<li><p>Latest articles by country and indicator<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/interest%20rate?c=guest:guest">/articles/country/{countries}/{indicators}</a>    </p></li>
+<li><p>Article by ID<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a></p></li>
+</ul>
+
+<p></span> </p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Id</strong></td>
+<td style="text-align: left">Unique ID</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Title</strong></td>
+<td style="text-align: left">Title of the event</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Description</strong></td>
+<td style="text-align: left">Description of the event</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Indicator Category Name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Url</strong></td>
+<td style="text-align: left">Indicator Hyperlink at Trading Economics</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
