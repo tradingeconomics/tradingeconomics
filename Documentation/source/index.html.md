@@ -928,11 +928,25 @@ Please note the sample request is limited in scope to a few countries and indica
 
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
-|     **Country**     |                                                           Country name                                                          |
-|     **Category**    |                                                      Indicator Category Name                                                    |
-|      **Title**      |                                                 Combination of country/category                                                 |
-|    **Frequency**    |                                           Frequency of the indicator                                          |
-|**HistoricalDataSymbol**|                               Unique symbol used by TradingEconomics                                                         |
+|     **Category**    |                                                    Indicator Category Name                                                      |
+|      **Title**      |                                                Combination of country/category                                                  |
+|   **ForecastDate**  |                                                 Date when forecasting was done                                                  |
+|  **ForecastValue**  |                                                 Forcastvalue for the ForecastDate                                               |
+|  **ForecastValue1** |                                             Forecast value for year end after q4_date                                           |
+|  **ForecastValue2** |                                          Forecast value for year end after ForecastValue1                                       |
+|  **ForecastValue3** |                                          Forecast value for year end after ForecastValue2                                       |
+| **ForecastValue1Q** |                                               Forecast value for the date in d1_date                                            |
+| **ForecastValue2Q** |                                               Forecast value for the date in d2_date                                            |
+| **ForecastValue3Q** |                                               Forecast value for the date in d3_date                                            |
+| **ForecastValue4Q** |                                               Forecast value for the date in d4_date                                            |
+|   **LatestValue**   |                                                      Last released value                                                        |
+| **LatestValueDate** |                                                Date of the last released value                                                  |
+|     **q1_date**     |                                                 1 quarter ahead release date                                                    |
+|     **q2_date**     |                                                 2 quarters ahead release date                                                   |
+|     **q3_date**     |                                                 3 quarters ahead release date                                                   |
+|     **q4_date**     |                                                 4 quarters ahead release date                                                   |
+|    **Frequency**    |                                                  Frequency of the indicator                                                     |
+|**HistoricalDataSymbol**|                                         Unique symbol used by TradingEconomics                                               |
 
 
 # Markets
