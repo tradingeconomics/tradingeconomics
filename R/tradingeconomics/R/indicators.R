@@ -27,18 +27,21 @@ getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com"
   df_final = data.frame()
   step = 10
+
   for(i in seq(1, length(country), by = step)){
+
     init = as.numeric(i)
-    finit = as.numeric(i)+step
+    finit = as.numeric(i)+step-1
+
     if (is.null(country) & is.null(indicator)){
       url <- "https://api.tradingeconomics.com/indicators"
     } else if (is.null(country) & !is.null(indicator)){
       stop('Country name should be provided')
     } else if (!is.null(country) & is.null(indicator)){
       url <- paste(base, 'country',
-                   paste(country[init:finit], collapse = ','), sep = '/')
+                   paste(na.omit(country[init:finit]), collapse = ','), sep = '/')
     } else {
-      url <- paste(base, 'country', paste(country[init:finit], collapse = ','),
+      url <- paste(base, 'country', paste(na.omit(country[init:finit]), collapse = ','),
                    paste(indicator, collapse = ','), sep = '/')
     }
 

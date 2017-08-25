@@ -55,11 +55,15 @@ getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL,
 
   df_final = data.frame()
   step = 10
+
   for(i in seq(1, length(country), by = step)){
+
     init = as.numeric(i)
-    finit = as.numeric(i)+step
-    url_base <- paste(base, paste(country[init:finit], collapse = ','), 'indicator',
+    finit = as.numeric(i)+step-1
+
+    url_base <- paste(base, paste(na.omit(country[init:finit]), collapse = ','), 'indicator',
                       paste(indicator, collapse = ','), sep = '/')
+
 
     if (is.null(initDate) & is.null(endDate)){
         initDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
@@ -85,6 +89,7 @@ getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL,
     url <- paste(url_base, '?c=', apiKey, sep = '')
     url <- URLencode(url)
     http <- http_status(GET(url))
+
     if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
       stop(paste('Something went wrong: ', http$message, sep=" "))
     }
