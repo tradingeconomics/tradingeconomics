@@ -5,6 +5,7 @@ import sys
 from datetime import *
 from . import functions as fn
 from . import glob
+import ssl
 
 PY3 = sys.version_info[0] == 3
 
@@ -80,6 +81,13 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
 
     getCalendarData(country = ['United States', 'India'], category = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
     """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+
     if country == None and category == None:
         linkAPI = 'https://api.tradingeconomics.com/calendar'
     elif country == None and category != None:

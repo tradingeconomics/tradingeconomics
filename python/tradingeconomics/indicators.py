@@ -5,6 +5,7 @@ import sys
 from datetime import *
 from . import functions as fn
 from . import glob
+import ssl
 
 PY3 = sys.version_info[0] == 3
 
@@ -82,6 +83,13 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
 
     getIndicatorData(country = ['United States', 'Portugal'], indicators = ['Imports','Exports'])
     """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    
     if country == None:
         linkAPI = 'https://api.tradingeconomics.com/indicators/'
     else:

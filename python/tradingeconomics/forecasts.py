@@ -5,6 +5,7 @@ from datetime import *
 import sys
 from . import functions as fn
 from . import glob
+import ssl
 
 PY3 = sys.version_info[0] == 3
 
@@ -88,6 +89,13 @@ def getForecastData(country = None, indicator = None, output_type = None):
 
     getForecastData(country = ['United States', 'India'], indicator = ['Imports','Exports'])
     """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+
     if country == None and indicator == None:
         raise ValueError ('At least one of the parameters, country or indicator, needs to be supplied.')
     elif country != None and indicator == None:

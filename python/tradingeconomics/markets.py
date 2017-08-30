@@ -4,6 +4,7 @@ import pandas as pd
 import sys
 from datetime import *
 from . import glob
+import ssl
 
 PY3 = sys.version_info[0] == 3
 
@@ -44,6 +45,13 @@ def getMarketsData(marketsField, output_type = None):
     -------
     getMarketsData(marketsField = 'index')
     """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+        
     fields =['commodities', 'currency', 'index', 'bonds']
     if marketsField not in fields:
         raise ParametersError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bonds\'.')
