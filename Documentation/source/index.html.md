@@ -562,7 +562,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a>
 
 * Filter Calendar Events by date    
-<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-01/2016-12-02?c=guest:guest">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-02/2016-12-03?c=guest:guest">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Calendar events for specific country    
   <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states?c=guest:guest">/calendar/country/{countries}</a>    
