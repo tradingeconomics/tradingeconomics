@@ -17,9 +17,15 @@ Then you need to install the tradingeconomics package. You can do so in a variet
 
 Install the tradingeconomics package using pip, a package management system used to install and manage software packages written in Python. In Windows Command Prompt or Linux bash type:
 ```bash
-pip install tradingeconomics
+pip install -i https://pypi.python.org/pypi tradingeconomics==0.2.7 
 ```
+Note: check if 0.2.7 is a latest version
 
+To update existing package to the latest version:
+```bash
+pip install -i https://pypi.python.org/pypi tradingeconomics -U
+```
+      
 Install using easy_install 
 ```python
 easy_install https://pypi.python.org/packages/67/ef/fce59528d5f772c8ecf8ae21f119a976c3c7aa740646a4eb4d536b3e4442/tradingeconomics-0.2.73.zip
