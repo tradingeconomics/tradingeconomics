@@ -1304,9 +1304,11 @@ Plus any indicator listed at Trading Economics.
 |    **price**    | latest market price                                                                                                             |
 |     **dt**      | timestamp of last market price (epoch)                                                                                          |
 |    **state**    | market state (open/close)                                                                                                       |
-|     **type**    | type of market (currency/indexes/commodity)                                                                                      |
+|     **type**    | type of market (currency/indexes/commodity)                                                                                     |
 |    **dhigh**    | daily high                                                                                                                      |
 |    **dlow**     | daily low                                                                                                                       |
+|    **pch**      | percentage change                                                                                                               |
+|    **nch**      | net change                                                                                                                      |
 
 **Check how to use it with** <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> **or** <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a>
 
