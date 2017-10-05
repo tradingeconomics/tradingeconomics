@@ -831,7 +831,8 @@ namespace TE
             }
             Range pass = null;
             string columns2 = "";
-            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columns2, pass, formulaCell);
+            //formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columns2, pass, formulaCell);
+            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, cntry, pass, formulaCell);
             MyRibbon.myNewDict = new Dictionary<string, formulaColumns>();
 
             if (formulaCell.Address == dataStartCell.Address)
@@ -865,10 +866,12 @@ namespace TE
                     //Dictionary<string, Dictionary<string, string>> dicts = dict.getDic();
                     Dictionary<DateTime, Dictionary<string, string>> dicts = dict.getDic();
                     var columns = dict.getColumns();
+
                     string[] clms = columns.ToArray();
                     helperClass.log.Info("Starting function data_to_excel");
-                    
+
                     var retriever = new RetrieveAndWriteTSData(clms, dicts, key, dataStartCell, newFormula, formulaCell);
+                    
                     var thready = new Thread(retriever.fetchData);
                     thready.Priority = ThreadPriority.Normal;
                     thready.IsBackground = true;

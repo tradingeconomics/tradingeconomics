@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-
+using System.Windows.Forms;
 
 namespace TE
 {
@@ -104,7 +104,27 @@ namespace TE
                     column_keys.Add(jsData[r]["Country"].ToString() + "-" + jsData[r]["Category"].ToString());
                 }
             }
-            return column_keys.OrderBy(a => a.Split('.', '-')[1]).ToList();
+            //return column_keys.OrderBy(a => a.Split('.', '-')[0]).ToList();
+                        
+            List<string> ordered_fullCntryNm = new List<string>(); ;
+            foreach (var item in _cntry.Split(',').ToList())
+            {
+                if (helperClass.myCountrysDict.ContainsValue(item))
+                {
+                    ordered_fullCntryNm.Add(helperClass.myLongCountrysDict[item]);
+                }
+            }
+
+            List<string> results;
+            results = column_keys.OrderBy(d => {
+                var index = ordered_fullCntryNm.IndexOf(d.Split('.', '-')[0]);
+                return index == -1 ? int.MaxValue : index;
+            }).ThenBy(p => {
+                var index = _indctr.Split(',').ToList().IndexOf(p.Split('.', '-')[1]);
+                return index == -1 ? int.MaxValue : index;
+            }).ToList();
+
+            return results;
         }
     }
 }
