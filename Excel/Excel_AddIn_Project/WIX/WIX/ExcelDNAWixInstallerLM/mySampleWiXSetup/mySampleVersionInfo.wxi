@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+
+  <!--START: check content and replace by yours-->
+  
+  <!-- Constants (this property should be updated by the build process) -->
+  <!-- That is important for the active setup...-->
+  <?define PRODUCTVERSION="66.6.6.6666" ?>
+
+  <!-- Constants -->
+  <!-- THIS GUID MUST BE UNIQUE PER PRODUCT -->
+  <!--IF YOU DO NOT CHANGE THE GUIDS THEN YOKO ONO WILL SING TO WAKE YOU UP EVERY MORNING TILL THE END OF YOUR LIFE!-->
+  <?define PRODUCTGUID="4b860165-3f7e-4f7a-863b-e07bbf492dc9"?>
+  <?define COMPONENTGROUP_PRGMFILES_GUID="{667290b6-f50e-45f4-9614-54d363f8b5c6}"?>
+  <?define COMPONENTGROUP_ACTIVESETUP_GUID="{6bf47eef-4f2b-436d-a0b5-b5c1af4ff35d}"?>
+  <?define ACTIVESETUP_GUID={7e537e3b-9708-4fc9-a945-97662b9609fb}?>
+  
+  <!--Set the name of your dlls here-->
+  <?define XLL32="mysample-AddIn-packed.xll"?>
+  <?define XLL64="mysample-AddIn64-packed.xll"?>
+
+  <!--IMPORTANT ALL MS OFFICE SUPPORTED VERSIONS ARE HERE Office 2007, 2010, 2013
+    For further versions of excel you'll have to update the .wxs path check (grep EXCELSUPPORTEDVERSION in .wxs project) 
+  -->
+  <?define OFFICEREGKEYS="12.0,14.0,15.0"?>
+
+  <!--That is yours to complete-->
+  <?define PRODUCT_NAME="MySample" ?>
+  <?define COMPANY_NAME="SampleCompany"?>
+  
+  <!--mysample here corresponds to the name of the C# project building the xll-->
+  <?define XLLFULLPATH32="$(var.mySample.TargetDir)$(var.XLL32)"?>
+  <?define XLLFULLPATH64="$(var.mySample.TargetDir)$(var.XLL64)"?>
+  
+  <!--mySampleWiXSetupCA is the name of the project containing the custom actions-->
+  <?define CADLLFULLPATH="$(var.mySampleWiXSetupCA.TargetDir)mySampleWiXSetupCA.CA.dll"?>
+  
+  <!--END: check content and replace by yours-->
+  
+  <!-- the .exe file path that will be executed by the active setup, 
+  if you do not rename the manageOpenKey project you won't have to change anything there-->
+  <?define manageOpenKeyDir="$(var.manageOpenKey.TargetDir)"?>
+  <?define manageOpenKeyExeName="$(var.manageOpenKey.TargetName).exe"?>
+  <?define manageOpenKeyREADMEName = "README.txt"?>
+</Include>

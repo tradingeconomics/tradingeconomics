@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TE.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="userApiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">guest:guest</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

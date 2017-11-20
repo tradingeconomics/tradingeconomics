@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.7</ProductVersion>
+    <ProjectGuid>{1675bdaa-fba7-4dfd-9108-2f8fc154efd1}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>mySampleExcelSetup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <SignOutput>true</SignOutput>
+    <Name>mySampleWixSetup</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\$(Platform)\</IntermediateOutputPath>
+    <DefineConstants>Debug;ProcessorArchitecture=x86</DefineConstants>
+    <LinkerAdditionalOptions>-cc "$(OutputPath)\" -reusecab</LinkerAdditionalOptions>
+    <SuppressIces>ICE91;ICE61;ICE80;ICE03</SuppressIces>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\$(Platform)\</IntermediateOutputPath>
+    <LinkerAdditionalOptions>-cc "$(OutputPath)\" -reusecab</LinkerAdditionalOptions>
+    <SuppressIces>ICE91;ICE61;ICE80;ICE03</SuppressIces>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DefineConstants>ProcessorArchitecture=x86</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="mySampleSetup.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="mySampleVersionInfo.wxi" />
+    <Content Include="Resources\company.ico" />
+    <Content Include="Resources\companySetupBanner.bmp" />
+    <Content Include="Resources\companySetupDialog.bmp" />
+    <Content Include="Resources\mySample_License.rtf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\manageOpenKey\manageOpenKey.csproj">
+      <Name>manageOpenKey</Name>
+      <Project>{059c99be-43cb-4b0d-8222-282617d239d5}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\mySampleWiXSetupCA\mySampleWiXSetupCA.csproj">
+      <Name>mySampleWiXSetupCA</Name>
+      <Project>FE3BCF72-1BB7-4BD5-AD8E-3F72FDB37A84</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\mySample\mySample.csproj">
+      <Name>mySample</Name>
+      <Project>{a8721679-d743-408d-beaa-49ccb78c4f32}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

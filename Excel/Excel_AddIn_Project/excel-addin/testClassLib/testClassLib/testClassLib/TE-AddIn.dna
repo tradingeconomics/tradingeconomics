@@ -1,0 +1,59 @@
+<DnaLibrary Name="TEconomics Add-In" RuntimeVersion="v4.0">
+  <ExternalLibrary Path="TE.dll" LoadFromBytes="true" Pack="true" />
+  <Reference Path="NLog.dll" Pack="true" />
+  <Reference Path="Newtonsoft.Json.dll" Pack="true" />
+  <Image Name="imgTest" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Calendar_5.png" Pack="true" />
+  <Image Name="mrkts" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Bullish.png" Pack="true" />
+  <Image Name="fork" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Bar_Chart.png" Pack="true" />
+  <Image Name="indi" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\arrow2.png" Pack="true" />
+  <Image Name="hist" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\Line.png" Pack="true" />
+  <Image Name="refresh" Path="C:\Users\Duarte Quintela\Desktop\excel-addin\testClassLib\testClassLib\testClassLib\Images\refresh.png" Pack="true" />
+
+  <!-- 
+       The RuntimeVersion attribute above allows two settings:
+       * RuntimeVersion="v2.0" - for .NET 2.0, 3.0 and 3.5
+       * RuntimeVersion="v4.0" - for .NET 4 and 4.5
+
+       Additional referenced assemblies can be specified by adding 'Reference' tags. 
+       These libraries will not be examined and registered with Excel as add-in libraries, 
+       but will be packed into the -packed.xll file and loaded at runtime as needed.
+       For example:
+       
+       <Reference Path="Another.Library.dll" Pack="true" />
+  
+       Excel-DNA also allows the xml for ribbon UI extensions to be specified in the .dna file.
+       See the main Excel-DNA site at http://excel-dna.net for downloads of the full distribution.
+  -->
+  <CustomUI>
+    <customUI xmlns='http://schemas.microsoft.com/office/2009/07/customui' loadImage='LoadImage'  onLoad='OnLoad'>
+      <ribbon>
+        <tabs>
+          <tab id='CustomTab' label='TE' >
+            <group id='getDataGroup' label='Get Data'>
+              <button id='btnIndicators' label='Indicators' size='large' showImage="true" image="hist" onAction='OnIndicatorsButtonPressed' getEnabled='getState'/>
+              <button id='btnHistorical' label='Historical' size='large' showImage="true" image="fork" onAction='OnHistoricalButtonPressed' getEnabled='getState'/>               
+              <button id='btnCalendar' label='Calendar' size='large' showImage="true" image ='imgTest' onAction='OnCalendarButtonPressed' getEnabled='getState' />                           
+              <menu id='menuMarkets' size="large" showImage="true" image="indi" label="Markets" getEnabled='getState'>
+                <button id='btnM_1' label='Currency' onAction='OnMarkets2ButtonPressed' />
+                <button id='btnM_2' label='Index' onAction='OnMarkets2ButtonPressed' />
+                <button id='btnM_3' label='Commodities' onAction='OnMarkets2ButtonPressed' />
+                <button id='btnM_4' label='Bonds' onAction='OnMarkets2ButtonPressed' />
+              </menu>
+              <button id='btnForecasts' label='Forecasts' size='large' showImage="true" image="mrkts" onAction='OnForecastsButtonPressed' getEnabled='getState'/>
+               <!-- <button id='btnTimeSeries' label='Time Series' size='large' showImage="true" image="hist" onAction='OnTSButtonPressed' getEnabled='getState'/>   -->
+              <button id='btnRefresh' label='Refresh' size='large' showImage="true" image="refresh" onAction='OnRefreshButtonPressed' getEnabled='getState'/> 
+            </group >
+            <group id='ApiKeyGroup' label='Login'>
+              <button id='btnApiKey' size='large' showImage="true" getImage="MyGetImage" onAction='OnApiKeyButtonPressed' getLabel='getLabelApi' />
+            </group>
+            <group id='helpGroup' label=' '>
+              <button id='btnHelp' label='Help' size='normal' onAction='OnHelpButtonPressed' />
+              <button id='btnCall' label='Contact'  onAction='OnCallButtonPressed' />
+            <button id='btnAbout' label='About'  onAction='OnAboutButtonPressed' />
+            </group>            
+          </tab>
+        </tabs>
+      </ribbon>
+    </customUI>
+  </CustomUI>
+</DnaLibrary>
