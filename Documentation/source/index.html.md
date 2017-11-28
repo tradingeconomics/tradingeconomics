@@ -1171,9 +1171,9 @@ For all methods listed above, you can get data in next formats:
 |    **Symbol**       | Unique symbol used by TradingEconomics                      |
 |     **Name**        | Company name                                                |
 |   **Actual**        | Earnings per share                                          |
-|  **Forecast**       | Average forecast among a representative group of economists |
+|  **Forecast**       | Average forecast among a representative group of analysts   |
 |  **FiscalTag**      | Fiscal year and quarter                                     |
-|**FiscalReference**  | Fiscal year and quarter with different format               |
+|**FiscalReference**  | Fiscal year and quarter in different format                 |
 |**CalendarReference**| Calendar quarter for the release                            |
 |   **Country**       | Country                                                     |
 |  **Currency**       | Currency                                                    |
