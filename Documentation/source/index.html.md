@@ -1108,24 +1108,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-10%2015:30">/markets/intraday/{symbol}?d1=yyyy-mm-dd hh:mm</a>
 
 * Filter intraday prices by date    
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>
-
-### Earnings
-
-* An earnings calendar     
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    
-
-* Filter earnings calendar by date    
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01">/earnings?d1=yyyy-mm-dd</a>    
-
-* Filter earnings calendar by market and date   
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2010-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a>    
-
-* Filter earnings calendar by market and date    
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2010-01-01&d2=2015-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>    
-
-* Filter earnings calendar by country    
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>   
 
 ### Market Lists
 
@@ -1164,6 +1147,23 @@ For all methods listed above, you can get data in next formats:
 |    **Group**    | Group of commodity                                       |
 |    **Symbol**   | Unique symbol used by TradingEconomics                   |
 | **LastUpdate**  | Time when new data was inserted or changed               |
+
+# Earnings
+
+* An earnings calendar     
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    
+
+* Filter earnings calendar by date    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01">/earnings?d1=yyyy-mm-dd</a>    
+
+* Filter earnings calendar by market and date   
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2010-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a>    
+
+* Filter earnings calendar by market and date    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2010-01-01&d2=2015-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>    
+
+* Filter earnings calendar by country    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> 
 
 # Streaming
 
