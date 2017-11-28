@@ -1310,17 +1310,70 @@ Please note the sample request is limited in scope to a few countries and indica
 <h1 id="earnings">Earnings</h1>
 
 <ul>
-<li><p>An earnings calendar<br>
+<li><p>Default earnings calendar<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    </p></li>
 <li><p>Filter earnings calendar by date<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01">/earnings?d1=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings calendar by market and date<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2010-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a>    </p></li>
-<li><p>Filter earnings calendar by market and date<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2010-01-01&d2=2015-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings calendar by country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> </p></li>
 </ul>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">Company name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Actual</strong></td>
+<td style="text-align: left">Earnings per share</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Forecast</strong></td>
+<td style="text-align: left">Average forecast among a representative group of economists</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>FiscalTag</strong></td>
+<td style="text-align: left">Fiscal year and quarter</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>FiscalReference</strong></td>
+<td style="text-align: left">Fiscal year and quarter with different format</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>CalendarReference</strong></td>
+<td style="text-align: left">Calendar quarter for the release</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Currency</strong></td>
+<td style="text-align: left">Currency</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
+</tr>
+</tbody></table>
 
 <h1 id="streaming">Streaming</h1>
 
