@@ -1150,20 +1150,34 @@ For all methods listed above, you can get data in next formats:
 
 # Earnings
 
-* An earnings calendar     
+* Default earnings calendar     
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    
 
 * Filter earnings calendar by date    
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01">/earnings?d1=yyyy-mm-dd</a>    
 
 * Filter earnings calendar by market and date   
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2010-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a>    
-
-* Filter earnings calendar by market and date    
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2010-01-01&d2=2015-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>    
 
 * Filter earnings calendar by country    
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> 
+
+### Response Fields
+
+|                     |                                                             |
+|:--------------------|:---------------------------------------------------------   |
+|     **Date**        | Release time and date in UTC                                |
+|    **Symbol**       | Unique symbol used by TradingEconomics                      |
+|     **Name**        | Company name                                                |
+|   **Actual**        | Earnings per share                                          |
+|  **Forecast**       | Average forecast among a representative group of economists |
+|  **FiscalTag**      | Fiscal year and quarter                                     |
+|**FiscalReference**  | Fiscal year and quarter with different format               |
+|**CalendarReference**| Calendar quarter for the release                            |
+|   **Country**       | Country                                                     |
+|  **Currency**       | Currency                                                    |
+| **LastUpdate**      | Time when new data was inserted or changed                  |
 
 # Streaming
 
