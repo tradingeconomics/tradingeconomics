@@ -1395,3 +1395,11 @@ Please note the sample request is limited in scope to a few countries and indica
 |   **Category**  | Indicator Category Name                                                                                                         |
 |    **Symbol**   | Unique symbol used by TradingEconomics                                                                                          |
 |     **Url**     | Indicator Hyperlink at Trading Economics                                                                                        |
+
+
+# Excel
+
+Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.  
+We support Excel 2010, 2013, 2016 (32 and 64bit).    
+After installing the Trading Economics Excel Add On click on TE tab and then click on login button, insert the access key and hit Submit button.    
+<a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a>
