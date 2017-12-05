@@ -5,28 +5,37 @@ import sys
 import json
 from pprint import pprint
 from time import sleep
+import datetime as dt
+import threading
 
+
+if len(sys.argv) == 4:
+    event = sys.argv[1]
+    client_key = sys.argv[2]  
+    client_secret = sys.argv[3]
+elif len(sys.argv) == 2:
+    event = sys.argv[1]
+    client_key = 'guest'  
+    client_secret = 'guest'
+    print 'You are subscribed as a guest user'
+else:
+    print 'Please provide the name of the event that you want to subscribe'
+    sys.exit(1) 
+    
 
 te_url = "ws://stream.tradingeconomics.com/"
-client_key = "guest" #API_CLIENT_KEY
-client_secret = "guest" #API_CLIENT_KEY
 
 reconnect_timeout = 60
 
 
 def on_message(ws, message):
     print "\n Msg from server:"
-    print message
+    print message, str(dt.datetime.utcnow())
     data = json.loads(message)
 
     if "topic" in data and data["topic"] != "keepalive":
         print "Save data to DB"
     
-
-
-
-
-
 def on_error(ws, error):
     print error
 
@@ -36,18 +45,10 @@ def on_close(ws):
     start_socket()
 
 
-
-
-#ws.close()
-
 def on_open(ws):
     print "+++ Socket is open!"
-    print "+++ Subscribe to calendar events..."
-    ws.send(json.dumps({'topic': 'subscribe', 'to': 'calendar'}) )
-    print "+++ Subscribe to EURUSD..."
-    ws.send(json.dumps({'topic': 'subscribe', 'to': 'EURUSD'}) )
-
-
+    print "+++ Subscribe to {0}".format(event)
+    ws.send(json.dumps({'topic': 'subscribe', 'to': event}) )
 
 
 
@@ -55,14 +56,21 @@ def build_url():
     return te_url + "?client=" + client_key + ":" + client_secret
 
 
-def start_socket():
+def start_socket():    
+    def _on_message(web_sock, message):
+        """ 
+            made so we do not have to reinitialize connection
+        """
+        t = threading.Thread(target=on_message, args=(web_sock, message))
+        t.start()
+    
     ws = websocket.WebSocketApp(build_url(),
-                              on_message = on_message,
+                              on_message = _on_message,
                               on_error = on_error,
                               on_close = on_close)
     ws.on_open = on_open
     ws.run_forever()
-
+    ws.close()
 
 
 
