@@ -15,7 +15,7 @@ cd open-api/stream/python
 pip install websocket-client
 ```
 
-#####5
+#####4
 ```
 python app.py event_name client_key client_secret
 ```
