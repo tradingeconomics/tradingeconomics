@@ -1200,18 +1200,12 @@ cd open-api/stream/python
 ```python
 pip install websocket-client
 ```
+
 <blockquote class="lang-specific python">
-<p>Step 4 - In app.py file, set-up your client key/secret</p>
+<p>Step 4 - Run it</p>
 </blockquote>
 ```python
-client_key = "API_CLIENT_KEY"
-client_secret = "API_CLIENT_KEY"
-```
-<blockquote class="lang-specific python">
-<p>Step 5 - Run it</p>
-</blockquote>
-```python
-python app.py
+python app.py event_name client_key client_secret
 ```
 <blockquote class="lang-specific python">
 <p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/stream/python/app.py">Check here for the complete sample code.</a></p>
