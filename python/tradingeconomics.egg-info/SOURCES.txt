@@ -10,6 +10,7 @@ tradingeconomics/glob.py
 tradingeconomics/historical.py
 tradingeconomics/indicators.py
 tradingeconomics/markets.py
+tradingeconomics/stream.py
 tradingeconomics.egg-info/PKG-INFO
 tradingeconomics.egg-info/SOURCES.txt
 tradingeconomics.egg-info/dependency_links.txt

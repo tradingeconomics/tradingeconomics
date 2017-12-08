@@ -9,3 +9,9 @@ def login(userkey = None):
     if apikey != 'guest:guest':
         fn.credCheck(apikey)
     return apikey
+
+
+def subscribe(ev):
+	global _event
+	_event = ev
+	return _event

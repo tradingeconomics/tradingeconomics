@@ -7,5 +7,5 @@ from calendar import getCalendarData
 from forecasts import getForecastData
 from indicators import getIndicatorData
 from markets import getMarketsData
-from glob import login
-
+from glob import login, subscribe
+from stream import run
