@@ -159,11 +159,11 @@ The API can be used to feed a custom developed application, a public website or 
 </code></pre>
 <blockquote class="lang-specific shell">
 <p>
-  Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add On</a> installer, launch it and follow the instructions.<br>    
+  Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
 We support Excel 2010, 2013, 2016 (32bit and 64bit). 
 </p>
 <br>
-<p>After installing the Trading Economics Excel Add On click on TE tab and than click on login button and follow instructions.</p>
+<p>After installing the Trading Economics Excel Add In click on TE tab and than click on login button and follow instructions.</p>
 </blockquote>
 
 <blockquote class="lang-specific r">
@@ -850,6 +850,8 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{country}/{indicators}</a></p></li>
 <li><p>Several countries and indicators<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a></p></li>
+<li><p>Credit Rating of the specific country
+<a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a></p></li>
 </ul>
 
 <p></span> </p>
@@ -1378,30 +1380,22 @@ Please note the sample request is limited in scope to a few countries and indica
 <h1 id="streaming">Streaming</h1>
 
 <blockquote class="lang-specific python">
-<p>In Windows Command Prompt or Linux bash execute next steps: <br>  
-    Step 1 - Clone repository</p>
+<p>
+ Step-1 
+</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ieconomics</span><span class="o">/</span><span class="nb">open</span><span class="o">-</span><span class="n">api</span><span class="o">.</span><span class="n">git</span>
-</code></pre>
-<blockquote class="lang-specific python">
-<p>Step 2</p>
-</blockquote>
-<pre class="highlight python"><code><span class="n">cd</span> <span class="nb">open</span><span class="o">-</span><span class="n">api</span><span class="o">/</span><span class="n">stream</span><span class="o">/</span><span class="n">python</span>
-</code></pre>
-<blockquote class="lang-specific python">
-<p>Step 3 - Install dependencies</p>
-</blockquote>
-<pre class="highlight python"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">websocket</span><span class="o">-</span><span class="n">client</span>
-</code></pre>
-<blockquote class="lang-specific python">
-<p>Step 4 - Run it</p>
-</blockquote>
-<pre class="highlight python"><code><span class="n">python</span> <span class="n">app</span><span class="o">.</span><span class="n">py</span> <span class="n">event_name</span> <span class="n">client_key</span> <span class="n">client_secret</span>
-</code></pre>
-<blockquote class="lang-specific python">
-<p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/stream/python/app.py">Check here for the complete sample code.</a></p>
-</blockquote>
+<pre class="highlight python"><code>  <span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
+  <span class="kn">import</span> <span class="nn">json</span>
 
+  <span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'guest:guest'</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="c">#Store data to the DB</span>
+
+  <span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD'</span><span class="p">)</span>
+  <span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
+</code></pre>
 <blockquote class="lang-specific javascript">
 <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
     Step 1 - Clone repository</p>
@@ -1673,7 +1667,7 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <h1 id="excel">Excel</h1>
 
-<p>Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add On</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add On click on TE tab and then click on login button, insert the access key and hit Submit button.<br>
+<p>Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.<br>
 <a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a></p>
 
       </div>
