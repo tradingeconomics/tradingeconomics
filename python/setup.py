@@ -17,5 +17,5 @@ setup(
   download_url = 'https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.80.zip', 
   keywords = ['tradingeconomics', 'data'], 
   classifiers = [ 'Programming Language :: Python :: 2.7'],
-  install_requires = ['pandas'],
+  install_requires = ['pandas', 'websocket-client'],
 )
