@@ -754,7 +754,7 @@ Please note the sample request is limited in scope to a few countries and indica
 * Several countries and indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
 
-* Credit Rating of the specific country
+* Credit Rating of the specific country    
 <a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>
 
 </span> 
@@ -1186,7 +1186,7 @@ For all methods listed above, you can get data in next formats:
 
 <blockquote class="lang-specific python">
 <p>
- Step-1 
+ Copy this code and execute
 </p>
 </blockquote>
 ```python
