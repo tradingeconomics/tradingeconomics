@@ -39,11 +39,11 @@ pip install tradingeconomics
 
 <blockquote class="lang-specific shell">
 <p>
-  Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add On</a> installer, launch it and follow the instructions.<br>    
+  Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
 We support Excel 2010, 2013, 2016 (32bit and 64bit). 
 </p>
 <br>
-<p>After installing the Trading Economics Excel Add On click on TE tab and than click on login button and follow instructions.</p>
+<p>After installing the Trading Economics Excel Add In click on TE tab and than click on login button and follow instructions.</p>
 </blockquote>
 
 
@@ -754,6 +754,9 @@ Please note the sample request is limited in scope to a few countries and indica
 * Several countries and indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
 
+* Credit Rating of the specific country
+<a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>
+
 </span> 
 
 ### Response Fields
@@ -1182,34 +1185,23 @@ For all methods listed above, you can get data in next formats:
 # Streaming
 
 <blockquote class="lang-specific python">
-<p>In Windows Command Prompt or Linux bash execute next steps: <br>  
-    Step 1 - Clone repository</p>
+<p>
+ Step-1 
+</p>
 </blockquote>
 ```python
-git clone https://github.com/ieconomics/open-api.git
-```
-<blockquote class="lang-specific python">
-<p>Step 2</p>
-</blockquote>
-```python
-cd open-api/stream/python
-```
-<blockquote class="lang-specific python">
-<p>Step 3 - Install dependencies</p>
-</blockquote>
-```python
-pip install websocket-client
-```
+  import tradingeconomics as te
+  import json
 
-<blockquote class="lang-specific python">
-<p>Step 4 - Run it</p>
-</blockquote>
-```python
-python app.py event_name client_key client_secret
+  te.login('guest:guest')
+
+  def on_message(ws, message):
+    print json.loads(message)
+    #Store data to the DB
+    
+  te.subscribe('EURUSD')
+  te.run(on_message)
 ```
-<blockquote class="lang-specific python">
-<p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/stream/python/app.py">Check here for the complete sample code.</a></p>
-</blockquote>
 
 <blockquote class="lang-specific javascript">
 <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
@@ -1395,5 +1387,5 @@ Please note the sample request is limited in scope to a few countries and indica
 
 
 
-Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add On</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add On click on TE tab and then click on login button, insert the access key and hit Submit button.    
+Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.    
 <a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a>
