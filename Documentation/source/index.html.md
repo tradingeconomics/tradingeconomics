@@ -1394,7 +1394,7 @@ Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/
 <a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a>
 
 
-# WorldBank Data
+# World Bank Data
 
 
 Main categories:    
