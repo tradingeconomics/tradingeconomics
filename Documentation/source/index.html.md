@@ -754,8 +754,8 @@ Please note the sample request is limited in scope to a few countries and indica
 * Several countries and indicators    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>    
 
-* Specific indicator for all countries
-<a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicators}</a>
+* Specific indicator for all countries    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicator}</a>
 
 * Credit Rating of the specific country    
 <a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>
