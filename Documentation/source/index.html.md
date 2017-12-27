@@ -752,7 +752,10 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{country}/{indicators}</a>
 
 * Several countries and indicators    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>    
+
+* Specific indicator for all countries
+<a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicators}</a>
 
 * Credit Rating of the specific country    
 <a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>
@@ -1389,3 +1392,38 @@ Please note the sample request is limited in scope to a few countries and indica
 
 Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.    
 <a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a>
+
+
+# WorldBank Data
+
+
+Main categories:    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldbank/categories?c=guest:guest">http://api.tradingeconomics.com/worldbank/categories?c=guest:guest</a>
+
+
+Filtering by the main categories:    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest</a>
+
+this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so:    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest</a>
+
+
+Using the indicators from the previous methods we can get a snap:    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr</a>
+
+we can also just get for a country for example:    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr</a>
+
+
+Another way to use the snap is by the trading economics url:    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldbank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">http://api.tradingeconomics.com/worldbank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html</a>
+
+
+Filtering by country (also with pagination):    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest</a>
+
+
+Finally, the historical can be retrieved with the symbol/ticker/indicator:    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr</a>
+
+All of this can be formatted to json by appending "&format=json"
