@@ -1193,17 +1193,16 @@ For all methods listed above, you can get data in next formats:
 </p>
 </blockquote>
 ```python
-  import tradingeconomics as te
-  import json
+import tradingeconomics as te
+import json
 
-  te.login('guest:guest')
+te.login('guest:guest')
 
-  def on_message(ws, message):
-    print json.loads(message)
-    #Store data to the DB
+def on_message(ws, message):
+  print json.loads(message)
     
-  te.subscribe('EURUSD')
-  te.run(on_message)
+te.subscribe('EURUSD')
+te.run(on_message)
 ```
 
 <blockquote class="lang-specific javascript">
@@ -1248,24 +1247,6 @@ node app.js
 
 The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. 
 
-**Streaming Endpoint**    
-`ws://stream.tradingeconomics.com/`
-
-**Connecting to Stream**    
-Our data is Streamed using <a target = '_blank' href="https://en.wikipedia.org/wiki/WebSocket">websocket protocol</a>. Meaning you can use programming language of your choice, as long as it supports websockets.
-
-**Opening the connection:**    
-Only Authorized users may establish a persistent real time connection with Trading Economics API Stream. In order to do so, you have to start a handshaking process. On the handshake, you have to use client key/secret in order to Authorize. These credentials must be added to the connection query:
-
-**Client key/secret**    
-`ws://stream.tradingeconomics.com/?client=YOUR_CLIENT_KEY:YOUR_CLIENT_SECRET`
-
-**Subscribe to a Channel**    
-After establishing the connection, you are able to subscribe to one or more topics. In order to subscribe to a channel, you must send a message to the stream server passing the topic name as the argument.    
-Our streaming service provides live data on Economic Data, Markets and Commodities.
-
-**Subscribe to Calendar Events:**  
-`'{"topic": "subscribe", "to": "calendar"}'` 
 
 **Response fields for the calendar subscription:**
 
@@ -1283,19 +1264,6 @@ Our streaming service provides live data on Economic Data, Markets and Commoditi
 |    **teforecast**   |                                                        TE own projections                                                       |
 |    **importance**   |                                                   1 = low, 2 = medium, 3 = high                                                 |
 
-**Subscribe to Markets in Bulk:**      
-`'{"topic": "subscribe", "to": "currencies"}'    
-'{"topic": "subscribe", "to": "indexes"}'    
-'{"topic": "subscribe", "to": "commodities"}'    
-'{"topic": "subscribe", "to": "bonds"}'` 
-
-**Subscribe to Individual Markets:**    
-`'{"topic": "subscribe", "to": "EURUSD"}'    
-'{"topic": "subscribe", "to": "DXY"}'    
-'{"topic": "subscribe", "to": "INDU"}'    
-'{"topic": "subscribe", "to": "XAUUSD:CUR"}'   
-'{"topic": "subscribe", "to": "AAPL:US"}' `     
-Plus any indicator listed at Trading Economics.
 
 **Response fields for the markets subscription:**
 
@@ -1386,15 +1354,8 @@ Please note the sample request is limited in scope to a few countries and indica
 |     **Url**     | Indicator Hyperlink at Trading Economics                                                                                        |
 
 
-# Excel
 
-
-
-Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.    
-<a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a>
-
-
-# World Bank Data
+# World Bank
 
 
 Main categories:    
@@ -1427,3 +1388,10 @@ Finally, the historical can be retrieved with the symbol/ticker/indicator:
 <a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr</a>
 
 All of this can be formatted to json by appending "&format=json"
+
+# Excel
+
+
+
+Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.    
+<a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a>
