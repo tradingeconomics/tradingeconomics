@@ -1386,17 +1386,16 @@ Please note the sample request is limited in scope to a few countries and indica
  Copy this code and execute
 </p>
 </blockquote>
-<pre class="highlight python"><code>  <span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
-  <span class="kn">import</span> <span class="nn">json</span>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
-  <span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'guest:guest'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'guest:guest'</span><span class="p">)</span>
 
-  <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-    <span class="c">#Store data to the DB</span>
+<span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+  <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
-  <span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD'</span><span class="p">)</span>
-  <span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
 <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
@@ -1434,25 +1433,6 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote>
 
 <p>The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. </p>
-
-<p><strong>Streaming Endpoint</strong><br>
-<code class="prettyprint">ws://stream.tradingeconomics.com/</code></p>
-
-<p><strong>Connecting to Stream</strong><br>
-Our data is Streamed using <a target = '_blank' href="https://en.wikipedia.org/wiki/WebSocket">websocket protocol</a>. Meaning you can use programming language of your choice, as long as it supports websockets.</p>
-
-<p><strong>Opening the connection:</strong><br>
-Only Authorized users may establish a persistent real time connection with Trading Economics API Stream. In order to do so, you have to start a handshaking process. On the handshake, you have to use client key/secret in order to Authorize. These credentials must be added to the connection query:</p>
-
-<p><strong>Client key/secret</strong><br>
-<code class="prettyprint">ws://stream.tradingeconomics.com/?client=YOUR_CLIENT_KEY:YOUR_CLIENT_SECRET</code></p>
-
-<p><strong>Subscribe to a Channel</strong><br>
-After establishing the connection, you are able to subscribe to one or more topics. In order to subscribe to a channel, you must send a message to the stream server passing the topic name as the argument.<br>
-Our streaming service provides live data on Economic Data, Markets and Commodities.</p>
-
-<p><strong>Subscribe to Calendar Events:</strong><br>
-<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;calendar&quot;}&#39;</code> </p>
 
 <p><strong>Response fields for the calendar subscription:</strong></p>
 
@@ -1507,20 +1487,6 @@ Our streaming service provides live data on Economic Data, Markets and Commoditi
 <td style="text-align: left">1 = low, 2 = medium, 3 = high</td>
 </tr>
 </tbody></table>
-
-<p><strong>Subscribe to Markets in Bulk:</strong><br>
-<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;currencies&quot;}&#39;    
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;indexes&quot;}&#39;    
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;commodities&quot;}&#39;    
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;bonds&quot;}&#39;</code> </p>
-
-<p><strong>Subscribe to Individual Markets:</strong><br>
-<code class="prettyprint">&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;EURUSD&quot;}&#39;    
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;DXY&quot;}&#39;    
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;INDU&quot;}&#39;    
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;XAUUSD:CUR&quot;}&#39;   
-&#39;{&quot;topic&quot;: &quot;subscribe&quot;, &quot;to&quot;: &quot;AAPL:US&quot;}&#39;</code><br>
-Plus any indicator listed at Trading Economics.</p>
 
 <p><strong>Response fields for the markets subscription:</strong></p>
 
@@ -1667,12 +1633,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 </tbody></table>
 
-<h1 id="excel">Excel</h1>
-
-<p>Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.<br>
-<a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a></p>
-
-<h1 id="world-bank-data">World Bank Data</h1>
+<h1 id="world-bank">World Bank</h1>
 
 <p>Main categories:<br>
 <a target = '_blank' href="http://api.tradingeconomics.com/worldbank/categories?c=guest:guest">http://api.tradingeconomics.com/worldbank/categories?c=guest:guest</a></p>
@@ -1699,6 +1660,11 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&amp;s=usa.fr.inr.rinr</a></p>
 
 <p>All of this can be formatted to json by appending &ldquo;&amp;format=json&rdquo;</p>
+
+<h1 id="excel">Excel</h1>
+
+<p>Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.<br>
+<a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a></p>
 
       </div>
       <div class="dark-box">
