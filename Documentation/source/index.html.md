@@ -1397,15 +1397,24 @@ Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/
 <a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a>
 
 
+
 <!-- Start of LiveChat (www.livechatinc.com) code -->
 <script type="text/javascript">
-   console.log("livechatinc");
-window.__lc = window.__lc || {};
-window.__lc.license = 9383265;
-(function() {
- var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
- lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
- var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
-})();
+  var theDate = new Date();
+  if(theDate.getUTCMinutes() > 45){
+      console.log("livechatinc");
+      window.__lc = window.__lc || {};
+      window.__lc.license = 9383265;
+      (function() {
+       var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+       lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+      })();
+
+  }
+
+
+
+
 </script>
 <!-- End of LiveChat code -->
