@@ -1083,7 +1083,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a>
 
 * Government Bonds    
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/bonds?c=guest:guest">/markets/bonds</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/bond?c=guest:guest">/markets/bond</a>
 
 * Individual Market (stock, index, currency, commodity or bond)    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest">/markets/symbol/{symbol}</a>
