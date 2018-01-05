@@ -1401,7 +1401,7 @@ Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/
 <!-- Start of LiveChat (www.livechatinc.com) code -->
 <script type="text/javascript">
   var theDate = new Date();
-  if(theDate.getUTCMinutes() > 45){
+  if(theDate.getUTCHours() > 9 && theDate.getUTCHours() < 18){
       console.log("livechatinc");
       window.__lc = window.__lc || {};
       window.__lc.license = 9383265;
