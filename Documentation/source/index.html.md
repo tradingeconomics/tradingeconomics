@@ -1393,20 +1393,20 @@ All of this can be formatted to json by appending "&format=json"
 # Comtrade
 
 
-All comtrade categories
+All comtrade categories    
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/categories?c=guest:guest">http://api.tradingeconomics.com/comtrade/categories?c=guest:guest</a>
 
-All comtrade countries
+All comtrade countries    
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/countries?c=guest:guest">http://api.tradingeconomics.com/comtrade/countries?c=guest:guest</a>
 
 Snapshot for a country    
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/snapshot/portugal?c=guest:guest">http://api.tradingeconomics.com/comtrade/snapshot/portugal?c=guest:guest</a>    
-this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so:   
+this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so   
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/snapshot/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/snapshot/portugal/2?c=guest:guest</a>
 
 Snapshot between two countries    
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/snapshot/portugal/spain?c=guest:guest">http://api.tradingeconomics.com/comtrade/snapshot/portugal/spain?c=guest:guest</a>     
-this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so:   
+this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so   
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/snapshot/portugal/spain/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/snapshot/portugal/spain/2?c=guest:guest</a>
 
 Historical data    
