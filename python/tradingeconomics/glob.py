@@ -8,10 +8,10 @@ def login(userkey = None):
         apikey = userkey
     if apikey != 'guest:guest':
         fn.credCheck(apikey)
-    return apikey
+    return 'You are logged in as a ' + apikey
 
 
 def subscribe(ev):
 	global _event
 	_event = ev
-	return _event
+	return 'You are subscribed to ' + _event
