@@ -1,8 +1,6 @@
+source("R/functions.R")
 
-dateCheck <- function(some_date){
-  pattern <- "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-  if (!grepl(pattern, some_date)) stop('Incorrect date format!')
-}
+
 
 #'Return calendar events from Trading Economics API
 #'@import jsonlite
@@ -77,17 +75,14 @@ getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, en
 
     url <- paste(url, '?c=', apiKey, sep = '')
     url <- URLencode(url)
-    http <- http_status(GET(url))
+    request <- GET(url)
 
-    if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-      stop(paste('Something went wrong: ', http$message, sep=" "))
-    }
+    checkRequestStatus(http_status(request)$message)
 
-    webData <-fromJSON(url)
-    webResults <- data.frame('Date' = webData$Date, 'Country' = webData$Country, 'Category' = webData$Category, 'Event' = webData$Event,
-                             'Reference' = webData$Reference, 'Unit' = webData$Unit, 'Source' = webData$Source, 'Actual' = webData$Actual,
-                             'Previous' = webData$Previous, 'Forecast' = webData$Forecast, 'TEForecast' = webData$TEForecast)
+    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
     df_final = rbind(df_final, webResults)
+    Sys.sleep(0.5)
   }
 
   if (is.null(outType)| identical(outType, 'lst')){

@@ -1,5 +1,7 @@
+source("R/functions.R")
 
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+
 
 
 #'Get markets values from Trading Economics API
@@ -21,34 +23,21 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
 getMarketsData <- function(marketsField, outType = NULL){
   base <- "https://api.tradingeconomics.com/markets"
-  fields <- c('commodities', 'currency', 'index', 'bonds')
+  fields <- c('commodities', 'currency', 'index', 'bond')
 
   if (!(marketsField %in% fields)){
-    stop('Possible values for marketsField are commodities, currency, index or bonds')
+    stop('Possible values for marketsField are commodities, currency, index or bond')
   } else {
     url <- paste(base, marketsField, sep = '/')
   }
 
   url <- paste(url, '?c=', apiKey, sep = '')
   url <- URLencode(url)
-  http <- http_status(GET(url))
+  request <- GET(url)
 
-  if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-    stop(paste('Something went wrong: ', http$message, sep=" "))
-  }
+  checkRequestStatus(http_status(request)$message)
 
-  webData <-fromJSON(url)
-  webData$Group <- trim(webData$Group)
-
-  if (marketsField == 'bonds'){
-    webData$Ticker <- rep(NA, length(webData$Symbol))
-  }
-  webResults <- data.frame('Symbol' = webData$Symbol,'Ticker' = webData$Ticker,'Name' = webData$Name, 'Country' = webData$Country, 'Date' = webData$Date,
-                           'Last' = webData$Last, 'Group' = webData$Group,'URL' = webData$URL,'Importance' = webData$Importance,'DailyChange' = webData$DailyChange,
-                           'DailyPercentualChange' = webData$DailyPercentualChange,'WeeklyChange' = webData$WeeklyChange,'WeeklyPercentualChange' = webData$WeeklyPercentualChange,
-                           'MonthlyChange' = webData$MonthlyChange,'MonthlyPercentualChange' = webData$MonthlyPercentualChange,'YearlyChange' = webData$YearlyChange,'YearlyPercentualChange' = webData$YearlyPercentualChange,
-                           'YTDChange' = webData$YTDChange,'YTDPercentualChange' = webData$YTDPercentualChange,'yesterday' = webData$yesterday,'lastWeek' = webData$lastWeek,'lastMonth' = webData$lastMonth,
-                           'lastYear' = webData$lastYear,'startYear' = webData$startYear)
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
 
   if (is.null(outType)| identical(outType, 'lst')){
     webResults <- split(webResults , f =paste(webResults$Country,webResults$Group))
@@ -60,7 +49,5 @@ getMarketsData <- function(marketsField, outType = NULL){
 
   return(webResults)
 }
-
-
 
 

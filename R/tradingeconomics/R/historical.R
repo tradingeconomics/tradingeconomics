@@ -1,4 +1,4 @@
-
+source("R/functions.R")
 
 lower.Date <- function(country, indicator, apiKey){
   base <-  "https://api.tradingeconomics.com/historical/country"
@@ -15,10 +15,6 @@ lower.Date <- function(country, indicator, apiKey){
 }
 
 
-dateCheck <- function(some_date){
-  pattern <- "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
-  if (!grepl(pattern, some_date)) stop('Incorrect date format!')
-}
 
 #'Return historical information from Trading Economics API.
 #'@export getHistoricalData
@@ -88,17 +84,14 @@ getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL,
 
     url <- paste(url_base, '?c=', apiKey, sep = '')
     url <- URLencode(url)
-    http <- http_status(GET(url))
+    request <- GET(url)
 
-    if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-      stop(paste('Something went wrong: ', http$message, sep=" "))
-    }
+    checkRequestStatus(http_status(request)$message)
 
-    webData <-fromJSON(url)
-    webResults <- data.frame('Country' = webData$Country, 'Category' = webData$Category,
-                             'Date'= webData$DateTime, 'Value' = webData$Value,
-                             'Frequency' = webData$Frequency)
+    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
     df_final = rbind(df_final, webResults)
+    Sys.sleep(0.5)
   }
 
   if (is.null(outType)| identical(outType, 'lst')){

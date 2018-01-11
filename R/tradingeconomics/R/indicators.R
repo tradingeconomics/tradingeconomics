@@ -1,3 +1,5 @@
+source("R/functions.R")
+
 
 #'Return indicators information from Trading Economics API
 #'@export getIndicatorData
@@ -47,24 +49,14 @@ getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL){
 
     url <- paste(url, '?c=', apiKey, sep = '')
     url <- URLencode(url)
-    http <- http_status(GET(url))
+    request <- GET(url)
 
-    if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-      stop(paste('Something went wrong: ', http$message, sep=" "))
-    }
+    checkRequestStatus(http_status(request)$message)
 
-    webData <-fromJSON(url)
+    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
 
-    if (is.null(country) & is.null(indicator)){
-      webResults <- data.frame('Category' = webData$Category, 'CategoryGroup' = webData$CategoryGroup)
-    } else {
-      webResults <- data.frame('Country' =webData$Country, 'Category' = webData$Category, 'Title' = webData$Title,  'LatestValue' = webData$LatestValue,
-                             'LatestValueDate' = webData$LatestValueDate,  'Source' = webData$Source, 'Unit' = webData$Unit,
-                             'URL' = webData$URL, 'CategoryGroup' = webData$CategoryGroup, 'Frequency' = webData$Frequency,
-                             'HistoricalDataSymbol' = webData$HistoricalDataSymbol, 'PreviousValue' = webData$PreviousValue,
-                             'PreviousValueDate' = webData$PreviousValueDate)
-    }
     df_final = rbind(df_final, webResults)
+    Sys.sleep(0.5)
   }
       if (is.null(outType)| identical(outType, 'lst')){
         df_final <- split(df_final , f = paste(df_final$Country,df_final$Category))

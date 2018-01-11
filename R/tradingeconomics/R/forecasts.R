@@ -1,3 +1,6 @@
+source("R/functions.R")
+
+
 
 #'Return forecast values from Trading Economics API
 #'@export getForecastData
@@ -50,18 +53,14 @@ getForecastData <- function(country = NULL, indicator = NULL, outType = NULL){
 
     url <- paste(url, '?c=', apiKey, sep = '')
     url <- URLencode(url)
-    http <- http_status(GET(url))
+    request <- GET(url)
 
-    if (class(try(fromJSON(url), silent=TRUE)) == 'try-error') {
-      stop(paste('Something went wrong: ', http$message, sep=" "))
-    }
+    checkRequestStatus(http_status(request)$message)
 
-    webData <-fromJSON(url)
-    webResults <- data.frame('Country' =webData$Country, 'Category' = webData$Category, 'LatestValue' = webData$LatestValue,
-                             'LatestValueDate' = webData$LatestValueDate,  'YearEnd' = webData$YearEnd, 'YearEnd2' = webData$YearEnd2,
-                             'YearEnd3' = webData$YearEnd3, 'q1' = webData$q1, 'q1_date' = webData$q1_date, 'q2' = webData$q2, 'q2_date' = webData$q2_date,
-                             'q3' = webData$q3, 'q3_date' = webData$q3_date, 'q4' = webData$q4, 'q4_date' = webData$q4_date)
+    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
     df_final = rbind(df_final, webResults)
+    Sys.sleep(0.5)
   }
 
   if (is.null(outType)| identical(outType, 'lst')){
