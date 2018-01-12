@@ -216,8 +216,147 @@ Using Headers auth:
 Without APIkeys all requests will return the default sample data.
 
 
-# Historical
+# Indicators
+
+Here you can get a list of all indicators, indicators by country, country-indicator pair and historical information for specific country and indicator.
+Click on any method below for a sample. Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
+
+
+<blockquote class="lang-specific r">
+<p>For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt </p>
+</blockquote>   
+```r
+getIndicatorData(country = 'italy', indicator = 'bankruptcies', outType = 'df')
+
+    Country     Category              Title LatestValue     LatestValueDate Source      Unit                 URL CategoryGroup Frequency HistoricalDataSymbol PreviousValue   PreviousValueDate
+  1   Italy Bankruptcies Italy Bankruptcies        3600 2016-03-31T00:00:00 Cerved Companies /italy/bankruptcies      Business Quarterly             ITALYBAN          4100 2015-12-31T00:00:00
+```
+<blockquote class="lang-specific r">
+<p>To get several countries and indicators </p>
+</blockquote>   
+```r
+getIndicatorData(country = c('united states','china'), indicator = c('gdp','inflation rate'), outType = 'df')
+```
+
+<blockquote class="lang-specific python">
+<p>To get List of Indicators by Country: </p>
+</blockquote>
+```python
+te.getIndicatorData(country = ['united states', 'china'])
+```
+<blockquote class="lang-specific python">
+<p>To get Country/Indicator pair: </p>
+</blockquote>
+```python
+te.getIndicatorData(country = 'united states', indicators = 'gdp')
+```
+
+<blockquote class="lang-specific shell">
+<p>Click Indicators button on TE ribbon and then follow the instructions in the dialog box.    
+Or type in any empty cell:</p>
+</blockquote>
+```shell
+=TEIndicators( "united states", "bankruptcies", "Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate", B2)
+```
+```javascript
+var http = require('https');
+var headers = {
+    'Accept': 'Application/xml',
+    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
+};
+var buffer = '';
+var options = {
+    host: 'api.tradingeconomics.com',
+    port: 80,
+    path: '/indicators',
+    headers: headers
+};
+callback = function(response) {
+    response.on('data', function (chunk) {
+    buffer += chunk;
+});
+response.on('end', function () {
+    // your code here if you want to use the results !
+});
+}
+  
+var req = http.get(options, callback).end();       
+```
+
+```jsonnet
+var url = 'https://api.tradingeconomics.com/indicators?c=guest:guest';
+$.ajax({
+        url: url,
+        type: "GET",
+        dataType: 'json'
+}).done(function (data) {
+    console.log(data);
+});
+```
+
+```csharp
+using (var client = new HttpClient())
+{
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
+    client.DefaultRequestHeaders.Clear();
+    //ADD Acept Header to tell the server what data type you want
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+    //ADD Authorization
+    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
+    client.DefaultRequestHeaders.Authorization = auth;
+    //SET Parameters
+    HttpResponseMessage response = await client.GetAsync("/indicators");
+    if (response.IsSuccessStatusCode)
+    {
+        //Your custom response parser code
+    }
+}
+```
+
+```java
+String uri = "https://api.tradingeconomics.com//indicators";
+URL url = new URL(uri);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Accept", "application/xml");
+InputStream xml = connection.getInputStream();
+```
+
+```php
+<?php
+$url = 'https://api.tradingeconomics.com/country';
+$headers = array(
+    "Accept: application/xml",
+    "Authorization: OAuth YOUR_TOKEN_VALUE"
+);
+$handle = curl_init(); 
+    curl_setopt($handle, CURLOPT_URL, $url);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
     
+    $data = curl_exec($handle);
+curl_close($handle);
+//parse your data to satusfy your needs....
+?>
+```
+
+### Methods
+
+
+<span class="methods">
+
+* List of all indicators  
+<a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
+
+* List of indicators by country    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a>
+
+* Specific indicator for all countries    
+<a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicator}</a>
+
+* Credit Rating of the specific country    
+<a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>
+
 <blockquote class="lang-specific r">
 <p>For example, to get historical data of imports in United Kingdom type:</p>
 </blockquote>  
@@ -354,11 +493,7 @@ curl_close($handle);
 ?>
 ```
 
-Here you can get historical information for specific a country and indicator.
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
-
-### Methods
+**Historical**
 
 <span class="methods">
 
@@ -371,18 +506,12 @@ or you can specify a start date and end date
 
 * Multiple indicators for specific country    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population/2015-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Specific indicator for multiple countries    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Multiple indicators for multiple countries    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population/2015-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a>    
-<a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population/2016-01-01/2016-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 </span> 
 
@@ -393,10 +522,14 @@ or you can specify a start date and end date
 |     **Country**     |                                                           Country name                                                          |
 |     **Category**    |                                                      Indicator Category Name                                                    |
 |   **Date Time**     |                                                   Release time and date in UTC                                                  |
+|      **Title**      |                                                 Combination of country/category                                                 |
+|      **Source**     |                                                          Source of data                                                         |
 |      **Close**      |                                                           Value                                                 |
 |    **Frequency**    |                                           Frequency of the indicator                                          |
 |**HistoricalDataSymbol**|                               Unique symbol used by TradingEconomics                                                         |
 |    **LastUpdate**   |                                            Time when new data was inserted or changed                                           |
+|       **URL**       |                                       Indicator Hyperlink at Trading Economicse                                                 |
+
 
 # Calendar
    
@@ -600,180 +733,6 @@ Please note the sample request is limited in scope to a few countries and indica
 |       **URL**       |                                               Indicator Hyperlink at Trading Economics                                          |
 |    **Importance**   |                                                   1 = low, 2 = medium, 3 = high                                                 |
 |    **LastUpdate**   |                                            Time when new data was inserted or changed                                           |
-
-# Indicators
-
-<blockquote class="lang-specific r">
-<p>For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt </p>
-</blockquote>   
-```r
-getIndicatorData(country = 'italy', indicator = 'bankruptcies', outType = 'df')
-
-    Country     Category              Title LatestValue     LatestValueDate Source      Unit                 URL CategoryGroup Frequency HistoricalDataSymbol PreviousValue   PreviousValueDate
-  1   Italy Bankruptcies Italy Bankruptcies        3600 2016-03-31T00:00:00 Cerved Companies /italy/bankruptcies      Business Quarterly             ITALYBAN          4100 2015-12-31T00:00:00
-```
-<blockquote class="lang-specific r">
-<p>To get several countries and indicators </p>
-</blockquote>   
-```r
-getIndicatorData(country = c('united states','china'), indicator = c('gdp','inflation rate'), outType = 'df')
-```
-
-<blockquote class="lang-specific python">
-<p>To get List of Indicators by Country: </p>
-</blockquote>
-```python
-te.getIndicatorData(country = ['united states', 'china'])
-```
-<blockquote class="lang-specific python">
-<p>To get Country/Indicator pair: </p>
-</blockquote>
-```python
-te.getIndicatorData(country = 'united states', indicators = 'gdp')
-```
-<blockquote class="lang-specific python">
-<p>To get Several Countries and Indicators: </p>
-</blockquote>
-```python
-te.getIndicatorData(country = ['united states', 'china'], indicators = ['gdp', 'population'])
-```
-
-<blockquote class="lang-specific shell">
-<p>Click Indicators button on TE ribbon and then follow the instructions in the dialog box.    
-Or type in any empty cell:</p>
-</blockquote>
-```shell
-=TEIndicators( "united states", "bankruptcies", "Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate", B2)
-```
-```javascript
-var http = require('https');
-var headers = {
-    'Accept': 'Application/xml',
-    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
-};
-var buffer = '';
-var options = {
-    host: 'api.tradingeconomics.com',
-    port: 80,
-    path: '/indicators',
-    headers: headers
-};
-callback = function(response) {
-    response.on('data', function (chunk) {
-    buffer += chunk;
-});
-response.on('end', function () {
-    // your code here if you want to use the results !
-});
-}
-  
-var req = http.get(options, callback).end();       
-```
-
-```jsonnet
-var url = 'https://api.tradingeconomics.com/indicators?c=guest:guest';
-$.ajax({
-        url: url,
-        type: "GET",
-        dataType: 'json'
-}).done(function (data) {
-    console.log(data);
-});
-```
-
-```csharp
-using (var client = new HttpClient())
-{
-    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
-    client.DefaultRequestHeaders.Clear();
-    //ADD Acept Header to tell the server what data type you want
-    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
-    //ADD Authorization
-    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
-    client.DefaultRequestHeaders.Authorization = auth;
-    //SET Parameters
-    HttpResponseMessage response = await client.GetAsync("/indicators");
-    if (response.IsSuccessStatusCode)
-    {
-        //Your custom response parser code
-    }
-}
-```
-
-```java
-String uri = "https://api.tradingeconomics.com//indicators";
-URL url = new URL(uri);
-HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-    connection.setRequestMethod("GET");
-    connection.setRequestProperty("Accept", "application/xml");
-InputStream xml = connection.getInputStream();
-```
-
-```php
-<?php
-$url = 'https://api.tradingeconomics.com/country';
-$headers = array(
-    "Accept: application/xml",
-    "Authorization: OAuth YOUR_TOKEN_VALUE"
-);
-$handle = curl_init(); 
-    curl_setopt($handle, CURLOPT_URL, $url);
-    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    
-    $data = curl_exec($handle);
-curl_close($handle);
-//parse your data to satusfy your needs....
-?>
-```
-
-Here you can get a list of all indicators, indicators by country or country-indicator pair.
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
-
-### Methods
-
-
-<span class="methods">
-
-* List of all indicators  
-<a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
-
-* List of indicators by country    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a> 
-
-* List of indicators with multiple countries        
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china?c=guest:guest">/country/{countries}</a>
-
-* Country/Indicator pair    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp?c=guest:guest">/country/{country}/{indicator}</a>    
-
-* Country/Indicator pairs with multiple indicators    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states/gdp,population?c=guest:guest">/country/{country}/{indicators}</a>
-
-* Several countries and indicators    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/united states,china/gdp,population?c=guest:guest">/country/{countries}/{indicators}</a>    
-
-* Specific indicator for all countries    
-<a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicator}</a>
-
-* Credit Rating of the specific country    
-<a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>
-
-</span> 
-
-### Response Fields
-
-|                     |                                                                                                                                 |
-|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
-|     **Country**     |                                                           Country name                                                          |
-|     **Category**    |                                                     Indicator Category Name                                                     |
-|      **Title**      |                                                 Combination of country/category                                                 |
-|      **Source**     |                                                          Source of data                                                         |
-|    **Frequency**    |                                           Frequency of the indicator                                                            |
-|       **URL**       |                                       Indicator Hyperlink at Trading Economicse                                                 |
-|**HistoricalDataSymbol**|                               Unique symbol used by TradingEconomics                                                         |
-
 
 
 # Forecast
@@ -1299,16 +1258,16 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <span class="methods">
 
-* Get latest news of data    
+* Get latest news    
 <a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/news</a>
 
-* Get news of data by country   
+* Get news by country   
 <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/{countries}</a>
 
-* Get news of data by indicator    
+* Get news by indicator    
 <a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/{indicators}</a>
 
-* Get news of data by country and indicator    
+* Get news by country and indicator    
 <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/{countries}/{indicators}</a>
 
 </span> 
@@ -1319,9 +1278,6 @@ Please note the sample request is limited in scope to a few countries and indica
 
 * Latest articles    
 <a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest">/articles</a>
-
-* Paginate over articles   
-<a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&skip=10&lim=10">/articles?c=guest:guest&skip=X&lim=Y</a>
 
 * Latest articles by country    
 <a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states?c=guest:guest">/articles/country/{countries}</a>
@@ -1363,29 +1319,29 @@ Main categories
 
 
 Filtering by the main categories    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}?c=guest:guest</a>
 
 this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}/2?c=guest:guest</a>
 
 
 Using the indicators from the previous methods we can get a snap    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s={indicator}</a>
 
 we can also just get for a country for example    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s={indicator}</a>
 
 
 Another way to use the snap is by the trading economics url    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldbank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">http://api.tradingeconomics.com/worldbank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldbank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">http://api.tradingeconomics.com/worldbank/indicator?c=guest:guest&url={tradingeconomics url}</a>
 
 
 Filtering by country (also with pagination)    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/{country}/2?c=guest:guest</a>
 
 
 Finally, the historical can be retrieved with the symbol/ticker/indicator    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s={indicator}</a>
 
 All of this can be formatted to json by appending "&format=json"
 
@@ -1400,17 +1356,17 @@ All comtrade countries
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/countries?c=guest:guest">http://api.tradingeconomics.com/comtrade/countries?c=guest:guest</a>
 
 Snapshot for a country    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/snapshot/portugal?c=guest:guest">http://api.tradingeconomics.com/comtrade/snapshot/portugal?c=guest:guest</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}?c=guest:guest</a>    
 this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so   
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/snapshot/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/snapshot/portugal/2?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}/2?c=guest:guest</a>
 
 Snapshot between two countries    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/snapshot/portugal/spain?c=guest:guest">http://api.tradingeconomics.com/comtrade/snapshot/portugal/spain?c=guest:guest</a>     
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/spain?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country_1}/{country_2}?c=guest:guest</a>     
 this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so   
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/snapshot/portugal/spain/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/snapshot/portugal/spain/2?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country_1}/{country_2}/2?c=guest:guest</a>
 
 Historical data    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">http://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">http://api.tradingeconomics.com/comtrade/historical/{symbol}?c=guest:guest</a>
 
 
 # Excel
