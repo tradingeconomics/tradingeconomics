@@ -1315,33 +1315,30 @@ Please note the sample request is limited in scope to a few countries and indica
 
 
 Main categories    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldbank/categories?c=guest:guest">http://api.tradingeconomics.com/worldbank/categories?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/categories?c=guest:guest">http://api.tradingeconomics.com/worldBank/categories?c=guest:guest</a>
 
 
 Filtering by the main categories    
 <a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}?c=guest:guest</a>
-
-this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}/2?c=guest:guest</a>
-
-
-Using the indicators from the previous methods we can get a snap    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s={indicator}</a>
-
-we can also just get for a country for example    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s={indicator}</a>
+Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately        
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}/{page_number}?c=guest:guest</a>
 
 
-Another way to use the snap is by the trading economics url    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldbank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">http://api.tradingeconomics.com/worldbank/indicator?c=guest:guest&url={tradingeconomics url}</a>
+Detailed information about specific indicator for all countries using a series code from the previous method    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s={series_code}</a>
 
 
-Filtering by country (also with pagination)    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/{country}/2?c=guest:guest</a>
+List of indicators available for a specific country (with pagination)    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/{country}/{page_number}?c=guest:guest</a>
 
 
-Finally, the historical can be retrieved with the symbol/ticker/indicator    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s={indicator}</a>
+Detailed  information just for a specific indicator and country by using series code or url    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s={series_code}</a>    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url={url1}</a>
+
+
+Historical data for a specific indicator    
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s={series_code}</a>
 
 All of this can be formatted to json by appending "&format=json"
 
@@ -1349,24 +1346,22 @@ All of this can be formatted to json by appending "&format=json"
 # Comtrade
 
 
-All comtrade categories    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/categories?c=guest:guest">http://api.tradingeconomics.com/comtrade/categories?c=guest:guest</a>
+Get detailed information about Comtrade categories    
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/categories?c=guest:guest">http://api.tradingeconomics.com/comtrade/categories</a>
 
-All comtrade countries    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/countries?c=guest:guest">http://api.tradingeconomics.com/comtrade/countries?c=guest:guest</a>
+Get detailed information about Comtrade countries    
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/countries?c=guest:guest">http://api.tradingeconomics.com/comtrade/countries</a>
 
-Snapshot for a country    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}?c=guest:guest</a>    
-this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so   
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}/2?c=guest:guest</a>
+Snapshot of data per country    
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}</a>    
+Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately   
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}/{page_number}?</a>
 
-Snapshot between two countries    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/spain?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country_1}/{country_2}?c=guest:guest</a>     
-this method has pagination, because there are too many results, each page has 200 results, we can go through the pages like so   
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country_1}/{country_2}/2?c=guest:guest</a>
+Snapshot of trade between two countries (with pagination)   
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country_1}/{country_2}/{page_number}</a>
 
 Historical data    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">http://api.tradingeconomics.com/comtrade/historical/{symbol}?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">http://api.tradingeconomics.com/comtrade/historical/{symbol}</a>
 
 
 # Excel
