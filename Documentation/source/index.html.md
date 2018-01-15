@@ -1315,13 +1315,13 @@ Please note the sample request is limited in scope to a few countries and indica
 
 
 Main categories    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/categories?c=guest:guest">http://api.tradingeconomics.com/worldBank/categories?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/categories?c=guest:guest">http://api.tradingeconomics.com/worldBank/categories</a>
 
 
 Filtering by the main categories    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}</a>    
 Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately        
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}/{page_number}?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}/{page_number}</a>
 
 
 Detailed information about specific indicator for all countries using a series code from the previous method    
@@ -1329,7 +1329,7 @@ Detailed information about specific indicator for all countries using a series c
 
 
 List of indicators available for a specific country (with pagination)    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/{country}/{page_number}?c=guest:guest</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/{country}/{page_number}</a>
 
 
 Detailed  information just for a specific indicator and country by using series code or url    
@@ -1355,7 +1355,7 @@ Get detailed information about Comtrade countries
 Snapshot of data per country    
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}</a>    
 Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately   
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}/{page_number}?</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}/{page_number}</a>
 
 Snapshot of trade between two countries (with pagination)   
 <a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country_1}/{country_2}/{page_number}</a>
