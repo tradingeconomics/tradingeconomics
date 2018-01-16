@@ -57,13 +57,13 @@ namespace TE
                 case "btnM_1": selectedItem = "currency" ; break;
                 case "btnM_2": selectedItem = "index"; break;
                 case "btnM_3": selectedItem = "commodities"; break;
-                case "btnM_4": selectedItem = "bonds"; break;
+                case "btnM_4": selectedItem = "bond"; break;
                 default: MessageBox.Show("There was a problem."); break;
             }
 
             helperClass.log.Info("Selected market is {0}", selectedItem);
             string newColumns;
-            if (MyRibbon.selectedItem == "bonds")
+            if (MyRibbon.selectedItem == "bond")
             {
                 newColumns = String.Join(",", helperClass.bondsNames);                
             }

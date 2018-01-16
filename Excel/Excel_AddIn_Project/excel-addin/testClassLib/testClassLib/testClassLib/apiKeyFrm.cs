@@ -46,7 +46,7 @@ namespace TE
                 using (WebClient wc = new WebClient())
                 {
                     helperClass.log.Info("Checking credentials...");
-                    string url = helperClass.host + "markets/bonds?client=" + apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
+                    string url = helperClass.host + "markets/bond?client=" + apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
                     helperClass.log.Info("apiKeyFrm - btnOK_Click, url = " + url);
                     var json = wc.DownloadString(url);
                     JArray o = JArray.Parse(json);

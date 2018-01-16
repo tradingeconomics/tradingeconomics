@@ -25,7 +25,7 @@ namespace TE
             string key = Properties.Settings.Default.userApiKey;
             // Convert column names to JArray names
             fullNames = new Dictionary<string, string>();
-            if (mrkt == "bonds")
+            if (mrkt == "bond")
             {
                 for (int i = 0; i < helperClass.bondsNames.Length; i++)
                 {
