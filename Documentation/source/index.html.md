@@ -357,6 +357,9 @@ curl_close($handle);
 * Credit Rating of the specific country    
 <a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>
 
+
+## Historical
+
 <blockquote class="lang-specific r">
 <p>For example, to get historical data of imports in United Kingdom type:</p>
 </blockquote>  
@@ -493,7 +496,6 @@ curl_close($handle);
 ?>
 ```
 
-**Historical**
 
 <span class="methods">
 
@@ -1025,7 +1027,7 @@ Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.     
 **Please consider that all market-related methods are beta and under heavy development.**
 
-### Snapshot of latest quotes
+## Snapshot of latest quotes
 
 <span class="methods">
 
@@ -1050,7 +1052,7 @@ Please note the sample request is limited in scope to a few countries and indica
 * Multiple Markets   
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a>
 
-### Historical  
+## Historical  
 
 * Historical markets data by market    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest">/markets/historical/{symbol}</a>
@@ -1064,7 +1066,7 @@ Please note the sample request is limited in scope to a few countries and indica
 * Filter historical markets data by date    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/historical/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>
 
-### Intraday
+## Intraday
 
 * Intraday prices for a single market     
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest">/markets/intraday/{symbol}</a>
@@ -1075,7 +1077,7 @@ Please note the sample request is limited in scope to a few countries and indica
 * Filter intraday prices by date    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>   
 
-### Market Lists
+## Market Lists
 
 * A snapshot of latest peers prices by market    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a>
@@ -1083,21 +1085,9 @@ Please note the sample request is limited in scope to a few countries and indica
 * Stock Market Index Components     
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a>
 
-### Search
+## Search
 * Search method    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a>
-
-### JSON CSV XML
-For all methods listed above, you can get data in next formats:
-
-* JSON        
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}?c=guest:guest&f=json</a>    
-
-* CSV    
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=csv">/markets/symbol/{symbol}?c=guest:guest&f=csv</a>
-
-* XML     
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=xml">/markets/symbol/{symbol}?c=guest:guest&f=xml</a>
 
 </span> 
 
@@ -1112,6 +1102,20 @@ For all methods listed above, you can get data in next formats:
 |    **Group**    | Group of commodity                                       |
 |    **Symbol**   | Unique symbol used by TradingEconomics                   |
 | **LastUpdate**  | Time when new data was inserted or changed               |
+
+
+
+### JSON CSV XML
+For all methods listed above, you can get data in next formats:
+
+* JSON        
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}?c=guest:guest&f=json</a>    
+
+* CSV    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=csv">/markets/symbol/{symbol}?c=guest:guest&f=csv</a>
+
+* XML     
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=xml">/markets/symbol/{symbol}?c=guest:guest&f=xml</a>
 
 # Earnings
 
@@ -1254,7 +1258,7 @@ For a detailed list of available live data please <a target = '_blank' href="htt
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.
 
-### Latest news
+## Latest news
 
 <span class="methods">
 
@@ -1272,7 +1276,7 @@ Please note the sample request is limited in scope to a few countries and indica
 
 </span> 
 
-### Latest articles
+## Latest articles
 
 <span class="methods">
 
