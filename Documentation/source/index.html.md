@@ -517,7 +517,7 @@ or you can specify a start date and end date
 
 </span> 
 
-### Response Fields
+**Response Fields**
 
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
@@ -1027,7 +1027,9 @@ Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.     
 **Please consider that all market-related methods are beta and under heavy development.**
 
-## Snapshot of latest quotes
+## Snapshots
+
+**Snapshot of latest quotes**
 
 <span class="methods">
 

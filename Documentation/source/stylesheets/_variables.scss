@@ -28,7 +28,8 @@ $examples-bg: #292929 !default;
 $code-bg: #292929 !default;
 $code-annotation-bg: #1c1c1c !default;
 $nav-subitem-bg: #262626 !default;
-$nav-active-bg: #2467af !default;
+//$nav-active-bg: #2467af !default;
+$nav-active-bg: rgb(24, 90, 169) !default;
 $lang-select-border: #000 !default;
 $lang-select-bg: #1c1c1c !default;
 $lang-select-active-bg: $examples-bg !default; // feel free to change this to blue or something

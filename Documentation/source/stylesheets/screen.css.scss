@@ -140,7 +140,8 @@ html, body {
       text-decoration: none;
 
       &:hover {
-        text-decoration: underline;
+        //text-decoration: underline;
+        text-decoration: none;
       }
     }
   }
@@ -173,7 +174,7 @@ html, body {
 
   // This is the currently selected ToC entry
   .tocify-focus {
-    box-shadow: 0px 1px 0px $nav-active-shadow;
+    //box-shadow: 0px 1px 0px $nav-active-shadow;
     background-color: $nav-active-bg;
     color: $nav-active-text;
   }
@@ -207,7 +208,8 @@ html, body {
     }
 
     a:hover {
-      text-decoration: underline;
+      //text-decoration: underline;
+      text-decoration: none;
     }
 
     li {
@@ -283,7 +285,7 @@ html, body {
   .lang-selector {
     position: fixed;
     z-index: 50;
-    border-bottom: 5px solid $lang-select-active-bg;
+    //border-bottom: 5px solid $lang-select-active-bg;
     //overflow-x: scroll; 
   }
 
@@ -312,7 +314,7 @@ html, body {
     float:left;
     color: $lang-select-text;
     text-decoration: none;
-    padding: 0 10px;
+    padding: 6px 13px;
     line-height: 30px;
     outline: 0;
 
@@ -322,7 +324,8 @@ html, body {
     }
 
     &.active {
-      background-color: $lang-select-active-bg;
+      //background-color: $lang-select-active-bg;
+      background-color: $nav-active-bg;
       color: $lang-select-active-text;
     }
   }
@@ -356,7 +359,7 @@ html, body {
     padding: 0 $main-padding;
     box-sizing: border-box;
     display: block;
-    text-shadow: $main-embossed-text-shadow;
+    //text-shadow: $main-embossed-text-shadow;
 
     @extend %left-col;
   }
@@ -447,11 +450,12 @@ html, body {
     }
 
     tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
+      background-color: lighten($main-bg,4.2%);      
     }
 
     tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+      //background-color: lighten($main-bg,2.4%);
+      background-color: #ddd;
     }
   }
 
@@ -488,7 +492,7 @@ html, body {
   aside {
     padding-top: 1em;
     padding-bottom: 1em;
-    text-shadow: 0 0px 0 #333333;
+    //text-shadow: 0 0px 0 #333333;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     background: $aside-notice-bg;
@@ -496,12 +500,12 @@ html, body {
 
     &.warning {
       background-color: $aside-warning-bg;
-      text-shadow: 0 0px 0 #333333;
+      //text-shadow: 0 0px 0 #333333;
     }
 
     &.success {
       background-color: $aside-success-bg;
-      text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
+      //text-shadow: 0 1px 0 lighten($aside-success-bg, 15%);
     }
   }
 
@@ -528,7 +532,7 @@ html, body {
     margin: -2px;
     border-radius: 4px;
     border: 1px solid #F7E633;
-    text-shadow: 1px 1px 0 #666;
+    //text-shadow: 1px 1px 0 #666;
     background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
   }
 }
@@ -551,7 +555,7 @@ html, body {
     clear:right;
 
     box-sizing: border-box;
-    text-shadow: 0px 1px 2px rgba(0,0,0,0.4);
+    //text-shadow: 0px 1px 2px rgba(0,0,0,0.4);
 
     @extend %right-col;
 
@@ -647,7 +651,8 @@ html, body {
 // Custom CSS
 
 .lang-selector a {
-  margin: 5px;
+  //margin: 5px;
+  margin-bottom: -3px;
   &.active {
     background-color: $selected-lang-blue;
     word-break: break-word;
