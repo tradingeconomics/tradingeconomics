@@ -11,8 +11,10 @@ class CredentialsError(ValueError):
     pass
 
 def credCheck(credentials):
-    pattern = re.compile("^...............:...............$")
-    if not(pattern.match(credentials)):
+    #pattern = re.compile("^:$")
+    #if not(pattern.match(credentials)):
+    #    raise CredentialsError('Invalid credentials.')
+    if ':' not in credentials:
         raise CredentialsError('Invalid credentials.')
         
 def out_type(init_format):
