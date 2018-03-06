@@ -355,7 +355,10 @@ curl_close($handle);
 <a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicator}</a>
 
 * Credit Rating of the specific country    
-<a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>
+<a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>    
+- Historical credit rating    
+<a target = '_blank' href="http://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest&f=json">/ratings/historical/{country}</a>    
+
 
 
 ## Historical
