@@ -227,9 +227,11 @@
             this.cntryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cntryTextBox.Location = new System.Drawing.Point(7, 28);
             this.cntryTextBox.Name = "cntryTextBox";
-            this.cntryTextBox.Size = new System.Drawing.Size(214, 16);
+            //this.cntryTextBox.Size = new System.Drawing.Size(214, 16);
             this.cntryTextBox.TabIndex = 14;
             this.cntryTextBox.TextChanged += new System.EventHandler(this.cntryTextBox_TextChanged);
+            this.cntryTextBox.AutoSize = false;
+            this.cntryTextBox.Size = new System.Drawing.Size(214, 16);
             // 
             // indctrTextBox
             // 
@@ -237,9 +239,11 @@
             this.indctrTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.indctrTextBox.Location = new System.Drawing.Point(7, 255);
             this.indctrTextBox.Name = "indctrTextBox";
-            this.indctrTextBox.Size = new System.Drawing.Size(214, 16);
+            //this.indctrTextBox.Size = new System.Drawing.Size(214, 16);
             this.indctrTextBox.TabIndex = 15;
             this.indctrTextBox.TextChanged += new System.EventHandler(this.indctrTextBox_TextChanged);
+            this.indctrTextBox.AutoSize = false;
+            this.indctrTextBox.Size = new System.Drawing.Size(214, 16);
             // 
             // activeCellPositionBox
             // 

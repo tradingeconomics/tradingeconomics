@@ -9,8 +9,8 @@ using System.IO;
 using System.Reflection;
 using Microsoft.Office.Interop.Excel;
 
-using NLog;
-using NLog.Targets;
+//using NLog;
+//using NLog.Targets;
 
 namespace TE
 {
@@ -35,7 +35,6 @@ namespace TE
             myMainDict = new Dictionary<string, Dictionary<string, formulaColumns>>();
             myFormulasDict = new Dictionary<string, formulaColumns>();
         }
-
 
         public void OnMarkets2ButtonPressed(IRibbonControl control)
         {
@@ -62,15 +61,8 @@ namespace TE
             }
 
             helperClass.log.Info("Selected market is {0}", selectedItem);
-            string newColumns;
-            if (MyRibbon.selectedItem == "bond")
-            {
-                newColumns = String.Join(",", helperClass.bondsNames);                
-            }
-            else
-            {
-                newColumns = String.Join(",", helperClass.marketsNames);
-            }
+
+            string newColumns = (MyRibbon.selectedItem == "bond") ? String.Join(",", helperClass.bondsNames) : String.Join(",", helperClass.marketsNames);
 
             cellRange = helperClass.CellAddress(app.ActiveCell.Address[false, false].ToString());
             string fmFin = string.Format("=TEMarkets( \"{0}\", \"{1}\", {2})",
@@ -79,7 +71,6 @@ namespace TE
                 cellRange[2, 2].Address[false, false, XlReferenceStyle.xlA1]);
             helperClass.log.Info("Formula {0}", fmFin);
             cellRange.Formula = fmFin;
-
         }
 
         public void OnIndicatorsButtonPressed(IRibbonControl control)
@@ -89,14 +80,12 @@ namespace TE
                 ifrm.ShowDialog();
         }
 
-
         public void OnCalendarButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On Calendar button is pressed");
                 var cFrm = new calendarFrm();
                 cFrm.ShowDialog();
         }
-
 
         public void OnForecastsButtonPressed(IRibbonControl control)
         {
@@ -105,14 +94,12 @@ namespace TE
                 fFrm.ShowDialog();
         }
 
-
         public void OnHistoricalButtonPressed(IRibbonControl control)
         {
             helperClass.log.Info("On Historical button is pressed");
             var hFrm = new historicalFrm();
                 hFrm.ShowDialog();
         }
-
         
         public void OnRefreshButtonPressed(IRibbonControl control)
         {
@@ -127,10 +114,16 @@ namespace TE
                 sheet = app.ActiveSheet;
             }            
             find_formula(sheet);
-            //InitTimer();
         }
 
-       
+        public void SearchEnginePressed(IRibbonControl control)
+        {
+            helperClass.log.Info("On SearchEngine button is pressed");
+            var srchFrm = new SearchEngine();
+            srchFrm.ShowDialog();
+        }
+
+        public static string fCellText;
 
         public static void find_formula(Worksheet worksheet)
         {
@@ -150,10 +143,12 @@ namespace TE
             {
                 if (c.HasFormula)
                 {
+                    fCellText = c.Text;
                     helperClass.runFormula = "RunAutomatically = 1";
                     refresh = true;
                     worksheet.Cells[c.Row, c.Column] = c.Formula;
                     while (worksheet.Application.CalculationState != XlCalculationState.xlDone) { }
+                    System.Threading.Thread.Sleep(500);
                 }
             }
         }
@@ -175,15 +170,13 @@ namespace TE
             _imageStream = _assembly.GetManifestResourceStream("TE.green2.png");
             Bitmap green = new Bitmap(_imageStream);
 
-            return ((apiKeyFrm.validApiKey == true) ? new Bitmap(red) : new Bitmap(green));
-            
+            return ((apiKeyFrm.validApiKey == true) ? new Bitmap(red) : new Bitmap(green));            
         }
 
         public bool getState(IRibbonControl control)
         {
             return ((apiKeyFrm.validApiKey == true) ? true : false);
         }
-
 
         public void OnApiKeyButtonPressed(IRibbonControl control)
         {
@@ -197,30 +190,15 @@ namespace TE
             {
                 var apkFrm = new apiKeyFrm();
                 apkFrm.ShowDialog();
-                if (ribbon != null)
-                {
-                    ribbon.Invalidate();                    
-                }
+                if (ribbon != null) ribbon.Invalidate();                    
             }           
         }
 
-
-        public void OnCallButtonPressed(IRibbonControl control)
-        {
-            helperClass.log.Info("On Call button is pressed");
-            System.Diagnostics.Process.Start("http://tradingeconomics.com/contact.aspx?subject=excel");
-        }
-
-        public void OnHelpButtonPressed(IRibbonControl control)
-        {
-            helperClass.log.Info("On Help button is pressed");
-            System.Diagnostics.Process.Start("http://github.com/ieconomics/excel-addin/wiki");
-        }
-
         public void OnAboutButtonPressed(IRibbonControl control)
-        {
+        {            
             helperClass.log.Info("On About button is pressed");
-            MessageBox.Show("The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. Youre Trading Economics Excel Add In Version: 1.2.4", "About");
+            var about = new About();
+            about.ShowDialog();
         }
     }
 }

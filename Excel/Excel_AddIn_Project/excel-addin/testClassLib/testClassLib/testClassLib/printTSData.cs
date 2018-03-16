@@ -22,39 +22,31 @@ namespace TE
         private readonly Range _formulaCell;
         private readonly Range _dataStartCell;
         private Worksheet _currentWorksheet => _dataStartCell.Worksheet;
-        //public readonly string _names;
         public readonly string[] _names;
-        //public readonly Dictionary<string, Dictionary<string, string>> _dict;
         public readonly Dictionary<DateTime, Dictionary<string, string>> _dict;
-        public readonly string _key_value;
         public readonly string _curCel;
         public readonly bool _threaded;
         public readonly string _newFormula;
 
         public Range writeRange = null;
         // Function to display data in excel spreadsheet
-
-        //public printTSData(string[] names, Dictionary<string, Dictionary<string, string>> dict, string key_value, Range dataStartCell, string newFormula, Range formulaCell, bool threaded = false)
-        public printTSData(string[] names, Dictionary<DateTime, Dictionary<string, string>> dict, string key_value, Range dataStartCell, string newFormula, Range formulaCell, bool threaded = false)
+      
+        public printTSData(string[] names, Dictionary<DateTime, Dictionary<string, string>> dict, Range dataStartCell, string newFormula, Range formulaCell, bool threaded = false)
         {
-            //_names = String.Join(",", names);
             _names = names;
             _dict = dict;
-            _key_value = key_value;
             _dataStartCell = dataStartCell;
             _threaded = threaded;
             _formulaCell = formulaCell;
             _newFormula = newFormula;
         }
 
-        //private object[,] ConvertDictionaryToArray(Dictionary<string, Dictionary<string, string>> data, string[] names)
         private object[,] ConvertDictionaryToArray(Dictionary<DateTime, Dictionary<string, string>> data, string[] names)
         {
             var newData = new object[data.Count, names.Length + 1];
             for (var r = 0; r != data.Count; r++)
              {
-                IFormatProvider culture = System.Threading.Thread.CurrentThread.CurrentCulture;
-                //newData[r, 0] = DateTime.Parse(data.Keys.ElementAt(r), culture, System.Globalization.DateTimeStyles.AssumeLocal);//data.Keys.ElementAt(r);       
+                IFormatProvider culture = System.Threading.Thread.CurrentThread.CurrentCulture;  
                 newData[r, 0] = data.Keys.ElementAt(r);
                  for (var c = 0; c < names.Length; c++)
                  {
@@ -72,8 +64,6 @@ namespace TE
             return newData;
         }
 
-        public static Range used;
-
         public void PopulateData()
         {
             helperClass.log.Info("PopulateData from printTSData");
@@ -83,19 +73,17 @@ namespace TE
                 DataWriteMutex.WaitOne();
 
                 // Since this is executing in a thread wait for excel to be finished whatever calculations its currently doing before writing to other cells. Helps avoid some issues.
-                if (_threaded)
-                {
-                    WaitForExcelToBeReady();
-                }
+                if (_threaded) WaitForExcelToBeReady();
 
                 header_to_excel();
                 data_to_excel();
 
                 //Writing final dictionary
                 WaitForExcelToBeReady();
-                Range endCell = _currentWorksheet.Cells[_dataStartCell.Row + _dict.Count, _dataStartCell.Column + _names.Length];//_names.Split(',').Length];
-                used = _currentWorksheet.Range[_dataStartCell, endCell];
-                formulaColumns frmlaColumnsPair2 = new formulaColumns(_newFormula, String.Join(",", _names), used, _formulaCell); //_names
+                Range endCell = _currentWorksheet.Cells[_dataStartCell.Row + _dict.Count, _dataStartCell.Column + _names.Length];
+                formulaColumns frmlaColumnsPair2 = new formulaColumns(_newFormula, String.Join(",", _names),
+                    _currentWorksheet.Range[_dataStartCell, endCell], 
+                    _formulaCell);
                 MyRibbon.myFormulasDict[_formulaCell.Address[false, false]] = frmlaColumnsPair2;
                 
                 if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
@@ -139,18 +127,17 @@ namespace TE
             helperClass.log.Info("header_to_excel from printTSData");
             try
             {
-                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Length];//_names.Split(',').Length];
-                var dl = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1];
-                var writeRange = _currentWorksheet.Range[dl, endCell];
-                writeRange.Value2 = _names.ToArray();//_names.Split(',').ToArray();
+                var writeRange = _currentWorksheet.Range[
+                    (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1],
+                    (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Length]];
+                writeRange.Value2 = _names.ToArray();
             }
             catch (Exception ex)
             {
                 helperClass.log.Info(ex.Message);
                 helperClass.log.Trace(ex.StackTrace);
                 throw;
-            }
-            
+            }            
         }
 
         private void data_to_excel()
@@ -158,19 +145,20 @@ namespace TE
             helperClass.log.Info("data_to_excel from printTSData");
             try
             {
-                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row + _dict.Count, _dataStartCell.Column + _names.Length];//_names.Split(',').Length];
-                var writeRange = _currentWorksheet.Range[_dataStartCell[2, 1], endCell];
-                var data = ConvertDictionaryToArray(_dict, _names);//_names.Split(','));
+                var writeRange = _currentWorksheet.Range[
+                    _dataStartCell[2, 1],
+                    (Range)_currentWorksheet.Cells[_dataStartCell.Row + _dict.Count, _dataStartCell.Column + _names.Length]];
+
                 writeRange.ClearFormats();
-                writeRange.Value = data;
+                writeRange.Value = ConvertDictionaryToArray(_dict, _names);
+                writeRange.Sort(writeRange.Columns[1], XlSortOrder.xlAscending);
             }
             catch (Exception ex)
             {
                 helperClass.log.Info(ex.Message);
                 helperClass.log.Trace(ex.StackTrace);
                 throw;
-            }
-            
+            }            
         }
 
         public void SetCellVolatile(bool value)
@@ -186,9 +174,7 @@ namespace TE
                 helperClass.log.Trace(ex.StackTrace);
                 throw;
             }
-
         }
-
 
         public void WaitForExcelToBeReady()
         {

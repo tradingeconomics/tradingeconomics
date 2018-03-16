@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Diagnostics;
+//using System.Diagnostics;
 using System.Net;
 using System.Windows.Forms;
 
@@ -13,6 +13,7 @@ namespace TE
     {
         public static String apiKey = Properties.Settings.Default.userApiKey;
         public static bool validApiKey;
+        public static String excelVersion;
 
         public apiKeyFrm()
         {
@@ -20,7 +21,6 @@ namespace TE
             apiKeyTextBox.Text = apiKey;
         }
       
-
         private void apiKeyTextBox_TextChanged(object sender, EventArgs e)
         {
             apiKey = apiKeyTextBox.Text.Trim(); 
@@ -31,7 +31,9 @@ namespace TE
             helperClass.log.Info("Submit button is pressed");
             if (apiKey.Length == 0)
             {
-                DialogResult dialogResult = MessageBox.Show("You will be logged in with guest credentials. For any request only default datasets will be provided. Do you want to proceed?", "" ,MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(
+                    "You will be logged in with guest credentials. For any request only default datasets will be provided. Do you want to proceed?", 
+                    "" , MessageBoxButtons.YesNo);
                 if(dialogResult == DialogResult.No)
                 {
                     return;
@@ -41,15 +43,24 @@ namespace TE
                     apiKey = "guest:guest";
                 }
             }
+
+            try
+            {
+                excelVersion = helperClass.Determine_OfficeVersion();
+            }
+            catch (Exception)
+            {
+                excelVersion = "NoExcelVersion";
+            }
+            
             try
             {
                 using (WebClient wc = new WebClient())
                 {
                     helperClass.log.Info("Checking credentials...");
-                    string url = helperClass.host + "markets/bond?client=" + apiKey + "&excel=" + helperClass.Determine_OfficeVersion();
+                    string url = helperClass.host + "markets/bond?client=" + apiKey + "&excel=" + excelVersion;
                     helperClass.log.Info("apiKeyFrm - btnOK_Click, url = " + url);
-                    var json = wc.DownloadString(url);
-                    JArray o = JArray.Parse(json);
+                    JArray.Parse(wc.DownloadString(url));
                 }
                 validApiKey = true;
                 Properties.Settings.Default.userApiKey = apiKey;
@@ -58,6 +69,8 @@ namespace TE
             }
             catch (System.Net.WebException ex)
             {
+                helperClass.log.Error("API key Error: " + ex);
+
                 MessageBox.Show("Wrong API Key" );
                 validApiKey = false;                               
                 return;
@@ -73,7 +86,7 @@ namespace TE
 
         private void btnGetKey_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://sso.tradingeconomics.com/?returnurl=analytics.tradingeconomics.com/api/");
+            System.Diagnostics.Process.Start("https://sso.tradingeconomics.com/member/excel");
             helperClass.log.Info("On API key form, GetKey button is pressed");
         }
     }

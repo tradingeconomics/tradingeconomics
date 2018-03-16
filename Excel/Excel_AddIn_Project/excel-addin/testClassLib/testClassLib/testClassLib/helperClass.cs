@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using NLog;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+//using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -154,7 +154,7 @@ namespace TE
             {"Low income" , "LIC"},
             {"Lower middle income" , "LMC"},
             {"Luxembourg" , "LUX"},
-            {"Macau" , "MAC"},
+            //{"Macau" , "MAC"},
             {"Macedonia" , "MKD"},
             {"Madagascar" , "MDG"},
             {"Malawi" , "MWI"},
@@ -405,7 +405,7 @@ namespace TE
             {"LIC","Low income"},
             {"LMC","Lower middle income"},
             {"LUX","Luxembourg"},
-            {"MAC","Macau"},
+            //{"MAC","Macau"},
             {"MKD","Macedonia"},
             {"MDG","Madagascar"},
             {"MWI","Malawi"},
@@ -640,7 +640,7 @@ namespace TE
                             "Lithuania",
                             "Luxembourg",
                             "Macao",
-                            "Macau",
+                            //"Macau",
                             "Macedonia",
                             "Madagascar",
                             "Malawi",
@@ -848,7 +848,7 @@ namespace TE
                             "Lithuania",
                             "Luxembourg",
                             "Macao",
-                            "Macau",
+                            //"Macau",
                             "Macedonia",
                             "Madagascar",
                             "Malawi",
@@ -1274,10 +1274,52 @@ namespace TE
 
         public static string[] tsNames = {  "DateTime", "Value"};
 
+        public static string[] MarketHistColumns = { "Date", "Symbol", "Open", "High", "Low", "Close"};
+
+        public static string[] MarketPeersComponentsColumns = { "Symbol", "Ticker", "Name", "Country", "Date", "Type", "decimals", "Last", "MarketCap", "URL",
+            "Importance", "DailyChg", "DailyPctChg", "WeeklyChg", "WeeklyPctChg", "MonthlyChg", "MonthlyPctChg", "YearlyChg", "YearlyPctChg", "YTDChg",
+            "YTDPctChg", "yesterday", "lastWeek", "lastMonth", "lastYear", "startYear", "lastUpdate" };
+
+        public static string[] MarketPeersComponentsFullColumns = { "Symbol", "Ticker", "Name", "Country", "Date", "Type", "decimals", "Last", "MarketCap", "URL", "Importance",
+            "DailyChange", "DailyPercentualChange", "WeeklyChange", "WeeklyPercentualChange", "MonthlyChange", "MonthlyPercentualChange", "YearlyChange",
+            "YearlyPercentualChange", "YTDChange", "YTDPercentualChange", "yesterday", "lastWeek", "lastMonth", "lastYear", "startYear", "lastUpdate" };
+
+        public static string[] fredColumns = { "symbol", "date", "value"};
+        public static string[] MetaColumns = { "country", "title", "unit", "lastUpdate" };
+
+        public static Dictionary<string, string> searchTabs = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "all", "All"},
+            { "wb", "World Bank"},
+            { "bond", "Bond"},
+            {"commodity", "Commodity"},
+            {"economy", "Economy"},
+            {"forex", "Forex"},
+            {"fred", "Federal Reserve"},
+            {"idx", "Index"},
+            {"mkt", "Market"},
+            {"comtrade", "Comtrade"}
+        };
+
+        public static Dictionary<string, string> searchTabsOriginal = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            {"All",  "all"},
+            {"World Bank",  "wb"},
+            {"Bond",  "bond"},
+            {"Commodity", "commodity"},
+            {"Economy", "economy"},
+            {"Forex", "forex"},
+            {"Federal Reserve", "fred"},
+            {"Index", "idx"},
+            {"Market", "mkt"},
+            {"Comtrade", "comtrade"}
+        };
+
         public static bool fromHistorical = false;
         public static bool fromCalendar = false;
 
         public static string formula = "";
+        public static string formulaMeta = "";
         public static string runFormula;
         public static bool origin = true;
         public static List<string> fList = new List<string>();
@@ -1304,10 +1346,7 @@ namespace TE
             {
                 if (c.HasFormula)
                 {
-                    if (!fList.Contains(c.Formula))
-                    {
-                        fList.Add(c.Formula);
-                    } 
+                    if (!fList.Contains(c.Formula)) fList.Add(c.Formula);
                 }
             }
         }
@@ -1467,10 +1506,9 @@ namespace TE
             return myNewDict;
         }
 
-        public static void elseFunction(string columns, JArray jsData, string key, Range dataStartCell, string newFormula, Range formulaCell)
+        public static void elseFunction(string columns, JArray jsData, Range dataStartCell, string newFormula, Range formulaCell)
         {
-            helperClass.log.Info("Starting function elseFunction");
-            var retriever = new RetrieveAndWriteData(columns, jsData, key, dataStartCell, newFormula, formulaCell);
+            var retriever = new RetrieveAndWriteData(columns, jsData, dataStartCell, newFormula, formulaCell);
             var thready = new Thread(retriever.fetchData);
             thready.Priority = ThreadPriority.Normal;
             thready.IsBackground = true;
@@ -1482,13 +1520,9 @@ namespace TE
             Dictionary<string, formulaColumns> auxDict = new Dictionary<string, formulaColumns>(MyRibbon.myFormulasDict);
             foreach (var item in auxDict.Keys)
             {
-                if (!myNewDict.ContainsKey(item))
-                {
-                    MyRibbon.myFormulasDict.Remove(item);
-                }
+                if (!myNewDict.ContainsKey(item)) MyRibbon.myFormulasDict.Remove(item);
             }
         }
-
 
         public static void setGlobalDict(string formulaCellAddress, formulaColumns frmlaColumnsPair)
         {          
@@ -1514,235 +1548,155 @@ namespace TE
                 {
                     MyRibbon.myFormulasDict.Add(formulaCellAddress, frmlaColumnsPair);
                 }
-            }
-            
+            }            
         }
 
-        public static string getHistUrl(string cntry, string indctr, string key, string startDate, string endDate)
+        private static string cntryList(string countries)
         {
             List<string> fullCntryNm = new List<string>();
-            string[] longCntryNames = cntry.Split(',');
 
-            int i = 0;
-            var query = from s in longCntryNames
-                        let num = i++
-                        group s by num / 3 into g
-                        select g.ToArray();
-            var results = query.ToArray();
-
-            foreach (var item in longCntryNames)
+            foreach (var item in countries.Split(','))
             {
-                if (myCountrysDict.ContainsValue(item))
-                {
-                    fullCntryNm.Add(myLongCountrysDict[item]);
-                }
+                if (myCountrysDict.ContainsValue(item)) fullCntryNm.Add(myLongCountrysDict[item]);
             }
-            cntry = String.Join(",", fullCntryNm);
+            return String.Join(",", fullCntryNm);
+        }
 
+        public static string getHistUrl(string cntry, string indctr, string startDate, string endDate)
+        {
             if (startDate.Length != 0 & endDate.Length == 0)
             {
-                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "historical/country/" + cntryList(cntry) + "/indicator/" + indctr + "/" + startDate + "?client=" +
+                    apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else if (startDate.Length != 0 & endDate.Length != 0)
             {
-                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "historical/country/" + cntryList(cntry) + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" +
+                    apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else
             {
-                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "historical/country/" + cntryList(cntry) + "/indicator/" + indctr + "/" + "?client=" +
+                    apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
-            return url;
         }
 
-        public static string getForcUrl(string cntry, string indctr, string key)
+        public static string getMrktsHistUrl(string indctr, string mktType)
         {
-            List<string> fullCntryNm = new List<string>();
-            string[] longCntryNames = cntry.Split(',');
-
-            int i = 0;
-            var query = from s in longCntryNames
-                        let num = i++
-                        group s by num / 3 into g
-                        select g.ToArray();
-            var results = query.ToArray();
-
-            foreach (var item in longCntryNames)
+            if (mktType == "worldBank")
             {
-                if (myCountrysDict.ContainsValue(item))
-                {
-                    fullCntryNm.Add(myLongCountrysDict[item]);
-                }
+                SearchEngine.fromSearch = true;
+                return host + mktType +  "/historical?c=" + apiKeyFrm.apiKey + "&s=" +  indctr + "&excel=" + apiKeyFrm.excelVersion;
             }
-            cntry = String.Join(",", fullCntryNm);
-
-            if (cntry.Length == 0)
+            else if (mktType == "fred" || mktType == "comtrade")
             {
-                url = host + "forecast/indicator/" + indctr + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                SearchEngine.fromSearch = true;
+                return host + mktType + "/historical/" + indctr + "?c=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
+            }
+            else
+            {
+                return host + "markets/" + mktType + "/" + indctr + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
+            }
+        }
+
+        public static string SearchEconomy(string cntry, string indctr)
+        {
+                return host + "historical/country/" + cntryList(cntry) + "/indicator/" + indctr + "?c=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
+        }
+
+        public static string getForcUrl(string cntry, string indctr)
+        {
+            if (cntryList(cntry).Length == 0)
+            {
+                return host + "forecast/indicator/" + indctr + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else if (indctr.Length == 0 || indctr == "All")
             {
-                url = host + "forecast/country/" + cntry + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "forecast/country/" + cntryList(cntry) + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else
             {
-                url = host + "forecast/country/" + cntry + "/indicator/" + indctr + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "forecast/country/" + cntryList(cntry) + "/indicator/" + indctr + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
-            return url;
         }
 
-        public static string getClndrUrl(string cntry, string indctr, string key, string startDate, string endDate)
+        public static string getClndrUrl(string cntry, string indctr, string startDate, string endDate)
         {
-            List<string> fullCntryNm = new List<string>();
-            string[] longCntryNames = cntry.Split(',');
-
-            int i = 0;
-            var query = from s in longCntryNames
-                        let num = i++
-                        group s by num / 3 into g
-                        select g.ToArray();
-            var results = query.ToArray();
-
-            foreach (var item in longCntryNames)
-            {
-                if (myCountrysDict.ContainsValue(item))
-                {
-                    fullCntryNm.Add(myLongCountrysDict[item]);
-                }
-            }
-            cntry = String.Join(",", fullCntryNm);
+            cntry = cntryList(cntry);
 
             if (cntry.Length == 0 & indctr.Length == 0)
             {
-                url = host + "calendar/country/All/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "calendar/country/All/" + startDate + "/" + endDate + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else if (cntry.Length != 0 & indctr.Length == 0)
             {
-                url = host + "calendar/country/" + cntry + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "calendar/country/" + cntry + "/" + startDate + "/" + endDate + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else if (cntry.Length == 0 & indctr.Length != 0)
             {
-                url = host + "calendar/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "calendar/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
-            else if (cntry.Length != 0 & indctr.Length != 0)
+            else
             {
-                url = host + "calendar/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "calendar/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" +
+                    apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
-            return url;
         }
 
-        public static string getIndctrUrl(string cntry, string indctr, string key)
+        public static string getIndctrUrl(string cntry, string indctr)
         {
             if (cntry != "All")
             {
-
-
-                //Debug.WriteLine("Start ofgetIndctrUrl: " + cntry);
-                List<string> fullCntryNm = new List<string>();
-                string[] longCntryNames = cntry.Split(',');
-                // This "query" slit string of countries in chunks
-                int i = 0;
-                var query = from s in longCntryNames
-                            let num = i++
-                            group s by num / 3 into g
-                            select g.ToArray();
-                var results = query.ToArray();
-
-                //foreach (var item in results)
-                //{
-                //    Debug.WriteLine("---------------" );
-                //    foreach (var item2 in item)
-                //    {
-                //        Debug.WriteLine("Chunks: " + item2);
-                //    }
-                //}
-
-                foreach (var item in longCntryNames)
-                {
-                    if (myCountrysDict.ContainsValue(item))
-                    {
-                        //Debug.WriteLine("myLongCountrysDict[item]: " + myLongCountrysDict[item]);
-                        fullCntryNm.Add(myLongCountrysDict[item]);
-                    }
-                }
-                cntry = String.Join(",", fullCntryNm);
+                cntry = cntryList(cntry);
             }
 
             if (cntry.Length == 0 & indctr.Length == 0)
             {
-                url = host + "indicators?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "indicators?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else if ((cntry.Length != 0 & indctr.Length == 0) || indctr == "All")
             {
-                url = host + "country/" + cntry + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "country/" + cntry + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else
             {
-                url = host + "country/" + cntry + "/" + indctr + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "country/" + cntry + "/" + indctr + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
-            return url;
         }
 
-        public static string getTsUrl(string cntry, string indctr, string key, string startDate, string endDate)
+        public static string getTsUrl(string cntry, string indctr, string startDate, string endDate)
         {
-            List<string> fullCntryNm = new List<string>();
-            string[] longCntryNames = cntry.Split(',');
-
-            int i = 0;
-            var query = from s in longCntryNames
-                        let num = i++
-                        group s by num / 3 into g
-                        select g.ToArray();
-            var results = query.ToArray();
-
-            foreach (var item in longCntryNames)
-            {
-                if (myCountrysDict.ContainsValue(item))
-                {
-                    fullCntryNm.Add(myLongCountrysDict[item]);
-                }
-            }
-            cntry = String.Join(",", fullCntryNm);
-
             if (startDate.Length != 0 & endDate.Length == 0)
             {
-                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "historical/country/" + cntryList(cntry) + "/indicator/" + indctr + "/" + startDate + "?client=" +
+                    apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else if (startDate.Length != 0 & endDate.Length != 0)
             {
-                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "historical/country/" + cntryList(cntry) + "/indicator/" + indctr + "/" + startDate + "/" + endDate + "?client=" +
+                    apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
             else
             {
-                url = host + "historical/country/" + cntry + "/indicator/" + indctr + "/" + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
+                return host + "historical/country/" + cntryList(cntry) + "/indicator/" + indctr + "/" + "?client=" +
+                    apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
             }
-            return url;
         }
 
         public static string[][] getStaff(string staffTocheck)
         {
-            //*************************
-            string[] KKK = staffTocheck.Split(',');
             // This "query" slit string of countries in chunks
             int i = 0;
-            var query = from s in KKK
+            var query = from s in staffTocheck.Split(',')
                         let num = i++
                         group s by num / 10 into g
                         select g.ToArray();
-            var results = query.ToArray();
 
-            //foreach (var item in results)
-            //{
-            //    Debug.WriteLine("---------------");
-            //    foreach (var item2 in item)
-            //    {
-            //        Debug.WriteLine("Chunks: " + item2);
-            //    }
-            //}
-            return results;
+            return query.ToArray();
         }
 
 
-        public static JArray SOmeName(string cntry, string indctr, string key, string caller, string iniDate = "", string clsDate = "")
+        public static JArray SOmeName(string cntry, string indctr, string caller, string iniDate = "", string clsDate = "", string mktType = "")
         {
             JArray jsData = new JArray();
             string[][] cntrStaff = helperClass.getStaff(cntry);
@@ -1755,23 +1709,31 @@ namespace TE
                 }
                 chunk = chunk.TrimEnd(',');
                 //Debug.WriteLine("Cntry to URL: " + chunk);
+
                 switch(caller)
                 {
                     case "Ind":
-                        url = helperClass.getIndctrUrl(chunk, indctr, key);
+                        url = helperClass.getIndctrUrl(chunk, indctr);
                         break;
                     case "Hist":
-                        url = getHistUrl (chunk, indctr, key, iniDate, clsDate);
+                        url = getHistUrl (chunk, indctr, iniDate, clsDate);
                         break;
                     case "Cal":
-                        url = getClndrUrl(chunk, indctr, key, iniDate, clsDate);
+                        url = getClndrUrl(chunk, indctr, iniDate, clsDate);
                         break;
                     case "For":
-                        url = getForcUrl(chunk, indctr, key);
+                        url = getForcUrl(chunk, indctr);
+                        break;
+                    case "MrktHist":
+                        url = getMrktsHistUrl(indctr, mktType);
+                        break;
+                    case "SearchEconomy":
+                        url = SearchEconomy(chunk, indctr);
                         break;
                 }
-                
+                log.Info("Some Name URL = " + url);
                 var jsnData = new requestData(url);
+                System.Threading.Thread.Sleep(500);
                 foreach (var k in jsnData.getJSON())
                 {
                     jsData.Add(k);
@@ -1779,7 +1741,6 @@ namespace TE
             }
             return jsData;
         }
-
 
         public static string Determine_OfficeVersion()
         {

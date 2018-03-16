@@ -228,9 +228,11 @@
             this.cntryTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cntryTextBox.Location = new System.Drawing.Point(7, 25);
             this.cntryTextBox.Name = "cntryTextBox";
-            this.cntryTextBox.Size = new System.Drawing.Size(214, 15);
+            //this.cntryTextBox.Size = new System.Drawing.Size(214, 15);
             this.cntryTextBox.TabIndex = 14;
             this.cntryTextBox.TextChanged += new System.EventHandler(this.cntryTextBox_TextChanged);
+            this.cntryTextBox.AutoSize = false;
+            this.cntryTextBox.Size = new System.Drawing.Size(214, 16);
             // 
             // indctrTextBox
             // 
@@ -238,9 +240,11 @@
             this.indctrTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.indctrTextBox.Location = new System.Drawing.Point(7, 245);
             this.indctrTextBox.Name = "indctrTextBox";
-            this.indctrTextBox.Size = new System.Drawing.Size(214, 15);
+            //this.indctrTextBox.Size = new System.Drawing.Size(214, 15);
             this.indctrTextBox.TabIndex = 15;
             this.indctrTextBox.TextChanged += new System.EventHandler(this.indctrTextBox_TextChanged);
+            this.indctrTextBox.AutoSize = false;
+            this.indctrTextBox.Size = new System.Drawing.Size(214, 16);
             // 
             // activeCellPositionBox
             // 
@@ -329,7 +333,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(556, 450);
+            this.tabPage2.Size = new System.Drawing.Size(556, 444);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Advanced";
             // 

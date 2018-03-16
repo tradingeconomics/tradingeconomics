@@ -8,7 +8,7 @@
   <Image Name="indi" Path="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\Images\arrow2.png" Pack="true" />
   <Image Name="hist" Path="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\Images\Line.png" Pack="true" />
   <Image Name="refresh" Path="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\Images\refresh.png" Pack="true" />
-
+  <Image Name="searcher" Path="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\Images\searcher.png" Pack="true" />
   <!-- 
        The RuntimeVersion attribute above allows two settings:
        * RuntimeVersion="v2.0" - for .NET 2.0, 3.0 and 3.5
@@ -39,16 +39,14 @@
                 <button id='btnM_3' label='Commodities' onAction='OnMarkets2ButtonPressed' />
                 <button id='btnM_4' label='Bonds' onAction='OnMarkets2ButtonPressed' />
               </menu>
-              <button id='btnForecasts' label='Forecasts' size='large' showImage="true" image="mrkts" onAction='OnForecastsButtonPressed' getEnabled='getState'/>
-               <!-- <button id='btnTimeSeries' label='Time Series' size='large' showImage="true" image="hist" onAction='OnTSButtonPressed' getEnabled='getState'/>   -->
-              <button id='btnRefresh' label='Refresh' size='large' showImage="true" image="refresh" onAction='OnRefreshButtonPressed' getEnabled='getState'/> 
+              <button id='btnForecasts' label='Forecasts' size='large' showImage="true" image="mrkts" onAction='OnForecastsButtonPressed' getEnabled='getState'/>              
+              <button id='btnRefresh' label='Refresh' size='large' showImage="true" image="refresh" onAction='OnRefreshButtonPressed' getEnabled='getState'/>
+              <button id='SearchEngine' label='Search' size='large' showImage="true" image="searcher" onAction='SearchEnginePressed' getEnabled='getState'/>
             </group >
             <group id='ApiKeyGroup' label='Login'>
               <button id='btnApiKey' size='large' showImage="true" getImage="MyGetImage" onAction='OnApiKeyButtonPressed' getLabel='getLabelApi' />
             </group>
             <group id='helpGroup' label=' '>
-              <button id='btnHelp' label='Help' size='normal' onAction='OnHelpButtonPressed' />
-              <button id='btnCall' label='Contact'  onAction='OnCallButtonPressed' />
             <button id='btnAbout' label='About'  onAction='OnAboutButtonPressed' />
             </group>            
           </tab>

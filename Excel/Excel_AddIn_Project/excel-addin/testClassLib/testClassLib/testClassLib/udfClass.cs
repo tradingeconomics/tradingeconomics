@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Threading;
 using Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
-using System.Diagnostics;
+//using System.Diagnostics;
 
 namespace TE
 {
@@ -16,32 +16,50 @@ namespace TE
         public static string host = helperClass.host;
         private static Dictionary<string, string> fullNames;
         public static bool refError = false;
+        private static string newFormula;
+        private static Range dataStartCell;
+        public static Range formulaCell;
+        public static string answer;
 
-        [ExcelFunction(Name = "TEMarkets", IsMacroType = true, IsThreadSafe = true)]
-        public static string teGetMarkets(string mrkt, string columnsToUse, [ExcelArgument(AllowReference = true)] object firstCell)
+        public static void udfClassHelper(string callCategory, string mrktCategory = "")
         {
-            helperClass.log.Info("=======================");
-            helperClass.log.Info("Starting TEMarkets udf");
-            string key = Properties.Settings.Default.userApiKey;
-            // Convert column names to JArray names
-            fullNames = new Dictionary<string, string>();
-            if (mrkt == "bond")
+            if (callCategory == "TEMarkets")
             {
-                for (int i = 0; i < helperClass.bondsNames.Length; i++)
+                fullNames = new Dictionary<string, string>();
+                if (mrktCategory == "bond")
                 {
-                    fullNames.Add(helperClass.bondsNames[i], helperClass.bondsNamesFull[i]);
+                    for (int i = 0; i < helperClass.bondsNames.Length; i++)
+                    {
+                        fullNames.Add(helperClass.bondsNames[i], helperClass.bondsNamesFull[i]);
+                    }
                 }
+                else
+                {
+                    for (int i = 0; i < helperClass.marketsNames.Length; i++)
+                    {
+                        fullNames.Add(helperClass.marketsNames[i], helperClass.marketsNamesFull[i]);
+                    }
+                }
+            }
+            else if (callCategory == "TEMrktsHist")
+            {
+                fullNames = new Dictionary<string, string>();
+                for (int i = 0; i < helperClass.MarketPeersComponentsColumns.Length; i++)
+                {
+                    fullNames.Add(helperClass.MarketPeersComponentsColumns[i], helperClass.MarketPeersComponentsFullColumns[i]);
+                }
+            }
+
+            if (SearchEngine.fromSearch)
+            {
+                answer = SearchEngine.searchAnswer;
+                SearchEngine.fromSearch = false;
             }
             else
             {
-                for (int i = 0; i < helperClass.marketsNames.Length; i++)
-                {
-                    fullNames.Add(helperClass.marketsNames[i], helperClass.marketsNamesFull[i]);
-                }
+                answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
             }
 
-            string answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
-            string columns = columnsToUse;
             try
             {
                 MyRibbon.sheet = MyRibbon.app.ActiveSheet;
@@ -53,22 +71,115 @@ namespace TE
             }
 
             ExcelReference caller = XlCall.Excel(XlCall.xlfCaller) as ExcelReference;
-            Range caller_range = helperClass.ReferenceToRange(caller);
-            Range formulaCell = caller_range; //Last cell used in userform
-            Range dataStartCell;
+            formulaCell = helperClass.ReferenceToRange(caller); //Last cell used in userform
+        }
 
-            string newFormula;
+        public static void customFunctionEnd(string processCategory)
+        {
+            helperClass.runFormula = "RunAutomatically = 0";
+            helperClass.origin = true;
+            helperClass.log.Info("Printing current cell value and finishing " + processCategory +" process");
+            MyRibbon.refresh = false;
+        }
+
+        public static void customFunctionHelper(JArray jsData, string columnsToUse)
+        {
+            Dictionary<string, formulaColumns> myNewDict = helperClass.getNewDict();
+            if (jsData.Count == 0)
+            {
+                MessageBox.Show("No data provided for selected parameters");
+            }
+            else
+            {
+                try
+                {
+                    helperClass.elseFunction(columnsToUse, jsData, dataStartCell, newFormula, formulaCell);
+                }
+                catch (Exception ex)
+                {
+                    helperClass.log.Error(ex.Message);
+                    helperClass.log.Trace(ex.StackTrace);
+                    throw;
+                }
+            }
+            helperClass.RemoveOldKey(myNewDict);
+        }
+
+        public static void customFunctionHelper_2(string columnsToUse)
+        {
+            MyRibbon.myNewDict = new Dictionary<string, formulaColumns>();
+
+            try
+            {
+                XlCall.Excel(XlCall.xlfVolatile, false);
+            }
+            catch (Exception e)
+            {
+                helperClass.log.Error(e.Message);
+                helperClass.log.Trace(e.StackTrace);
+                throw;
+            }
+            if (formulaCell.Address == dataStartCell.Address) answer = columnsToUse.Split(',')[0];
+        }
+
+        public static void customFunctionAutoRun(string cat, formulaColumns frmlaColumnsPair, JArray jsData, string columnsToUse)
+        {            
+            if (MyRibbon.refresh != true)
+                helperClass.setGlobalDict(formulaCell.Address[false, false], frmlaColumnsPair);
+
+            if (jsData.Count == 0)
+            {
+                MessageBox.Show("No data provided for selected parameters");
+            }
+            else
+            {
+                try
+                {
+                    helperClass.elseFunction(columnsToUse, jsData, dataStartCell, newFormula, formulaCell);
+                }
+                catch (Exception ex)
+                {
+                    helperClass.log.Info(ex.Message);
+                    helperClass.log.Trace(ex.StackTrace);
+                    throw;
+                }
+            }
+        }
+
+        public static void customFunctionNotAutoRun(string cat)
+        {
+            MyRibbon.sheet = MyRibbon.app.ActiveSheet;
+
+            MyRibbon.myFormulasDict = (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString())) ? 
+                MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()] : new Dictionary<string, formulaColumns>();
+        }
+
+        public static string columnNamesHack(string toHack)
+        {
+            List<string> columnsFull = new List<string>();
+            foreach (var item in toHack.Split(','))
+            {
+                if (fullNames.ContainsKey(item)) columnsFull.Add(fullNames[item]);
+            }
+            return String.Join(",", columnsFull);
+        }
+
+        [ExcelFunction(Name = "TEMarkets", IsMacroType = true, IsThreadSafe = true)]
+        public static string teGetMarkets(string mrkt, string columnsToUse, [ExcelArgument(AllowReference = true)] object firstCell)
+        {
+            udfClassHelper("TEMarkets", mrkt);
+
             if (firstCell is ExcelMissing)
             {
                 dataStartCell = formulaCell;
-                newFormula = string.Format($"=TEMarkets( \"{mrkt}\", \"{columns}\")");
+                newFormula = string.Format($"=TEMarkets( \"{mrkt}\", \"{columnsToUse}\")");
             }
             else
             {
                 try
                 {
                     dataStartCell = helperClass.ReferenceToRange((ExcelReference)firstCell);
-                    newFormula = string.Format($"=TEMarkets( \"{mrkt}\", \"{columns}\", {dataStartCell.Address[false, false]})");
+                    newFormula = string.Format($"=TEMarkets( \"{mrkt}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
                 }
                 catch (Exception)
                 {
@@ -79,7 +190,7 @@ namespace TE
                 }
             }
             Range pass = null;
-            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columns, pass, formulaCell);
+            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columnsToUse, pass, formulaCell);
             MyRibbon.myNewDict = new Dictionary<string, formulaColumns>();
 
             try
@@ -93,23 +204,17 @@ namespace TE
                 throw;
             }
 
-            if (formulaCell.Address == dataStartCell.Address)
-            {
-                answer = columns.Split(',')[0];
-            }
+            if (formulaCell.Address == dataStartCell.Address) answer = columnsToUse.Split(',')[0];
 
             if (helperClass.runFormula == "RunAutomatically = 1")
             {
                 helperClass.log.Info("TEMarkets udf -> RunAutomatically = 1");
 
                 if (MyRibbon.refresh != true)
-                {
                     helperClass.setGlobalDict(formulaCell.Address[false, false], frmlaColumnsPair);
-                }
 
-                url = host + "markets/" + mrkt + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
-                var jsnData = new requestData(url);
-                var jsData = jsnData.getJSON();
+                url = host + "markets/" + mrkt + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
+                var jsData = new requestData(url).getJSON();
 
                 if (jsData.Count == 0)
                 {
@@ -117,19 +222,9 @@ namespace TE
                 }
                 else
                 {
-                    List<string> columnsFull = new List<string>();
-
-                    foreach (var item in columns.Split(','))
-                    {
-                        if (fullNames.ContainsKey(item))
-                        {
-                            columnsFull.Add(fullNames[item]);
-                        }
-                    }
-                    columns = String.Join(",", columnsFull);
                     try
                     {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
+                        helperClass.elseFunction(columnNamesHack(columnsToUse), jsData, dataStartCell, newFormula, formulaCell);
                     }
                     catch (Exception ex)
                     {
@@ -141,16 +236,10 @@ namespace TE
             }
             else
             {
-                helperClass.log.Info("TEMarkets udf -> RunAutomatically != 1");
                 MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-                if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
-                {
-                    MyRibbon.myFormulasDict = MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()];
-                }
-                else
-                {
-                    MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
-                }
+                MyRibbon.myFormulasDict = (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString())) ?
+                    MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()] : new Dictionary<string, formulaColumns>();
+
                 foreach (var item in MyRibbon.myFormulasDict.Keys)
                 {
                     if (MyRibbon.myFormulasDict[item]._formula == newFormula && item == MyRibbon.myFormulasDict[item]._caller.Address[false, false])
@@ -160,28 +249,17 @@ namespace TE
                 }
                 Dictionary<string, formulaColumns> myNewDict = helperClass.getNewDict();
 
-                url = host + "markets/" + mrkt + "?client=" + key + "&excel=" + helperClass.Determine_OfficeVersion();
-                var jsnData = new requestData(url);
-                var jsData = jsnData.getJSON();
+                url = host + "markets/" + mrkt + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
+                var jsData = new requestData(url).getJSON();
                 if (jsData.Count == 0)
                 {
                     MessageBox.Show("No data provided for selected parameters");
                 }
                 else
                 {
-                    List<string> columnsFull = new List<string>();
-
-                    foreach (var item in columns.Split(','))
-                    {
-                        if (fullNames.ContainsKey(item))
-                        {
-                            columnsFull.Add(fullNames[item]);
-                        }
-                    }
-                    columns = String.Join(",", columnsFull);
                     try
                     {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
+                        helperClass.elseFunction(columnNamesHack(columnsToUse), jsData, dataStartCell, newFormula, formulaCell);
                     }
                     catch (Exception ex)
                     {
@@ -192,49 +270,26 @@ namespace TE
                 }
                 helperClass.RemoveOldKey(myNewDict);
             }
-            helperClass.runFormula = "RunAutomatically = 0";
-            helperClass.origin = true;
-            helperClass.log.Info("Printing current cell value and finishing Markets process");
-            MyRibbon.refresh = false;
+            customFunctionEnd("Markets");
             return answer;
         }
 
-
         [ExcelFunction(Name = "TEIndicators", IsMacroType = true, IsThreadSafe = false)]
         public static string teGetIndicators(string cntry, string indctr, string columnsToUse, [ExcelArgument(AllowReference = true)] object firstCell)
-        {            
-            helperClass.log.Info("=========================");
-            helperClass.log.Info("Starting TEIndicators udf");
-            string key = Properties.Settings.Default.userApiKey;
-            string answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
-            string columns = columnsToUse;
-            try
-            {
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
-            catch (Exception)
-            {
-                MyRibbon.app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;               
-            }
+        {
+            udfClassHelper("TEIndicators");
 
-            ExcelReference caller = XlCall.Excel(XlCall.xlfCaller) as ExcelReference;
-            Range caller_range = helperClass.ReferenceToRange(caller);
-            Range formulaCell = caller_range; //Last cell used in userform
-            Range dataStartCell;
-
-            string newFormula;
             if (firstCell is ExcelMissing)
             {
                 dataStartCell = formulaCell;
-                newFormula = string.Format($"=TEIndicators( \"{cntry}\", \"{indctr}\", \"{columns}\")");
+                newFormula = string.Format($"=TEIndicators( \"{cntry}\", \"{indctr}\", \"{columnsToUse}\")");
             }
             else
             {
                 try
                 {
                     dataStartCell = helperClass.ReferenceToRange((ExcelReference)firstCell);
-                    newFormula = string.Format($"=TEIndicators( \"{cntry}\", \"{indctr}\", \"{columns}\", {dataStartCell.Address[false, false]})");
+                    newFormula = string.Format($"=TEIndicators( \"{cntry}\", \"{indctr}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
                 }
                 catch (Exception)
                 {
@@ -245,141 +300,51 @@ namespace TE
                 }
             }
             helperClass.log.Info("newFormula = " + newFormula);
-            Range pass = null;
-            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columns, pass, formulaCell);
-            MyRibbon.myNewDict = new Dictionary<string, formulaColumns>();
 
-            try
-            {
-                XlCall.Excel(XlCall.xlfVolatile, false);
-            }
-            catch (Exception e)
-            {
-                helperClass.log.Error(e.Message);
-                helperClass.log.Trace(e.StackTrace);
-                throw;
-            }
-
-            if (formulaCell.Address == dataStartCell.Address)
-            {
-                answer = columns.Split(',')[0];
-            }
+            customFunctionHelper_2(columnsToUse);
 
             if (helperClass.runFormula == "RunAutomatically = 1")
             {
-                helperClass.log.Info("TEIndicators udf -> RunAutomatically = 1");
-
-                if (MyRibbon.refresh != true)
-                {
-                    helperClass.setGlobalDict(formulaCell.Address[false, false], frmlaColumnsPair);
-                }
-
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "Ind");
-
-                if (jsData.Count == 0)
-                {
-                    MessageBox.Show("No data provided for selected parameters");
-                }
-                else
-                {
-                    try
-                    {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
-                    }
-                    catch (Exception ex)
-                    {
-                        helperClass.log.Info(ex.Message);
-                        helperClass.log.Trace(ex.StackTrace);
-                        throw;
-                    }
-                }                
+                customFunctionAutoRun("TEIndicators",
+                    new formulaColumns(newFormula, columnsToUse, null, formulaCell), 
+                    helperClass.SOmeName(cntry, indctr, "Ind"), 
+                    columnsToUse);
             }
             else
             {
-                helperClass.log.Info("TEIndicators udf -> RunAutomatically != 1");
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-                if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
-                {
-                    MyRibbon.myFormulasDict = MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()];
-                }
-                else
-                {
-                    MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
-                }
+                customFunctionNotAutoRun("TEIndicators");
 
                 foreach (var item in MyRibbon.myFormulasDict.Keys)
                 {
-                    if (MyRibbon.myFormulasDict[item]._formula == newFormula && item == MyRibbon.myFormulasDict[item]._caller.Address[false, false])
+                    if (MyRibbon.myFormulasDict[item]._formula == newFormula && MyRibbon.myFormulasDict[item]._caller.Address[false, false] == item)
                     {
                         return answer;
                     }
                 }
-
-                Dictionary<string, formulaColumns> myNewDict = helperClass.getNewDict();
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "Ind");
-                if (jsData.Count == 0)
-                {
-                    MessageBox.Show("No data provided for selected parameters");
-                }
-                else
-                {
-                    try
-                    {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
-                    }
-                    catch (Exception ex)
-                    {
-                        helperClass.log.Error(ex.Message);
-                        helperClass.log.Trace(ex.StackTrace);
-                        throw;
-                    }
-                }
-                helperClass.RemoveOldKey(myNewDict);
+                customFunctionHelper(helperClass.SOmeName(cntry, indctr, "Ind"), columnsToUse);
             }
-            helperClass.runFormula = "RunAutomatically = 0";
-            helperClass.origin = true;
-            MyRibbon.refresh = false;
-            helperClass.log.Info("Printing current cell value and finishing Indicators process");
+            customFunctionEnd("Indicators");
             return answer;
         }
 
-
         [ExcelFunction(Name = "TECalendar", IsMacroType = true, IsThreadSafe = false)]
-        public static string teGetCalendar(string cntry, string indctr, string startDate, string endDate, string columnsToUse, [ExcelArgument(AllowReference = true)] object firstCell)
+        public static string teGetCalendar(string cntry, string indctr, string startDate, string endDate, string columnsToUse, 
+            [ExcelArgument(AllowReference = true)] object firstCell)
         {
-            helperClass.log.Info("=======================");
-            helperClass.log.Info("Starting TECalendar udf");
-            string key = Properties.Settings.Default.userApiKey;
-            string answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
-            string columns = columnsToUse;
-            helperClass.fromCalendar = true;
-            try
-            {
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
-            catch (Exception)
-            {
-                MyRibbon.app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
+            udfClassHelper("TECalendar");
 
-            ExcelReference caller = XlCall.Excel(XlCall.xlfCaller) as ExcelReference;
-            Range caller_range = helperClass.ReferenceToRange(caller);
-            Range formulaCell = caller_range; //Last cell used in userform
-            Range dataStartCell;
-
-            string newFormula;
             if (firstCell is ExcelMissing)
             {
                 dataStartCell = formulaCell;
-                newFormula = string.Format($"=TECalendar( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columns}\")");
+                newFormula = string.Format($"=TECalendar( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columnsToUse}\")");
             }
             else
             {
                 try
                 {
                     dataStartCell = helperClass.ReferenceToRange((ExcelReference)firstCell);
-                    newFormula = string.Format($"=TECalendar( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columns}\", {dataStartCell.Address[false, false]})");
+                    newFormula = string.Format(
+                        $"=TECalendar( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
                 }
                 catch (Exception)
                 {
@@ -389,141 +354,48 @@ namespace TE
                     throw;
                 }
             }
-            Range pass = null;
-            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columns, pass, formulaCell);
-            MyRibbon.myNewDict = new Dictionary<string, formulaColumns>();
-
-            try
-            {
-                XlCall.Excel(XlCall.xlfVolatile, false);
-            }
-            catch (Exception e)
-            {
-                helperClass.log.Error(e.Message);
-                helperClass.log.Trace(e.StackTrace);
-                throw;
-            }
-
-            if (formulaCell.Address == dataStartCell.Address)
-            {
-                answer = columns.Split(',')[0];
-            }
+            customFunctionHelper_2(columnsToUse);
 
             if (helperClass.runFormula == "RunAutomatically = 1")
             {
-                helperClass.log.Info("TECalendar udf -> RunAutomatically = 1");
-
-                if (MyRibbon.refresh != true)
-                {
-                    helperClass.setGlobalDict(formulaCell.Address[false, false], frmlaColumnsPair);
-                }
-
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "Cal", startDate, endDate);
-
-                if (jsData.Count == 0)
-                {
-                    MessageBox.Show("No data provided for selected parameters");
-                }
-                else
-                {
-                    try
-                    {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
-                    }
-                    catch (Exception ex)
-                    {
-                        helperClass.log.Info(ex.Message);
-                        helperClass.log.Trace(ex.StackTrace);
-                        throw;
-                    }
-                }
+                customFunctionAutoRun("TECalendar",
+                    new formulaColumns(newFormula, columnsToUse, null, formulaCell),
+                    helperClass.SOmeName(cntry, indctr, "Cal", startDate, endDate),
+                    columnsToUse);
             }
             else
             {
-                helperClass.log.Info("TECalendar udf -> RunAutomatically != 1");
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-
-                if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
-                {
-                    MyRibbon.myFormulasDict = MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()];
-                }
-                else
-                {
-                    MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
-                }
+                customFunctionNotAutoRun("TECalendar");
 
                 foreach (var item in MyRibbon.myFormulasDict.Keys)
                 {
-                    if (MyRibbon.myFormulasDict[item]._formula == newFormula && item == MyRibbon.myFormulasDict[item]._caller.Address[false, false])
+                    if (MyRibbon.myFormulasDict[item]._formula == newFormula &&  MyRibbon.myFormulasDict[item]._caller.Address[false, false] == item)
                     {
                         return answer;
                     }
                 }
-
-                Dictionary<string, formulaColumns> myNewDict = helperClass.getNewDict();
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "Cal", startDate, endDate);
-
-                if (jsData.Count == 0)
-                {
-                    MessageBox.Show("No data provided for selected parameters");
-                }
-                else
-                {
-                    try
-                    {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
-                    }
-                    catch (Exception ex)
-                    {
-                        helperClass.log.Info(ex.Message);
-                        helperClass.log.Trace(ex.StackTrace);
-                        throw;
-                    }
-                }
-                helperClass.RemoveOldKey(myNewDict);
+                customFunctionHelper(helperClass.SOmeName(cntry, indctr, "Cal", startDate, endDate), columnsToUse);
             }
-            helperClass.runFormula = "RunAutomatically = 0";
-            helperClass.origin = true;
-            MyRibbon.refresh = false;
-            helperClass.log.Info("Printing current cell value and finishing Calendar process");
+            customFunctionEnd("Calendar");
             return answer;
         }
 
         [ExcelFunction(Name = "TEForecasts", IsMacroType = true, IsThreadSafe = false)]
         public static string teGetForecasts(string cntry, string indctr, string columnsToUse, [ExcelArgument(AllowReference = true)] object firstCell)
         {
-            helperClass.log.Info("========================");
-            helperClass.log.Info("Starting TEForecasts udf");
-            string key = Properties.Settings.Default.userApiKey;
-            string answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
-            string columns = columnsToUse;
-            try
-            {
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
-            catch (Exception)
-            {
-                MyRibbon.app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
+            udfClassHelper("TEForecasts");
 
-            ExcelReference caller = XlCall.Excel(XlCall.xlfCaller) as ExcelReference;
-            Range caller_range = helperClass.ReferenceToRange(caller);
-            Range formulaCell = caller_range;
-            Range dataStartCell;
-
-            string newFormula;
             if (firstCell is ExcelMissing)
             {
                 dataStartCell = formulaCell;
-                newFormula = string.Format($"=TEForecasts( \"{cntry}\", \"{indctr}\", \"{columns}\")");
+                newFormula = string.Format($"=TEForecasts( \"{cntry}\", \"{indctr}\", \"{columnsToUse}\")");
             }
             else
             {
                 try
                 {
                     dataStartCell = helperClass.ReferenceToRange((ExcelReference)firstCell);
-                    newFormula = string.Format($"=TEForecasts( \"{cntry}\", \"{indctr}\", \"{columns}\", {dataStartCell.Address[false, false]})");
+                    newFormula = string.Format($"=TEForecasts( \"{cntry}\", \"{indctr}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
                 }
                 catch (Exception)
                 {
@@ -533,69 +405,18 @@ namespace TE
                     throw;
                 }
             }
-
-            Range pass = null;
-            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columns, pass, formulaCell);
-            MyRibbon.myNewDict = new Dictionary<string, formulaColumns>();
-
-            try
-            {
-                XlCall.Excel(XlCall.xlfVolatile, false);
-            }
-            catch (Exception e)
-            {
-                helperClass.log.Error(e.Message);
-                helperClass.log.Trace(e.StackTrace);
-                throw;
-            }
-
-            if (formulaCell.Address == dataStartCell.Address)
-            {
-                answer = columns.Split(',')[0];
-            }
+            customFunctionHelper_2(columnsToUse);
 
             if (helperClass.runFormula == "RunAutomatically = 1")
             {
-                helperClass.log.Info("TEForecasts udf -> RunAutomatically = 1");
-
-                if (MyRibbon.refresh != true)
-                {
-                    helperClass.setGlobalDict(formulaCell.Address[false, false], frmlaColumnsPair);
-                }
-
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "For");
-
-                if (jsData.Count == 0)
-                {
-                    MessageBox.Show("No data provided for selected parameters");
-                }
-                else
-                {
-                    try
-                    {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
-                    }
-                    catch (Exception ex)
-                    {
-                        helperClass.log.Info(ex.Message);
-                        helperClass.log.Trace(ex.StackTrace);
-                        throw;
-                    }                    
-                }
+                customFunctionAutoRun("TEForecasts",
+                    new formulaColumns(newFormula, columnsToUse, null, formulaCell),
+                    helperClass.SOmeName(cntry, indctr, "For"),
+                    columnsToUse);
             }
             else
             {
-                helperClass.log.Info("TEForecasts udf -> RunAutomatically != 1");
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-
-                if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
-                {
-                    MyRibbon.myFormulasDict = MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()];
-                }
-                else
-                {
-                    MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
-                }
+                customFunctionNotAutoRun("TEForecasts");
 
                 foreach (var item in MyRibbon.myFormulasDict.Keys)
                 {
@@ -604,74 +425,30 @@ namespace TE
                         return answer;
                     }
                 }
-
-                Dictionary<string, formulaColumns> myNewDict = helperClass.getNewDict();
-                helperClass.log.Info("udfClass_Forecasts code is starting");
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "For");
-
-                if (jsData.Count == 0)
-                {
-                    MessageBox.Show("No data provided for selected parameters");
-                }
-                else
-                {
-                    try
-                    {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
-                    }
-                    catch (Exception ex)
-                    {
-                        helperClass.log.Info(ex.Message);
-                        helperClass.log.Trace(ex.StackTrace);
-                        throw;
-                    }                    
-                }
-                helperClass.RemoveOldKey(myNewDict);
+                customFunctionHelper(helperClass.SOmeName(cntry, indctr, "For"), columnsToUse);
             }
-            helperClass.runFormula = "RunAutomatically = 0";
-            helperClass.origin = true;
-            MyRibbon.refresh = false;
-            helperClass.log.Info("Printing current cell value and finishing Forecasting process");
+            customFunctionEnd("Forecasting");
             return answer;
         }
 
         [ExcelFunction(Name = "TEHistorical", IsMacroType = true)]
-        public static string teGetHistorical(string cntry, string indctr, string startDate, string endDate, string columnsToUse, [ExcelArgument(AllowReference = true)] object myArgument)
+        public static string teGetHistorical(string cntry, string indctr, string startDate, string endDate, string columnsToUse, 
+            [ExcelArgument(AllowReference = true)] object myArgument)
         {
-            helperClass.log.Info("=========================");
-            helperClass.log.Info("Starting TEHistorical udf");
-            string key = Properties.Settings.Default.userApiKey;
-            string answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
-            string columns = columnsToUse;
-            try
-            {
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
-            catch (Exception)
-            {
-                MyRibbon.app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
+            udfClassHelper("TEHistorical");
 
-            ExcelReference caller = XlCall.Excel(XlCall.xlfCaller) as ExcelReference;
-            Range caller_range = helperClass.ReferenceToRange(caller);
-            Range formulaCell = caller_range;
-
-            Range dataStartCell;
-            helperClass.fromHistorical = true;
-
-            string newFormula;
             if (myArgument is ExcelMissing)
             {
                 dataStartCell = formulaCell;
-                newFormula = string.Format($"=TEHistorical( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columns}\")");
+                newFormula = string.Format($"=TEHistorical( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columnsToUse}\")");
             }
             else
             {
                 try
                 {
                     dataStartCell = helperClass.ReferenceToRange((ExcelReference)myArgument);
-                    newFormula = string.Format($"=TEHistorical( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columns}\", {dataStartCell.Address[false, false]})");
+                    newFormula = string.Format(
+                        $"=TEHistorical( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
                 }
                 catch (Exception)
                 {
@@ -681,104 +458,30 @@ namespace TE
                     throw;
                 }
             }
-            Range pass = null;
-            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columns, pass, formulaCell);
-            MyRibbon.myNewDict = new Dictionary<string, formulaColumns>();
 
-            try
-            {
-                XlCall.Excel(XlCall.xlfVolatile, false);
-            }
-            catch (Exception e)
-            {
-                helperClass.log.Error(e.Message);
-                helperClass.log.Trace(e.StackTrace);
-                throw;
-            }
-
-            if (formulaCell.Address == dataStartCell.Address)
-            {
-                answer = columns.Split(',')[0];
-            }
+            customFunctionHelper_2(columnsToUse);
 
             if (helperClass.runFormula == "RunAutomatically = 1")
             {
-                helperClass.log.Info("TEHistorical udf -> RunAutomatically = 1");
-
-                if (MyRibbon.refresh != true)
-                {
-                    helperClass.setGlobalDict(formulaCell.Address[false, false], frmlaColumnsPair);
-                }
-
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "Hist", startDate, endDate);
-
-                if (jsData.Count == 0)
-                {
-                    MessageBox.Show("No data provided for selected parameters");
-                }
-                else
-                {
-                    try
-                    {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
-                    }
-                    catch (Exception ex)
-                    {
-                        helperClass.log.Info(ex.Message);
-                        helperClass.log.Trace(ex.StackTrace);
-                        throw;
-                    }
-                }
+                customFunctionAutoRun("TEHistorical",
+                    new formulaColumns(newFormula, columnsToUse, null, formulaCell),
+                    helperClass.SOmeName(cntry, indctr, "Hist", startDate, endDate),
+                    columnsToUse);
             }
             else
             {
-                helperClass.log.Info("TEHistorical udf -> RunAutomatically != 1");
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-
-                if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
-                {
-                    MyRibbon.myFormulasDict = MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()];
-                }
-                else
-                {
-                    MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
-                }
+                customFunctionNotAutoRun("TEHistorical");
 
                 foreach (var item in MyRibbon.myFormulasDict.Keys)
                 {
-                    if (MyRibbon.myFormulasDict[item]._formula == newFormula && caller_range.Address[false, false] == item)
+                    if (MyRibbon.myFormulasDict[item]._formula == newFormula && formulaCell.Address[false, false] == item)
                     {
                         return answer;
                     }
                 }
-
-                Dictionary<string, formulaColumns> myNewDict = helperClass.getNewDict();
-                JArray jsData = helperClass.SOmeName(cntry, indctr, key, "Hist", startDate, endDate);
-
-                if (jsData.Count == 0)
-                {
-                    MessageBox.Show("No data provided for selected parameters");
-                }
-                else
-                {
-                    try
-                    {
-                        helperClass.elseFunction(columns, jsData, key, dataStartCell, newFormula, formulaCell);
-                    }
-                    catch (Exception ex)
-                    {
-                        helperClass.log.Info(ex.Message);
-                        helperClass.log.Trace(ex.StackTrace);
-                        throw;
-                    }
-
-                }
-                helperClass.RemoveOldKey(myNewDict);
+                customFunctionHelper(helperClass.SOmeName(cntry, indctr, "Hist", startDate, endDate), columnsToUse);
             }
-            helperClass.runFormula = "RunAutomatically = 0";
-            helperClass.origin = true;
-            MyRibbon.refresh = false;
-            helperClass.log.Info("Printing current cell value and finishing Historical process");
+            customFunctionEnd("Historical");
             return answer;
         }
 
@@ -786,27 +489,9 @@ namespace TE
         [ExcelFunction(Name = "TESeries", IsMacroType = true)]
         public static string teGetTS(string cntry, string indctr, string startDate, string endDate, [ExcelArgument(AllowReference = true)] object myArgument)
         {
-            helperClass.log.Info("=======================");
-            helperClass.log.Info("Starting TESeries udf");
-            string key = Properties.Settings.Default.userApiKey;
-            string answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
             bool fromTS = true;
-            try
-            {
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
-            catch (Exception)
-            {
-                MyRibbon.app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-            }
+            udfClassHelper("TESeries");
 
-            ExcelReference caller = XlCall.Excel(XlCall.xlfCaller) as ExcelReference;
-            Range caller_range = helperClass.ReferenceToRange(caller);
-            Range formulaCell = caller_range; //Last cell used in userform
-            Range dataStartCell;
-
-            string newFormula;
             if (myArgument is ExcelMissing)
             {
                 dataStartCell = formulaCell;
@@ -818,7 +503,8 @@ namespace TE
                 try
                 {
                     dataStartCell = helperClass.ReferenceToRange((ExcelReference)myArgument);
-                    newFormula = string.Format($"=TESeries( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", {dataStartCell.Address[false, false]})");
+                    newFormula = string.Format(
+                        $"=TESeries( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", {dataStartCell.Address[false, false]})");
                     //Debug.WriteLine(newFormula);
                 }
                 catch (Exception)
@@ -829,16 +515,10 @@ namespace TE
                     throw;
                 }
             }
-            Range pass = null;
-            string columns2 = "";
-            //formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, columns2, pass, formulaCell);
-            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, cntry, pass, formulaCell);
+            formulaColumns frmlaColumnsPair = new formulaColumns(newFormula, cntry, null, formulaCell);
             MyRibbon.myNewDict = new Dictionary<string, formulaColumns>();
 
-            if (formulaCell.Address == dataStartCell.Address)
-            {
-                answer = "DateTime";
-            }
+            if (formulaCell.Address == dataStartCell.Address) answer = "DateTime";
 
             try
             {
@@ -856,22 +536,15 @@ namespace TE
                 helperClass.log.Info("TESeries udf -> RunAutomatically = 1");
 
                 if (MyRibbon.refresh != true)
-                {
                     helperClass.setGlobalDict(formulaCell.Address[false, false], frmlaColumnsPair);
-                }
 
                 try
                 {
-                    var dict = new getDictionary(cntry, indctr, key, startDate, endDate);
-                    //Dictionary<string, Dictionary<string, string>> dicts = dict.getDic();
+                    var dict = new getDictionary(cntry, indctr, startDate, endDate);
                     Dictionary<DateTime, Dictionary<string, string>> dicts = dict.getDic();
-                    var columns = dict.getColumns();
-
-                    string[] clms = columns.ToArray();
                     helperClass.log.Info("Starting function data_to_excel");
 
-                    var retriever = new RetrieveAndWriteTSData(clms, dicts, key, dataStartCell, newFormula, formulaCell);
-                    
+                    var retriever = new RetrieveAndWriteTSData(dict.getColumns().ToArray(), dicts, dataStartCell, newFormula, formulaCell);                    
                     var thready = new Thread(retriever.fetchData);
                     thready.Priority = ThreadPriority.Normal;
                     thready.IsBackground = true;
@@ -889,14 +562,8 @@ namespace TE
                 helperClass.log.Info("TESeries udf -> RunAutomatically != 1");
                 MyRibbon.sheet = MyRibbon.app.ActiveSheet;
 
-                if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
-                {
-                    MyRibbon.myFormulasDict = MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()];
-                }
-                else
-                {
-                    MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
-                }
+                MyRibbon.myFormulasDict = (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString())) ?
+                    MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()] : new Dictionary<string, formulaColumns>();
 
                 foreach (var item in MyRibbon.myFormulasDict.Keys)
                 {
@@ -910,13 +577,12 @@ namespace TE
 
                 try
                 {
-                    var dict = new getDictionary(cntry, indctr, key, startDate, endDate);
-                    //Dictionary<string, Dictionary<string, string>> dicts = dict.getDic();
+                    var dict = new getDictionary(cntry, indctr, startDate, endDate);
                     Dictionary<DateTime, Dictionary<string, string>> dicts = dict.getDic();
                     var columns = dict.getColumns();
                     string[] clms = columns.ToArray();
                     helperClass.log.Info("Starting function data_to_excel");                    
-                    var retriever = new RetrieveAndWriteTSData(clms, dicts, key, dataStartCell, newFormula, formulaCell);
+                    var retriever = new RetrieveAndWriteTSData(clms, dicts, dataStartCell, newFormula, formulaCell);
                     var thready = new Thread(retriever.fetchData);
                     thready.Priority = ThreadPriority.Normal;
                     thready.IsBackground = true;
@@ -929,12 +595,122 @@ namespace TE
                     helperClass.log.Trace(ex.StackTrace);
                     throw;
                 }
-            }            
-            helperClass.log.Info("TS finish");
-            helperClass.runFormula = "RunAutomatically = 0";
-            helperClass.origin = true;
-            MyRibbon.refresh = false;
-            helperClass.log.Info("Printing current cell value and finishing TS process");
+            }
+            customFunctionEnd("TS");
+            return answer;
+        }
+
+        [ExcelFunction(Name = "TEMrktsHist", IsMacroType = true)]
+        public static string teGetMktsHist(string mktType, string indctr, string columnsToUse, [ExcelArgument(AllowReference = true)] object myArgument)
+        {
+            SearchEngine.fromSearch = true;
+
+            udfClassHelper("TEMrktsHist");
+
+            if (myArgument is ExcelMissing)
+            {
+                newFormula = string.Format($"=TEMrktsHist(\"{mktType}\", \"{indctr}\", \"{columnsToUse}\")");
+            }
+            else
+            {
+                try
+                {
+                    dataStartCell = helperClass.ReferenceToRange((ExcelReference)myArgument);
+                    newFormula = string.Format(
+                        $"=TEMrktsHist(\"{mktType}\", \"{indctr}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
+                }
+                catch (Exception)
+                {
+                    refError = true;
+                    helperClass.getNewDict();
+                    return "#REF!";
+                    throw;
+                }
+            }
+
+            customFunctionHelper_2(columnsToUse);
+
+            if (helperClass.runFormula == "RunAutomatically = 1")
+            {
+                answer = MyRibbon.fCellText.ToString();
+
+                customFunctionAutoRun("TEMrktsHist",
+                    new formulaColumns(newFormula, columnsToUse, null, formulaCell),
+                    helperClass.SOmeName("", indctr, "MrktHist", "", "", mktType),
+                    columnsToUse);
+            }
+            else
+            {
+                customFunctionNotAutoRun("TEMrktsHist");
+
+                foreach (var item in MyRibbon.myFormulasDict.Keys)
+                {
+                    if (MyRibbon.myFormulasDict[item]._formula == newFormula && formulaCell.Address[false, false] == item)
+                    {
+                        helperClass.log.Info("This Answer");
+                        return answer;
+                    }
+                }
+                customFunctionHelper(helperClass.SOmeName("", indctr, "MrktHist", "", "", mktType), columnsToUse);
+            }
+            customFunctionEnd("TEMrktsHist");            
+            return answer;
+        }
+
+        [ExcelFunction(Name = "SearchEconomy", IsMacroType = true)]
+        public static string teSearchEconomy(string cntry, string indctr, string columnsToUse, [ExcelArgument(AllowReference = true)] object myArgument)
+        {
+            SearchEngine.fromSearch = true;
+
+            udfClassHelper("SearchEconomy");
+
+            if (myArgument is ExcelMissing)
+            {
+                newFormula = string.Format($"=SearchEconomy(\"{cntry}\", \"{indctr}\", \"{columnsToUse}\")");
+            }
+            else
+            {
+                try
+                {
+                    dataStartCell = helperClass.ReferenceToRange((ExcelReference)myArgument);
+                    newFormula = string.Format(
+                        $"=SearchEconomy(\"{cntry}\", \"{indctr}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
+                }
+                catch (Exception)
+                {
+                    refError = true;
+                    helperClass.getNewDict();
+                    return "#REF!";
+                    throw;
+                }
+            }
+
+            customFunctionHelper_2(columnsToUse);
+
+            if (helperClass.runFormula == "RunAutomatically = 1")
+            {
+                answer = MyRibbon.fCellText.ToString();
+
+                customFunctionAutoRun("SearchEconomy",
+                    new formulaColumns(newFormula, columnsToUse, null, formulaCell),
+                    helperClass.SOmeName(cntry, indctr, "SearchEconomy"),
+                    columnsToUse);
+            }
+            else
+            {
+                customFunctionNotAutoRun("SearchEconomy");
+
+                foreach (var item in MyRibbon.myFormulasDict.Keys)
+                {
+                    if (MyRibbon.myFormulasDict[item]._formula == newFormula && formulaCell.Address[false, false] == item)
+                    {
+                        helperClass.log.Info("This Answer");
+                        return answer;
+                    }
+                }
+                customFunctionHelper(helperClass.SOmeName(cntry, indctr, "SearchEconomy"), columnsToUse);
+            }
+            customFunctionEnd("SearchEconomy");        
             return answer;
         }
 
@@ -942,16 +718,14 @@ namespace TE
         internal class RetrieveAndWriteData
         {
             private string names;
-            private string key;
             private Range dataStartCell;
             private Range formulaCell;
             private JArray data;
             private string newFormula;
-            public RetrieveAndWriteData(string names, JArray data, string key, Range dataStartCell, string nFrmla, Range formulaCell)
+            public RetrieveAndWriteData(string names, JArray data, Range dataStartCell, string nFrmla, Range formulaCell)
             {
                 this.names = names;
                 this.data = data;
-                this.key = key;
                 this.dataStartCell = dataStartCell;
                 this.newFormula = nFrmla;
                 this.formulaCell = formulaCell;
@@ -966,7 +740,7 @@ namespace TE
                 {
                     do
                     {
-                        newPrintData testprint = new newPrintData(names, data, key, dataStartCell, newFormula, formulaCell);
+                        newPrintData testprint = new newPrintData(names, data, dataStartCell, newFormula, formulaCell);
                         testprint.PopulateData();
                     } while (!string.IsNullOrWhiteSpace(nextCursorId));
                 }
@@ -985,19 +759,16 @@ namespace TE
         internal class RetrieveAndWriteTSData
         {
             private string[] names;
-            private string key;
             private Range dataStartCell;
-            //private Dictionary<string, Dictionary<string, string>> dict;
             private Dictionary<DateTime, Dictionary<string, string>> dict;
             private string newFormula;
             private Range formulaCell;
 
-            //public RetrieveAndWriteTSData(string[] names, Dictionary<string, Dictionary<string, string>> dict, string key, Range dataStartCell, string nFrmla, Range formulaCell)
-            public RetrieveAndWriteTSData(string[] names, Dictionary<DateTime, Dictionary<string, string>> dict, string key, Range dataStartCell, string nFrmla, Range formulaCell)
+            public RetrieveAndWriteTSData(string[] names, Dictionary<DateTime, Dictionary<string, string>> dict, 
+                Range dataStartCell, string nFrmla, Range formulaCell)
             {
                 this.names = names;
                 this.dict = dict;
-                this.key = key;
                 this.dataStartCell = dataStartCell;
                 this.newFormula = nFrmla;
                 this.formulaCell = formulaCell;
@@ -1012,7 +783,7 @@ namespace TE
                 {
                     do
                     {
-                        printTSData testprint = new printTSData(names, dict, key, dataStartCell, newFormula, formulaCell);                           
+                        printTSData testprint = new printTSData(names, dict, dataStartCell, newFormula, formulaCell);                           
                         testprint.PopulateData();
                     } while (!string.IsNullOrWhiteSpace(nextCursorId));
                 }

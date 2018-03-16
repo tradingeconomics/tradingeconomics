@@ -23,7 +23,6 @@ namespace TE
         private readonly Range _dataStartCell;
         private Worksheet _currentWorksheet => _dataStartCell.Worksheet;
         public readonly string[] _names;
-        public readonly string _key_value;
         public readonly string _curCel;
         public readonly bool _threaded;
         public readonly JArray _data;
@@ -31,11 +30,10 @@ namespace TE
         public readonly string _newFormula;
         // Function to display data in excel spreadsheet
 
-        public newPrintData(string names, JArray data, string key_value, Range dataStartCell, string newFormula, Range formulaCell, bool threaded = false)
+        public newPrintData(string names, JArray data, Range dataStartCell, string newFormula, Range formulaCell, bool threaded = false)
         {
             _names = names.Split(',');
             _data = data;
-            _key_value = key_value;
             _dataStartCell = dataStartCell;
             _threaded = threaded;
             _newFormula = newFormula;
@@ -43,16 +41,16 @@ namespace TE
         }
 
         private object[,] ConvertNestedListToArray(JArray data, string[] names)
-        {
-            
-            var newData = new object[data.Count, names.Length];//.Split(',').Length];
+        {            
+            var newData = new object[data.Count, names.Length];
 
             for (var r = 0; r != data.Count; r++)
-                for (var c = 0; c < names.Length; c++)//.Split(',').Length; c++)
+                for (var c = 0; c < names.Length; c++)
                 {
                   try
                     {
-                        newData[r, c] = data[r][names[c]];//.Split(',')[c]];
+                        newData[r, c] = (names[c] == "Date") ? 
+                            Convert.ToDateTime(data[r][names[c]].ToString()) : data[r][names[c]];
                     }
                     catch(NullReferenceException )
                     {
@@ -64,26 +62,23 @@ namespace TE
 
         public void PopulateData()
         {
-            helperClass.log.Info("PopulateData from newPrintData");
             try
              {
                 // Acquire Mutex to avoid multiple functions writing at the same time.
                 DataWriteMutex.WaitOne();
 
                 // Since this is executing in a thread wait for excel to be finished whatever calculations its currently doing before writing to other cells. Helps avoid some issues.
-                if (_threaded)
-                {
-                    WaitForExcelToBeReady();
-                }
+                if (_threaded) WaitForExcelToBeReady();
 
                 header_to_excel();
                 data_to_excel();
 
                 //Writing final dictionary
                 WaitForExcelToBeReady();
-                Range endCell = _currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Length - 1];//.Split(',').Length - 1];
-                Range used = _currentWorksheet.Range[_dataStartCell, endCell];                   
-                formulaColumns frmlaColumnsPair2 = new formulaColumns(_newFormula, String.Join(",", _names), used, _formulaCell);//_names, used, _formulaCell);
+                Range endCell = _currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Length - 1];               
+                formulaColumns frmlaColumnsPair2 = new formulaColumns(_newFormula, String.Join(",", _names),
+                    _currentWorksheet.Range[_dataStartCell, endCell]
+                    , _formulaCell);
                 MyRibbon.myFormulasDict[_formulaCell.Address[false, false]] = frmlaColumnsPair2;                
 
                 if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
@@ -113,7 +108,6 @@ namespace TE
                     PopulateData();
                     return;
                 }
-
                 throw;
             }
             Marshal.ReleaseComObject(MyRibbon.sheet);
@@ -125,33 +119,30 @@ namespace TE
 
         private void header_to_excel()
         {
-            helperClass.log.Info("header_to_excel from newPrintData");
             try
             {
-                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Length - 1];//.Split(',').Length - 1];
-                var dl = (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1];
-                var writeRange = _currentWorksheet.Range[dl, endCell];
-                writeRange.Value2 = _names.Skip(1).ToArray();//.Split(',').Skip(1).ToArray();
+                var writeRange = _currentWorksheet.Range[
+                    (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + 1],
+                    (Range)_currentWorksheet.Cells[_dataStartCell.Row, _dataStartCell.Column + _names.Length - 1]];
+                writeRange.Value2 = _names.Skip(1).ToArray();
             }
             catch (Exception ex)
             {
                 helperClass.log.Info(ex.Message);
                 helperClass.log.Trace(ex.StackTrace);
                 throw;
-            }
-            
+            }            
         }
 
         private void data_to_excel()
         {
-            helperClass.log.Info("data_to_excel from newPrintData");
             try
             {
-                var endCell = (Range)_currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Length - 1];//.Split(',').Length - 1];
-                var writeRange = _currentWorksheet.Range[_dataStartCell[2, 1], endCell];
-                var data = ConvertNestedListToArray(_data, _names);
+                var writeRange = _currentWorksheet.Range[_dataStartCell[2, 1],
+                    (Range)_currentWorksheet.Cells[_dataStartCell.Row + _data.Count, _dataStartCell.Column + _names.Length - 1]];
+
                 writeRange.ClearFormats();
-                writeRange.Value = data;
+                writeRange.Value = ConvertNestedListToArray(_data, _names);
                 // This sort method works perfectly !!! Ready to implement only for Historycal data 
                 if (helperClass.fromHistorical == true)
                 {
@@ -188,7 +179,6 @@ namespace TE
                 throw;
             }
         }
-
 
         public void WaitForExcelToBeReady()
         {
