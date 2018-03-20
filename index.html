@@ -430,14 +430,79 @@ Or type in any empty cell:</p>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a></p></li>
 <li><p>Specific indicator for all countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicator}</a></p></li>
-<li><p>Credit Rating of the specific country<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>    </p>
-
-<ul>
-<li>Historical credit rating<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest&f=json">/ratings/historical/{country}</a><br></li>
-</ul></li>
 </ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Title</strong></td>
+<td style="text-align: left">Combination of country/category</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LatestValueDate</strong></td>
+<td style="text-align: left">Date of the last released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LatestValue</strong></td>
+<td style="text-align: left">Last released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Source</strong></td>
+<td style="text-align: left">Source of data</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">Unit of the value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economicse</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>CategoryGroup</strong></td>
+<td style="text-align: left">Category group name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Adjustment</strong></td>
+<td style="text-align: left">&mdash;&ndash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Frequency</strong></td>
+<td style="text-align: left">Frequency of the indicator</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>HistoricalDataSymbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>CreateDate</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>PreviousValue</strong></td>
+<td style="text-align: left">Previous released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>PreviousValueDate</strong></td>
+<td style="text-align: left">Date of the previous released value</td>
+</tr>
+</tbody></table>
 
 <h2 id="historical">Historical</h2>
 
@@ -554,6 +619,8 @@ Or type in any empty cell:</p>
 <span class="c1">//parse your data to satisfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
+<h3 id="methods">Methods</h3>
+
 <p><span class="methods"></p>
 
 <ul>
@@ -569,11 +636,13 @@ or you can specify a start date and end date<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
 <li><p>Multiple indicators for multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
+<li><p>Get historical data by ticker<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/ticker/USURTOT/2015-03-01?c=guest:guest">/historical/ticker/{ticker}/{yyyy-mm-dd}</a>  </p></li>
 </ul>
 
 <p></span> </p>
 
-<p><strong>Response Fields</strong></p>
+<h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
 <tr>
@@ -587,19 +656,11 @@ or you can specify a start date and end date<br>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Category</strong></td>
-<td style="text-align: left">Indicator Category Name</td>
+<td style="text-align: left">Indicator category name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Date Time</strong></td>
 <td style="text-align: left">Release time and date in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Title</strong></td>
-<td style="text-align: left">Combination of country/category</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Source</strong></td>
-<td style="text-align: left">Source of data</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Close</strong></td>
@@ -617,9 +678,121 @@ or you can specify a start date and end date<br>
 <td style="text-align: left"><strong>LastUpdate</strong></td>
 <td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
+</tbody></table>
+
+<h2 id="credit-rating">Credit Rating</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>Credit Rating of the specific country<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest">/ratings/{country}</a>    </p>
+
+<ul>
+<li>Historical credit rating<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br></li>
+</ul></li>
+<li><p>Credit Rating for multiple countries<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states,portugal?c=guest:guest">/ratings/{countries}</a>    </p>
+
+<ul>
+<li>Historical credit rating<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br></li>
+</ul></li>
+</ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
 <tr>
-<td style="text-align: left"><strong>URL</strong></td>
-<td style="text-align: left">Indicator Hyperlink at Trading Economicse</td>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>TE</strong></td>
+<td style="text-align: left">Trading Economics rating</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Agency</strong></td>
+<td style="text-align: left">Rating agency</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Rating</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Outlook</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>TE_Outlook</strong></td>
+<td style="text-align: left">Trading Economics outlook</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>SP</strong></td>
+<td style="text-align: left">Standard &amp; Poor&rsquo;s rating</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>SP_Outlook</strong></td>
+<td style="text-align: left">Standard &amp; Poor&rsquo;s outlook</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Moodys</strong></td>
+<td style="text-align: left">Moody&rsquo;s rating</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Moodys_Outlook</strong></td>
+<td style="text-align: left">Moody&rsquo;s outlook</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Fitch</strong></td>
+<td style="text-align: left">Fitch rating</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Fitch_outlook</strong></td>
+<td style="text-align: left">Fitch outlook</td>
+</tr>
+</tbody></table>
+
+<h2 id="latest-updates">Latest updates</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>Latest updates<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/updates?client=guest:guest">/updates</a></p></li>
+<li><p>Updates since a specific date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/updates/2018-01-01?client=guest:guest">/updates/{date}</a></p></li>
+</ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>HistoricalDataSymbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
 
@@ -799,7 +972,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 <tr>
 <td style="text-align: left"><strong>Category</strong></td>
-<td style="text-align: left">Indicator Category Name</td>
+<td style="text-align: left">Indicator category name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Event</strong></td>
@@ -822,10 +995,6 @@ Please note the sample request is limited in scope to a few countries and indica
 <td style="text-align: left">Value for the previous period after the revision (if revision is applicable)</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Revised</strong></td>
-<td style="text-align: left">Value reported in the previous period before revision (if there is no revision field remains empty)</td>
-</tr>
-<tr>
 <td style="text-align: left"><strong>Forecast</strong></td>
 <td style="text-align: left">Average forecast among a representative group of economists</td>
 </tr>
@@ -835,7 +1004,11 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 <tr>
 <td style="text-align: left"><strong>URL</strong></td>
-<td style="text-align: left">Indicator Hyperlink at Trading Economics</td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>DateSpan</strong></td>
+<td style="text-align: left">&mdash;&ndash;</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Importance</strong></td>
@@ -844,6 +1017,34 @@ Please note the sample request is limited in scope to a few countries and indica
 <tr>
 <td style="text-align: left"><strong>LastUpdate</strong></td>
 <td style="text-align: left">Time when new data was inserted or changed</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Revised</strong></td>
+<td style="text-align: left">Value reported in the previous period after revision (if there is no revision field remains empty)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Currency</strong></td>
+<td style="text-align: left">&mdash;&ndash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">Unit of the value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>OCountry</strong></td>
+<td style="text-align: left">Country&rsquo;s original  name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>OCategory</strong></td>
+<td style="text-align: left">Category&rsquo;s original  name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Ticker</strong></td>
+<td style="text-align: left">Unique ticker used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
 </tr>
 </tbody></table>
 
@@ -1150,6 +1351,8 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <h2 id="snapshots">Snapshots</h2>
 
+<h3 id="methods">Methods</h3>
+
 <p><strong>Snapshot of latest quotes</strong></p>
 
 <p><span class="methods"></p>
@@ -1171,7 +1374,135 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a></p></li>
 </ul>
 
+<p></span> </p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Ticker</strong></td>
+<td style="text-align: left">Unique ticker used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">Indicator full name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Group</strong></td>
+<td style="text-align: left">Group name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Type</strong></td>
+<td style="text-align: left">Market type</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Decimals</strong></td>
+<td style="text-align: left">Number of decimal places</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Last</strong></td>
+<td style="text-align: left">Latest released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">Unit of the value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Importance</strong></td>
+<td style="text-align: left">Indicator importance from 0(lowest) to 1000(highest)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>DailyChange</strong></td>
+<td style="text-align: left">Difference between last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>DailyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>WeeklyChange</strong></td>
+<td style="text-align: left">Difference between last week close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>WeeklyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last week close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>MonthlyChange</strong></td>
+<td style="text-align: left">Difference between last month close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>MonthlyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last month close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YearlyChange</strong></td>
+<td style="text-align: left">Difference between last year close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YearlyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last year close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YTDChange</strong></td>
+<td style="text-align: left">Difference between last year last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YTDPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last year last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Yesterday</strong></td>
+<td style="text-align: left">Yesterday close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastWeek</strong></td>
+<td style="text-align: left">Last week close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastMonth</strong></td>
+<td style="text-align: left">Last month close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastYear</strong></td>
+<td style="text-align: left">Last year close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>StartYear</strong></td>
+<td style="text-align: left">Start year close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
+</tr>
+</tbody></table>
+
 <h2 id="historical">Historical</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
 
 <ul>
 <li><p>Historical markets data by market<br>
@@ -1184,7 +1515,47 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/historical/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a></p></li>
 </ul>
 
+<p></span> </p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Open</strong></td>
+<td style="text-align: left">Open value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>High</strong></td>
+<td style="text-align: left">High value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Low</strong></td>
+<td style="text-align: left">Low value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Close</strong></td>
+<td style="text-align: left">Close value</td>
+</tr>
+</tbody></table>
+
 <h2 id="intraday">Intraday</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
 
 <ul>
 <li><p>Intraday prices for a single market<br>
@@ -1195,7 +1566,47 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>   </p></li>
 </ul>
 
+<p></span> </p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Datetime</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Open</strong></td>
+<td style="text-align: left">Open value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>High</strong></td>
+<td style="text-align: left">High value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Low</strong></td>
+<td style="text-align: left">Low value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Close</strong></td>
+<td style="text-align: left">Close value</td>
+</tr>
+</tbody></table>
+
 <h2 id="market-lists">Market Lists</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
 
 <ul>
 <li><p>A snapshot of latest peers prices by market<br>
@@ -1204,7 +1615,135 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a></p></li>
 </ul>
 
+<p></span> </p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Ticker</strong></td>
+<td style="text-align: left">Unique ticker used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">Indicator full name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Type</strong></td>
+<td style="text-align: left">Market type</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Decimals</strong></td>
+<td style="text-align: left">Number of decimal places</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Last</strong></td>
+<td style="text-align: left">Latest released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>MarketCap</strong></td>
+<td style="text-align: left">Market capitalization</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">Unit of the value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Importance</strong></td>
+<td style="text-align: left">Indicator importance from 0(lowest) to 1000(highest)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>DailyChange</strong></td>
+<td style="text-align: left">Difference between last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>DailyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>WeeklyChange</strong></td>
+<td style="text-align: left">Difference between last week close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>WeeklyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last week close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>MonthlyChange</strong></td>
+<td style="text-align: left">Difference between last month close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>MonthlyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last month close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YearlyChange</strong></td>
+<td style="text-align: left">Difference between last year close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YearlyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last year close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YTDChange</strong></td>
+<td style="text-align: left">Difference between last year last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YTDPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last year last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Yesterday</strong></td>
+<td style="text-align: left">Yesterday close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastWeek</strong></td>
+<td style="text-align: left">Last week close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastMonth</strong></td>
+<td style="text-align: left">Last month close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastYear</strong></td>
+<td style="text-align: left">Last year close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>StartYear</strong></td>
+<td style="text-align: left">Start year close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
+</tr>
+</tbody></table>
+
 <h2 id="search">Search</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
 
 <ul>
 <li>Search method<br>
@@ -1222,28 +1761,108 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 </thead><tbody>
 <tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Ticker</strong></td>
+<td style="text-align: left">Unique ticker used by TradingEconomics</td>
+</tr>
+<tr>
 <td style="text-align: left"><strong>Name</strong></td>
-<td style="text-align: left">Commodity name</td>
+<td style="text-align: left">Indicator full name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country field of a commodity if always &ldquo;Commodity&rdquo;</td>
+<td style="text-align: left">Country name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Date</strong></td>
 <td style="text-align: left">Release time and date in UTC</td>
 </tr>
 <tr>
+<td style="text-align: left"><strong>Type</strong></td>
+<td style="text-align: left">Market Type</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Decimals</strong></td>
+<td style="text-align: left">Number of decimal places</td>
+</tr>
+<tr>
 <td style="text-align: left"><strong>Last</strong></td>
-<td style="text-align: left">Latest value available</td>
+<td style="text-align: left">Latest released value</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Group</strong></td>
-<td style="text-align: left">Group of commodity</td>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">Unit of the value</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Symbol</strong></td>
-<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Importance</strong></td>
+<td style="text-align: left">Indicator importance from 0(lowest) to 1000(highest)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>DailyChange</strong></td>
+<td style="text-align: left">Difference between last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>DailyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>WeeklyChange</strong></td>
+<td style="text-align: left">Difference between last week close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>WeeklyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last week close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>MonthlyChange</strong></td>
+<td style="text-align: left">Difference between last month close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>MonthlyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last month close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YearlyChange</strong></td>
+<td style="text-align: left">Difference between last year close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YearlyPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last year close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YTDChange</strong></td>
+<td style="text-align: left">Difference between last year last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>YTDPercentualChange</strong></td>
+<td style="text-align: left">Difference in percentage between last year last close and current price</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Yesterday</strong></td>
+<td style="text-align: left">Yesterday close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastWeek</strong></td>
+<td style="text-align: left">Last week close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastMonth</strong></td>
+<td style="text-align: left">Last month close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastYear</strong></td>
+<td style="text-align: left">Last year close</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>StartYear</strong></td>
+<td style="text-align: left">Start year close</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>LastUpdate</strong></td>
@@ -1255,6 +1874,8 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <p>For all methods listed above, you can get data in next formats:</p>
 
+<p><span class="methods"></p>
+
 <ul>
 <li><p>JSON<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}?c=guest:guest&amp;f=json</a>    </p></li>
@@ -1264,7 +1885,13 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=xml">/markets/symbol/{symbol}?c=guest:guest&amp;f=xml</a></p></li>
 </ul>
 
+<p></span> </p>
+
 <h1 id="earnings">Earnings</h1>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
 
 <ul>
 <li><p>Default earnings calendar<br>
@@ -1277,6 +1904,8 @@ Please note the sample request is limited in scope to a few countries and indica
 <li><p>Filter earnings calendar by country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> </p></li>
 </ul>
+
+<p></span> </p>
 
 <h3 id="response-fields">Response Fields</h3>
 
@@ -1320,11 +1949,11 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 <tr>
 <td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country</td>
+<td style="text-align: left">Country name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Currency</strong></td>
-<td style="text-align: left">Currency</td>
+<td style="text-align: left">&mdash;-</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>LastUpdate</strong></td>
@@ -1405,7 +2034,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 <tr>
 <td style="text-align: left"><strong>category</strong></td>
-<td style="text-align: left">Indicator Category Name</td>
+<td style="text-align: left">Indicator category name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>event</strong></td>
@@ -1451,47 +2080,47 @@ Please note the sample request is limited in scope to a few countries and indica
 </thead><tbody>
 <tr>
 <td style="text-align: left"><strong>s</strong></td>
-<td style="text-align: left">symbol</td>
+<td style="text-align: left">Symbol</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>bid</strong></td>
-<td style="text-align: left">latest market bid price</td>
+<td style="text-align: left">Latest market bid price</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ask</strong></td>
-<td style="text-align: left">latest maket ask price</td>
+<td style="text-align: left">Latest maket ask price</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>price</strong></td>
-<td style="text-align: left">latest market price</td>
+<td style="text-align: left">Latest market price</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>dt</strong></td>
-<td style="text-align: left">timestamp of last market price (epoch)</td>
+<td style="text-align: left">Timestamp of last market price (epoch)</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>state</strong></td>
-<td style="text-align: left">market state (open/close)</td>
+<td style="text-align: left">Market state (open/close)</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>type</strong></td>
-<td style="text-align: left">type of market (currency/indexes/commodity)</td>
+<td style="text-align: left">Type of market (currency/indexes/commodity)</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>dhigh</strong></td>
-<td style="text-align: left">daily high</td>
+<td style="text-align: left">Daily high</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>dlow</strong></td>
-<td style="text-align: left">daily low</td>
+<td style="text-align: left">Daily low</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>pch</strong></td>
-<td style="text-align: left">percentage change</td>
+<td style="text-align: left">Percentage change</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>nch</strong></td>
-<td style="text-align: left">net change</td>
+<td style="text-align: left">Net change</td>
 </tr>
 </tbody></table>
 
@@ -1505,6 +2134,8 @@ Please note the sample request is limited in scope to a few countries and indica
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
 
 <h2 id="latest-news">Latest news</h2>
+
+<h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
 
@@ -1521,7 +2152,51 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <p></span> </p>
 
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>ID</strong></td>
+<td style="text-align: left">Unique ID</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Title</strong></td>
+<td style="text-align: left">Title of the event</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Description</strong></td>
+<td style="text-align: left">Description of the event</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Url</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+</tbody></table>
+
 <h2 id="latest-articles">Latest articles</h2>
+
+<h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
 
@@ -1551,7 +2226,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><strong>Id</strong></td>
+<td style="text-align: left"><strong>ID</strong></td>
 <td style="text-align: left">Unique ID</td>
 </tr>
 <tr>
@@ -1572,61 +2247,553 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 <tr>
 <td style="text-align: left"><strong>Category</strong></td>
-<td style="text-align: left">Indicator Category Name</td>
+<td style="text-align: left">Category name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Symbol</strong></td>
 <td style="text-align: left">Unique symbol used by TradingEconomics</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Url</strong></td>
-<td style="text-align: left">Indicator Hyperlink at Trading Economics</td>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
 </tr>
 </tbody></table>
 
 <h1 id="world-bank">World Bank</h1>
 
-<p>Main categories<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/categories?c=guest:guest">http://api.tradingeconomics.com/worldBank/categories</a></p>
+<h2 id="category">Category</h2>
 
-<p>Filtering by the main categories<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}</a><br>
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>Main categories<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/categories?c=guest:guest">/worldBank/categories</a></p></li>
+<li><p>Filtering by the main categories<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">/worldBank/category/{category}</a><br>
 Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}/{page_number}</a></p>
-
-<p>Detailed information about specific indicator for all countries using a series code from the previous method<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&amp;s={series_code}</a></p>
-
-<p>List of indicators available for a specific country (with pagination)<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/{country}/{page_number}</a></p>
-
-<p>Detailed  information just for a specific indicator and country by using series code or url<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&amp;s={series_code}</a><br>
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&amp;url={url1}</a></p>
-
-<p>Historical data for a specific indicator<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&amp;s={series_code}</a></p>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">/worldBank/category/{category}/{page_number}</a></p></li>
+</ul>
 
 <p>All of this can be formatted to json by appending &ldquo;&amp;format=json&rdquo;</p>
 
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>series_code</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>series_name</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>sub_category</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>sub_category2</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>sub_category3</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Title</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>long_definition</strong></td>
+<td style="text-align: left">&mdash;&ndash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>short_definition</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Source</strong></td>
+<td style="text-align: left">Data source</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>general_comments</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>aggregation_method</strong></td>
+<td style="text-align: left">&mdash;&ndash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Organization</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>verbose_unit</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>last_update</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
+</tr>
+</tbody></table>
+
+<h2 id="indicators-and-countries">Indicators and Countries</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>Detailed information about specific indicator for all countries using a series code from the previous method<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">/worldBank/indicator?c=guest:guest&amp;s={series_code}</a></p></li>
+<li><p>List of indicators available for a specific country (with pagination)<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">/worldBank/country/{country}/{page_number}</a></p></li>
+<li><p>Detailed  information just for a specific indicator and country by using series code or url<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">/worldBank/indicator?c=guest:guest&amp;s={series_code}</a><br>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">/worldBank/indicator?c=guest:guest&amp;url={url1}</a></p></li>
+</ul>
+
+<p>All of this can be formatted to json by appending &ldquo;&amp;format=json&rdquo;</p>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Last</strong></td>
+<td style="text-align: left">Latest released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Previous</strong></td>
+<td style="text-align: left">Value for the previous period after the revision (if revision is applicable)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>PreviousDate</strong></td>
+<td style="text-align: left">Release time and date in UTC of the previous value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Description</strong></td>
+<td style="text-align: left">&mdash;-</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Frequency</strong></td>
+<td style="text-align: left">Frequency of the indicator</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">Unit of the value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Title</strong></td>
+<td style="text-align: left">&mdash;                                                            &mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
+</tr>
+</tbody></table>
+
+<h2 id="historical">Historical</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li>Historical data for a specific indicator<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">/worldBank/historical?c=guest:guest&amp;s={series_code}</a></li>
+</ul>
+
+<p>All of this can be formatted to json by appending &ldquo;&amp;format=json&rdquo;</p>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value</strong></td>
+<td style="text-align: left">Released value</td>
+</tr>
+</tbody></table>
+
 <h1 id="comtrade">Comtrade</h1>
 
-<p>Get detailed information about Comtrade categories<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/categories?c=guest:guest">http://api.tradingeconomics.com/comtrade/categories</a></p>
+<h3 id="methods">Methods</h3>
 
-<p>Get detailed information about Comtrade countries<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/countries?c=guest:guest">http://api.tradingeconomics.com/comtrade/countries</a></p>
+<p><span class="methods"></p>
 
-<p>Snapshot of data per country<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}</a><br>
+<ul>
+<li>Get detailed information about Comtrade categories<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest">/comtrade/categories</a></li>
+</ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Id</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>ParentId</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Pretty_Name</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+</tbody></table>
+
+<h2 id="country">Country</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>Get detailed information about Comtrade countries<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/countries?c=guest:guest">/comtrade/countries</a></p></li>
+<li><p>Snapshot of data per country<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">/comtrade/country/{country}</a><br>
 Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}/{page_number}</a></p>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">/comtrade/country/{country}/{page_number}</a></p></li>
+<li><p>Snapshot of trade between two countries (with pagination)<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">/comtrade/country/{country_1}/{country_2}/{page_number}</a></p></li>
+</ul>
 
-<p>Snapshot of trade between two countries (with pagination)<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country_1}/{country_2}/{page_number}</a></p>
+<p></span></p>
 
-<p>Historical data<br>
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">http://api.tradingeconomics.com/comtrade/historical/{symbol}</a></p>
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Id</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Region</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Subregion</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>ISO</strong></td>
+<td style="text-align: left">Three letter country code</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Year</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country1</strong></td>
+<td style="text-align: left">First country ame</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country2</strong></td>
+<td style="text-align: left">Second country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Type</strong></td>
+<td style="text-align: left">&mdash;&ndash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Title</strong></td>
+<td style="text-align: left">&mdash;&ndash;</td>
+</tr>
+</tbody></table>
+
+<h2 id="historical">Historical</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li>Historical data<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">/comtrade/historical/{symbol}</a></li>
+</ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value</strong></td>
+<td style="text-align: left">Released value</td>
+</tr>
+</tbody></table>
+
+<h1 id="federal-reserve">Federal Reserve</h1>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods">  </p>
+
+<ul>
+<li><p>List of all US states<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/states?c=guest:guest">/fred/states</a>    </p></li>
+<li><p>List of all counties per state<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/counties/arkansas?c=guest:guest">/fred/counties/{county}</a>    </p></li>
+</ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">State</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>County</strong></td>
+<td style="text-align: left">County</td>
+</tr>
+</tbody></table>
+
+<h2 id="snapshots">Snapshots</h2>
+
+<p>Snapshots can be accessed through symbol, url, country, state or county. All have pagination.  </p>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods">  </p>
+
+<ul>
+<li><p>Symbol<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/symbol/AGEXMAK2A647NCEN?c=guest:guest">/fred/snapshot/symbol/{symbol}</a>    </p></li>
+<li><p>URL<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/url?c=guest:guest&url=/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html">/fred/snapshot/url?c=guest:guest&amp;url={url}</a></p></li>
+<li><p>Country<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/?c=guest:guest">/fred/snapshot/country/{country}</a>    </p></li>
+<li><p>State<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/state/tennessee?c=guest:guest">/fred/snapshot/state/{state}</a>    </p></li>
+<li><p>County<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/arkansas?c=guest:guest">/fred/snapshot/county/{county}</a><br>
+or<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest">/fred/snapshot/county/Pike%20County,%20AR</a></p></li>
+<li><p>Pagination<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/2?c=guest:guest">/fred/snapshot/country/{country}/{page}</a>    </p></li>
+</ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Indicator category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Last</strong></td>
+<td style="text-align: left">Latest released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Previous</strong></td>
+<td style="text-align: left">Value for the previous period after the revision (if revision is applicable)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>PreviousDate</strong></td>
+<td style="text-align: left">Release time and date in UTC of the previous value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Frequency</strong></td>
+<td style="text-align: left">Frequency of the indicator</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Popularity</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Start</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">Unit of the value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Adjustment</strong></td>
+<td style="text-align: left">&mdash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
+</tr>
+</tbody></table>
+
+<h2 id="historical">Historical</h2>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"> </p>
+
+<ul>
+<li><p>Only accessed through symbol<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007?c=guest:guest">/fred/historical/{symbol}</a>    </p></li>
+<li><p>Multiple symbols<br>
+<a target = '_blank' href="http://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007,2020RATIO002013?c=guest:guest">/fred/historical/{symbols}</a>    </p></li>
+</ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value</strong></td>
+<td style="text-align: left">Released value</td>
+</tr>
+</tbody></table>
 
 <h1 id="excel">Excel</h1>
 
