@@ -354,11 +354,27 @@ curl_close($handle);
 * Specific indicator for all countries    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicator}</a>
 
-* Credit Rating of the specific country    
-<a target = '_blank' href="http://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>    
-  * Historical credit rating    
-  <a target = '_blank' href="http://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest&f=json">/ratings/historical/{country}</a>    
+</span>
 
+### Response Fields
+
+|                        |                                                  |
+|:-----------------------|:-------------------------------------------------|
+|     **Country**        |Country name                                      |
+|     **Category**       |Category name                                    |
+|     **Title**          |Combination of country/category                   |
+| **LatestValueDate**    |Date of the last released value                   |
+|   **LatestValue**      |Last released value                               |
+|      **Source**        |Source of data                                    |
+|      **Unit**          |Unit of the value                                 |
+|       **URL**          |Hyperlink at Trading Economicse         |
+|  **CategoryGroup**     |Category group name                           |
+|   **Adjustment**       |-----                        |
+|    **Frequency**       |Frequency of the indicator                        |
+|**HistoricalDataSymbol**|Unique symbol used by TradingEconomics            |
+|   **CreateDate**       |Release time and date in UTC                      |
+|  **PreviousValue**     |Previous released value                 |
+|**PreviousValueDate**   |Date of the previous released value               |
 
 
 ## Historical
@@ -499,6 +515,7 @@ curl_close($handle);
 ?>
 ```
 
+### Methods
 
 <span class="methods">
 
@@ -518,23 +535,79 @@ or you can specify a start date and end date
 * Multiple indicators for multiple countries    
 <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    
 
+* Get historical data by ticker   
+<a target = '_blank' href="https://api.tradingeconomics.com/historical/ticker/USURTOT/2015-03-01?c=guest:guest">/historical/ticker/{ticker}/{yyyy-mm-dd}</a>  
+
 </span> 
 
-**Response Fields**
+### Response Fields
 
 |                     |                                                                                                                                 |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
 |     **Country**     |                                                           Country name                                                          |
-|     **Category**    |                                                      Indicator Category Name                                                    |
+|     **Category**    |                                                      Indicator category name                                                    |
 |   **Date Time**     |                                                   Release time and date in UTC                                                  |
-|      **Title**      |                                                 Combination of country/category                                                 |
-|      **Source**     |                                                          Source of data                                                         |
 |      **Close**      |                                                           Value                                                 |
 |    **Frequency**    |                                           Frequency of the indicator                                          |
 |**HistoricalDataSymbol**|                               Unique symbol used by TradingEconomics                                                         |
 |    **LastUpdate**   |                                            Time when new data was inserted or changed                                           |
-|       **URL**       |                                       Indicator Hyperlink at Trading Economicse                                                 |
 
+
+## Credit Rating
+
+### Methods
+
+<span class="methods">
+
+* Credit Rating of the specific country    
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest">/ratings/{country}</a>    
+  * Historical credit rating    
+  <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a>    
+
+* Credit Rating for multiple countries    
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states,portugal?c=guest:guest">/ratings/{countries}</a>    
+  * Historical credit rating    
+  <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a>    
+
+</span>
+
+### Response Fields
+
+|                        |                                                  |
+|:-----------------------|:-------------------------------------------------|
+|       **TE**           |Trading Economics rating                          |
+|       **Date**         |Release time and date in UTC                      |
+|      **Agency**        |Rating agency                           |
+|      **Rating**        |---                           |
+|     **Outlook**        |---                           |
+|   **TE_Outlook**       |Trading Economics outlook                      |
+|       **SP**           |Standard & Poor's rating                        |
+|   **SP_Outlook**       |Standard & Poor's outlook           |
+|    **Moodys**          |Moody's rating           |
+|  **Moodys_Outlook**    |Moody's outlook     |
+|    **Fitch**           |Fitch rating       |
+|  **Fitch_outlook**     |Fitch outlook      |
+
+## Latest updates
+
+### Methods
+
+<span class="methods">
+
+* Latest updates    
+<a target = '_blank' href="https://api.tradingeconomics.com/updates?client=guest:guest">/updates</a>
+
+* Updates since a specific date    
+<a target = '_blank' href="https://api.tradingeconomics.com/updates/2018-01-01?client=guest:guest">/updates/{date}</a>
+
+</span>
+
+### Response Fields
+
+|                         |                                           |
+|:------------------------|:------------------------------------------|
+|**HistoricalDataSymbol** |Unique symbol used by TradingEconomics     |
+|**LastUpdate**           |Time when new data was inserted or changed |
 
 # Calendar
    
@@ -726,18 +799,25 @@ Please note the sample request is limited in scope to a few countries and indica
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
 |       **Date**      |                                                   Release time and date in UTC                                                  |
 |     **Country**     |                                                           Country name                                                          |
-|     **Category**    |                                                     Indicator Category Name                                                     |
+|     **Category**    |                                                     Indicator category name                                                     |
 |      **Event**      |                                                Specific event name in the calendar                                              |
 |    **Reference**    |                                           The period for which released data refers to                                          |
 |      **Source**     |                                                          Source of data                                                         |
 |      **Actual**     |                                                      Latest released value                                                      |
 |     **Previous**    |                           Value for the previous period after the revision (if revision is applicable)                          |
-|     **Revised**     |               Value reported in the previous period before revision (if there is no revision field remains empty)               |
 |     **Forecast**    |                                   Average forecast among a representative group of economists                                   |
 |    **TEForecast**   |                                                        TE own projections                                                       |
-|       **URL**       |                                               Indicator Hyperlink at Trading Economics                                          |
+|       **URL**       |                                                Hyperlink at Trading Economics                                          |
+|    **DateSpan**     |                                                   -----                                                 |
 |    **Importance**   |                                                   1 = low, 2 = medium, 3 = high                                                 |
-|    **LastUpdate**   |                                            Time when new data was inserted or changed                                           |
+|     **LastUpdate**  |               Time when new data was inserted or changed               |
+|     **Revised**     |               Value reported in the previous period after revision (if there is no revision field remains empty)|
+|     **Currency**    |               -----              |
+|     **Unit**        |               Unit of the value               |
+|     **OCountry**    |    Country's original  name            |
+|     **OCategory**   |      Category's original  name           |
+|    **Ticker**       |                                            Unique ticker used by TradingEconomics                                           |
+|    **Symbol**       |                                           Unique symbol used by TradingEconomics                                           |
 
 
 # Forecast
@@ -1032,6 +1112,8 @@ Please note the sample request is limited in scope to a few countries and indica
 
 ## Snapshots
 
+### Methods
+
 **Snapshot of latest quotes**
 
 <span class="methods">
@@ -1057,7 +1139,46 @@ Please note the sample request is limited in scope to a few countries and indica
 * Multiple Markets   
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a>
 
+</span> 
+
+### Response Fields
+
+|                            |                                                                                                                                 |
+|:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|**Symbol**                  |Unique symbol used by TradingEconomics                                                                                          |
+|**Ticker**                  |Unique ticker used by TradingEconomics                                                          |
+|**Name**                    |Indicator full name                                                           |
+|**Country**                 |Country name                                                          |
+|**Date**                    |Release time and date in UTC                                                                                                    |
+|**Group**                   |Group name                                                                                                    |
+|**Type**                    |Market type                                                      |
+|**Decimals**                |Number of decimal places                                                      |
+|**Last**                    |Latest released value                                                      |
+|**Unit**                    |Unit of the value                                                  |
+|**URL**                     |Hyperlink at Trading Economics                                          |
+|**Importance**              |Indicator importance from 0(lowest) to 1000(highest)                                                  |
+|**DailyChange**             |Difference between last close and current price                          |
+|**DailyPercentualChange**   |Difference in percentage between last close and current price                                        |
+|**WeeklyChange**            |Difference between last week close and current price                                              |
+|**WeeklyPercentualChange**  |Difference in percentage between last week close and current price                                   |
+|**MonthlyChange**           |Difference between last month close and current price                                        |
+|**MonthlyPercentualChange** |Difference in percentage between last month close and current price                                 |
+|**YearlyChange**            |Difference between last year close and current price                                         |
+|**YearlyPercentualChange**  |Difference in percentage between last year close and current price                                           |
+|**YTDChange**               |Difference between last year last close and current price                                         |
+|**YTDPercentualChange**     |Difference in percentage between last year last close and current price                                          |
+|**Yesterday**               |Yesterday close                                          |
+|**LastWeek**                |Last week close                                          |
+|**LastMonth**               |Last month close                                        |
+|**LastYear**                |Last year close                                          |
+|**StartYear**               |Start year close                                          |
+|**LastUpdate**              |Time when new data was inserted or changed                                           |
+
 ## Historical  
+
+### Methods
+
+<span class="methods">
 
 * Historical markets data by market    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest">/markets/historical/{symbol}</a>
@@ -1071,7 +1192,25 @@ Please note the sample request is limited in scope to a few countries and indica
 * Filter historical markets data by date    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/historical/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>
 
+</span> 
+
+### Response Fields
+
+|           |                                       |
+|:----------|:--------------------------------------|
+|**Symbol** |Unique symbol used by TradingEconomics |
+|**Date**   |Release time and date in UTC           |
+|**Open**   |Open value                             |
+|**High**   |High value                             |
+|**Low**    |Low value                              |
+|**Close**  |Close value                            |
+
+
 ## Intraday
+
+### Methods
+
+<span class="methods">
 
 * Intraday prices for a single market     
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest">/markets/intraday/{symbol}</a>
@@ -1082,7 +1221,24 @@ Please note the sample request is limited in scope to a few countries and indica
 * Filter intraday prices by date    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>   
 
+</span> 
+
+### Response Fields
+
+|             |                                       |
+|:------------|:--------------------------------------|
+|**Symbol**   |Unique symbol used by TradingEconomics |
+|**Datetime** |Release time and date in UTC           |
+|**Open**     |Open value                             |
+|**High**     |High value                             |
+|**Low**      |Low value                              |
+|**Close**    |Close value                            |
+
 ## Market Lists
+
+### Methods
+
+<span class="methods">
 
 * A snapshot of latest peers prices by market    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a>
@@ -1090,7 +1246,47 @@ Please note the sample request is limited in scope to a few countries and indica
 * Stock Market Index Components     
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a>
 
+</span> 
+
+### Response Fields
+
+|                            |                                                                        |
+|:---------------------------|:-----------------------------------------------------------------------|
+|**Symbol**                  |Unique symbol used by TradingEconomics                                  |
+|**Ticker**                  |Unique ticker used by TradingEconomics                                  |
+|**Name**                    |Indicator full name                                                     |
+|**Country**                 |Country name                                                            |
+|**Date**                    |Release time and date in UTC                                            |
+|**Type**                    |Market type                                                             |
+|**Decimals**                |Number of decimal places                                                |
+|**Last**                    |Latest released value                                                   |
+|**MarketCap**               |Market capitalization                                                   |
+|**Unit**                    |Unit of the value                                                       |
+|**URL**                     |Hyperlink at Trading Economics                                          |
+|**Importance**              |Indicator importance from 0(lowest) to 1000(highest)                    |
+|**DailyChange**             |Difference between last close and current price                         |
+|**DailyPercentualChange**   |Difference in percentage between last close and current price           |
+|**WeeklyChange**            |Difference between last week close and current price                    |
+|**WeeklyPercentualChange**  |Difference in percentage between last week close and current price      |
+|**MonthlyChange**           |Difference between last month close and current price                   |
+|**MonthlyPercentualChange** |Difference in percentage between last month close and current price     |
+|**YearlyChange**            |Difference between last year close and current price                    |
+|**YearlyPercentualChange**  |Difference in percentage between last year close and current price      |
+|**YTDChange**               |Difference between last year last close and current price               |
+|**YTDPercentualChange**     |Difference in percentage between last year last close and current price |
+|**Yesterday**               |Yesterday close                                                         |
+|**LastWeek**                |Last week close                                                         |
+|**LastMonth**               |Last month close                                                        |
+|**LastYear**                |Last year close                                                         |
+|**StartYear**               |Start year close                                                        |
+|**LastUpdate**              |Time when new data was inserted or changed                              |
+
 ## Search
+
+### Methods
+
+<span class="methods">
+
 * Search method    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a>
 
@@ -1098,20 +1294,42 @@ Please note the sample request is limited in scope to a few countries and indica
 
 ### Response Fields
 
-|                 |                                                          |
-|:----------------|:---------------------------------------------------------|
-|     **Name**    | Commodity name                                           |
-|   **Country**   | Country field of a commodity if always "Commodity"       |
-|     **Date**    | Release time and date in UTC                             |
-|     **Last**    | Latest value available                                   |
-|    **Group**    | Group of commodity                                       |
-|    **Symbol**   | Unique symbol used by TradingEconomics                   |
-| **LastUpdate**  | Time when new data was inserted or changed               |
+|                            |                                                                        |
+|:---------------------------|:-----------------------------------------------------------------------|
+|**Symbol**                  |Unique symbol used by TradingEconomics                                  |
+|**Ticker**                  |Unique ticker used by TradingEconomics                                  |
+|**Name**                    |Indicator full name                                                     |
+|**Country**                 |Country name                                                            |
+|**Date**                    |Release time and date in UTC                                            |
+|**Type**                    |Market Type                                                             |
+|**Decimals**                |Number of decimal places                                                |
+|**Last**                    |Latest released value                                                   |
+|**Unit**                    |Unit of the value                                                       |
+|**URL**                     |Hyperlink at Trading Economics                                          |
+|**Importance**              |Indicator importance from 0(lowest) to 1000(highest)                    |
+|**DailyChange**             |Difference between last close and current price                         |
+|**DailyPercentualChange**   |Difference in percentage between last close and current price           |
+|**WeeklyChange**            |Difference between last week close and current price                    |
+|**WeeklyPercentualChange**  |Difference in percentage between last week close and current price      |
+|**MonthlyChange**           |Difference between last month close and current price                   |
+|**MonthlyPercentualChange** |Difference in percentage between last month close and current price     |
+|**YearlyChange**            |Difference between last year close and current price                    |
+|**YearlyPercentualChange**  |Difference in percentage between last year close and current price      |
+|**YTDChange**               |Difference between last year last close and current price               |
+|**YTDPercentualChange**     |Difference in percentage between last year last close and current price |
+|**Yesterday**               |Yesterday close                                                         |
+|**LastWeek**                |Last week close                                                         |
+|**LastMonth**               |Last month close                                                        |
+|**LastYear**                |Last year close                                                         |
+|**StartYear**               |Start year close                                                        |
+|**LastUpdate**              |Time when new data was inserted or changed                              |
 
 
 
 ### JSON CSV XML
 For all methods listed above, you can get data in next formats:
+
+<span class="methods">
 
 * JSON        
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}?c=guest:guest&f=json</a>    
@@ -1122,7 +1340,13 @@ For all methods listed above, you can get data in next formats:
 * XML     
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=xml">/markets/symbol/{symbol}?c=guest:guest&f=xml</a>
 
+</span> 
+
 # Earnings
+
+### Methods
+
+<span class="methods">
 
 * Default earnings calendar     
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    
@@ -1137,6 +1361,8 @@ For all methods listed above, you can get data in next formats:
 * Filter earnings calendar by country    
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> 
 
+</span> 
+
 ### Response Fields
 
 |                     |                                                             |
@@ -1149,8 +1375,8 @@ For all methods listed above, you can get data in next formats:
 |  **FiscalTag**      | Fiscal year and quarter                                     |
 |**FiscalReference**  | Fiscal year and quarter in different format                 |
 |**CalendarReference**| Calendar quarter for the release                            |
-|   **Country**       | Country                                                     |
-|  **Currency**       | Currency                                                    |
+|   **Country**       | Country name                                                |
+|  **Currency**       | ----                                                        |
 | **LastUpdate**      | Time when new data was inserted or changed                  |
 
 # Streaming
@@ -1222,7 +1448,7 @@ The Trading Economics API streaming endpoint can be used to receive live calenda
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------|
 |       **date**      |                                                   Release time and date in UTC                                                  |
 |     **country**     |                                                           Country name                                                          |
-|     **category**    |                                                     Indicator Category Name                                                     |
+|     **category**    |                                                     Indicator category name                                                     |
 |      **event**      |                                                Specific event name in the calendar                                              |
 |    **reference**    |                                           The period for which released data refers to                                          |
 |      **source**     |                                                          Source of data                                                         |
@@ -1237,17 +1463,17 @@ The Trading Economics API streaming endpoint can be used to receive live calenda
 
 |                 |                                                                                                                                 |
 |:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
-|      **s**      | symbol                                                                                                                          |
-|     **bid**     | latest market bid price                                                                                                         |
-|     **ask**     | latest maket ask price                                                                                                          |
-|    **price**    | latest market price                                                                                                             |
-|     **dt**      | timestamp of last market price (epoch)                                                                                          |
-|    **state**    | market state (open/close)                                                                                                       |
-|     **type**    | type of market (currency/indexes/commodity)                                                                                     |
-|    **dhigh**    | daily high                                                                                                                      |
-|    **dlow**     | daily low                                                                                                                       |
-|    **pch**      | percentage change                                                                                                               |
-|    **nch**      | net change                                                                                                                      |
+|      **s**      | Symbol                                                                                                                          |
+|     **bid**     | Latest market bid price                                                                                                         |
+|     **ask**     | Latest maket ask price                                                                                                          |
+|    **price**    | Latest market price                                                                                                             |
+|     **dt**      | Timestamp of last market price (epoch)                                                                                          |
+|    **state**    | Market state (open/close)                                                                                                       |
+|     **type**    | Type of market (currency/indexes/commodity)                                                                                     |
+|    **dhigh**    | Daily high                                                                                                                      |
+|    **dlow**     | Daily low                                                                                                                       |
+|    **pch**      | Percentage change                                                                                                               |
+|    **nch**      | Net change                                                                                                                      |
 
 **Check how to use it with** <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> **or** <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a>
 
@@ -1265,6 +1491,8 @@ Please note the sample request is limited in scope to a few countries and indica
 
 ## Latest news
 
+### Methods
+
 <span class="methods">
 
 * Get latest news    
@@ -1281,7 +1509,22 @@ Please note the sample request is limited in scope to a few countries and indica
 
 </span> 
 
+### Response Fields
+
+|                |                                       |
+|:---------------|:--------------------------------------|
+|**ID**          |Unique ID                              |
+|**Title**       |Title of the event                     |
+|**Description** |Description of the event               |
+|**Date**        |Release time and date in UTC           |
+|**Country**     |Country name                           |
+|**Category**    |Category name                          |
+|**Symbol**      |Unique symbol used by TradingEconomics |
+|**Url**         |Hyperlink at Trading Economics         |
+
 ## Latest articles
+
+### Methods
 
 <span class="methods">
 
@@ -1307,70 +1550,297 @@ Please note the sample request is limited in scope to a few countries and indica
 
 ### Response Fields
 
-|                 |                                                                                                                                 |
-|:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
-|      **Id**     | Unique ID                                                                                                                       |
-|    **Title**    | Title of the event                                                                                                              |
-| **Description** | Description of the event                                                                                                        |
-|     **Date**    | Release time and date in UTC                                                                                                    |
-|   **Country**   | Country name                                                                                                                    |
-|   **Category**  | Indicator Category Name                                                                                                         |
-|    **Symbol**   | Unique symbol used by TradingEconomics                                                                                          |
-|     **Url**     | Indicator Hyperlink at Trading Economics                                                                                        |
+|                |                                       |
+|:---------------|:--------------------------------------|
+|**ID**          |Unique ID                              |
+|**Title**       |Title of the event                     |
+|**Description** |Description of the event               |
+|**Date**        |Release time and date in UTC           |
+|**Country**     |Country name                           |
+|**Category**    |Category name                          |
+|**Symbol**      |Unique symbol used by TradingEconomics |
+|**URL**         |Hyperlink at Trading Economics         |
 
 
 
 # World Bank
 
+## Category
 
-Main categories    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/categories?c=guest:guest">http://api.tradingeconomics.com/worldBank/categories</a>
+### Methods
+
+<span class="methods">
+
+* Main categories    
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/categories?c=guest:guest">/worldBank/categories</a>
 
 
-Filtering by the main categories    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}</a>    
+* Filtering by the main categories    
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">/worldBank/category/{category}</a>    
 Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately        
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/category/{category}/{page_number}</a>
-
-
-Detailed information about specific indicator for all countries using a series code from the previous method    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s={series_code}</a>
-
-
-List of indicators available for a specific country (with pagination)    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/worldBank/country/{country}/{page_number}</a>
-
-
-Detailed  information just for a specific indicator and country by using series code or url    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s={series_code}</a>    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">http://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url={url1}</a>
-
-
-Historical data for a specific indicator    
-<a target = '_blank' href="http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">http://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s={series_code}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">/worldBank/category/{category}/{page_number}</a>
 
 All of this can be formatted to json by appending "&format=json"
+
+</span>
+
+### Response Fields
+
+|                       |                                                                                                                                 |
+|:----------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|**Category**           |Category name                                                                                                                        |
+|**series_code**        | ---                                                                                          |
+|**series_name**        |                                                      ---                                                      |
+|**sub_category**       |----                                                 |
+|**sub_category2**      |----                         |
+|**sub_category3**      |----                                      |
+|**Title**              |----                                                          |
+|**long_definition**    |-----                                           |
+|**short_definition**   |----                                         |
+|**Source**             |Data source                                      |
+|**general_comments**   |----                                                         |
+|**aggregation_method** |-----                                            |
+|**URL**                |Hyperlink at Trading Economics                                          |
+|**Organization**       |----                                         |
+|**Unit**               |----                                                       |
+|**verbose_unit**       |----                                          |
+|**last_update**        |Time when new data was inserted or changed                                           |
+
+
+
+## Indicators and Countries
+
+### Methods
+
+<span class="methods">
+
+* Detailed information about specific indicator for all countries using a series code from the previous method    
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">/worldBank/indicator?c=guest:guest&s={series_code}</a>
+
+
+* List of indicators available for a specific country (with pagination)    
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">/worldBank/country/{country}/{page_number}</a>
+
+
+* Detailed  information just for a specific indicator and country by using series code or url    
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">/worldBank/indicator?c=guest:guest&s={series_code}</a>    
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">/worldBank/indicator?c=guest:guest&url={url1}</a>
+
+All of this can be formatted to json by appending "&format=json"
+
+</span>
+
+### Response Fields
+
+|                 |                                                                                                                                 |
+|:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|**Symbol**       |Unique symbol used by TradingEconomics                                                                                          |
+|**Last**         |Latest released value                                                      |
+|**Date**         |Release time and date in UTC                                                  |
+|**Previous**     |Value for the previous period after the revision (if revision is applicable)                          |
+|**PreviousDate** |Release time and date in UTC of the previous value                                        |
+|**Country**      |Country name                                                          |
+|**Category**     |Category name                                                    |
+|**Description**  |----                                              |
+|**Frequency**    |Frequency of the indicator                                              |
+|**Unit**         |Unit of the value                                          |
+|**Title**        |---                                                            ---                                          |
+|**URL**          |Hyperlink at Trading Economics                                          |
+|**LastUpdate**   |Time when new data was inserted or changed                                           |
+
+
+## Historical
+
+### Methods
+
+<span class="methods">
+
+* Historical data for a specific indicator    
+<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">/worldBank/historical?c=guest:guest&s={series_code}</a>
+
+All of this can be formatted to json by appending "&format=json"
+
+</span>
+
+### Response Fields
+
+|           |                                       |
+|:----------|:--------------------------------------|
+|**Symbol** |Unique symbol used by TradingEconomics |
+|**Date**   |Release time and date in UTC           |
+|**Value**  |Released value                         |
 
 
 # Comtrade
 
+### Methods
 
-Get detailed information about Comtrade categories    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/categories?c=guest:guest">http://api.tradingeconomics.com/comtrade/categories</a>
+<span class="methods">
 
-Get detailed information about Comtrade countries    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/countries?c=guest:guest">http://api.tradingeconomics.com/comtrade/countries</a>
+* Get detailed information about Comtrade categories    
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest">/comtrade/categories</a>
 
-Snapshot of data per country    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}</a>    
+</span>
+
+
+### Response Fields
+
+|                |                                                                                                                                 |
+|:---------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|**Id**          | ---                                                                                                        |
+|**Name**        |                                             ---                                          |
+|**ParentId**    |                                            ---                                           |
+|**Pretty_Name** | ---                                                                                                       |
+
+## Country
+
+### Methods 
+
+<span class="methods">
+
+* Get detailed information about Comtrade countries    
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/countries?c=guest:guest">/comtrade/countries</a>
+
+* Snapshot of data per country    
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">/comtrade/country/{country}</a>    
 Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately   
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country}/{page_number}</a>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">/comtrade/country/{country}/{page_number}</a>
 
-Snapshot of trade between two countries (with pagination)   
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">http://api.tradingeconomics.com/comtrade/country/{country_1}/{country_2}/{page_number}</a>
+* Snapshot of trade between two countries (with pagination)   
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">/comtrade/country/{country_1}/{country_2}/{page_number}</a>
 
-Historical data    
-<a target = '_blank' href="http://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">http://api.tradingeconomics.com/comtrade/historical/{symbol}</a>
+</span>
+
+
+### Response Fields
+
+|              |                                                                                                                                 |
+|:-------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|**Id**        | ---                                                                                                        |
+|**Name**      |                                             ---                                          |
+|**Region**    |                                            ---                                           |
+|**Subregion** | ---                                                                                                       |
+|**ISO**       |Three letter country code                                          |
+|**Year**      |                                            ---                                           |
+|**Symbol**    |Unique symbol used by TradingEconomics                                                                                          |
+|**Country1**  |First country ame                                                          |
+|**Country2**  |Second country name                                                          |
+|**Type**      |-----                                                         |
+|**Category**  |Category name                                                                                                         |
+|**URL**       |Hyperlink at Trading Economics                                          |
+|**Title**     |     -----                                           |
+
+## Historical
+
+### Methods
+
+<span class="methods">
+
+* Historical data    
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">/comtrade/historical/{symbol}</a>
+
+</span>
+
+
+### Response Fields
+
+|           |                                       |
+|:----------|:--------------------------------------|
+|**Symbol** |Unique symbol used by TradingEconomics |
+|**Date**   |Release time and date in UTC           |
+|**Value**  |Released value                         |
+
+
+# Federal Reserve    
+
+### Methods
+
+<span class="methods">  
+
+* List of all US states    
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/states?c=guest:guest">/fred/states</a>    
+
+* List of all counties per state    
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/counties/arkansas?c=guest:guest">/fred/counties/{county}</a>    
+
+</span>
+
+### Response Fields
+
+|           |       |
+|:----------|:------|
+|**Name**   |State  |
+|**County** |County |
+
+## Snapshots    
+Snapshots can be accessed through symbol, url, country, state or county. All have pagination.  
+
+### Methods
+
+<span class="methods">  
+
+* Symbol    
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/symbol/AGEXMAK2A647NCEN?c=guest:guest">/fred/snapshot/symbol/{symbol}</a>    
+
+* URL    
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/url?c=guest:guest&url=/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html">/fred/snapshot/url?c=guest:guest&url={url}</a>
+
+* Country     
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/?c=guest:guest">/fred/snapshot/country/{country}</a>    
+
+* State    
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/state/tennessee?c=guest:guest">/fred/snapshot/state/{state}</a>    
+
+* County    
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/arkansas?c=guest:guest">/fred/snapshot/county/{county}</a>    
+or    
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest">/fred/snapshot/county/Pike%20County,%20AR</a>
+
+* Pagination    
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/2?c=guest:guest">/fred/snapshot/country/{country}/{page}</a>    
+
+</span>
+
+### Response Fields
+
+|                 |                                                                                                                                 |
+|:----------------|:--------------------------------------------------------------------------------------------------------------------------------|
+|**Symbol**       |Unique symbol used by TradingEconomics                                                                                          |
+|**Country**      |Country name                                                          |
+|**Category**     |Indicator category name                                                                                                         |
+|**Last**         |Latest released value                                                      |
+|**Date**         |Release time and date in UTC                                                  |
+|**Previous**     |Value for the previous period after the revision (if revision is applicable)                          |
+|**PreviousDate** |Release time and date in UTC of the previous value                                        |
+|**Frequency**    |Frequency of the indicator                                              |
+|**Popularity**   |                                                ---                                              |
+|**Start**        |                                                              ---                                          |
+|**Unit**         |Unit of the value                                          |
+|**Adjustment**   |                                               ---                                          |
+|**URL**          |Hyperlink at Trading Economics                                          |
+|**LastUpdate**   |Time when new data was inserted or changed                                           |
+
+## Historical
+
+### Methods
+
+<span class="methods"> 
+
+* Only accessed through symbol       
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007?c=guest:guest">/fred/historical/{symbol}</a>    
+
+* Multiple symbols        
+<a target = '_blank' href="http://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007,2020RATIO002013?c=guest:guest">/fred/historical/{symbols}</a>    
+
+</span>
+
+### Response Fields
+
+|           |                                       |
+|:----------|:--------------------------------------|
+|**Symbol** |Unique symbol used by TradingEconomics |
+|**Date**   |Release time and date in UTC           |
+|**Value**  |Released value                         |
 
 
 # Excel
