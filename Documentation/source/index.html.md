@@ -1507,6 +1507,9 @@ Please note the sample request is limited in scope to a few countries and indica
 * Get news by country and indicator    
 <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/{countries}/{indicators}</a>
 
+* Paginate news list by specifying start index and list size    
+<a target = '_blank' href="http://api.tradingeconomics.com/news?c=guest:guest&limit=15&start=10">/news?c=guest:guest&limit={list_size}&start={start_index}</a>
+
 </span> 
 
 ### Response Fields
