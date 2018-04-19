@@ -1549,7 +1549,7 @@ Please note the sample request is limited in scope to a few countries and indica
 * Article by ID    
 <a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a>
 
-* Paginate articles list by specifying start index and list size
+* Paginate articles list by specifying start index and list size    
 <a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&lim=10&start=10">/articles?c=guest:guest&lim={list_size}&start={start_index}</a>
 </span> 
 
