@@ -1,4 +1,4 @@
-﻿using ExcelDna.Integration;
+﻿//using ExcelDna.Integration;
 using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
@@ -66,7 +66,7 @@ namespace TE
 
         public void PopulateData()
         {
-            helperClass.log.Info("PopulateData from printTSData");
+            //helperClass.log.Info("PopulateData from printTSData");
             try
             {
                 // Acquire Mutex to avoid multiple functions writing at the same time.
@@ -124,7 +124,7 @@ namespace TE
 
         private void header_to_excel()
         {
-            helperClass.log.Info("header_to_excel from printTSData");
+            //helperClass.log.Info("header_to_excel from printTSData");
             try
             {
                 var writeRange = _currentWorksheet.Range[
@@ -142,7 +142,7 @@ namespace TE
 
         private void data_to_excel()
         {
-            helperClass.log.Info("data_to_excel from printTSData");
+            //helperClass.log.Info("data_to_excel from printTSData");
             try
             {
                 var writeRange = _currentWorksheet.Range[
@@ -161,6 +161,7 @@ namespace TE
             }            
         }
 
+        /*
         public void SetCellVolatile(bool value)
         {
             try
@@ -174,7 +175,7 @@ namespace TE
                 helperClass.log.Trace(ex.StackTrace);
                 throw;
             }
-        }
+        }*/
 
         public void WaitForExcelToBeReady()
         {

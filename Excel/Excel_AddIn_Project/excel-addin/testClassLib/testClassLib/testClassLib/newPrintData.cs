@@ -1,4 +1,4 @@
-﻿using ExcelDna.Integration;
+﻿//using ExcelDna.Integration;
 using Microsoft.Office.Interop.Excel;
 using Newtonsoft.Json.Linq;
 using System;
@@ -165,6 +165,7 @@ namespace TE
             }                      
         }
 
+        /*
         public void SetCellVolatile(bool value)
         {
             try
@@ -178,7 +179,7 @@ namespace TE
                 helperClass.log.Trace(ex.StackTrace);
                 throw;
             }
-        }
+        }*/
 
         public void WaitForExcelToBeReady()
         {

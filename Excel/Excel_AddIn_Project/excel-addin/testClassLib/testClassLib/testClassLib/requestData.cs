@@ -24,6 +24,7 @@ namespace TE
                     wc.Encoding = System.Text.Encoding.UTF8;
                     try
                     {
+                        helperClass.log.Info("URL From request data: ", _url);
                         json = wc.DownloadString(_url);
                     }
                     catch (WebException ex)
@@ -32,8 +33,7 @@ namespace TE
                         helperClass.log.Info(ex.Message);
                         helperClass.log.Trace(ex.StackTrace);                        
                         throw;                        
-                    }
-                                        
+                    }                                        
                     return JArray.Parse(json);
                 }
             }

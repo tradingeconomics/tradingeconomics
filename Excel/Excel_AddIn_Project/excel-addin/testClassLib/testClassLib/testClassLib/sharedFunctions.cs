@@ -69,5 +69,33 @@ namespace TE
             }
             return false;
         }
+
+        public static string getAnswer(string indic)
+        {
+            string answer;
+
+            if (SearchEngine.fromSearch)
+            {
+                answer = SearchEngine.searchAnswer;
+                SearchEngine.fromSearch = false;
+
+                if (SearchEngine.fromWinForm == false & MyRibbon.refresh == false)
+                {                    
+                    answer = indic;
+                }
+                else if(SearchEngine.fromWinForm == false & MyRibbon.refresh != false)
+                {
+                    answer = MyRibbon.fCellText;
+                }
+            }
+            else
+            {
+                answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
+            }
+
+            SearchEngine.fromWinForm = false;
+            MyRibbon.refresh = false;
+            return answer;
+        }
     }
 }

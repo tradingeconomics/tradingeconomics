@@ -22,135 +22,191 @@ namespace TE
         public static Dictionary<string, formulaColumns> myFormulasDict;
         public static Dictionary<string, formulaColumns> myNewDict;
         public static string selectedItem;
-        public static readonly string[] UserDefinedFunctions = { "TECalendar", "TEMarkets", "TEIndicators", "TEForecasts", "TEHistorical", "TESeries" };
         public static bool refresh = false;
 
         public static Microsoft.Office.Interop.Excel.Application app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
         public static Worksheet sheet;
         public static Range cellRange;
+        public static string fCellText;
 
         public void OnLoad(IRibbonUI ribbon)
         {
-            this.ribbon = ribbon;
-            myMainDict = new Dictionary<string, Dictionary<string, formulaColumns>>();
-            myFormulasDict = new Dictionary<string, formulaColumns>();
+            try
+            {
+                this.ribbon = ribbon;
+                myMainDict = new Dictionary<string, Dictionary<string, formulaColumns>>();
+                myFormulasDict = new Dictionary<string, formulaColumns>();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         public void OnMarkets2ButtonPressed(IRibbonControl control)
         {
-            helperClass.log.Info("On Markets2 button is pressed");
-            
             try
             {
-                cellRange = app.ActiveCell;
+                try
+                {
+                    cellRange = app.ActiveCell;
+                }
+                catch (Exception)
+                {
+                    app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
+                    cellRange = app.ActiveCell;
+                }
+                helperClass.runFormula = "RunAutomatically = 1";
+
+                switch (control.Id)
+                {
+                    case "btnM_1": selectedItem = "currency"; break;
+                    case "btnM_2": selectedItem = "index"; break;
+                    case "btnM_3": selectedItem = "commodities"; break;
+                    case "btnM_4": selectedItem = "bond"; break;
+                    default: MessageBox.Show("There was a problem."); break;
+                }
+
+                string newColumns = (MyRibbon.selectedItem == "bond") ? 
+                    String.Join(",", helperClass.bondsNames) : String.Join(",", helperClass.marketsNames);
+
+                cellRange = helperClass.CellAddress(app.ActiveCell.Address[false, false].ToString());
+                string fmFin = string.Format("=TEMarkets( \"{0}\", \"{1}\", {2})",
+                    selectedItem,
+                    newColumns,
+                    cellRange[2, 2].Address[false, false, XlReferenceStyle.xlA1]);
+                cellRange.Formula = fmFin;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-                cellRange = app.ActiveCell;
-            }
-            helperClass.runFormula = "RunAutomatically = 1";
-
-            switch (control.Id)
-            {
-                case "btnM_1": selectedItem = "currency" ; break;
-                case "btnM_2": selectedItem = "index"; break;
-                case "btnM_3": selectedItem = "commodities"; break;
-                case "btnM_4": selectedItem = "bond"; break;
-                default: MessageBox.Show("There was a problem."); break;
-            }
-
-            helperClass.log.Info("Selected market is {0}", selectedItem);
-
-            string newColumns = (MyRibbon.selectedItem == "bond") ? String.Join(",", helperClass.bondsNames) : String.Join(",", helperClass.marketsNames);
-
-            cellRange = helperClass.CellAddress(app.ActiveCell.Address[false, false].ToString());
-            string fmFin = string.Format("=TEMarkets( \"{0}\", \"{1}\", {2})",
-                selectedItem, 
-                newColumns,
-                cellRange[2, 2].Address[false, false, XlReferenceStyle.xlA1]);
-            helperClass.log.Info("Formula {0}", fmFin);
-            cellRange.Formula = fmFin;
+                helperClass.log.Error(ex);
+            }           
         }
 
         public void OnIndicatorsButtonPressed(IRibbonControl control)
         {
-            helperClass.log.Info("On Indicators button is pressed");
-            var ifrm = new indicatorsFrm();
+            try
+            {
+                var ifrm = new indicatorsFrm();
                 ifrm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         public void OnCalendarButtonPressed(IRibbonControl control)
         {
-            helperClass.log.Info("On Calendar button is pressed");
+            try
+            {
                 var cFrm = new calendarFrm();
                 cFrm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }           
         }
 
         public void OnForecastsButtonPressed(IRibbonControl control)
         {
-            helperClass.log.Info("On Forecasts button is pressed");
-            var fFrm = new forecastsFrm();
+            try
+            {
+                var fFrm = new forecastsFrm();
                 fFrm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }           
         }
 
         public void OnHistoricalButtonPressed(IRibbonControl control)
         {
-            helperClass.log.Info("On Historical button is pressed");
-            var hFrm = new historicalFrm();
+            try
+            {
+                var hFrm = new historicalFrm();
                 hFrm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }           
         }
         
         public void OnRefreshButtonPressed(IRibbonControl control)
         {
-            helperClass.log.Info("On Refresh button is pressed");
             try
             {
-                sheet = app.ActiveSheet;
+                try
+                {
+                    sheet = app.ActiveSheet;
+                }
+                catch (Exception)
+                {
+                    app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
+                    sheet = app.ActiveSheet;
+                }
+                
+                find_formula(sheet);                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                app = (Microsoft.Office.Interop.Excel.Application)ExcelDnaUtil.Application;
-                sheet = app.ActiveSheet;
+                helperClass.log.Error(ex);
             }            
-            find_formula(sheet);
         }
 
         public void SearchEnginePressed(IRibbonControl control)
         {
-            helperClass.log.Info("On SearchEngine button is pressed");
-            var srchFrm = new SearchEngine();
-            srchFrm.ShowDialog();
-        }
-
-        public static string fCellText;
+            try
+            {
+                var srchFrm = new SearchEngine();
+                srchFrm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
+        }        
 
         public static void find_formula(Worksheet worksheet)
         {
-            helperClass.log.Info("Starting find_formula(Class1)");
-            Range range;
             try
             {
-                range = worksheet.UsedRange.SpecialCells(XlCellType.xlCellTypeFormulas);
-            }
-                catch(COMException)
-            {
-                MessageBox.Show("No TradingEconomics formula's were found to update.");
-                return;
-            }
-           
-            foreach (Range c in range.Cells)
-            {
-                if (c.HasFormula)
+                Range range;
+                try
                 {
-                    fCellText = c.Text;
-                    helperClass.runFormula = "RunAutomatically = 1";
-                    refresh = true;
-                    worksheet.Cells[c.Row, c.Column] = c.Formula;
-                    while (worksheet.Application.CalculationState != XlCalculationState.xlDone) { }
-                    System.Threading.Thread.Sleep(500);
+                    range = worksheet.UsedRange.SpecialCells(XlCellType.xlCellTypeFormulas);
+                }
+                catch (COMException)
+                {
+                    MessageBox.Show("No TradingEconomics formula's were found to update.");
+                    return;
+                }
+
+                foreach (Range c in range.Cells)
+                {
+                    if (c.HasFormula)
+                    {
+                        fCellText = c.Text;
+                        helperClass.runFormula = "RunAutomatically = 1";
+                        refresh = true;
+                        worksheet.Cells[c.Row, c.Column] = c.Formula;
+
+                        //Was causing a deadLock. Do I remove this part? 
+                        /*while (worksheet.Application.CalculationState != XlCalculationState.xlDone) {
+                            System.Threading.Thread.Sleep(500);
+
+                        }  */
+                        System.Threading.Thread.Sleep(500);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         public  string getLabelApi(IRibbonControl control)
@@ -178,27 +234,46 @@ namespace TE
             return ((apiKeyFrm.validApiKey == true) ? true : false);
         }
 
+        /*public bool getStateRefresh(IRibbonControl control)
+        {
+            return ((apiKeyFrm.validApiKey == true) ? true : false);
+        }*/
+
         public void OnApiKeyButtonPressed(IRibbonControl control)
         {
-            helperClass.log.Info("On Api key button is pressed");
-            if (apiKeyFrm.validApiKey == true)
+            try
             {
-                apiKeyFrm.validApiKey = false;
-                ribbon.Invalidate();
+                //helperClass.log.Info("On Api key button is pressed");
+                if (apiKeyFrm.validApiKey == true)
+                {
+                    apiKeyFrm.validApiKey = false;
+                    ribbon.Invalidate();
+                }
+                else
+                {
+                    var apkFrm = new apiKeyFrm();
+                    apkFrm.ShowDialog();
+                    if (ribbon != null) ribbon.Invalidate();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var apkFrm = new apiKeyFrm();
-                apkFrm.ShowDialog();
-                if (ribbon != null) ribbon.Invalidate();                    
-            }           
+                helperClass.log.Error(ex);
+            }            
         }
 
         public void OnAboutButtonPressed(IRibbonControl control)
-        {            
-            helperClass.log.Info("On About button is pressed");
-            var about = new About();
-            about.ShowDialog();
+        {
+            try
+            {
+                //helperClass.log.Info("On About button is pressed");
+                var about = new About();
+                about.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
     }
 }

@@ -25,7 +25,7 @@ namespace TE
 
         public Dictionary<DateTime, Dictionary<string, string>> getDic()
         {
-            helperClass.log.Info("getDictionary");
+            //helperClass.log.Info("getDictionary");
 
             JArray jsData = new JArray();
             string[][] cntrStaff = helperClass.getStaff(_cntry);
@@ -66,7 +66,7 @@ namespace TE
 
         public List<string> getColumns()
         {
-            helperClass.log.Info("getColumns from getDictionary");
+            //helperClass.log.Info("getColumns from getDictionary");
             List<string> column_keys = new List<string>();
             JArray jsData = new JArray();
             string[][] cntrStaff = helperClass.getStaff(_cntry);

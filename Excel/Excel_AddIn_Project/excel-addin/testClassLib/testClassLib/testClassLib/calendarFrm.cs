@@ -15,50 +15,57 @@ namespace TE
 
         public calendarFrm()
         {
-            InitializeComponent();
-            cntryTextBox.Select();
-            activeCellPositionBox.Text = helperClass.RangeAddress();
-            for (int i = 0; i < helperClass.cntry.Length; i++)
+            try
             {
-                countryLstBx.Items.Insert(i, helperClass.cntry[i]);
-            }
+                InitializeComponent();
+                cntryTextBox.Select();
+                activeCellPositionBox.Text = helperClass.RangeAddress();
+                for (int i = 0; i < helperClass.cntry.Length; i++)
+                {
+                    countryLstBx.Items.Insert(i, helperClass.cntry[i]);
+                }
 
-            indicatorLstBx.Items.Clear();
-            for (int i = 0; i < helperClass.calendarIndicator.Length; i++)
-            {
-                if (!indicatorLstBx.Items.Contains(helperClass.calendarIndicator[i]))
-                    indicatorLstBx.Items.Insert(i, helperClass.calendarIndicator[i]);
-            }
+                indicatorLstBx.Items.Clear();
+                for (int i = 0; i < helperClass.calendarIndicator.Length; i++)
+                {
+                    if (!indicatorLstBx.Items.Contains(helperClass.calendarIndicator[i]))
+                        indicatorLstBx.Items.Insert(i, helperClass.calendarIndicator[i]);
+                }
 
-            for (int n = 0; n < helperClass.calendNames.Length; n++)
-            {
-                columnsListBox.Items.Insert(n, helperClass.calendNames[n]);
-                columnsListBox.SetItemChecked(n, true);
+                for (int n = 0; n < helperClass.calendNames.Length; n++)
+                {
+                    columnsListBox.Items.Insert(n, helperClass.calendNames[n]);
+                    columnsListBox.SetItemChecked(n, true);
+                }
+
+                dateTimePicker1.Value = DateTime.Today;
+                dateTimePicker2.Value = DateTime.Today.AddMonths(3);
+                AutoCompleteList = indics_list();
+                this.cntryTextBox.KeyDown += new KeyEventHandler(cntryTextBox_KeyDown);
+                this.indctrTextBox.KeyDown += new KeyEventHandler(indctrTextBox_KeyDown);
+                this.countryLstBx.KeyDown += new KeyEventHandler(countryLstBx_KeyDown);
+                this.selectedCountryLstBx.KeyDown += new KeyEventHandler(selectedCountryLstBx_KeyDown);
+                this.countryLstBx.MouseDoubleClick += new MouseEventHandler(countryLstBx_MouseDoubleClick);
+                this.selectedCountryLstBx.MouseDoubleClick += new MouseEventHandler(selectedCountryLstBx_MouseDoubleClick);
+                this.indicatorLstBx.KeyDown += new KeyEventHandler(indicatorLstBx_KeyDown);
+                this.selectedIndicatorLstBx.KeyDown += new KeyEventHandler(selectedIndicatorLstBx_KeyDown);
+                this.indicatorLstBx.MouseDoubleClick += new MouseEventHandler(indicatorLstBx_MouseDoubleClick);
+                this.selectedIndicatorLstBx.MouseDoubleClick += new MouseEventHandler(selectedIndicatorLstBx_MouseDoubleClick);
             }
-            
-            dateTimePicker1.Value = DateTime.Today;
-            dateTimePicker2.Value = DateTime.Today.AddMonths(3);
-            AutoCompleteList = indics_list();
-            this.cntryTextBox.KeyDown += new KeyEventHandler(cntryTextBox_KeyDown);
-            this.indctrTextBox.KeyDown += new KeyEventHandler(indctrTextBox_KeyDown);
-            this.countryLstBx.KeyDown += new KeyEventHandler(countryLstBx_KeyDown);
-            this.selectedCountryLstBx.KeyDown += new KeyEventHandler(selectedCountryLstBx_KeyDown);
-            this.countryLstBx.MouseDoubleClick += new MouseEventHandler(countryLstBx_MouseDoubleClick);
-            this.selectedCountryLstBx.MouseDoubleClick += new MouseEventHandler(selectedCountryLstBx_MouseDoubleClick);
-            this.indicatorLstBx.KeyDown += new KeyEventHandler(indicatorLstBx_KeyDown);
-            this.selectedIndicatorLstBx.KeyDown += new KeyEventHandler(selectedIndicatorLstBx_KeyDown);
-            this.indicatorLstBx.MouseDoubleClick += new MouseEventHandler(indicatorLstBx_MouseDoubleClick);
-            this.selectedIndicatorLstBx.MouseDoubleClick += new MouseEventHandler(selectedIndicatorLstBx_MouseDoubleClick);
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
     
         private void hideAutoCompleteMenu()
         {
-            countryLstBx.Visible = false;
+            countryLstBx.Visible = false;           
         }
 
         private void hideAutoCompleteMenu2()
         {
-            indicatorLstBx.Visible = false;
+            indicatorLstBx.Visible = false;           
         }
 
         private String getLatestString()
@@ -85,165 +92,199 @@ namespace TE
 
         private void btnCntryAdd_Click(object sender, EventArgs e)
         {
-            helperClass.log.Info("Adding country(s)");
-
-            foreach (string item in countryLstBx.SelectedItems)
+            //helperClass.log.Info("Adding country(s)");
+            try
             {
-                if (!selectedCountryLstBx.Items.Contains(item))
-                    selectedCountryLstBx.Items.Add(item);
+                foreach (string item in countryLstBx.SelectedItems)
+                {
+                    if (!selectedCountryLstBx.Items.Contains(item))
+                        selectedCountryLstBx.Items.Add(item);
+                }
+                cntryTextBox.Focus();
+                countryLstBx.ClearSelected();
+                AutoCompleteList = indics_list();
             }
-            cntryTextBox.Focus();
-            countryLstBx.ClearSelected();
-            AutoCompleteList = indics_list();
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
            
         private void btnCntryRemove_Click(object sender, EventArgs e)
         {
-            helperClass.log.Info("Removing country(s)");
-            for (int i = selectedCountryLstBx.SelectedIndices.Count - 1; i >= 0; i--)
+            try
             {
-                selectedCountryLstBx.Items.RemoveAt(selectedCountryLstBx.SelectedIndices[i]);
+                for (int i = selectedCountryLstBx.SelectedIndices.Count - 1; i >= 0; i--)
+                {
+                    selectedCountryLstBx.Items.RemoveAt(selectedCountryLstBx.SelectedIndices[i]);
+                }
+                selectedCountryLstBx.Focus();
             }
-            selectedCountryLstBx.Focus();
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void btnIndctrAdd_Click(object sender, EventArgs e)
         {
-            helperClass.log.Info("Adding indicators(s)");
-            for (int i = 0; i < indicatorLstBx.Items.Count; i++)
+            try
             {
-                indicatorLstBx.Items[i] = indicatorLstBx.Items[i].ToString();
-            }
-            foreach (string item in indicatorLstBx.SelectedItems)
-            {
+                for (int i = 0; i < indicatorLstBx.Items.Count; i++)
+                {
+                    indicatorLstBx.Items[i] = indicatorLstBx.Items[i].ToString();
+                }
+                foreach (string item in indicatorLstBx.SelectedItems)
+                {
                     if (!selectedIndicatorLstBx.Items.Contains(item))
                         selectedIndicatorLstBx.Items.Add(item);
+                }
+                indctrTextBox.Focus();
+                indicatorLstBx.ClearSelected();
             }
-            indctrTextBox.Focus();
-            indicatorLstBx.ClearSelected();
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void btnIndctrRemove_Click(object sender, EventArgs e)
         {
-            helperClass.log.Info("Removing indicators(s)");
-            for (int i = selectedIndicatorLstBx.SelectedIndices.Count - 1; i >= 0; i--)
+            try
             {
-                selectedIndicatorLstBx.Items.RemoveAt(selectedIndicatorLstBx.SelectedIndices[i]);
+                for (int i = selectedIndicatorLstBx.SelectedIndices.Count - 1; i >= 0; i--)
+                {
+                    selectedIndicatorLstBx.Items.RemoveAt(selectedIndicatorLstBx.SelectedIndices[i]);
+                }
+                selectedIndicatorLstBx.Focus();
             }
-            selectedIndicatorLstBx.Focus();
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
         
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            date1 = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+            try
+            {
+                date1 = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
         
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            date2 = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+            try
+            {
+                date2 = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            helperClass.log.Info("Calendars button OK is clicked");
-            helperClass.origin = false;
-            if (date1 == null & date2 == null)
+            try
             {
-                date1 = dateTimePicker1.Value.ToString("yyyy-MM-dd");
-                date2 = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+                if (selectedCountryLstBx.Items.Count == 0 || selectedIndicatorLstBx.Items.Count == 0)
+                {
+                    string field = (selectedCountryLstBx.Items.Count == 0) ? "Country" : "Indicator";
+                    MessageBox.Show(field + " should be provided");
+                }
+                else
+                {
+                    helperClass.origin = false;
+                    if (date1 == null & date2 == null)
+                    {
+                        date1 = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+                        date2 = dateTimePicker2.Value.ToString("yyyy-MM-dd");
+                    }
+
+                    string selectedIsoCntry = sharedFunctions.toIsoCountry(selectedCountryLstBx);
+                    if (sharedFunctions.checkCountryLength(selectedIsoCntry)) return;
+
+                    string selectedIndic = sharedFunctions.getIndicators(selectedIndicatorLstBx);
+                    if (sharedFunctions.checkIndicatorsLength(selectedIndic)) return;
+
+                    List<string> columns = sharedFunctions.getColumns(columnsListBox);
+
+                    helperClass.runFormula = "RunAutomatically = 1";
+                    Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
+
+                    string clndrFm = string.Format(
+                        $"=TECalendar( \"{selectedIsoCntry}\", \"{selectedIndic}\", \"{date1}\", \"{date2}\", \"{String.Join(",", columns)}\", {dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]})");
+
+                    MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
+                    MyRibbon.cellRange.Formula = clndrFm;
+                    Close();
+                }
             }
-
-            string selectedIsoCntry = sharedFunctions.toIsoCountry(selectedCountryLstBx);
-            if (sharedFunctions.checkCountryLength(selectedIsoCntry)) return;
-
-            string selectedIndic = sharedFunctions.getIndicators(selectedIndicatorLstBx);
-            if (sharedFunctions.checkIndicatorsLength(selectedIndic)) return;
-
-            List<string> columns = sharedFunctions.getColumns(columnsListBox);
-
-            helperClass.runFormula = "RunAutomatically = 1";            
-            Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
-           
-            string clndrFm = string.Format(
-                $"=TECalendar( \"{selectedIsoCntry}\", \"{selectedIndic}\", \"{date1}\", \"{date2}\", \"{String.Join(",", columns)}\", {dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]})");
-            helperClass.log.Info("Formula {0}", clndrFm);
-            MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
-            MyRibbon.cellRange.Formula = clndrFm; 
-            Close();
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            Close();           
         }
 
         private void cntryTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (countryLstBx.Enabled)
+            try
             {
-                countryLstBx.Items.Clear();
-                if (cntryTextBox.Text.Length == 0)
+                if (countryLstBx.Enabled)
                 {
-                    hideAutoCompleteMenu();
-                    countryLstBx.Show();
-                    for (int i = 0; i < helperClass.cntry.Length; i++)
+                    countryLstBx.Items.Clear();
+                    if (cntryTextBox.Text.Length == 0)
                     {
-                        countryLstBx.Items.Insert(i, helperClass.cntry[i]);
+                        hideAutoCompleteMenu();
+                        countryLstBx.Show();
+                        for (int i = 0; i < helperClass.cntry.Length; i++)
+                        {
+                            countryLstBx.Items.Insert(i, helperClass.cntry[i]);
+                        }
+                        return;
                     }
-                    return;
-                }
 
-                String compareText = getLatestString();
-                foreach (String s in helperClass.autoCompleteList)
-                {
-                    if (compareText == null ||
-                    compareText.Equals("") || s.StartsWith(compareText.Trim(), helperClass.comparison))
+                    String compareText = getLatestString();
+                    foreach (String s in helperClass.autoCompleteList)
                     {
-                        countryLstBx.Items.Add(s);
+                        if (compareText == null || compareText.Equals("") || s.StartsWith(compareText.Trim(),
+                            helperClass.comparison))
+                        {
+                            countryLstBx.Items.Add(s);
+                        }
+                    }
+
+                    if (countryLstBx.Items.Count > 0)
+                    {
+                        Point point = this.cntryTextBox.GetPositionFromCharIndex
+                         (cntryTextBox.SelectionStart);
+                        point.Y += (int)Math.Ceiling(this.cntryTextBox.Font.GetHeight()) + 37;
+                        point.X += 7;
+                        countryLstBx.Location = point;
+                        this.countryLstBx.BringToFront();
+                        this.countryLstBx.Show();
                     }
                 }
-
-                if (countryLstBx.Items.Count > 0)
-                {
-                    Point point = this.cntryTextBox.GetPositionFromCharIndex
-                     (cntryTextBox.SelectionStart);
-                    point.Y += (int)Math.Ceiling(this.cntryTextBox.Font.GetHeight()) + 37;
-                    point.X += 7;
-                    countryLstBx.Location = point;
-                    this.countryLstBx.BringToFront();
-                    this.countryLstBx.Show();
-                }
-            }            
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }                   
         }
 
         private void countryLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            cntryTextBox.Focus();
-            btnCntryAdd_Click(sender, e);
-            cntryTextBox.SelectionStart = cntryTextBox.Text.Length + 1;
-            cntryTextBox.SelectionLength = 0;
-            countryLstBx.ClearSelected();
-        }
-
-        private void selectedCountryLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            btnCntryRemove_Click(sender, e);
-        }
-
-        private void indicatorLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            btnIndctrAdd_Click(sender, e);
-            indicatorLstBx.ClearSelected();
-        }
-
-        private void selectedIndicatorLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            btnIndctrRemove_Click(sender, e);
-        }
-
-        private void countryLstBx_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
                 cntryTextBox.Focus();
                 btnCntryAdd_Click(sender, e);
@@ -251,136 +292,224 @@ namespace TE
                 cntryTextBox.SelectionLength = 0;
                 countryLstBx.ClearSelected();
             }
-
-            if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Back)
+            catch (Exception ex)
             {
-                cntryTextBox.Focus();
-                countryLstBx.ClearSelected();
-            }
+                helperClass.log.Error(ex);
+            }            
         }
 
-        private void selectedCountryLstBx_KeyDown(object sender, KeyEventArgs e)
+        private void selectedCountryLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) btnCntryRemove_Click(sender, e);
+            btnCntryRemove_Click(sender, e);          
         }
 
-        private void indicatorLstBx_KeyDown(object sender, KeyEventArgs e)
+        private void indicatorLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
                 btnIndctrAdd_Click(sender, e);
                 indicatorLstBx.ClearSelected();
             }
-
-            if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Back)
+            catch (Exception ex)
             {
-                indicatorLstBx.ClearSelected();
-                indctrTextBox.Select();
+                helperClass.log.Error(ex);
+            }            
+        }
+
+        private void selectedIndicatorLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            btnIndctrRemove_Click(sender, e);         
+        }
+
+        private void countryLstBx_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    cntryTextBox.Focus();
+                    btnCntryAdd_Click(sender, e);
+                    cntryTextBox.SelectionStart = cntryTextBox.Text.Length + 1;
+                    cntryTextBox.SelectionLength = 0;
+                    countryLstBx.ClearSelected();
+                }
+
+                if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Back)
+                {
+                    cntryTextBox.Focus();
+                    countryLstBx.ClearSelected();
+                }
             }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
+        }
+
+        private void selectedCountryLstBx_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) btnCntryRemove_Click(sender, e);           
+        }
+
+        private void indicatorLstBx_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    btnIndctrAdd_Click(sender, e);
+                    indicatorLstBx.ClearSelected();
+                }
+
+                if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Back)
+                {
+                    indicatorLstBx.ClearSelected();
+                    indctrTextBox.Select();
+                }
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void selectedIndicatorLstBx_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) btnIndctrRemove_Click(sender, e);                
+            if (e.KeyCode == Keys.Enter) btnIndctrRemove_Click(sender, e);                          
         }
 
         private void cntryTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (countryLstBx.Enabled && (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down))
+            try
             {
-                countryLstBx.Select();
-                countryLstBx.SetSelected(0, true);
+                if (countryLstBx.Enabled && (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down))
+                {
+                    countryLstBx.Select();
+                    countryLstBx.SetSelected(0, true);
+                }
             }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void indctrTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (indicatorLstBx.Enabled && (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down))
+            try
             {
-                indicatorLstBx.Select();
-                indicatorLstBx.SetSelected(0, true);
+                if (indicatorLstBx.Enabled && (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down))
+                {
+                    indicatorLstBx.Select();
+                    indicatorLstBx.SetSelected(0, true);
+                }
             }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void indctrTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (indicatorLstBx.Enabled)
+            try
             {
-                indicatorLstBx.Items.Clear();
-                if (indctrTextBox.Text.Length == 0)
+                if (indicatorLstBx.Enabled)
                 {
-                    hideAutoCompleteMenu2();
-                    if (selectedCountryLstBx.Items.Count == 0)
+                    indicatorLstBx.Items.Clear();
+                    if (indctrTextBox.Text.Length == 0)
                     {
-                        for (int i = 0; i < helperClass.calendarIndicator.Length; i++)
+                        hideAutoCompleteMenu2();
+                        if (selectedCountryLstBx.Items.Count == 0)
                         {
-                            if (!indicatorLstBx.Items.Contains(helperClass.calendarIndicator[i]))
-                                indicatorLstBx.Items.Insert(i, helperClass.calendarIndicator[i]);
+                            for (int i = 0; i < helperClass.calendarIndicator.Length; i++)
+                            {
+                                if (!indicatorLstBx.Items.Contains(helperClass.calendarIndicator[i]))
+                                    indicatorLstBx.Items.Insert(i, helperClass.calendarIndicator[i]);
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < AutoCompleteList.ToList().Count; i++)
+                            {
+                                indicatorLstBx.Items.Insert(i, AutoCompleteList.ToList()[i]);
+                            }
+                        }
+                        indicatorLstBx.Show();
+                        return;
+                    }
+
+                    String compareText = getLatestString2();
+                    foreach (String s in AutoCompleteList)
+                    {
+                        if (compareText == null ||
+                        compareText.Equals("") || s.StartsWith(compareText.Trim(), helperClass.comparison))
+                        {
+                            indicatorLstBx.Items.Add(s);
                         }
                     }
-                    else
-                    {
-                        for (int i = 0; i < AutoCompleteList.ToList().Count; i++)
-                        {
-                            indicatorLstBx.Items.Insert(i, AutoCompleteList.ToList()[i]);
-                        }
-                    }
-                    indicatorLstBx.Show();
-                    return;
-                }
 
-                String compareText = getLatestString2();
-                foreach (String s in AutoCompleteList)
-                {
-                    if (compareText == null ||
-                    compareText.Equals("") || s.StartsWith(compareText.Trim(), helperClass.comparison))
+                    if (indicatorLstBx.Items.Count > 0)
                     {
-                        indicatorLstBx.Items.Add(s);
+                        Point point = this.indctrTextBox.GetPositionFromCharIndex
+                         (indctrTextBox.SelectionStart);
+                        point.Y += (int)Math.Ceiling(this.indctrTextBox.Font.GetHeight()) + 263;
+                        point.X += 7;
+                        indicatorLstBx.Location = point;
+                        this.indicatorLstBx.BringToFront();
+                        this.indicatorLstBx.Show();
                     }
                 }
-
-                if (indicatorLstBx.Items.Count > 0)
-                {
-                    Point point = this.indctrTextBox.GetPositionFromCharIndex
-                     (indctrTextBox.SelectionStart);
-                    point.Y += (int)Math.Ceiling(this.indctrTextBox.Font.GetHeight()) + 263;
-                    point.X += 7;
-                    indicatorLstBx.Location = point;
-                    this.indicatorLstBx.BringToFront();
-                    this.indicatorLstBx.Show();
-                }
-            }            
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }                       
         }
 
         private void allCountriesBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (allCountriesBox.Checked == true)
+            try
             {
-                countryLstBx.Enabled = false;
-                selectedCountryLstBx.Items.Clear();
-                selectedCountryLstBx.Items.Add("All");               
-                indctrTextBox.Focus();
+                if (allCountriesBox.Checked == true)
+                {
+                    countryLstBx.Enabled = false;
+                    selectedCountryLstBx.Items.Clear();
+                    selectedCountryLstBx.Items.Add("All");
+                    indctrTextBox.Focus();
+                }
+                else
+                {
+                    countryLstBx.Enabled = true;
+                    selectedCountryLstBx.Items.Clear();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                countryLstBx.Enabled = true;
-                selectedCountryLstBx.Items.Clear();
-            }
+                helperClass.log.Error(ex);
+            }           
         }
 
         private void allIndicatorsBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (allIndicatorsBox.Checked == true)
+            try
             {
-                indicatorLstBx.Enabled = false;
-                selectedIndicatorLstBx.Items.Clear();
-                selectedIndicatorLstBx.Items.Add("All");
+                if (allIndicatorsBox.Checked == true)
+                {
+                    indicatorLstBx.Enabled = false;
+                    selectedIndicatorLstBx.Items.Clear();
+                    selectedIndicatorLstBx.Items.Add("All");
+                }
+                else
+                {
+                    indicatorLstBx.Enabled = true;
+                    selectedIndicatorLstBx.Items.Clear();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                indicatorLstBx.Enabled = true;
-                selectedIndicatorLstBx.Items.Clear();
-            }
+                helperClass.log.Error(ex);
+            }            
         }
     }
 }

@@ -1267,7 +1267,10 @@ namespace TE
         public static string[] calendNames = { "Date", "Country", "Category", "Event", "Reference", "Source", "Actual", "Previous", "Forecast", "TEForecast",
             "URL", "Importance", "LastUpdate" };
 
-        public static string[] forcNames = { "Country", "Category", "LatestValue", "LatestValueDate", "YearEnd", "YearEnd2", "YearEnd3",
+        public static string[] forcNames = { "Country", "Category", "Title", "LatestValue", "LatestValueDate", "YearEnd", "YearEnd2", "YearEnd3",
+            "q1", "q1_date", "q2", "q2_date", "q3", "q3_date", "q4", "q4_date" };
+
+        public static string[] forcComodNames = { "Country", "Title", "LatestValue", "LatestValueDate", "YearEnd", "YearEnd2", "YearEnd3",
             "q1", "q1_date", "q2", "q2_date", "q3", "q3_date", "q4", "q4_date" };
 
         public static string[] histNames = { "Country", "Category", "DateTime", "Value", "Frequency", "HistoricalDataSymbol", "LastUpdate" };
@@ -1285,6 +1288,7 @@ namespace TE
             "YearlyPercentualChange", "YTDChange", "YTDPercentualChange", "yesterday", "lastWeek", "lastMonth", "lastYear", "startYear", "lastUpdate" };
 
         public static string[] fredColumns = { "symbol", "date", "value"};
+
         public static string[] MetaColumns = { "country", "title", "unit", "lastUpdate" };
 
         public static Dictionary<string, string> searchTabs = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -1293,11 +1297,12 @@ namespace TE
             { "wb", "World Bank"},
             { "bond", "Bond"},
             {"commodity", "Commodity"},
-            {"economy", "Economy"},
+            {"economic", "Economy"},
             {"forex", "Forex"},
             {"fred", "Federal Reserve"},
             {"idx", "Index"},
             {"mkt", "Market"},
+            {"financials", "Financials"},
             {"comtrade", "Comtrade"}
         };
 
@@ -1307,11 +1312,12 @@ namespace TE
             {"World Bank",  "wb"},
             {"Bond",  "bond"},
             {"Commodity", "commodity"},
-            {"Economy", "economy"},
+            {"Economy", "economic"},
             {"Forex", "forex"},
             {"Federal Reserve", "fred"},
             {"Index", "idx"},
             {"Market", "mkt"},
+            {"Financials", "financials"},
             {"Comtrade", "comtrade"}
         };
 
@@ -1323,32 +1329,39 @@ namespace TE
         public static string runFormula;
         public static bool origin = true;
         public static List<string> fList = new List<string>();
-        public static Range oldRange;        
+        public static Range oldRange;
 
 
 
         public static void get_formulaList()
         {
-            Range range;
             try
             {
-                MyRibbon.sheet = MyRibbon.app.ActiveSheet;
-                range = MyRibbon.sheet.UsedRange.SpecialCells(XlCellType.xlCellTypeFormulas);
-                oldRange = range;
-            }
-            catch (COMException)
-            {
-                MessageBox.Show("No TradingEconomics formula's were found to update.");
-                return;
-            }
-            
-            foreach (Range c in range.Cells)
-            {
-                if (c.HasFormula)
+                Range range;
+                try
                 {
-                    if (!fList.Contains(c.Formula)) fList.Add(c.Formula);
+                    MyRibbon.sheet = MyRibbon.app.ActiveSheet;
+                    range = MyRibbon.sheet.UsedRange.SpecialCells(XlCellType.xlCellTypeFormulas);
+                    oldRange = range;
+                }
+                catch (COMException)
+                {
+                    MessageBox.Show("No TradingEconomics formula's were found to update.");
+                    return;
+                }
+
+                foreach (Range c in range.Cells)
+                {
+                    if (c.HasFormula)
+                    {
+                        if (!fList.Contains(c.Formula)) fList.Add(c.Formula);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         // List of the countries for AutoComplete
@@ -1432,14 +1445,19 @@ namespace TE
                     Range dtStrt = MyRibbon.myFormulasDict[item]._cells;
                     Range hdrEnd;
                     MyRibbon.myFormulasDict = MyRibbon.myMainDict[MyRibbon.sheet.Index.ToString()];
-                    if (fromTS)
+
+                    /*if (fromTS)
                     {
                         hdrEnd = MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count + 1];
                     }
                     else
                     {
                         hdrEnd = MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
-                    }
+                    }*/
+                    hdrEnd = (fromTS) ?
+                        MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count + 1] :
+                        MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
+
                     Range dtEnd = MyRibbon.myFormulasDict[item]._cells[MyRibbon.myFormulasDict[item]._cells.Rows.Count, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
                     try
                     {
@@ -1477,15 +1495,19 @@ namespace TE
                 {
                     Range dtStrt = MyRibbon.myFormulasDict[item]._cells;
                     Range hdrEnd;
-                    if (fromTS)
+                    /*if (fromTS)
                     {
                         hdrEnd = MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count + 1];
                     }
                     else
                     {
                         hdrEnd = MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
-                    }
-                    
+                    }*/
+
+                    hdrEnd = (fromTS) ?
+                        MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count + 1] :
+                        MyRibbon.myFormulasDict[item]._cells[1, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
+
                     Range dtEnd = MyRibbon.myFormulasDict[item]._cells[MyRibbon.myFormulasDict[item]._cells.Rows.Count, MyRibbon.myFormulasDict[item]._cells.Columns.Count];
                     Range hdrRng;
                     Range dtRng;
@@ -1498,7 +1520,6 @@ namespace TE
                     }
                     catch (System.Runtime.InteropServices.COMException)
                     {
-
                         continue;
                     }  
                 }
@@ -1508,47 +1529,68 @@ namespace TE
 
         public static void elseFunction(string columns, JArray jsData, Range dataStartCell, string newFormula, Range formulaCell)
         {
-            var retriever = new RetrieveAndWriteData(columns, jsData, dataStartCell, newFormula, formulaCell);
-            var thready = new Thread(retriever.fetchData);
-            thready.Priority = ThreadPriority.Normal;
-            thready.IsBackground = true;
-            thready.Start();
+            try
+            {
+                var retriever = new RetrieveAndWriteData(columns, jsData, dataStartCell, newFormula, formulaCell);
+                var thready = new Thread(retriever.fetchData);
+                thready.Priority = ThreadPriority.Normal;
+                thready.IsBackground = true;
+                thready.Start();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         public static void RemoveOldKey(Dictionary<string, formulaColumns>  myNewDict)
         {
-            Dictionary<string, formulaColumns> auxDict = new Dictionary<string, formulaColumns>(MyRibbon.myFormulasDict);
-            foreach (var item in auxDict.Keys)
+            try
             {
-                if (!myNewDict.ContainsKey(item)) MyRibbon.myFormulasDict.Remove(item);
+                Dictionary<string, formulaColumns> auxDict = new Dictionary<string, formulaColumns>(MyRibbon.myFormulasDict);
+                foreach (var item in auxDict.Keys)
+                {
+                    if (!myNewDict.ContainsKey(item)) MyRibbon.myFormulasDict.Remove(item);
+                }
             }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         public static void setGlobalDict(string formulaCellAddress, formulaColumns frmlaColumnsPair)
-        {          
-            if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
+        {
+            try
             {
-                if (MyRibbon.myFormulasDict.ContainsKey(formulaCellAddress))
+                if (MyRibbon.myMainDict.ContainsKey(MyRibbon.sheet.Index.ToString()))
                 {
-                    MyRibbon.myFormulasDict[formulaCellAddress] = frmlaColumnsPair;
+                    if (MyRibbon.myFormulasDict.ContainsKey(formulaCellAddress))
+                    {
+                        MyRibbon.myFormulasDict[formulaCellAddress] = frmlaColumnsPair;
+                    }
+                    else
+                    {
+                        MyRibbon.myFormulasDict.Add(formulaCellAddress, frmlaColumnsPair);
+                    }
                 }
                 else
                 {
-                    MyRibbon.myFormulasDict.Add(formulaCellAddress, frmlaColumnsPair);
+                    MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
+                    if (MyRibbon.myFormulasDict.ContainsKey(formulaCellAddress))
+                    {
+                        MyRibbon.myFormulasDict[formulaCellAddress] = frmlaColumnsPair;
+                    }
+                    else
+                    {
+                        MyRibbon.myFormulasDict.Add(formulaCellAddress, frmlaColumnsPair);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MyRibbon.myFormulasDict = new Dictionary<string, formulaColumns>();
-                if (MyRibbon.myFormulasDict.ContainsKey(formulaCellAddress))
-                {
-                    MyRibbon.myFormulasDict[formulaCellAddress] = frmlaColumnsPair;
-                }
-                else
-                {
-                    MyRibbon.myFormulasDict.Add(formulaCellAddress, frmlaColumnsPair);
-                }
-            }            
+                helperClass.log.Error(ex);
+            }                      
         }
 
         private static string cntryList(string countries)
@@ -1588,7 +1630,7 @@ namespace TE
                 SearchEngine.fromSearch = true;
                 return host + mktType +  "/historical?c=" + apiKeyFrm.apiKey + "&s=" +  indctr + "&excel=" + apiKeyFrm.excelVersion;
             }
-            else if (mktType == "fred" || mktType == "comtrade")
+            else if (mktType == "fred" || mktType == "comtrade" || mktType == "markets")
             {
                 SearchEngine.fromSearch = true;
                 return host + mktType + "/historical/" + indctr + "?c=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
@@ -1792,5 +1834,5 @@ namespace TE
             }
             return strVersion;
         }
-}
+    }
 }

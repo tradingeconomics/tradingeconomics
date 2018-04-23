@@ -17,30 +17,37 @@ namespace TE
 
         public indicatorsFrm()
         {
-            InitializeComponent();
-            cntryTextBox.Select();
-            allIndicatorsBox.Enabled = false;
-            activeCellPositionBox.Text = helperClass.RangeAddress();
-            for (int i = 0; i < helperClass.cntry.Length; i++)
+            try
             {
-                countryLstBx.Items.Insert(i, helperClass.cntry[i]);
-            }
+                InitializeComponent();
+                cntryTextBox.Select();
+                allIndicatorsBox.Enabled = false;
+                activeCellPositionBox.Text = helperClass.RangeAddress();
+                for (int i = 0; i < helperClass.cntry.Length; i++)
+                {
+                    countryLstBx.Items.Insert(i, helperClass.cntry[i]);
+                }
 
-            for (int n = 0; n < helperClass.indNames.Length; n++)
-            {
-                columnsListBox.Items.Insert(n, helperClass.indNames[n]);
-                columnsListBox.SetItemChecked(n, true);
+                for (int n = 0; n < helperClass.indNames.Length; n++)
+                {
+                    columnsListBox.Items.Insert(n, helperClass.indNames[n]);
+                    columnsListBox.SetItemChecked(n, true);
+                }
+                this.cntryTextBox.KeyDown += new KeyEventHandler(cntryTextBox_KeyDown);
+                this.indctrTextBox.KeyDown += new KeyEventHandler(indctrTextBox_KeyDown);
+                this.countryLstBx.KeyDown += new KeyEventHandler(countryLstBx_KeyDown);
+                this.selectedCountryLstBx.KeyDown += new KeyEventHandler(selectedCountryLstBx_KeyDown);
+                this.countryLstBx.MouseDoubleClick += new MouseEventHandler(countryLstBx_MouseDoubleClick);
+                this.selectedCountryLstBx.MouseDoubleClick += new MouseEventHandler(selectedCountryLstBx_MouseDoubleClick);
+                this.indicatorsLstBx.KeyDown += new KeyEventHandler(indicatorLstBx_KeyDown);
+                this.selectedIndicatorsLstBx.KeyDown += new KeyEventHandler(selectedIndicatorLstBx_KeyDown);
+                this.indicatorsLstBx.MouseDoubleClick += new MouseEventHandler(indicatorLstBx_MouseDoubleClick);
+                this.selectedIndicatorsLstBx.MouseDoubleClick += new MouseEventHandler(selectedIndicatorLstBx_MouseDoubleClick);
             }
-            this.cntryTextBox.KeyDown += new KeyEventHandler(cntryTextBox_KeyDown);
-            this.indctrTextBox.KeyDown += new KeyEventHandler(indctrTextBox_KeyDown);
-            this.countryLstBx.KeyDown += new KeyEventHandler(countryLstBx_KeyDown);
-            this.selectedCountryLstBx.KeyDown += new KeyEventHandler(selectedCountryLstBx_KeyDown);
-            this.countryLstBx.MouseDoubleClick += new MouseEventHandler(countryLstBx_MouseDoubleClick);
-            this.selectedCountryLstBx.MouseDoubleClick += new MouseEventHandler(selectedCountryLstBx_MouseDoubleClick);
-            this.indicatorsLstBx.KeyDown += new KeyEventHandler(indicatorLstBx_KeyDown);
-            this.selectedIndicatorsLstBx.KeyDown += new KeyEventHandler(selectedIndicatorLstBx_KeyDown);
-            this.indicatorsLstBx.MouseDoubleClick += new MouseEventHandler(indicatorLstBx_MouseDoubleClick);
-            this.selectedIndicatorsLstBx.MouseDoubleClick += new MouseEventHandler(selectedIndicatorLstBx_MouseDoubleClick);
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void hideAutoCompleteMenu()
@@ -69,7 +76,6 @@ namespace TE
         {
             try
             {
-                helperClass.log.Info("indicatorsFrm - btnCntryAdd_Click, url2 = " + url2);
                 using (WebClient wc = new WebClient())
                 {
                     JArray o = JArray.Parse(wc.DownloadString(url2));
@@ -87,28 +93,36 @@ namespace TE
             }
             catch (Exception ex)
             {
-                helperClass.log.Info("Something went wrong trying get indicators list for specific country: " + ex);
-                helperClass.log.Trace(ex.StackTrace);
+                helperClass.log.Info(url2);
+                //helperClass.log.Trace(ex.StackTrace);
+                helperClass.log.Error(ex);
             }
         }
 
         private void countyAddRemoveHelper()
         {
-            if ((selectedCountryLstBx.Items.Count == 1) && (selectedCountryLstBx.Items[0].ToString() != "All"))
+            try
             {
-                string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() +
-                    "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
-
-                indicatorListPopulate(url2);
-            }
-            else
-            {
-                indicatorsLstBx.Items.Clear();
-                for (int i = 0; i < helperClass.category.Length; i++)
+                if ((selectedCountryLstBx.Items.Count == 1) && (selectedCountryLstBx.Items[0].ToString() != "All"))
                 {
-                    if (!indicatorsLstBx.Items.Contains(helperClass.category[i]))
-                        indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
+                    string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() +
+                        "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
+
+                    indicatorListPopulate(url2);
                 }
+                else
+                {
+                    indicatorsLstBx.Items.Clear();
+                    for (int i = 0; i < helperClass.category.Length; i++)
+                    {
+                        if (!indicatorsLstBx.Items.Contains(helperClass.category[i]))
+                            indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
             }
         }
 
@@ -124,7 +138,7 @@ namespace TE
             }
             catch(Exception e)
             {
-                helperClass.log.Info("Something went wrong trying get indicators list: " + e);
+                //helperClass.log.Info("Something went wrong trying get indicators list: " + e);
                 helperClass.log.Trace(e.StackTrace);
             }
             return values_test;
@@ -132,127 +146,125 @@ namespace TE
 
         private void btnCntryAdd_Click(object sender, EventArgs e)
         {
-            allIndicatorsBox.Enabled = true;
-            foreach (string item in countryLstBx.SelectedItems)
+            try
             {
+                allIndicatorsBox.Enabled = true;
+                foreach (string item in countryLstBx.SelectedItems)
+                {
                     if (!selectedCountryLstBx.Items.Contains(item))
                         selectedCountryLstBx.Items.Add(item);
-            }
-
-            /*if ((selectedCountryLstBx.Items.Count == 1) && (selectedCountryLstBx.Items[0].ToString() != "All"))
-            {
-                string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() + 
-                    "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
-
-                indicatorListPopulate(url2);
-            }
-            else
-            {
-                indicatorsLstBx.Items.Clear();
-                for (int i = 0; i < helperClass.category.Length; i++)
-                {
-                    if (!indicatorsLstBx.Items.Contains(helperClass.category[i]))
-                        indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
                 }
-            }*/
-            countyAddRemoveHelper();
-            if (!fromIndTxtBox)
-            {
-                cntryTextBox.Focus();
+
+                countyAddRemoveHelper();
+                if (!fromIndTxtBox)
+                {
+                    cntryTextBox.Focus();
+                }
+                else
+                {
+                    fromIndTxtBox = false;
+                }
+
+                countryLstBx.ClearSelected();
+                AutoCompleteList = indics_list();
             }
-            else
+            catch (Exception ex)
             {
-                fromIndTxtBox = false;
-            }
-            
-            countryLstBx.ClearSelected();
-            AutoCompleteList = indics_list();
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void btnCntryRemove_Click(object sender, EventArgs e)
         {
-            for (int i = selectedCountryLstBx.SelectedIndices.Count - 1; i >= 0; i--)
+            try
             {
-                selectedCountryLstBx.Items.RemoveAt(selectedCountryLstBx.SelectedIndices[i]);
-            }
-
-            /*if ((selectedCountryLstBx.Items.Count == 1) && (selectedCountryLstBx.Items[0].ToString() != "All"))
-            {
-                string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() +
-                    "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
-
-                indicatorListPopulate(url2);
-            }
-            else
-            {
-                indicatorsLstBx.Items.Clear();
-                for (int i = 0; i < helperClass.category.Length; i++)
+                for (int i = selectedCountryLstBx.SelectedIndices.Count - 1; i >= 0; i--)
                 {
-                    if (!indicatorsLstBx.Items.Contains(helperClass.category[i]))
-                        indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
+                    selectedCountryLstBx.Items.RemoveAt(selectedCountryLstBx.SelectedIndices[i]);
                 }
-            }*/
-            countyAddRemoveHelper();
-            selectedCountryLstBx.Focus();
+
+                countyAddRemoveHelper();
+                selectedCountryLstBx.Focus();
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void btnIndctrAdd_Click(object sender, EventArgs e)
         {
-            foreach (string item in indicatorsLstBx.SelectedItems)
+            try
             {
+                foreach (string item in indicatorsLstBx.SelectedItems)
+                {
                     if (!selectedIndicatorsLstBx.Items.Contains(item))
                         selectedIndicatorsLstBx.Items.Add(item);
+                }
+                indctrTextBox.Focus();
+                indicatorsLstBx.ClearSelected();
             }
-            indctrTextBox.Focus();
-            indicatorsLstBx.ClearSelected();
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void btnIndctrRemove_Click(object sender, EventArgs e)
         {
-            for (int i = selectedIndicatorsLstBx.SelectedIndices.Count - 1; i >= 0; i--)
+            try
             {
-                selectedIndicatorsLstBx.Items.RemoveAt(selectedIndicatorsLstBx.SelectedIndices[i]);
+                for (int i = selectedIndicatorsLstBx.SelectedIndices.Count - 1; i >= 0; i--)
+                {
+                    selectedIndicatorsLstBx.Items.RemoveAt(selectedIndicatorsLstBx.SelectedIndices[i]);
+                }
+                selectedIndicatorsLstBx.Focus();
             }
-            selectedIndicatorsLstBx.Focus();
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }
         }        
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (selectedCountryLstBx.Items.Count == 0)
+            try
             {
-                MessageBox.Show("Please select available country");
-                return;
-            }
+                helperClass.origin = false;
+                if (selectedCountryLstBx.Items.Count == 0 || selectedIndicatorsLstBx.Items.Count == 0)
+                {
+                    string field = (selectedCountryLstBx.Items.Count == 0) ? "Country" : "Indicator";
+                    MessageBox.Show(field + " should be provided");
+                }
+                else
+                {
+                    string selectedIsoCntry = sharedFunctions.toIsoCountry(selectedCountryLstBx);
+                    if (sharedFunctions.checkCountryLength(selectedIsoCntry)) return;
 
-            if (selectedCountryLstBx.Items[0].ToString() == "All" && selectedIndicatorsLstBx.Items.Count == 0)
+                    if (selectedIndicatorsLstBx.Items.Count > 0)
+                    {
+                        selectedIndic = sharedFunctions.getIndicators(selectedIndicatorsLstBx);
+                        if (sharedFunctions.checkIndicatorsLength(selectedIndic)) return;
+                    }
+
+                    helperClass.runFormula = "RunAutomatically = 1";
+                    Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
+
+                    string indFm = string.Format("=TEIndicators( \"{0}\", \"{1}\", \"{2}\", {3})",
+                            selectedIsoCntry,
+                            selectedIndic,
+                            String.Join(",", sharedFunctions.getColumns(columnsListBox)),
+                            dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
+
+                    MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
+                    MyRibbon.cellRange.Formula = indFm;
+                    Close();
+                }
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select available indicator");
-                return;
-            }
-            helperClass.log.Info("Indicators button OK is clicked");
-            helperClass.origin = false;
-            string selectedIsoCntry = sharedFunctions.toIsoCountry(selectedCountryLstBx);
-            if (sharedFunctions.checkCountryLength(selectedIsoCntry)) return;
-
-            if (selectedIndicatorsLstBx.Items.Count > 0)
-            {
-                selectedIndic = sharedFunctions.getIndicators(selectedIndicatorsLstBx);
-                if (sharedFunctions.checkIndicatorsLength(selectedIndic)) return;
-            }
-
-            helperClass.runFormula = "RunAutomatically = 1";
-            Microsoft.Office.Interop.Excel.Range dateCell = helperClass.CellAddress(activeCellPositionBox.Text);
-
-            string indFm = string.Format("=TEIndicators( \"{0}\", \"{1}\", \"{2}\", {3})",
-                    selectedIsoCntry,
-                    selectedIndic,
-                    String.Join(",", sharedFunctions.getColumns(columnsListBox)),
-                    dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
-
-            helperClass.log.Info("Formula {0}", indFm);
-            MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
-            MyRibbon.cellRange.Formula = indFm;
-            Close();
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -262,42 +274,48 @@ namespace TE
 
         private void cntryTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (countryLstBx.Enabled)
+            try
             {
-                countryLstBx.Items.Clear();
-                if (cntryTextBox.Text.Length == 0)
+                if (countryLstBx.Enabled)
                 {
-                    hideAutoCompleteMenu();
-                    countryLstBx.Show();
-                    for (int i = 0; i < helperClass.cntry.Length; i++)
+                    countryLstBx.Items.Clear();
+                    if (cntryTextBox.Text.Length == 0)
                     {
-                        countryLstBx.Items.Insert(i, helperClass.cntry[i]);
+                        hideAutoCompleteMenu();
+                        countryLstBx.Show();
+                        for (int i = 0; i < helperClass.cntry.Length; i++)
+                        {
+                            countryLstBx.Items.Insert(i, helperClass.cntry[i]);
+                        }
+                        return;
                     }
-                    return;
-                }
 
-                String compareText = getLatestString();
-                foreach (String s in helperClass.autoCompleteList)
-                {
-                    if (compareText == null ||
-                    compareText.Equals("") || s.StartsWith(compareText.Trim(), helperClass.comparison))
+                    String compareText = getLatestString();
+                    foreach (String s in helperClass.autoCompleteList)
                     {
-                        countryLstBx.Items.Add(s);
+                        if (compareText == null ||
+                        compareText.Equals("") || s.StartsWith(compareText.Trim(), helperClass.comparison))
+                        {
+                            countryLstBx.Items.Add(s);
+                        }
                     }
-                }
 
-                if (countryLstBx.Items.Count > 0)
-                {
-                    Point point = this.cntryTextBox.GetPositionFromCharIndex
-                     (cntryTextBox.SelectionStart);
-                    point.Y += (int)Math.Ceiling(this.cntryTextBox.Font.GetHeight()) + 29;
-                    point.X += 7;
-                    countryLstBx.Location = point;
-                    this.countryLstBx.BringToFront();
-                    this.countryLstBx.Show();
+                    if (countryLstBx.Items.Count > 0)
+                    {
+                        Point point = this.cntryTextBox.GetPositionFromCharIndex
+                         (cntryTextBox.SelectionStart);
+                        point.Y += (int)Math.Ceiling(this.cntryTextBox.Font.GetHeight()) + 29;
+                        point.X += 7;
+                        countryLstBx.Location = point;
+                        this.countryLstBx.BringToFront();
+                        this.countryLstBx.Show();
+                    }
                 }
             }
-            
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }                      
         }
 
         private void countryLstBx_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -379,94 +397,115 @@ namespace TE
 
         private void indctrTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (indicatorsLstBx.Enabled)
+            try
             {
-                indicatorsLstBx.Items.Clear();
-                if (indctrTextBox.Text.Length == 0)
+                if (indicatorsLstBx.Enabled)
                 {
-                    hideAutoCompleteMenu2();
-
-                    if (selectedCountryLstBx.Items.Count > 0)
+                    indicatorsLstBx.Items.Clear();
+                    if (indctrTextBox.Text.Length == 0)
                     {
-                        fromIndTxtBox = true;
-                        btnCntryAdd_Click(sender, e);
-                    }
+                        hideAutoCompleteMenu2();
 
-                    indicatorsLstBx.Show();
-                    return;
-                }
-                if (AutoCompleteList != null)
-                {
-                    String compareText = getLatestString2();
-                    foreach (String s in AutoCompleteList)
-                    {
-                        if (compareText == null ||
-                        compareText.Equals("") || s.StartsWith(compareText.Trim(), helperClass.comparison))
+                        if (selectedCountryLstBx.Items.Count > 0)
                         {
-                            indicatorsLstBx.Items.Add(s);
+                            fromIndTxtBox = true;
+                            btnCntryAdd_Click(sender, e);
+                        }
+
+                        indicatorsLstBx.Show();
+                        return;
+                    }
+                    if (AutoCompleteList != null)
+                    {
+                        String compareText = getLatestString2();
+                        foreach (String s in AutoCompleteList)
+                        {
+                            if (compareText == null ||
+                            compareText.Equals("") || s.StartsWith(compareText.Trim(), helperClass.comparison))
+                            {
+                                indicatorsLstBx.Items.Add(s);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Please select country first");
-                    indctrTextBox.Clear();
-                    cntryTextBox.Select();
-                }
+                    else
+                    {
+                        MessageBox.Show("Please select country first");
+                        indctrTextBox.Clear();
+                        cntryTextBox.Select();
+                    }
 
-                if (indicatorsLstBx.Items.Count > 0)
-                {
-                    Point point = this.indctrTextBox.GetPositionFromCharIndex
-                     (indctrTextBox.SelectionStart);
-                    point.Y += (int)Math.Ceiling(this.indctrTextBox.Font.GetHeight()) + 251;
-                    point.X += 7;
-                    indicatorsLstBx.Location = point;
-                    this.indicatorsLstBx.BringToFront();
-                    this.indicatorsLstBx.Show();
+                    if (indicatorsLstBx.Items.Count > 0)
+                    {
+                        Point point = this.indctrTextBox.GetPositionFromCharIndex
+                         (indctrTextBox.SelectionStart);
+                        point.Y += (int)Math.Ceiling(this.indctrTextBox.Font.GetHeight()) + 251;
+                        point.X += 7;
+                        indicatorsLstBx.Location = point;
+                        this.indicatorsLstBx.BringToFront();
+                        this.indicatorsLstBx.Show();
+                    }
                 }
-            }            
+            }
+            catch (Exception ex)
+            {
+                helperClass.log.Error(ex);
+            }                      
         }
 
         private void allCountriesBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (allCountriesBox.Checked == true)
+            try
             {
-                countryLstBx.Enabled = false;
-                allIndicatorsBox.Enabled = false;
-                selectedCountryLstBx.Items.Clear();
-                selectedCountryLstBx.Items.Add("All");
-                indicatorsLstBx.Items.Clear();
-                for (int i = 0; i < helperClass.category.Length; i++)
+                if (allCountriesBox.Checked == true)
                 {
-                    if (!indicatorsLstBx.Items.Contains(helperClass.category[i]))
-                        indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
+                    countryLstBx.Enabled = false;
+                    allIndicatorsBox.Enabled = false;
+                    selectedCountryLstBx.Items.Clear();
+                    selectedCountryLstBx.Items.Add("All");
+                    indicatorsLstBx.Items.Clear();
+                    for (int i = 0; i < helperClass.category.Length; i++)
+                    {
+                        if (!indicatorsLstBx.Items.Contains(helperClass.category[i]))
+                            indicatorsLstBx.Items.Insert(i, helperClass.category[i]);
+                    }
+                    indctrTextBox.Focus();
+                    AutoCompleteList = indics_list();
                 }
-                indctrTextBox.Focus();
-                AutoCompleteList = indics_list();
+                else
+                {
+                    countryLstBx.Enabled = true;
+                    allIndicatorsBox.Enabled = true;
+                    selectedCountryLstBx.Items.Clear();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                countryLstBx.Enabled = true;
-                allIndicatorsBox.Enabled = true;
-                selectedCountryLstBx.Items.Clear();
-            }
+                helperClass.log.Error(ex);
+            }            
         }
 
         private void allIndicatorsBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (allIndicatorsBox.Checked == true)
+            try
             {
-                indicatorsLstBx.Enabled = false;
-                allCountriesBox.Enabled = false;
-                selectedIndicatorsLstBx.Items.Clear();
-                selectedIndicatorsLstBx.Items.Add("All");
+                if (allIndicatorsBox.Checked == true)
+                {
+                    indicatorsLstBx.Enabled = false;
+                    allCountriesBox.Enabled = false;
+                    selectedIndicatorsLstBx.Items.Clear();
+                    selectedIndicatorsLstBx.Items.Add("All");
+                }
+                else
+                {
+                    indicatorsLstBx.Enabled = true;
+                    allCountriesBox.Enabled = true;
+                    selectedIndicatorsLstBx.Items.Clear();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                indicatorsLstBx.Enabled = true;
-                allCountriesBox.Enabled = true;
-                selectedIndicatorsLstBx.Items.Clear();
-            }
+                helperClass.log.Error(ex);
+            }            
         }
     }
  }

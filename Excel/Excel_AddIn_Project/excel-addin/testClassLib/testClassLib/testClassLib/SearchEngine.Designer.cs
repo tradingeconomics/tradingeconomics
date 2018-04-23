@@ -95,7 +95,7 @@ namespace TE
             // 
             this.getDataBtn.Enabled = false;
             this.getDataBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.getDataBtn.Location = new System.Drawing.Point(816, 429);
+            this.getDataBtn.Location = new System.Drawing.Point(816, 398);
             this.getDataBtn.Margin = new System.Windows.Forms.Padding(4);
             this.getDataBtn.Name = "getDataBtn";
             this.getDataBtn.Size = new System.Drawing.Size(99, 31);
@@ -118,19 +118,20 @@ namespace TE
             // 
             this.firstPage.Enabled = false;
             this.firstPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.firstPage.Location = new System.Drawing.Point(721, 397);
+            this.firstPage.Location = new System.Drawing.Point(446, 397);
             this.firstPage.Name = "firstPage";
             this.firstPage.Size = new System.Drawing.Size(30, 25);
             this.firstPage.TabIndex = 7;
             this.firstPage.Text = "|<";
             this.firstPage.UseVisualStyleBackColor = true;
+            this.firstPage.Visible = false;
             this.firstPage.Click += new System.EventHandler(this.firstPage_Click);
             // 
             // previousPage
             // 
             this.previousPage.Enabled = false;
             this.previousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.previousPage.Location = new System.Drawing.Point(757, 397);
+            this.previousPage.Location = new System.Drawing.Point(482, 397);
             this.previousPage.Name = "previousPage";
             this.previousPage.Size = new System.Drawing.Size(30, 25);
             this.previousPage.TabIndex = 8;
@@ -142,7 +143,7 @@ namespace TE
             // 
             this.nextPage.Enabled = false;
             this.nextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.nextPage.Location = new System.Drawing.Point(849, 397);
+            this.nextPage.Location = new System.Drawing.Point(574, 397);
             this.nextPage.Name = "nextPage";
             this.nextPage.Size = new System.Drawing.Size(30, 25);
             this.nextPage.TabIndex = 9;
@@ -154,19 +155,20 @@ namespace TE
             // 
             this.lastPage.Enabled = false;
             this.lastPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lastPage.Location = new System.Drawing.Point(885, 397);
+            this.lastPage.Location = new System.Drawing.Point(610, 397);
             this.lastPage.Name = "lastPage";
             this.lastPage.Size = new System.Drawing.Size(30, 25);
             this.lastPage.TabIndex = 10;
             this.lastPage.Text = ">|";
             this.lastPage.UseVisualStyleBackColor = true;
+            this.lastPage.Visible = false;
             this.lastPage.Click += new System.EventHandler(this.lastPage_Click);
             // 
             // pageBox
             // 
             this.pageBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pageBox.Enabled = false;
-            this.pageBox.Location = new System.Drawing.Point(793, 397);
+            this.pageBox.Location = new System.Drawing.Point(518, 397);
             this.pageBox.MaximumSize = new System.Drawing.Size(50, 25);
             this.pageBox.MinimumSize = new System.Drawing.Size(50, 25);
             this.pageBox.Name = "pageBox";
@@ -178,7 +180,7 @@ namespace TE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(926, 470);
+            this.ClientSize = new System.Drawing.Size(926, 449);
             this.Controls.Add(this.pageBox);
             this.Controls.Add(this.lastPage);
             this.Controls.Add(this.nextPage);
