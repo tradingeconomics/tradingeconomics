@@ -791,6 +791,9 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a>     
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
 
+* Select calendar events by calendar ID
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/calendarid/174108,160025,160030?c=guest:guest">/calendar/calendarid/{calendarids}?c=guest:guest</a>     
+
 </span> 
 
 ### Response Fields
@@ -818,6 +821,7 @@ Please note the sample request is limited in scope to a few countries and indica
 |     **OCategory**   |      Category's original  name           |
 |    **Ticker**       |                                            Unique ticker used by TradingEconomics                                           |
 |    **Symbol**       |                                           Unique symbol used by TradingEconomics                                           |
+|    **CalendarID**   |                                           Unique calendar ID used by TradingEconomics                                           |
 
 
 # Forecast
