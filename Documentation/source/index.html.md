@@ -772,7 +772,7 @@ Please note the sample request is limited in scope to a few countries and indica
 * All calendar events    
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a>
 
-* Filter Calendar Events by date    
+* Filter calendar events by date    
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-02/2016-12-03?c=guest:guest">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a>
 
 * Calendar events for specific country    
@@ -791,7 +791,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a>     
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> 
 
-* Select calendar events by calendar ID    
+* Filter calendar events by calendar ID    
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/calendarid/174108,160025,160030?c=guest:guest">/calendar/calendarid/{calendarids}?c=guest:guest</a>     
 
 </span> 
