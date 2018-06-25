@@ -250,4 +250,4 @@ FakesAssemblies/
 *.opt
 .Rproj.user
 
-python/*.pyc
+python/**/*.pyc
