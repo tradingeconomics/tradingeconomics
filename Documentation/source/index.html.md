@@ -26,7 +26,7 @@ The API can be used to feed a custom developed application, a public website or 
 <blockquote class="lang-specific python">
   <p>You can get Python from: <a target = '_blank' href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>   
     <br>
-    We support Python 2.7.
+    We support Python 2.7 and Python 3.6.
     Then you need to install the tradingeconomics package. You can do so in a variety of ways.    
   </p>
 <br>
@@ -214,6 +214,10 @@ Using Headers auth:
 `curl -i "https://api.tradingeconomics.com/country/united%20states/" -H "Authorization: Client guest:guest"`
 
 Without APIkeys all requests will return the default sample data.
+
+### Notes
+
+* All API calls have a maximum limitation of 10000 rows. This limit can be different depending on your subscription.
 
 
 # Indicators
@@ -1182,6 +1186,41 @@ Please note the sample request is limited in scope to a few countries and indica
 
 ### Methods
 
+<blockquote class="lang-specific python">
+<p>To get historical market data for specific symbol and time range:</p>
+</blockquote>  
+```python
+In [2]: te.fetchMarkets(symbol = 'indu:ind', initDate = '2017-01-01', endDate = '2017-06-15')
+
+Out[2]: 
+              symbol      open      high       low     close
+2017-01-03  INDU:IND  19872.86  19938.53  19775.93  19881.76
+2017-01-04  INDU:IND  19890.94  19956.14  19878.83  19942.16
+2017-01-05  INDU:IND  19924.56  19948.60  19811.12  19899.29
+...              ...       ...       ...       ...       ...
+2017-06-13  INDU:IND  21256.83  21332.77  21256.83  21328.47
+2017-06-14  INDU:IND  21342.71  21391.97  21294.09  21374.56
+2017-06-15  INDU:IND  21291.69  21367.28  21261.87  21359.90
+```
+
+<blockquote class="lang-specific python">
+<p>To get historical market data for multiple symbols and specific time range:</p>
+</blockquote>  
+```python
+In [2]: te.fetchMarkets(symbol = ['indu:ind', 'cl1:com'], initDate = '2017-01-01', endDate = '2017-06-15')
+
+Out[2]: 
+              symbol        open        high         low       close
+2017-01-02   CL1:COM     53.9600     54.3000     53.9100     54.0200
+2017-01-03   CL1:COM     54.2000     55.2400     52.1100     52.3300
+2017-01-03  INDU:IND  19872.8600  19938.5300  19775.9300  19881.7600
+
+...              ...       ...       ...       ...       ...
+2017-06-14  INDU:IND  21342.7100  21391.9700  21294.0900  21374.5600
+2017-06-15  INDU:IND  21291.6900  21367.2800  21261.8700  21359.9000
+2017-06-15   CL1:COM     44.6900     44.8100     44.2200     44.4600
+```
+
 <span class="methods">
 
 * Historical markets data by market    
@@ -1399,7 +1438,7 @@ te.login('guest:guest')
 def on_message(ws, message):
   print json.loads(message)
     
-te.subscribe('EURUSD')
+te.subscribe('EURUSD:CUR')
 te.run(on_message)
 ```
 
