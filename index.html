@@ -148,7 +148,7 @@ The API can be used to feed a custom developed application, a public website or 
 <blockquote class="lang-specific python">
   <p>You can get Python from: <a target = '_blank' href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>   
     <br>
-    We support Python 2.7.
+    We support Python 2.7 and Python 3.6.
     Then you need to install the tradingeconomics package. You can do so in a variety of ways.    
   </p>
 <br>
@@ -317,6 +317,12 @@ Using Headers auth:<br>
 <code class="prettyprint">curl -i &quot;https://api.tradingeconomics.com/country/united%20states/&quot; -H &quot;Authorization: Client guest:guest&quot;</code></p>
 
 <p>Without APIkeys all requests will return the default sample data.</p>
+
+<h3 id="notes">Notes</h3>
+
+<ul>
+<li>All API calls have a maximum limitation of 10000 rows. This limit can be different depending on your subscription.</li>
+</ul>
 
 <h1 id="indicators">Indicators</h1>
 
@@ -1508,6 +1514,37 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <h3 id="methods">Methods</h3>
 
+<blockquote class="lang-specific python">
+<p>To get historical market data for specific symbol and time range:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">initDate</span> <span class="o">=</span> <span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span> <span class="o">=</span> <span class="s">'2017-06-15'</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
+              <span class="n">symbol</span>      <span class="nb">open</span>      <span class="n">high</span>       <span class="n">low</span>     <span class="n">close</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">03</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">19872.86</span>  <span class="mf">19938.53</span>  <span class="mf">19775.93</span>  <span class="mf">19881.76</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">04</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">19890.94</span>  <span class="mf">19956.14</span>  <span class="mf">19878.83</span>  <span class="mf">19942.16</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">05</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">19924.56</span>  <span class="mf">19948.60</span>  <span class="mf">19811.12</span>  <span class="mf">19899.29</span>
+<span class="o">...</span>              <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">13</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21256.83</span>  <span class="mf">21332.77</span>  <span class="mf">21256.83</span>  <span class="mf">21328.47</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">14</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21342.71</span>  <span class="mf">21391.97</span>  <span class="mf">21294.09</span>  <span class="mf">21374.56</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21291.69</span>  <span class="mf">21367.28</span>  <span class="mf">21261.87</span>  <span class="mf">21359.90</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get historical market data for multiple symbols and specific time range:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="s">'cl1:com'</span><span class="p">],</span> <span class="n">initDate</span> <span class="o">=</span> <span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span> <span class="o">=</span> <span class="s">'2017-06-15'</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
+              <span class="n">symbol</span>        <span class="nb">open</span>        <span class="n">high</span>         <span class="n">low</span>       <span class="n">close</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">02</span>   <span class="n">CL1</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">53.9600</span>     <span class="mf">54.3000</span>     <span class="mf">53.9100</span>     <span class="mf">54.0200</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">03</span>   <span class="n">CL1</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">54.2000</span>     <span class="mf">55.2400</span>     <span class="mf">52.1100</span>     <span class="mf">52.3300</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">03</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">19872.8600</span>  <span class="mf">19938.5300</span>  <span class="mf">19775.9300</span>  <span class="mf">19881.7600</span>
+
+<span class="o">...</span>              <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">14</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21342.7100</span>  <span class="mf">21391.9700</span>  <span class="mf">21294.0900</span>  <span class="mf">21374.5600</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21291.6900</span>  <span class="mf">21367.2800</span>  <span class="mf">21261.8700</span>  <span class="mf">21359.9000</span>
+<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>   <span class="n">CL1</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">44.6900</span>     <span class="mf">44.8100</span>     <span class="mf">44.2200</span>     <span class="mf">44.4600</span>
+</code></pre>
 <p><span class="methods"></p>
 
 <ul>
@@ -1982,7 +2019,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
   <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
-<span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD:CUR'</span><span class="p">)</span>
 <span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
