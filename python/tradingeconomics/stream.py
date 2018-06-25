@@ -11,17 +11,17 @@ from . import glob
 
   
 
-te_url = "ws://stream.tradingeconomics.com"
+te_url = "wss://stream.tradingeconomics.com"
 reconnect_timeout = 60
 function_to_restart = ["", ""]
 
 
 def on_error(ws, error):
-    print error
+    print(error)
 
 def on_open(ws):
-    print "+++ Socket is open!"
-    print "+++ Subscribe to {0}".format(glob._event)
+    print("+++ Socket is open!")
+    print("+++ Subscribe to {0}".format(glob._event))
     ws.send(json.dumps({'topic': 'subscribe', 'to': glob._event}) )
 
 def build_url():
@@ -39,10 +39,11 @@ def start_socket(on_message_client, *args):
         if (function_to_restart[1]) :
             t = threading.Thread(target=function_to_restart[1], args=(web_sock, json.dumps({"msg" : "CLOSING"})))
             t.start()
-        print "### closed ### reconnect in " + str(reconnect_timeout) + " seconds"
+        print("### closed ### reconnect in " + str(reconnect_timeout) + " seconds")
         sleep(reconnect_timeout)
         start_socket(function_to_restart[0]) 
 
+    
     ws = websocket.WebSocketApp(build_url(),
                               on_message = _on_message,
                               on_error = on_error,
