@@ -249,3 +249,5 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 .Rproj.user
+
+python/*.pyc
