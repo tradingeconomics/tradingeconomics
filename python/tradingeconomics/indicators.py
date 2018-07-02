@@ -26,21 +26,20 @@ class CredentialsError(ValueError):
 class LoginError(AttributeError):
     pass
         
-def checkCountry(country):       
+def checkCountry(country):
+    linkAPI = 'https://api.tradingeconomics.com/country/'       
     if type(country) is str:
-        linkAPI = 'https://api.tradingeconomics.com/country/' + quote(country)
+        linkAPI += quote(country.lower())
     else:
-        multiCountry = ",".join(country)
-        linkAPI = 'https://api.tradingeconomics.com/country/' + quote(multiCountry)
+        linkAPI += quote(",".join(country))
     return linkAPI
     
     
 def checkIndic(indicators, linkAPI):       
     if type(indicators) is str:
-        linkAPI = linkAPI + '/' + quote(indicators)
+        linkAPI += '/' + quote(indicators)
     else:
-        multiIndic = ",".join(indicators)
-        linkAPI = linkAPI + '/' + quote(multiIndic)
+        linkAPI += '/' + quote(",".join(indicators))
     return linkAPI
 
  
@@ -94,30 +93,34 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
         linkAPI = 'https://api.tradingeconomics.com/indicators/'
     else:
         linkAPI = checkCountry(country)
+    
     if indicators == None:
         linkAPI = linkAPI
     else:
         linkAPI = checkIndic(indicators, linkAPI)
     try:
-        linkAPI = linkAPI + '?c=' + glob.apikey
+        linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
+
     try:
         code = urlopen(linkAPI)
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+
     if len(webResults) > 0:
         if country == None:
             print ('Without country indication only a list of available indicators will be returned...')
-            category = [d['Category'] for d in webResults]       
-            category_group = [d['CategoryGroup'] for d in webResults]
-            output = {'Category': category, 'CategoryGroup': category_group}
+            output = {'Category': [d['Category'] for d in webResults], 
+                        'CategoryGroup': [d['CategoryGroup'] for d in webResults]}
+            return pd.DataFrame(output)
         else:
             maindf = getResults(webResults, country)  
     else:
         raise ParametersError ('No data available for the provided parameters.')
+
     if output_type == None or output_type =='dict':
         output = fn.out_type(maindf)
     elif output_type == 'df': 

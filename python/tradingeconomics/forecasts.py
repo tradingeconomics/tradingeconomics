@@ -29,35 +29,35 @@ class LoginError(AttributeError):
 def checkCountry(country):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'       
     if type(country) is str:
-        linkAPI = linkAPI + quote(country)
+        linkAPI += quote(country)
     else:
-        multiCountry = ",".join(country)
-        linkAPI = linkAPI + quote(multiCountry)
+        #multiCountry = ",".join(country)
+        linkAPI += quote(",".join(country))
     return linkAPI
     
     
 def checkIndic(indicator):
     linkAPI = 'https://api.tradingeconomics.com/forecast/indicator/'        
     if type(indicator) is str:
-        linkAPI = linkAPI + quote(indicator)
+        linkAPI += quote(indicator)
     else:
-        multiIndic = ",".join(indicator)
-        linkAPI = linkAPI  + quote(multiIndic)
+        #multiIndic = ",".join(indicator)
+        linkAPI += quote(",".join(indicator))
     return linkAPI
 
 
 def getLink(country, indicator):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'
     if type(country) is str:
-        linkAPI = linkAPI + quote(country)
+        linkAPI += quote(country)
     else:
-        multiCountry = ",".join(country)
-        linkAPI = linkAPI + quote(multiCountry) 
+        #multiCountry = ",".join(country)
+        linkAPI += quote(",".join(country)) 
     if type(indicator) is str:
-        linkAPI = linkAPI + '/indicator/' + quote(indicator)
+        linkAPI += '/indicator/' + quote(indicator)
     else:
-        multiIndic = ",".join(indicator)
-        linkAPI = linkAPI + '/indicator/' + quote(multiIndic) 
+        #multiIndic = ",".join(indicator)
+        linkAPI += '/indicator/' + quote(",".join(indicator)) 
     return linkAPI
 
     
@@ -105,7 +105,7 @@ def getForecastData(country = None, indicator = None, output_type = None):
     else:
         linkAPI = getLink(country, indicator)
     try:
-        linkAPI = linkAPI + '?c=' + glob.apikey
+        linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:

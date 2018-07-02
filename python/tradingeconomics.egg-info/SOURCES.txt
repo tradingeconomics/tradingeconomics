@@ -4,6 +4,7 @@ setup.cfg
 setup.py
 tradingeconomics/__init__.py
 tradingeconomics/calendar.py
+tradingeconomics/earnings.py
 tradingeconomics/forecasts.py
 tradingeconomics/functions.py
 tradingeconomics/glob.py

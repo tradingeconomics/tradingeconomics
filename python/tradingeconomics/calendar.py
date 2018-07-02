@@ -115,7 +115,7 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
         param=[initDate, endDate]
         linkAPI = fn.finalLink(linkAPI, param)
     try:
-        linkAPI = linkAPI + '?c=' + glob.apikey
+        linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
@@ -143,4 +143,3 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     else:
         raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
     return output
-

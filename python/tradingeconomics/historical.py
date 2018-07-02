@@ -38,10 +38,8 @@ def parseData(data):
     
     
 def multiParams(webdata):
-    cntry = [d['Country'] for d in webdata]
-    mycntry = list(set(cntry))
-    ind = [d['Category'] for d in webdata]
-    myind = list(set(ind))
+    mycntry = list(set([d['Country'] for d in webdata]))
+    myind = list(set([d['Category'] for d in webdata]))
     lst = [(d['Country'], d['Value'], d['DateTime'], d['Category']) for d in webdata] 
     lst2 = [list(i) for i in lst]
     countryDict = dict();
@@ -58,8 +56,8 @@ def multiParams(webdata):
         
     
 def multiParsedData(countryDict):
-    CNTRY = countryDict.keys()
-    INDCTR = countryDict[CNTRY[0]].keys()
+    CNTRY = list(countryDict.keys())
+    INDCTR = list(countryDict[CNTRY[0]].keys())
     answer = [];
     for i, j in itertools.product(range(len(CNTRY)), range(len(INDCTR))):
         answer.append(parseData(countryDict[CNTRY[i]][INDCTR[j]]).to_dict('Series').values())
@@ -87,16 +85,13 @@ def out_type(init_format):
     
         
 def paramCheck (country, indicator):
+    linkAPI = 'https://api.tradingeconomics.com/historical/country/'
     if type(country) is not str and type(indicator) is str:  
-        multiCountry = ",".join(country)
-        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(multiCountry) + '/indicator/' + quote(indicator)
+        linkAPI += quote(",".join(country)) + '/indicator/' + quote(indicator)
     if type(country) is str and type(indicator) is not str:
-        multiIndicator = ",".join(indicator)
-        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(country) + '/indicator/' + quote(multiIndicator)
+        linkAPI += quote(country) + '/indicator/' + quote(",".join(indicator))
     if type(country) is not str and type(indicator) is not str: 
-        multiCountry = ",".join(country)
-        multiIndicator = ",".join(indicator)
-        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(multiCountry) + '/indicator/' + quote(multiIndicator)
+        linkAPI += quote(",".join(country)) + '/indicator/' + quote(",".join(indicator))
     return linkAPI
     
     
@@ -145,18 +140,8 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     if initDate == None and endDate == None:
         minDate = [(datetime.now() - relativedelta(years=10)).strftime('%Y-%m-%d') ]
         linkAPI = fn.finalLink(linkAPI, minDate) 
-    if initDate == None and (endDate is not None):
-        iDate = (datetime.now() - relativedelta(years=10)).strftime('%Y-%m-%d') 
-        try: 
-            fn.validate(endDate)
-        except ValueError:
-            raise DateError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
-        try:
-            fn.validatePeriod(iDate, endDate)
-        except ValueError:
-            raise DateError ('Incorrect time period.')  
-        param=[iDate, endDate]
-        linkAPI = fn.finalLink(linkAPI, param)    
+    if initDate == None and (endDate is not None): 
+        raise DateError('initDate value is missing') 
     if (initDate is not None) and (endDate is not None) :
         try: 
             fn.validate(initDate)
@@ -170,8 +155,7 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
             fn.validatePeriod(initDate, endDate)
         except ValueError:
             raise DateError ('Invalid time period.')
-        param=[initDate, endDate]
-        linkAPI = fn.finalLink(linkAPI, param)
+        linkAPI = fn.finalLink(linkAPI, [initDate, endDate])
     if (initDate is not None) and endDate == None :        
         try: 
             fn.validate(initDate)
@@ -179,12 +163,14 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
             raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
             if initDate > str(date.today()):
                 raise DateError ('Initial date out of range.')
-        myDate = [initDate]
-        linkAPI = fn.finalLink(linkAPI, myDate)
+        linkAPI = fn.finalLink(linkAPI, [initDate])
+
     try:
-        linkAPI = linkAPI + '?c='+glob.apikey
+        linkAPI += '?c='+glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
+
+    print(linkAPI)
     try:
         code = urlopen(linkAPI)
         code = code.getcode() 
@@ -192,9 +178,8 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))
     if len(webResults) > 0:
-        date = [d['DateTime'] for d in webResults]        
-        value = [d[u'Value'] for d in webResults]
-        results = {'dates': date, 'values': value}
+        results = {'dates': [d['DateTime'] for d in webResults],
+                    'values': [d[u'Value'] for d in webResults]}
         if (type(country)== str and type(indicator) == str):
             results = parseData(results)
         else:

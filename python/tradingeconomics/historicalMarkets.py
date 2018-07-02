@@ -41,7 +41,7 @@ def parseData(data):
     return datafr    
     
     
-def fetchMarkets(symbol, initDate= None, endDate= None, output_type = None):
+def fetchMarkets(symbol, initDate=None, endDate=None, output_type=None):
     """
     Return historical information for specific markets symbol.
     =================================================================
@@ -63,9 +63,9 @@ def fetchMarkets(symbol, initDate= None, endDate= None, output_type = None):
 
     Example
     -------
-    fetchMarkets(symbol = 'indu:ind', initDate = '2017-01-01', endDate = '2017-06-15')
-
-    fetchMarkets(symbol = ['aapl:us', 'indu:ind'])
+    fetchMarkets(symbol = 'indu:ind')
+    fetchMarkets(symbol = 'indu:ind', initDate = '2017-01-01', endDate = '2017-06-15', output_type='raw')
+    fetchMarkets(symbol = ['aapl:us', 'indu:ind'], initDate = '2017-01-01', endDate = '2017-06-15')
     """
     try:
         _create_unverified_https_context = ssl._create_unverified_context
@@ -82,8 +82,12 @@ def fetchMarkets(symbol, initDate= None, endDate= None, output_type = None):
         raise TypeError('symbol parameter should be of the list or of the string type')
 
     
-    linkAPI = 'https://api.tradingeconomics.com/markets/historical/' + quote(symbol) + '?c=' + glob.apikey
+    linkAPI = 'https://api.tradingeconomics.com/markets/historical/' + quote(symbol)
     
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
 
     if (initDate is not None) and (endDate is not None) :
         try: 
@@ -98,7 +102,7 @@ def fetchMarkets(symbol, initDate= None, endDate= None, output_type = None):
             fn.validatePeriod(initDate, endDate)
         except ValueError:
             raise DateError ('Invalid time period.')
-        linkAPI = linkAPI + '&d1=' + initDate + '&d2=' + endDate
+        linkAPI += '&d1=' + initDate + '&d2=' + endDate
     
     elif (initDate is not None) and endDate == None :        
         try: 
@@ -107,16 +111,11 @@ def fetchMarkets(symbol, initDate= None, endDate= None, output_type = None):
             raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
             if initDate > str(date.today()):
                 raise DateError ('Initial date out of range.')
-        linkAPI = linkAPI + '&d1=' + initDate
+        linkAPI += '&d1=' + initDate
     
     elif initDate == None and (endDate is not None):
         iDate = (datetime.strptime(endDate, '%Y-%m-%d') - relativedelta(months=1)).strftime('%Y-%m-%d')
-        linkAPI = linkAPI + '&d1=' + iDate + '&d2=' + endDate
-
-    try:
-        linkAPI = linkAPI
-    except AttributeError:
-        raise LoginError('You need to do login before making any request')
+        linkAPI += '&d1=' + iDate + '&d2=' + endDate   
     
     try:
         code = urlopen(linkAPI)
@@ -125,14 +124,19 @@ def fetchMarkets(symbol, initDate= None, endDate= None, output_type = None):
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))
     if len(webResults) > 0:
-        date = [d['Date'] for d in webResults]        
-        myOpen = [d['Open'] for d in webResults]
-        myHigh = [d['High'] for d in webResults]
-        myLow = [d['Low'] for d in webResults]
-        myClose = [d['Close'] for d in webResults]
-        mySymbol = [d['Symbol'] for d in webResults]
+        #date = [d['Date'] for d in webResults]        
+        #myOpen = [d['Open'] for d in webResults]
+        #myHigh = [d['High'] for d in webResults]
+        #myLow = [d['Low'] for d in webResults]
+        #myClose = [d['Close'] for d in webResults]
+        #mySymbol = [d['Symbol'] for d in webResults]
 
-        results = {'dates': date, 'open': myOpen, 'high': myHigh, 'low': myLow, 'close': myClose, 'symbol':mySymbol}
+        results = {'dates': [d['Date'] for d in webResults], 
+                    'open': [d['Open'] for d in webResults], 
+                    'high': [d['High'] for d in webResults], 
+                    'low': [d['Low'] for d in webResults], 
+                    'close': [d['Close'] for d in webResults], 
+                    'symbol':[d['Symbol'] for d in webResults]}
         results = parseData(results)
 
     else:
