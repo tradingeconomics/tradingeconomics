@@ -215,9 +215,18 @@ Using Headers auth:
 
 Without APIkeys all requests will return the default sample data.
 
+### Error codes
+
+* 200 - OK    
+* 401 - Unauthorized (The user doesn't have an access, client key missing or wrong)      
+* 403 - Forbidden (The user hit the maximum limit of downloads or was blocked)    
+* 400 - Bad Request (Some error with a request, like a typo, wrong parameter, etc.)    
+* 409 - Conflict (Throttle, to many requests per second, beyond the API limit)    
+
 ### Notes
 
-* All API calls have a maximum limitation of 10000 rows. This limit can be different depending on your subscription.
+* All API calls have a maximum limitation of 10000 rows. This limit can be different depending on your subscription.    
+* API calls for Earnings, World Bank, Comtrade and Federal Reserv data have a maximum limitation of 500 rows.
 
 
 # Indicators
@@ -246,13 +255,35 @@ getIndicatorData(country = c('united states','china'), indicator = c('gdp','infl
 <p>To get List of Indicators by Country: </p>
 </blockquote>
 ```python
-te.getIndicatorData(country = ['united states', 'china'])
+te.getIndicatorData(country=['united states', 'china'], output_type='df')
+
+Output:
+           Country         ...             PreviousValueDate
+0    United States         ...           2018-04-30T00:00:00
+1    United States         ...           2018-06-15T00:00:00
+2    United States         ...           2017-12-31T00:00:00
+               ...         ...                           ...
+314          China         ...           2016-12-31T00:00:00
+315  United States         ...           2016-12-31T00:00:00
+316  United States         ...           2018-04-30T00:00:00
+317  United States         ...           2018-04-30T00:00:00
+
 ```
 <blockquote class="lang-specific python">
 <p>To get Country/Indicator pair: </p>
 </blockquote>
 ```python
-te.getIndicatorData(country = 'united states', indicators = 'gdp')
+te.getIndicatorData(country='united states', indicators='gdp')
+
+Output:
+{'United States': 
+  {'GDP': 
+    [{'LatestValue': 18624.48, 'LatestValueDate': '2016-12-31T00:00:00', 'Source': 'World Bank', 
+    'Unit': 'USD Billion', 'CategoryGroup': 'GDP', 'Frequency': 'Yearly', 'PreviousValue': 18120.71, 
+    'PreviousValueDate': '2015-12-31T00:00:00'}]
+  }
+}
+
 ```
 
 <blockquote class="lang-specific shell">
@@ -402,31 +433,66 @@ getHistoricalData(country = c('united states','china'), indicator = c('gdp','pop
 <p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
 ```python
-In [2]: te.getHistoricalData(country = 'united kingdom', indicator = 'gdp', endDate= '2015-01-01')
+In [2]: te.getHistoricalData(country='united kingdom', indicator='gdp', initDate='2015-01-01')
 
 Out[2]: 
                   0
 2006-12-31  2588.08
 2007-12-31  2969.73
-2008-12-31  2793.38
-2009-12-31  2314.58
-2010-12-31  2403.50
-2011-12-31  2594.90
-2012-12-31  2630.47
+              ...
 2013-12-31  2712.30
 2014-12-31  2990.20
 ```
 <blockquote class="lang-specific python">
 <p> <strong>Note:</strong> Making request for one country and one indicator, without putting country name and indicator name in square brackets, will return pandas.DataFrame type(example above).</p>
 </blockquote> 
-
 <blockquote class="lang-specific python">
 <p>Putting country name or indicator name in square brackets will return a dictionary type.
 For several countries and indicators</p>
 </blockquote> 
 ```python
-te.getHistoricalData(country = ['united states', 'china'], indicator = ['exports','imports', 'gdp'], 
-                     initDate= '1990-01-01', endDate= '2015-01-01')
+te.getHistoricalData(country=['united states', 'china'], indicator=['exports','imports'], 
+                     initDate='1990-01-01', endDate='2015-01-01')
+
+Output:
+{'China': 
+  {'Exports': 
+    [dict_values([
+    1990-01-31      28.42
+    1990-02-28      32.53
+                   ...
+    2014-11-30    2116.33
+    2014-12-31    2273.72
+    Name: 0, Length: 300, dtype: float64])
+    ], 
+    'Imports': 
+    [dict_values([
+    1990-01-31      25.70
+    1990-02-28      35.30
+                   ...
+    2014-11-30    1567.79
+    2014-12-31    1775.93
+    Name: 0, Length: 300, dtype: float64])]
+  }, 
+  'United States': 
+  {'Exports': 
+    [dict_values([
+    1990-01-31     43315.0
+    1990-02-28     43412.0
+                    ...
+    2014-11-30    197778.0
+    2014-12-31    197411.0
+    Name: 0, Length: 300, dtype: float64])], 
+    'Imports': 
+    [dict_values([
+    1990-01-31     50769.0
+    1990-02-28     48553.0
+                    ...
+    2014-11-30    237634.0
+    2014-12-31    239840.0
+    Name: 0, Length: 300, dtype: float64])]
+  }
+}
 ```
 
 <blockquote class="lang-specific shell">
@@ -649,30 +715,58 @@ getCalendarData(country = c('united states','china'), indicator = c('gdp growth 
 <p>To get calendar data for a specific country, in data frame format, run:</p>
 </blockquote>    
 ```python
-In [1]: te.getCalendarData(country = 'italy', output_type = 'df')
-Out[1]: 
-                  Date Country         Category               Event Reference  \
-0  2016-11-18T10:00:00   Italy  Current Account     Current Account       Sep   
-1  2016-11-24T10:00:00   Italy      Wage Growth  Wage Inflation YoY       Oct   
-2  2016-11-24T10:00:00   Italy      Wage Growth  Wage Inflation MoM       Oct   
+te.getCalendarData(country='italy', output_type='df')
 
-  Unit                                    Source  Actual Previous Forecast  \
-0                                 Banca D'italia  €2810M   €3282M            
-1       National Institute of Statistics (ISTAT)             0.6%            
-2       National Institute of Statistics (ISTAT)               0%            
-
-  TEForecast  
-0    € 2116M  
-1       0.7%  
-2       0.1%  
+Output:
+  CalendarId                 Date    ...     TEForecast Importance
+0     160449  2018-06-28T09:00:00    ...           1.2%          1
+1     160450  2018-06-28T09:00:00    ...           0.4%          1
+2     160451  2018-06-28T09:00:00    ...           0.3%          2
+3     160452  2018-06-28T09:00:00    ...           1.2%          2
+4     160693  2018-06-28T09:45:00    ...                         1
+5     160694  2018-06-28T09:45:00    ...                         1
+6     160832  2018-07-02T07:45:00    ...           53.4          2
+7     160837  2018-07-02T08:00:00    ...          10.8%          2
+8     160966  2018-07-04T07:45:00    ...           53.6          2
+ 
 ``` 
 <blockquote class="lang-specific python">
 <p>For several countries and indicators, in data frame format, run:</p>
 </blockquote>  
 ```python
-te.getCalendarData(country = ['united states', 'china'], category = ['imports','exports'],
-                   initDate = '2017-06-07', endDate = '2017-12-31',
-                   output_type = 'df')
+te.getCalendarData(country=['united states', 'china'], category=['imports','exports'],
+                   initDate='2017-06-07', endDate='2017-12-31',
+                   output_type='df')
+
+Output:
+   CalendarId                 Date    ...     TEForecast Importance
+0      133104  2017-06-08T03:00:00    ...                         3
+1      133105  2017-06-08T03:00:00    ...                         3
+2      134636  2017-07-06T12:30:00    ...        $191.7B          1
+3      134637  2017-07-06T12:30:00    ...        $236.7B          1
+4      135063  2017-07-13T03:00:00    ...                         3
+5      135064  2017-07-13T03:00:00    ...                         3
+6      136267  2017-08-04T12:30:00    ...          $193B          1
+7      136268  2017-08-04T12:30:00    ...        $238.9B          1
+8      136307  2017-08-08T03:00:00    ...                         3
+9      136308  2017-08-08T03:00:00    ...                         3
+10     137694  2017-09-06T12:30:00    ...          $195B          1
+11     137695  2017-09-06T12:30:00    ...        $239.2B          1
+12     137989  2017-09-08T02:00:00    ...                         3
+13     137990  2017-09-08T02:00:00    ...                         3
+14     139629  2017-10-05T12:30:00    ...                         1
+15     139630  2017-10-05T12:30:00    ...                         1
+16     140073  2017-10-13T02:30:00    ...                         3
+17     140075  2017-10-13T02:30:00    ...                         3
+18     141343  2017-11-03T12:30:00    ...          $195B          1
+19     141344  2017-11-03T12:30:00    ...          $239B          1
+20     141492  2017-11-08T03:00:00    ...                         3
+21     141493  2017-11-08T03:00:00    ...                         3
+22     143120  2017-12-05T13:30:00    ...          $195B          1
+23     143121  2017-12-05T13:30:00    ...          $239B          1
+24     143323  2017-12-08T03:00:00    ...                         3
+25     143324  2017-12-08T03:00:00    ...                         3
+
 ```
 <blockquote class="lang-specific shell">
 <p>Click Calendar button on TE ribbon and then follow the instructions in the dialog box.    
@@ -855,13 +949,30 @@ getForecastData(country =c('united states','china'), indicator = c('gdp','inflat
 <p>Forecasted values for specific a country, in this case United States. </p>
 </blockquote>
 ```python
-te.getForecastData(country = 'united states', output_type = 'df')
+te.getForecastData(country='united states', output_type='df')
+
+Output:
+           Country         ...                       q4_date
+0    United States         ...           2019-03-31T00:00:00
+1    United States         ...           2019-03-31T00:00:00
+2    United States         ...           2019-03-31T00:00:00
+               ...         ...                           ...
+200  United States         ...           2019-03-31T00:00:00
+201  United States         ...           2019-03-31T00:00:00
+202  United States         ...           2019-03-31T00:00:00
 ```
 <blockquote class="lang-specific python">
 <p>Forecasted values for several countries and indicators. </p>
 </blockquote>
 ```python
-te.getForecastData(country = ['united states', 'china'], indicator = ['gdp', 'population'], output_type = 'df')
+te.getForecastData(country=['united states', 'china'], indicator=['gdp', 'population'], output_type='df')
+
+Output:
+         Country    Category         ...                 q4              q4_date
+0          China         GDP         ...           13100.00  2019-03-31T00:00:00
+1          China  Population         ...            1407.00  2019-03-31T00:00:00
+2  United States         GDP         ...           20220.00  2019-03-31T00:00:00
+3  United States  Population         ...             328.49  2019-03-31T00:00:00
 ```
 
 <blockquote class="lang-specific shell">
@@ -1009,6 +1120,13 @@ Please note the sample request is limited in scope to a few countries and indica
 
 # Markets
    
+Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
+Click on any method below for a sample.
+Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.     
+**Please consider that all market-related methods are beta and under heavy development.**
+
+## Snapshots
+
 <blockquote class="lang-specific r">
 <p>To get information about commodities in data frame format type:</p>
 </blockquote>   
@@ -1020,7 +1138,40 @@ getMarketsData(marketsField = 'commodities', outType = 'df')
 <p>To get stock market index data:</p>
 </blockquote>
 ```python
-te.getMarketsData(marketsField = 'index', output_type = 'df')
+te.getMarketsData(marketsField='index', output_type='df')
+
+Output:
+           Symbol            Ticker     ...          lastYear    startYear
+1     KWSEIDX:IND   KuwwaitStoarket     ...         6762.8200    6312.5200
+2    SECTMIND:IND          SECTMIND     ...          399.3300     400.4300
+3         BSX:IND               BSX     ...         2021.9300    2202.1900
+              ...               ...     ...               ...          ...
+128       SPX:IND               SPX     ...         2419.7000    2695.8100
+129      SX5E:IND              SX5E     ...         3471.3300    3490.1900
+130       UKX:IND               UKX     ...         7350.3200    7648.1000
+```
+
+<blockquote class="lang-specific python">
+<p>To get stock market data filtered by symbol:</p>
+</blockquote>
+```python
+te.getMarketsBySymbol(symbols='indu:ind')    
+
+Output:    
+     Symbol Ticker         ...           ISIN           LastUpdate
+0  INDU:IND   INDU         ...           None  2018-06-28T14:56:00
+```
+
+<blockquote class="lang-specific python">
+<p>To get stock market data filtered by symbols:</p>
+</blockquote>
+```python
+te.getMarketsBySymbol(symbols=['aapl:us', 'indu:ind'], output_type='raw')   
+
+Output:    
+[{'Symbol': 'AAPL:US', 'Ticker': 'AAPL', 'Name': 'Apple', ..., 'LastUpdate': '2018-06-27T20:05:00'}, 
+{'Symbol': 'INDU:IND', 'Ticker': 'INDU', 'Name': 'Dow Jones', 'Type': 'index', ... 'LastUpdate': '2018-06-28T11:35:00'}]
+
 ```
 
 <blockquote class="lang-specific shell">
@@ -1113,13 +1264,6 @@ curl_close($handle);
 ?>
 ```
 
-Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.     
-**Please consider that all market-related methods are beta and under heavy development.**
-
-## Snapshots
-
 ### Methods
 
 **Snapshot of latest quotes**
@@ -1184,13 +1328,11 @@ Please note the sample request is limited in scope to a few countries and indica
 
 ## Historical  
 
-### Methods
-
 <blockquote class="lang-specific python">
 <p>To get historical market data for specific symbol and time range:</p>
 </blockquote>  
 ```python
-In [2]: te.fetchMarkets(symbol = 'indu:ind', initDate = '2017-01-01', endDate = '2017-06-15')
+In [2]: te.fetchMarkets(symbol='indu:ind', initDate='2017-01-01', endDate='2017-06-15')
 
 Out[2]: 
               symbol      open      high       low     close
@@ -1207,19 +1349,20 @@ Out[2]:
 <p>To get historical market data for multiple symbols and specific time range:</p>
 </blockquote>  
 ```python
-In [2]: te.fetchMarkets(symbol = ['indu:ind', 'cl1:com'], initDate = '2017-01-01', endDate = '2017-06-15')
+In [2]: te.fetchMarkets(symbol=['indu:ind', 'cl1:com'], initDate='2017-01-01', endDate='2017-06-15')
 
 Out[2]: 
               symbol        open        high         low       close
 2017-01-02   CL1:COM     53.9600     54.3000     53.9100     54.0200
 2017-01-03   CL1:COM     54.2000     55.2400     52.1100     52.3300
 2017-01-03  INDU:IND  19872.8600  19938.5300  19775.9300  19881.7600
-
-...              ...       ...       ...       ...       ...
+       ...       ...         ...         ...         ...         ...
 2017-06-14  INDU:IND  21342.7100  21391.9700  21294.0900  21374.5600
 2017-06-15  INDU:IND  21291.6900  21367.2800  21261.8700  21359.9000
 2017-06-15   CL1:COM     44.6900     44.8100     44.2200     44.4600
 ```
+
+### Methods
 
 <span class="methods">
 
@@ -1251,6 +1394,40 @@ Out[2]:
 
 ## Intraday
 
+<blockquote class="lang-specific python">
+<p>To get intraday market data for a specific symbol run:</p>
+</blockquote>  
+```python
+te.getMarketsIntraday(symbols='indu:ind')
+
+Output:
+        Symbol                 Date     ...             Low       Close
+0     INDU:IND  2018-04-30T08:30:00     ...      24409.2109  24409.2109
+1     INDU:IND  2018-04-30T08:31:00     ...      24407.2207  24409.2109
+2     INDU:IND  2018-04-30T08:32:00     ...      24410.2109  24411.2109
+ ...       ...                  ...     ...             ...         ...
+9997  INDU:IND  2018-05-18T15:52:00     ...      24744.1191  24755.1094
+9998  INDU:IND  2018-05-18T15:53:00     ...      24749.1094  24749.1094
+9999  INDU:IND  2018-05-18T15:54:00     ...      24750.1094  24754.1191
+```
+
+<blockquote class="lang-specific python">
+<p>To get intraday market data for a specific symbol starting on certain date and time run:</p>
+</blockquote>  
+```python
+te.getMarketsIntraday(symbols='indu:ind', initDate='2018-03-13 15:30')
+
+Output:
+        Symbol                 Date     ...             Low       Close
+0     INDU:IND  2018-03-13T15:30:00     ...      25198.0606  25209.9609
+1     INDU:IND  2018-03-13T15:31:00     ...      25201.9395  25206.9395
+2     INDU:IND  2018-03-13T15:32:00     ...      25201.8809  25208.8809
+ ...       ...                  ...     ...             ...         ...
+9997  INDU:IND  2018-04-04T16:06:00     ...      23884.9300  23890.0200
+9998  INDU:IND  2018-04-04T16:07:00     ...      23888.4000  23903.0400
+9999  INDU:IND  2018-04-04T16:08:00     ...      23903.5000  23942.3900
+```
+
 ### Methods
 
 <span class="methods">
@@ -1278,6 +1455,72 @@ Out[2]:
 |**Close**    |Close value                            |
 
 ## Market Lists
+
+<blockquote class="lang-specific python">
+<p>To get closely related items of a certain symbol:</p>
+</blockquote>  
+```python
+te.getMarketsPeers(symbols='indu:ind', output_type='df')
+
+Output:
+     Symbol Ticker         ...           ISIN           LastUpdate
+0  INDU:IND   INDU         ...           None  2018-06-28T13:49:00
+1   MID:IND    MID         ...           None  2018-06-28T13:49:00
+2   NDX:IND    NDX         ...           None  2018-06-28T13:49:00
+3   SPX:IND    SPX         ...           None  2018-06-28T13:49:00
+```
+
+<blockquote class="lang-specific python">
+<p>To get closely related items of a certain group of symbols:</p>
+</blockquote>  
+```python
+te.getMarketsPeers(symbols=['aapl:us', 'indu:ind'])
+
+Output:
+      Symbol         ...                    LastUpdate
+0    AAPL:US         ...           2018-06-28T13:49:00
+1     HPQ:US         ...           2018-06-28T13:49:00
+2     IBM:US         ...           2018-06-28T13:49:00
+         ...         ...                           ...
+8     SNE:US         ...           2018-06-28T13:48:00
+9    SPX:IND         ...           2018-06-28T13:49:00
+10     VZ:US         ...           2018-06-28T13:49:00
+```
+
+<blockquote class="lang-specific python">
+<p>To get components of the certain index:</p>
+</blockquote>  
+```python
+te.getMarketsComponents(symbols='psi20:ind', output_type='df')
+
+Output:
+     Symbol         ...                    LastUpdate
+0   ALTR:PL         ...           2018-06-28T13:45:00
+1    BCP:PL         ...           2018-06-28T13:45:00
+2    COR:PL         ...           2018-06-28T13:48:00
+        ...         ...                           ...
+15   SEM:PL         ...           2018-06-28T13:47:00
+16   SON:PL         ...           2018-06-28T13:46:00
+17  SONC:PL         ...           2018-06-28T11:51:00
+```
+
+<blockquote class="lang-specific python">
+<p>To get components of the group of indexes:</p>
+</blockquote>  
+```python
+te.getMarketsComponents(symbols=['indu:ind', 'psi20:ind'])
+
+Output:
+     Symbol         ...                    LastUpdate
+0   AAPL:US         ...           2018-06-28T13:49:00
+1   ALTR:PL         ...           2018-06-28T13:45:00
+2    AXP:US         ...           2018-06-28T13:49:00
+        ...         ...                           ...
+45    VZ:US         ...           2018-06-28T13:49:00
+46   WMT:US         ...           2018-06-28T13:49:00
+47   XOM:US         ...           2018-06-28T13:49:00
+
+```
 
 ### Methods
 
@@ -1386,6 +1629,52 @@ For all methods listed above, you can get data in next formats:
 </span> 
 
 # Earnings
+
+<blockquote class="lang-specific python">
+<p>To get default earnings calendar:</p>
+</blockquote>  
+```python
+te.getEarnings()
+
+Output:
+        Symbol                            Name     Actual  ...
+0         A:US                         Agilent      0.149  ...
+1     ASLAN:TI                   Aslan Cimento       0.55  ...
+2      2459:TT                           Audix          3  ...
+3       AXW:FP                  AXWAY SOFTWARE        0.2  ...
+
+```
+
+<blockquote class="lang-specific python">
+<p>To get earnings calendar filtered by symbol and date:</p>
+</blockquote>  
+```python
+te.getEarnings(symbols = 'msft:us', initDate='2016-01-01', endDate='2017-12-31')
+
+Output:
+    Symbol       Name Actual  ...
+0  MSFT:US  Microsoft   0.78  ...
+1  MSFT:US  Microsoft   0.62  ...
+2  MSFT:US  Microsoft   0.69  ...
+3  MSFT:US  Microsoft   0.76  ...
+
+```
+
+<blockquote class="lang-specific python">
+<p>To get earnings calendar by country:</p>
+</blockquote>  
+```python
+te.getEarnings(country = 'united states')
+
+Output:
+       Symbol                                  Name  Actual  ...
+0        A:US                               Agilent   0.149  ...
+1    CMCSA:US                               Comcast    0.19  ...
+2      DDR:US                                   DDR    0.38  ...
+3      CUZ:US                    Cousins Properties   0.065  ...
+
+```
+
 
 ### Methods
 
