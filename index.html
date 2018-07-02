@@ -318,10 +318,21 @@ Using Headers auth:<br>
 
 <p>Without APIkeys all requests will return the default sample data.</p>
 
+<h3 id="error-codes">Error codes</h3>
+
+<ul>
+<li>200 - OK<br></li>
+<li>401 - Unauthorized (The user doesn&rsquo;t have an access, client key missing or wrong)<br></li>
+<li>403 - Forbidden (The user hit the maximum limit of downloads or was blocked)<br></li>
+<li>400 - Bad Request (Some error with a request, like a typo, wrong parameter, etc.)<br></li>
+<li>409 - Conflict (Throttle, to many requests per second, beyond the API limit)<br></li>
+</ul>
+
 <h3 id="notes">Notes</h3>
 
 <ul>
-<li>All API calls have a maximum limitation of 10000 rows. This limit can be different depending on your subscription.</li>
+<li>All API calls have a maximum limitation of 10000 rows. This limit can be different depending on your subscription.<br></li>
+<li>API calls for Earnings, World Bank, Comtrade and Federal Reserv data have a maximum limitation of 500 rows.</li>
 </ul>
 
 <h1 id="indicators">Indicators</h1>
@@ -345,12 +356,34 @@ Click on any method below for a sample. Please note the sample request is limite
 <blockquote class="lang-specific python">
 <p>To get List of Indicators by Country: </p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">])</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+           <span class="n">Country</span>         <span class="o">...</span>             <span class="n">PreviousValueDate</span>
+<span class="mi">0</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">30</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+               <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
+<span class="mi">314</span>          <span class="n">China</span>         <span class="o">...</span>           <span class="mi">2016</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">315</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2016</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">316</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">30</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">317</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">30</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+
 </code></pre>
 <blockquote class="lang-specific python">
 <p>To get Country/Indicator pair: </p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span><span class="p">,</span> <span class="n">indicators</span> <span class="o">=</span> <span class="s">'gdp'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">,</span> <span class="n">indicators</span><span class="o">=</span><span class="s">'gdp'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+<span class="p">{</span><span class="s">'United States'</span><span class="p">:</span> 
+  <span class="p">{</span><span class="s">'GDP'</span><span class="p">:</span> 
+    <span class="p">[{</span><span class="s">'LatestValue'</span><span class="p">:</span> <span class="mf">18624.48</span><span class="p">,</span> <span class="s">'LatestValueDate'</span><span class="p">:</span> <span class="s">'2016-12-31T00:00:00'</span><span class="p">,</span> <span class="s">'Source'</span><span class="p">:</span> <span class="s">'World Bank'</span><span class="p">,</span> 
+    <span class="s">'Unit'</span><span class="p">:</span> <span class="s">'USD Billion'</span><span class="p">,</span> <span class="s">'CategoryGroup'</span><span class="p">:</span> <span class="s">'GDP'</span><span class="p">,</span> <span class="s">'Frequency'</span><span class="p">:</span> <span class="s">'Yearly'</span><span class="p">,</span> <span class="s">'PreviousValue'</span><span class="p">:</span> <span class="mf">18120.71</span><span class="p">,</span> 
+    <span class="s">'PreviousValueDate'</span><span class="p">:</span> <span class="s">'2015-12-31T00:00:00'</span><span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
 </code></pre>
 <blockquote class="lang-specific shell">
 <p>Click Indicators button on TE ribbon and then follow the instructions in the dialog box.    
@@ -527,17 +560,13 @@ Or type in any empty cell:</p>
 <blockquote class="lang-specific python">
 <p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united kingdom'</span><span class="p">,</span> <span class="n">indicator</span> <span class="o">=</span> <span class="s">'gdp'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span> <span class="s">'2015-01-01'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united kingdom'</span><span class="p">,</span> <span class="n">indicator</span><span class="o">=</span><span class="s">'gdp'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2015-01-01'</span><span class="p">)</span>
 
 <span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
                   <span class="mi">0</span>
 <span class="mi">2006</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2588.08</span>
 <span class="mi">2007</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2969.73</span>
-<span class="mi">2008</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2793.38</span>
-<span class="mi">2009</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2314.58</span>
-<span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2403.50</span>
-<span class="mi">2011</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2594.90</span>
-<span class="mi">2012</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2630.47</span>
+              <span class="o">...</span>
 <span class="mi">2013</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2712.30</span>
 <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2990.20</span>
 </code></pre>
@@ -549,8 +578,48 @@ Or type in any empty cell:</p>
 <p>Putting country name or indicator name in square brackets will return a dictionary type.
 For several countries and indicators</p>
 </blockquote> 
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span> <span class="o">=</span> <span class="p">[</span><span class="s">'exports'</span><span class="p">,</span><span class="s">'imports'</span><span class="p">,</span> <span class="s">'gdp'</span><span class="p">],</span> 
-                     <span class="n">initDate</span><span class="o">=</span> <span class="s">'1990-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span> <span class="s">'2015-01-01'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span><span class="o">=</span><span class="p">[</span><span class="s">'exports'</span><span class="p">,</span><span class="s">'imports'</span><span class="p">],</span> 
+                     <span class="n">initDate</span><span class="o">=</span><span class="s">'1990-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2015-01-01'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+<span class="p">{</span><span class="s">'China'</span><span class="p">:</span> 
+  <span class="p">{</span><span class="s">'Exports'</span><span class="p">:</span> 
+    <span class="p">[</span><span class="n">dict_values</span><span class="p">([</span>
+    <span class="mi">1990</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">31</span>      <span class="mf">28.42</span>
+    <span class="mi">1990</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span>      <span class="mf">32.53</span>
+                   <span class="o">...</span>
+    <span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span>    <span class="mf">2116.33</span>
+    <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>    <span class="mf">2273.72</span>
+    <span class="n">Name</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span><span class="p">])</span>
+    <span class="p">],</span> 
+    <span class="s">'Imports'</span><span class="p">:</span> 
+    <span class="p">[</span><span class="n">dict_values</span><span class="p">([</span>
+    <span class="mi">1990</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">31</span>      <span class="mf">25.70</span>
+    <span class="mi">1990</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span>      <span class="mf">35.30</span>
+                   <span class="o">...</span>
+    <span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span>    <span class="mf">1567.79</span>
+    <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>    <span class="mf">1775.93</span>
+    <span class="n">Name</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span><span class="p">])]</span>
+  <span class="p">},</span> 
+  <span class="s">'United States'</span><span class="p">:</span> 
+  <span class="p">{</span><span class="s">'Exports'</span><span class="p">:</span> 
+    <span class="p">[</span><span class="n">dict_values</span><span class="p">([</span>
+    <span class="mi">1990</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">31</span>     <span class="mf">43315.0</span>
+    <span class="mi">1990</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span>     <span class="mf">43412.0</span>
+                    <span class="o">...</span>
+    <span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span>    <span class="mf">197778.0</span>
+    <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>    <span class="mf">197411.0</span>
+    <span class="n">Name</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span><span class="p">])],</span> 
+    <span class="s">'Imports'</span><span class="p">:</span> 
+    <span class="p">[</span><span class="n">dict_values</span><span class="p">([</span>
+    <span class="mi">1990</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">31</span>     <span class="mf">50769.0</span>
+    <span class="mi">1990</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span>     <span class="mf">48553.0</span>
+                    <span class="o">...</span>
+    <span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span>    <span class="mf">237634.0</span>
+    <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>    <span class="mf">239840.0</span>
+    <span class="n">Name</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span><span class="p">])]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 <blockquote class="lang-specific shell">
 <p>Click Historical button on TE ribbon and then follow the instructions in the dialog box.    
@@ -834,29 +903,57 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific python">
 <p>To get calendar data for a specific country, in data frame format, run:</p>
 </blockquote>    
-<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'italy'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> 
-                  <span class="n">Date</span> <span class="n">Country</span>         <span class="n">Category</span>               <span class="n">Event</span> <span class="n">Reference</span>  \
-<span class="mi">0</span>  <span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">18</span><span class="n">T10</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>   <span class="n">Italy</span>  <span class="n">Current</span> <span class="n">Account</span>     <span class="n">Current</span> <span class="n">Account</span>       <span class="n">Sep</span>   
-<span class="mi">1</span>  <span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">24</span><span class="n">T10</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>   <span class="n">Italy</span>      <span class="n">Wage</span> <span class="n">Growth</span>  <span class="n">Wage</span> <span class="n">Inflation</span> <span class="n">YoY</span>       <span class="n">Oct</span>   
-<span class="mi">2</span>  <span class="mi">2016</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">24</span><span class="n">T10</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>   <span class="n">Italy</span>      <span class="n">Wage</span> <span class="n">Growth</span>  <span class="n">Wage</span> <span class="n">Inflation</span> <span class="n">MoM</span>       <span class="n">Oct</span>   
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'italy'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
-  <span class="n">Unit</span>                                    <span class="n">Source</span>  <span class="n">Actual</span> <span class="n">Previous</span> <span class="n">Forecast</span>  \
-<span class="mi">0</span>                                 <span class="n">Banca</span> <span class="n">D</span><span class="s">'italia  €2810M   €3282M            </span><span class="err">
-</span><span class="s">1       National Institute of Statistics (ISTAT)             0.6</span><span class="si">%            </span><span class="err">
-</span><span class="s">2       National Institute of Statistics (ISTAT)               0</span><span class="si">%            </span><span class="err">
+<span class="n">Output</span><span class="p">:</span>
+  <span class="n">CalendarId</span>                 <span class="n">Date</span>    <span class="o">...</span>     <span class="n">TEForecast</span> <span class="n">Importance</span>
+<span class="mi">0</span>     <span class="mi">160449</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">1.2</span><span class="o">%</span>          <span class="mi">1</span>
+<span class="mi">1</span>     <span class="mi">160450</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">0.4</span><span class="o">%</span>          <span class="mi">1</span>
+<span class="mi">2</span>     <span class="mi">160451</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">0.3</span><span class="o">%</span>          <span class="mi">2</span>
+<span class="mi">3</span>     <span class="mi">160452</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">1.2</span><span class="o">%</span>          <span class="mi">2</span>
+<span class="mi">4</span>     <span class="mi">160693</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">1</span>
+<span class="mi">5</span>     <span class="mi">160694</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">1</span>
+<span class="mi">6</span>     <span class="mi">160832</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">02</span><span class="n">T07</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">53.4</span>          <span class="mi">2</span>
+<span class="mi">7</span>     <span class="mi">160837</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">02</span><span class="n">T08</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="mf">10.8</span><span class="o">%</span>          <span class="mi">2</span>
+<span class="mi">8</span>     <span class="mi">160966</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">04</span><span class="n">T07</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">53.6</span>          <span class="mi">2</span>
 
-</span><span class="s">  TEForecast  </span><span class="err">
-</span><span class="s">0    € 2116M  </span><span class="err">
-</span><span class="s">1       0.7</span><span class="si">%  </span><span class="err">
-</span><span class="s">2       0.1</span><span class="si">%  </span><span class="err">
-</span></code></pre>
+</code></pre>
 <blockquote class="lang-specific python">
 <p>For several countries and indicators, in data frame format, run:</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">category</span> <span class="o">=</span> <span class="p">[</span><span class="s">'imports'</span><span class="p">,</span><span class="s">'exports'</span><span class="p">],</span>
-                   <span class="n">initDate</span> <span class="o">=</span> <span class="s">'2017-06-07'</span><span class="p">,</span> <span class="n">endDate</span> <span class="o">=</span> <span class="s">'2017-12-31'</span><span class="p">,</span>
-                   <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s">'imports'</span><span class="p">,</span><span class="s">'exports'</span><span class="p">],</span>
+                   <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-06-07'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">,</span>
+                   <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+   <span class="n">CalendarId</span>                 <span class="n">Date</span>    <span class="o">...</span>     <span class="n">TEForecast</span> <span class="n">Importance</span>
+<span class="mi">0</span>      <span class="mi">133104</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">1</span>      <span class="mi">133105</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">2</span>      <span class="mi">134636</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">06</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>        <span class="err">$</span><span class="mf">191.7</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">3</span>      <span class="mi">134637</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">06</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>        <span class="err">$</span><span class="mf">236.7</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">4</span>      <span class="mi">135063</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">13</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">5</span>      <span class="mi">135064</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">13</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">6</span>      <span class="mi">136267</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mo">04</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">193</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">7</span>      <span class="mi">136268</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mo">04</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>        <span class="err">$</span><span class="mf">238.9</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">8</span>      <span class="mi">136307</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">9</span>      <span class="mi">136308</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">10</span>     <span class="mi">137694</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mo">06</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">195</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">11</span>     <span class="mi">137695</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mo">06</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>        <span class="err">$</span><span class="mf">239.2</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">12</span>     <span class="mi">137989</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">08</span><span class="n">T02</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">13</span>     <span class="mi">137990</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">08</span><span class="n">T02</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">14</span>     <span class="mi">139629</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">05</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">1</span>
+<span class="mi">15</span>     <span class="mi">139630</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">05</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">1</span>
+<span class="mi">16</span>     <span class="mi">140073</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">13</span><span class="n">T02</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">17</span>     <span class="mi">140075</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">13</span><span class="n">T02</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">18</span>     <span class="mi">141343</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">03</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">195</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">19</span>     <span class="mi">141344</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">03</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">239</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">20</span>     <span class="mi">141492</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">21</span>     <span class="mi">141493</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">22</span>     <span class="mi">143120</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">05</span><span class="n">T13</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">195</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">23</span>     <span class="mi">143121</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">05</span><span class="n">T13</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">239</span><span class="n">B</span>          <span class="mi">1</span>
+<span class="mi">24</span>     <span class="mi">143323</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+<span class="mi">25</span>     <span class="mi">143324</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
+
 </code></pre>
 <blockquote class="lang-specific shell">
 <p>Click Calendar button on TE ribbon and then follow the instructions in the dialog box.    
@@ -1080,12 +1177,29 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific python">
 <p>Forecasted values for specific a country, in this case United States. </p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+           <span class="n">Country</span>         <span class="o">...</span>                       <span class="n">q4_date</span>
+<span class="mi">0</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+               <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
+<span class="mi">200</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">201</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">202</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>Forecasted values for several countries and indicators. </p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span> <span class="o">=</span> <span class="p">[</span><span class="s">'gdp'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">],</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span><span class="o">=</span><span class="p">[</span><span class="s">'gdp'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">],</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+         <span class="n">Country</span>    <span class="n">Category</span>         <span class="o">...</span>                 <span class="n">q4</span>              <span class="n">q4_date</span>
+<span class="mi">0</span>          <span class="n">China</span>         <span class="n">GDP</span>         <span class="o">...</span>           <span class="mf">13100.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>          <span class="n">China</span>  <span class="n">Population</span>         <span class="o">...</span>            <span class="mf">1407.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>  <span class="n">United</span> <span class="n">States</span>         <span class="n">GDP</span>         <span class="o">...</span>           <span class="mf">20220.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">3</span>  <span class="n">United</span> <span class="n">States</span>  <span class="n">Population</span>         <span class="o">...</span>             <span class="mf">328.49</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 </code></pre>
 <blockquote class="lang-specific shell">
 <p>Click Forecasts button on TE ribbon and then follow the instructions in the dialog box.    
@@ -1273,6 +1387,13 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <h1 id="markets">Markets</h1>
 
+<p>Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
+Click on any method below for a sample.
+Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.<br>
+<strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
+
+<h2 id="snapshots">Snapshots</h2>
+
 <blockquote class="lang-specific r">
 <p>To get information about commodities in data frame format type:</p>
 </blockquote>   
@@ -1281,7 +1402,36 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific python">
 <p>To get stock market index data:</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span> <span class="o">=</span> <span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+           <span class="n">Symbol</span>            <span class="n">Ticker</span>     <span class="o">...</span>          <span class="n">lastYear</span>    <span class="n">startYear</span>
+<span class="mi">1</span>     <span class="n">KWSEIDX</span><span class="p">:</span><span class="n">IND</span>   <span class="n">KuwwaitStoarket</span>     <span class="o">...</span>         <span class="mf">6762.8200</span>    <span class="mf">6312.5200</span>
+<span class="mi">2</span>    <span class="n">SECTMIND</span><span class="p">:</span><span class="n">IND</span>          <span class="n">SECTMIND</span>     <span class="o">...</span>          <span class="mf">399.3300</span>     <span class="mf">400.4300</span>
+<span class="mi">3</span>         <span class="n">BSX</span><span class="p">:</span><span class="n">IND</span>               <span class="n">BSX</span>     <span class="o">...</span>         <span class="mf">2021.9300</span>    <span class="mf">2202.1900</span>
+              <span class="o">...</span>               <span class="o">...</span>     <span class="o">...</span>               <span class="o">...</span>          <span class="o">...</span>
+<span class="mi">128</span>       <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>               <span class="n">SPX</span>     <span class="o">...</span>         <span class="mf">2419.7000</span>    <span class="mf">2695.8100</span>
+<span class="mi">129</span>      <span class="n">SX5E</span><span class="p">:</span><span class="n">IND</span>              <span class="n">SX5E</span>     <span class="o">...</span>         <span class="mf">3471.3300</span>    <span class="mf">3490.1900</span>
+<span class="mi">130</span>       <span class="n">UKX</span><span class="p">:</span><span class="n">IND</span>               <span class="n">UKX</span>     <span class="o">...</span>         <span class="mf">7350.3200</span>    <span class="mf">7648.1000</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get stock market data filtered by symbol:</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsBySymbol</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">)</span>    
+
+<span class="n">Output</span><span class="p">:</span>    
+     <span class="n">Symbol</span> <span class="n">Ticker</span>         <span class="o">...</span>           <span class="n">ISIN</span>           <span class="n">LastUpdate</span>
+<span class="mi">0</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>   <span class="n">INDU</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T14</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mo">00</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get stock market data filtered by symbols:</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsBySymbol</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'indu:ind'</span><span class="p">],</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'raw'</span><span class="p">)</span>   
+
+<span class="n">Output</span><span class="p">:</span>    
+<span class="p">[{</span><span class="s">'Symbol'</span><span class="p">:</span> <span class="s">'AAPL:US'</span><span class="p">,</span> <span class="s">'Ticker'</span><span class="p">:</span> <span class="s">'AAPL'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">:</span> <span class="s">'Apple'</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s">'LastUpdate'</span><span class="p">:</span> <span class="s">'2018-06-27T20:05:00'</span><span class="p">},</span> 
+<span class="p">{</span><span class="s">'Symbol'</span><span class="p">:</span> <span class="s">'INDU:IND'</span><span class="p">,</span> <span class="s">'Ticker'</span><span class="p">:</span> <span class="s">'INDU'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">:</span> <span class="s">'Dow Jones'</span><span class="p">,</span> <span class="s">'Type'</span><span class="p">:</span> <span class="s">'index'</span><span class="p">,</span> <span class="o">...</span> <span class="s">'LastUpdate'</span><span class="p">:</span> <span class="s">'2018-06-28T11:35:00'</span><span class="p">}]</span>
+
 </code></pre>
 <blockquote class="lang-specific shell">
 <p>Click Markets button on TE ribbon and then follow the instructions in the dialog box.    
@@ -1356,13 +1506,6 @@ Or type in any empty cell:</p>
 <span class="c1">//parse your data to satusfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
-<p>Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.<br>
-<strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
-
-<h2 id="snapshots">Snapshots</h2>
-
 <h3 id="methods">Methods</h3>
 
 <p><strong>Snapshot of latest quotes</strong></p>
@@ -1512,12 +1655,10 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <h2 id="historical">Historical</h2>
 
-<h3 id="methods">Methods</h3>
-
 <blockquote class="lang-specific python">
 <p>To get historical market data for specific symbol and time range:</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">initDate</span> <span class="o">=</span> <span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span> <span class="o">=</span> <span class="s">'2017-06-15'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-06-15'</span><span class="p">)</span>
 
 <span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
               <span class="n">symbol</span>      <span class="nb">open</span>      <span class="n">high</span>       <span class="n">low</span>     <span class="n">close</span>
@@ -1532,19 +1673,20 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific python">
 <p>To get historical market data for multiple symbols and specific time range:</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="s">'cl1:com'</span><span class="p">],</span> <span class="n">initDate</span> <span class="o">=</span> <span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span> <span class="o">=</span> <span class="s">'2017-06-15'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="p">[</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="s">'cl1:com'</span><span class="p">],</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-06-15'</span><span class="p">)</span>
 
 <span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
               <span class="n">symbol</span>        <span class="nb">open</span>        <span class="n">high</span>         <span class="n">low</span>       <span class="n">close</span>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">02</span>   <span class="n">CL1</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">53.9600</span>     <span class="mf">54.3000</span>     <span class="mf">53.9100</span>     <span class="mf">54.0200</span>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">03</span>   <span class="n">CL1</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">54.2000</span>     <span class="mf">55.2400</span>     <span class="mf">52.1100</span>     <span class="mf">52.3300</span>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">03</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">19872.8600</span>  <span class="mf">19938.5300</span>  <span class="mf">19775.9300</span>  <span class="mf">19881.7600</span>
-
-<span class="o">...</span>              <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>
+       <span class="o">...</span>       <span class="o">...</span>         <span class="o">...</span>         <span class="o">...</span>         <span class="o">...</span>         <span class="o">...</span>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">14</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21342.7100</span>  <span class="mf">21391.9700</span>  <span class="mf">21294.0900</span>  <span class="mf">21374.5600</span>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21291.6900</span>  <span class="mf">21367.2800</span>  <span class="mf">21261.8700</span>  <span class="mf">21359.9000</span>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>   <span class="n">CL1</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">44.6900</span>     <span class="mf">44.8100</span>     <span class="mf">44.2200</span>     <span class="mf">44.4600</span>
 </code></pre>
+<h3 id="methods">Methods</h3>
+
 <p><span class="methods"></p>
 
 <ul>
@@ -1596,6 +1738,36 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <h2 id="intraday">Intraday</h2>
 
+<blockquote class="lang-specific python">
+<p>To get intraday market data for a specific symbol run:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntraday</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+        <span class="n">Symbol</span>                 <span class="n">Date</span>     <span class="o">...</span>             <span class="n">Low</span>       <span class="n">Close</span>
+<span class="mi">0</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">30</span><span class="n">T08</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24409.2109</span>  <span class="mf">24409.2109</span>
+<span class="mi">1</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">30</span><span class="n">T08</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24407.2207</span>  <span class="mf">24409.2109</span>
+<span class="mi">2</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">30</span><span class="n">T08</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24410.2109</span>  <span class="mf">24411.2109</span>
+ <span class="o">...</span>       <span class="o">...</span>                  <span class="o">...</span>     <span class="o">...</span>             <span class="o">...</span>         <span class="o">...</span>
+<span class="mi">9997</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span><span class="n">T15</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24744.1191</span>  <span class="mf">24755.1094</span>
+<span class="mi">9998</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span><span class="n">T15</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24749.1094</span>  <span class="mf">24749.1094</span>
+<span class="mi">9999</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span><span class="n">T15</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24750.1094</span>  <span class="mf">24754.1191</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get intraday market data for a specific symbol starting on certain date and time run:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntraday</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2018-03-13 15:30'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+        <span class="n">Symbol</span>                 <span class="n">Date</span>     <span class="o">...</span>             <span class="n">Low</span>       <span class="n">Close</span>
+<span class="mi">0</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">13</span><span class="n">T15</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">25198.0606</span>  <span class="mf">25209.9609</span>
+<span class="mi">1</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">13</span><span class="n">T15</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">25201.9395</span>  <span class="mf">25206.9395</span>
+<span class="mi">2</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">13</span><span class="n">T15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">25201.8809</span>  <span class="mf">25208.8809</span>
+ <span class="o">...</span>       <span class="o">...</span>                  <span class="o">...</span>     <span class="o">...</span>             <span class="o">...</span>         <span class="o">...</span>
+<span class="mi">9997</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span><span class="n">T16</span><span class="p">:</span><span class="mo">06</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">23884.9300</span>  <span class="mf">23890.0200</span>
+<span class="mi">9998</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span><span class="n">T16</span><span class="p">:</span><span class="mo">07</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">23888.4000</span>  <span class="mf">23903.0400</span>
+<span class="mi">9999</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span><span class="n">T16</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">23903.5000</span>  <span class="mf">23942.3900</span>
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -1647,6 +1819,64 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <h2 id="market-lists">Market Lists</h2>
 
+<blockquote class="lang-specific python">
+<p>To get closely related items of a certain symbol:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+     <span class="n">Symbol</span> <span class="n">Ticker</span>         <span class="o">...</span>           <span class="n">ISIN</span>           <span class="n">LastUpdate</span>
+<span class="mi">0</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>   <span class="n">INDU</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>   <span class="n">MID</span><span class="p">:</span><span class="n">IND</span>    <span class="n">MID</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>   <span class="n">NDX</span><span class="p">:</span><span class="n">IND</span>    <span class="n">NDX</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">3</span>   <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>    <span class="n">SPX</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get closely related items of a certain group of symbols:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'indu:ind'</span><span class="p">])</span>
+
+<span class="n">Output</span><span class="p">:</span>
+      <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
+<span class="mi">0</span>    <span class="n">AAPL</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>     <span class="n">HPQ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>     <span class="n">IBM</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+         <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
+<span class="mi">8</span>     <span class="n">SNE</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">9</span>    <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">10</span>     <span class="n">VZ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get components of the certain index:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsComponents</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'psi20:ind'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+     <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
+<span class="mi">0</span>   <span class="n">ALTR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>    <span class="n">BCP</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>    <span class="n">COR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mo">00</span>
+        <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
+<span class="mi">15</span>   <span class="n">SEM</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">16</span>   <span class="n">SON</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">17</span>  <span class="n">SONC</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T11</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mo">00</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get components of the group of indexes:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsComponents</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="s">'psi20:ind'</span><span class="p">])</span>
+
+<span class="n">Output</span><span class="p">:</span>
+     <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
+<span class="mi">0</span>   <span class="n">AAPL</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>   <span class="n">ALTR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>    <span class="n">AXP</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+        <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
+<span class="mi">45</span>    <span class="n">VZ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">46</span>   <span class="n">WMT</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">47</span>   <span class="n">XOM</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -1932,6 +2162,45 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <h1 id="earnings">Earnings</h1>
 
+<blockquote class="lang-specific python">
+<p>To get default earnings calendar:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">()</span>
+
+<span class="n">Output</span><span class="p">:</span>
+        <span class="n">Symbol</span>                            <span class="n">Name</span>     <span class="n">Actual</span>  <span class="o">...</span>
+<span class="mi">0</span>         <span class="n">A</span><span class="p">:</span><span class="n">US</span>                         <span class="n">Agilent</span>      <span class="mf">0.149</span>  <span class="o">...</span>
+<span class="mi">1</span>     <span class="n">ASLAN</span><span class="p">:</span><span class="n">TI</span>                   <span class="n">Aslan</span> <span class="n">Cimento</span>       <span class="mf">0.55</span>  <span class="o">...</span>
+<span class="mi">2</span>      <span class="mi">2459</span><span class="p">:</span><span class="n">TT</span>                           <span class="n">Audix</span>          <span class="mi">3</span>  <span class="o">...</span>
+<span class="mi">3</span>       <span class="n">AXW</span><span class="p">:</span><span class="n">FP</span>                  <span class="n">AXWAY</span> <span class="n">SOFTWARE</span>        <span class="mf">0.2</span>  <span class="o">...</span>
+
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get earnings calendar filtered by symbol and date:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">symbols</span> <span class="o">=</span> <span class="s">'msft:us'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2016-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+    <span class="n">Symbol</span>       <span class="n">Name</span> <span class="n">Actual</span>  <span class="o">...</span>
+<span class="mi">0</span>  <span class="n">MSFT</span><span class="p">:</span><span class="n">US</span>  <span class="n">Microsoft</span>   <span class="mf">0.78</span>  <span class="o">...</span>
+<span class="mi">1</span>  <span class="n">MSFT</span><span class="p">:</span><span class="n">US</span>  <span class="n">Microsoft</span>   <span class="mf">0.62</span>  <span class="o">...</span>
+<span class="mi">2</span>  <span class="n">MSFT</span><span class="p">:</span><span class="n">US</span>  <span class="n">Microsoft</span>   <span class="mf">0.69</span>  <span class="o">...</span>
+<span class="mi">3</span>  <span class="n">MSFT</span><span class="p">:</span><span class="n">US</span>  <span class="n">Microsoft</span>   <span class="mf">0.76</span>  <span class="o">...</span>
+
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get earnings calendar by country:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+       <span class="n">Symbol</span>                                  <span class="n">Name</span>  <span class="n">Actual</span>  <span class="o">...</span>
+<span class="mi">0</span>        <span class="n">A</span><span class="p">:</span><span class="n">US</span>                               <span class="n">Agilent</span>   <span class="mf">0.149</span>  <span class="o">...</span>
+<span class="mi">1</span>    <span class="n">CMCSA</span><span class="p">:</span><span class="n">US</span>                               <span class="n">Comcast</span>    <span class="mf">0.19</span>  <span class="o">...</span>
+<span class="mi">2</span>      <span class="n">DDR</span><span class="p">:</span><span class="n">US</span>                                   <span class="n">DDR</span>    <span class="mf">0.38</span>  <span class="o">...</span>
+<span class="mi">3</span>      <span class="n">CUZ</span><span class="p">:</span><span class="n">US</span>                    <span class="n">Cousins</span> <span class="n">Properties</span>   <span class="mf">0.065</span>  <span class="o">...</span>
+
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
