@@ -160,7 +160,7 @@ The API can be used to feed a custom developed application, a public website or 
 <blockquote class="lang-specific shell">
 <p>
   Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
-We support Excel 2010, 2013, 2016 (32bit and 64bit). 
+We support Excel 2010, 2013, 2016 (32bit and 64bit) only for Windows. 
 </p>
 <br>
 <p>After installing the Trading Economics Excel Add In click on TE tab and than click on login button and follow instructions.</p>
@@ -2162,6 +2162,8 @@ Or type in any empty cell:</p>
 
 <h1 id="earnings">Earnings</h1>
 
+<h3 id="earnings-ipo-dividends">Earnings, IPO, Dividends</h3>
+
 <blockquote class="lang-specific python">
 <p>To get default earnings calendar:</p>
 </blockquote>  
@@ -2215,6 +2217,8 @@ Or type in any empty cell:</p>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings calendar by country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> </p></li>
+<li><p>Filter earnings by type<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?type=earnings">/earnings?type=earnings</a>    </p></li>
 </ul>
 
 <p></span> </p>
@@ -2234,6 +2238,10 @@ Or type in any empty cell:</p>
 <tr>
 <td style="text-align: left"><strong>Symbol</strong></td>
 <td style="text-align: left">Unique symbol used by TradingEconomics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Type</strong></td>
+<td style="text-align: left">Ernings type: earnings, ipo, dividends</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Name</strong></td>
