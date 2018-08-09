@@ -40,7 +40,7 @@ pip install tradingeconomics
 <blockquote class="lang-specific shell">
 <p>
   Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
-We support Excel 2010, 2013, 2016 (32bit and 64bit). 
+We support Excel 2010, 2013, 2016 (32bit and 64bit) only for Windows. 
 </p>
 <br>
 <p>After installing the Trading Economics Excel Add In click on TE tab and than click on login button and follow instructions.</p>
@@ -1630,6 +1630,8 @@ For all methods listed above, you can get data in next formats:
 
 # Earnings
 
+### Earnings, IPO, Dividends    
+
 <blockquote class="lang-specific python">
 <p>To get default earnings calendar:</p>
 </blockquote>  
@@ -1693,6 +1695,9 @@ Output:
 * Filter earnings calendar by country    
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> 
 
+* Filter earnings by type    
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?type=earnings">/earnings?type=earnings</a>    
+
 </span> 
 
 ### Response Fields
@@ -1701,6 +1706,7 @@ Output:
 |:--------------------|:---------------------------------------------------------   |
 |     **Date**        | Release time and date in UTC                                |
 |    **Symbol**       | Unique symbol used by TradingEconomics                      |
+|     **Type**        | Ernings type: earnings, ipo, dividends                      |
 |     **Name**        | Company name                                                |
 |   **Actual**        | Earnings per share                                          |
 |  **Forecast**       | Average forecast among a representative group of analysts   |
