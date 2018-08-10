@@ -383,6 +383,9 @@ curl_close($handle);
 * List of all indicators  
 <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
 
+* Description of all indicators  
+<a target = '_blank' href="https://api.tradingeconomics.com/indicators/descriptions?c=guest:guest">/indicators/descriptions</a>
+
 * List of indicators by country    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a>
 
@@ -1706,7 +1709,7 @@ Output:
 |:--------------------|:---------------------------------------------------------   |
 |     **Date**        | Release time and date in UTC                                |
 |    **Symbol**       | Unique symbol used by TradingEconomics                      |
-|     **Type**        | Ernings type: earnings, ipo, dividends                      |
+|     **Type**        | Earnings type: earnings, ipo, dividends                     |
 |     **Name**        | Company name                                                |
 |   **Actual**        | Earnings per share                                          |
 |  **Forecast**       | Average forecast among a representative group of analysts   |
@@ -2190,7 +2193,7 @@ or
 
 
 
-Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit). After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.    
+Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions. We support Excel 2010, 2013, 2016 (32 and 64bit) only for Windows. After installing the Trading Economics Excel Add In click on TE tab and then click on login button, insert the access key and hit Submit button.    
 <a target = '_blank' href="https://github.com/ieconomics/open-api/raw/master/Documentation/source/Trading%20Economics%20Excel%20Add%20On%20Tutorial%202017.pdf">Click here to download detailed user guide.</a>
 
 
