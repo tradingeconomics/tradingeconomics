@@ -129,14 +129,21 @@ namespace TE
                     using (WebClient wc = new WebClient())
                     {
                         JObject tabJson = JObject.Parse(wc.DownloadString(url));
-
+                        helperClass.log.Info(url);
                         filterResults.Items.Insert(0, "All" +
                                 "  (" + tabJson["info"]["hits"].ToString() + ")");
 
                         for (int i = 0; i < tabJson["info"]["facets"]["type"].Count(); i++)
                         {
-                            filterResults.Items.Insert(i+1, helperClass.searchTabs[tabJson["info"]["facets"]["type"][i]["key"].ToString()].ToString() +
+                            try
+                            {
+                                filterResults.Items.Insert(i + 1, helperClass.searchTabs[tabJson["info"]["facets"]["type"][i]["key"].ToString()].ToString() +
                                 "  (" + tabJson["info"]["facets"]["type"][i]["doc_count"].ToString() + ")");
+                            }
+                            catch (Exception ex)
+                            {
+                                helperClass.log.Error(ex);
+                            }
                         }
                     }
 
@@ -221,6 +228,14 @@ namespace TE
                             myTabList["hits"][i]["category"],
                             String.Join(",", helperClass.histNames),
                             helperClass.CellAddress(helperClass.RangeAddress())[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
+                    }
+                    else if (myTabList["hits"][i]["type"].ToString() == "teforecasts")
+                    {
+                        helperClass.formula = string.Format("=TEForecasts( \"{0}\", \"{1}\", \"{2}\", {3})",
+                        country,
+                        myTabList["hits"][i]["category"],
+                        String.Join(",", helperClass.forcNames),
+                        helperClass.CellAddress(helperClass.RangeAddress())[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
                     }
                     else
                     {

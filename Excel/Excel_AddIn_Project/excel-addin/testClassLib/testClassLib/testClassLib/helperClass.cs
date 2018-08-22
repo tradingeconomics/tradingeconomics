@@ -1303,7 +1303,8 @@ namespace TE
             {"idx", "Index"},
             {"mkt", "Market"},
             {"financials", "Financials"},
-            {"comtrade", "Comtrade"}
+            {"comtrade", "Comtrade"},
+            {"teforecasts", "Forecasts"}
         };
 
         public static Dictionary<string, string> searchTabsOriginal = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -1318,7 +1319,8 @@ namespace TE
             {"Index", "idx"},
             {"Market", "mkt"},
             {"Financials", "financials"},
-            {"Comtrade", "comtrade"}
+            {"Comtrade", "comtrade"},
+            {"Forecasts", "teforecasts"}
         };
 
         public static bool fromHistorical = false;

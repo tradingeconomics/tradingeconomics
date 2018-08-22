@@ -126,30 +126,30 @@
       <Component Id="XLL32" Guid="{c6b51155-2622-4666-8ac8-ef8c5a46cef8}" Directory="AddinFolder">
         <RegistryValue Root="HKCU" Key="Software\!(loc.ProductManufacturer)\Excel Add-In" Name="Xll32Bit" Value="AddIns" KeyPath="yes" Type="string" />
 
-        <File Id="EXCELXLL32PACKED.XLL" Name="!(loc.ProductNameNoSpace)32.xll" Source="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE-AddIn-packed.xll" >
+        <File Id="EXCELXLL32PACKED.XLL" Name="!(loc.ProductNameNoSpace)32.xll" Source="C:\git\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE-AddIn-packed.xll" >
           <netfx:NativeImage Id="ngen_32Xll" Platform="32bit" Priority="0"/>
         </File>
       </Component>
       <Component Id="XLL64" Guid="{a32b4a93-64f4-4265-a0c2-77a09f85b532}" Directory="AddinFolder">
         <RegistryValue Root="HKCU" Key="Software\!(loc.ProductManufacturer)\Excel Add-In" Name="Xll64Bit" Value="AddIns" KeyPath="yes" Type="string" />
 
-        <File Id="EXCELXLL64PACKED.XLL" Name="!(loc.ProductNameNoSpace)64.xll" Source="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE-AddIn64-packed.xll" >
+        <File Id="EXCELXLL64PACKED.XLL" Name="!(loc.ProductNameNoSpace)64.xll" Source="C:\git\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE-AddIn64-packed.xll" >
           <netfx:NativeImage Id="ngen_64Xll" Platform="64bit" Priority="0"/>
         </File>
         </Component>
         <Component Id="DNA64" Guid="{6c27c272-ac88-4879-92aa-05d47c69fd6f}" Directory="AddinFolder">
         <RegistryValue Root="HKCU" Key="Software\!(loc.ProductManufacturer)\Excel Add-In" Name="Xll64Bit" Value="AddIns" KeyPath="yes" Type="string" />
-        <File Id="EXCELXLL64PACKED.DNA" Name="!(loc.ProductNameNoSpace)64.dna" Source="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE-AddIn64.dna" >
+        <File Id="EXCELXLL64PACKED.DNA" Name="!(loc.ProductNameNoSpace)64.dna" Source="C:\git\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE-AddIn64.dna" >
         </File>
         </Component>
         <Component Id="DNA32" Guid="{237f1cd3-27c2-4dd4-aef9-2c2087810172}" Directory="AddinFolder">
         <RegistryValue Root="HKCU" Key="Software\!(loc.ProductManufacturer)\Excel Add-In" Name="Xll32Bit" Value="AddIns" KeyPath="yes" Type="string" />
-        <File Id="EXCELXLL32PACKED.DNA" Name="!(loc.ProductNameNoSpace).dna" Source="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE-AddIn.dna" >
+        <File Id="EXCELXLL32PACKED.DNA" Name="!(loc.ProductNameNoSpace).dna" Source="C:\git\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE-AddIn.dna" >
         </File>
         </Component>
         <Component Id="DLL" Guid="{b7293c71-dc18-48c0-b3dc-d52bda21bbf2}" Directory="AddinFolder">
         <RegistryValue Root="HKCU" Key="Software\!(loc.ProductManufacturer)\Excel Add-In" Name="Xll64Bit" Value="AddIns" KeyPath="yes" Type="string" />
-         <File Id="EXCELXLL.DLL" Name="!(loc.ProductNameNoSpace).dll" Source="C:\myGit\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE.dll" >
+         <File Id="EXCELXLL.DLL" Name="!(loc.ProductNameNoSpace).dll" Source="C:\git\master\open-api\Excel\Excel_AddIn_Project\excel-addin\testClassLib\testClassLib\testClassLib\bin\Debug\TE.dll" >
         </File>
                
         <RemoveFile On="uninstall" Id="XLL32" Directory="AddinFolder" Name="!(loc.ProductNameNoSpace)32.xll" />
