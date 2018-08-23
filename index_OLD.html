@@ -107,7 +107,7 @@
       </script>
   </head>
 
-  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;,&quot;r&quot;,&quot;jsonnet&quot;]">
+  <body class="index_OLD" data-languages="[&quot;python&quot;,&quot;shell&quot;,&quot;r&quot;,&quot;jsonnet&quot;,&quot;javascript&quot;,&quot;csharp&quot;,&quot;java&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -121,6 +121,10 @@
               <a href="#" data-language-name="shell">Excel</a>
               <a href="#" data-language-name="r">R</a>
               <a href="#" data-language-name="jsonnet">jQuery</a>
+              <a href="#" data-language-name="javascript">NodeJS</a>
+              <a href="#" data-language-name="csharp">C#</a>
+              <a href="#" data-language-name="java">Java</a>
+              <a href="#" data-language-name="php">PHP</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -218,6 +222,66 @@ See below how to install a package that’s sitting on GitHub.</p>
   <strong>Multiple Parameters</strong>
    <br>
 
+    <br>      
+   Almost all of the Trading Economics WEB API methods support multiple parameters.  
+   <br>   
+   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   <br> 
+   Here is a practical example:
+   <br>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</blockquote>
+
+<blockquote class="lang-specific javascript">
+<p>
+  <strong>Multiple Parameters</strong>
+   <br>
+   
+    <br>      
+   Almost all of the Trading Economics WEB API methods support multiple parameters.  
+   <br>   
+   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   <br> 
+   Here is a practical example:
+   <br>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</blockquote>
+
+<blockquote class="lang-specific csharp">
+<p>
+  <strong>Multiple Parameters</strong>
+   <br>
+   
+    <br>      
+   Almost all of the Trading Economics WEB API methods support multiple parameters.  
+   <br>   
+   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   <br> 
+   Here is a practical example:
+   <br>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</blockquote>
+
+<blockquote class="lang-specific java">
+<p>
+  <strong>Multiple Parameters</strong>
+   <br>
+   
+    <br>      
+   Almost all of the Trading Economics WEB API methods support multiple parameters.  
+   <br>   
+   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   <br> 
+   Here is a practical example:
+   <br>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</blockquote>
+
+<blockquote class="lang-specific php">
+<p>
+  <strong>Multiple Parameters</strong>
+   <br>
+   
     <br>      
    Almost all of the Trading Economics WEB API methods support multiple parameters.  
    <br>   
@@ -326,6 +390,28 @@ Click on any method below for a sample. Please note the sample request is limite
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEIndicators<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"bankruptcies"</span>, <span class="s2">"Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate"</span>, B2<span class="o">)</span>
+</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'OAuth2 YOUR_TOKEN_VALUE'</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/indicators'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">};</span>
+<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// your code here if you want to use the results !</span>
+<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>       
 </code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/indicators?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
@@ -334,6 +420,43 @@ Or type in any empty cell:</p>
 <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
+    <span class="c1">//ADD Authorization</span>
+    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
+    <span class="c1">//SET Parameters</span>
+    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/indicators"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Your custom response parser code</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//indicators"</span><span class="o">;</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: OAuth YOUR_TOKEN_VALUE"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satusfy your needs....
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
 
@@ -505,6 +628,28 @@ For several countries and indicators</p>
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEHistorical<span class="o">(</span> <span class="s2">"andorra"</span>, <span class="s2">"gdp per capita"</span>, <span class="s2">"2010-01-01"</span>, <span class="s2">"2017-10-29"</span>, <span class="s2">"Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate"</span>, B2<span class="o">)</span>
+</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'OAuth2 YOUR_TOKEN_VALUE'</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/historical/country/{put country name here}/indicator/{put indicator name here}'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">};</span>
+<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// your code here if you want to use the results !</span>
+<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/historical/country/{put country name here}/indicator/{put indicator name here}?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
@@ -513,6 +658,43 @@ Or type in any empty cell:</p>
 <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
+    <span class="c1">//ADD Authorization</span>
+    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
+    <span class="c1">//SET Parameters</span>
+    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/historical/country/{put country name here}/indicator/{put indicator name here}"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Your custom response parser code</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}"</span><span class="o">;</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: OAuth YOUR_TOKEN_VALUE"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
 
@@ -780,6 +962,28 @@ or you can specify a start date and end date<br>
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TECalendar<span class="o">(</span> <span class="s2">"germany"</span>, <span class="s2">"services pmi"</span>, <span class="s2">"2017-03-24"</span>, <span class="s2">"2017-06-24"</span>, <span class="s2">"Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate"</span>, B2<span class="o">)</span>
+</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'OAuth2 YOUR_TOKEN_VALUE'</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">};</span>
+<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// your code here if you want to use the results !</span>
+<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>
 </code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/calendar?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
@@ -788,6 +992,43 @@ Or type in any empty cell:</p>
 <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
+    <span class="c1">//ADD Authorization</span>
+    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
+    <span class="c1">//SET Parameters</span>
+    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/calendar"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Your custom response parser code</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//calendar"</span><span class="o">;</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: OAuth YOUR_TOKEN_VALUE"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satusfy your needs....
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <p>Here you can get calendar events. 
 Click on any method below for a sample.
@@ -967,6 +1208,28 @@ Please note the sample request is limited in scope to a few countries and indica
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEForecasts<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"gdp"</span>, <span class="s2">"Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date"</span>, B2<span class="o">)</span>
+</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'OAuth2 YOUR_TOKEN_VALUE'</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/forecast/country/{put country name here}'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">};</span>
+<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// your code here if you want to use the results !</span>
+<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/forecast/country/{put country name here}?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
@@ -975,6 +1238,43 @@ Or type in any empty cell:</p>
 <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
+    <span class="c1">//ADD Authorization</span>
+    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
+    <span class="c1">//SET Parameters</span>
+    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/forecast/country/{put country name here}"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Your custom response parser code</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//forecast/country/{put country name here}"</span><span class="o">;</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: OAuth YOUR_TOKEN_VALUE"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <p>Here you can get forecast values by country, by indicator, by country and indicator.
 Click on any method below for a sample.
@@ -1140,6 +1440,28 @@ Please note the sample request is limited in scope to a few countries and indica
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEMarkets<span class="o">(</span> <span class="s2">"currency"</span>, <span class="s2">"Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear"</span>, B2<span class="o">)</span>
+</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'OAuth2 YOUR_TOKEN_VALUE'</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/commodities'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">};</span>
+<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// your code here if you want to use the results !</span>
+<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/markets/commodities?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
@@ -1148,6 +1470,43 @@ Or type in any empty cell:</p>
 <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
+</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<span class="p">{</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
+    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
+    <span class="c1">//ADD Authorization</span>
+    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"OAuth2"</span><span class="p">,</span> <span class="s">"YOUR_TOKEN"</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
+    <span class="c1">//SET Parameters</span>
+    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/markets/commodities"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">//Your custom response parser code</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//markets/commodities"</span><span class="o">;</span>
+<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
+<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
+<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: OAuth YOUR_TOKEN_VALUE"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satusfy your needs....
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
 
@@ -2803,6 +3162,18 @@ or<br>
               </div>
               <div>
                 <a href="#" data-language-name="jsonnet">jQuery</a>
+              </div>
+              <div>
+                <a href="#" data-language-name="javascript">NodeJS</a>
+              </div>
+              <div>
+                <a href="#" data-language-name="csharp">C#</a>
+              </div>
+              <div>
+                <a href="#" data-language-name="java">Java</a>
+              </div>
+              <div>
+                <a href="#" data-language-name="php">PHP</a>
               </div>
           </div>
       </div>
