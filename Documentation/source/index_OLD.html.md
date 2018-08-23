@@ -6,6 +6,10 @@ language_tabs:
   - shell : Excel
   - r : R
   - jsonnet : jQuery
+  - javascript : NodeJS
+  - csharp : C#
+  - java : Java
+  - php : PHP
 
 toc_footers:
  - <a target = '_blank' href=" https://tradingeconomics.com/contact.aspx?subject=api">Support</a>
@@ -123,6 +127,65 @@ Before proceeding select your language tab on the right.
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
 
+<blockquote class="lang-specific javascript">
+<p>
+  <strong>Multiple Parameters</strong>
+   <br>
+   
+    <br>      
+   Almost all of the Trading Economics WEB API methods support multiple parameters.  
+   <br>   
+   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   <br> 
+   Here is a practical example:
+   <br>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</blockquote>
+
+<blockquote class="lang-specific csharp">
+<p>
+  <strong>Multiple Parameters</strong>
+   <br>
+   
+    <br>      
+   Almost all of the Trading Economics WEB API methods support multiple parameters.  
+   <br>   
+   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   <br> 
+   Here is a practical example:
+   <br>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</blockquote>
+
+<blockquote class="lang-specific java">
+<p>
+  <strong>Multiple Parameters</strong>
+   <br>
+   
+    <br>      
+   Almost all of the Trading Economics WEB API methods support multiple parameters.  
+   <br>   
+   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   <br> 
+   Here is a practical example:
+   <br>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</blockquote>
+
+<blockquote class="lang-specific php">
+<p>
+  <strong>Multiple Parameters</strong>
+   <br>
+   
+    <br>      
+   Almost all of the Trading Economics WEB API methods support multiple parameters.  
+   <br>   
+   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   <br> 
+   Here is a practical example:
+   <br>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</blockquote>
 
 ### Data Types  
 
@@ -230,6 +293,30 @@ Or type in any empty cell:</p>
 ```shell
 =TEIndicators( "united states", "bankruptcies", "Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate", B2)
 ```
+```javascript
+var http = require('https');
+var headers = {
+    'Accept': 'Application/xml',
+    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
+};
+var buffer = '';
+var options = {
+    host: 'api.tradingeconomics.com',
+    port: 80,
+    path: '/indicators',
+    headers: headers
+};
+callback = function(response) {
+    response.on('data', function (chunk) {
+    buffer += chunk;
+});
+response.on('end', function () {
+    // your code here if you want to use the results !
+});
+}
+  
+var req = http.get(options, callback).end();       
+```
 
 ```jsonnet
 var url = 'https://api.tradingeconomics.com/indicators?c=guest:guest';
@@ -240,6 +327,52 @@ $.ajax({
 }).done(function (data) {
     console.log(data);
 });
+```
+
+```csharp
+using (var client = new HttpClient())
+{
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
+    client.DefaultRequestHeaders.Clear();
+    //ADD Acept Header to tell the server what data type you want
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+    //ADD Authorization
+    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
+    client.DefaultRequestHeaders.Authorization = auth;
+    //SET Parameters
+    HttpResponseMessage response = await client.GetAsync("/indicators");
+    if (response.IsSuccessStatusCode)
+    {
+        //Your custom response parser code
+    }
+}
+```
+
+```java
+String uri = "https://api.tradingeconomics.com//indicators";
+URL url = new URL(uri);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Accept", "application/xml");
+InputStream xml = connection.getInputStream();
+```
+
+```php
+<?php
+$url = 'https://api.tradingeconomics.com/country';
+$headers = array(
+    "Accept: application/xml",
+    "Authorization: OAuth YOUR_TOKEN_VALUE"
+);
+$handle = curl_init(); 
+    curl_setopt($handle, CURLOPT_URL, $url);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    
+    $data = curl_exec($handle);
+curl_close($handle);
+//parse your data to satusfy your needs....
+?>
 ```
 
 ### Methods
@@ -373,6 +506,31 @@ Or type in any empty cell:</p>
 =TEHistorical( "andorra", "gdp per capita", "2010-01-01", "2017-10-29", "Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate", B2)
 ```
 
+```javascript
+var http = require('https');
+var headers = {
+    'Accept': 'Application/xml',
+    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
+};
+var buffer = '';
+var options = {
+    host: 'api.tradingeconomics.com',
+    port: 80,
+    path: '/historical/country/{put country name here}/indicator/{put indicator name here}',
+    headers: headers
+};
+callback = function(response) {
+    response.on('data', function (chunk) {
+    buffer += chunk;
+});
+response.on('end', function () {
+    // your code here if you want to use the results !
+});
+}
+  
+var req = http.get(options, callback).end();         
+```
+
 ```jsonnet
 var url = 'https://api.tradingeconomics.com/historical/country/{put country name here}/indicator/{put indicator name here}?c=guest:guest';
 $.ajax({
@@ -384,7 +542,51 @@ $.ajax({
 });
 ```
 
+```csharp
+using (var client = new HttpClient())
+{
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
+    client.DefaultRequestHeaders.Clear();
+    //ADD Acept Header to tell the server what data type you want
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+    //ADD Authorization
+    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
+    client.DefaultRequestHeaders.Authorization = auth;
+    //SET Parameters
+    HttpResponseMessage response = await client.GetAsync("/historical/country/{put country name here}/indicator/{put indicator name here}");
+    if (response.IsSuccessStatusCode)
+    {
+        //Your custom response parser code
+    }
+}
+```
 
+```java
+String uri = "https://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}";
+URL url = new URL(uri);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Accept", "application/xml");
+InputStream xml = connection.getInputStream();
+```
+
+```php
+<?php
+$url = 'https://api.tradingeconomics.com/country';
+$headers = array(
+    "Accept: application/xml",
+    "Authorization: OAuth YOUR_TOKEN_VALUE"
+);
+$handle = curl_init(); 
+    curl_setopt($handle, CURLOPT_URL, $url);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    
+    $data = curl_exec($handle);
+curl_close($handle);
+//parse your data to satisfy your needs....
+?>
+```
 
 ### Methods
 
@@ -577,6 +779,31 @@ Or type in any empty cell:</p>
 =TECalendar( "germany", "services pmi", "2017-03-24", "2017-06-24", "Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate", B2)
 ```
 
+```javascript
+var http = require('https');
+var headers = {
+    'Accept': 'Application/xml',
+    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
+};
+var buffer = '';
+var options = {
+    host: 'api.tradingeconomics.com',
+    port: 80,
+    path: '/calendar',
+    headers: headers
+};
+callback = function(response) {
+    response.on('data', function (chunk) {
+    buffer += chunk;
+});
+response.on('end', function () {
+    // your code here if you want to use the results !
+});
+}
+  
+var req = http.get(options, callback).end();
+```
+
 ```jsonnet
 var url = 'https://api.tradingeconomics.com/calendar?c=guest:guest';
 $.ajax({
@@ -586,6 +813,52 @@ $.ajax({
 }).done(function (data) {
     console.log(data);
 });
+```
+
+```csharp
+using (var client = new HttpClient())
+{
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
+    client.DefaultRequestHeaders.Clear();
+    //ADD Acept Header to tell the server what data type you want
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+    //ADD Authorization
+    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
+    client.DefaultRequestHeaders.Authorization = auth;
+    //SET Parameters
+    HttpResponseMessage response = await client.GetAsync("/calendar");
+    if (response.IsSuccessStatusCode)
+    {
+        //Your custom response parser code
+    }
+}
+```
+
+```java
+String uri = "https://api.tradingeconomics.com//calendar";
+URL url = new URL(uri);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Accept", "application/xml");
+InputStream xml = connection.getInputStream();
+```
+
+```php
+<?php
+$url = 'https://api.tradingeconomics.com/country';
+$headers = array(
+    "Accept: application/xml",
+    "Authorization: OAuth YOUR_TOKEN_VALUE"
+);
+$handle = curl_init(); 
+    curl_setopt($handle, CURLOPT_URL, $url);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    
+    $data = curl_exec($handle);
+curl_close($handle);
+//parse your data to satusfy your needs....
+?>
 ```
 
 Here you can get calendar events. 
@@ -713,6 +986,31 @@ Or type in any empty cell:</p>
 =TEForecasts( "united states", "gdp", "Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date", B2)
 ```
 
+```javascript
+var http = require('https');
+var headers = {
+    'Accept': 'Application/xml',
+    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
+};
+var buffer = '';
+var options = {
+    host: 'api.tradingeconomics.com',
+    port: 80,
+    path: '/forecast/country/{put country name here}',
+    headers: headers
+};
+callback = function(response) {
+    response.on('data', function (chunk) {
+    buffer += chunk;
+});
+response.on('end', function () {
+    // your code here if you want to use the results !
+});
+}
+  
+var req = http.get(options, callback).end();         
+```
+
 ```jsonnet
 var url = 'https://api.tradingeconomics.com/forecast/country/{put country name here}?c=guest:guest';
 $.ajax({
@@ -724,6 +1022,51 @@ $.ajax({
 });
 ```
 
+```csharp
+using (var client = new HttpClient())
+{
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
+    client.DefaultRequestHeaders.Clear();
+    //ADD Acept Header to tell the server what data type you want
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+    //ADD Authorization
+    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
+    client.DefaultRequestHeaders.Authorization = auth;
+    //SET Parameters
+    HttpResponseMessage response = await client.GetAsync("/forecast/country/{put country name here}");
+    if (response.IsSuccessStatusCode)
+    {
+        //Your custom response parser code
+    }
+}
+```
+
+```java
+String uri = "https://api.tradingeconomics.com//forecast/country/{put country name here}";
+URL url = new URL(uri);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Accept", "application/xml");
+InputStream xml = connection.getInputStream();
+```
+
+```php
+<?php
+$url = 'https://api.tradingeconomics.com/country';
+$headers = array(
+    "Accept: application/xml",
+    "Authorization: OAuth YOUR_TOKEN_VALUE"
+);
+$handle = curl_init(); 
+    curl_setopt($handle, CURLOPT_URL, $url);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    
+    $data = curl_exec($handle);
+curl_close($handle);
+//parse your data to satisfy your needs....
+?>
+```
 
 Here you can get forecast values by country, by indicator, by country and indicator.
 Click on any method below for a sample.
@@ -842,6 +1185,31 @@ Or type in any empty cell:</p>
 =TEMarkets( "currency", "Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear", B2)
 ```
 
+```javascript
+var http = require('https');
+var headers = {
+    'Accept': 'Application/xml',
+    'Authorization': 'OAuth2 YOUR_TOKEN_VALUE'
+};
+var buffer = '';
+var options = {
+    host: 'api.tradingeconomics.com',
+    port: 80,
+    path: '/markets/commodities',
+    headers: headers
+};
+callback = function(response) {
+    response.on('data', function (chunk) {
+    buffer += chunk;
+});
+response.on('end', function () {
+    // your code here if you want to use the results !
+});
+}
+  
+var req = http.get(options, callback).end();         
+```
+
 ```jsonnet
 var url = 'https://api.tradingeconomics.com/markets/commodities?c=guest:guest';
 $.ajax({
@@ -851,6 +1219,52 @@ $.ajax({
 }).done(function (data) {
     console.log(data);
 });
+```
+
+```csharp
+using (var client = new HttpClient())
+{
+    client.BaseAddress = new Uri("https://api.tradingeconomics.com/");
+    client.DefaultRequestHeaders.Clear();
+    //ADD Acept Header to tell the server what data type you want
+    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+    //ADD Authorization
+    AuthenticationHeaderValue auth = new AuthenticationHeaderValue("OAuth2", "YOUR_TOKEN");
+    client.DefaultRequestHeaders.Authorization = auth;
+    //SET Parameters
+    HttpResponseMessage response = await client.GetAsync("/markets/commodities");
+    if (response.IsSuccessStatusCode)
+    {
+        //Your custom response parser code
+    }
+}
+```
+
+```java
+String uri = "https://api.tradingeconomics.com//markets/commodities";
+URL url = new URL(uri);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestMethod("GET");
+    connection.setRequestProperty("Accept", "application/xml");
+InputStream xml = connection.getInputStream();
+```
+
+```php
+<?php
+$url = 'https://api.tradingeconomics.com/country';
+$headers = array(
+    "Accept: application/xml",
+    "Authorization: OAuth YOUR_TOKEN_VALUE"
+);
+$handle = curl_init(); 
+    curl_setopt($handle, CURLOPT_URL, $url);
+    curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    
+    $data = curl_exec($handle);
+curl_close($handle);
+//parse your data to satusfy your needs....
+?>
 ```
 
 ### Methods
