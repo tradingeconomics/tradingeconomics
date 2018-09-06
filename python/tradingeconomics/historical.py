@@ -30,6 +30,9 @@ class CredentialsError(ValueError):
 class LoginError(AttributeError):
     pass
 
+class WebRequestError(ValueError):
+    pass
+
 def parseData(data):
         indx = pd.DatetimeIndex(data['dates'])
         datafr = pd.DataFrame(data['values']) 

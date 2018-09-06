@@ -30,6 +30,9 @@ class LoginError(AttributeError):
 class DateError(ValueError):
     pass
 
+class WebRequestError(ValueError):
+    pass
+    
 def getMarketsData(marketsField, output_type=None):
     """
     Returns a list of available commodities, currencies, indeces or 

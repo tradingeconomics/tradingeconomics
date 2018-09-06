@@ -30,6 +30,8 @@ class CredentialsError(ValueError):
 class LoginError(AttributeError):
     pass
 
+class WebRequestError(ValueError):
+    pass
 
 def parseData(data):
     datafr = pd.DataFrame.from_dict(data)

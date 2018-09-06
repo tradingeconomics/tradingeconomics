@@ -26,6 +26,9 @@ class CredentialsError(ValueError):
 class LoginError(AttributeError):
     pass
   
+class WebRequestError(ValueError):
+    pass
+  
 def checkCountry(country):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'       
     if type(country) is str:

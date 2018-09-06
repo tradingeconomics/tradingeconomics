@@ -31,6 +31,9 @@ class LoginError(AttributeError):
 class DateError(ValueError):
     pass
 
+class WebRequestError(ValueError):
+    pass
+
 def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_type=None):
     """
     Returns earnings calendar data.

@@ -29,6 +29,9 @@ class CredentialsError(ValueError):
 class LoginError(AttributeError):
     pass
 
+class WebRequestError(ValueError):
+    pass
+
 def paramCheck (country, indicator = None):
     if type(country) is str and indicator == None:
         linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(country)
