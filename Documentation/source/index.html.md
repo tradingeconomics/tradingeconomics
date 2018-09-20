@@ -250,8 +250,6 @@ $.ajax({
 * List of all indicators  
 <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a>
 
-* Description of all indicators  
-<a target = '_blank' href="https://api.tradingeconomics.com/indicators/descriptions?c=guest:guest">/indicators/descriptions</a>
 
 * List of indicators by country    
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a>
