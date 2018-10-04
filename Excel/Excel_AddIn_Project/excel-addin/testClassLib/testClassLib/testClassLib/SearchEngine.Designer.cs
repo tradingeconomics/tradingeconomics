@@ -1,4 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Net;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace TE
 {
@@ -13,6 +21,7 @@ namespace TE
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -49,7 +58,6 @@ namespace TE
             this.search.Location = new System.Drawing.Point(13, 13);
             this.search.Margin = new System.Windows.Forms.Padding(4);
             this.search.Name = "search";
-            this.search.AutoSize = false;
             this.search.Size = new System.Drawing.Size(795, 17);
             this.search.TabIndex = 1;
             // 
@@ -172,11 +180,10 @@ namespace TE
             this.pageBox.MaximumSize = new System.Drawing.Size(50, 25);
             this.pageBox.MinimumSize = new System.Drawing.Size(50, 25);
             this.pageBox.Name = "pageBox";
-            this.pageBox.AutoSize = false;
             this.pageBox.Size = new System.Drawing.Size(50, 25);
             this.pageBox.TabIndex = 11;
             // 
-            // SearchEngine
+            // SearchEngineInterval
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -199,6 +206,7 @@ namespace TE
             this.MinimizeBox = false;
             this.Name = "SearchEngine";
             this.ShowIcon = false;
+            this.Load += new System.EventHandler(this.SearchEngine_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

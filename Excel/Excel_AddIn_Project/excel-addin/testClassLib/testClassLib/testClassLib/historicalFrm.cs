@@ -257,7 +257,8 @@ namespace TE
                 if (selectedCountryLstBx.Items.Count == 0 || selectedIndicatorLstBx.Items.Count == 0)
                 {
                     string field = (selectedCountryLstBx.Items.Count == 0) ? "Country" : "Indicator";
-                    MessageBox.Show(field + " should be provided");
+                    helperClass.log.Info(field + " was not provided to obtain historical data.");
+                    MessageBox.Show(field + " should be provided");                    
                 }                
                 else
                 {
@@ -281,6 +282,7 @@ namespace TE
                     {
                         if (columns.Count == 1)
                         {
+                            helperClass.log.Info("Less than two columns were selected.");
                             MessageBox.Show("Please select at least two columns");
                             return;
                         }
@@ -301,6 +303,7 @@ namespace TE
                           date2,
                           dateCell[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
                     }
+                    helperClass.log.Info(helperClass.formula);
                     MyRibbon.cellRange = helperClass.CellAddress(activeCellPositionBox.Text);
                     MyRibbon.cellRange.Formula = helperClass.formula;
                     Close();

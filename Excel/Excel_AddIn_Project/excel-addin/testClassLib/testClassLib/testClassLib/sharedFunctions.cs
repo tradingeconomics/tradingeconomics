@@ -54,6 +54,7 @@ namespace TE
         {
             if (isoCntryString.Length > 255)
             {
+                helperClass.log.Info("You selected too many countries. Please remove some of them.");
                 MessageBox.Show("You selected too many countries. Please remove some of them.");
                 return true;
             }
@@ -64,6 +65,7 @@ namespace TE
         {
             if (indctrsString.Length > 255)
             {
+                helperClass.log.Info("You selected too many indicators. Please remove some of them.");
                 MessageBox.Show("You selected too many indicators. Please remove some of them.");
                 return true;
             }
@@ -74,16 +76,16 @@ namespace TE
         {
             string answer;
 
-            if (SearchEngine.fromSearch)
+            if (PickTimeInterval.fromSearch)
             {
-                answer = SearchEngine.searchAnswer;
-                SearchEngine.fromSearch = false;
+                answer = PickTimeInterval.searchAnswer;
+                PickTimeInterval.fromSearch = false;
 
-                if (SearchEngine.fromWinForm == false & MyRibbon.refresh == false)
+                if (PickTimeInterval.fromWinForm == false & MyRibbon.refresh == false)
                 {                    
                     answer = indic;
                 }
-                else if(SearchEngine.fromWinForm == false & MyRibbon.refresh != false)
+                else if(PickTimeInterval.fromWinForm == false & MyRibbon.refresh != false)
                 {
                     answer = MyRibbon.fCellText;
                 }
@@ -93,7 +95,7 @@ namespace TE
                 answer = "Updated at " + DateTime.Now.TimeOfDay.ToString("hh\\:mm\\:ss");
             }
 
-            SearchEngine.fromWinForm = false;
+            PickTimeInterval.fromWinForm = false;
             MyRibbon.refresh = false;
             return answer;
         }

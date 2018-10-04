@@ -45,6 +45,7 @@ namespace TE
 
         public void OnMarkets2ButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("Markets button pressed.");
             try
             {
                 try
@@ -85,8 +86,9 @@ namespace TE
 
         public void OnIndicatorsButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("Indicators button pressed.");
             try
-            {
+            {               
                 var ifrm = new indicatorsFrm();
                 ifrm.ShowDialog();
             }
@@ -98,6 +100,7 @@ namespace TE
 
         public void OnCalendarButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("Calendar button pressed.");
             try
             {
                 var cFrm = new calendarFrm();
@@ -111,6 +114,7 @@ namespace TE
 
         public void OnForecastsButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("Forecasts button pressed.");
             try
             {
                 var fFrm = new forecastsFrm();
@@ -124,6 +128,7 @@ namespace TE
 
         public void OnHistoricalButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("Historical button pressed.");
             try
             {
                 var hFrm = new historicalFrm();
@@ -137,6 +142,7 @@ namespace TE
         
         public void OnRefreshButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("Refresh button pressed.");
             try
             {
                 try
@@ -159,6 +165,7 @@ namespace TE
 
         public void SearchEnginePressed(IRibbonControl control)
         {
+            helperClass.log.Info("Search button pressed.");
             try
             {
                 var srchFrm = new SearchEngine();
@@ -241,6 +248,7 @@ namespace TE
 
         public void OnApiKeyButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("API key button pressed.");
             try
             {
                 //helperClass.log.Info("On Api key button is pressed");
@@ -264,6 +272,7 @@ namespace TE
 
         public void OnAboutButtonPressed(IRibbonControl control)
         {
+            helperClass.log.Info("About button pressed.");
             try
             {
                 //helperClass.log.Info("On About button is pressed");

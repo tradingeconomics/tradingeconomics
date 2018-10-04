@@ -8,6 +8,10 @@ EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ExcelAddInDeploy", "..\..\..\WIX\WIX\WiXInstaller\Source\ExcelAddInDeploy\ExcelAddInDeploy.wixproj", "{9787F6FE-2779-410B-B4EF-A04D2C6C7EEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEconomics", "testClassLib\TEconomics.csproj", "{1A5B1D07-B5B8-4537-A35D-45D3B58A2CB1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F135D7B8-747C-4C4F-A9FC-1F3A25FBD403} = {F135D7B8-747C-4C4F-A9FC-1F3A25FBD403}
+		{9787F6FE-2779-410B-B4EF-A04D2C6C7EEA} = {9787F6FE-2779-410B-B4EF-A04D2C6C7EEA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -52,10 +52,10 @@ namespace TE
                     }
                 }
                 /*
-                if (SearchEngine.fromSearch)
+                if (PickTimeInterval.fromSearch)
                 {
-                    answer = SearchEngine.searchAnswer;
-                    SearchEngine.fromSearch = false;
+                    answer = PickTimeInterval.searchAnswer;
+                    PickTimeInterval.fromSearch = false;
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace TE
         public static void customFunctionHelper(JArray jsData, string columnsToUse)
         {
             try
-            {
+            {   
                 Dictionary<string, formulaColumns> myNewDict = helperClass.getNewDict();
                 if (jsData.Count == 0)
                 {
@@ -108,7 +108,7 @@ namespace TE
                     {
                         helperClass.log.Error(ex.Message);
                         helperClass.log.Trace(ex.StackTrace);
-                        throw;
+                       // throw;
                     }
                 }
                 helperClass.RemoveOldKey(myNewDict);
@@ -203,6 +203,7 @@ namespace TE
         [ExcelFunction(Name = "TEMarkets", IsMacroType = true, IsThreadSafe = true)]
         public static string teGetMarkets(string mrkt, string columnsToUse, [ExcelArgument(AllowReference = true)] object firstCell)
         {
+            helperClass.log.Info("Executing TEMarkets.");
             SearchEngine.fromSearch = false;
             udfClassHelper("TEMarkets", mrkt);
 
@@ -247,8 +248,9 @@ namespace TE
                     helperClass.setGlobalDict(formulaCell.Address[false, false], frmlaColumnsPair);
 
                 url = host + "markets/" + mrkt + "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
+                
                 var jsData = new requestData(url).getJSON();
-
+              
                 if (jsData.Count == 0)
                 {
                     MessageBox.Show("No data provided for selected parameters");
@@ -310,6 +312,7 @@ namespace TE
         [ExcelFunction(Name = "TEIndicators", IsMacroType = true, IsThreadSafe = false)]
         public static string teGetIndicators(string cntry, string indctr, string columnsToUse, [ExcelArgument(AllowReference = true)] object firstCell)
         {
+            helperClass.log.Info("Executing TEIndicators.");
             SearchEngine.fromSearch = false;
             udfClassHelper("TEIndicators");
 
@@ -364,6 +367,7 @@ namespace TE
         public static string teGetCalendar(string cntry, string indctr, string startDate, string endDate, string columnsToUse, 
             [ExcelArgument(AllowReference = true)] object firstCell)
         {
+            helperClass.log.Info("Executing TECalendar.");
             SearchEngine.fromSearch = false;
             udfClassHelper("TECalendar");
 
@@ -417,6 +421,7 @@ namespace TE
         [ExcelFunction(Name = "TEForecasts", IsMacroType = true, IsThreadSafe = false)]
         public static string teGetForecasts(string cntry, string indctr, string columnsToUse, [ExcelArgument(AllowReference = true)] object firstCell)
         {
+            helperClass.log.Info("Executing TEForecasts.");
             SearchEngine.fromSearch = false;
             udfClassHelper("TEForecasts");
 
@@ -470,54 +475,67 @@ namespace TE
         public static string teGetHistorical(string cntry, string indctr, string startDate, string endDate, string columnsToUse, 
             [ExcelArgument(AllowReference = true)] object myArgument)
         {
-            SearchEngine.fromSearch = false;
-            udfClassHelper("TEHistorical");
 
-            if (myArgument is ExcelMissing)
-            {
-                dataStartCell = formulaCell;
-                newFormula = string.Format($"=TEHistorical( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columnsToUse}\")");
-            }
-            else
-            {
-                try
+            helperClass.log.Info("Executing TEHistorical.");
+            try
+            { 
+
+                SearchEngine.fromSearch = false;
+                udfClassHelper("TEHistorical");
+
+                if (myArgument is ExcelMissing)
                 {
-                    dataStartCell = helperClass.ReferenceToRange((ExcelReference)myArgument);
-                    newFormula = string.Format(
-                        $"=TEHistorical( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
+                    dataStartCell = formulaCell;
+                    newFormula = string.Format($"=TEHistorical( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columnsToUse}\")");
                 }
-                catch (Exception)
+                else
                 {
-                    refError = true;
-                    helperClass.getNewDict();
-                    return "#REF!";
-                    throw;
-                }
-            }
-
-            customFunctionHelper_2(columnsToUse);
-
-            if (helperClass.runFormula == "RunAutomatically = 1")
-            {
-                customFunctionAutoRun("TEHistorical",
-                    new formulaColumns(newFormula, columnsToUse, null, formulaCell),
-                    helperClass.SOmeName(cntry, indctr, "Hist", startDate, endDate),
-                    columnsToUse);
-            }
-            else
-            {
-                customFunctionNotAutoRun("TEHistorical");
-
-                foreach (var item in MyRibbon.myFormulasDict.Keys)
-                {
-                    if (MyRibbon.myFormulasDict[item]._formula == newFormula && formulaCell.Address[false, false] == item)
+                    try
                     {
-                        return formulaCell.Text;
+                        dataStartCell = helperClass.ReferenceToRange((ExcelReference)myArgument);
+                        newFormula = string.Format(
+                            $"=TEHistorical( \"{cntry}\", \"{indctr}\", \"{startDate}\", \"{endDate}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
+                    }
+                    catch (Exception e)
+                    {
+                        helperClass.log.Error(e);
+                        refError = true;
+                        helperClass.getNewDict();
+                        return "#REF!";
+                        throw;
                     }
                 }
-                customFunctionHelper(helperClass.SOmeName(cntry, indctr, "Hist", startDate, endDate), columnsToUse);
+
+                customFunctionHelper_2(columnsToUse);
+
+                if (helperClass.runFormula == "RunAutomatically = 1")
+                {
+                    customFunctionAutoRun("TEHistorical",
+                        new formulaColumns(newFormula, columnsToUse, null, formulaCell),
+                        helperClass.SOmeName(cntry, indctr, "Hist", startDate, endDate),
+                        columnsToUse);
+                }
+                else
+                {
+                    customFunctionNotAutoRun("TEHistorical");
+
+                    foreach (var item in MyRibbon.myFormulasDict.Keys)
+                    {
+                        if (MyRibbon.myFormulasDict[item]._formula == newFormula && formulaCell.Address[false, false] == item)
+                        {
+                            return formulaCell.Text;
+                        }
+                    }
+                    customFunctionHelper(helperClass.SOmeName(cntry, indctr, "Hist", startDate, endDate), columnsToUse);
+                }
+                customFunctionEnd("Historical");
+
             }
-            customFunctionEnd("Historical");
+            catch (Exception e)
+            {
+                helperClass.log.Error(e);
+            }
+
             return (formulaCell.Address == dataStartCell.Address) ? columnsToUse.Split(',')[0] : sharedFunctions.getAnswer(indctr);
         }
 
@@ -525,6 +543,7 @@ namespace TE
         [ExcelFunction(Name = "TESeries", IsMacroType = true)]
         public static string teGetTS(string cntry, string indctr, string startDate, string endDate, [ExcelArgument(AllowReference = true)] object myArgument)
         {
+            helperClass.log.Info("Executing TESeries.");
             SearchEngine.fromSearch = false;
             bool fromTS = true;
             udfClassHelper("TESeries");
@@ -633,9 +652,9 @@ namespace TE
         }
 
         [ExcelFunction(Name = "TEMrktsHist", IsMacroType = true)]
-        public static string teGetMktsHist(string mktType, string indctr, string columnsToUse, [ExcelArgument(AllowReference = true)] object myArgument)
+        public static string teGetMktsHist(string mktType, string indctr, string columnsToUse, string iniDate, string clsDate, [ExcelArgument(AllowReference = true)] object myArgument)
         {
-            
+            helperClass.log.Info("Executing TEMrkstsHist.");
             SearchEngine.fromSearch = true;
             udfClassHelper("TEMrktsHist");
 
@@ -666,7 +685,7 @@ namespace TE
             {
                 customFunctionAutoRun("TEMrktsHist",
                     new formulaColumns(newFormula, columnsToUse, null, formulaCell),
-                    helperClass.SOmeName("", indctr, "MrktHist", "", "", mktType),
+                    helperClass.SOmeName("", indctr, "MrktHist", iniDate, clsDate, mktType),
                     columnsToUse);
             }
             else
@@ -681,7 +700,7 @@ namespace TE
                         return formulaCell.Text;
                     }
                 }
-                customFunctionHelper(helperClass.SOmeName("", indctr, "MrktHist", "", "", mktType), columnsToUse);                
+                customFunctionHelper(helperClass.SOmeName("", indctr, "MrktHist", iniDate, clsDate, mktType), columnsToUse);                
             }
             customFunctionEnd("TEMrktsHist");
             return (formulaCell.Address == dataStartCell.Address) ? columnsToUse.Split(',')[0] : sharedFunctions.getAnswer(indctr);
@@ -690,7 +709,7 @@ namespace TE
         [ExcelFunction(Name = "SearchEconomy", IsMacroType = true)]
         public static string teSearchEconomy(string cntry, string indctr, string columnsToUse, [ExcelArgument(AllowReference = true)] object myArgument)
         {
-            helperClass.log.Info("NO INFO, I am Economy!");
+            helperClass.log.Info("Executing Search Economy.");
             SearchEngine.fromSearch = true;
             udfClassHelper("SearchEconomy");
 

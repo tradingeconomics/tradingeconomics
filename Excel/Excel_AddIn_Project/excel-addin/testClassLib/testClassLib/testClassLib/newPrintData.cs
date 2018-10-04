@@ -43,17 +43,19 @@ namespace TE
         private object[,] ConvertNestedListToArray(JArray data, string[] names)
         {            
             var newData = new object[data.Count, names.Length];
-
+            var ptCulture = System.Globalization.CultureInfo.CreateSpecificCulture("pt-PT");
             for (var r = 0; r != data.Count; r++)
                 for (var c = 0; c < names.Length; c++)
                 {
                   try
                     {
                         newData[r, c] = (names[c] == "Date") ? 
-                            Convert.ToDateTime(data[r][names[c]].ToString()) : data[r][names[c]];
+                            Convert.ToDateTime(data[r][names[c]].ToString(), ptCulture.DateTimeFormat) : data[r][names[c]];
                     }
-                    catch(NullReferenceException )
+                    catch(Exception e)
                     {
+                        helperClass.log.Info(data[r][names[c]].ToString());
+                        helperClass.log.Info(ptCulture.DateTimeFormat);
                         continue;
                     }
                 }            
@@ -161,7 +163,7 @@ namespace TE
             {
                 helperClass.log.Info(ex.Message);
                 helperClass.log.Trace(ex.StackTrace);
-                throw;
+               // throw;
             }                      
         }
 

@@ -16,6 +16,8 @@ namespace TE
         public static bool fromSearch = false;
         public static bool fromWinForm = false;
         public static string searchAnswer;
+        PickTimeInterval picktime_form;
+
 
         string startUrl = "https://brains.tradingeconomics.com/v2/search/";//"http://daedalus:3000/v2/search/";
         string endtUrl = "&pp=100&nogroup=Overview;Financial%20Statements&app=excel";
@@ -171,6 +173,7 @@ namespace TE
         {
             try
             {
+                
                 fromWinForm = true;
                 string country = "";
                 int i = searchResults.SelectedIndex;
@@ -183,9 +186,9 @@ namespace TE
                         country = (helperClass.myCountrysDict.ContainsKey(myTabList["hits"][i]["country"][0].ToString())) ?
                             helperClass.myCountrysDict[myTabList["hits"][i]["country"][0].ToString()] : myTabList["hits"][i]["country"][0].ToString();
                     }
-                    
+
                     string[] allMarkets = { "commodity", "idx", "forex", "bond", "equity" };
-                    string[] newMarkets = { "fred", "wb", "comtrade", "mkt"};
+                    string[] newMarkets = { "fred", "wb", "comtrade", "mkt" };
 
                     searchAnswer = (myTabList["hits"][i]["unit"].ToString().Length < 1) ?
                          myTabList["hits"][i]["pretty_name"].ToString() :
@@ -194,11 +197,12 @@ namespace TE
 
                     if (allMarkets.Contains(myTabList["hits"][i]["type"].ToString()))
                     {
-                        helperClass.formula = string.Format("=TEMrktsHist( \"{0}\",\"{1}\", \"{2}\", {3})",
-                            "historical",
-                            myTabList["hits"][i]["s"],
-                            String.Join(",", helperClass.MarketHistColumns),
-                            helperClass.CellAddress(helperClass.RangeAddress())[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
+                        picktime_form = new PickTimeInterval(searchResults, myTabList);
+                        Close();
+                        picktime_form.ShowDialog();
+                       
+                        //this.Hide();
+                        //return;
                     }
                     else if (newMarkets.Contains(myTabList["hits"][i]["type"].ToString()))
                     {
@@ -211,14 +215,14 @@ namespace TE
                             case "mkt": myCat = "markets"; break;
                             default: myCat = ""; break;
                         }
-                        string newMarketsCols = (myCat == "markets") ? 
+                        string newMarketsCols = (myCat == "markets") ?
                             String.Join(",", helperClass.MarketHistColumns) : String.Join(",", helperClass.fredColumns);
-                        
-                            helperClass.formula = string.Format("=TEMrktsHist( \"{0}\",\"{1}\", \"{2}\", {3})",
-                            myCat,
-                            myTabList["hits"][i]["s"].ToString().Replace(":wb", "").Replace(":fred", ""),
-                            newMarketsCols,
-                            helperClass.CellAddress(helperClass.RangeAddress())[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
+
+                        helperClass.formula = string.Format("=TEMrktsHist( \"{0}\",\"{1}\", \"{2}\", {3})",
+                        myCat,
+                        myTabList["hits"][i]["s"].ToString().Replace(":wb", "").Replace(":fred", ""),
+                        newMarketsCols,
+                        helperClass.CellAddress(helperClass.RangeAddress())[2, 2].Address[false, false, Microsoft.Office.Interop.Excel.XlReferenceStyle.xlA1]);
 
                     }
                     else if (myTabList["hits"][i]["type"].ToString() == "economic")
@@ -248,9 +252,10 @@ namespace TE
                     MyRibbon.cellRange = helperClass.CellAddress(helperClass.RangeAddress());
                     MyRibbon.cellRange.Formula = helperClass.formula;
                 }
-                
-                Close();
-            }
+
+                Close();                
+
+                }
             catch (Exception ex)
             {
                 helperClass.log.Error(ex);
@@ -404,6 +409,16 @@ namespace TE
         private void selectedIndicator_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             getDataBtn_Click(sender, e);
+        }
+
+        private void SearchEngine_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -157,7 +157,7 @@ namespace TE
             {
                 helperClass.log.Info(ex.Message);
                 helperClass.log.Trace(ex.StackTrace);
-                throw;
+                //throw;
             }            
         }
 

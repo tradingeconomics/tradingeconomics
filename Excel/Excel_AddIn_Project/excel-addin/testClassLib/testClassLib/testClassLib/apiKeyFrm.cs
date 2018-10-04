@@ -44,7 +44,7 @@ namespace TE
         {
             try
             {
-                //helperClass.log.Info("Submit button is pressed");
+               
                 if (apiKey.Length == 0)
                 {
                     DialogResult dialogResult = MessageBox.Show(
@@ -73,9 +73,9 @@ namespace TE
                 {
                     using (WebClient wc = new WebClient())
                     {
-                        //helperClass.log.Info("Checking credentials...");
-                        //string url = helperClass.host + "markets/bond?client=" + apiKey + "&excel=" + excelVersion;
-                        //helperClass.log.Info("apiKeyFrm - btnOK_Click, url = " + url);
+                        helperClass.log.Info("Checking credentials for a " + helperClass.getSystemArch() + " system with " + helperClass.getOSInfo() + " OS and Excel " + excelVersion + ".");
+                        string url = helperClass.host + "markets/bond?client=" + apiKey + "&excel=" + excelVersion;
+                        helperClass.log.Info("Get key command redirecting to URL: " + url + ".");
                         JArray.Parse(wc.DownloadString(
                             helperClass.host + "markets/bond?client=" + apiKey + "&excel=" + excelVersion));
                     }
@@ -109,8 +109,8 @@ namespace TE
         {
             try
             {
-                System.Diagnostics.Process.Start("https://sso.tradingeconomics.com/member/excel");
-                //helperClass.log.Info("On API key form, GetKey button is pressed");
+                helperClass.log.Info("On API key form, GetKey button was pressed.");
+                System.Diagnostics.Process.Start("https://sso.tradingeconomics.com/member/excel");                
             }
             catch (Exception ex)
             {
