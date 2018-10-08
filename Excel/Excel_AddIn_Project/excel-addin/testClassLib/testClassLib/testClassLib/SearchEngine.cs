@@ -47,7 +47,7 @@ namespace TE
 
         private void populateResultsList_2(string URL)
         {
-            helperClass.log.Info(URL);
+            //helperClass.log.Info(URL);
             try
             {
                 searchResults.Items.Clear();
@@ -179,8 +179,7 @@ namespace TE
                 int i = searchResults.SelectedIndex;
                 var idx = searchResults.SelectedItem.ToString().LastIndexOf("(");
                 if (searchResults.SelectedItem.ToString().Substring(0, idx).Trim() == myTabList["hits"][i]["pretty_name"].ToString().Trim())
-                {
-                    helperClass.log.Info("Let's GO");
+                {                   
                     if (!String.IsNullOrEmpty(myTabList["hits"][i]["country"].ToString()))
                     {
                         country = (helperClass.myCountrysDict.ContainsKey(myTabList["hits"][i]["country"][0].ToString())) ?
