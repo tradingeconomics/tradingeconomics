@@ -72,9 +72,16 @@ namespace TE
                             !String.IsNullOrEmpty(myTabList["hits"][h]["frequency"].ToString())) ?
                             myTabList["hits"][h]["frequency"][0].ToString() : "--";
 
-                        searchResults.Items.Insert(h, myTabList["hits"][h]["pretty_name"].ToString() + "  (" + unit + "/" + frequency + ")");
+						if((frequency == "Annual" || frequency == "Quanterly") && unit != "~")
+							searchResults.Items.Insert(h, myTabList["hits"][h]["pretty_name"].ToString() + "  (" + unit + "/" + frequency + ")");
+						else if((frequency == "Annual" || frequency == "Quanterly") && unit == "~")
+							// Removing unit.
+							searchResults.Items.Insert(h, myTabList["hits"][h]["pretty_name"].ToString() + "  (" + frequency + ")");
+						else
+							// Removing intrday frequency
+							searchResults.Items.Insert(h, myTabList["hits"][h]["pretty_name"].ToString() );
 
-                        /*if ((myTabList["hits"][h]["unit"].GetType() == typeof(JArray) || myTabList["hits"][h]["unit"] == null) &
+						/*if ((myTabList["hits"][h]["unit"].GetType() == typeof(JArray) || myTabList["hits"][h]["unit"] == null) &
                             (myTabList["hits"][h]["frequency"].GetType() == typeof(JArray) || myTabList["hits"][h]["frequency"] == null))
                         {
                             string unit = (
@@ -91,7 +98,7 @@ namespace TE
                         {
                             searchResults.Items.Insert(h, myTabList["hits"][h]["pretty_name"].ToString());
                         }     */
-                    }
+					}
                 }
                 if (searchResults.Items.Count == 0)
                 {
@@ -178,7 +185,13 @@ namespace TE
                 string country = "";
                 int i = searchResults.SelectedIndex;
                 var idx = searchResults.SelectedItem.ToString().LastIndexOf("(");
-                if (searchResults.SelectedItem.ToString().Substring(0, idx).Trim() == myTabList["hits"][i]["pretty_name"].ToString().Trim())
+				string result = "";
+				if (idx < 1)
+					result = searchResults.SelectedItem.ToString();
+				else
+					result = searchResults.SelectedItem.ToString().Substring(0, idx).Trim();
+
+				if (result == myTabList["hits"][i]["pretty_name"].ToString().Trim())
                 {                   
                     if (!String.IsNullOrEmpty(myTabList["hits"][i]["country"].ToString()))
                     {

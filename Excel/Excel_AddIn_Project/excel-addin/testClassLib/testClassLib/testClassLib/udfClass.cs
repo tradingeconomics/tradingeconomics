@@ -654,7 +654,7 @@ namespace TE
         [ExcelFunction(Name = "TEMrktsHist", IsMacroType = true)]
         public static string teGetMktsHist(string mktType, string indctr, string columnsToUse, string iniDate, string clsDate, [ExcelArgument(AllowReference = true)] object myArgument)
         {
-            helperClass.log.Info("Executing TEMrkstsHist.");
+            helperClass.log.Info("Executing TEMrkstsHist with parameters: " + mktType + " " + indctr + " " + columnsToUse + " " + iniDate + " " + clsDate);
             SearchEngine.fromSearch = true;
             udfClassHelper("TEMrktsHist");
 
@@ -666,9 +666,10 @@ namespace TE
             {
                 try
                 {
-                    dataStartCell = helperClass.ReferenceToRange((ExcelReference)myArgument);
-                    newFormula = string.Format(
-                        $"=TEMrktsHist(\"{mktType}\", \"{indctr}\", \"{columnsToUse}\", {dataStartCell.Address[false, false]})");
+                   // dataStartCell = helperClass.ReferenceToRange((ExcelReference)myArgument);
+					dataStartCell = formulaCell;
+					newFormula = string.Format(
+                        $"=TEMrktsHist(\"{mktType}\", \"{indctr}\", \"{columnsToUse}\",  \"{iniDate}\", \"{clsDate}\",{dataStartCell.Address[false, false]})");
                 }
                 catch (Exception)
                 {
@@ -780,14 +781,16 @@ namespace TE
 
             public void fetchData()
             {
-                //helperClass.log.Info("running fetchData() from  RetrieveAndWriteData");
+                helperClass.log.Info("running fetchData() from  RetrieveAndWriteData");
                 string nextCursorId = null;
 
                 try
                 {
                     do
                     {
+						//Update class variables
                         newPrintData testprint = new newPrintData(names, data, dataStartCell, newFormula, formulaCell);
+						//Populate cells with data
                         testprint.PopulateData();
                     } while (!string.IsNullOrWhiteSpace(nextCursorId));
                 }

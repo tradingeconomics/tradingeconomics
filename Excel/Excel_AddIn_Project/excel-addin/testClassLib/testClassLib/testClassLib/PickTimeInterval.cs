@@ -24,9 +24,9 @@ namespace TE
         int totalPages;
         int maxPage;
         JObject myTabList;
-
-        string start_date = "2017-08-01";
-        string end_date = "2017-08-08";
+		
+		string start_date = DateTime.Now.AddDays(-10).ToString("yyyy/MM/dd");
+		string end_date = DateTime.Now.ToString("yyyy/MM/dd");
         System.Windows.Forms.ListBox searchResults;
 
         public PickTimeInterval(System.Windows.Forms.ListBox searchResults, JObject myTabList)
@@ -55,7 +55,13 @@ namespace TE
                 string country = "";
                 int i = searchResults.SelectedIndex;
                 var idx = searchResults.SelectedItem.ToString().LastIndexOf("(");
-                if (searchResults.SelectedItem.ToString().Substring(0, idx).Trim() == myTabList["hits"][i]["pretty_name"].ToString().Trim())
+				string result = "";
+				if (idx < 1)
+					result = searchResults.SelectedItem.ToString();
+				else
+					result = searchResults.SelectedItem.ToString().Substring(0, idx).Trim();
+
+				if (result == myTabList["hits"][i]["pretty_name"].ToString().Trim())
                 {
                     //helperClass.log.Info("Let's GO");
                     if (!String.IsNullOrEmpty(myTabList["hits"][i]["country"].ToString()))
@@ -119,150 +125,7 @@ namespace TE
                 helperClass.log.Error(ex);
             }                        
         }
-
-        //private void search_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        searchBtn_Click(sender, e);
-
-        //        e.Handled = true;
-        //        e.SuppressKeyPress = true;
-        //    }
-        //}
-
-        //private void searchResults_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter) getDataBtn_Click(sender, e);
-        //}
-
-        //private void filterResults_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (filterResults.CheckedItems.Count == 0)
-        //        {
-        //            searchResults.Items.Clear();
-        //            filterResults.ClearSelected();
-        //            return;
-        //        }
-        //        page = 0;
-
-        //        foreach (int i in filterResults.CheckedIndices)
-        //        {
-        //            if (i != filterResults.SelectedIndex) filterResults.SetItemCheckState(i, CheckState.Unchecked);
-        //        }
-
-        //        if (search.Text != "")
-        //        {
-        //            populateResultsList_2(startUrl + helperClass.searchTabsOriginal[filterResults.SelectedItem.ToString().Split(new[] { "  " }, StringSplitOptions.None)[0]] +
-        //                "?q=" + search.Text + "&p=0" + endtUrl);
-        //            pageBox.Text = (page + 1).ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        helperClass.log.Error(ex);
-        //    }                            
-        //}
-
-        //private void nextPage_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (page < maxPage-1 && search.Text != "")
-        //        {
-        //            ++page;
-        //            string myUrl = startUrl + helperClass.searchTabsOriginal[filterResults.CheckedItems[0].ToString().Split(new[] { "  " }, StringSplitOptions.None)[0]] +
-        //                "?q=" + search.Text + "&p=" + page.ToString() + endtUrl;
-        //            populateResultsList_2(myUrl);
-        //            pageBox.Text = (page + 1).ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        helperClass.log.Error(ex);
-        //    }                        
-        //}
-
-        //private void previousPage_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (page > 0 && search.Text != "")
-        //        {
-        //            --page;
-        //            string myUrl = startUrl + helperClass.searchTabsOriginal[filterResults.CheckedItems[0].ToString().Split(new[] { "  " }, StringSplitOptions.None)[0]] +
-        //                "?q=" + search.Text + "&p=" + page.ToString() + endtUrl;
-        //            populateResultsList_2(myUrl);
-        //            pageBox.Text = (page + 1).ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        helperClass.log.Error(ex);
-        //    }            
-        //}
-
-        
-        //private void firstPage_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (page > 0 && search.Text != "")
-        //        {
-        //            page = 0;
-        //            string myUrl = startUrl + helperClass.searchTabsOriginal[filterResults.CheckedItems[0].ToString().Split(new[] { "  " }, StringSplitOptions.None)[0]] + 
-        //                "?q=" + search.Text + "&p=0" + endtUrl;
-        //            populateResultsList_2(myUrl);
-        //            pageBox.Text = (page + 1).ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        helperClass.log.Error(ex);
-        //    }               
-        //}
-
-        //private void lastPage_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {                
-        //        if (page < totalPages - 1 && search.Text != "")
-        //        {
-        //            page = totalPages - 1;
-        //            string myUrl = startUrl + helperClass.searchTabsOriginal[filterResults.CheckedItems[0].ToString().Split(new[] { "  " }, StringSplitOptions.None)[0]] + 
-        //                "?q=" + search.Text + "&p=" + page.ToString() + endtUrl;
-        //            populateResultsList_2(myUrl);
-        //            pageBox.Text = (page + 1).ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        helperClass.log.Error(ex);
-        //    }             
-        //}
-
-        //private void pageBox_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (e.KeyCode == Keys.Enter)
-        //        {                    
-        //            if (Int32.Parse(pageBox.Text) > 0 && Int32.Parse(pageBox.Text) <= maxPage && search.Text != "" && !String.IsNullOrEmpty(pageBox.Text.ToString()))
-        //            {
-        //                page = Int32.Parse(pageBox.Text) - 1;
-        //                string myUrl = startUrl + helperClass.searchTabsOriginal[filterResults.CheckedItems[0].ToString().Split(new[] { "  " }, StringSplitOptions.None)[0]] + 
-        //                    "?q=" + search.Text + "&p=" + page.ToString() + endtUrl;
-        //                populateResultsList_2(myUrl);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        helperClass.log.Error(ex);
-        //    }            
-        //}
+		
 
         private void selectedIndicator_MouseDoubleClick(object sender, MouseEventArgs e)
         {

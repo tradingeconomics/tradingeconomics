@@ -104,11 +104,11 @@ namespace TE
             try
             {
                 if ((selectedCountryLstBx.Items.Count == 1) && (selectedCountryLstBx.Items[0].ToString() != "All"))
-                {
-                    string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() +
+                {					
+					string url2 = helperClass.host + "country/" + selectedCountryLstBx.Items[0].ToString() +
                         "?client=" + apiKeyFrm.apiKey + "&excel=" + apiKeyFrm.excelVersion;
-
-                    indicatorListPopulate(url2);
+					helperClass.log.Info("Requesting indicator list from: " + url2);
+					indicatorListPopulate(url2);
                 }
                 else
                 {

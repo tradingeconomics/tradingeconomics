@@ -93,7 +93,7 @@ namespace TE
                 }
                 DataWriteMutex.ReleaseMutex();                
             }
-            catch (COMException ex)
+            catch (Exception ex)
             {
                 Trace.WriteLine(ex.Message);
 
@@ -110,7 +110,7 @@ namespace TE
                     PopulateData();
                     return;
                 }
-                throw;
+                //throw;
             }
             Marshal.ReleaseComObject(MyRibbon.sheet);
             Marshal.ReleaseComObject(MyRibbon.app);
