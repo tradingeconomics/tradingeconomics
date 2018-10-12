@@ -1473,8 +1473,9 @@ namespace TE
                                 hdrRng = MyRibbon.sheet.Range[dtStrt, hdrEnd];
                                 dtRng = MyRibbon.sheet.Range[dtStrt, dtEnd];
                             }
-                            dtRng.Clear();
-                            hdrRng.Clear();
+							helperClass.log.Info(item.ToString());
+                            //dtRng.Clear();
+                            //hdrRng.Clear();
                         }
                         catch (Exception)
                         {
@@ -1789,7 +1790,8 @@ namespace TE
                 System.Threading.Thread.Sleep(500);
                 foreach (var k in jsnData.getJSON())
                 {
-                    jsData.Add(k);
+					//helperClass.log.Info(k);
+					jsData.Add(k);
                 }
             }
             return jsData;

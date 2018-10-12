@@ -29,13 +29,18 @@ namespace TE
                         json = wc.DownloadString(_url);
                     }
                     catch (WebException ex)
-                    {                        
+                    {         
+						
+						// depending error code do something
+						               
                         MessageBox.Show("No available data for your request. This could be due to your account subscription plan.\rPlease contact support or subscribe to one of our paid plans.");
                         helperClass.log.Info("An error occurred when making a api request, status code: " + ((HttpWebResponse)ex.Response).StatusCode);
                         helperClass.log.Trace(ex.StackTrace);                        
                         throw;                        
-                    }                                        
-                    return JArray.Parse(json);
+                    }
+
+					//helperClass.log.Info(JArray.Parse(json).ToString());
+					return JArray.Parse(json);
                 }
             }
             catch (System.Exception ex)

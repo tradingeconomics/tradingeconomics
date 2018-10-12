@@ -35,7 +35,7 @@ namespace TE
         {
             try
             {
-                Process.Start("http://docs.tradingeconomics.com/?shell");
+                Process.Start("https://docs.tradingeconomics.com/?shell");
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace TE
         {
             try
             {
-                Process.Start("http://tradingeconomics.com/contact.aspx?subject=excel");
+                Process.Start("https://tradingeconomics.com/contact.aspx?subject=excel");
             }
             catch (Exception ex)
             {

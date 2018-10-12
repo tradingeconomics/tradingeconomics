@@ -701,7 +701,8 @@ namespace TE
                         return formulaCell.Text;
                     }
                 }
-                customFunctionHelper(helperClass.SOmeName("", indctr, "MrktHist", iniDate, clsDate, mktType), columnsToUse);                
+				JArray temp = helperClass.SOmeName("", indctr, "MrktHist", iniDate, clsDate, mktType);
+				customFunctionHelper(temp, columnsToUse);                
             }
             customFunctionEnd("TEMrktsHist");
             return (formulaCell.Address == dataStartCell.Address) ? columnsToUse.Split(',')[0] : sharedFunctions.getAnswer(indctr);
