@@ -22,7 +22,7 @@ else: # Python 2.X
     from calendar import getCalendarData
     from forecasts import getForecastData
     from indicators import getIndicatorData
-    from markets import getMarketsData, getMarketsBySymbol
+    from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents
     from historicalMarkets import fetchMarkets
     from glob import login, subscribe
     from stream import run
