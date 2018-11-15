@@ -36,8 +36,15 @@ def checkCountry(country):
     else:
         linkAPI += quote(",".join(country))
     return linkAPI
-    
-    
+
+def checkCountryRatings(country):
+    linkAPI = 'https://api.tradingeconomics.com/ratings/'       
+    if type(country) is str:
+        linkAPI += quote(country.lower())
+    else:
+        linkAPI += quote(",".join(country))
+    return linkAPI
+   
 def checkIndic(indicators, linkAPI):       
     if type(indicators) is str:
         linkAPI += '/' + quote(indicators)
@@ -45,18 +52,35 @@ def checkIndic(indicators, linkAPI):
         linkAPI += '/' + quote(",".join(indicators))
     return linkAPI
 
- 
+def checkRatings(rating, linkAPI):       
+    if type(rating) is str:
+        linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(rating)
+    else:
+        linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(",".join(rating))
+    print linkAPI    
+    return linkAPI    
+
 def getResults(webResults, country):
         names = ['country', 'category', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'categorygroup', 'frequency', 'previousvalue', 'previousvaluedate']
-        names2 = ['Country', 'Category','LatestValue', 'LatestValueDate',  'Source', 'Unit', 'CategoryGroup', 'Frequency', 'PreviousValue', 'PreviousValueDate']
+        names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'Source', 'Unit', 'CategoryGroup', 'Frequency', 'PreviousValue', 'PreviousValueDate']
         maindf = pd.DataFrame()  
         for i in range(len(names)):
             names[i] = [d[names2[i]]  for d in webResults]
             maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
         maindf['Country'] =  maindf['Country'].map(lambda x: x.strip())
-        return maindf    
+        return maindf 
 
-          
+def getRatingResults(webResults, rating):
+        names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook']
+        names2 = ['Country','Te', 'Te_Outlook', 'Sp', 'Sp_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook']
+        maindf = pd.DataFrame()  
+        for i in range(len(names)):  
+            names[i] = [d[names2[i]]  for d in webResults]
+            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
+        maindf['Rating'] =  maindf['Rating'].map(lambda x: x.strip())
+        return maindf
+
+
 def getIndicatorData(country = None, indicators = None, output_type = None):
     """
     Return a list of all indicators, indicators by country or country-indicator pair.
@@ -132,5 +156,73 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
         output = webResults
     else:
         raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for results directly from web.')      
+    return output
+ 
+  
+def getRatings(country=['united states', 'china'], rating = None, output_type='df'):
+    """
+    Return a list of all countrys by rating.
+    =================================================================================
+
+    Parameters:
+    -----------
+    country: string or list.
+             String for one country information. List of strings for 
+             several countrys, for example country = ['country_name', 'country_name'].
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+
+    Notes
+    -----
+    All parameters are optional. Without parameters a list of all indicators will be provided. 
+
+    Example
+    -------
+    getRatings(country = 'United States', rating = None, output_type = 'df')
+
+    getRatings(country = ['United States', 'Portugal'], rating = None, output_type = 'df')
+    """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    
+    if country == None:
+        linkAPI = 'https://api.tradingeconomics.com/ratings/'
+    else:
+        linkAPI = checkCountryRatings(country)
+    
+    if rating == None:
+        linkAPI = linkAPI
+    else:
+        linkAPI = checkRatings(rating, linkAPI)
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+
+    try:
+        code = urlopen(linkAPI)
+        code = code.getcode() 
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+    
+    if len(webResults) > 0:
+        names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook']
+        names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook']    
+        maindf = pd.DataFrame(webResults, columns=names2)    
+      
+    else:
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
   

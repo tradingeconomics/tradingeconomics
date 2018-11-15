@@ -38,8 +38,7 @@ def parseData(data):
         datafr = pd.DataFrame(data['values']) 
         datafr = datafr.set_index(indx)
         return datafr    
-    
-    
+        
 def multiParams(webdata):
     mycntry = list(set([d['Country'] for d in webdata]))
     myind = list(set([d['Category'] for d in webdata]))
@@ -55,9 +54,8 @@ def multiParams(webdata):
                     countryDict[mycntry[i]][myind[m]]['dates'].append(lst2[j][2])
                     countryDict[mycntry[i]][myind[m]]['values'].append(lst2[j][1])
     finalDict = multiParsedData(countryDict)                            
-    return finalDict    
-        
-    
+    return finalDict 
+          
 def multiParsedData(countryDict):
     CNTRY = list(countryDict.keys())
     INDCTR = list(countryDict[CNTRY[0]].keys())
@@ -72,7 +70,6 @@ def multiParsedData(countryDict):
         del answer[0]       
     return empty_dict2      
 
-
 def out_type(init_format):
     list_of_countries= init_format.Country.unique()
     list_of_cat= init_format.Category.unique()
@@ -85,8 +82,7 @@ def out_type(init_format):
             del dict_cat[l]['Country']
             del dict_cat[l]['Category']
     return dict_start
-    
-        
+            
 def paramCheck (country, indicator):
     linkAPI = 'https://api.tradingeconomics.com/historical/country/'
     if type(country) is not str and type(indicator) is str:  
@@ -96,8 +92,36 @@ def paramCheck (country, indicator):
     if type(country) is not str and type(indicator) is not str: 
         linkAPI += quote(",".join(country)) + '/indicator/' + quote(",".join(indicator))
     return linkAPI
+
+def checkRatings(rating, linkAPI):       
+    if type(rating) is str:
+        linkAPI += 'https://api.tradingeconomics.com/ratings/historical/' + quote(rating)
+    else:
+        linkAPI += 'https://api.tradingeconomics.com/ratings/historical/' + quote(",".join(rating))
+    print linkAPI    
+    return linkAPI 
+
+def checkCountryHistoricalRatings(country):
+    linkAPI = 'https://api.tradingeconomics.com/ratings/historical/'       
+    if type(country) is str:
+        linkAPI += quote(country.lower())
+    else:
+        linkAPI += quote(",".join(country))
+    return linkAPI
     
     
+
+def getRatingResults(webResults, rating):
+        names = ['country','date', 'agency', 'rating', 'outlook']
+        names2 = ['Country','Date', 'Agency', 'Rating', 'Outlook']
+        maindf = pd.DataFrame()  
+        for i in range(len(names)):  
+            names[i] = [d[names2[i]]  for d in webResults]
+            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
+        maindf['Rating'] =  maindf['Rating'].map(lambda x: x.strip())
+        return maindf
+
+
 def getHistoricalData(country, indicator, initDate= None, endDate= None, output_type = None):
     """
     Return historical information for specific country and indicator.
@@ -196,5 +220,76 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     else:       
         raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
     return output
-    
 
+
+def getHistoricalRatings(country = None, rating = None, output_type = None):
+    """
+    Return historical information for specific country.
+    =================================================================
+
+    Parameters:
+    -----------
+    country: string or list.
+             String to get data for one country. List of strings to get data for
+             several countries. For example, country = ['United States', 'Australia'].
+        output_type: string.
+             'dict'(default) for dictionary format output,
+             'raw' for list of dictionaries without any parsing.
+
+    Notes
+    ----- 
+    Without credentials only sample data will be provided.
+
+    Example
+    -------
+    getHistoricalRatings(country = 'United States', rating = None)
+
+    getHistoricalRatings(country = ['United States', 'United Kingdom'], rating = None)
+    """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    
+    if country == None:
+        linkAPI = 'https://api.tradingeconomics.com/ratings/historical/'    
+    else:
+         linkAPI = checkCountryHistoricalRatings(country)
+        
+    if rating == None:
+        linkAPI = linkAPI
+    else:
+        linkAPI = checkRatings(rating, linkAPI)
+    if (country == None) and (rating == None):
+        linkAPI = 'https://api.tradingeconomics.com/ratings/historical/united%20states'   
+    else:
+        linkAPI = linkAPI
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+    
+    try:
+        code = urlopen(linkAPI)
+        code = code.getcode() 
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+    
+    if len(webResults) > 0:
+        names = ['country','date', 'agency', 'rating', 'outlook']
+        names2 = ['Country','Date', 'Agency', 'Rating', 'Outlook']    
+        maindf = pd.DataFrame(webResults, columns=names2)    
+      
+    else:
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+    return output
+  
