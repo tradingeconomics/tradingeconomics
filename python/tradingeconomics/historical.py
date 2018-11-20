@@ -98,7 +98,6 @@ def checkRatings(rating, linkAPI):
         linkAPI += 'https://api.tradingeconomics.com/ratings/historical/' + quote(rating)
     else:
         linkAPI += 'https://api.tradingeconomics.com/ratings/historical/' + quote(",".join(rating))
-    print linkAPI    
     return linkAPI 
 
 def checkCountryHistoricalRatings(country):
@@ -109,8 +108,6 @@ def checkCountryHistoricalRatings(country):
         linkAPI += quote(",".join(country))
     return linkAPI
     
-    
-
 def getRatingResults(webResults, rating):
         names = ['country','date', 'agency', 'rating', 'outlook']
         names2 = ['Country','Date', 'Agency', 'Rating', 'Outlook']

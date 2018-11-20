@@ -57,13 +57,13 @@ def checkRatings(rating, linkAPI):
         linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(rating)
     else:
         linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(",".join(rating))
-    print linkAPI    
     return linkAPI    
 
 def getResults(webResults, country):
         names = ['country', 'category', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'categorygroup', 'frequency', 'previousvalue', 'previousvaluedate']
         names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'Source', 'Unit', 'CategoryGroup', 'Frequency', 'PreviousValue', 'PreviousValueDate']
-        maindf = pd.DataFrame()  
+        maindf = pd.DataFrame() 
+        
         for i in range(len(names)):
             names[i] = [d[names2[i]]  for d in webResults]
             maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
@@ -80,6 +80,16 @@ def getRatingResults(webResults, rating):
         maindf['Rating'] =  maindf['Rating'].map(lambda x: x.strip())
         return maindf
 
+def getUpdateResults(webResults, date):
+        names = ['historicalDataSymbol', 'lastUpdate']
+        names2 = ['HistoricalDataSymbol', 'LastUpdate']
+        maindf = pd.DataFrame() 
+        
+        for i in range(len(names)):
+            names[i] = [d[names2[i]]  for d in webResults]
+            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
+        maindf['date'] =  maindf['date'].map(lambda x: x.strip())
+        return maindf 
 
 def getIndicatorData(country = None, indicators = None, output_type = None):
     """
@@ -157,7 +167,7 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
     else:
         raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for results directly from web.')      
     return output
- 
+
   
 def getRatings(country=['united states', 'china'], rating = None, output_type='df'):
     """
@@ -225,4 +235,76 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
     else:      
         raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
-  
+
+
+def getLatestUpdates(initDate = None, output_type = None):
+    """
+    Return a list of latest updates, and last updates by initial date.
+    =================================================================================
+
+    Parameters:
+    -----------
+        initDate:string or list.
+                 list of latest updates by initial date, for example:
+                 initDate = '2018-08-15'          
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+
+    Notes
+    -----
+    Without parameters a list of latest updates will be provided. 
+
+    Example
+    -------
+    getLatestUpdates(initDate = None, output_type = None)
+
+    getLatestUpdates(initDate = '2018-08-15', output_type = None)
+
+    """
+    
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    
+    if initDate == None:
+        
+            linkAPI = 'https://api.tradingeconomics.com/updates/'
+        
+    if initDate != None:
+        if type(initDate) == str:
+            linkAPI =  'https://api.tradingeconomics.com/updates/' + initDate 
+        try: 
+            fn.validate(initDate)
+        except ValueError:
+            raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+
+    try:
+        code = urlopen(linkAPI)
+        code = code.getcode() 
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+    
+    if len(webResults) > 0:
+        names = ['historicalDataSymbol', 'lastUpdate']
+        names2 = ['HistoricalDataSymbol', 'LastUpdate']    
+        maindf = pd.DataFrame(webResults, columns=names2)    
+      
+    else:
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+    return output
+

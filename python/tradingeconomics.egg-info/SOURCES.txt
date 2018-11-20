@@ -12,6 +12,7 @@ tradingeconomics/historical.py
 tradingeconomics/historicalMarkets.py
 tradingeconomics/indicators.py
 tradingeconomics/markets.py
+tradingeconomics/news.py
 tradingeconomics/stream.py
 tradingeconomics.egg-info/PKG-INFO
 tradingeconomics.egg-info/SOURCES.txt

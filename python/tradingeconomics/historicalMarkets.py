@@ -116,8 +116,8 @@ def fetchMarkets(symbol, initDate=None, endDate=None, output_type=None):
         linkAPI += '&d1=' + initDate
     
     elif initDate == None and (endDate is not None):
-        iDate = (datetime.strptime(endDate, '%Y-%m-%d') - relativedelta(months=1)).strftime('%Y-%m-%d')
-        linkAPI += '&d1=' + iDate + '&d2=' + endDate   
+        initDate = (datetime.strptime(endDate, '%Y-%m-%d') - relativedelta(months=1)).strftime('%Y-%m-%d')
+        linkAPI += '&d1=' + initDate + '&d2=' + endDate   
     
     try:
         code = urlopen(linkAPI)
