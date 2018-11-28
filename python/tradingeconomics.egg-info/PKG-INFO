@@ -1,12 +1,12 @@
 Metadata-Version: 1.1
 Name: tradingeconomics
-Version: 0.2.932
+Version: 0.2.933
 Summary: Library to download data from Trading Economics API
 Home-page: https://github.com/ieconomics/open-api
 Author: Trading Economics
 Author-email: olexandr.baturin@tradingeconomics.com
 License: MIT
-Download-URL: https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.932.zip
+Download-URL: https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.933.zip
 Description: ---
         title: "Trading Economics API"
         output: html_document
@@ -15,7 +15,7 @@ Description: ---
         
         #Load Data Directly Into Python
         
-        If you don’t already have a copy of Python installed on your computer, you can get it from oficial website https://www.python.org/downloads/.  
+        If you donâ€™t already have a copy of Python installed on your computer, you can get it from oficial website https://www.python.org/downloads/.  
         
         It's recomended to install pip, it is a package management system used to install and manage software packages written in Python. All information you can find on https://packaging.python.org/installing/. Then just type in Python (command line) 
         ```python
