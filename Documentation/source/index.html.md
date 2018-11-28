@@ -457,6 +457,22 @@ or you can specify a start date and end date
 |    **Fitch**           |Fitch rating       |
 |  **Fitch_outlook**     |Fitch outlook      |
 
+
+<blockquote class="lang-specific python">
+<p>Get the ratings using python</p>
+</blockquote>  
+```python
+In [2]: te.GetCreditRatings(country='united kingdom', indicator='gdp', initDate='2015-01-01')
+
+Out[2]: 
+                  0
+2006-12-31  2588.08
+2007-12-31  2969.73
+              ...
+2013-12-31  2712.30
+2014-12-31  2990.20
+```
+
 ## Latest updates
 
 ### Methods

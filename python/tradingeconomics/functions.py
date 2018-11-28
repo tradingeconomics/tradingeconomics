@@ -40,8 +40,7 @@ def out_type(init_format):
             del dict_cat[l]['Country']
             del dict_cat[l]['Category']
     return dict_start
-    
-    
+       
 def validate(date_text):      
         try:
             try:
@@ -50,8 +49,7 @@ def validate(date_text):
                 datetime.strptime(date_text, '%Y-%m-%d %H:%M')
         except ValueError:
             raise DateError("Incorrect data format, should be YYYY-MM-DD")
-            
-            
+                       
 def validatePeriod(initDate, endDate):
     if  datetime.strptime(initDate, '%Y-%m-%d') > datetime.strptime(endDate, '%Y-%m-%d'):
         raise DateError ('Invalid time period, check the supplied date parameters.')

@@ -85,27 +85,23 @@ def out_type(init_format):
             
 def paramCheck (country, indicator):
     linkAPI = 'https://api.tradingeconomics.com/historical/country/'
-    if type(country) is not str and type(indicator) is str:  
-        linkAPI += quote(",".join(country)) + '/indicator/' + quote(indicator)
-    if type(country) is str and type(indicator) is not str:
-        linkAPI += quote(country) + '/indicator/' + quote(",".join(indicator))
-    if type(country) is not str and type(indicator) is not str: 
-        linkAPI += quote(",".join(country)) + '/indicator/' + quote(",".join(indicator))
+    if type(country) is str:
+        linkAPI += quote(country)
+    else:
+        linkAPI += quote(",".join(country), safe='') 
+    if type(indicator) is str:
+        linkAPI += '/indicator/' + quote(indicator, safe='')
+    else:
+        linkAPI += '/indicator/' + quote(",".join(indicator), safe='') 
     return linkAPI
 
-def checkRatings(rating, linkAPI):       
-    if type(rating) is str:
-        linkAPI += 'https://api.tradingeconomics.com/ratings/historical/' + quote(rating)
-    else:
-        linkAPI += 'https://api.tradingeconomics.com/ratings/historical/' + quote(",".join(rating))
-    return linkAPI 
 
 def checkCountryHistoricalRatings(country):
     linkAPI = 'https://api.tradingeconomics.com/ratings/historical/'       
     if type(country) is str:
         linkAPI += quote(country.lower())
     else:
-        linkAPI += quote(",".join(country))
+        linkAPI += quote(",".join(country), safe='')
     return linkAPI
     
 def getRatingResults(webResults, rating):
@@ -118,8 +114,15 @@ def getRatingResults(webResults, rating):
         maindf['Rating'] =  maindf['Rating'].map(lambda x: x.strip())
         return maindf
 
+def checkRatings(linkAPI, rating):    
+    if type(rating) is str:
+        linkAPI += 'https://api.tradingeconomics.com/ratings/historical/' + quote(rating)
+    else:
+        linkAPI += 'https://api.tradingeconomics.com/ratings/historical/' + quote(",".join(rating))
+    return linkAPI    
 
-def getHistoricalData(country, indicator, initDate= None, endDate= None, output_type = None):
+
+def getHistoricalData(country = None, indicator = None, initDate= None, endDate= None, output_type = None):
     """
     Return historical information for specific country and indicator.
     =================================================================
@@ -142,13 +145,13 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
 
     Notes
     ----- 
-    Without credentials only sample data will be provided.
+    At least one parameter must be provided.
 
     Example
     -------
     getHistoricalData(country = 'United States', indicator = 'Imports', initDate = '2011-01-01', endDate = '2016-01-01')
 
-    getHistoricalData(country = ['United States', 'United Kingdom'], indicator = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
+    getHistoricalData(country = ['United States', 'china'], indicator = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
     """
     try:
         _create_unverified_https_context = ssl._create_unverified_context
@@ -157,10 +160,11 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     else:
         ssl._create_default_https_context = _create_unverified_https_context
 
-    if type(country) is not str or type(indicator) is not str:  
-        linkAPI = paramCheck(country, indicator)
+    if type(country) is str or type(indicator) is str: 
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(country)  + '/indicator/' + quote(indicator) 
     else:
-        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(country) + '/indicator/' + quote(indicator)
+        linkAPI = paramCheck(country, indicator)
+        
     if initDate == None and endDate == None:
         minDate = [(datetime.now() - relativedelta(years=10)).strftime('%Y-%m-%d') ]
         linkAPI = fn.finalLink(linkAPI, minDate) 
@@ -193,15 +197,15 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
         linkAPI += '?c='+glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-
-    print(linkAPI)
+    
     try:
         code = urlopen(linkAPI)
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if len(webResults) > 0:
+   
+    if len(webResults) > int(0):
         results = {'dates': [d['DateTime'] for d in webResults],
                     'values': [d[u'Value'] for d in webResults]}
         if (type(country)== str and type(indicator) == str):
@@ -217,7 +221,6 @@ def getHistoricalData(country, indicator, initDate= None, endDate= None, output_
     else:       
         raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
     return output
-
 
 def getHistoricalRatings(country = None, rating = None, output_type = None):
     """
@@ -258,7 +261,7 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
     if rating == None:
         linkAPI = linkAPI
     else:
-        linkAPI = checkRatings(rating, linkAPI)
+        linkAPI = checkRatings(linkAPI, rating)
     if (country == None) and (rating == None):
         linkAPI = 'https://api.tradingeconomics.com/ratings/historical/united%20states'   
     else:

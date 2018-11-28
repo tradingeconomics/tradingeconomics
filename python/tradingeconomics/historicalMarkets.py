@@ -43,7 +43,7 @@ def parseData(data):
     return datafr    
     
     
-def fetchMarkets(symbol, initDate=None, endDate=None, output_type=None):
+def fetchMarkets(symbol = None, initDate=None, endDate=None, output_type=None):
     """
     Return historical information for specific markets symbol.
     =================================================================
@@ -61,7 +61,7 @@ def fetchMarkets(symbol, initDate=None, endDate=None, output_type=None):
 
     Notes
     ----- 
-    Without credentials only sample data will be provided.
+    A symbol must be provided.
 
     Example
     -------
@@ -75,16 +75,14 @@ def fetchMarkets(symbol, initDate=None, endDate=None, output_type=None):
         pass
     else:
         ssl._create_default_https_context = _create_unverified_https_context
-    
-    if type(symbol) is list:
-        symbol = ",".join(symbol)
-    elif type(symbol) is str:
-        pass
-    else:
-        raise TypeError('symbol parameter should be of the list or of the string type')
 
+    linkAPI = 'https://api.tradingeconomics.com/markets/historical/'
     
-    linkAPI = 'https://api.tradingeconomics.com/markets/historical/' + quote(symbol)
+    
+    if type(symbol) is not str:        
+        linkAPI = 'https://api.tradingeconomics.com/markets/historical/' + quote(",".join(symbol), safe='') 
+    else:   
+        linkAPI = 'https://api.tradingeconomics.com/markets/historical/' + quote(symbol, safe='')
     
     try:
         linkAPI += '?c=' + glob.apikey

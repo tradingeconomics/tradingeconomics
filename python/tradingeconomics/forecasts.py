@@ -32,22 +32,20 @@ class WebRequestError(ValueError):
 def checkCountry(country):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'       
     if type(country) is str:
-        linkAPI += quote(country)
+        linkAPI += quote(country, safe='')
     else:
         #multiCountry = ",".join(country)
-        linkAPI += quote(",".join(country))
+        linkAPI += quote(",".join(country), safe='')
     return linkAPI
-    
-    
+        
 def checkIndic(indicator):
     linkAPI = 'https://api.tradingeconomics.com/forecast/indicator/'        
     if type(indicator) is str:
-        linkAPI += quote(indicator)
+        linkAPI += quote(indicator, safe='')
     else:
         #multiIndic = ",".join(indicator)
-        linkAPI += quote(",".join(indicator))
+        linkAPI += quote(",".join(indicator), safe='')
     return linkAPI
-
 
 def getLink(country, indicator):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'
@@ -55,12 +53,12 @@ def getLink(country, indicator):
         linkAPI += quote(country)
     else:
         #multiCountry = ",".join(country)
-        linkAPI += quote(",".join(country)) 
+        linkAPI += quote(",".join(country), safe='') 
     if type(indicator) is str:
-        linkAPI += '/indicator/' + quote(indicator)
+        linkAPI += '/indicator/' + quote(indicator, safe='')
     else:
         #multiIndic = ",".join(indicator)
-        linkAPI += '/indicator/' + quote(",".join(indicator)) 
+        linkAPI += '/indicator/' + quote(",".join(indicator), safe='') 
     return linkAPI
 
     
