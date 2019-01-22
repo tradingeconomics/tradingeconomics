@@ -116,8 +116,12 @@ def getForecastData(country = None, indicator = None, output_type = None):
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))
     if len(webResults) > 0:
-        names = ['country', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
-        names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
+        if country.strip().lower() == 'commodity':
+            names = ['title', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
+            names2 = ['Title', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
+        else:    
+            names = ['country', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
+            names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
         maindf = pd.DataFrame()  
         for i in range(len(names)):
             names[i] =  [d[names2[i]] for d in webResults]
@@ -125,7 +129,7 @@ def getForecastData(country = None, indicator = None, output_type = None):
     else:
         raise ParametersError ('No data available for the provided parameters.')
     if output_type == None or output_type =='dict':
-        output = fn.out_type(maindf)
+        output = fn.out_type(maindf, country)
     elif output_type == 'df':  
         output = maindf
     elif output_type == 'raw':
