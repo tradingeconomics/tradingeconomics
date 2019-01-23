@@ -8,7 +8,7 @@ PY3 = sys.version_info[0] == 3
 
 
 if PY3: # Python 3+
-    from .historical import getHistoricalData
+    from .historical import getHistoricalData, getHistoricalRatings
     from .calendar import getCalendarData
     from .forecasts import getForecastData
     from .indicators import getIndicatorData, getRatings, getLatestUpdates
@@ -18,6 +18,9 @@ if PY3: # Python 3+
     from .stream import run
     from .earnings import getEarnings
     from .news import getNews, getArticles, getArticleId
+    from .worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
+    from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical
+    from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical
 else: # Python 2.X
     from historical import getHistoricalData, getHistoricalRatings
     from calendar import getCalendarData
@@ -29,4 +32,6 @@ else: # Python 2.X
     from stream import run
     from earnings import getEarnings
     from news import getNews, getArticles, getArticleId
-    
+    from worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
+    from comtrade import getCmtCategories, getCmtCountry, getCmtHistorical
+    from federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical

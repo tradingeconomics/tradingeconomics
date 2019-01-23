@@ -44,31 +44,32 @@ def checkLimit(linkAPI, limit):
     return linkAPI
 
 
-
 def checkNewsIndic(indicator): 
     linkAPI = 'https://api.tradingeconomics.com/news/indicator/'      
     if type(indicator) is str:
-        linkAPI += '/' + quote(indicator)
+        linkAPI += '/' + quote(indicator, safe="")
     else:
-        linkAPI += '/' + quote(",".join(indicator))
+        linkAPI += '/' + quote(",".join(indicator), safe="")
     return linkAPI
 
 def checkNewsCountry(country):
     linkAPI = 'https://api.tradingeconomics.com/news/country/'      
     if type(country) is str:
-        linkAPI +=  '/' + quote(country)
+        linkAPI +=  '/' + quote(country, safe="")
     else:
-        linkAPI += '/' + quote(",".join(country))
+        linkAPI += '/' + quote(",".join(country), safe="")
     return linkAPI
 
 def getNewsLink(country, indicator):
     linkAPI = 'https://api.tradingeconomics.com/news/country/'    
-    if country != None:
-        linkAPI += '/' + quote(",".join(country))
-    if indicator != None:
-        linkAPI += '/' + quote(",".join(indicator))
-    else:
-        raise ParametersError ('No data available for the provided parameters.')      
+    if type(country) is str:
+        linkAPI += quote(country, safe="")
+    else: 
+        linkAPI += quote(",".join(country), safe="") 
+    if type(indicator) is str:
+        linkAPI += '/' + quote(indicator, safe="")
+    else: 
+        linkAPI += '/' + quote(",".join(indicator), safe="") 
     return linkAPI
   
 def getNewsResults(webResults, country):
@@ -81,30 +82,25 @@ def getNewsResults(webResults, country):
             maindf['country'] =  maindf['country'].map(lambda x: x.strip())
 
 
-
 def checkArticleLink (country, indicator):
     linkAPI = 'https://api.tradingeconomics.com/articles/country/'    
-    if country != None :
-        if type(country) == str:
-            linkAPI += '/'+ country
-        else:
-            linkAPI += '/' + quote(",".join(country))
-    if indicator != None:
-        if type(indicator) == str:
-            linkAPI += '/'+ indicator
-        else:    
-            linkAPI += '/' + quote(",".join(indicator))
-    else:
-        raise ParametersError ('No data available for the provided parameters.')      
+    if type(country) is str:
+        linkAPI += quote(country)
+    else: 
+        linkAPI += quote(",".join(country), safe="") 
+    if type(indicator) is str:
+        linkAPI += '/' + quote(indicator, safe="")
+    else: 
+        linkAPI += '/' + quote(",".join(indicator), safe="") 
     return linkAPI
 
 def checkArticleCountry(country):
-    linkAPI = 'https://api.tradingeconomics.com/articles/country/'      
+    linkAPI = 'https://api.tradingeconomics.com/articles/country'      
     if country != None:
         if type(country) == str:
-            linkAPI += '/' + country
+            linkAPI += '/' + quote(country, safe="")
         else:    
-            linkAPI += '/' + quote(",".join(country))
+            linkAPI += '/' + quote(",".join(country), safe="")
      
     return linkAPI
 
@@ -114,7 +110,7 @@ def checkArticleIndic(indicator):
         if type(indicator) == str:
             linkAPI += '/' + indicator
         else:    
-            linkAPI += '/' + quote(",".join(indicator))
+            linkAPI += '/' + quote(",".join(indicator), safe="")
 
     return linkAPI
 
@@ -130,7 +126,7 @@ def getArticleResults(webResults, id):
         for i in range(len(names)):
             names[i] = [d[names2[i]]  for d in webResults]
             maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
-            maindf['id'] =  maindf['id'].map(lambda x: x.strip())
+            maindf['category'] =  maindf['category'].map(lambda x: x.strip())
 
 def checkArticleId(id):
     linkAPI = 'https://api.tradingeconomics.com/articles/id/'      
@@ -167,9 +163,9 @@ def getNews(country = None, indicator = None, start= None, limit = None, output_
 
     Example
     -------
-    getNews(country = 'United States', indicators = 'Imports', start = 10, limit = 20, output_type = 'df')
+    getNews(country = 'United States', indicator = 'Imports', start = 10, limit = 20, output_type = 'df')
 
-    getNews(country = ['United States', 'Portugal'], indicators = ['Imports','Exports'])
+    getNews(country = ['United States', 'Portugal'], indicator = ['Imports','Exports'])
     """          
     try:
         _create_unverified_https_context = ssl._create_unverified_context
@@ -194,6 +190,7 @@ def getNews(country = None, indicator = None, start= None, limit = None, output_
 
     linkAPI = checkLimit(linkAPI, limit)
     linkAPI = checkIndex(linkAPI, start)
+  
     try:
         code = urlopen(linkAPI)
         code = code.getcode() 
@@ -241,7 +238,6 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
             List of strings for several indicators or one indicator, for example: 
             indicator = 'indicator_name'  
             indicator = ['indicator_name', 'indicator_name']
-            indicator = ['indicator_name', 'indicator_name'], initDate = '2015-10-10', endDate = '2017-10-10'
     start and lim: string or list.
             articles list by start index and/or by limit for example:
             country = 'country_name', start = 20, lim = 100
@@ -256,15 +252,15 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
 
     Notes
     -----
-     Without parameters a list of all articles will be provided. 
+     Without parameters a list of articles will be provided. 
 
     Example
     -------
-    getArticles(country = ['United States', 'Portugal'], indicators = ['Imports','Exports'])
+    getArticles(country = ['United States', 'Portugal'], indicator = ['Imports','Exports'])
 
-    getArticles(country = 'United States', indicators = 'Imports', start = 10, limit = 20, output_type = 'df')
+    getArticles(country = 'United States', indicator = 'Imports', start = 10, lim = 20, output_type = 'df')
 
-    getArticles(country = 'United States', indicators = None, initDate = '2015-10-10', endDate = '2017-10-10', start = 10, limit = 20, output_type = 'df')
+    getArticles(country = 'United States', indicator = None, initDate = '2015-10-10', endDate = '2017-10-10', start = 10, lim = 20, output_type = 'df')
 
     """          
 
@@ -319,6 +315,8 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
     
     linkAPI = checkArticleLimit(linkAPI, lim)
     linkAPI = checkIndex(linkAPI, start)
+
+    print (linkAPI)
     try:
         code = urlopen(linkAPI)
         code = code.getcode() 
@@ -326,11 +324,10 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
 
-    if len(webResults) > 0:
+    if len(webResults) > int(0):
             names = ['id', 'title', 'date', 'description', 'country', 'category', 'symbol', 'url']
             names2 = ['id', 'title', 'date', 'description', 'country', 'category', 'symbol', 'url']
             maindf = pd.DataFrame(webResults, columns=names2)    
-    
     else:
         raise ParametersError ('No data available for the provided parameters.')
 

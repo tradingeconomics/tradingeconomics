@@ -75,13 +75,13 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
     if symbols:
         linkAPI += 'symbol/'
         if type(symbols) is not str:
-            linkAPI += quote(",".join(symbols))
+            linkAPI += quote(",".join(symbols), safe='')
         else:
             linkAPI += quote(symbols)
     elif country:
         linkAPI += 'country/'
         if type(country) is not str:
-            linkAPI += quote(",".join(country))
+            linkAPI += quote(",".join(country), safe='')
         else:
             linkAPI += quote(country)
     try:
@@ -90,7 +90,7 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
         raise LoginError('You need to do login before making any request')
         
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
-    print(linkAPI)
+    
     try:       
         code = urlopen(linkAPI)
         code = code.getcode() 

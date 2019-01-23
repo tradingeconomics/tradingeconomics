@@ -34,7 +34,7 @@ def checkCountry(country):
     if type(country) is str:
         linkAPI += quote(country.lower())
     else:
-        linkAPI += quote(",".join(country))
+        linkAPI += quote(",".join(country), safe='')
     return linkAPI
 
 def checkCountryRatings(country):
@@ -42,21 +42,21 @@ def checkCountryRatings(country):
     if type(country) is str:
         linkAPI += quote(country.lower())
     else:
-        linkAPI += quote(",".join(country))
+        linkAPI += quote(",".join(country), safe='')
     return linkAPI
    
 def checkIndic(indicators, linkAPI):       
     if type(indicators) is str:
-        linkAPI += '/' + quote(indicators)
+        linkAPI += '/' + quote(indicators, safe='')
     else:
-        linkAPI += '/' + quote(",".join(indicators))
+        linkAPI += '/' + quote(",".join(indicators), safe='')
     return linkAPI
 
 def checkRatings(rating, linkAPI):       
     if type(rating) is str:
-        linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(rating)
+        linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(rating, safe='')
     else:
-        linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(",".join(rating))
+        linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(",".join(rating), safe='')
     return linkAPI    
 
 def getResults(webResults, country):
@@ -90,6 +90,8 @@ def getUpdateResults(webResults, date):
             maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
         maindf['date'] =  maindf['date'].map(lambda x: x.strip())
         return maindf 
+
+
 
 def getIndicatorData(country = None, indicators = None, output_type = None):
     """
@@ -280,7 +282,7 @@ def getLatestUpdates(initDate = None, output_type = None):
         try: 
             fn.validate(initDate)
         except ValueError:
-            raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
+            raise DateError('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:

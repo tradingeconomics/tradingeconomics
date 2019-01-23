@@ -63,7 +63,7 @@ def getMarketsData(marketsField, output_type=None):
     fields =['commodities', 'currency', 'index', 'bonds']
     if marketsField not in fields:
         raise ParametersError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bonds\'.')
-    linkAPI = 'https://api.tradingeconomics.com/markets/' + quote(marketsField) 
+    linkAPI = 'https://api.tradingeconomics.com/markets/' + quote(marketsField, safe='') 
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
@@ -123,9 +123,9 @@ def getMarketsBySymbol(symbols, output_type=None):
         ssl._create_default_https_context = _create_unverified_https_context
 
     if type(symbols) is not str:        
-        linkAPI = 'https://api.tradingeconomics.com/markets/symbol/' + quote(",".join(symbols)) 
+        linkAPI = 'https://api.tradingeconomics.com/markets/symbol/' + quote(",".join(symbols), safe='') 
     else:   
-        linkAPI = 'https://api.tradingeconomics.com/markets/symbol/' + quote(symbols)
+        linkAPI = 'https://api.tradingeconomics.com/markets/symbol/' + quote(symbols, safe='')
     
     try:
         linkAPI += '?c=' + glob.apikey
@@ -186,9 +186,9 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
         ssl._create_default_https_context = _create_unverified_https_context
 
     if type(symbols) is not str:        
-        linkAPI = 'https://api.tradingeconomics.com/markets/intraday/' + quote(",".join(symbols)) 
+        linkAPI = 'https://api.tradingeconomics.com/markets/intraday/' + quote(",".join(symbols), safe='') 
     else:   
-        linkAPI = 'https://api.tradingeconomics.com/markets/intraday/' + quote(symbols)
+        linkAPI = 'https://api.tradingeconomics.com/markets/intraday/' + quote(symbols, safe='')
     
     try:
         linkAPI += '?c=' + glob.apikey
@@ -196,7 +196,7 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
         raise LoginError('You need to do login before making any request')
     
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
-    print(linkAPI)
+    
 
     try:       
         code = urlopen(linkAPI)
@@ -247,9 +247,9 @@ def getMarketsPeers(symbols, output_type = None):
         ssl._create_default_https_context = _create_unverified_https_context
 
     if type(symbols) is not str:        
-        linkAPI = 'https://api.tradingeconomics.com/markets/peers/' + quote(",".join(symbols)) 
+        linkAPI = 'https://api.tradingeconomics.com/markets/peers/' + quote(",".join(symbols), safe='') 
     else:   
-        linkAPI = 'https://api.tradingeconomics.com/markets/peers/' + quote(symbols)
+        linkAPI = 'https://api.tradingeconomics.com/markets/peers/' + quote(symbols, safe='')
     
     try:
         linkAPI += '?c=' + glob.apikey
@@ -304,9 +304,9 @@ def getMarketsComponents(symbols, output_type = None):
         ssl._create_default_https_context = _create_unverified_https_context
 
     if type(symbols) is not str:        
-        linkAPI = 'https://api.tradingeconomics.com/markets/components/' + quote(",".join(symbols)) 
+        linkAPI = 'https://api.tradingeconomics.com/markets/components/' + quote(",".join(symbols), safe='') 
     else:   
-        linkAPI = 'https://api.tradingeconomics.com/markets/components/' + quote(symbols)
+        linkAPI = 'https://api.tradingeconomics.com/markets/components/' + quote(symbols, safe='')
     
     try:
         linkAPI += '?c=' + glob.apikey
