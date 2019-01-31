@@ -199,7 +199,7 @@ See below how to install a package that’s sitting on GitHub.</p>
 <blockquote class="lang-specific python">
 <p>To start using the Trading Economics Python package, open the python command line, and type:</p>
 </blockquote>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="k">as</span> <span class="n">te</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>If you already have an APIkey then type:</p>
@@ -656,6 +656,19 @@ or you can specify a start date and end date<br>
 </tr>
 </tbody></table>
 
+<blockquote class="lang-specific python">
+<p>Get the ratings using python</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">GetCreditRatings</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united kingdom'</span><span class="p">,</span> <span class="n">indicator</span><span class="o">=</span><span class="s">'gdp'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2015-01-01'</span><span class="p">)</span>
+
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
+                  <span class="mi">0</span>
+<span class="mi">2006</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2588.08</span>
+<span class="mi">2007</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2969.73</span>
+              <span class="o">...</span>
+<span class="mi">2013</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2712.30</span>
+<span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2990.20</span>
+</code></pre>
 <h2 id="latest-updates">Latest updates</h2>
 
 <h3 id="methods">Methods</h3>
@@ -1660,8 +1673,15 @@ Or type in any empty cell:</p>
 <p><span class="methods"></p>
 
 <ul>
-<li>Search method<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a></li>
+<li><p>Search method<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a>
+By Default, the search will look into the categories: Indexes, markets(stocks), bonds, and commodities.</p></li>
+<li><p>Filtering by category
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest&category=index,markets">/markets/search/{term}?category={category}</a>
+Categories available: index, markets, forex, bond and commodity.</p></li>
+<li><p>Pagination
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/japan?c=guest:guest&category=index,markets&page=2">/markets/search/{term}?category={category}&amp;page=2</a>
+Because this endpoint can yield too many results, this method has pagination. Each page is limited to 250 items, you can request each page separately.</p></li>
 </ul>
 
 <p></span> </p>
@@ -1929,7 +1949,7 @@ Or type in any empty cell:</p>
  Copy this code and execute
 </p>
 </blockquote>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="k">as</span> <span class="n">te</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'guest:guest'</span><span class="p">)</span>
