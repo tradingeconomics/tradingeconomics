@@ -28,16 +28,25 @@ def credCheck(credentials):
     if ':' not in credentials:
         raise CredentialsError('Invalid credentials.')
         
-def out_type(init_format):
-    list_of_countries= init_format.Country.unique()
+def out_type(init_format, isCommodity = False):
+    if isCommodity:
+        list_of_countries= init_format.Title.unique()
+    else:
+        list_of_countries= init_format.Country.unique()
     list_of_cat= init_format.Category.unique()
     dict_start = {el:{elm:0 for elm in list_of_cat} for el in list_of_countries} 
     for i, j in itertools.product(range(len(list_of_countries)), range(len(list_of_cat))):
-        dict_cntry = init_format.loc[init_format['Country'] == list_of_countries[i]]
+        if isCommodity:
+            dict_cntry = init_format.loc[init_format['Title'] == list_of_countries[i]]
+        else:
+            dict_cntry = init_format.loc[init_format['Country'] == list_of_countries[i]]
         dict_cat = dict_cntry.loc[init_format['Category'] == list_of_cat[j]].to_dict('records')
         dict_start[list_of_countries[i]][list_of_cat[j]] = dict_cat
         for l in range(len(dict_cat)):
-            del dict_cat[l]['Country']
+            if isCommodity:
+                del dict_cat[l]['Title']
+            else:
+                del dict_cat[l]['Country']
             del dict_cat[l]['Category']
     return dict_start
        
