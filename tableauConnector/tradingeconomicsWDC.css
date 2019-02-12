@@ -1,0 +1,83 @@
+#wrapper {
+    max-width: 980px;
+    margin: auto auto;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 60px;
+    font-weight: 600;
+}
+
+button {
+    height: 40px; 
+    margin: 12px;
+    padding: 0 30px;
+    border: 0;
+}
+
+label {
+    margin-top: 16px;
+}
+
+input {
+    text-align: center;
+}
+
+.form-control {
+    border-radius: 0;
+    margin: 4px 0 8px 0;
+    height: 40px;
+    display: inline-block;
+}
+
+.btn-group {
+    width: 200px;
+}
+
+#method {
+    width: 100%;
+    margin: 20px 0 10px 0;
+}
+
+.dropdown-menu {
+  border-radius: 0;
+}
+
+.dropdown-item {
+    margin: 0;
+    border: 0;
+    background-color: transparent;
+    padding: 5px 16px;
+    width: 100%;
+    text-align: left;
+    display: inline-block;
+}
+
+.dropdown-item:hover {
+    background-color: #efeff7;
+}
+
+#gettingWhatTitle {
+    margin: 40px 0 10px 0;
+    font-size: 2.2rem;
+    font-weight: 600;
+    display: block;
+}
+
+.btn-default {
+    min-height: 50px; 
+    background-color: #efeff7;
+}
+
+.btn-default:focus, .pressedBtnGray, .btn-default:hover {
+    background-color: #d6d6e6;
+}
+
+.pressedBtnBlue, .btn-info:focus, .btn-info:hover {
+    background-color: #2e96b6;
+}
+
+footer {
+    margin-bottom: 40px;
+}
