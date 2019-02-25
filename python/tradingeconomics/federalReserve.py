@@ -279,7 +279,7 @@ def getFedRHistorical(symbol = None, output_type = None):
     -------
     getFedRHistorical(symbol = 'racedisparity005007', output_type = None)
 
-    getFedRHistorical(symbol = ['racedisparity005007', 'racedisparity005007'], output_type = None)
+    getFedRHistorical(symbol = ['racedisparity005007', '2020ratio002013'], output_type = None)
     
     """
     try:

@@ -120,7 +120,7 @@ def getWBCategories(category = None, page_number = None, output_type = None):
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    print (linkAPI)
+   
     try:
         code = urlopen(linkAPI)
         code = code.getcode() 
