@@ -1,22 +1,22 @@
 (function () {
-	let myConnector = tableau.makeConnector()
-    myConnector.getSchema = schemaCallback => {
+	var myConnector = tableau.makeConnector()
+    myConnector.getSchema = function (schemaCallback) {
 
-		let urlObj = JSON.parse(tableau.connectionData)
+		var urlObj = JSON.parse(tableau.connectionData)
 
-		let dataCategory =  urlObj.urlBase.split('/')[1]
+		var dataCategory =  urlObj.urlBase.split('/')[1]
 		if (urlObj.urlBase.includes('earnings')) { dataCategory = 'earnings' }
-    	console.log(`Category: ${dataCategory}`)
+    	console.log('Category:' + dataCategory)
 
-		let dataSecondPoint = urlObj.urlBase.split('/')[2]
-		console.log(`SecondPoint: ${dataSecondPoint}`)
+		var dataSecondPoint = urlObj.urlBase.split('/')[2]
+		console.log('SecondPoint:' + dataSecondPoint)
 
-		let dataThirdPoint = urlObj.urlBase.split('/')[3]
-		console.log(`ThirdPoint: ${dataThirdPoint}`)
+		var dataThirdPoint = urlObj.urlBase.split('/')[3]
+		console.log('ThirdPoint:' + dataThirdPoint)
 		
 		//The columns to be shown are defined here
 		if(dataCategory == 'indicators' && dataSecondPoint == undefined) {
-    		let cols = [
+    		var cols = [
 		        {id : 'Category', alias : 'Category', dataType : tableau.dataTypeEnum.string},
 				{id : 'CategoryGroup', alias : 'CategoryGroup', dataType : tableau.dataTypeEnum.string}
 		    ]
@@ -26,7 +26,7 @@
 		        columns : cols
 			}
 		} else if (dataCategory == 'indicators' && dataSecondPoint != undefined || dataCategory == 'country') {
-    		let cols = [
+    		var cols = [
 		        {id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
 		        {id : 'Category', alias : 'Category', dataType : tableau.dataTypeEnum.string},
 		        {id : 'Title', alias : 'Title', dataType : tableau.dataTypeEnum.string},
@@ -49,7 +49,7 @@
 		        columns : cols
 		    }
 		} else if(dataCategory == 'historical') {
-    		let cols = [
+    		var cols = [
 		        {id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
 		        {id : 'Category', alias : 'Category', dataType : tableau.dataTypeEnum.string},
 		        {id : 'DateTime', alias : 'DateTime', dataType : tableau.dataTypeEnum.datetime},
@@ -64,7 +64,7 @@
 		        columns : cols
 		    }
 		} else if (dataCategory == 'calendar') {
-    		let cols = [
+    		var cols = [
 				{id : 'CalendarId', alias : 'CalendarId', dataType : tableau.dataTypeEnum.string},
     			{id : 'Date', alias : 'Date', dataType : tableau.dataTypeEnum.datetime},
 		        {id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
@@ -88,7 +88,7 @@
 		        columns : cols
 			}
 		} else if (dataCategory == 'ratings' && dataSecondPoint != 'historical') {
-    		let cols = [
+    		var cols = [
 				{id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
 		        {id : 'TE', alias : 'TE', dataType : tableau.dataTypeEnum.string},
 		        {id : 'TE_Outlook', alias : 'TE_Outlook', dataType : tableau.dataTypeEnum.string},
@@ -107,7 +107,7 @@
 		        columns : cols
 			}
 		} else if (dataCategory == 'ratings' && dataSecondPoint == 'historical') {
-    		let cols = [
+    		var cols = [
 				{id : 'Country', alias : 'Countr', dataType : tableau.dataTypeEnum.string},
 				{id : 'Date', alias : 'Date', dataType : tableau.dataTypeEnum.date},
 		        {id : 'Agency', alias : 'Agency', dataType : tableau.dataTypeEnum.string},
@@ -120,7 +120,7 @@
 		        columns : cols
 			}
 		} else if (dataCategory == 'updates') {
-    		let cols = [
+    		var cols = [
 				{id : 'HistoricalDataSymbol', alias : 'HistoricalDataSymbol', dataType : tableau.dataTypeEnum.string},
 				{id : 'LastUpdate', alias : 'LastUpdate', dataType : tableau.dataTypeEnum.date}
 		    ]
@@ -130,7 +130,7 @@
 		        columns : cols
 		    }
     	} else if (dataCategory == 'markets' && dataSecondPoint != 'historical' && dataSecondPoint != 'intraday') {
-    		let cols = [
+    		var cols = [
 		        {id : 'Symbol', alias : 'Symbol', dataType : tableau.dataTypeEnum.string},
 				{id : 'Ticker', alias : 'Ticker', dataType : tableau.dataTypeEnum.string},
 				{id : 'Name', alias : 'Name', dataType : tableau.dataTypeEnum.string},
@@ -165,7 +165,7 @@
 		        columns : cols
 			}	
 		} else if (dataCategory == 'markets' && dataSecondPoint == 'historical' || dataCategory == 'markets' && dataSecondPoint == 'intraday') {
-    		let cols = [
+    		var cols = [
 		        {id : 'Symbol', alias : 'Symbol', dataType : tableau.dataTypeEnum.string},
 				{id : 'DateHour', alias : 'Date', dataType : tableau.dataTypeEnum.date},
 				{id : 'Open', alias : 'Open', dataType : tableau.dataTypeEnum.float},
@@ -179,7 +179,7 @@
 		        columns : cols
 			}	
 		} else if (dataCategory == 'earnings') {
-    		let cols = [
+    		var cols = [
 				{id : 'Date', alias : 'Date', dataType : tableau.dataTypeEnum.date},
 				{id : 'Symbol', alias : 'Symbol', dataType : tableau.dataTypeEnum.string},
 				{id : 'Type', alias : 'Type', dataType : tableau.dataTypeEnum.string},
@@ -199,7 +199,7 @@
 		        columns : cols
 			}
 		} else if (dataCategory == 'news' || dataCategory == 'articles') {
-    		let cols = [
+    		var cols = [
 				{id : 'Id', alias : 'id', dataType : tableau.dataTypeEnum.string},
 				{id : 'Title', alias : 'title', dataType : tableau.dataTypeEnum.string},
 				{id : 'Date', alias : 'date', dataType : tableau.dataTypeEnum.date},
@@ -215,7 +215,7 @@
 		        columns : cols
 		    }
     	} else if (dataCategory == 'forecast') {
-    		let cols = [
+    		var cols = [
 		        { id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
 				{ id : 'Category', alias : 'Category', dataType : tableau.dataTypeEnum.string},
 				{ id : 'Title', alias : 'Title', dataType : tableau.dataTypeEnum.string},
@@ -233,8 +233,8 @@
 				{ id : 'Q2Date', alias : 'q2_date', dataType : tableau.dataTypeEnum.date},
 				{ id : 'Q3Date', alias : 'q3_date', dataType : tableau.dataTypeEnum.date},
 				{ id : 'Q4Date', alias : 'q4_date', dataType : tableau.dataTypeEnum.date},
-				{ id : "Frequency", alias : "Frequency", dataType : tableau.dataTypeEnum.string},
-				{ id : "HistoricalDataSymbol", alias : "HistoricalDataSymbol", dataType : tableau.dataTypeEnum.string}
+				{ id : 'Frequency', alias : 'Frequency', dataType : tableau.dataTypeEnum.string},
+				{ id : 'HistoricalDataSymbol', alias : 'HistoricalDataSymbol', dataType : tableau.dataTypeEnum.string}
 		    ]
 		    var tableInfo = {
 		        id : 'forecastFeed',
@@ -245,26 +245,26 @@
 		schemaCallback([tableInfo])
 	}
 	
-    myConnector.getData = (table, doneCallback) => {
+    myConnector.getData = function (table, doneCallback) {
 		
-		let urlObj = JSON.parse(tableau.connectionData)
+		var urlObj = JSON.parse(tableau.connectionData)
 		
 		//Final Url is created here
-		let apiCall = `https://api.tradingeconomics.com${urlObj.urlBase}?f=json&c=${urlObj.apiKey}&${urlObj.urlAfter}`
+		var apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey + '&' + urlObj.urlAfter
 		if(urlObj.urlBase.includes('earnings?type=')) {
-			apiCall = `https://api.tradingeconomics.com${urlObj.urlBase}&f=json&c=${urlObj.apiKey}`
+			apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase +'&f=json&c=' + urlObj.apiKey
 		}
 
-		console.log(`apiCall: ${apiCall}`)
+		console.log('apiCall:' + apiCall)
 
-		let dataCategory =  urlObj.urlBase.split('/')[1]
+		var dataCategory =  urlObj.urlBase.split('/')[1]
 
-    	$.getJSON(apiCall, resp => {
+    	$.getJSON(apiCall, function(resp) {
 
-			let tableData = []
+			var tableData = []
 
 			//Atributting value to the columns defined earlier
-			for (let i = 0, len = resp.length; i < len; i++) {
+			for (var i = 0, len = resp.length; i < len; i++) {
 			
 				if(!resp[i].date) { resp[i].date = ''}
 				if(!resp[i].q1_date) { resp[i].q1_date = ''}
@@ -388,93 +388,93 @@
 	
     tableau.registerConnector(myConnector)
 
-    $(document).ready(() => {
+    $(document).ready(function() {
 
-		let inputsID = ['indicatorInput', 'countryInput', 'tickerInput', 'calendarIdInput', 'currencyISOInput', 'marketSymbolInput', 'dateFromOneInput', 'dateFromInput', 'dateToInput', 'earningsTypeInput', 'startIndexInput', 'listSizeInput', 'articleIdInput', 'hourInput']
-		let inputsSelected = []
+		var inputsID = ['indicatorInput', 'countryInput', 'tickerInput', 'calendarIdInput', 'currencyISOInput', 'marketSymbolInput', 'dateFromOneInput', 'dateFromInput', 'dateToInput', 'earningsTypeInput', 'startIndexInput', 'listSizeInput', 'articleIdInput', 'hourInput']
+		var inputsSelected = []
 
 		//Selecting DOM Elements
 		function selectFromDOM(idArray, selectedArray) {
-			for (let i in idArray) {
+			for (var i in idArray) {
 				selectedArray[i] = document.getElementById(idArray[i])
 			}
 		}
 
 		selectFromDOM(inputsID, inputsSelected)
 
-		let urlToBakeCode = ''
+		var urlToBakeCode = ''
 
-		let submitButton = document.getElementById('submitButton')
-		submitButton.onclick = () => { 
+		var submitButton = document.getElementById('submitButton')
+		submitButton.onclick = function() { 
 		
-			let _baseUrl = ''
-			let _urlAfter = ''
+			var _baseUrl = ''
+			var _urlAfter = ''
 
 			//Creating the specific url's foreach case
 			//Indicators
-			if (urlToBakeCode == 'getEveryTeApiIndicatorName') { _baseUrl = `/indicators` }
-			else if (urlToBakeCode == 'getEveryIndicatorOfaCountry') { _baseUrl = `/country/${inputsSelected[1].value}` } 
-			else if (urlToBakeCode == 'getThatIndicatorForAllCountries') { _baseUrl = `/country/all/${inputsSelected[0].value}` } 
-			else if (urlToBakeCode == 'getSpecificCountriesAndIndicators') { _baseUrl = `/historical/country/${inputsSelected[1].value}/indicator/${inputsSelected[0].value}` }
-			else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsStartingFromaDate') { _baseUrl = `/historical/country/${inputsSelected[1].value}/indicator/${inputsSelected[0].value}/${inputsSelected[6].value}` }
-			else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = `/historical/country/${inputsSelected[1].value}/indicator/${inputsSelected[0].value}/${inputsSelected[7].value}/${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getDataByTicker') { _baseUrl = `/historical/ticker/${inputsSelected[2].value}/${inputsSelected[6].value}` }
-			else if (urlToBakeCode == 'getCountryRating') { _baseUrl = `/ratings/${inputsSelected[1].value}` }
-			else if (urlToBakeCode == 'getCountryHistoricalRating') { _baseUrl = `/ratings/historical/${inputsSelected[1].value}` }
+			if (urlToBakeCode == 'getEveryTeApiIndicatorName') { _baseUrl = '/indicators' }
+			else if (urlToBakeCode == 'getEveryIndicatorOfaCountry') { _baseUrl = '/country/' + inputsSelected[1].value } 
+			else if (urlToBakeCode == 'getThatIndicatorForAllCountries') { _baseUrl = '/country/all/' + inputsSelected[0].value } 
+			else if (urlToBakeCode == 'getSpecificCountriesAndIndicators') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
+			else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsStartingFromaDate') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[6].value }
+			else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getDataByTicker') { _baseUrl = '/historical/ticker/' + inputsSelected[2].value + '/' + inputsSelected[6].value }
+			else if (urlToBakeCode == 'getCountryRating') { _baseUrl = '/ratings/' + inputsSelected[1].value }
+			else if (urlToBakeCode == 'getCountryHistoricalRating') { _baseUrl = '/ratings/historical/' + inputsSelected[1].value }
 			else if (urlToBakeCode == 'getAllUpdates') { _baseUrl = '/updates' }
-			else if (urlToBakeCode == 'getUpdatesStartingFromADate') { _baseUrl = `/updates/${inputsSelected[6].value}` }
+			else if (urlToBakeCode == 'getUpdatesStartingFromADate') { _baseUrl = '/updates/' + inputsSelected[6].value }
 			//Calendar
-			else if (urlToBakeCode == 'getAllCalendarEvents') { _baseUrl = `/calendar` }
-			else if (urlToBakeCode == 'getCalendarEventsFromDateToDate') { _baseUrl = `/calendar/country/All/${inputsSelected[7].value}/${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountries') { _baseUrl = `/calendar/country/${inputsSelected[1].value}` }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesFromDateToDate') { _baseUrl = `/calendar/country/${inputsSelected[1].value}/${inputsSelected[7].value}/${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificIndicator') { _baseUrl = `/calendar/indicator/${inputsSelected[0].value}` }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificIndicatorFromDateToDate') { _baseUrl = `/calendar/indicator/${inputsSelected[0].value}/${inputsSelected[7].value}/${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicators') { _baseUrl = `/calendar/country/${inputsSelected[1].value}/indicator/${inputsSelected[0].value}` }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = `/calendar/country/${inputsSelected[1].value}/indicator/${inputsSelected[0].value}/${inputsSelected[7].value}/${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getCalendarEventsByCalendarId') { _baseUrl = `/calendar/calendarid/${inputsSelected[3].value}` }
+			else if (urlToBakeCode == 'getAllCalendarEvents') { _baseUrl = '/calendar' }
+			else if (urlToBakeCode == 'getCalendarEventsFromDateToDate') { _baseUrl = '/calendar/country/All/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountries') { _baseUrl = '/calendar/country/' + inputsSelected[1].value }
+			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesFromDateToDate') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getCalendarEventsForSpecificIndicator') { _baseUrl = '/calendar/indicator/' + inputsSelected[0].value }
+			else if (urlToBakeCode == 'getCalendarEventsForSpecificIndicatorFromDateToDate') { _baseUrl = '/calendar/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicators') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
+			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getCalendarEventsByCalendarId') { _baseUrl = '/calendar/calendarid/' + inputsSelected[3].value }
 			//Forecast
-			else if (urlToBakeCode == 'getForecastsForSpecificCountries') { _baseUrl = `/forecast/country/${inputsSelected[1].value}` }
-			else if (urlToBakeCode == 'getForecastsForSpecificIndicator') { _baseUrl = `/forecast/indicator/${inputsSelected[0].value}` }
-			else if (urlToBakeCode == 'getForecastsForSpecificCountriesAndIndicators') { _baseUrl = `/forecast/country/${inputsSelected[1].value}/indicator/${inputsSelected[0].value}` }
+			else if (urlToBakeCode == 'getForecastsForSpecificCountries') { _baseUrl = '/forecast/country/' + inputsSelected[1].value }
+			else if (urlToBakeCode == 'getForecastsForSpecificIndicator') { _baseUrl = '/forecast/indicator/' + inputsSelected[0].value }
+			else if (urlToBakeCode == 'getForecastsForSpecificCountriesAndIndicators') { _baseUrl = '/forecast/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
 			//Markets
-			else if (urlToBakeCode == 'getCommodities') { _baseUrl = `/markets/commodities` }
-			else if (urlToBakeCode == 'getMajorCurrencies') { _baseUrl = `/markets/currency` }
-			else if (urlToBakeCode == 'getCurrencyCrosses') {_baseUrl = `/markets/currency`, _urlAfter = `cross=${inputsSelected[4].value}` }
-			else if (urlToBakeCode == 'getStockMarketIndexes') { _baseUrl = `/markets/index` }
-			else if (urlToBakeCode == 'getGovernmentBonds') { _baseUrl = `/markets/bond` }
-			else if (urlToBakeCode == 'getSpecificMarketsBySymbol') { _baseUrl = `/markets/symbol/${inputsSelected[5].value}` }
-			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbol') { _baseUrl = `/markets/historical/${inputsSelected[5].value}` }
-			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbolStartingFromDate') { _baseUrl = `/markets/historical/${inputsSelected[5].value}`, _urlAfter = `d1=${inputsSelected[6].value}` }
-			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbolFromDateToDate') { _baseUrl = `/markets/historical/${inputsSelected[5].value}`, _urlAfter = `d1=${inputsSelected[7].value}&d2=${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbol') { _baseUrl = `/markets/intraday/${inputsSelected[5].value}` }
-			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolStartingFromDateAndHour') { _baseUrl = `/markets/intraday/${inputsSelected[5].value}`, _urlAfter = `d1=${inputsSelected[6].value} ${inputsSelected[13].value}` }
-			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolFromDateToDate') { _baseUrl = `/markets/intraday/${inputsSelected[5].value}`, _urlAfter = `d1=${inputsSelected[7].value}&d2=${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getLatestPeersPricesByMarketSymbol') { _baseUrl = `/markets/peers/${inputsSelected[5].value}` }
-			else if (urlToBakeCode == 'getStockMarketsIndexComponentsbySymbol') { _baseUrl = `/markets/components/${inputsSelected[5].value}` }
+			else if (urlToBakeCode == 'getCommodities') { _baseUrl = '/markets/commodities' }
+			else if (urlToBakeCode == 'getMajorCurrencies') { _baseUrl = '/markets/currency' }
+			else if (urlToBakeCode == 'getCurrencyCrosses') {_baseUrl = '/markets/currency', _urlAfter = 'cross=' + inputsSelected[4].value }
+			else if (urlToBakeCode == 'getStockMarketIndexes') { _baseUrl = '/markets/index' }
+			else if (urlToBakeCode == 'getGovernmentBonds') { _baseUrl = '/markets/bond' }
+			else if (urlToBakeCode == 'getSpecificMarketsBySymbol') { _baseUrl = '/markets/symbol/' + inputsSelected[5].value }
+			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbol') { _baseUrl = '/markets/historical/' + inputsSelected[5].value }
+			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbolStartingFromDate') { _baseUrl = '/markets/historical/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value }
+			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbolFromDateToDate') { _baseUrl = '/markets/historical/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + '&d2=' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbol') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value }
+			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolStartingFromDateAndHour') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value + ' ' + inputsSelected[13].value }
+			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolFromDateToDate') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + 'd2=' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getLatestPeersPricesByMarketSymbol') { _baseUrl = '/markets/peers/' + inputsSelected[5].value }
+			else if (urlToBakeCode == 'getStockMarketsIndexComponentsbySymbol') { _baseUrl = '/markets/components/' + inputsSelected[5].value }
 			//Earnings
-			else if (urlToBakeCode == 'getDefaultEarningsCalendar') { _baseUrl = `/earnings` }
-			else if (urlToBakeCode == 'getEarningsCalendarStartingFromDate') { _baseUrl = `/earnings`, _urlAfter = `d1=${inputsSelected[6].value}` }
-			else if (urlToBakeCode == 'getEarningsCalendarByMarketStartingFromDate') { _baseUrl = `/earnings/symbol/${inputsSelected[5].value}`, _urlAfter = `d1=${inputsSelected[6].value}` }
-			else if (urlToBakeCode == 'getEarningsCalendarByMarketFromDateToDate') { _baseUrl = `/earnings/symbol/${inputsSelected[5].value}`, _urlAfter = `d1=${inputsSelected[7].value}&d2=${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getEarningsCalendarByCountry') { _baseUrl = `/earnings/country/${inputsSelected[1].value}` }
-			else if (urlToBakeCode == 'getEarningsByType') { _baseUrl = `/earnings?type=${inputsSelected[9].value}` }
+			else if (urlToBakeCode == 'getDefaultEarningsCalendar') { _baseUrl = '/earnings' }
+			else if (urlToBakeCode == 'getEarningsCalendarStartingFromDate') { _baseUrl = '/earnings', _urlAfter = 'd1=' + inputsSelected[6].value }
+			else if (urlToBakeCode == 'getEarningsCalendarByMarketStartingFromDate') { _baseUrl = '/earnings/symbol/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value }
+			else if (urlToBakeCode == 'getEarningsCalendarByMarketFromDateToDate') { _baseUrl = '/earnings/symbol/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + '&d2=' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getEarningsCalendarByCountry') { _baseUrl = '/earnings/country/' + inputsSelected[1].value }
+			else if (urlToBakeCode == 'getEarningsByType') { _baseUrl = '/earnings?type=' + inputsSelected[9].value }
 			//News
-			else if (urlToBakeCode == 'getLatestNews') { _baseUrl = `/news` }
-			else if (urlToBakeCode == 'getNewsByCountry') { _baseUrl = `/news/country/${inputsSelected[1].value}` }
-			else if (urlToBakeCode == 'getNewsByIndicator') { _baseUrl = `/news/indicator/${inputsSelected[0].value}` }
-			else if (urlToBakeCode == 'getNewsByCountryAndIndicator') { _baseUrl = `/news/country/${inputsSelected[1].value}/${inputsSelected[0].value}` }
-			else if (urlToBakeCode == 'getNewsListSpecifyingStartIndexAndListSize') { _baseUrl = `/news`, _urlAfter = `limit=${inputsSelected[11].value}&start=${inputsSelected[10].value}` }
-			else if (urlToBakeCode == 'getLatestArticles') { _baseUrl = `/articles` }
-			else if (urlToBakeCode == 'getArticlesByCountry') { _baseUrl = `/articles/country/${inputsSelected[1].value}` }
-			else if (urlToBakeCode == 'getArticlesByCountryFromDateToDate') { _baseUrl = `/articles/country/${inputsSelected[1].value}/from/${inputsSelected[7].value}/${inputsSelected[8].value}` }
-			else if (urlToBakeCode == 'getLatestArticlesByIndicator') { _baseUrl = `/articles/indicator/${inputsSelected[0].value}` }
-			else if (urlToBakeCode == 'getLatestArticlesByCountryAndIndicator') { _baseUrl = `/articles/country/${inputsSelected[1].value}/${inputsSelected[0].value}` }
-			else if (urlToBakeCode == 'getArticlesById') { _baseUrl = `/articles/id/${inputsSelected[12].value}` }
-			else if (urlToBakeCode == 'getArticlesListSpecifyingStartIndexAndListSize') { _baseUrl = `/articles`, _urlAfter = `lim=${inputsSelected[11].value}&start=${inputsSelected[10].value}` }
+			else if (urlToBakeCode == 'getLatestNews') { _baseUrl = '/news' }
+			else if (urlToBakeCode == 'getNewsByCountry') { _baseUrl = '/news/country/' + inputsSelected[1].value }
+			else if (urlToBakeCode == 'getNewsByIndicator') { _baseUrl = '/news/indicator/' + inputsSelected[0].value }
+			else if (urlToBakeCode == 'getNewsByCountryAndIndicator') { _baseUrl = '/news/country/' + inputsSelected[1].value + '/' + inputsSelected[0].value }
+			else if (urlToBakeCode == 'getNewsListSpecifyingStartIndexAndListSize') { _baseUrl = '/news', _urlAfter = 'limit=' + inputsSelected[11].value + '&start=' + inputsSelected[10].value }
+			else if (urlToBakeCode == 'getLatestArticles') { _baseUrl = '/articles' }
+			else if (urlToBakeCode == 'getArticlesByCountry') { _baseUrl = '/articles/country/' + inputsSelected[1].value }
+			else if (urlToBakeCode == 'getArticlesByCountryFromDateToDate') { _baseUrl = '/articles/country/' + inputsSelected[1].value + '/from/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+			else if (urlToBakeCode == 'getLatestArticlesByIndicator') { _baseUrl = '/articles/indicator/' + inputsSelected[0].value }
+			else if (urlToBakeCode == 'getLatestArticlesByCountryAndIndicator') { _baseUrl = '/articles/country/' + inputsSelected[1].value + '/' + inputsSelected[0].value }
+			else if (urlToBakeCode == 'getArticlesById') { _baseUrl = '/articles/id/' + inputsSelected[12].value }
+			else if (urlToBakeCode == 'getArticlesListSpecifyingStartIndexAndListSize') { _baseUrl = '/articles', _urlAfter = 'lim=' + inputsSelected[11].value + '&start=' + inputsSelected[10].value }
 
 			//This object will further complete the url with the API Key 
-			let urlObj = {
+			var urlObj = {
 				urlBase: _baseUrl.trim(),
 				apiKey: $('#apiKeyInput').val().trim(),
 				urlAfter: _urlAfter.trim()
@@ -486,113 +486,113 @@
 		}
 
 		//DOM Selections
-		let indicatorsHr = document.getElementById('indicatorsHr')
-		let marketsHr = document.getElementById('marketsHr')
-		let newsHr = document.getElementById('newsHr')
-		let gettingWhatHr = document.getElementById('gettingWhatHr')
-		let gettingWhatTitle = document.getElementById('gettingWhatTitle')
-		let dateFromOneInputLabel = document.getElementById('dateFromOneInputLabel')
-		let apiKeyInput = document.getElementById('apiKeyInput')
+		var indicatorsHr = document.getElementById('indicatorsHr')
+		var marketsHr = document.getElementById('marketsHr')
+		var newsHr = document.getElementById('newsHr')
+		var gettingWhatHr = document.getElementById('gettingWhatHr')
+		var gettingWhatTitle = document.getElementById('gettingWhatTitle')
+		var dateFromOneInputLabel = document.getElementById('dateFromOneInputLabel')
+		var apiKeyInput = document.getElementById('apiKeyInput')
 		//Indicators
-		let indicatorsContainer = document.getElementById('indicatorsContainer')
-		let allIndicatorsBtn = document.getElementById('allIndicatorsBtn')
-		let allIndicatorsBtnContainer = document.getElementById('allIndicatorsBtnContainer')
-		let historicalDataBtn = document.getElementById('historicalDataBtn')
-		let historicalDataBtnContainer = document.getElementById('historicalDataBtnContainer')
-		let creditRatingBtn = document.getElementById('creditRatingBtn')
-		let creditRatingBtnContainer = document.getElementById('creditRatingBtnContainer')
-		let updatesBtn = document.getElementById('updatesBtn')
-		let updatesBtnContainer = document.getElementById('updatesBtnContainer')
-		let getEveryTeApiIndicatorName = document.getElementById('getEveryTeApiIndicatorName')
-		let getEveryIndicatorOfaCountry = document.getElementById('getEveryIndicatorOfaCountry')
-		let getThatIndicatorForAllCountries = document.getElementById('getThatIndicatorForAllCountries')
-		let getSpecificCountriesAndIndicators = document.getElementById('getSpecificCountriesAndIndicators')
-		let getSpecificCountriesAndIndicatorsStartingFromaDate = document.getElementById('getSpecificCountriesAndIndicatorsStartingFromaDate')
-		let getSpecificCountriesAndIndicatorsFromDateToDate = document.getElementById('getSpecificCountriesAndIndicatorsFromDateToDate')
-		let getDataByTicker = document.getElementById('getDataByTicker')
-		let getCountryRating = document.getElementById('getCountryRating')
-		let getCountryHistoricalRating = document.getElementById('getCountryHistoricalRating')
-		let getAllUpdates = document.getElementById('getAllUpdates')
-		let getUpdatesStartingFromADate = document.getElementById('getUpdatesStartingFromADate')
+		var indicatorsContainer = document.getElementById('indicatorsContainer')
+		var allIndicatorsBtn = document.getElementById('allIndicatorsBtn')
+		var allIndicatorsBtnContainer = document.getElementById('allIndicatorsBtnContainer')
+		var historicalDataBtn = document.getElementById('historicalDataBtn')
+		var historicalDataBtnContainer = document.getElementById('historicalDataBtnContainer')
+		var creditRatingBtn = document.getElementById('creditRatingBtn')
+		var creditRatingBtnContainer = document.getElementById('creditRatingBtnContainer')
+		var updatesBtn = document.getElementById('updatesBtn')
+		var updatesBtnContainer = document.getElementById('updatesBtnContainer')
+		var getEveryTeApiIndicatorName = document.getElementById('getEveryTeApiIndicatorName')
+		var getEveryIndicatorOfaCountry = document.getElementById('getEveryIndicatorOfaCountry')
+		var getThatIndicatorForAllCountries = document.getElementById('getThatIndicatorForAllCountries')
+		var getSpecificCountriesAndIndicators = document.getElementById('getSpecificCountriesAndIndicators')
+		var getSpecificCountriesAndIndicatorsStartingFromaDate = document.getElementById('getSpecificCountriesAndIndicatorsStartingFromaDate')
+		var getSpecificCountriesAndIndicatorsFromDateToDate = document.getElementById('getSpecificCountriesAndIndicatorsFromDateToDate')
+		var getDataByTicker = document.getElementById('getDataByTicker')
+		var getCountryRating = document.getElementById('getCountryRating')
+		var getCountryHistoricalRating = document.getElementById('getCountryHistoricalRating')
+		var getAllUpdates = document.getElementById('getAllUpdates')
+		var getUpdatesStartingFromADate = document.getElementById('getUpdatesStartingFromADate')
 		//Calendar
-		let calendarContainer = document.getElementById('calendarContainer')
-		let getAllCalendarEvents = document.getElementById('getAllCalendarEvents')
-		let getCalendarEventsFromDateToDate = document.getElementById('getCalendarEventsFromDateToDate')
-		let getCalendarEventsForSpecificCountries = document.getElementById('getCalendarEventsForSpecificCountries')
-		let getCalendarEventsForSpecificCountriesFromDateToDate = document.getElementById('getCalendarEventsForSpecificCountriesFromDateToDate')
-		let getCalendarEventsForSpecificIndicator = document.getElementById('getCalendarEventsForSpecificIndicator')
-		let getCalendarEventsForSpecificIndicatorFromDateToDate = document.getElementById('getCalendarEventsForSpecificIndicatorFromDateToDate')
-		let getCalendarEventsForSpecificCountriesAndIndicators = document.getElementById('getCalendarEventsForSpecificCountriesAndIndicators')
-		let getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate = document.getElementById('getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate')
-		let getCalendarEventsByCalendarId = document.getElementById('getCalendarEventsByCalendarId')
+		var calendarContainer = document.getElementById('calendarContainer')
+		var getAllCalendarEvents = document.getElementById('getAllCalendarEvents')
+		var getCalendarEventsFromDateToDate = document.getElementById('getCalendarEventsFromDateToDate')
+		var getCalendarEventsForSpecificCountries = document.getElementById('getCalendarEventsForSpecificCountries')
+		var getCalendarEventsForSpecificCountriesFromDateToDate = document.getElementById('getCalendarEventsForSpecificCountriesFromDateToDate')
+		var getCalendarEventsForSpecificIndicator = document.getElementById('getCalendarEventsForSpecificIndicator')
+		var getCalendarEventsForSpecificIndicatorFromDateToDate = document.getElementById('getCalendarEventsForSpecificIndicatorFromDateToDate')
+		var getCalendarEventsForSpecificCountriesAndIndicators = document.getElementById('getCalendarEventsForSpecificCountriesAndIndicators')
+		var getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate = document.getElementById('getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate')
+		var getCalendarEventsByCalendarId = document.getElementById('getCalendarEventsByCalendarId')
 		//Forecast
-		let forecastContainer = document.getElementById('forecastContainer')
-		let getForecastsForSpecificCountries = document.getElementById('getForecastsForSpecificCountries')
-		let getForecastsForSpecificIndicator = document.getElementById('getForecastsForSpecificIndicator')
-		let getForecastsForSpecificCountriesAndIndicators = document.getElementById('getForecastsForSpecificCountriesAndIndicators')
+		var forecastContainer = document.getElementById('forecastContainer')
+		var getForecastsForSpecificCountries = document.getElementById('getForecastsForSpecificCountries')
+		var getForecastsForSpecificIndicator = document.getElementById('getForecastsForSpecificIndicator')
+		var getForecastsForSpecificCountriesAndIndicators = document.getElementById('getForecastsForSpecificCountriesAndIndicators')
 		//Markets
-		let marketsContainer = document.getElementById('marketsContainer')
-		let snapshotsBtn = document.getElementById('snapshotsBtn')
-		let snapshotsBtnContainer = document.getElementById('snapshotsBtnContainer')
-		let historicalDataMarketsBtn = document.getElementById('historicalDataMarketsBtn')
-		let historicalDataMarketsBtnContainer = document.getElementById('historicalDataMarketsBtnContainer')
-		let intradayDataBtn = document.getElementById('intradayDataBtn')
-		let intradayDataBtnContainer = document.getElementById('intradayDataBtnContainer')
-		let marketListsBtn = document.getElementById('marketListsBtn')
-		let marketListsBtnContainer = document.getElementById('marketListsBtnContainer')
-		let getCommodities = document.getElementById('getCommodities')
-		let getMajorCurrencies = document.getElementById('getMajorCurrencies')
-		let getCurrencyCrosses = document.getElementById('getCurrencyCrosses')
-		let getStockMarketIndexes = document.getElementById('getStockMarketIndexes')
-		let getGovernmentBonds = document.getElementById('getGovernmentBonds')
-		let getSpecificHistoricalMarketsDataBySymbol = document.getElementById('getSpecificHistoricalMarketsDataBySymbol')
-		let getSpecificHistoricalMarketsDataBySymbolStartingFromDate = document.getElementById('getSpecificHistoricalMarketsDataBySymbolStartingFromDate')
-		let getSpecificHistoricalMarketsDataBySymbolFromDateToDate = document.getElementById('getSpecificHistoricalMarketsDataBySymbolFromDateToDate')
-		let getIntradayPricesByMarketSymbol = document.getElementById('getIntradayPricesByMarketSymbol')
-		let getIntradayPricesByMarketSymbolStartingFromDateAndHour = document.getElementById('getIntradayPricesByMarketSymbolStartingFromDateAndHour')
-		let getIntradayPricesByMarketSymbolFromDateToDate = document.getElementById('getIntradayPricesByMarketSymbolFromDateToDate')
-		let getLatestPeersPricesByMarketSymbol = document.getElementById('getLatestPeersPricesByMarketSymbol')
-		let getStockMarketsIndexComponentsbySymbol = document.getElementById('getStockMarketsIndexComponentsbySymbol')
+		var marketsContainer = document.getElementById('marketsContainer')
+		var snapshotsBtn = document.getElementById('snapshotsBtn')
+		var snapshotsBtnContainer = document.getElementById('snapshotsBtnContainer')
+		var historicalDataMarketsBtn = document.getElementById('historicalDataMarketsBtn')
+		var historicalDataMarketsBtnContainer = document.getElementById('historicalDataMarketsBtnContainer')
+		var intradayDataBtn = document.getElementById('intradayDataBtn')
+		var intradayDataBtnContainer = document.getElementById('intradayDataBtnContainer')
+		var marketListsBtn = document.getElementById('marketListsBtn')
+		var marketListsBtnContainer = document.getElementById('marketListsBtnContainer')
+		var getCommodities = document.getElementById('getCommodities')
+		var getMajorCurrencies = document.getElementById('getMajorCurrencies')
+		var getCurrencyCrosses = document.getElementById('getCurrencyCrosses')
+		var getStockMarketIndexes = document.getElementById('getStockMarketIndexes')
+		var getGovernmentBonds = document.getElementById('getGovernmentBonds')
+		var getSpecificHistoricalMarketsDataBySymbol = document.getElementById('getSpecificHistoricalMarketsDataBySymbol')
+		var getSpecificHistoricalMarketsDataBySymbolStartingFromDate = document.getElementById('getSpecificHistoricalMarketsDataBySymbolStartingFromDate')
+		var getSpecificHistoricalMarketsDataBySymbolFromDateToDate = document.getElementById('getSpecificHistoricalMarketsDataBySymbolFromDateToDate')
+		var getIntradayPricesByMarketSymbol = document.getElementById('getIntradayPricesByMarketSymbol')
+		var getIntradayPricesByMarketSymbolStartingFromDateAndHour = document.getElementById('getIntradayPricesByMarketSymbolStartingFromDateAndHour')
+		var getIntradayPricesByMarketSymbolFromDateToDate = document.getElementById('getIntradayPricesByMarketSymbolFromDateToDate')
+		var getLatestPeersPricesByMarketSymbol = document.getElementById('getLatestPeersPricesByMarketSymbol')
+		var getStockMarketsIndexComponentsbySymbol = document.getElementById('getStockMarketsIndexComponentsbySymbol')
 		//Earnings
-		let earningsContainer = document.getElementById('earningsContainer')
-		let getDefaultEarningsCalendar = document.getElementById('getDefaultEarningsCalendar')
-		let getEarningsCalendarStartingFromDate = document.getElementById('getEarningsCalendarStartingFromDate')
-		let getEarningsCalendarByMarketStartingFromDate = document.getElementById('getEarningsCalendarByMarketStartingFromDate')
-		let getEarningsCalendarByMarketFromDateToDate = document.getElementById('getEarningsCalendarByMarketFromDateToDate')
-		let getEarningsCalendarByCountry = document.getElementById('getEarningsCalendarByCountry')
-		let getEarningsByType = document.getElementById('getEarningsByType')
+		var earningsContainer = document.getElementById('earningsContainer')
+		var getDefaultEarningsCalendar = document.getElementById('getDefaultEarningsCalendar')
+		var getEarningsCalendarStartingFromDate = document.getElementById('getEarningsCalendarStartingFromDate')
+		var getEarningsCalendarByMarketStartingFromDate = document.getElementById('getEarningsCalendarByMarketStartingFromDate')
+		var getEarningsCalendarByMarketFromDateToDate = document.getElementById('getEarningsCalendarByMarketFromDateToDate')
+		var getEarningsCalendarByCountry = document.getElementById('getEarningsCalendarByCountry')
+		var getEarningsByType = document.getElementById('getEarningsByType')
 		//News
-		let newsContainer = document.getElementById('newsContainer')
-		let latestNewsBtn = document.getElementById('latestNewsBtn')
-		let latestNewsBtnContainer = document.getElementById('latestNewsBtnContainer')
-		let lastestArticlesBtn = document.getElementById('lastestArticlesBtn')
-		let lastestArticlesBtnContainer = document.getElementById('lastestArticlesBtnContainer')
-		let getLatestNews = document.getElementById('getLatestNews')
-		let getNewsByCountry = document.getElementById('getNewsByCountry')
-		let getNewsByIndicator = document.getElementById('getNewsByIndicator')
-		let getNewsByCountryAndIndicator = document.getElementById('getNewsByCountryAndIndicator')
-		let getNewsListSpecifyingStartIndexAndListSize = document.getElementById('getNewsListSpecifyingStartIndexAndListSize')
-		let getLatestArticles = document.getElementById('getLatestArticles')
-		let getArticlesByCountry = document.getElementById('getArticlesByCountry')
-		let getArticlesByCountryFromDateToDate = document.getElementById('getArticlesByCountryFromDateToDate')
-		let getLatestArticlesByIndicator = document.getElementById('getLatestArticlesByIndicator')
-		let getLatestArticlesByCountryAndIndicator = document.getElementById('getLatestArticlesByCountryAndIndicator')
-		let getArticlesById = document.getElementById('getArticlesById')
-		let getArticlesListSpecifyingStartIndexAndListSize = document.getElementById('getArticlesListSpecifyingStartIndexAndListSize')
+		var newsContainer = document.getElementById('newsContainer')
+		var latestNewsBtn = document.getElementById('latestNewsBtn')
+		var latestNewsBtnContainer = document.getElementById('latestNewsBtnContainer')
+		var lastestArticlesBtn = document.getElementById('lastestArticlesBtn')
+		var lastestArticlesBtnContainer = document.getElementById('lastestArticlesBtnContainer')
+		var getLatestNews = document.getElementById('getLatestNews')
+		var getNewsByCountry = document.getElementById('getNewsByCountry')
+		var getNewsByIndicator = document.getElementById('getNewsByIndicator')
+		var getNewsByCountryAndIndicator = document.getElementById('getNewsByCountryAndIndicator')
+		var getNewsListSpecifyingStartIndexAndListSize = document.getElementById('getNewsListSpecifyingStartIndexAndListSize')
+		var getLatestArticles = document.getElementById('getLatestArticles')
+		var getArticlesByCountry = document.getElementById('getArticlesByCountry')
+		var getArticlesByCountryFromDateToDate = document.getElementById('getArticlesByCountryFromDateToDate')
+		var getLatestArticlesByIndicator = document.getElementById('getLatestArticlesByIndicator')
+		var getLatestArticlesByCountryAndIndicator = document.getElementById('getLatestArticlesByCountryAndIndicator')
+		var getArticlesById = document.getElementById('getArticlesById')
+		var getArticlesListSpecifyingStartIndexAndListSize = document.getElementById('getArticlesListSpecifyingStartIndexAndListSize')
 		//Input/Form Containers
-		let indicatorInputContainer = document.getElementById('indicatorInputContainer')
-		let countryInputContainer = document.getElementById('countryInputContainer')
-		let tickerInputContainer = document.getElementById('tickerInputContainer')
-		let calendarIdInputContainer = document.getElementById('calendarIdInputContainer')
-		let currencyISOInputContainer = document.getElementById('currencyISOInputContainer')
-		let marketSymbolInputContainer = document.getElementById('marketSymbolInputContainer')
-		let dateFromOneInputContainer = document.getElementById('dateFromOneInputContainer')
-		let dateFromToInputContainer = document.getElementById('dateFromToInputContainer')
-		let earningsTypeInputContainer = document.getElementById('earningsTypeInputContainer')
-		let startIndexListSizeInputContainer = document.getElementById('startIndexListSizeInputContainer')
-		let articleIdInputContainer = document.getElementById('articleIdInputContainer')
-		let hourInputContainer = document.getElementById('hourInputContainer')
-		let apiKeyInputContainer = document.getElementById('apiKeyInputContainer')
+		var indicatorInputContainer = document.getElementById('indicatorInputContainer')
+		var countryInputContainer = document.getElementById('countryInputContainer')
+		var tickerInputContainer = document.getElementById('tickerInputContainer')
+		var calendarIdInputContainer = document.getElementById('calendarIdInputContainer')
+		var currencyISOInputContainer = document.getElementById('currencyISOInputContainer')
+		var marketSymbolInputContainer = document.getElementById('marketSymbolInputContainer')
+		var dateFromOneInputContainer = document.getElementById('dateFromOneInputContainer')
+		var dateFromToInputContainer = document.getElementById('dateFromToInputContainer')
+		var earningsTypeInputContainer = document.getElementById('earningsTypeInputContainer')
+		var startIndexListSizeInputContainer = document.getElementById('startIndexListSizeInputContainer')
+		var articleIdInputContainer = document.getElementById('articleIdInputContainer')
+		var hourInputContainer = document.getElementById('hourInputContainer')
+		var apiKeyInputContainer = document.getElementById('apiKeyInputContainer')
 
 		//Hide Everything
 		function hideContainers() {
@@ -691,7 +691,7 @@
 			
 			methodValue = this.value
 
-			let dropDownButton = document.getElementById('method')
+			var dropDownButton = document.getElementById('method')
 			dropDownButton.textContent = this.textContent
 
 			hideContainers()
@@ -709,7 +709,7 @@
 
 				indicatorsHr.style.display = 'none'
 
-				allIndicatorsBtn.onclick = () => {
+				allIndicatorsBtn.onclick = function() {
 					buttonStyle(allIndicatorsBtn)
 					indicatorsHr.style.display = 'block'
 					allIndicatorsBtnContainer.style.display = 'block'
@@ -718,7 +718,7 @@
 					updatesBtnContainer.style.display = 'none'
 				}
 
-				historicalDataBtn.onclick = () => {
+				historicalDataBtn.onclick = function() {
 					buttonStyle(historicalDataBtn)
 					indicatorsHr.style.display = 'block'
 					allIndicatorsBtnContainer.style.display = 'none'
@@ -727,7 +727,7 @@
 					updatesBtnContainer.style.display = 'none'
 				}
 
-				creditRatingBtn.onclick = () => {
+				creditRatingBtn.onclick = function() {
 					buttonStyle(creditRatingBtn)
 					indicatorsHr.style.display = 'block'
 					allIndicatorsBtnContainer.style.display = 'none'
@@ -736,7 +736,7 @@
 					updatesBtnContainer.style.display = 'none'
 				}
 
-				updatesBtn.onclick = () => {
+				updatesBtn.onclick = function() {
 					buttonStyle(updatesBtn)
 					indicatorsHr.style.display = 'block'
 					allIndicatorsBtnContainer.style.display = 'none'
@@ -745,39 +745,39 @@
 					updatesBtnContainer.style.display = 'block'
 				}
 
-				getEveryTeApiIndicatorName.onclick = () => { eachButtonSetup(getEveryTeApiIndicatorName) }
-				getEveryIndicatorOfaCountry.onclick = () => { eachButtonSetup(getEveryIndicatorOfaCountry, '', 'block') }
-				getThatIndicatorForAllCountries.onclick = () => { eachButtonSetup(getThatIndicatorForAllCountries, 'block') }
-				getSpecificCountriesAndIndicators.onclick = () => { eachButtonSetup(getSpecificCountriesAndIndicators, 'block', 'block') }
-				getSpecificCountriesAndIndicatorsStartingFromaDate.onclick = () => { eachButtonSetup(getSpecificCountriesAndIndicatorsStartingFromaDate, 'block', 'block', '', '', '', '', 'block') }
-				getSpecificCountriesAndIndicatorsFromDateToDate.onclick = () => { eachButtonSetup(getSpecificCountriesAndIndicatorsFromDateToDate, 'block', 'block', '', '', '', '', '', 'block') }
-				getDataByTicker.onclick = () => { eachButtonSetup(getDataByTicker, '', '', 'block', '', '', '', 'block') }
-				getCountryRating.onclick = () => { eachButtonSetup(getCountryRating, '', 'block') }
-				getCountryHistoricalRating.onclick = () => { eachButtonSetup(getCountryHistoricalRating, '', 'block') }
-				getAllUpdates.onclick = () => { eachButtonSetup(getAllUpdates) }
-				getUpdatesStartingFromADate.onclick = () => { eachButtonSetup(getUpdatesStartingFromADate, '', '', '', '', '', '', 'block') }
+				getEveryTeApiIndicatorName.onclick = function() { eachButtonSetup(getEveryTeApiIndicatorName) }
+				getEveryIndicatorOfaCountry.onclick = function() { eachButtonSetup(getEveryIndicatorOfaCountry, '', 'block') }
+				getThatIndicatorForAllCountries.onclick = function() { eachButtonSetup(getThatIndicatorForAllCountries, 'block') }
+				getSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicators, 'block', 'block') }
+				getSpecificCountriesAndIndicatorsStartingFromaDate.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicatorsStartingFromaDate, 'block', 'block', '', '', '', '', 'block') }
+				getSpecificCountriesAndIndicatorsFromDateToDate.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicatorsFromDateToDate, 'block', 'block', '', '', '', '', '', 'block') }
+				getDataByTicker.onclick = function() { eachButtonSetup(getDataByTicker, '', '', 'block', '', '', '', 'block') }
+				getCountryRating.onclick = function() { eachButtonSetup(getCountryRating, '', 'block') }
+				getCountryHistoricalRating.onclick = function() { eachButtonSetup(getCountryHistoricalRating, '', 'block') }
+				getAllUpdates.onclick = function() { eachButtonSetup(getAllUpdates) }
+				getUpdatesStartingFromADate.onclick = function() { eachButtonSetup(getUpdatesStartingFromADate, '', '', '', '', '', '', 'block') }
 			}
 
 			else if (methodValue == 'calendar') {
 				calendarContainer.style.display = "block"
 
-				getAllCalendarEvents.onclick = () => { eachButtonSetup(getAllCalendarEvents) }
-				getCalendarEventsFromDateToDate.onclick = () => { eachButtonSetup(getCalendarEventsFromDateToDate, '', '', '', '', '', '', '', 'block') }
-				getCalendarEventsForSpecificCountries.onclick = () => { eachButtonSetup(getCalendarEventsForSpecificCountries, '', 'block') }
-				getCalendarEventsForSpecificCountriesFromDateToDate.onclick = () => { eachButtonSetup(getCalendarEventsForSpecificCountriesFromDateToDate, '', 'block', '', '', '', '', '', 'block') }
-				getCalendarEventsForSpecificIndicator.onclick = () => { eachButtonSetup(getCalendarEventsForSpecificIndicator, 'block') }
-				getCalendarEventsForSpecificIndicatorFromDateToDate.onclick = () => { eachButtonSetup(getCalendarEventsForSpecificIndicatorFromDateToDate, 'block', '', '', '', '', '', '', 'block') }
-				getCalendarEventsForSpecificCountriesAndIndicators.onclick = () => { eachButtonSetup(getCalendarEventsForSpecificCountriesAndIndicators, 'block', 'block') }
-				getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate.onclick = () => { eachButtonSetup(getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate, 'block', 'block', '', '', '', '', '', 'block') }
-				getCalendarEventsByCalendarId.onclick = () => { eachButtonSetup(getCalendarEventsByCalendarId, '', '', '', 'block') }
+				getAllCalendarEvents.onclick = function() { eachButtonSetup(getAllCalendarEvents) }
+				getCalendarEventsFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsFromDateToDate, '', '', '', '', '', '', '', 'block') }
+				getCalendarEventsForSpecificCountries.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountries, '', 'block') }
+				getCalendarEventsForSpecificCountriesFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesFromDateToDate, '', 'block', '', '', '', '', '', 'block') }
+				getCalendarEventsForSpecificIndicator.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificIndicator, 'block') }
+				getCalendarEventsForSpecificIndicatorFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificIndicatorFromDateToDate, 'block', '', '', '', '', '', '', 'block') }
+				getCalendarEventsForSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesAndIndicators, 'block', 'block') }
+				getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate, 'block', 'block', '', '', '', '', '', 'block') }
+				getCalendarEventsByCalendarId.onclick = function() { eachButtonSetup(getCalendarEventsByCalendarId, '', '', '', 'block') }
 			}
 
 			else if (methodValue == 'forecast') {
 				forecastContainer.style.display = "block"
 
-				getForecastsForSpecificCountries.onclick = () => { eachButtonSetup(getForecastsForSpecificCountries, '', 'block') }
-				getForecastsForSpecificIndicator.onclick = () => { eachButtonSetup(getForecastsForSpecificIndicator, 'block') }
-				getForecastsForSpecificCountriesAndIndicators.onclick = () => { eachButtonSetup(getForecastsForSpecificCountriesAndIndicators, 'block', 'block') }
+				getForecastsForSpecificCountries.onclick = function() { eachButtonSetup(getForecastsForSpecificCountries, '', 'block') }
+				getForecastsForSpecificIndicator.onclick = function() { eachButtonSetup(getForecastsForSpecificIndicator, 'block') }
+				getForecastsForSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getForecastsForSpecificCountriesAndIndicators, 'block', 'block') }
 			}
 
 			else if (methodValue == 'markets') {
@@ -790,7 +790,7 @@
 
 				marketsHr.style.display = 'none'
 
-				snapshotsBtn.onclick = () => {
+				snapshotsBtn.onclick = function() {
 					buttonStyle(snapshotsBtn)
 					marketsHr.style.display = 'block'
 					snapshotsBtnContainer.style.display = 'block'
@@ -799,7 +799,7 @@
 					marketListsBtnContainer.style.display = 'none'
 				}
 
-				historicalDataMarketsBtn.onclick = () => {
+				historicalDataMarketsBtn.onclick = function() {
 					buttonStyle(historicalDataMarketsBtn)
 					marketsHr.style.display = 'block'
 					snapshotsBtnContainer.style.display = 'none'
@@ -808,7 +808,7 @@
 					marketListsBtnContainer.style.display = 'none'
 				}
 
-				intradayDataBtn.onclick = () => {
+				intradayDataBtn.onclick = function() {
 					buttonStyle(intradayDataBtn)
 					marketsHr.style.display = 'block'
 					snapshotsBtnContainer.style.display = 'none'
@@ -817,7 +817,7 @@
 					marketListsBtnContainer.style.display = 'none'
 				}
 
-				marketListsBtn.onclick = () => {
+				marketListsBtn.onclick = function() {
 					buttonStyle(marketListsBtn)
 					marketsHr.style.display = 'block'
 					snapshotsBtnContainer.style.display = 'none'
@@ -826,31 +826,31 @@
 					marketListsBtnContainer.style.display = 'block'
 				}
 
-				getCommodities.onclick = () => { eachButtonSetup(getCommodities) }
-				getMajorCurrencies.onclick = () => { eachButtonSetup(getMajorCurrencies) }
-				getCurrencyCrosses.onclick = () => { eachButtonSetup(getCurrencyCrosses, '', '', '', '', 'block') }
-				getStockMarketIndexes.onclick = () => { eachButtonSetup(getStockMarketIndexes) }
-				getGovernmentBonds.onclick = () => { eachButtonSetup(getGovernmentBonds) }
-				getSpecificMarketsBySymbol.onclick = () => { eachButtonSetup(getSpecificMarketsBySymbol, '', '', '', '', '', 'block') }
-				getSpecificHistoricalMarketsDataBySymbol.onclick = () => { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbol, '', '', '', '', '', 'block') }
-				getSpecificHistoricalMarketsDataBySymbolStartingFromDate.onclick = () => { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbolStartingFromDate, '', '', '', '', '', 'block', 'block') }
-				getSpecificHistoricalMarketsDataBySymbolFromDateToDate.onclick = () => { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbolFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
-				getIntradayPricesByMarketSymbol.onclick = () => { eachButtonSetup(getIntradayPricesByMarketSymbol, '', '', '', '', '', 'block') }
-				getIntradayPricesByMarketSymbolStartingFromDateAndHour.onclick = () => { eachButtonSetup(getIntradayPricesByMarketSymbolStartingFromDateAndHour, '', '', '', '', '', 'block', 'block', '', '', '', '', 'block'), dateFromOneInputLabel.textContent = 'Filter by Date' }
-				getIntradayPricesByMarketSymbolFromDateToDate.onclick = () => { eachButtonSetup(getIntradayPricesByMarketSymbolFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
-				getLatestPeersPricesByMarketSymbol.onclick = () => { eachButtonSetup(getLatestPeersPricesByMarketSymbol, '', '', '', '', '', 'block') }
-				getStockMarketsIndexComponentsbySymbol.onclick = () => { eachButtonSetup(getStockMarketsIndexComponentsbySymbol, '', '', '', '', '', 'block') }
+				getCommodities.onclick = function() { eachButtonSetup(getCommodities) }
+				getMajorCurrencies.onclick = function() { eachButtonSetup(getMajorCurrencies) }
+				getCurrencyCrosses.onclick = function() { eachButtonSetup(getCurrencyCrosses, '', '', '', '', 'block') }
+				getStockMarketIndexes.onclick = function() { eachButtonSetup(getStockMarketIndexes) }
+				getGovernmentBonds.onclick = function() { eachButtonSetup(getGovernmentBonds) }
+				getSpecificMarketsBySymbol.onclick = function() { eachButtonSetup(getSpecificMarketsBySymbol, '', '', '', '', '', 'block') }
+				getSpecificHistoricalMarketsDataBySymbol.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbol, '', '', '', '', '', 'block') }
+				getSpecificHistoricalMarketsDataBySymbolStartingFromDate.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbolStartingFromDate, '', '', '', '', '', 'block', 'block') }
+				getSpecificHistoricalMarketsDataBySymbolFromDateToDate.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbolFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
+				getIntradayPricesByMarketSymbol.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbol, '', '', '', '', '', 'block') }
+				getIntradayPricesByMarketSymbolStartingFromDateAndHour.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbolStartingFromDateAndHour, '', '', '', '', '', 'block', 'block', '', '', '', '', 'block'), dateFromOneInputLabel.textContent = 'Filter by Date' }
+				getIntradayPricesByMarketSymbolFromDateToDate.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbolFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
+				getLatestPeersPricesByMarketSymbol.onclick = function() { eachButtonSetup(getLatestPeersPricesByMarketSymbol, '', '', '', '', '', 'block') }
+				getStockMarketsIndexComponentsbySymbol.onclick = function() { eachButtonSetup(getStockMarketsIndexComponentsbySymbol, '', '', '', '', '', 'block') }
 			}
 
 			else if (methodValue == 'earnings') {
 				earningsContainer.style.display = ''
 
-				getDefaultEarningsCalendar.onclick = () => { eachButtonSetup(getDefaultEarningsCalendar) }
-				getEarningsCalendarStartingFromDate.onclick = () => { eachButtonSetup(getEarningsCalendarStartingFromDate, '', '', '', '', '', '', 'block') }
-				getEarningsCalendarByMarketStartingFromDate.onclick = () => { eachButtonSetup(getEarningsCalendarByMarketStartingFromDate, '', '', '', '', '', 'block', 'block') }
-				getEarningsCalendarByMarketFromDateToDate.onclick = () => { eachButtonSetup(getEarningsCalendarByMarketFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
-				getEarningsCalendarByCountry.onclick = () => { eachButtonSetup(getEarningsCalendarByCountry, '', 'block') }
-				getEarningsByType.onclick = () => { eachButtonSetup(getEarningsByType, '', '', '', '', '', '', '', '', 'block') }
+				getDefaultEarningsCalendar.onclick = function() { eachButtonSetup(getDefaultEarningsCalendar) }
+				getEarningsCalendarStartingFromDate.onclick = function() { eachButtonSetup(getEarningsCalendarStartingFromDate, '', '', '', '', '', '', 'block') }
+				getEarningsCalendarByMarketStartingFromDate.onclick = function() { eachButtonSetup(getEarningsCalendarByMarketStartingFromDate, '', '', '', '', '', 'block', 'block') }
+				getEarningsCalendarByMarketFromDateToDate.onclick = function() { eachButtonSetup(getEarningsCalendarByMarketFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
+				getEarningsCalendarByCountry.onclick = function() { eachButtonSetup(getEarningsCalendarByCountry, '', 'block') }
+				getEarningsByType.onclick = function() { eachButtonSetup(getEarningsByType, '', '', '', '', '', '', '', '', 'block') }
 			}
 
 			else if (methodValue == 'news') {
@@ -861,32 +861,32 @@
 
 				newsHr.style.display = 'none'
 
-				latestNewsBtn.onclick = () => {
+				latestNewsBtn.onclick = function() {
 					buttonStyle(latestNewsBtn)
 					newsHr.style.display = 'block'
 					latestNewsBtnContainer.style.display = 'block'
 					lastestArticlesBtnContainer.style.display = 'none'
 				}
 
-				lastestArticlesBtn.onclick = () => {
+				lastestArticlesBtn.onclick = function() {
 					buttonStyle(lastestArticlesBtn)
 					newsHr.style.display = 'block'
 					latestNewsBtnContainer.style.display = 'none'
 					lastestArticlesBtnContainer.style.display = 'block'
 				}
 
-				getLatestNews.onclick = () => { eachButtonSetup(getLatestNews) }
-				getNewsByCountry.onclick = () => { eachButtonSetup(getNewsByCountry, '', 'block') }
-				getNewsByIndicator.onclick = () => { eachButtonSetup(getNewsByIndicator, 'block') }
-				getNewsByCountryAndIndicator.onclick = () => { eachButtonSetup(getNewsByCountryAndIndicator, 'block', 'block') }
-				getNewsListSpecifyingStartIndexAndListSize.onclick = () => { eachButtonSetup(getNewsListSpecifyingStartIndexAndListSize, '', '', '', '', '', '', '', '', '', 'block') }
-				getLatestArticles.onclick = () => { eachButtonSetup(getLatestArticles) }
-				getArticlesByCountry.onclick = () => { eachButtonSetup(getArticlesByCountry, '', 'block') }
-				getArticlesByCountryFromDateToDate.onclick = () => { eachButtonSetup(getArticlesByCountryFromDateToDate, '', 'block', '', '', '', '', '', 'block') }
-				getLatestArticlesByIndicator.onclick = () => { eachButtonSetup(getLatestArticlesByIndicator, 'block') }
-				getLatestArticlesByCountryAndIndicator.onclick = () => { eachButtonSetup(getLatestArticlesByCountryAndIndicator, 'block', 'block') }
-				getArticlesById.onclick = () => { eachButtonSetup(getArticlesById, '', '', '', '', '', '', '', '', '', '', 'block') }
-				getArticlesListSpecifyingStartIndexAndListSize.onclick = () => { eachButtonSetup(getArticlesListSpecifyingStartIndexAndListSize, '', '', '', '', '', '', '', '', '', 'block') }
+				getLatestNews.onclick = function() { eachButtonSetup(getLatestNews) }
+				getNewsByCountry.onclick = function() { eachButtonSetup(getNewsByCountry, '', 'block') }
+				getNewsByIndicator.onclick = function() { eachButtonSetup(getNewsByIndicator, 'block') }
+				getNewsByCountryAndIndicator.onclick = function() { eachButtonSetup(getNewsByCountryAndIndicator, 'block', 'block') }
+				getNewsListSpecifyingStartIndexAndListSize.onclick = function() { eachButtonSetup(getNewsListSpecifyingStartIndexAndListSize, '', '', '', '', '', '', '', '', '', 'block') }
+				getLatestArticles.onclick = function() { eachButtonSetup(getLatestArticles) }
+				getArticlesByCountry.onclick = function() { eachButtonSetup(getArticlesByCountry, '', 'block') }
+				getArticlesByCountryFromDateToDate.onclick = function() { eachButtonSetup(getArticlesByCountryFromDateToDate, '', 'block', '', '', '', '', '', 'block') }
+				getLatestArticlesByIndicator.onclick = function() { eachButtonSetup(getLatestArticlesByIndicator, 'block') }
+				getLatestArticlesByCountryAndIndicator.onclick = function() { eachButtonSetup(getLatestArticlesByCountryAndIndicator, 'block', 'block') }
+				getArticlesById.onclick = function() { eachButtonSetup(getArticlesById, '', '', '', '', '', '', '', '', '', '', 'block') }
+				getArticlesListSpecifyingStartIndexAndListSize.onclick = function() { eachButtonSetup(getArticlesListSpecifyingStartIndexAndListSize, '', '', '', '', '', '', '', '', '', 'block') }
 			}
 		})
 	})
