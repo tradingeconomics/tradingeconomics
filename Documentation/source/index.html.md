@@ -1179,6 +1179,21 @@ Output:
 * Search method    
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a>
 
+By Default, the search will look into the categories: Indexes, markets(stocks), bonds, and commodities.
+
+* Filtering by Category   
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest&category=index,markets">/markets/search/{term}?category={category}</a>
+
+Categories available: index, markets, forex, bond and commodity.
+
+
+* Pagination    
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/japan?c=guest:guest&category=index,markets&page=2">/markets/search/{term}?category={category}&page=2</a>
+
+Because this endpoint can yield too many results, this method has pagination. Each page is limited to 250 items, you can request each page separately.
+
+
+
 </span> 
 
 ### Response Fields

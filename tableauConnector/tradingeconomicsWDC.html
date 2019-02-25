@@ -1,40 +1,235 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <title>Trading Economics</title>
     <meta http-equiv="Cache-Control" content="no-store" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="tradingeconomicsWDC.css">
+</head>
+
+<body>
+    <div id="wrapper">                
+        <h1>Get Trading Economics Data</h1>
+
+        <div class="btn-group">
+            <button id="method" type="button" class="btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select one Method
+            </button>
+            <div class="dropdown-menu">
+                <button value="indicators" class="dropdown-item">Indicators</button>
+                <button value="calendar" class="dropdown-item">Calendar</button>
+                <button value="forecast" class="dropdown-item">Forecast</button>
+                <button value="markets" class="dropdown-item">Markets</button>
+                <button value="earnings" class="dropdown-item">Earnings</button>
+                <button value="news" class="dropdown-item">News</button>
+            </div>
+        </div>
+        <form>
+            <div class="form-inline">
+                <div id="indicatorsContainer">
+                    <button id='allIndicatorsBtn' type="button" class="btn-info">All Indicators</button>
+                    <button id='historicalDataBtn' type="button" class="btn-info">Historical Data</button>
+                    <button id='creditRatingBtn' type="button" class="btn-info">Credit Rating</button>
+                    <button id='updatesBtn' type="button" class="btn-info">Updates</button>
+                    <hr id="indicatorsHr">
+
+                    <div id="allIndicatorsBtnContainer">
+                        <button id="getEveryTeApiIndicatorName" type="button" class="btn-default">Get Every TE API Indicator Name</button>
+                        <button id="getEveryIndicatorOfaCountry" type="button" class="btn-default">Get Every Indicator of a Country</button>
+                        <button id="getThatIndicatorForAllCountries" type="button" class="btn-default">Get that Indicator for all Countries</button>
+                    </div>
+
+                    <div id="historicalDataBtnContainer">
+                        <button id="getSpecificCountriesAndIndicators" type="button" class="btn-default">Get Specific Countries and Indicators</button>
+                        <button id="getSpecificCountriesAndIndicatorsStartingFromaDate" type="button" class="btn-default">Get Specific Countries and Indicators Starting From a Date</button>
+                        <button id="getSpecificCountriesAndIndicatorsFromDateToDate" type="button" class="btn-default">Get Specific Countries and Indicators From Date to Date</button>
+                        <button id="getDataByTicker" type="button" class="btn-default">Get Data by Ticker</button>
+                    </div>
+
+                    <div id="creditRatingBtnContainer">
+                        <button id="getCountryRating" type="button" class="btn-default">Get Country Rating</button>
+                        <button id="getCountryHistoricalRating" type="button" class="btn-default">Get Country Historical Rating</button>
+                    </div>
+
+                    <div id="updatesBtnContainer">
+                        <button id="getAllUpdates" type="button" class="btn-default">Get All Updates</button>
+                        <button id="getUpdatesStartingFromADate" type="button" class="btn-default">Get Updates Starting From a Date</button>
+                    </div>
+                </div>
+
+                <div id="calendarContainer">
+                    <hr>
+                    <button id="getAllCalendarEvents" type="button" class="btn-default">Get All Calendar Events</button>
+                    <button id="getCalendarEventsFromDateToDate" type="button" class="btn-default">Get Calendar Events From Date to Date</button>
+                    <button id="getCalendarEventsForSpecificCountries" type="button" class="btn-default">Get Calendar Events for Specific Countries</button>
+                    <button id="getCalendarEventsForSpecificCountriesFromDateToDate" type="button" class="btn-default">Get Calendar Events for Specific Countries From Date to Date</button>
+                    <button id="getCalendarEventsForSpecificIndicator" type="button" class="btn-default">Get Calendar Events for Specific Indicator</button>
+                    <button id="getCalendarEventsForSpecificIndicatorFromDateToDate" type="button" class="btn-default">Get Calendar Events for Specific Indicator From Date to Date</button>
+                    <button id="getCalendarEventsForSpecificCountriesAndIndicators" type="button" class="btn-default">Get Calendar Events for Specific Countries and Indicators</button>
+                    <button id="getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate" type="button" class="btn-default">Get Calendar Events for Specific Countries and Indicators From Date to Date</button>
+                    <button id="getCalendarEventsByCalendarId" type="button" class="btn-default">Get Calendar Events by Calendar ID</button>
+                </div>
+
+                <div id="forecastContainer">
+                    <hr>
+                    <button id="getForecastsForSpecificCountries" type="button" class="btn-default">Get Forecasts for Specific Countries</button>
+                    <button id="getForecastsForSpecificIndicator" type="button" class="btn-default">Get Forecasts for Specific Indicators</button>
+                    <button id="getForecastsForSpecificCountriesAndIndicators" type="button" class="btn-default">Get Forecasts for Specific Countries and Indicators</button>
+                </div>
+
+                <div id="marketsContainer">
+                    <button id='snapshotsBtn' type="button" class="btn-info">Snapshots</button>
+                    <button id='historicalDataMarketsBtn' type="button" class="btn-info">Historical Data</button>
+                    <button id='intradayDataBtn' type="button" class="btn-info">Intraday Data</button>
+                    <button id='marketListsBtn' type="button" class="btn-info">Market Lists</button>
+                    <hr id="marketsHr">
+
+                    <div id="snapshotsBtnContainer">
+                        <button id='getCommodities' type="button" class="btn-default">Get Commodities</button>
+                        <button id='getMajorCurrencies' type="button" class="btn-default">Get Major Currencies</button>
+                        <button id='getCurrencyCrosses' type="button" class="btn-default">Get Currency Crosses</button>
+                        <button id='getStockMarketIndexes' type="button" class="btn-default">Get Stock Market Indexes</button>
+                        <button id='getGovernmentBonds' type="button" class="btn-default">Get Government Bonds</button>
+                        <button id='getSpecificMarketsBySymbol' type="button" class="btn-default">Get Specific Markets by Symbol</button>
+                    </div>
+
+                    <div id="historicalDataMarketsBtnContainer">
+                        <button id='getSpecificHistoricalMarketsDataBySymbol' type="button" class="btn-default">Get Specific Historical Markets Data by Symbol</button>
+                        <button id='getSpecificHistoricalMarketsDataBySymbolStartingFromDate' type="button" class="btn-default">Get Specific Historical Markets Data by Symbol Starting From Date</button>
+                        <button id='getSpecificHistoricalMarketsDataBySymbolFromDateToDate' type="button" class="btn-default">Get Specific Historical Markets Data by Symbol From Date To Date</button>
+                    </div>
+
+                    <div id="intradayDataBtnContainer">
+                        <button id='getIntradayPricesByMarketSymbol' type="button" class="btn-default">Get Intraday Prices by Market Symbol</button>
+                        <button id='getIntradayPricesByMarketSymbolStartingFromDateAndHour' type="button" class="btn-default">Get Intraday Prices by Market Symbol Starting From Date and Hour</button>
+                        <button id='getIntradayPricesByMarketSymbolFromDateToDate' type="button" class="btn-default">Get Intraday Prices by Market Symbol From Date to Date</button>
+                    </div>
+
+                    <div id="marketListsBtnContainer">
+                        <button id='getLatestPeersPricesByMarketSymbol' type="button" class="btn-default">Get Latest Peers Prices by Market Symbol</button>
+                        <button id='getStockMarketsIndexComponentsbySymbol' type="button" class="btn-default">Get Stock Markets Index Components by Symbol</button>
+                    </div>
+                </div>
+
+                <div id="earningsContainer">
+                    <hr>
+                    <button id="getDefaultEarningsCalendar" type="button" class="btn-default">Get Default Earnings Calendar</button>
+                    <button id="getEarningsCalendarStartingFromDate" type="button" class="btn-default">Get Earnings Calendar Starting From Date</button>
+                    <button id="getEarningsCalendarByMarketStartingFromDate" type="button" class="btn-default">Get Earnings Calendar by Market Starting From Date</button>
+                    <button id="getEarningsCalendarByMarketFromDateToDate" type="button" class="btn-default">Get Earnings Calendar by Market From Date to Date</button>
+                    <button id="getEarningsCalendarByCountry" type="button" class="btn-default">Get Earnings Calendar by Country</button>
+                    <button id="getEarningsByType" type="button" class="btn-default">Get Earnings by Type</button>
+                </div>
+
+                <div id="newsContainer">
+                    <button id='latestNewsBtn' type="button" class="btn-info">Latest News</button>
+                    <button id='lastestArticlesBtn' type="button" class="btn-info">Latest Articles</button>
+                    <hr id="newsHr">
+
+                    <div id="latestNewsBtnContainer">
+                        <button id="getLatestNews" type="button" class="btn-default">Get Latest News</button>
+                        <button id="getNewsByCountry" type="button" class="btn-default">Get News by Country</button>
+                        <button id="getNewsByIndicator" type="button" class="btn-default">Get News by Indicator</button>
+                        <button id="getNewsByCountryAndIndicator" type="button" class="btn-default">Get News by Country and Indicator</button>
+                        <button id="getNewsListSpecifyingStartIndexAndListSize" type="button" class="btn-default">Get News List Specifying Start Index and List Size</button>
+                    </div>
+
+                    <div id="lastestArticlesBtnContainer">
+                        <button id="getLatestArticles" type="button" class="btn-default">Get Latest Articles</button>
+                        <button id="getArticlesByCountry" type="button" class="btn-default">Get Articles by Country</button>
+                        <button id="getArticlesByCountryFromDateToDate" type="button" class="btn-default">Get Articles by Country From Date to Date</button>
+                        <button id="getLatestArticlesByIndicator" type="button" class="btn-default">Get Latest Articles by Indicator</button>
+                        <button id="getLatestArticlesByCountryAndIndicator" type="button" class="btn-default">Get Latest Articles by Country and Indicator</button>
+                        <button id="getArticlesById" type="button" class="btn-default">Get Articles by ID</button>
+                        <button id="getArticlesListSpecifyingStartIndexAndListSize" type="button" class="btn-default">Get Articles List Specifying Start Index and List Size</button>
+                    </div>
+                </div>
+
+                <!--Input Fields-->
+                <hr id="gettingWhatHr">
+                <span id="gettingWhatTitle">Test Title</span>
+
+                <div id="indicatorInputContainer">
+                    <label for="indicatorInput" class="text-center">Indicators</label><br>
+                    <input type="text" class="form-control" id="indicatorInput" value="GDP, Consumer Confidence, Unemployment Rate" style="width: 600px;">
+                </div>
+
+                <div id="countryInputContainer">
+                    <label for="countryInput" class="text-center">Countries</label><br>
+                    <input type="text" class="form-control" id="countryInput" value="United States, United Kingdom, Australia" style="width: 600px;">
+                </div>
+
+                <div id="tickerInputContainer">
+                    <label for="tickerInput" class="text-center">Ticker</label><br>
+                    <input type="text" class="form-control" id="tickerInput" value="USURTOT" style="width: 160px;">
+                </div>
+
+                <div id="calendarIdInputContainer">
+                    <label for="calendarIdInput" class="text-center">Calendar ID</label><br>
+                    <input type="text" class="form-control" id="calendarIdInput" value="174108, 160025, 160030" style="width: 320px;">
+                </div>
+
+                <div id="currencyISOInputContainer">
+                    <label for="currencyISOInput" class="text-center">Currency ISO</label><br>
+                    <input type="text" class="form-control" id="currencyISOInput" value="EUR" style="width: 320px;">
+                </div>
+
+                <div id="marketSymbolInputContainer">
+                    <label for="marketSymbolInput" class="text-center">Market Symbol<br><span style="font-weight:100; font-size: 1.2rem;">Stock, Index, Currency, Commodity or Bond<br>Some options will not accept all of the above</span></label><br>
+                    <input type="text" class="form-control" id="marketSymbolInput" value="AAPL:US, INDU:IND, MSFT:US" style="width: 320px;">
+                </div>
+
+                <div id="earningsTypeInputContainer">
+                    <label for="earningsTypeInput" class="text-center">Earnings Type<br><span style="font-weight:100; font-size: 1.2rem;">Earnings, Dividends, IPO or Stock Splits<br>Only one Type at a Time</span></label><br>
+                    <input type="text" class="form-control" id="earningsTypeInput" value="Earnings" style="width: 320px;">
+                </div>
+
+                <div id="startIndexListSizeInputContainer">
+                    <label for="startIndexInput" class="text-center">Start Index and List Size</label><br>
+                    <input type="text" class="form-control" id="startIndexInput" value="10" style="width: 160px;">
+                    <input type="text" class="form-control" id="listSizeInput" value="15" style="width: 160px;">
+                </div>
+
+                <div id="articleIdInputContainer">
+                    <label for="articleIdInput" class="text-center">Article ID<br><span style="font-weight:100; font-size: 1.2rem;">Only one ID at a Time</span></label><br>
+                    <input type="text" class="form-control" id="articleIdInput" value="20580" style="width: 320px;">
+                </div>
+
+                <div id="dateFromOneInputContainer">
+                    <label id="dateFromOneInputLabel" for="dateFromOneInput" class="text-center">Starting From Date</label><br>
+                    <input type="text" class="form-control" id="dateFromOneInput" value="2014-12-31" style="width: 160px;">
+                </div>
+
+                <div id="dateFromToInputContainer">
+                    <label for="dateFromInput" class="text-center">From Date To Date</label><br>
+                    <input type="text" class="form-control" id="dateFromInput" value="2007-12-31" style="width: 160px;">
+                    <input type="text" class="form-control" id="dateToInput" value="2017-12-31" style="width: 160px;">
+                </div>
+                
+                <div id="hourInputContainer">
+                    <label for="hourInput" class="text-center">Hour</label><br>
+                    <input type="text" class="form-control" id="hourInput" value="15:30" style="width: 160px;">
+                </div>
+            
+                <div id="apiKeyInputContainer">
+                    <label for="apiKeyInput">API Key</label><br>
+                    <input type="text" class="form-control" id="apiKeyInput" value="guest:guest" style="width: 300px;">
+                </div>
+            </div>
+        </form>
+        <div class="center-block">
+            <button type="button" id="submitButton" class="btn-primary center-block" style="margin-top: 20px;">Submit</button><br>
+        </div>
+        <footer>
+            <hr>
+            <span style="font-weight:100; font-size: 1.2rem;">Some data requests will not work correctly with API Key as 'guest:guest'.<br>May be possible to use only one indicator/country/symbol(...) at a time depending on the option chosen.<br>For more infomation visit Trading Economics API Documentation website.</span>
+        </footer>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="https://connectors.tableau.com/libs/tableauwdc-2.2.latest.js" type="text/javascript"></script>
     <script src="tradingeconomicsWDC.js" type="text/javascript"></script>
-</head>
-
-<body>
-    <div class="container container-table">
-        <div class="row vertical-center-row">
-            <div class="text-center col-md-4 col-md-offset-4">                
-                <h2>Get Trading Economics Data</h2>
-                <label for="method" class="text-center">Select a Method</label><br>
-                <select id="method" title = "Select a Method"> <!--Supplement an id here instead of using 'name'-->
-                  <option value="historical">Historical</option> 
-                  <option value="calendar">Calendar</option>
-                  <option value="indicators">Indicators</option>
-                  <option value="markets">Markets</option>
-                  <option value="forecast">Forecast</option>
-                </select>
-                <form>
-                    <div class="form-inline">
-                        <label for="myUrl" class="text-center">URL</label><br>
-                        <input type="text" class="form-control" id="myUrl" value="/historical/country/country_name/indicator/indicator_name" style="width: 600px; text-align:center;"> <br>
-                        <label for="myKey">API Key</label><br>
-                        <input type="text" class="form-control" id="myKey" value="guest:guest" style="width: 300px; text-align:center;">
-                    </div>
-                </form>
-                <button type="button" id="submitButton" class="btn btn-success" style="margin: 10px;">Submit</button>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
