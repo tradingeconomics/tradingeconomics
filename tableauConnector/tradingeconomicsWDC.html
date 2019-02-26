@@ -6,6 +6,10 @@
     <meta http-equiv="Cache-Control" content="no-store" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="tradingeconomicsWDC.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://connectors.tableau.com/libs/tableauwdc-2.2.latest.js" type="text/javascript"></script>
+    <script src="tradingeconomicsWDC.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -179,12 +183,12 @@
                     <label for="marketSymbolInput" class="text-center">Market Symbol<br><span style="font-weight:100; font-size: 1.2rem;">Stock, Index, Currency, Commodity or Bond<br>Some options will not accept all of the above</span></label><br>
                     <input type="text" class="form-control" id="marketSymbolInput" value="AAPL:US, INDU:IND, MSFT:US" style="width: 320px;">
                 </div>
-
+                
                 <div id="earningsTypeInputContainer">
                     <label for="earningsTypeInput" class="text-center">Earnings Type<br><span style="font-weight:100; font-size: 1.2rem;">Earnings, Dividends, IPO or Stock Splits<br>Only one Type at a Time</span></label><br>
                     <input type="text" class="form-control" id="earningsTypeInput" value="Earnings" style="width: 320px;">
                 </div>
-
+            
                 <div id="startIndexListSizeInputContainer">
                     <label for="startIndexInput" class="text-center">Start Index and List Size</label><br>
                     <input type="text" class="form-control" id="startIndexInput" value="10" style="width: 160px;">
@@ -226,10 +230,6 @@
             <span style="font-weight:100; font-size: 1.2rem;">Some data requests will not work correctly with API Key as 'guest:guest'.<br>May be possible to use only one indicator/country/symbol(...) at a time depending on the option chosen.<br>For more infomation visit Trading Economics API Documentation website.</span>
         </footer>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script src="https://connectors.tableau.com/libs/tableauwdc-2.2.latest.js" type="text/javascript"></script>
-    <script src="tradingeconomicsWDC.js" type="text/javascript"></script>
 </body>
 
 </html>

@@ -1,21 +1,20 @@
 (function () {
-	var myConnector = tableau.makeConnector()
+    var myConnector = tableau.makeConnector();
+
     myConnector.getSchema = function (schemaCallback) {
 
-		var urlObj = JSON.parse(tableau.connectionData)
-
-		var dataCategory =  urlObj.urlBase.split('/')[1]
-		if (urlObj.urlBase.includes('earnings')) { dataCategory = 'earnings' }
-    	console.log('Category:' + dataCategory)
+    	var urlObj = JSON.parse(tableau.connectionData)
+		
+		var dataCategory =  urlObj.urlBase.split('/')[1];
+    	console.log('DataCategory: ' + dataCategory)
 
 		var dataSecondPoint = urlObj.urlBase.split('/')[2]
-		console.log('SecondPoint:' + dataSecondPoint)
+		console.log('SecondPoint: ' + dataSecondPoint)
 
 		var dataThirdPoint = urlObj.urlBase.split('/')[3]
-		console.log('ThirdPoint:' + dataThirdPoint)
-		
-		//The columns to be shown are defined here
-		if(dataCategory == 'indicators' && dataSecondPoint == undefined) {
+		console.log('ThirdPoint: ' + dataThirdPoint)
+
+		if(dataCategory == 'indicators' && dataSecondPoint == null) {
     		var cols = [
 		        {id : 'Category', alias : 'Category', dataType : tableau.dataTypeEnum.string},
 				{id : 'CategoryGroup', alias : 'CategoryGroup', dataType : tableau.dataTypeEnum.string}
@@ -25,7 +24,7 @@
 		        alias : 'Trading Economics Indicators Data',
 		        columns : cols
 			}
-		} else if (dataCategory == 'indicators' && dataSecondPoint != undefined || dataCategory == 'country') {
+		} else if (dataCategory == 'indicators' && dataSecondPoint != null || dataCategory == 'country') {
     		var cols = [
 		        {id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
 		        {id : 'Category', alias : 'Category', dataType : tableau.dataTypeEnum.string},
@@ -108,7 +107,7 @@
 			}
 		} else if (dataCategory == 'ratings' && dataSecondPoint == 'historical') {
     		var cols = [
-				{id : 'Country', alias : 'Countr', dataType : tableau.dataTypeEnum.string},
+				{id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
 				{id : 'Date', alias : 'Date', dataType : tableau.dataTypeEnum.date},
 		        {id : 'Agency', alias : 'Agency', dataType : tableau.dataTypeEnum.string},
 		        {id : 'Rating', alias : 'Rating', dataType : tableau.dataTypeEnum.string},
@@ -137,7 +136,6 @@
 				{id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
 				{id : 'Date', alias : 'Date', dataType : tableau.dataTypeEnum.datetime},
 				{id : 'Last', alias : 'Last', dataType : tableau.dataTypeEnum.float},
-				{id : 'Group', alias : 'Group', dataType : tableau.dataTypeEnum.string},
 				{id : 'URL', alias : 'URL', dataType : tableau.dataTypeEnum.string},
 				{id : 'Importance', alias : 'Importance', dataType : tableau.dataTypeEnum.float},
 				{id : 'DailyChange', alias : 'DailyChange', dataType : tableau.dataTypeEnum.float},
@@ -167,7 +165,7 @@
 		} else if (dataCategory == 'markets' && dataSecondPoint == 'historical' || dataCategory == 'markets' && dataSecondPoint == 'intraday') {
     		var cols = [
 		        {id : 'Symbol', alias : 'Symbol', dataType : tableau.dataTypeEnum.string},
-				{id : 'DateHour', alias : 'Date', dataType : tableau.dataTypeEnum.date},
+				{id : 'Date', alias : 'Date', dataType : tableau.dataTypeEnum.date},
 				{id : 'Open', alias : 'Open', dataType : tableau.dataTypeEnum.float},
 				{id : 'High', alias : 'High', dataType : tableau.dataTypeEnum.float},
 				{id : 'Low', alias : 'Low', dataType : tableau.dataTypeEnum.float},
@@ -195,7 +193,7 @@
 		    ]
 		    var tableInfo = {
 		        id : 'earningsFeed',
-		        alias : 'Trading Economics Earnings Dat',
+		        alias : 'Trading Economics Earnings Data',
 		        columns : cols
 			}
 		} else if (dataCategory == 'news' || dataCategory == 'articles') {
@@ -219,7 +217,6 @@
 		        { id : 'Country', alias : 'Country', dataType : tableau.dataTypeEnum.string},
 				{ id : 'Category', alias : 'Category', dataType : tableau.dataTypeEnum.string},
 				{ id : 'Title', alias : 'Title', dataType : tableau.dataTypeEnum.string},
-				{ id : 'NextForecastValue', alias : 'NextForecastValue', dataType : tableau.dataTypeEnum.float},
 				{ id : 'YearEnd', alias : 'YearEnd', dataType : tableau.dataTypeEnum.float},
 				{ id : 'YearTwoEnd', alias : 'YearEnd2', dataType : tableau.dataTypeEnum.float},
 				{ id : 'YearThreeEnd', alias : 'YearEnd3', dataType : tableau.dataTypeEnum.float},
@@ -242,19 +239,31 @@
 		        columns : cols
 		    }
     	}
-		schemaCallback([tableInfo])
-	}
-	
+	    schemaCallback([tableInfo])
+    }
+
     myConnector.getData = function (table, doneCallback) {
 		
 		var urlObj = JSON.parse(tableau.connectionData)
 		
 		//Final Url is created here
-		var apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey + '&' + urlObj.urlAfter
-		if(urlObj.urlBase.includes('earnings?type=')) {
-			apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase +'&f=json&c=' + urlObj.apiKey
-		}
+		var apiCall = ''
 
+		if(urlObj.urlAfter == null) {
+			apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey
+		}
+		else {
+			apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey + '&' + urlObj.urlAfter
+		}
+		/*
+		var earningsByType = urlObj.urlBase.substring(
+			urlObj.urlBase.lastIndexOf("/") + 1, 
+			urlObj.urlBase.lastIndexOf("=")
+		)
+		if(earningsByType == 'earnings?type=') {
+			apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '&f=json&c=' + urlObj.apiKey
+		} 
+		*/
 		console.log('apiCall:' + apiCall)
 
 		var dataCategory =  urlObj.urlBase.split('/')[1]
@@ -264,7 +273,7 @@
 			var tableData = []
 
 			//Atributting value to the columns defined earlier
-			for (var i = 0, len = resp.length; i < len; i++) {
+			for (var i = 0; i < resp.length; i++) {
 			
 				if(!resp[i].date) { resp[i].date = ''}
 				if(!resp[i].q1_date) { resp[i].q1_date = ''}
@@ -278,7 +287,7 @@
 				if(!resp[i].CreateDate) { resp[i].CreateDate = ''}
 				if(!resp[i].LastUpdate) { resp[i].LastUpdate = ''}
 				if(!resp[i].unit) { resp[i].unit = ''}
-
+				
 				if (dataCategory == 'news' || dataCategory == 'articles') {
 					tableData.push({
 					'Id' : resp[i].id,
@@ -292,7 +301,7 @@
 					})
 					continue
 				}
-
+				
 				tableData.push({
 					'Ticker' : resp[i].Ticker,
 					'Name'  : resp[i].Name ,
@@ -307,7 +316,6 @@
 					'Event' : resp[i].Event,
 					'Currency' : resp[i].Currency,
 					'Source' : resp[i].Source,
-					'Group'  : resp[i].Group,
 					'URL' : resp[i].URL,
 					'Decimals' : resp[i].decimals,
 					'Adjustment' : resp[i].Adjustment,
@@ -358,7 +366,6 @@
 					'PreviousValue' : resp[i].PreviousValue,
 					'Forecast' : resp[i].Forecast,
 					'TEForecast' : resp[i].TEForecast,
-					'NextForecastValue' : resp[i].NextForecastValue,
 					'YearEnd' : resp[i].YearEnd,
 					'YearTwoEnd' : resp[i].YearEnd2,
 					'YearThreeEnd' : resp[i].YearEnd3,
@@ -383,7 +390,8 @@
 			}	
 			table.appendRows(tableData)
 			doneCallback()
-	    })
+		})
+		
 	}
 	
     tableau.registerConnector(myConnector)
@@ -393,22 +401,22 @@
 		var inputsID = ['indicatorInput', 'countryInput', 'tickerInput', 'calendarIdInput', 'currencyISOInput', 'marketSymbolInput', 'dateFromOneInput', 'dateFromInput', 'dateToInput', 'earningsTypeInput', 'startIndexInput', 'listSizeInput', 'articleIdInput', 'hourInput']
 		var inputsSelected = []
 
-		//Selecting DOM Elements
-		function selectFromDOM(idArray, selectedArray) {
-			for (var i in idArray) {
-				selectedArray[i] = document.getElementById(idArray[i])
-			}
+		//Selecting Input Fields
+		for (var i in inputsID) {
+			inputsSelected[i] = document.getElementById(inputsID[i])
 		}
-
-		selectFromDOM(inputsID, inputsSelected)
 
 		var urlToBakeCode = ''
 
 		var submitButton = document.getElementById('submitButton')
 		submitButton.onclick = function() { 
-		
+
 			var _baseUrl = ''
-			var _urlAfter = ''
+			var _urlAfter = null
+
+			for(var i in inputsSelected) {
+				inputsSelected[i].value = inputsSelected[i].value.trim()
+			}
 
 			//Creating the specific url's foreach case
 			//Indicators
@@ -458,7 +466,7 @@
 			else if (urlToBakeCode == 'getEarningsCalendarByMarketStartingFromDate') { _baseUrl = '/earnings/symbol/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value }
 			else if (urlToBakeCode == 'getEarningsCalendarByMarketFromDateToDate') { _baseUrl = '/earnings/symbol/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + '&d2=' + inputsSelected[8].value }
 			else if (urlToBakeCode == 'getEarningsCalendarByCountry') { _baseUrl = '/earnings/country/' + inputsSelected[1].value }
-			else if (urlToBakeCode == 'getEarningsByType') { _baseUrl = '/earnings?type=' + inputsSelected[9].value }
+			//else if (urlToBakeCode == 'getEarningsByType') { _baseUrl = '/earnings?type=' + inputsSelected[9].value }
 			//News
 			else if (urlToBakeCode == 'getLatestNews') { _baseUrl = '/news' }
 			else if (urlToBakeCode == 'getNewsByCountry') { _baseUrl = '/news/country/' + inputsSelected[1].value }
@@ -475,9 +483,9 @@
 
 			//This object will further complete the url with the API Key 
 			var urlObj = {
-				urlBase: _baseUrl.trim(),
+				urlBase: _baseUrl,
 				apiKey: $('#apiKeyInput').val().trim(),
-				urlAfter: _urlAfter.trim()
+				urlAfter: _urlAfter
 			}
 
 			tableau.connectionData = JSON.stringify(urlObj)
@@ -843,14 +851,16 @@
 			}
 
 			else if (methodValue == 'earnings') {
-				earningsContainer.style.display = ''
+				earningsContainer.style.display = 'block'
+
+				getEarningsByType.style.display = 'none'
 
 				getDefaultEarningsCalendar.onclick = function() { eachButtonSetup(getDefaultEarningsCalendar) }
 				getEarningsCalendarStartingFromDate.onclick = function() { eachButtonSetup(getEarningsCalendarStartingFromDate, '', '', '', '', '', '', 'block') }
 				getEarningsCalendarByMarketStartingFromDate.onclick = function() { eachButtonSetup(getEarningsCalendarByMarketStartingFromDate, '', '', '', '', '', 'block', 'block') }
 				getEarningsCalendarByMarketFromDateToDate.onclick = function() { eachButtonSetup(getEarningsCalendarByMarketFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
 				getEarningsCalendarByCountry.onclick = function() { eachButtonSetup(getEarningsCalendarByCountry, '', 'block') }
-				getEarningsByType.onclick = function() { eachButtonSetup(getEarningsByType, '', '', '', '', '', '', '', '', 'block') }
+				//getEarningsByType.onclick = function() { eachButtonSetup(getEarningsByType, '', '', '', '', '', '', '', '', 'block') }
 			}
 
 			else if (methodValue == 'news') {

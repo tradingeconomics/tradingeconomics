@@ -1,28 +1,33 @@
-Git clone in the directory where you want to download Tableau WDC:
-git clone https://github.com/tableau/webdataconnector.git
+Download Tableau desktop application: https://www.tableau.com/products/desktop/download
 
-Then git clone the TE API Connector:
-git clone https://github.com/ieconomics/open-api.git
-The folder "tableauConnector" should be copy/moved to directory "webdataconnector" (from the first clone), example: C:\git\webdataconnector
+Open Command Prompt
 
-Change to the directory where you downloaded the repository (from this last clone), example: C:\git\webdataconnector
-cd webdataconnector
+    Git clone in the directory where you want to download Tableau Web Data Connector:
+    > git clone https://github.com/tableau/webdataconnector.git
 
-Install dependencies with npm:
-npm install --production
-Note: You must run the command with administrator or sudo privileges.
+    Then git clone the TE API Connector:
+    > git clone https://github.com/ieconomics/open-api.git
 
-Start the test web server:
-npm start
+(Outside Command Prompt)
+The folder "tableauConnector" should be copied to directory "webdataconnector" (from the first git clone), example: C:\git\webdataconnector
 
-Open a browser and navigate to the following URL:
-http://localhost:8888/Simulator/index.html
+(Again in Command Prompt)
 
-Input in the Connector URL field the directory of "tradingeconomicsWDC.html" relative to the "Simulator" folder, example:
-../tableauConnector/tradingeconomicsWDC.html
+    Change to the directory where you downloaded the repository (from this last clone), example: C:\git\webdataconnector
+    > cd webdataconnector
 
-Press "Start Interactive Phase" button.
-A Window pops up and the API Connector is ready to be used.
+    Install dependencies with npm:
+    > npm install --production
+    Note: You must run the command with administrator or sudo privileges.
 
-Official Tableau WDC docs: http://tableau.github.io/webdataconnector/docs/
-Docs to use this with Tableau desktop application: http://tableau.github.io/webdataconnector/docs/wdc_use_in_tableau
+    Start the test web server:
+    > npm start
+
+Open Tableau desktop application. 
+In "To a Server", click "More..." -> "Web data Connector". 
+Then write in the adress bar: http://localhost:8888/tableauConnector/tradingeconomicsWDC.html
+The API Connector is ready to be used.
+
+Official Tableau Docs:
+http://tableau.github.io/webdataconnector/docs/
+http://tableau.github.io/webdataconnector/docs/wdc_use_in_tableau
