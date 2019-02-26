@@ -48,7 +48,6 @@ def checkCmtPage(linkAPI, page_number):
 
 
 
-
 def getCmtCategories(category = None, output_type = None):
     """
     Get detailed information about Comtrade categories.

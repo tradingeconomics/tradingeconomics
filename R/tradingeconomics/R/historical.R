@@ -15,7 +15,6 @@ lower.Date <- function(country, indicator, apiKey){
 }
 
 
-
 #'Return historical information from Trading Economics API.
 #'@export getHistoricalData
 #'
@@ -106,7 +105,7 @@ getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL,
     }
 
   } else {
-    stop('output_type options : df for data frame, lst(defoult) for list by country and indicator')
+    stop('output_type options : df for data frame, lst(default) for list by country and indicator')
   }
 
   return(df_final)

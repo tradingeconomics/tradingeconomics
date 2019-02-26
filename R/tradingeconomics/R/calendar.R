@@ -1,7 +1,6 @@
 source("R/functions.R")
 
 
-
 #'Return calendar events from Trading Economics API
 #'@import jsonlite
 #'@import httr
@@ -92,7 +91,7 @@ getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, en
     df_final <- df_final[order(df_final$Date),]
     rownames(df_final) <- 1:nrow(df_final)
   } else {
-    stop('output_type options : df for data frame, lst(defoult) for list by country and indicator')
+    stop('output_type options : df for data frame, lst(default) for list by country and indicator')
   }
 
   return(df_final)

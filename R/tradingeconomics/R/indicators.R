@@ -63,10 +63,58 @@ getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL){
       } else if (identical(outType, 'df')){
         df_final = df_final
       } else {
-        stop('output_type options : df for data frame, lst(defoult) for list by country ')
+        stop('output_type options : df for data frame, lst(default) for list by country ')
       }
 
   return(df_final)
 }
+
+#'Return the latest updates
+#'@export getLatestUpdates
+#'
+#'@param date string or list.
+#'String for historical data lastupdate, or for historical data per date.
+#'@param outType string.
+#''lst'(default) for lis format output, 'df' for data frame,
+#'
+#'@section Notes:
+#'Historical data Symbol lastupdates.
+#'
+#'@return Return a list or data frame of historical information by lastupdate or by specific date.
+#'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
+#'@examples
+#'\dontrun{getLatestUpdates()
+#'getLatestUpdates('2018-02-22')
+#'}
+#'
+
+getLatestUpdates <- function(initDate= NULL, outType = NULL){
+  base <-  "https://api.tradingeconomics.com/updates"
+  df_final = data.frame()
+
+  if(is.null(initDate)){
+    url <- "https://api.tradingeconomics.com/updates"
+  }else if(!is.null(initDate)){
+    url <- paste(base,paste(initDate, collapse = ','), sep = '/')
+  }
+
+  url <- paste(url, '?c=', apiKey, sep = '')
+  print(url)
+  url <- URLencode(url)
+  request <- GET(url)
+
+
+  checkRequestStatus(http_status(request)$message)
+
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
+
+
+
+  return(df_final)
+}
+
 
 

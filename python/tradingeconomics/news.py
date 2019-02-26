@@ -256,7 +256,7 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
 
     Example
     -------
-    getArticles(country = ['United States', 'Portugal'], indicator = ['Imports','Exports'])
+    getArticles(country = ['United States', 'Portugal'], indicator = ['Imports','Interest rate'])
 
     getArticles(country = 'United States', indicator = 'Imports', start = 10, lim = 20, output_type = 'df')
 
@@ -316,7 +316,6 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
     linkAPI = checkArticleLimit(linkAPI, lim)
     linkAPI = checkIndex(linkAPI, start)
 
-    print (linkAPI)
     try:
         code = urlopen(linkAPI)
         code = code.getcode() 
