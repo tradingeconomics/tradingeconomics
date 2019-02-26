@@ -110,7 +110,7 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
       url <- paste(url_base, paste(initDate, sep = ''), sep = '&d1=')
 
   }
-
+    print(url)
     url <- URLencode(url)
     request <- GET(url)
 
