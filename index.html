@@ -2880,7 +2880,7 @@ Because there are too many results, this method has pagination. Each page is lim
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Portugal'</span><span class="p">,</span><span class="n">page_number</span> <span class="o">=</span> <span class="s">3</span><span class="p">)</span>
 
-                    <span class="n">symbol</span>             <span class="n">last</span>      <span class="n">...</span>                                                     <span class="n">URL</span>                  <span class="n">lastUpdate</span>                          
+                    <span class="n">symbol</span>             <span class="n">last</span>      <span class="n">...</span>                                                      <span class="n">URL</span>                 <span class="n">lastUpdate</span>                          
 <span class="mi">0</span>       <span class="n">prt.bx.svf.totl.cd</span>     <span class="n">1.555543e+09</span>      <span class="n">...</span>        <span class="n">/portugal/factor-service-receipts-us$-bop-wb-d...</span>    <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">10:02:51.023</span> 
 <span class="mi">0</span>       <span class="n">prt.bx.svn.totl.cd</span>     <span class="n">5.327495e+09</span>      <span class="n">...</span>        <span class="n">/portugal/non-factor-services-receipts-us$-bop...</span>    <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">10:02:51.023</span>
 <span class="mi">0</span>       <span class="n">prt.bx.trf.curr.cd</span>     <span class="n">6.370007e+09</span>      <span class="n">...</span>        <span class="n">/portugal/current-transfers-receipts-bop-us-do...</span>    <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">07:15:10.083</span>            
@@ -2967,6 +2967,18 @@ Because there are too many results, this method has pagination. Each page is lim
 </tbody></table>
 
 <h2 id="historical">Historical</h2>
+<blockquote class="lang-specific python">  
+<br>
+<p>To get World Bank historical data by specific indicator.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBHistorical</span><span class="p">(</span><span class="n">series_code</span> <span class="o">=</span> <span class="s">'usa.fr.inr.rinr'</span><span class="p">)</span>
+
+                    <span class="n">symbol</span>                        <span class="n">date</span>                <span class="n">value</span>           
+<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>         <span class="mi">1961-06-15</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.10788</span>
+<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>         <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.21535</span>
+<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>         <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.37488</span>        
+<span class="n">...</span>
+</code></pre>
 
 <h3 id="methods">Methods</h3>
 
