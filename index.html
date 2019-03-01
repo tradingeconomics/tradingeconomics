@@ -762,7 +762,7 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific python">
   <br>
   <br>
-  <p>To get Credit Rating data for one country ( te.getRatings(country = 'United States', output_type = 'df') ), for several countries see the example bellow.</p>
+  <p>To get Credit Rating data for one country ( te.getRatings(country = 'United States', output_type = 'df') ), for several countries.</p>
   <br>
   <br>
 </blockquote>    
@@ -776,7 +776,7 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific python">
   <br>
   <br>
-  <p>To get Credit Rating historical data for one country ( te.getHistoricalRatings(country = 'United States') ), for several countries see the example bellow.</p>
+  <p>To get Credit Rating historical data for one country ( te.getHistoricalRatings(country = 'United States') ), for several countries.</p>
   <br>
   <br>
 </blockquote>    
@@ -879,7 +879,7 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific python">
   <p>Without specifying the date a sample of the latest updates will be provided.</p> 
   <br>
-  <p>Putting the date on "initDate" field will return the latest updates starting from the specified date, see example bellow.</p>
+  <p>To get latest updates using a starting date.</p>
 </blockquote>    
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getLatestUpdates</span><span class="p">(</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2018-08-15'</span><span class="p">)</span>
 
@@ -2537,7 +2537,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific python">
 <p>To get the latest news by country, or country and indicator, ( te.getNews(country = 'United States', indicator = 'Imports' ).</p>
 <br>
-<p>To get several countries and indicators, see example bellow.</p>
+<p>To get several countries and indicators.</p>
 <br>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="p">[</span> <span class="s">'united states'</span><span class="p">,<span class="s">'China'</span><span class="p">]<span class="p">,<span class="s">indicator</span><span class="o">=<span class="p">[</span><span class="s">'Imports'</span><span class="p">,<span class="s">'Exports'<span class="p">]<span class="p">)</span>
@@ -2632,7 +2632,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <p>To get the latest articles by country, or countries ( te.getArticles(country = 'United States') ), ( te.getArticles(country = ['United States', 'China']) ).</p>
 <p>By indicator or indicators, ( te.getArticles(indicator = 'Imports') ), ( te.getArticles(indicator = ['Imports', 'Exports']) ).</p>
 <br>
-<p>To get the latest articles by several countries and indicators and also with a start index and limit size, see the example bellow.</p>
+<p>To get the latest articles by several countries and indicators and also with a start index and limit size.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getArticles</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="p">[</span> <span class="s">'united states'</span><span class="p">,<span class="s">'Portugal'</span><span class="p">]<span class="p">,<span class="s">indicator</span><span class="o">=<span class="p">[</span><span class="s">'Imports'</span><span class="p">,<span class="s">'Interest rate'<span class="p">]<span class="p">,</span><span class="s">start</span><span class="o">=</span><span class="s">10</span><span class="p">,</span><span class="s">lim</span><span class="o">=<span class="s">5</span><span class="p">)</span>
 
@@ -2645,7 +2645,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </code></pre>
 <blockquote class="lang-specific python">  
 <br>
-<p>To get the latest articles by country and within a specific date, see the example bellow.</p>
+<p>To get the latest articles by country and within a specific date.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getArticles</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span><span class="p">,</span><span class="s">initDate</span><span class="o">=</span><span class="s">'2018-10-10'</span><span class="p">,</span><span class="s">endDate</span><span class="o">=</span><span class="s">'2018-10-15'</span><span class="p">)</span>
 
@@ -2657,7 +2657,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </code></pre>
 <blockquote class="lang-specific python">  
 <br>
-<p>To get the latest articles by Id, see the example bellow.</p>
+<p>To get the latest articles by Id.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getArticleId</span><span class="p">(</span><span class="n">id</span> <span class="o">=</span> <span class="s">'26902'</span><span class="p">)</span>
 
@@ -2749,7 +2749,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </code></pre>
 <blockquote class="lang-specific python">  
 <br>
-<p>To get World Bank data by category, and page number, see example bellow.</p>
+<p>To get World Bank data by category, and page number.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCategories</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">'Demographics'</span><span class="p">,</span><span class="s">page_number</span><span class="o">=</span><span class="s">2</span><span class="p">)</span>
 
@@ -2855,7 +2855,37 @@ Because there are too many results, this method has pagination. Each page is lim
 </tbody></table>
 
 <h2 id="indicators-and-countries">Indicators and Countries</h2>
+<!--Python WB indicators black side-->
+<blockquote class="lang-specific python">  
+<br>
+<p>To get World Bank data by indicator (series_code).</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBIndicator</span><span class="p">(</span><span class="n">series_code</span> <span class="o">=</span> <span class="s">'usa.fr.inr.rinr'</span><span class="p">)</span>
 
+            <span class="n">symbol</span>     <span class="n">last</span>                <span class="n">previous</span>       <span class="n">...</span>     <span class="n">title</span>     <span class="n">URL</span>     <span class="n">lastUpdate</span>                          
+<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>     <span class="n">2.2077</span>   <span class="n">2.15223</span>   <span class="n">...</span>    <span class="n">Real interest rate</span>    <span class="n">/united-states/real-interest-rate-percent-wb-d...</span>    <span class="mi">2018-04-27</span><span class="n">T</span><span class="mi">13:49:37.133</span>             
+</code></pre>
+<blockquote class="lang-specific python">  
+<br>
+<p>To get World Bank data by URL.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBIndicator</span><span class="p">(</span><span class="n">url</span> <span class="o">=</span> <span class="s">'/united-states/real-interest-rate-percent-wb-data.html'</span><span class="p">)</span>
+
+            <span class="n">symbol</span>     <span class="n">last</span>                <span class="n">previous</span>       <span class="n">...</span>     <span class="n">title</span>     <span class="n">URL</span>     <span class="n">lastUpdate</span>                          
+<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>     <span class="n">2.2077</span>   <span class="n">2.15223</span>   <span class="n">...</span>    <span class="n">Real interest rate</span>    <span class="n">/united-states/real-interest-rate-percent-wb-d...</span>    <span class="mi">2018-04-27</span><span class="n">T</span><span class="mi">13:49:37.133</span>             
+</code></pre>
+<blockquote class="lang-specific python">  
+<br>
+<p>To get World Bank data by country and page number.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCountry</span><span class="p">(</span><<span class="n">country</span> <span class="o">=</span> <span class="s">'Portugal'</span><span class="p">,</span><span class="n">page_number</span> <span class="o">=</span> <span class="s">3</span><span class="p">)</span>
+
+            <span class="n">symbol</span>     <span class="n">last</span>                       <span class="n">...</span>         <span class="n">URL</span>     <span class="n">lastUpdate</span>                          
+<span class="mi">0</span>       <span class="n">prt.bx.svf.totl.cd</span>     <span class="n">1.555543e+09</span>      <span class="n">...</span>        <span class="n">/portugal/factor-service-receipts-us$-bop-wb-d...</span>    <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">10:02:51.023</span> 
+<span class="mi">0</span>       <span class="n">prt.bx.svn.totl.cd</span>     <span class="n">5.327495e+09</span>      <span class="n">...</span>        <span class="n">/portugal/non-factor-services-receipts-us$-bop...</span>    <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">10:02:51.023</span>
+<span class="mi">0</span>       <span class="n">prt.bx.trf.curr.cd</span>     <span class="n">6.370007e+09</span>      <span class="n">...</span>        <span class="n">/portugal/current-transfers-receipts-bop-us-do...</span>    <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">07:15:10.083</span>            
+<span class="n">...</span>
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
