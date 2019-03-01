@@ -106,7 +106,6 @@
         });
       </script>
   </head>
-
   <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;,&quot;r&quot;,&quot;jsonnet&quot;,&quot;javascript&quot;,&quot;csharp&quot;,&quot;java&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
@@ -140,7 +139,7 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="introduction">Introduction</h1>
-
+<!--Introduction-->
 <p>The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
 Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. 
 The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at <a target = '_blank' href="https://tradingeconomics.com/analytics/api.aspx">Trading Economics</a>.</p>
@@ -353,6 +352,7 @@ Click on any method below for a sample. Please note the sample request is limite
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
+<!--Python Indicators black side-->
 <blockquote class="lang-specific python">
 <p>To get List of Indicators by Country: </p>
 </blockquote>
@@ -385,6 +385,7 @@ Click on any method below for a sample. Please note the sample request is limite
 <span class="p">}</span>
 
 </code></pre>
+
 <blockquote class="lang-specific shell">
 <p>Click Indicators button on TE ribbon and then follow the instructions in the dialog box.    
 Or type in any empty cell:</p>
@@ -544,7 +545,7 @@ Or type in any empty cell:</p>
 </tbody></table>
 
 <h2 id="historical">Historical</h2>
-
+<!--Historical data R black side-->
 <blockquote class="lang-specific r">
 <p>For example, to get historical data of imports in United Kingdom type:</p>
 </blockquote>  
@@ -557,6 +558,7 @@ Or type in any empty cell:</p>
                   </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w">
                   </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
+<!--Python Historical black side-->
 <blockquote class="lang-specific python">
 <p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
@@ -756,8 +758,19 @@ or you can specify a start date and end date<br>
 </tbody></table>
 
 <h2 id="credit-rating">Credit Rating</h2>
+<!--Python Credit Rating black side-->
+<blockquote class="lang-specific python">
+  <p>To get Credit Rating data for one country (getRatings(country = 'United States', output_type = 'df')), for several countries see the example bellow.</p>
+</blockquote>    
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getRatings</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'United states'</span><span class="p">,<span class="s">'Japan'</span><span class="p">]</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
-<h3 id="methods">Methods</h3>
+  <span class="n">Country</span>            <span class="n">TE</span>     <span class="o">TE_Outlook</span>          <span class="n">SP</span>    <span class="n">SP_Outlook</span>    <span class="n">Moodys</span>    <span class="n">Moodys_Outlook</span>    <span class="n">Fitch</span>    <span class="n">Fitch_Outlook</span>    <span class="n">Outlook</span>
+  <span class="mi">0</span>     <span class="n">Japan</span>     <span class="mi">77</span>     <span class="n">Positive</span>         <span class="n">A+</span>    <span class="n">Positive</span>     <span class="n">A1</span>     <span class="n">Stable</span>     <span class="n">A</span>     <span class="n">Stable</span>     <span class="n">NaN</span>
+  <span class="mi">1</span>    <span class="n">United States</span>     <span class="mi">98</span>     <span class="n">Stable</span>          <span class="n">AA+</span>     <span class="n">Stable</span>     <span class="n">Aaa</span>     <span class="n">Stable</span>     <span class="n">AAA</span>     <span class="n">Stable</span>     <span class="n">NaN</span>
+  
+ 
+
+  <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
 
@@ -870,7 +883,7 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
-
+<!--Calendar R black side-->
 <h1 id="calendar">Calendar</h1>
 
 <blockquote class="lang-specific r">
@@ -900,6 +913,7 @@ or you can specify a start date and end date<br>
                 </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w">
                 </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
+<!--Python Calendar black side-->
 <blockquote class="lang-specific python">
 <p>To get calendar data for a specific country, in data frame format, run:</p>
 </blockquote>    
@@ -1158,7 +1172,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </tbody></table>
 
 <h1 id="forecast">Forecast</h1>
-
+<!--Forecasts R black side-->
 <blockquote class="lang-specific r">
 <p>Next code will provide a list with forecasted values of all indicators of United States </p>
 </blockquote> 
@@ -1174,6 +1188,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
+<!--Python Forecasts black side-->
 <blockquote class="lang-specific python">
 <p>Forecasted values for specific a country, in this case United States. </p>
 </blockquote>
