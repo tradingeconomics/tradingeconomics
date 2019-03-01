@@ -2862,7 +2862,7 @@ Because there are too many results, this method has pagination. Each page is lim
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBIndicator</span><span class="p">(</span><span class="n">series_code</span> <span class="o">=</span> <span class="s">'usa.fr.inr.rinr'</span><span class="p">)</span>
 
-                 <span class="n">symbol</span>        <span class="n">last</span>    <span class="n">previous</span>        <span class="n">...</span>                 <span class="n">title</span>                               <span class="n">URL</span>                 <span class="n">lastUpdate</span>                          
+                 <span class="n">symbol</span>        <span class="n">last</span>    <span class="n">previous</span>        <span class="n">...</span>                 <span class="n">title</span>                                <span class="n">URL</span>                 <span class="n">lastUpdate</span>                          
 <span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>      <span class="n">2.2077</span>     <span class="n">2.15223</span>        <span class="n">...</span>    <span class="n">Real interest rate</span>    <span class="n">/united-states/real-interest...</span>    <span class="mi">2018-04-27</span><span class="n">T</span><span class="mi">13:49:37.133</span>             
 </code></pre>
 <blockquote class="lang-specific python">  
@@ -2871,14 +2871,14 @@ Because there are too many results, this method has pagination. Each page is lim
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBIndicator</span><span class="p">(</span><span class="n">url</span> <span class="o">=</span> <span class="s">'/united-states/real-interest-rate-percent-wb-data.html'</span><span class="p">)</span>
 
-            <span class="n">symbol</span>         <span class="n">last</span>                <span class="n">previous</span>             <span class="n">...</span>       <span class="n">title</span>     <span class="n">URL</span><span class="n">lastUpdate</span>                          
-<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>  <span class="n">2.2077</span>        <span class="n">2.15223</span>  <span class="n">...</span>    <span class="n">Real interest rate</span>     <span class="n">/united-states/real-interest-rate-percent-wb-d...</span>    <span class="mi">2018-04-27</span><span class="n">T</span><span class="mi">13:49:37.133</span>             
+                 <span class="n">symbol</span>    <span class="n">last</span>     <span class="n">previous</span>        <span class="n">...</span>       <span class="n">title</span>     <span class="n">URL</span><span class="n">lastUpdate</span>                          
+<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>  <span class="n">2.2077</span>  <span class="n">2.15223</span>  <span class="n">...</span>    <span class="n">Real interest rate</span>     <span class="n">/united-states/real-interest-rate-percent-wb-d...</span>    <span class="mi">2018-04-27</span><span class="n">T</span><span class="mi">13:49:37.133</span>             
 </code></pre>
 <blockquote class="lang-specific python">  
 <br>
 <p>To get World Bank data by country and page number.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCountry</span><span class="p">(</span><<span class="n">country</span> <span class="o">=</span> <span class="s">'Portugal'</span><span class="p">,</span><span class="n">page_number</span> <span class="o">=</span> <span class="s">3</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Portugal'</span><span class="p">,</span><span class="n">page_number</span> <span class="o">=</span> <span class="s">3</span><span class="p">)</span>
 
             <span class="n">symbol</span>     <span class="n">last</span>                       <span class="n">...</span>         <span class="n">URL</span>     <span class="n">lastUpdate</span>                          
 <span class="mi">0</span>       <span class="n">prt.bx.svf.totl.cd</span>     <span class="n">1.555543e+09</span>      <span class="n">...</span>        <span class="n">/portugal/factor-service-receipts-us$-bop-wb-d...</span>    <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">10:02:51.023</span> 
