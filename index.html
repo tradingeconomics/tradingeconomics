@@ -2659,7 +2659,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <br>
 <p>To get the latest articles by Id, see the example bellow.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getArticles</span><span class="p">(</span><span class="n">id</span> <span class="o">=</span> <span class="s">'26902'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getArticleId</span><span class="p">(</span><span class="n">id</span> <span class="o">=</span> <span class="s">'26902'</span><span class="p">)</span>
 
        <span class="n">id</span>                                          <span class="n">title</span>                     <span class="n">date</span>   <span class="n">...</span>         <span class="n">symbol</span>                               <span class="n">url</span>
 <span class="mi">0</span>   <span class="mi">26902</span>      <span class="n">US Consumer Sentiment Lower than Expected</span>      <span class="mi">2018-12-10</span><span class="n">T</span><span class="mi">09:28:07</span>   <span class="n">...</span>       <span class="n">CONCCONF</span>      <span class="n">/articles/10122018140928.htm</span>                
@@ -2732,7 +2732,20 @@ Please note the sample request is limited in scope to a few countries and indica
 </tbody></table>
 
 <h1 id="world-bank">World Bank</h1>
+<!--Python WB black side-->
+<blockquote class="lang-specific python">  
+<br>
+<p>With no category specified, a list of categories will be provided.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCategories</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">None</span><span class="p">)</span>
 
+        <span class="n">category</span>                                          
+<span class="mi">0</span>         <span class="n">Agriculture</span>                     
+<span class="mi">1</span>   <span class="n">Aid Effectiveness</span>     
+<span class="mi">2</span>       <span class="n"> Demographics</span>
+<span>...</span>     
+  
+</code></pre>
 <h2 id="category">Category</h2>
 
 <h3 id="methods">Methods</h3>
