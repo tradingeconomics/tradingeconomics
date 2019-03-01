@@ -2965,7 +2965,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
-
+<!--Python WB historical black side-->
 <h2 id="historical">Historical</h2>
 <blockquote class="lang-specific python">  
 <br>
@@ -2975,8 +2975,8 @@ Because there are too many results, this method has pagination. Each page is lim
 
                  <span class="n">symbol</span>                      <span class="n">date</span>      <span class="n">value</span>           
 <span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">1961-06-15</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.10788</span>
-<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.21535</span>
-<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.37488</span>        
+<span class="mi">1</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.21535</span>
+<span class="mi">2</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.37488</span>        
 <span class="n">...</span>
 </code></pre>
 
@@ -3016,7 +3016,19 @@ Because there are too many results, this method has pagination. Each page is lim
 </tbody></table>
 
 <h1 id="comtrade">Comtrade</h1>
+<!--Python Comtrade black side-->
+<blockquote class="lang-specific python">  
+<br>
+<p>To getComtrade categories.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCategories</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">None</span><span class="p">)</span>
 
+                  <span class="n">id</span>                      <span class="n">...</span>      <span class="n">pretty_name</span>           
+<span class="mi">0</span>       <span class="mi">01</span>   <span class="n">...</span>                                <span class="n">Live animals</span>
+<span class="mi">1</span>     <span class="mi">0101</span>   <span class="n">...</span>      <span class="n">Horses, asses, mules and hinnies, live</span>
+<span class="mi">2</span>     <span class="mi">0102</span>   <span class="n">...</span>                        <span class="n">Bovine animals, live</span>        
+<span class="n">...</span>
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
