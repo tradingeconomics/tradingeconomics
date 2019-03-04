@@ -1592,6 +1592,14 @@ Or type in any empty cell:</p>
 <span class="c1">//parse your data to satusfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
+
+<!--R market snapshots black side-->
+<blockquote class="lang-specific r">
+<br>  
+<p>marketsField can be: 'commodities', 'currency', 'index', 'bond'.</p>
+<br>
+</blockquote>  
+
 <h3 id="methods">Methods</h3>
 
 <p><strong>Snapshot of latest quotes</strong></p>
@@ -1771,6 +1779,13 @@ Or type in any empty cell:</p>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21291.6900</span>  <span class="mf">21367.2800</span>  <span class="mf">21261.8700</span>  <span class="mf">21359.9000</span>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>   <span class="n">CL1</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">44.6900</span>     <span class="mf">44.8100</span>     <span class="mf">44.2200</span>     <span class="mf">44.4600</span>
 </code></pre>
+
+<!--R historical markets black side-->
+<blockquote class="lang-specific r">
+<p>To get from historical markets by symbol and date.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getHistoricalMarkets</span><span class="p">(<span class="nf">c</span><span class="p">(</span><span class="s1">'AAPL:US'</span><span class="p">,</span><span class="s1">'INDU:IND'</span><span class="p">),</span><span class="w"> </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2011-01-01'</span><span class="p">,</span><span class="n">endDate</span><span class="o">=</span><span class="s1">'2016-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
