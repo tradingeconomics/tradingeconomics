@@ -3173,7 +3173,7 @@ Because there are too many results, this method has pagination. Each page is lim
 </tbody></table>
 
 <h2 id="historical">Historical</h2>
-<!--Python Comtrade Historical-->
+<!--Python Comtrade Historical black side-->
 <blockquote class="lang-specific python">  
 <br>
 <p>To get Comtrade historical data by specific symbol.</p>
@@ -3221,7 +3221,21 @@ Because there are too many results, this method has pagination. Each page is lim
 </tbody></table>
 
 <h1 id="federal-reserve">Federal Reserve</h1>
+<!--Python Ferderal reserve states black side-->
+<blockquote class="lang-specific python">  
+<br>
+<p>To get Federal Reserve states and counties.</p>
+<p> With no county specified, a list of all states will be provided.</p>
+<br>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRStates</span><span class="p">(</span><span class="n">county</span> <span class="o">=</span> <span class="s">'arkansas'</span><span class="p">)</span>
 
+              <span class="n">county</span>                             
+<span class="mi">0</span>     <span class="n">Arkansas County, AR</span>       
+<span class="mi">1</span>       <span class="n">Ashley County, AR</span>      
+<span class="mi">2</span>        <span class="n">Boone County, AR</span>              
+<span class="n">...</span>
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods">  </p>
@@ -3254,6 +3268,19 @@ Because there are too many results, this method has pagination. Each page is lim
 </tbody></table>
 
 <h2 id="snapshots">Snapshots</h2>
+<!--Python Ferderal reserve snapshots black side-->
+<blockquote class="lang-specific python">  
+<br>
+<p>To get Federal Reserve.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'PRTESP24031'</span><span class="p">)</span>
+
+              <span class="n">symbol</span>                      <span class="n">date</span>    <span class="n">value</span>           
+<span class="mi">0</span>       <span class="n">PRTESP24031</span>       <span class="mi">1997-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">707.0</span>
+<span class="mi">1</span>       <span class="n">PRTESP24031</span>       <span class="mi">1998-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n"> 7020.0</span>
+<span class="mi">2</span>       <span class="n">PRTESP24031</span>       <span class="mi">2000-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n">54310.0</span>        
+<span class="n">...</span>
+</code></pre>
 
 <p>Snapshots can be accessed through symbol, url, country, state or county. All have pagination.  </p>
 
