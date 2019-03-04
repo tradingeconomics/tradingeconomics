@@ -3271,15 +3271,14 @@ Because there are too many results, this method has pagination. Each page is lim
 <!--Python Ferderal reserve snapshots black side-->
 <blockquote class="lang-specific python">  
 <br>
-<p>To get Federal Reserve.</p>
+<p>To get Federal Reserve snapshots by symbol.</p>
+<br>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'PRTESP24031'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'AGEXMAK2A647NCEN'</span><span class="p">)</span>
 
-              <span class="n">symbol</span>                      <span class="n">date</span>    <span class="n">value</span>           
-<span class="mi">0</span>       <span class="n">PRTESP24031</span>       <span class="mi">1997-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">707.0</span>
-<span class="mi">1</span>       <span class="n">PRTESP24031</span>       <span class="mi">1998-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n"> 7020.0</span>
-<span class="mi">2</span>       <span class="n">PRTESP24031</span>       <span class="mi">2000-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n">54310.0</span>        
-<span class="n">...</span>
+                    <span class="n">symbol</span>     <span class="n">...</span>                            <span class="n">lastUpdate</span>                          
+<span class="mi">0</span>        <span class="n">AGEXMAK2A647NCEN</span>   <span class="n">...</span>   <span class="mi">20-02-2019</span><span class="n">T</span><span class="mi">13:47:00</span>       
+
 </code></pre>
 
 <p>Snapshots can be accessed through symbol, url, country, state or county. All have pagination.  </p>
