@@ -3293,7 +3293,7 @@ Because there are too many results, this method has pagination. Each page is lim
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s">'tennesse'</span><span class="p">,</span></span><span class="n">page_number</span> <span class="o">=</span> <span class="s">5</span><span class="p">)</span>
 
-         <span class="n">symbol</span>   <span class="n">...</span>               <span class="n">lastUpdate</span>                          
+         <span class="n">symbol</span>   <span class="n">...</span>                <span class="n">lastUpdate</span>                          
 <span class="mi">0</span>        <span class="n">TNODIV</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.903</span> 
 <span class="mi">1</span>        <span class="n">TNOFAR</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.713</span> 
 <span class="mi">2</span>        <span class="n">TNOI96</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.217</span>       
@@ -3392,7 +3392,22 @@ or<br>
 </tbody></table>
 
 <h2 id="historical">Historical</h2>
+<!--Python Federal Reserve historical black side-->
+<blockquote class="lang-specific python">  
+<br>
+<p>To get Federal Reserve historical data by more than one symbol ( te.getFedRHistorical(symbol = ['racedisparity005007', '2020ratio002013']) ).</p>  
+<br>
+<p>To get Federal Reserve historical data by symbol.</p>
+<br>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'racedisparity005007'</span><span class="p">)</span>
 
+          <span class="n">symbol</span>                   <span class="n">date</span>          <span class="n">value</span>                
+<span class="mi">0</span>        <span class="n">racedisparity005007</span>      <span class="mi">2009-01-01</span><span class="n">T</span><span class="mi">00:00:00</span>     <span class="mi">33.60301</span>
+<span class="mi">1</span>        <span class="n">racedisparity005007</span>      <span class="mi">2010-01-01</span><span class="n">T</span><span class="mi">00:00:00</span>     <span class="mi">36.29680</span>
+<span class="mi">2</span>        <span class="n">racedisparity005007</span>      <span class="mi">2011-01-01</span><span class="n">T</span><span class="mi">00:00:00</span>     <span class="mi">36.59937</span> 
+<span class="n">...</span>
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"> </p>
