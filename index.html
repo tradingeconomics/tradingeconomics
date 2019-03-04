@@ -2301,7 +2301,27 @@ Or type in any empty cell:</p>
 <p></span> </p>
 
 <h1 id="earnings">Earnings</h1>
-
+<!--R Markets Search black side-->
+<blockquote class="lang-specific r">
+<p>To get earnings by country.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="s1">'united states'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get earnings by date.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">initDate</span><span class="o">=</span><span class="s1">'2017-01-01'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get earnings by category.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">indicator</span><span class="o">=</span><span class="s1">'msft:us'</span><span class="p">,<span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'symbol'</span><span class="p">,</span><span class="n">initDate</span><span class="o">=</span><span class="s1">'2017-01-01'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get earnings by type. Type can be: earnings, dividends, ipo.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">type</span><span class="o">=</span><span class="s1">'dividends'</span><span class="p">)</span><span class="w">
+</span></code></pre>
 <h3 id="earnings-ipo-dividends">Earnings, IPO, Dividends</h3>
 
 <blockquote class="lang-specific python">
