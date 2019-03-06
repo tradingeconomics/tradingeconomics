@@ -333,12 +333,12 @@ Using Headers auth:<br>
 <li>All API calls have a maximum limitation of 10000 rows. This limit can be different depending on your subscription.<br></li>
 <li>API calls for Earnings, World Bank, Comtrade and Federal Reserv data have a maximum limitation of 500 rows.</li>
 </ul>
-
+<!--Indicators white-->
 <h1 id="indicators">Indicators</h1>
 
 <p>Here you can get a list of all indicators, indicators by country, country-indicator pair and historical information for specific country and indicator.
 Click on any method below for a sample. Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
-
+<!--R indicators black side-->
 <blockquote class="lang-specific r">
 <p>For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt </p>
 </blockquote>   
@@ -385,12 +385,13 @@ Click on any method below for a sample. Please note the sample request is limite
 <span class="p">}</span>
 
 </code></pre>
-
+<!--Excel black side-->
 <blockquote class="lang-specific shell">
 <p>Click Indicators button on TE ribbon and then follow the instructions in the dialog box.    
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEIndicators<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"bankruptcies"</span>, <span class="s2">"Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate"</span>, B2<span class="o">)</span>
+<!--Node black side-->
 </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
@@ -413,6 +414,7 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>       
+<!--JQuery black side-->
 </code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/indicators?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
@@ -421,6 +423,7 @@ Or type in any empty cell:</p>
 <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
+<!--C# black side-->
 </code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
@@ -437,12 +440,14 @@ Or type in any empty cell:</p>
         <span class="c1">//Your custom response parser code</span>
     <span class="p">}</span>
 <span class="p">}</span>
+<!--Java black side-->
 </code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//indicators"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+<!--PHP black side-->
 </code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -459,6 +464,7 @@ Or type in any empty cell:</p>
 <span class="c1">//parse your data to satusfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
+<!--Indicators white-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -623,11 +629,13 @@ For several countries and indicators</p>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
+<!--Excel black side-->
 <blockquote class="lang-specific shell">
 <p>Click Historical button on TE ribbon and then follow the instructions in the dialog box.    
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEHistorical<span class="o">(</span> <span class="s2">"andorra"</span>, <span class="s2">"gdp per capita"</span>, <span class="s2">"2010-01-01"</span>, <span class="s2">"2017-10-29"</span>, <span class="s2">"Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate"</span>, B2<span class="o">)</span>
+<!--Node black side-->
 </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
@@ -650,6 +658,7 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+<!--JQuery black side-->
 </code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/historical/country/{put country name here}/indicator/{put indicator name here}?c=guest:guest'</span><span class="p">;</span>
 <span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
@@ -658,6 +667,7 @@ Or type in any empty cell:</p>
 <span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">});</span>
+<!--C# black side-->
 </code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
@@ -674,12 +684,14 @@ Or type in any empty cell:</p>
         <span class="c1">//Your custom response parser code</span>
     <span class="p">}</span>
 <span class="p">}</span>
+<!--Java black side-->
 </code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+<!--PHP black side-->
 </code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -696,6 +708,7 @@ Or type in any empty cell:</p>
 <span class="c1">//parse your data to satisfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
+<!--Indicators Methods white-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -917,6 +930,7 @@ or you can specify a start date and end date<br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getLatestUpdates</span><span class="p">(</span><span class="w"> </span><span class="s1">'2018-02-22'</span><span class="p">)</span>           
 </span></code></pre>  
+<!--Indicators latest updates white-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -1234,6 +1248,118 @@ Please note the sample request is limited in scope to a few countries and indica
 <td style="text-align: left">Unique calendar ID used by TradingEconomics</td>
 </tr>
 </tbody></table>
+
+<h2 id="streaming">Streaming</h2>
+
+<blockquote class="lang-specific python">
+<p>
+ Copy this code and execute
+</p>
+</blockquote>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'guest:guest'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+  <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+<span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'calendar'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>In Windows Command Prompt or Linux bash execute next steps: <br>  
+    Step 1 - Clone repository</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/ieconomics/open-api.git</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 2</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">cd</span> <span class="nx">open</span><span class="o">-</span><span class="nx">api</span><span class="o">/</span><span class="nx">stream</span><span class="o">/</span><span class="nx">nodejs</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 3 - Install dependencies</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">npm</span> <span class="nx">install</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 4 - In app.js file, set-up your client key/secret</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">te_client</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'ws://stream.tradingeconomics.com/'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'API_CLIENT_KEY'</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+  <span class="na">secret</span><span class="p">:</span> <span class="s1">'API_CLIENT_SECRET'</span> <span class="c1">// &lt;--</span>
+  <span class="c1">//reconnect: true</span>
+<span class="p">});</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 5 - Run it</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">node</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p><a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">Check here for the complete sample code.</a></p>
+</blockquote>
+
+<p>The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. </p>
+
+<p><strong>Response fields for the calendar subscription:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>category</strong></td>
+<td style="text-align: left">Indicator category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>event</strong></td>
+<td style="text-align: left">Specific event name in the calendar</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>reference</strong></td>
+<td style="text-align: left">The period for which released data refers to</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>source</strong></td>
+<td style="text-align: left">Source of data</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>actual</strong></td>
+<td style="text-align: left">Latest released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>previous</strong></td>
+<td style="text-align: left">Value for the previous period after the revision (if revision is applicable)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>forecast</strong></td>
+<td style="text-align: left">Average forecast among a representative group of economists</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>teforecast</strong></td>
+<td style="text-align: left">TE own projections</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>importance</strong></td>
+<td style="text-align: left">1 = low, 2 = medium, 3 = high</td>
+</tr>
+</tbody></table>
+<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a></p>
+
+<p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 
 <h1 id="forecast">Forecast</h1>
 <!--Forecasts R black side-->
@@ -1622,8 +1748,124 @@ Or type in any empty cell:</p>
 <li><p>Multiple Markets<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a></p></li>
 </ul>
+<p></span> </p>
+
+<h3 id="methods">Market Lists</h3>
+<!--Python Market lists black side-->
+<blockquote class="lang-specific python">
+<p>To get closely related items of a certain symbol:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+     <span class="n">Symbol</span> <span class="n">Ticker</span>         <span class="o">...</span>           <span class="n">ISIN</span>           <span class="n">LastUpdate</span>
+<span class="mi">0</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>   <span class="n">INDU</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>   <span class="n">MID</span><span class="p">:</span><span class="n">IND</span>    <span class="n">MID</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>   <span class="n">NDX</span><span class="p">:</span><span class="n">IND</span>    <span class="n">NDX</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">3</span>   <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>    <span class="n">SPX</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get closely related items of a certain group of symbols:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'indu:ind'</span><span class="p">])</span>
+
+<span class="n">Output</span><span class="p">:</span>
+      <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
+<span class="mi">0</span>    <span class="n">AAPL</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>     <span class="n">HPQ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>     <span class="n">IBM</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+         <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
+<span class="mi">8</span>     <span class="n">SNE</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">9</span>    <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">10</span>     <span class="n">VZ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get components of the certain index:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsComponents</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'psi20:ind'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+     <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
+<span class="mi">0</span>   <span class="n">ALTR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>    <span class="n">BCP</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>    <span class="n">COR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mo">00</span>
+        <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
+<span class="mi">15</span>   <span class="n">SEM</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">16</span>   <span class="n">SON</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">17</span>  <span class="n">SONC</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T11</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mo">00</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To get components of the group of indexes:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsComponents</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="s">'psi20:ind'</span><span class="p">])</span>
+
+<span class="n">Output</span><span class="p">:</span>
+     <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
+<span class="mi">0</span>   <span class="n">AAPL</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">1</span>   <span class="n">ALTR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">2</span>    <span class="n">AXP</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+        <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
+<span class="mi">45</span>    <span class="n">VZ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">46</span>   <span class="n">WMT</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">47</span>   <span class="n">XOM</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+
+</code></pre>
+<!--R Markets lists black side-->
+<blockquote class="lang-specific r">
+<p>To get markets lists by components.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsList</span><span class="p">(<span class="nf">marketsField</span><span class="o">=</span><span class="s1">'components'</span><span class="p">,</span><span class="s1">'psi20:ind'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get markets lists by peers.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsList</span><span class="p">(<span class="nf">marketsField</span><span class="o">=</span><span class="s1">'peers'</span><span class="p">,</span><span class="s1">'aapl:us'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>A snapshot of latest peers prices by market<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a></p></li>
+<li><p>Stock Market Index Components<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a></p></li>
+</ul>
 
 <p></span> </p>
+<h3 id="methods">Search</h3>
+<!--R Markets Search black side-->
+<blockquote class="lang-specific r">
+<p>To get markets search by country, category and page number.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span><span class="s1">'markets'</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+
+<p><span class="methods"></p>
+
+<ul>
+<li>Search method<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a></li>
+</ul>
+
+<p>By Default, the search will look into the categories: Indexes, markets(stocks), bonds, and commodities.</p>
+
+ <ul>
+<li>Filtering by Category<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest&category=index,markets">/markets/search/{term}?category={category}</a></li>
+</ul>
+
+ <p>Categories available: index, markets, forex, bond and commodity.</p>
+
+ <ul>
+<li>Pagination<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/japan?c=guest:guest&category=index,markets&page=2">/markets/search/{term}?category={category}&amp;page=2</a></li>
+</ul>
+
+ <p>Because this endpoint can yield too many results, this method has pagination. Each page is limited to 250 items, you can request each page separately.</p>
+
+ <p></span> </p>  <p></span> </p>
+
+
 
 <h3 id="response-fields">Response Fields</h3>
 
@@ -1746,6 +1988,21 @@ Or type in any empty cell:</p>
 <td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
+<h3 id="json-csv-xml">JSON CSV XML</h3>
+
+<p>For all methods listed above, you can get data in next formats:</p>
+
+<p><span class="methods"></p>
+  <ul>
+    <li><p>JSON<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}?c=guest:guest&amp;f=json</a>    </p></li>
+    <li><p>CSV<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=csv">/markets/symbol/{symbol}?c=guest:guest&amp;f=csv</a></p></li>
+    <li><p>XML<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=xml">/markets/symbol/{symbol}?c=guest:guest&amp;f=xml</a></p></li>
+    </ul>
+    
+<p></span> </p>  
 
 <h2 id="historical">Historical</h2>
 <!--Python Historical Markets black side-->
@@ -1924,91 +2181,60 @@ Or type in any empty cell:</p>
 </tr>
 </tbody></table>
 
-<h2 id="market-lists">Market Lists</h2>
-<!--Python Market lists black side-->
+<h2 id="streaming">Streaming</h2>
+
 <blockquote class="lang-specific python">
-<p>To get closely related items of a certain symbol:</p>
-</blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+<p>
+ Copy this code and execute
+</p>
+</blockquote>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
-<span class="n">Output</span><span class="p">:</span>
-     <span class="n">Symbol</span> <span class="n">Ticker</span>         <span class="o">...</span>           <span class="n">ISIN</span>           <span class="n">LastUpdate</span>
-<span class="mi">0</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>   <span class="n">INDU</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">1</span>   <span class="n">MID</span><span class="p">:</span><span class="n">IND</span>    <span class="n">MID</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">2</span>   <span class="n">NDX</span><span class="p">:</span><span class="n">IND</span>    <span class="n">NDX</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">3</span>   <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>    <span class="n">SPX</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'guest:guest'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+  <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+<span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD:CUR'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
 </code></pre>
-<blockquote class="lang-specific python">
-<p>To get closely related items of a certain group of symbols:</p>
-</blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'indu:ind'</span><span class="p">])</span>
-
-<span class="n">Output</span><span class="p">:</span>
-      <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
-<span class="mi">0</span>    <span class="n">AAPL</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">1</span>     <span class="n">HPQ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">2</span>     <span class="n">IBM</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-         <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
-<span class="mi">8</span>     <span class="n">SNE</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">9</span>    <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">10</span>     <span class="n">VZ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
+<blockquote class="lang-specific javascript">
+<p>In Windows Command Prompt or Linux bash execute next steps: <br>  
+    Step 1 - Clone repository</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/ieconomics/open-api.git</span>
 </code></pre>
-<blockquote class="lang-specific python">
-<p>To get components of the certain index:</p>
-</blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsComponents</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'psi20:ind'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
-
-<span class="n">Output</span><span class="p">:</span>
-     <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
-<span class="mi">0</span>   <span class="n">ALTR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">1</span>    <span class="n">BCP</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">2</span>    <span class="n">COR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mo">00</span>
-        <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
-<span class="mi">15</span>   <span class="n">SEM</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">16</span>   <span class="n">SON</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">17</span>  <span class="n">SONC</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T11</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mo">00</span>
+<blockquote class="lang-specific javascript">
+<p>Step 2</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">cd</span> <span class="nx">open</span><span class="o">-</span><span class="nx">api</span><span class="o">/</span><span class="nx">stream</span><span class="o">/</span><span class="nx">nodejs</span>
 </code></pre>
-<blockquote class="lang-specific python">
-<p>To get components of the group of indexes:</p>
-</blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsComponents</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="s">'psi20:ind'</span><span class="p">])</span>
-
-<span class="n">Output</span><span class="p">:</span>
-     <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
-<span class="mi">0</span>   <span class="n">AAPL</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">1</span>   <span class="n">ALTR</span><span class="p">:</span><span class="n">PL</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">2</span>    <span class="n">AXP</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-        <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
-<span class="mi">45</span>    <span class="n">VZ</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">46</span>   <span class="n">WMT</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">47</span>   <span class="n">XOM</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-
+<blockquote class="lang-specific javascript">
+<p>Step 3 - Install dependencies</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">npm</span> <span class="nx">install</span>
 </code></pre>
-<!--R Markets lists black side-->
-<blockquote class="lang-specific r">
-<p>To get markets lists by components.</p>
-</blockquote> 
-<pre class="highlight r"><code><span class="n">getMarketsList</span><span class="p">(<span class="nf">marketsField</span><span class="o">=</span><span class="s1">'components'</span><span class="p">,</span><span class="s1">'psi20:ind'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-</span></code></pre>
-<blockquote class="lang-specific r">
-<p>To get markets lists by peers.</p>
-</blockquote> 
-<pre class="highlight r"><code><span class="n">getMarketsList</span><span class="p">(<span class="nf">marketsField</span><span class="o">=</span><span class="s1">'peers'</span><span class="p">,</span><span class="s1">'aapl:us'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-</span></code></pre>
-<h3 id="methods">Methods</h3>
+<blockquote class="lang-specific javascript">
+<p>Step 4 - In app.js file, set-up your client key/secret</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">te_client</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'ws://stream.tradingeconomics.com/'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'API_CLIENT_KEY'</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+  <span class="na">secret</span><span class="p">:</span> <span class="s1">'API_CLIENT_SECRET'</span> <span class="c1">// &lt;--</span>
+  <span class="c1">//reconnect: true</span>
+<span class="p">});</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p>Step 5 - Run it</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">node</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+<p><a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">Check here for the complete sample code.</a></p>
+</blockquote>
 
-<p><span class="methods"></p>
-
-<ul>
-<li><p>A snapshot of latest peers prices by market<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a></p></li>
-<li><p>Stock Market Index Components<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a></p></li>
-</ul>
-
-<p></span> </p>
-
-<h3 id="response-fields">Response Fields</h3>
+<p><strong>Response fields for the markets subscription:</strong></p>
 
 <table><thead>
 <tr>
@@ -2017,290 +2243,57 @@ Or type in any empty cell:</p>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><strong>Symbol</strong></td>
-<td style="text-align: left">Unique symbol used by TradingEconomics</td>
+<td style="text-align: left"><strong>s</strong></td>
+<td style="text-align: left">Symbol</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Ticker</strong></td>
-<td style="text-align: left">Unique ticker used by TradingEconomics</td>
+<td style="text-align: left"><strong>bid</strong></td>
+<td style="text-align: left">Latest market bid price</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Name</strong></td>
-<td style="text-align: left">Indicator full name</td>
+<td style="text-align: left"><strong>ask</strong></td>
+<td style="text-align: left">Latest maket ask price</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country name</td>
+<td style="text-align: left"><strong>price</strong></td>
+<td style="text-align: left">Latest market price</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Release time and date in UTC</td>
+<td style="text-align: left"><strong>dt</strong></td>
+<td style="text-align: left">Timestamp of last market price (epoch)</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Type</strong></td>
-<td style="text-align: left">Market type</td>
+<td style="text-align: left"><strong>state</strong></td>
+<td style="text-align: left">Market state (open/close)</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Decimals</strong></td>
-<td style="text-align: left">Number of decimal places</td>
+<td style="text-align: left"><strong>type</strong></td>
+<td style="text-align: left">Type of market (currency/indexes/commodity)</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Last</strong></td>
-<td style="text-align: left">Latest released value</td>
+<td style="text-align: left"><strong>dhigh</strong></td>
+<td style="text-align: left">Daily high</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>MarketCap</strong></td>
-<td style="text-align: left">Market capitalization</td>
+<td style="text-align: left"><strong>dlow</strong></td>
+<td style="text-align: left">Daily low</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Unit</strong></td>
-<td style="text-align: left">Unit of the value</td>
+<td style="text-align: left"><strong>pch</strong></td>
+<td style="text-align: left">Percentage change</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>URL</strong></td>
-<td style="text-align: left">Hyperlink at Trading Economics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Importance</strong></td>
-<td style="text-align: left">Indicator importance from 0(lowest) to 1000(highest)</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>DailyChange</strong></td>
-<td style="text-align: left">Difference between last close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>DailyPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>WeeklyChange</strong></td>
-<td style="text-align: left">Difference between last week close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>WeeklyPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last week close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>MonthlyChange</strong></td>
-<td style="text-align: left">Difference between last month close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>MonthlyPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last month close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>YearlyChange</strong></td>
-<td style="text-align: left">Difference between last year close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>YearlyPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last year close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>YTDChange</strong></td>
-<td style="text-align: left">Difference between last year last close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>YTDPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last year last close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Yesterday</strong></td>
-<td style="text-align: left">Yesterday close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastWeek</strong></td>
-<td style="text-align: left">Last week close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastMonth</strong></td>
-<td style="text-align: left">Last month close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastYear</strong></td>
-<td style="text-align: left">Last year close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>StartYear</strong></td>
-<td style="text-align: left">Start year close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastUpdate</strong></td>
-<td style="text-align: left">Time when new data was inserted or changed</td>
+<td style="text-align: left"><strong>nch</strong></td>
+<td style="text-align: left">Net change</td>
 </tr>
 </tbody></table>
 
-<h2 id="search">Search</h2>
-<!--R Markets Search black side-->
-<blockquote class="lang-specific r">
-<p>To get markets search by country, category and page number.</p>
-</blockquote> 
-<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span><span class="s1">'markets'</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
-</span></code></pre>
+<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a></p>
 
-<h3 id="methods">Methods</h3>
+<p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 
-<p><span class="methods"></p>
 
-<ul>
-<li>Search method<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a></li>
-</ul>
-
-<p>By Default, the search will look into the categories: Indexes, markets(stocks), bonds, and commodities.</p>
-
- <ul>
-<li>Filtering by Category<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest&category=index,markets">/markets/search/{term}?category={category}</a></li>
-</ul>
-
- <p>Categories available: index, markets, forex, bond and commodity.</p>
-
- <ul>
-<li>Pagination<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/japan?c=guest:guest&category=index,markets&page=2">/markets/search/{term}?category={category}&amp;page=2</a></li>
-</ul>
-
- <p>Because this endpoint can yield too many results, this method has pagination. Each page is limited to 250 items, you can request each page separately.</p>
-
- <p></span> </p>  <p></span> </p>
-
-<h3 id="response-fields">Response Fields</h3>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>Symbol</strong></td>
-<td style="text-align: left">Unique symbol used by TradingEconomics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Ticker</strong></td>
-<td style="text-align: left">Unique ticker used by TradingEconomics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Name</strong></td>
-<td style="text-align: left">Indicator full name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Release time and date in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Type</strong></td>
-<td style="text-align: left">Market Type</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Decimals</strong></td>
-<td style="text-align: left">Number of decimal places</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Last</strong></td>
-<td style="text-align: left">Latest released value</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Unit</strong></td>
-<td style="text-align: left">Unit of the value</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>URL</strong></td>
-<td style="text-align: left">Hyperlink at Trading Economics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Importance</strong></td>
-<td style="text-align: left">Indicator importance from 0(lowest) to 1000(highest)</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>DailyChange</strong></td>
-<td style="text-align: left">Difference between last close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>DailyPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>WeeklyChange</strong></td>
-<td style="text-align: left">Difference between last week close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>WeeklyPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last week close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>MonthlyChange</strong></td>
-<td style="text-align: left">Difference between last month close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>MonthlyPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last month close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>YearlyChange</strong></td>
-<td style="text-align: left">Difference between last year close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>YearlyPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last year close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>YTDChange</strong></td>
-<td style="text-align: left">Difference between last year last close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>YTDPercentualChange</strong></td>
-<td style="text-align: left">Difference in percentage between last year last close and current price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Yesterday</strong></td>
-<td style="text-align: left">Yesterday close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastWeek</strong></td>
-<td style="text-align: left">Last week close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastMonth</strong></td>
-<td style="text-align: left">Last month close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastYear</strong></td>
-<td style="text-align: left">Last year close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>StartYear</strong></td>
-<td style="text-align: left">Start year close</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastUpdate</strong></td>
-<td style="text-align: left">Time when new data was inserted or changed</td>
-</tr>
-</tbody></table>
-
-<h3 id="json-csv-xml">JSON CSV XML</h3>
-
-<p>For all methods listed above, you can get data in next formats:</p>
-
-<p><span class="methods"></p>
-
-<ul>
-<li><p>JSON<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}?c=guest:guest&amp;f=json</a>    </p></li>
-<li><p>CSV<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=csv">/markets/symbol/{symbol}?c=guest:guest&amp;f=csv</a></p></li>
-<li><p>XML<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=xml">/markets/symbol/{symbol}?c=guest:guest&amp;f=xml</a></p></li>
-</ul>
-
-<p></span> </p>
-
-<h1 id="earnings">Earnings</h1>
+<h2 id="earnings">Earnings</h2>
 <!--R Markets Search black side-->
 <blockquote class="lang-specific r">
 <p>To get earnings by country.</p>
@@ -2441,172 +2434,7 @@ Or type in any empty cell:</p>
 </tr>
 </tbody></table>
 
-<h1 id="streaming">Streaming</h1>
 
-<blockquote class="lang-specific python">
-<p>
- Copy this code and execute
-</p>
-</blockquote>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-<span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'guest:guest'</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-  <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-
-<span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD:CUR'</span><span class="p">)</span>
-<span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
-</code></pre>
-<blockquote class="lang-specific javascript">
-<p>In Windows Command Prompt or Linux bash execute next steps: <br>  
-    Step 1 - Clone repository</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/ieconomics/open-api.git</span>
-</code></pre>
-<blockquote class="lang-specific javascript">
-<p>Step 2</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">cd</span> <span class="nx">open</span><span class="o">-</span><span class="nx">api</span><span class="o">/</span><span class="nx">stream</span><span class="o">/</span><span class="nx">nodejs</span>
-</code></pre>
-<blockquote class="lang-specific javascript">
-<p>Step 3 - Install dependencies</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">npm</span> <span class="nx">install</span>
-</code></pre>
-<blockquote class="lang-specific javascript">
-<p>Step 4 - In app.js file, set-up your client key/secret</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">te_client</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'ws://stream.tradingeconomics.com/'</span><span class="p">,</span>
-  <span class="na">key</span><span class="p">:</span> <span class="s1">'API_CLIENT_KEY'</span><span class="p">,</span> <span class="c1">// &lt;--</span>
-  <span class="na">secret</span><span class="p">:</span> <span class="s1">'API_CLIENT_SECRET'</span> <span class="c1">// &lt;--</span>
-  <span class="c1">//reconnect: true</span>
-<span class="p">});</span>
-</code></pre>
-<blockquote class="lang-specific javascript">
-<p>Step 5 - Run it</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">node</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
-</code></pre>
-<blockquote class="lang-specific javascript">
-<p><a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">Check here for the complete sample code.</a></p>
-</blockquote>
-
-<p>The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. </p>
-
-<p><strong>Response fields for the calendar subscription:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>date</strong></td>
-<td style="text-align: left">Release time and date in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>country</strong></td>
-<td style="text-align: left">Country name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>category</strong></td>
-<td style="text-align: left">Indicator category name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>event</strong></td>
-<td style="text-align: left">Specific event name in the calendar</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>reference</strong></td>
-<td style="text-align: left">The period for which released data refers to</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>source</strong></td>
-<td style="text-align: left">Source of data</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>actual</strong></td>
-<td style="text-align: left">Latest released value</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>previous</strong></td>
-<td style="text-align: left">Value for the previous period after the revision (if revision is applicable)</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>forecast</strong></td>
-<td style="text-align: left">Average forecast among a representative group of economists</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>teforecast</strong></td>
-<td style="text-align: left">TE own projections</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>importance</strong></td>
-<td style="text-align: left">1 = low, 2 = medium, 3 = high</td>
-</tr>
-</tbody></table>
-
-<p><strong>Response fields for the markets subscription:</strong></p>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>s</strong></td>
-<td style="text-align: left">Symbol</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>bid</strong></td>
-<td style="text-align: left">Latest market bid price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>ask</strong></td>
-<td style="text-align: left">Latest maket ask price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>price</strong></td>
-<td style="text-align: left">Latest market price</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>dt</strong></td>
-<td style="text-align: left">Timestamp of last market price (epoch)</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>state</strong></td>
-<td style="text-align: left">Market state (open/close)</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>type</strong></td>
-<td style="text-align: left">Type of market (currency/indexes/commodity)</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>dhigh</strong></td>
-<td style="text-align: left">Daily high</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>dlow</strong></td>
-<td style="text-align: left">Daily low</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>pch</strong></td>
-<td style="text-align: left">Percentage change</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>nch</strong></td>
-<td style="text-align: left">Net change</td>
-</tr>
-</tbody></table>
-
-<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a></p>
-
-<p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 
 <h1 id="news">News</h1>
 
