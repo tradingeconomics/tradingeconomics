@@ -1,5 +1,5 @@
-let introductionLi = document.getElementById('introductionLi');
-let logginLi = document.getElementById('logginLi');
+let installationLi = document.getElementById('installationLi');
+let loginLi = document.getElementById('loginLi');
 let methodsLi = document.getElementById('methodsLi');
 let indicatorsLi = document.getElementById('indicatorsLi');
 let historicalLi = document.getElementById('historicalLi');
@@ -9,22 +9,22 @@ let forecastsLi = document.getElementById('forecastsLi');
 let refreshLi = document.getElementById('refreshLi');
 let searchLi = document.getElementById('searchLi');
 
-introductionLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#introduction'; }
-logginLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#loggin'; }
-methodsLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#methods'; }
-indicatorsLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#indicators'; }
-historicalLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#historical'; }
-calendarLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#calendar'; }
-marketsLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#markets'; }
-forecastsLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#forecasts'; }
-refreshLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#refresh'; }
-searchLi.onclick = () => { window.location = 'excelTeAddInWebDocs.html#search'; }
+installationLi.onclick = () => { window.location = 'index.html#installation'; }
+loginLi.onclick = () => { window.location = 'index.html#login'; }
+methodsLi.onclick = () => { window.location = 'index.html#methods'; }
+indicatorsLi.onclick = () => { window.location = 'index.html#indicators'; }
+historicalLi.onclick = () => { window.location = 'index.html#historical'; }
+calendarLi.onclick = () => { window.location = 'index.html#calendar'; }
+marketsLi.onclick = () => { window.location = 'index.html#markets'; }
+forecastsLi.onclick = () => { window.location = 'index.html#forecasts'; }
+refreshLi.onclick = () => { window.location = 'index.html#refresh'; }
+searchLi.onclick = () => { window.location = 'index.html#search'; }
 
 let colorBlue = '#428bca';
     
 function clearAllLiColors() {
-    introductionLi.style.backgroundColor = 'transparent';
-    logginLi.style.backgroundColor = 'transparent';
+    installationLi.style.backgroundColor = 'transparent';
+    loginLi.style.backgroundColor = 'transparent';
     methodsLi.style.backgroundColor = 'transparent';
     indicatorsLi.style.backgroundColor = 'transparent';
     historicalLi.style.backgroundColor = 'transparent';
@@ -37,13 +37,13 @@ function clearAllLiColors() {
 
 $('#contentContainer').scroll(() => { 
     clearAllLiColors()
-    if($('#introduction').position().top <= 0) {
+    if($('#installation').position().top <= 0) {
         clearAllLiColors()
-        introductionLi.style.backgroundColor = colorBlue;
+        installationLi.style.backgroundColor = colorBlue;
     }
-    if($('#loggin').position().top <= 0) {
+    if($('#login').position().top <= 0) {
         clearAllLiColors()
-        logginLi.style.backgroundColor = colorBlue;
+        loginLi.style.backgroundColor = colorBlue;
     }
     if($('#methods').position().top <= 0) {
         clearAllLiColors()
@@ -79,20 +79,20 @@ $('#contentContainer').scroll(() => {
     }
 })
 
-introductionLi.onmouseover = () => { introductionLi.style.backgroundColor = '#666'; }
-introductionLi.onmouseleave  = () => { 
-    introductionLi.style.backgroundColor = 'transparent'; 
-    if($('#introduction').position().top <= 0 && $('#loggin').position().top >= 0) {
+installationLi.onmouseover = () => { installationLi.style.backgroundColor = '#666'; }
+installationLi.onmouseleave  = () => { 
+    installationLi.style.backgroundColor = 'transparent'; 
+    if($('#installation').position().top <= 0 && $('#login').position().top >= 0) {
         clearAllLiColors()
-        introductionLi.style.backgroundColor = colorBlue;
+        installationLi.style.backgroundColor = colorBlue;
     }
 }
-logginLi.onmouseover = () => { logginLi.style.backgroundColor = '#666'; }
-logginLi.onmouseleave  = () => { 
-    logginLi.style.backgroundColor = 'transparent'; 
-    if($('#loggin').position().top <= 0 && $('#methods').position().top >= 0) {
+loginLi.onmouseover = () => { loginLi.style.backgroundColor = '#666'; }
+loginLi.onmouseleave  = () => { 
+    loginLi.style.backgroundColor = 'transparent'; 
+    if($('#login').position().top <= 0 && $('#methods').position().top >= 0) {
         clearAllLiColors()
-        logginLi.style.backgroundColor = colorBlue;
+        loginLi.style.backgroundColor = colorBlue;
     }
 }
 methodsLi.onmouseover = () => { methodsLi.style.backgroundColor = '#666'; }
@@ -167,3 +167,14 @@ searchLi.onmouseleave  = () => {
         searchLi.style.backgroundColor = colorBlue;
     }
 }
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+$('downloadLink').click(() => {
+    ga('send', 'event', 'Data Request', 'Excel-Download');
+    window.location = 'https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi';
+    return;
+});
