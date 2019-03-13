@@ -32,22 +32,20 @@ class WebRequestError(ValueError):
 def checkCountry(country):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'       
     if type(country) is str:
-        linkAPI += quote(country)
+        linkAPI += quote(country, safe='')
     else:
         #multiCountry = ",".join(country)
-        linkAPI += quote(",".join(country))
+        linkAPI += quote(",".join(country), safe='')
     return linkAPI
-    
-    
+        
 def checkIndic(indicator):
     linkAPI = 'https://api.tradingeconomics.com/forecast/indicator/'        
     if type(indicator) is str:
-        linkAPI += quote(indicator)
+        linkAPI += quote(indicator, safe='')
     else:
         #multiIndic = ",".join(indicator)
-        linkAPI += quote(",".join(indicator))
+        linkAPI += quote(",".join(indicator), safe='')
     return linkAPI
-
 
 def getLink(country, indicator):
     linkAPI = 'https://api.tradingeconomics.com/forecast/country/'
@@ -55,12 +53,12 @@ def getLink(country, indicator):
         linkAPI += quote(country)
     else:
         #multiCountry = ",".join(country)
-        linkAPI += quote(",".join(country)) 
+        linkAPI += quote(",".join(country), safe='') 
     if type(indicator) is str:
-        linkAPI += '/indicator/' + quote(indicator)
+        linkAPI += '/indicator/' + quote(indicator, safe='')
     else:
         #multiIndic = ",".join(indicator)
-        linkAPI += '/indicator/' + quote(",".join(indicator)) 
+        linkAPI += '/indicator/' + quote(",".join(indicator), safe='') 
     return linkAPI
 
     
@@ -117,9 +115,17 @@ def getForecastData(country = None, indicator = None, output_type = None):
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+
+    isCommodity = False
+    if (country != None and country.strip().lower() == 'commodity') or (indicator != None and indicator.strip().lower() == 'commodity'):
+            isCommodity = True
     if len(webResults) > 0:
-        names = ['country', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
-        names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
+        if isCommodity:
+            names = ['title', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
+            names2 = ['Title', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
+        else:    
+            names = ['country', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
+            names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date']
         maindf = pd.DataFrame()  
         for i in range(len(names)):
             names[i] =  [d[names2[i]] for d in webResults]
@@ -127,7 +133,10 @@ def getForecastData(country = None, indicator = None, output_type = None):
     else:
         raise ParametersError ('No data available for the provided parameters.')
     if output_type == None or output_type =='dict':
-        output = fn.out_type(maindf)
+        if isCommodity:
+            output = fn.out_type(maindf, True)
+        else:
+            output = fn.out_type(maindf)
     elif output_type == 'df':  
         output = maindf
     elif output_type == 'raw':

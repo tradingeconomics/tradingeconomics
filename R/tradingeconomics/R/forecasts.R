@@ -68,7 +68,7 @@ getForecastData <- function(country = NULL, indicator = NULL, outType = NULL){
   } else if (identical(outType, 'df')){
     df_final = df_final
   } else {
-    stop('output_type options : df for data frame, lst(defoult) for list by country ')
+    stop('output_type options : df for data frame, lst(default) for list by country ')
   }
 
   return(df_final)
