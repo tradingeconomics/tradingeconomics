@@ -1,0 +1,18 @@
+
+.table {       
+    position: relative;
+    font-size: 150%;
+    width: 480px;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin-left: 150px;
+    background: #cccc;
+    }
+
+h1{
+    
+    font-size: 25px;
+    
+    }
