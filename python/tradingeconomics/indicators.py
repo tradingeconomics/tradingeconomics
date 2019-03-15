@@ -307,6 +307,6 @@ def getLatestUpdates(initDate = None, output_type = None):
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
     return output
 

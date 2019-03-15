@@ -258,9 +258,9 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
     -------
     getArticles(country = ['United States', 'Portugal'], indicator = ['Imports','Interest rate'])
 
-    getArticles(country = 'United States', indicator = 'Imports', start = 10, lim = 20, output_type = 'df')
+    getArticles( start = 10, lim = 20, output_type = 'df')
 
-    getArticles(country = 'United States', indicator = None, initDate = '2015-10-10', endDate = '2017-10-10', start = 10, lim = 20, output_type = 'df')
+    getArticles(country = 'United States''2015-10-10', endDate = '2017-10-10')
 
     """          
 
