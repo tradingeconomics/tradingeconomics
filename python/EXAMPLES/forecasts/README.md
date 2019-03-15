@@ -1,6 +1,6 @@
 #Forecasts examples
 
-In this folder you can find examples on how to get data from calendar using python.
+In this folder you can find examples on how to get forecast data using python.
 Remember that without a client key to login, only a sample of data will be provided.
 
 #**forecastsEx**

@@ -1,5 +1,5 @@
 import tradingeconomics as te
-te.login('yu06vzmlllju1qz:mtvmbg847pwz3jn')
+te.login('guest:guest')
 
 #without a client key only a small sample of data will be given.
 
