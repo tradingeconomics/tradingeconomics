@@ -1,25 +1,25 @@
-#Calendar examples
+#Forecasts examples
 
 In this folder you can find examples on how to get data from calendar using python.
 Remember that without a client key to login, only a sample of data will be provided.
 
-#**calendarEx**
+#**forecastsEx**
 
 Shows how to get data with diferent parameters, and output types.
 
 *You can get a pandas DataFrame output:*
 ```python
-               Country Category  LatestValue         ...                       q3_date       q4              q4_date
-0          Afghanistan      GDP        20.82         ...           2019-09-30T00:00:00    22.00  2019-12-31T00:00:00
-1              Albania      GDP        13.04         ...           2019-09-30T00:00:00    14.00  2019-12-31T00:00:00
-2              Algeria      GDP       170.37         ...           2019-09-30T00:00:00   178.10  2019-12-31T00:00:00
-3              Andorra      GDP         3.01         ...           2019-09-30T00:00:00     3.07  2019-12-31T00:00:00
-4               Angola      GDP       124.21         ...           2019-09-30T00:00:00   143.00  2019-12-31T00:00:00
-5  Antigua And Barbuda      GDP         1.53         ...           2019-09-30T00:00:00     1.60  2019-12-31T00:00:00
-6            Argentina      GDP       637.59         ...           2019-09-30T00:00:00   680.00  2019-12-31T00:00:00
-7              Armenia      GDP        11.54         ...           2019-09-30T00:00:00    13.30  2019-12-31T00:00:00
-8                Aruba      GDP         2.58         ...           2019-09-30T00:00:00     2.70  2019-12-31T00:00:00
-9            Australia      GDP      1323.42         ...           2019-09-30T00:00:00  1580.00  2019-12-31T00:00:00
+               Country Category  LatestValue      LatestValueDate         ...                q3              q3_date       q4              q4_date
+0          Afghanistan      GDP        20.82  2017-12-31T00:00:00         ...             22.00  2019-09-30T00:00:00    22.00  2019-12-31T00:00:00
+1              Albania      GDP        13.04  2017-12-31T00:00:00         ...             14.50  2019-09-30T00:00:00    14.00  2019-12-31T00:00:00
+2              Algeria      GDP       170.37  2017-12-31T00:00:00         ...            178.10  2019-09-30T00:00:00   178.10  2019-12-31T00:00:00
+3              Andorra      GDP         3.01  2017-12-31T00:00:00         ...              3.15  2019-09-30T00:00:00     3.07  2019-12-31T00:00:00
+4               Angola      GDP       124.21  2017-12-31T00:00:00         ...            143.00  2019-09-30T00:00:00   143.00  2019-12-31T00:00:00
+5  Antigua And Barbuda      GDP         1.53  2017-12-31T00:00:00         ...              1.60  2019-09-30T00:00:00     1.60  2019-12-31T00:00:00
+6            Argentina      GDP       637.59  2017-12-31T00:00:00         ...            680.00  2019-09-30T00:00:00   680.00  2019-12-31T00:00:00
+7              Armenia      GDP        11.54  2017-12-31T00:00:00         ...             13.30  2019-09-30T00:00:00    13.30  2019-12-31T00:00:00
+8                Aruba      GDP         2.58  2011-12-31T00:00:00         ...              2.70  2019-09-30T00:00:00     2.70  2019-12-31T00:00:00
+9            Australia      GDP      1323.42  2017-12-31T00:00:00         ...           1580.00  2019-09-30T00:00:00  1580.00  2019-12-31T00:00:00
 
 [10 rows x 15 columns]
 ```
