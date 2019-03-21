@@ -106,7 +106,7 @@
         });
       </script>
   </head>
-  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;,&quot;r&quot;,&quot;jsonnet&quot;,&quot;javascript&quot;,&quot;csharp&quot;,&quot;java&quot;,&quot;php&quot;]">
+  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;,&quot;r&quot;,&quot;javascript&quot;,&quot;csharp&quot;,&quot;java&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -118,8 +118,7 @@
 </a>        <div class="lang-selector">
               <a href="#" data-language-name="python">Python</a>             
               <a href="#" data-language-name="r">R</a>
-              <a href="#" data-language-name="jsonnet">jQuery</a>
-              <a href="#" data-language-name="javascript">NodeJS</a>
+              <a href="#" data-language-name="javascript">Javascript</a>
               <a href="#" data-language-name="csharp">C#</a>
               <a href="#" data-language-name="java">Java</a>
               <a href="#" data-language-name="php">PHP</a>
@@ -144,7 +143,7 @@
 <p>The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
 Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. 
 The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at <a target = '_blank' href="https://tradingeconomics.com/analytics/api.aspx">Trading Economics</a>.</p>
-
+<!--python black side-->
 <blockquote class="lang-specific python">
   <p>You can get Python from: <a target = '_blank' href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>   
     <br>
@@ -165,7 +164,7 @@ We support Excel 2010, 2013, 2016 (32bit and 64bit) only for Windows.
 <br>
 <p>After installing the Trading Economics Excel Add In click on TE tab and than click on login button and follow instructions.</p>
 </blockquote>
-
+<!--R black side-->
 <blockquote class="lang-specific r">
 <p>You can get R from the official website: <a target = '_blank' href="https://cran.r-project.org/">https://cran.r-project.org/</a>     
 Then you need to install the tradingeconomics package. At this moment our package is available to download from the <a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/R">GitHub</a> repository.    
@@ -200,6 +199,7 @@ See below how to install a package that’s sitting on GitHub.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">login</span><span class="p">()</span><span class="w">
 </span></code></pre>
+<!--python black side-->
 <blockquote class="lang-specific python">
 <p>To start using the Trading Economics Python package, open the python command line, and type:</p>
 </blockquote>
@@ -217,21 +217,7 @@ See below how to install a package that’s sitting on GitHub.</p>
 </code></pre>
 <p>Before proceeding select your language tab on the right. </p>
 
-<blockquote class="lang-specific jsonnet">
-<p>
-  <strong>Multiple Parameters</strong>
-   <br>
-
-    <br>      
-   Almost all of the Trading Economics WEB API methods support multiple parameters.  
-   <br>   
-   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
-   <br> 
-   Here is a practical example:
-   <br>
-   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
-</blockquote>
-
+<!--javascript black side-->
 <blockquote class="lang-specific javascript">
 <p>
   <strong>Multiple Parameters</strong>
@@ -246,7 +232,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <br>
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
-
+<!--c# black side-->
 <blockquote class="lang-specific csharp">
 <p>
   <strong>Multiple Parameters</strong>
@@ -261,7 +247,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <br>
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
-
+<!--java black side-->
 <blockquote class="lang-specific java">
 <p>
   <strong>Multiple Parameters</strong>
@@ -276,7 +262,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <br>
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
-
+<!--php black side-->
 <blockquote class="lang-specific php">
 <p>
   <strong>Multiple Parameters</strong>
@@ -291,7 +277,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <br>
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
-
+<!--Introduction white side-->
 <h3 id="data-types">Data Types</h3>
 
 <p>You can request data in several formats:<br></p>
@@ -392,7 +378,7 @@ Click on any method below for a sample. Please note the sample request is limite
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEIndicators<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"bankruptcies"</span>, <span class="s2">"Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate"</span>, B2<span class="o">)</span>
-<!--Node black side-->
+<!--javascript black side-->
 </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
@@ -415,15 +401,7 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>       
-<!--JQuery black side-->
-</code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/indicators?c=guest:guest'</span><span class="p">;</span>
-<span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-        <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
-        <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
-        <span class="nx">dataType</span><span class="p">:</span> <span class="s">'json'</span>
-<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="p">});</span>
+</code></pre>
 <!--C# black side-->
 </code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
@@ -636,7 +614,7 @@ For several countries and indicators</p>
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEHistorical<span class="o">(</span> <span class="s2">"andorra"</span>, <span class="s2">"gdp per capita"</span>, <span class="s2">"2010-01-01"</span>, <span class="s2">"2017-10-29"</span>, <span class="s2">"Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate"</span>, B2<span class="o">)</span>
-<!--Node black side-->
+<!--javascript black side-->
 </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
@@ -659,15 +637,8 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-<!--JQuery black side-->
-</code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/historical/country/{put country name here}/indicator/{put indicator name here}?c=guest:guest'</span><span class="p">;</span>
-<span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-        <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
-        <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
-        <span class="nx">dataType</span><span class="p">:</span> <span class="s">'json'</span>
-<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="p">});</span>
+</code></pre>
+
 <!--C# black side-->
 </code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
@@ -825,6 +796,8 @@ or you can specify a start date and end date<br>
 <pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="s1">'United States'</span><span class="w"> </span></span><span class="p">)</span>          
 </span></code></pre>
 
+  
+<!--credit rating white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -930,8 +903,9 @@ or you can specify a start date and end date<br>
 <br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getLatestUpdates</span><span class="p">(</span><span class="w"> </span><span class="s1">'2018-02-22'</span><span class="p">)</span>           
-</span></code></pre>  
-<!--Indicators latest updates white-->
+</span></code></pre> 
+
+ <!--Indicators latest updates white-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -1049,11 +1023,13 @@ or you can specify a start date and end date<br>
 <span class="mi">25</span>     <span class="mi">143324</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
 
 </code></pre>
+<!--Excel black side-->
 <blockquote class="lang-specific shell">
 <p>Click Calendar button on TE ribbon and then follow the instructions in the dialog box.    
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TECalendar<span class="o">(</span> <span class="s2">"germany"</span>, <span class="s2">"services pmi"</span>, <span class="s2">"2017-03-24"</span>, <span class="s2">"2017-06-24"</span>, <span class="s2">"Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate"</span>, B2<span class="o">)</span>
+<!--javascript black side-->
 </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
@@ -1076,14 +1052,8 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>
-</code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/calendar?c=guest:guest'</span><span class="p">;</span>
-<span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-        <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
-        <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
-        <span class="nx">dataType</span><span class="p">:</span> <span class="s">'json'</span>
-<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="p">});</span>
+</code></pre>
+<!--c# black side-->
 </code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
@@ -1100,6 +1070,7 @@ Or type in any empty cell:</p>
         <span class="c1">//Your custom response parser code</span>
     <span class="p">}</span>
 <span class="p">}</span>
+<!--java black side-->
 </code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//calendar"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
@@ -1126,7 +1097,7 @@ Or type in any empty cell:</p>
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
 
-
+<!--calendar white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -1253,7 +1224,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </tbody></table>
 
 <h2 id="streaming">Streaming</h2>
-
+<!--streaming calenda python black side-->
 <blockquote class="lang-specific python">
 <p>
  Copy this code and execute
@@ -1270,6 +1241,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'calendar'</span><span class="p">)</span>
 <span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
 </code></pre>
+<!--streaming calendar javascript black side-->
 <blockquote class="lang-specific javascript">
 <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
     Step 1 - Clone repository</p>
@@ -1304,6 +1276,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific javascript">
 <p><a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">Check here for the complete sample code.</a></p>
 </blockquote>
+<!--streaming calendar c# black side-->
 <blockquote class="lang-specific csharp">
   <p>Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package</p>  
   </blockquote>
@@ -1325,7 +1298,7 @@ Please note the sample request is limited in scope to a few countries and indica
   <span class="p">  }</span>
   <span class="p">}</span>
   </code></pre>
-
+<!--streaming calendar white side-->
 <p>The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. </p>
 
 <p><strong>Response fields for the calendar subscription:</strong></p>
@@ -1436,11 +1409,13 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="mi">2</span>  <span class="n">United</span> <span class="n">States</span>         <span class="n">GDP</span>         <span class="o">...</span>           <span class="mf">20220.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 <span class="mi">3</span>  <span class="n">United</span> <span class="n">States</span>  <span class="n">Population</span>         <span class="o">...</span>             <span class="mf">328.49</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 </code></pre>
+<!--Excel black side-->
 <blockquote class="lang-specific shell">
 <p>Click Forecasts button on TE ribbon and then follow the instructions in the dialog box.    
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEForecasts<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"gdp"</span>, <span class="s2">"Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date"</span>, B2<span class="o">)</span>
+<!--javascript black side-->
 </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
@@ -1463,14 +1438,8 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/forecast/country/{put country name here}?c=guest:guest'</span><span class="p">;</span>
-<span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-        <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
-        <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
-        <span class="nx">dataType</span><span class="p">:</span> <span class="s">'json'</span>
-<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="p">});</span>
+
+<!--c# black side-->
 </code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
@@ -1487,12 +1456,14 @@ Or type in any empty cell:</p>
         <span class="c1">//Your custom response parser code</span>
     <span class="p">}</span>
 <span class="p">}</span>
+<!--java black side-->
 </code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//forecast/country/{put country name here}"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+<!--php black side-->
 </code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -1512,7 +1483,7 @@ Or type in any empty cell:</p>
 <p>Here you can get forecast values by country, by indicator, by country and indicator.
 Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
-
+<!--forecasts white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -1619,7 +1590,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <td style="text-align: left">Unique symbol used by TradingEconomics</td>
 </tr>
 </tbody></table>
-
+<!--markets white side-->
 <h1 id="markets">Markets</h1>
 
 <p>Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
@@ -1628,7 +1599,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
 
 <h2 id="snapshots">Snapshots</h2>
-
+<!--R black side-->
 <blockquote class="lang-specific r">
 <p>To get information about commodities in data frame format type:</p>
 </blockquote>   
@@ -1638,6 +1609,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific python">
 <p>To get stock market index data:</p>
 </blockquote>
+<!--python black side-->
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
 <span class="n">Output</span><span class="p">:</span>
@@ -1669,11 +1641,13 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="p">{</span><span class="s">'Symbol'</span><span class="p">:</span> <span class="s">'INDU:IND'</span><span class="p">,</span> <span class="s">'Ticker'</span><span class="p">:</span> <span class="s">'INDU'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">:</span> <span class="s">'Dow Jones'</span><span class="p">,</span> <span class="s">'Type'</span><span class="p">:</span> <span class="s">'index'</span><span class="p">,</span> <span class="o">...</span> <span class="s">'LastUpdate'</span><span class="p">:</span> <span class="s">'2018-06-28T11:35:00'</span><span class="p">}]</span>
 
 </code></pre>
+<!--Excel black side-->
 <blockquote class="lang-specific shell">
 <p>Click Markets button on TE ribbon and then follow the instructions in the dialog box.    
 Or type in any empty cell:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="o">=</span>TEMarkets<span class="o">(</span> <span class="s2">"currency"</span>, <span class="s2">"Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear"</span>, B2<span class="o">)</span>
+<!--javascript black side-->
 </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
@@ -1696,14 +1670,8 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre><pre class="highlight jsonnet"><code><span class="nx">var</span> <span class="nx">url</span> <span class="p">=</span> <span class="s">'https://api.tradingeconomics.com/markets/commodities?c=guest:guest'</span><span class="p">;</span>
-<span class="k">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-        <span class="nx">url</span><span class="p">:</span> <span class="nx">url</span><span class="p">,</span>
-        <span class="nb">type</span><span class="p">:</span> <span class="s">"GET"</span><span class="p">,</span>
-        <span class="nx">dataType</span><span class="p">:</span> <span class="s">'json'</span>
-<span class="p">}).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nb">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-<span class="p">});</span>
+
+<!--c# black side-->
 </code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
@@ -1720,12 +1688,14 @@ Or type in any empty cell:</p>
         <span class="c1">//Your custom response parser code</span>
     <span class="p">}</span>
 <span class="p">}</span>
+<!--java black side-->
 </code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//markets/commodities"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+<!--php black side-->
 </code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -1749,7 +1719,7 @@ Or type in any empty cell:</p>
 <p>marketsField can be: 'commodities', 'currency', 'index', 'bond'.</p>
 <br>
 </blockquote>  
-
+<!--markets white side-->
 <h3 id="methods">Methods</h3>
 
 <p><strong>Snapshot of latest quotes</strong></p>
@@ -1845,7 +1815,7 @@ Or type in any empty cell:</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getMarketsList</span><span class="p">(<span class="nf">marketsField</span><span class="o">=</span><span class="s1">'peers'</span><span class="p">,</span><span class="s1">'aapl:us'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-
+<!--markets white side-->
 <p><span class="methods"></p>
 
 <ul>
@@ -1865,7 +1835,7 @@ Or type in any empty cell:</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span><span class="s1">'markets'</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-
+<!--markets white side-->
 <p><span class="methods"></p>
 
 <ul>
@@ -2085,7 +2055,7 @@ Or type in any empty cell:</p>
 </ul>
 
 <p></span> </p>
-
+<!--markets white side-->
 <h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
@@ -2172,7 +2142,7 @@ Or type in any empty cell:</p>
 </ul>
 
 <p></span> </p>
-
+<!--intraday white side-->
 <h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
@@ -2208,7 +2178,7 @@ Or type in any empty cell:</p>
 </tbody></table>
 
 <h2 id="streaming">Streaming</h2>
-
+<!--streaming markets python black side-->
 <blockquote class="lang-specific python">
 <p>
  Copy this code and execute
@@ -2225,6 +2195,7 @@ Or type in any empty cell:</p>
 <span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD:CUR'</span><span class="p">)</span>
 <span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
 </code></pre>
+<!--streaming markets javascript black side-->
 <blockquote class="lang-specific javascript">
 <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
     Step 1 - Clone repository</p>
@@ -2259,6 +2230,7 @@ Or type in any empty cell:</p>
 <blockquote class="lang-specific javascript">
 <p><a target = '_blank' href="https://github.com/ieconomics/open-api/tree/master/stream/nodejs">Check here for the complete sample code.</a></p>
 </blockquote>
+<!--streaming markets c# black side-->
 <blockquote class="lang-specific csharp">
 <p>Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package</p>  
 </blockquote>
@@ -2280,6 +2252,7 @@ Or type in any empty cell:</p>
 <span class="p">  }</span>
 <span class="p">}</span>
 </code></pre>
+<!--streaming markets white side-->
 <p><strong>Response fields for the markets subscription:</strong></p>
 
 <table><thead>
@@ -2340,7 +2313,7 @@ Or type in any empty cell:</p>
 
 
 <h2 id="earnings">Earnings</h2>
-<!--R Markets Search black side-->
+<!--R earnings black side-->
 <blockquote class="lang-specific r">
 <p>To get earnings by country.</p>
 </blockquote> 
@@ -2362,7 +2335,7 @@ Or type in any empty cell:</p>
 <pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">type</span><span class="o">=</span><span class="s1">'dividends'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <h3 id="earnings-ipo-dividends">Earnings, IPO, Dividends</h3>
-
+<!--python earnings black side-->
 <blockquote class="lang-specific python">
 <p>To get default earnings calendar:</p>
 </blockquote>  
@@ -2402,6 +2375,7 @@ Or type in any empty cell:</p>
 <span class="mi">3</span>      <span class="n">CUZ</span><span class="p">:</span><span class="n">US</span>                    <span class="n">Cousins</span> <span class="n">Properties</span>   <span class="mf">0.065</span>  <span class="o">...</span>
 
 </code></pre>
+<!--earnings white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -2537,7 +2511,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(<span class="nf">limit</span><span class="o">=</span><span class="s1">'2'</span><span class="p">,</span><span class="n">start</span><span class="o"> =</span><span class="s1"> '1'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <h3 id="methods">Methods</h3>
-
+<!--latest news white side-->
 <p><span class="methods"></p>
 
 <ul>
@@ -2660,7 +2634,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getLatestArticles</span><span class="p">(<span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'portugal'</span><span class="p">),</span><span class="s1">'inflation rate'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-
+<!--latest articles white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -2753,6 +2727,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="mi">2</span>       <span class="n">Demographics</span>     <span class="n">...</span>     <span class="mi">2017-10-16</span><span class="n">T</span><span class="mi">09:03:02.72</span>
 <span>...</span>      
 </code></pre>
+<!--WB white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -2881,7 +2856,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
-
+<!--WB white side-->
 <p><span class="methods"></p>
 
 <ul>
@@ -2973,7 +2948,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">2</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.37488</span>        
 <span class="n">...</span>
 </code></pre>
-
+<!--WB historical white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -3023,6 +2998,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">2</span>     <span class="mi">0102</span>   <span class="n">...</span>                        <span class="n">Bovine animals, live</span>        
 <span class="n">...</span>
 </code></pre>
+<!--comtrade white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -3087,6 +3063,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">25</span>    <span class="n">CHNPRT41091</span>   <span class="n">...</span>      <span class="n"> China Imports from Portugal of Patent and pate...</span>        
 <span class="n">...</span>
 </code></pre>
+<!--comtrade white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -3180,7 +3157,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">2</span>       <span class="n">PRTESP24031</span>       <span class="mi">2000-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n">54310.0</span>        
 <span class="n">...</span>
 </code></pre>
-
+<!--comtrade historical white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -3231,7 +3208,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
-
+<!--federal reserve white side-->
 <p><span class="methods">  </p>
 
 <ul>
@@ -3295,7 +3272,7 @@ Because there are too many results, this method has pagination. Each page is lim
 </code></pre>
 
 <p>Snapshots can be accessed through symbol, url, country, state or county. All have pagination.  </p>
-
+<!--fed reserve snapshots white side-->
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods">  </p>
@@ -3403,7 +3380,7 @@ or<br>
 <span class="n">...</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
-
+<!--fed reserve historical white side-->
 <p><span class="methods"> </p>
 
 <ul>
@@ -3449,10 +3426,7 @@ or<br>
                 <a href="#" data-language-name="python">Python</a>
               </div>
               <div>
-                <a href="#" data-language-name="javascript">NodeJS</a>
-              </div>
-                        <div>
-                <a href="#" data-language-name="jsonnet">jQuery</a>
+                <a href="#" data-language-name="javascript">Javascript</a>
               </div>
               <div>
                 <a href="#" data-language-name="csharp">C#</a>
