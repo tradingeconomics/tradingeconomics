@@ -7,7 +7,7 @@ namespace webSocket
     {
         static void Main(string[] args)
         {
-            //only single market topic "EURUSD:CUR" can subscribe using guest:guest
+            //only a single market topic "EURUSD:CUR" can subscribe using guest:guest
             //For other markets or calendar topic "key:secret" is required
             using (var ws = new WebSocket("ws://stream.tradingeconomics.com/?client=guest:guest"))
             {
