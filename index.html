@@ -1282,7 +1282,10 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote>
 <!--streaming calendar c# black side-->
 <blockquote class="lang-specific csharp">
-  <p>Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package</p>  
+  <p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest<br>
+    For other markets or calendar topic "key:secret" is required.<br><br>
+    Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package
+  </p>  
   </blockquote>
   </code></pre><pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
   <span class="p">{</span>
@@ -1302,6 +1305,9 @@ Please note the sample request is limited in scope to a few countries and indica
   <span class="p">  }</span>
   <span class="p">}</span>
   </code></pre>
+  <blockquote class="lang-specific csharp">
+      <p>Press ctrl + f5 to run.</p>  
+      </blockquote>
 <!--streaming calendar white side-->
 <p>The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. </p>
 
@@ -2236,8 +2242,11 @@ Or type in any empty cell:</p>
 </blockquote>
 <!--streaming markets c# black side-->
 <blockquote class="lang-specific csharp">
-<p>Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package</p>  
-</blockquote>
+    <p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest<br>
+      For other markets or calendar topic "key:secret" is required.<br><br>
+      Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package
+    </p>  
+    </blockquote>
 </code></pre><pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
 <span class="p">{</span>
 <span class="k">  using</span><span class="p">(</span><span class="k">var</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">WebSocket</span><span class="p">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="p">))</span>
@@ -2256,6 +2265,9 @@ Or type in any empty cell:</p>
 <span class="p">  }</span>
 <span class="p">}</span>
 </code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Press ctrl + f5 to run.</p>  
+    </blockquote>
 <!--streaming markets white side-->
 <p><strong>Response fields for the markets subscription:</strong></p>
 
