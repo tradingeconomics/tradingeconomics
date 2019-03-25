@@ -16,7 +16,7 @@ namespace CSharpExamples
         static void Main(string[] args)
         {
             // set the client key
-            _clientKey = ConfigurationManager.AppSettings["clientkey"]; ;
+            _clientKey = ConfigurationManager.AppSettings["clientkey"];
 
             // get  calendar events
             Console.WriteLine("About to get calendar events");
