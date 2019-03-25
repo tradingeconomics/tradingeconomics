@@ -203,7 +203,7 @@ strong {
 	}
 
 	#burger {
-		display: inline-block;
+		display: block;
 		position: fixed;
 		width: 28px;
 		margin-top: 68px;
