@@ -18,8 +18,6 @@ Using a text file editor, open the file _CSharpExamples.csproj_, find the tag &l
 
 ## API Key
 
-To access the information, a common test key **guest:guest** has been applied. To use your own key, you must go to the _App.config_ file and look for the appSettings value for the key _clientkey_
+To access the information, a common test key **guest:guest** has been applied. To use your own key, you must type it when asked in the begining of the program execution.
 
-Search for: `<add key="clientkey" value="guest:guest"/>`
-
-Changing the value **guest:guest** with your current API Key will make every example run under your subscription key.
+You still can just press ENTER, without providing a API KEY. In this case, the aplication will make use of the default API Key **guest:guest** that is used as an example key. Keep in mind that the example API Key is limited to enable the user to have a taste on how the Trading Economics API works; therefore, this key comes with limitations and should not be used in a production environment.
