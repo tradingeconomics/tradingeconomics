@@ -7,37 +7,45 @@
 </head>
 <body>
     <div id="mainMenu">
-        <a id="downloadLink"><img id="TElogo" src="images/TElogo.png"></a>
+        <a href="https://tradingeconomics.com"><img id="TElogo" src="images/TElogo.png"></a>
         <div>
-            <ul>
-                <li id="installationLi">Installation</li>
-                <li id="loginLi">Login</li>
-                <li id="methodsLi">Methods</li>
+            <nav>
                 <ul>
-                    <li id="indicatorsLi">Indicators</li>
-                    <li id="historicalLi">Historical</li>
-                    <li id="calendarLi">Calendar</li>
-                    <li id="marketsLi">Markets</li>
-                    <li id="forecastsLi">Forecasts</li>
+                    <li id="installationLi">Installation</li>
+                    <li id="loginLi">Login</li>
+                    <li id="methodsLi">Methods</li>
+                    <ul>
+                        <li id="indicatorsLi">Indicators</li>
+                        <li id="historicalLi">Historical</li>
+                        <li id="calendarLi">Calendar</li>
+                        <li id="marketsLi">Markets</li>
+                        <li id="forecastsLi">Forecasts</li>
+                    </ul>
+                    <li id="refreshLi">Refresh</li>
+                    <li id="searchLi">Search</li>
                 </ul>
-                <li id="refreshLi">Refresh</li>
-                <li id="searchLi">Search</li>
-            </ul>
+            </nav>
         </div>
+        <span><a href="https://docs.tradingeconomics.com">TE API<br>Documentation</a></span>
+        <span><a href="https://docs.tradingeconomics.com/tableau">Tableau</a></span>
         <span><a href="https://tradingeconomics.com/contact.aspx?subject=excel%20add-in">Support</a></span>
     </div>
+    <img id="burger" src="images/burger.png" alt="">
     <div id="contentContainer">
         <div id="mobileHeader">
             <a href="https://tradingeconomics.com"><img id="TElogoMobile" src="images/TElogo.png"></a>
-            <span><a href="https://tradingeconomics.com/contact.aspx?subject=excel%20add-in">Support</a></span>
         </div>
-        <h1 id="installation">Trading Economics Excel Add-In Documentation</h1>
+        <h1>Trading Economics Excel Add-In Documentation</h1>
+        <section>
+            <p>
+                The Trading Economics Excel Add-In connects Excel to our API which provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates.
+            </p>
+        </section>
+        <hr id="installation">
         <section>
             <h2>Installation</h2>
             <p>
-                The Trading Economics Excel Add-In connects Excel to our API which provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates.
-                <br><br>
-                The installer can be downloaded here: <a href="https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Download TE Excel Add-In</a>.<br>
+                The Trading Economics Excel Add-In installer can be downloaded here: <a id="downloadLink" href="https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Download TE Excel Add-In</a>.<br>
                 <span>Requirements:</span> Microsoft Windows with Excel 2010, 2013 or 2016.
                 <br>
                 Download the installer, launch it and follow the instructions.
@@ -48,7 +56,7 @@
             <h2>Login</h2>
             <p>
                 After installing the Add-In, open Excel, click on TE tab, then click on the login button and insert your Excel key.<br> 
-                Please <a href="https://billing.tradingeconomics.com/plans.aspx?source=excel-docs">subscribe</a> to one of our plans if you do not have one.
+                Please <a href="https://billing.tradingeconomics.com/plans.aspx?source=excel-docs">subscribe</a> to one of our plans if you do not have one. You can also use the key guest:guest to test the add-in using a limited amount of data and indicators.
             </p>
             <img src="images/login.png">
         </section>
@@ -56,7 +64,8 @@
         <section>
             <h2>Methods</h2>
             <p>There are five different methods available to get data from TE API. These are Indicators, Historical, Calendar, Markets and Forecasts.</p>
-            <section id="indicators">
+            <hr id="indicators">
+            <section>
                 <h3>Indicators</h3>
                 <p>The Indicators method gets the latest datapoint for one or more countries and indicators. Click on the Indicators button.</p>
                 <img src="images/img2.png">
@@ -69,8 +78,8 @@
                 <p>The result:</p>
                 <img src="images/indicators3.png">
             </section>
-            <hr>
-            <section id="historical">
+            <hr id="historical">
+            <section>
                 <h3>Historical</h3>
                 <p>The Historical method gets data for one or more countries and indicators for a period of time. You can choose a time interval or you can get all the data available. Click on the Historical button.</p>
                 <img src="images/img6.png">
@@ -83,8 +92,8 @@
                 <p>The result:</p>
                 <img src="images/img9.png">
             </section>
-            <hr>
-            <section id="calendar">
+            <hr id="calendar">
+            <section>
                 <h3>Calendar</h3>
                 <p>The Calendar method gets the date when a certain indicator for a specific country is expected to be released. You can choose a time interval. Click on the Calendar button.</p>
                 <img src="images/img10.png">
@@ -97,16 +106,16 @@
                 <p>The result:</p>
                 <img src="images/img13.png">
             </section>
-            <hr>
-            <section id="markets">
+            <hr id="markets">
+            <section>
                 <h3>Markets</h3>
                 <p>The Markets method gets the latest data values for all markets indicators from either currency, index, commodities and bonds. Click on the Markets button and choose one of these options.</p>
                 <img src="images/img14.png">
                 <p>The result:</p>
                 <img src="images/img15.png">
             </section>
-            <hr>
-            <section id="forecasts">
+            <hr id="forecasts">
+            <section>
                 <h3>Forecasts</h3>
                 <p>The Forecasts gets value predictions for the selected indicators.</p>
                 <img src="images/img16.png">

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Trading Economics - Tableau</title>
+    <link rel="stylesheet" href="tableau.css">
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.1.min.js"></script>
+</head>
+<body>
+    <div id="mainMenu">
+        <a href="https://tradingeconomics.com"><img id="TElogo" src="images/TElogo.png"></a>
+        <div>
+            <nav>
+                <ul>
+                    <li id="installationLi">Installation</li>
+                    <li id="connectionLi">Connection</li>
+                    <li id="methodsLi">Methods</li>
+                    <ul>
+                        <li id="indicatorsLi">Indicators</li>
+                        <li id="calendarLi">Calendar</li>
+                        <li id="forecastLi">Forecast</li>
+                        <li id="marketsLi">Markets</li>
+                        <li id="earningsLi">Earnings</li>
+                    </ul>
+                    <li id="infoInputsLi">Info Inputs</li>
+                    <li id="apiKeyLi">API Key</li>
+                </ul>
+            </nav>
+        </div>
+        <span><a href="https://docs.tradingeconomics.com">TE API<br>Documentation</a></span>
+        <span><a href="http://docs.tradingeconomics.com/excel">Excel</a></span>
+        <span><a href="https://tradingeconomics.com/contact.aspx?subject=tableau">Support</a></span>
+    </div>
+    <img id="burger" src="images/burger.png" alt="">
+    <div id="contentContainer">
+        <div id="mobileHeader">
+            <a href="https://tradingeconomics.com"><img id="TElogoMobile" src="images/TElogo.png"></a>
+        </div>
+        <h1>Trading Economics Tableau API Connector</h1>
+        <section>
+            <p>
+                The Trading Economics Tableau Connector links the Tableau software to our API which provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates.
+            </p>
+        </section>
+        <hr id="installation">
+        <section>
+            <h2>Installation</h2>
+            <p>
+                If you do not have Tableau yet, it is available here: <a href="https://public.tableau.com/en-us/s/download">Download Tableau</a>.<br>
+                Download the installer, launch it and follow the instructions.
+            </p>
+        </section>
+        <hr id="connection">
+        <section>
+            <h2>Connection</h2>
+            <p>
+                Open Tableau software and find the <strong>Web Data Connector</strong> option. Click it, a new window will appear.
+            </p>
+            <img src="images/connection1.PNG" alt=""><br>
+            <img src="images/connection2.PNG" alt="">
+            <p>
+                In the address bar of this new window paste:<br>
+                <strong>https://api.tradingeconomics.com/js/tableau.html</strong><br>
+                Press Enter, TE Tableau API Connector is ready to be used.
+            </p>
+            <img src="images/connection3.PNG" alt="">
+        </section>
+        <hr id="methods">
+        <section>
+            <h2>Methods</h2>
+            <p>
+                There are six main methods in which you can get data from TE API, these beeing Indicators, Calendar, Forecast, Markets, Earnings and News.
+            </p>
+            <img src="images/allMethods.PNG" alt="">
+            <hr id="indicators">
+            <section>
+                <h2>Indicators</h2>
+                <p>
+                    Indicators has the sub-categories All Indicators, Historical Data, Credit Rating and Updates.
+                </p>
+                <img src="images/indicators1.PNG" alt="">
+                <p>
+                    In All Indicators you can:
+                </p>
+                <img src="images/indicators2.PNG" alt="">
+                <p>
+                    In Historical Data you can:
+                </p>
+                <img src="images/indicators3.PNG" alt="">
+                <p>
+                    In Credit Rating you can:
+                </p>
+                <img src="images/indicators4.PNG" alt="">
+                <p>
+                    In Updates you can:
+                </p>
+                <img src="images/indicators5.PNG" alt="">
+            </section>
+            <hr id="calendar">
+            <section>
+                <h2>Calendar</h2>
+                <p>
+                    In Calendar you can:
+                </p>
+                <img src="images/calendar.PNG" alt="">
+            </section>
+            <hr id="forecast">
+            <section>
+                <h2>Forecast</h2>
+                <p>
+                    In Forecast you can:
+                </p>
+                <img src="images/forecast.PNG" alt="">
+            </section>
+            <hr id="markets">
+            <section>
+                <h2>Markets</h2>
+                <p>
+                    Markets has the sub-categories Spanshots, Historical Data, Intraday Data and Market Lists.
+                </p>
+                <img src="images/markets1.PNG" alt="">
+                <p>
+                    In Spanshots you can:
+                </p>
+                <img src="images/markets2.PNG" alt="">
+                <p>
+                    In Historical Data you can:
+                </p>
+                <img src="images/markets3.PNG" alt="">
+                <p>
+                    In Intraday Data you can:
+                </p>
+                <img src="images/markets4.PNG" alt="">
+                <p>
+                    In Market Lists you can:
+                </p>
+                <img src="images/markets5.PNG" alt="">
+            </section>
+            <hr id="earnings">
+            <section>
+                <h2>Earnings</h2>
+                <p>
+                    In Earnings you can:
+                </p>
+                <img src="images/earnings.PNG" alt="">
+            </section>
+            <hr id="news">
+            <section>
+                <h2>News</h2>
+                <p>
+                    News has the sub-categories Latest News and Latest Articles.
+                </p>
+                <img src="images/news1.PNG" alt="">
+                <p>
+                    In Latest News you can:
+                </p>
+                <img src="images/news2.PNG" alt="">
+                <p>
+                    In Latest Articles you can:
+                </p>
+                <img src="images/news3.PNG" alt="">
+            </section>
+        </section>
+        <hr id="infoInputs">
+        <section>
+            <h2>Info Inputs</h2>
+            <p>
+                After choosing a way of getting data, depending on the option, many different input fields are displayed. These can be Countries, Indicators, Date, Symbols and many others.<br>
+                Please pick only one indicator/country/symbol if Tableau fails to display multiple ones.
+            </p>
+            <img src="images/infoInputs.PNG" alt="">
+        </section>
+        <hr id="apiKey">
+        <section id="lastSection">
+            <h2>API Key</h2>
+            <p>
+                Before submitting your data request insert your API Key.
+                Please <a href="https://billing.tradingeconomics.com/plans.aspx?source=excel-docs">subscribe</a> to one of our plans if you do not have one.<br>
+                You can also use the key <strong>guest:guest</strong> to test TE Tableau Connector using a limited amount of data and indicators.
+            </p>
+            <img src="images/apiKey.PNG" alt="">
+            <p>
+                After all is set click on the Submit button.<br>
+                Your data will be displayed in Tableau Software.
+            </p>
+        </section>
+    </div>
+    <script src="tableau.js" type="text/javascript"></script>
+</body>
