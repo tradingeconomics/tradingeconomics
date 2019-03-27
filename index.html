@@ -376,55 +376,48 @@ Click on any method below for a sample. Please note the sample request is limite
 <span class="p">}</span>
 
 </code></pre>
-<!--Excel black side-->
-<blockquote class="lang-specific shell">
-<p>Click Indicators button on TE ribbon and then follow the instructions in the dialog box.    
-Or type in any empty cell:</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="o">=</span>TEIndicators<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"bankruptcies"</span>, <span class="s2">"Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate"</span>, B2<span class="o">)</span>
-</code></pre>
   <!--javascript black side-->
-<blockquote class="lang-specific javscript">
-    <p>To get a list of all indicators. <br>Remember, without a client key only a sample of data will be provided.</p>
-</blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/indicators'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>       
-</code></pre>
-<blockquote class="lang-specific javscript">
-    <p>To get a list of indicators by country.</p>
-</blockquote>
-</code></pre><pre class="highlight javascript"><code>
-<span class="na">path</span><span class="p">:</span> <span class="s1">'/indicators</span><span class="s1">/country</span><span class="s1">/{put country name here}'</span><span class="p">,</span>
-</code></pre>
-<blockquote class="lang-specific javscript">
-    <p>To get a list of all countries with a specific indicator.</p>
-</blockquote>
-</code></pre><pre class="highlight javascript"><code>
-<span class="na">path</span><span class="p">:</span> <span class="s1">'/country</span><span class="s1">/all</span><span class="s1">/{put indicator name here}'</span><span class="p">,</span>
-</code></pre>
+  <blockquote class="lang-specific javascript">
+      <p>To get a list of all indicators. <br>Remember, without a client key only a sample of data will be provided.</p>
+  </blockquote>
+  <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
+      <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
+  <span class="p">};</span>
+  <span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
+      <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+      <span class="na">path</span><span class="p">:</span> <span class="s1">'/indicators'</span><span class="p">,</span>
+      <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+  <span class="p">};</span>
+  <span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
+  <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+  <span class="p">});</span>
+  <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// your code here if you want to use the results !</span>
+  <span class="p">});</span>
+  <span class="p">}</span>
+  
+  <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>       
+  </code></pre>
+  <blockquote class="lang-specific javascript">
+      <p>To get a list of indicators by country.</p>
+  </blockquote>
+  </code></pre><pre class="highlight javascript"><code>
+  <span class="na">path</span><span class="p">:</span> <span class="s1">'/indicators</span><span class="s1">/country</span><span class="s1">/{put country name here}'</span><span class="p">,</span>
+  </code></pre>
+  <blockquote class="lang-specific javascript">
+      <p>To get a list of all countries with a specific indicator.</p>
+  </blockquote>
+  </code></pre><pre class="highlight javascript"><code>
+  <span class="na">path</span><span class="p">:</span> <span class="s1">'/country</span><span class="s1">/all</span><span class="s1">/{put indicator name here}'</span><span class="p">,</span>
+  </code></pre>
 <!--C# black side-->
-</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
     <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
@@ -442,7 +435,7 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 </code></pre>
 <!--Java black side-->
-</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//indicators"</span><span class="o">;</span>
+<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//indicators"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
@@ -450,7 +443,7 @@ Or type in any empty cell:</p>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
 </code></pre>
 <!--PHP black side-->
-</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
@@ -466,6 +459,13 @@ Or type in any empty cell:</p>
 <span class="c1">//parse your data to satusfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
+<!--Excel black side-->
+<blockquote class="lang-specific shell">
+    <p>Click Indicators button on TE ribbon and then follow the instructions in the dialog box.    
+    Or type in any empty cell:</p>
+</blockquote>
+    <pre class="highlight shell"><code><span class="o">=</span>TEIndicators<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"bankruptcies"</span>, <span class="s2">"Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate"</span>, B2<span class="o">)</span>
+    </code></pre>
 <!--Indicators white-->
 <h3 id="methods">Methods</h3>
 
@@ -639,10 +639,10 @@ Or type in any empty cell:</p>
 <pre class="highlight shell"><code><span class="o">=</span>TEHistorical<span class="o">(</span> <span class="s2">"andorra"</span>, <span class="s2">"gdp per capita"</span>, <span class="s2">"2010-01-01"</span>, <span class="s2">"2017-10-29"</span>, <span class="s2">"Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate"</span>, B2<span class="o">)</span>
 </code></pre>
   <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>To get a list of Historical data for specific country and indicator. <br>Remember, without a client key only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -666,20 +666,20 @@ Or type in any empty cell:</p>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>You can specify a start date, or even start and end date (date format is yyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/historical/country/{put country name here}/indicator/{put indicator name here}/{put start date here}/{put end date here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>You can specify a symbol, and a start date (date format is yyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/historical/ticker/{put symbol name here}/{put start date here}'</span><span class="p">,</span>
 </code></pre>
 <!--C# black side-->
-</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
     <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
@@ -697,7 +697,7 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 </code></pre>
 <!--Java black side-->
-</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}"</span><span class="o">;</span>
+<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
@@ -705,7 +705,7 @@ Or type in any empty cell:</p>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
 </code></pre>
 <!--PHP black side-->
-</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
@@ -837,10 +837,10 @@ or you can specify a start date and end date<br>
 <pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="s1">'United States'</span><span class="w"> </span></span><span class="p">)</span>          
 </span></code></pre>
   <!--javascript black side-->
-  <blockquote class="lang-specific javscript">
+  <blockquote class="lang-specific javascript">
       <p>To get credit rating for specific country. <br>Remember, without a client key only a sample of data will be provided.</p>
   </blockquote>
-  </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+  <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
       <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
       <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -864,7 +864,7 @@ or you can specify a start date and end date<br>
   
   <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
   </code></pre>
-  <blockquote class="lang-specific javscript">
+  <blockquote class="lang-specific javascript">
       <p>To get historical ratings.</p>
   </blockquote>
   </code></pre><pre class="highlight javascript"><code>
@@ -970,19 +970,19 @@ or you can specify a start date and end date<br>
   <span class="mi">4</span>         <span class="n">MOZAMBIQUECONSPE</span>     <span class="mi">21-03-2014</span><span class="n">T</span><span class="mi">15:16:00</span>          
   <span class="mi">5</span>         <span class="n">MOZAMBIQUEGOVSPE</span>     <span class="mi">15-10-2013</span><span class="n">T</span><span class="mi">15:17:00</span>         
       
-</span></code></pre> 
+</code></pre> 
 <!--R Latest updates black side-->
 <blockquote class="lang-specific r">
 <p>To get the latest updates by date. <br> with no specific date, a list of the latest updates will be provided.</p>
 <br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getLatestUpdates</span><span class="p">(</span><span class="w"> </span><span class="s1">'2018-02-22'</span><span class="p">)</span>           
-</span></code></pre> 
+</code></pre> 
   <!--javascript black side-->
-  <blockquote class="lang-specific javscript">
+  <blockquote class="lang-specific javascript">
       <p>To get the latest updates. <br>Remember, without a client key only a sample of data will be provided.</p>
   </blockquote>
-  </code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+  <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
       <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
       <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -1006,7 +1006,7 @@ or you can specify a start date and end date<br>
   
   <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
   </code></pre>
-  <blockquote class="lang-specific javscript">
+  <blockquote class="lang-specific javascript">
       <p>To get updates by a specific date (date format is yyyy-mm-dd).</p>
   </blockquote>
   </code></pre><pre class="highlight javascript"><code>
@@ -1138,10 +1138,10 @@ Or type in any empty cell:</p>
 <pre class="highlight shell"><code><span class="o">=</span>TECalendar<span class="o">(</span> <span class="s2">"germany"</span>, <span class="s2">"services pmi"</span>, <span class="s2">"2017-03-24"</span>, <span class="s2">"2017-06-24"</span>, <span class="s2">"Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate"</span>, B2<span class="o">)</span>
 </code></pre>
   <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>To get calendar events. <br>Remember, without a client key only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -1165,41 +1165,41 @@ Or type in any empty cell:</p>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>To filter calendar events by a date (date format is yyyy-mm-dd).</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/country/All/{put start date here}/{put end date here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>To get calendar events by country, or by country and date (date format is yyyy-mm-dd).</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/country/{put country or countries name here}'</span><span class="p">,</span>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/country/{put country or countries name here}/{put start date here}/{put end date here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>To get calendar events by indicator, or by indicator and date (date format is yyyy-mm-dd).</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/indicator/{put indicator or indicators name here}/{put start date here}/{put end date here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>To get calendar events by indicator, or by indicator and date (date format is yyyy-mm-dd).</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/indicator/{put indicator or indicators name here}/{put start date here}/{put end date here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Filter calendar events by calendar ID.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/calendarid/{put calendar ID here}'</span><span class="p">,</span>
 </code></pre>
 <!--c# black side-->
-</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
     <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
@@ -1217,7 +1217,7 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 </code></pre> 
 <!--java black side-->
-</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//calendar"</span><span class="o">;</span>
+<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//calendar"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
@@ -1429,7 +1429,7 @@ Please note the sample request is limited in scope to a few countries and indica
     Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package
   </p>  
   </blockquote>
-  </code></pre><pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
+  <pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
   <span class="p">{</span>
   <span class="k">  using</span><span class="p">(</span><span class="k">var</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">WebSocket</span><span class="p">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="p">))</span>
   <span class="p">  {</span>  
@@ -1569,10 +1569,10 @@ Or type in any empty cell:</p>
 <pre class="highlight shell"><code><span class="o">=</span>TEForecasts<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"gdp"</span>, <span class="s2">"Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date"</span>, B2<span class="o">)</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get forecasts by country or countries. To get several countries, please separate them by ' , '. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -1596,20 +1596,20 @@ Or type in any empty cell:</p>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get forecasts by indicator or indicators. To get several indicators, please separate them by ' , '.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/forecast/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get forecasts by country and indicator.To get several countries and indicators, please separate them by ' , '.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/forecast/country/{put country or countries name here}/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
 </code></pre>
 <!--c# black side-->
-</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
     <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
@@ -1627,7 +1627,7 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 </code></pre> 
 <!--java black side-->
-</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//forecast/country/{put country name here}"</span><span class="o">;</span>
+<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//forecast/country/{put country name here}"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
@@ -1635,7 +1635,7 @@ Or type in any empty cell:</p>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
 </code></pre> 
 <!--php black side-->
-</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
@@ -1820,10 +1820,10 @@ Or type in any empty cell:</p>
 <pre class="highlight shell"><code><span class="o">=</span>TEMarkets<span class="o">(</span> <span class="s2">"currency"</span>, <span class="s2">"Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear"</span>, B2<span class="o">)</span>
 </code></pre>
   <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get markets commodities. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -1847,56 +1847,56 @@ Or type in any empty cell:</p>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get major currencies.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/currency'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get stock market indexes.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/index'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get government bonds.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/bond'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get markets by symbol or symbols. To get several symbols, please separate them by ' ,'.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/symbol/{put symbol or symbols name here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get a snapshot of the latest peers prices by market.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/peers/{put symbol name here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get stock index markets components.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/components/{put symbol name here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get stock market by country.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/country/{put country name here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get stock market by searching for country.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/search/{put country name here}'</span><span class="p">,</span>
 </code></pre>
 <!--c# black side-->
-</code></pre><pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
+<pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
 <span class="p">{</span>
     <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
     <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
@@ -1914,7 +1914,7 @@ Or type in any empty cell:</p>
 <span class="p">}</span>
 </code></pre> 
 <!--java black side-->
-</code></pre><pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//markets/commodities"</span><span class="o">;</span>
+<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//markets/commodities"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
@@ -1922,7 +1922,7 @@ Or type in any empty cell:</p>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
 </code></pre> 
 <!--php black side-->
-</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
@@ -2259,10 +2259,10 @@ Or type in any empty cell:</p>
 <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>   <span class="n">CL1</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">44.6900</span>     <span class="mf">44.8100</span>     <span class="mf">44.2200</span>     <span class="mf">44.4600</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get markets historical data by market symbol or symbols. To get several symbols, separate them by ' , '. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -2376,10 +2376,10 @@ Or type in any empty cell:</p>
 <span class="mi">9999</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span><span class="n">T16</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">23903.5000</span>  <span class="mf">23942.3900</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get markets intraday data by market symbol. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -2518,7 +2518,7 @@ Or type in any empty cell:</p>
       Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package
     </p>  
     </blockquote>
-</code></pre><pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
+<pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
 <span class="p">{</span>
 <span class="k">  using</span><span class="p">(</span><span class="k">var</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">WebSocket</span><span class="p">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="p">))</span>
 <span class="p">  {</span>  
@@ -2663,10 +2663,10 @@ Or type in any empty cell:</p>
 
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get earnings default calendar. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -2690,10 +2690,10 @@ Or type in any empty cell:</p>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get earnings calendar by country.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/earnings/country/{put country name here}'</span><span class="p">,</span>
 </code></pre>  
 <!--earnings white side-->
@@ -2832,10 +2832,10 @@ Please note the sample request is limited in scope to a few countries and indica
 <pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(<span class="nf">limit</span><span class="o">=</span><span class="s1">'2'</span><span class="p">,</span><span class="n">start</span><span class="o"> =</span><span class="s1"> '1'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get the latest news. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -2859,16 +2859,16 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get news by indicator or indicators. To get several indicators, separate them by ' ,' .</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
 </code></pre> 
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get news by country or countries and indicator or indicators. To get several countries and indicators, separate them by ' ,' .</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/country/{put country or countries name here}/{put indicator or indicators name here}'</span><span class="p">,</span>
 </code></pre> 
 <h3 id="methods">Methods</h3>
@@ -2996,10 +2996,10 @@ Please note the sample request is limited in scope to a few countries and indica
 <pre class="highlight r"><code><span class="n">getLatestArticles</span><span class="p">(<span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'portugal'</span><span class="p">),</span><span class="s1">'inflation rate'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get the latest articles. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -3023,28 +3023,28 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get latest articles by country or countries. To get several countries, separate them by ' ,' .</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/country/{put country or countries name here}'</span><span class="p">,</span>
 </code></pre> 
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get latest articles by indicator or indicators.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
 </code></pre> 
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get latest articles by country or countries and indicator or indicators.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/articles/country/{put country or countries name here}/{put indicator or indicators name here}'</span><span class="p">,</span>
 </code></pre> 
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
   <p>Get articles by a specific ID.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/articles/id/{put country or countries name here}/{put ID here}'</span><span class="p">,</span>
 </code></pre> 
 <!--latest articles white side-->
@@ -3141,10 +3141,10 @@ Please note the sample request is limited in scope to a few countries and indica
 <span>...</span>      
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get World Bank categories. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -3168,16 +3168,16 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get World Bank data by a specific category.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/category/{put category name here}'</span><span class="p">,</span>
 </code></pre> 
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get World Bank data by a specific category and page number.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/category/{put category name here}/{put page number here}'</span><span class="p">,</span>
 </code></pre> 
 <!--WB white side-->
@@ -3309,10 +3309,10 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get World Bank data by country and page number. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -3480,10 +3480,10 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get Comtrade categories. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -3575,10 +3575,10 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get detailed information about Comtrade countries. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -3602,16 +3602,16 @@ Because there are too many results, this method has pagination. Each page is lim
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>You can request each page separately.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/comtrade/country/{put country name here}/{put page number here}'</span><span class="p">,</span>
 </code></pre> 
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get a snapshot of trade between two countries (with pagination).</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/country/{put country1 name here}/{put country2 name here}/{put page number here}'</span><span class="p">,</span>
 </code></pre>
 <!--comtrade white side-->
@@ -3709,10 +3709,10 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get Comtrade historical. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -3787,10 +3787,10 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get a list of all US states. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -3814,10 +3814,10 @@ Because there are too many results, this method has pagination. Each page is lim
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get a list of all counties per state.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/counties/{put county name here}'</span><span class="p">,</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
@@ -3884,10 +3884,10 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get a snapshot of Federal Reserve data by symbol. <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
@@ -3911,22 +3911,22 @@ Because there are too many results, this method has pagination. Each page is lim
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get a snapshot of Federal Reserve data by county.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/snapshot/county/{put county name here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get a snapshot of Federal Reserve data by state.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/snapshot/state/{put state name here}'</span><span class="p">,</span>
 </code></pre>
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
 <p>Get a snapshot of Federal Reserve data by county and page number.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code>
+<pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/snapshot/county/{put county name here}/{put page number here}'</span><span class="p">,</span>
 </code></pre>
 
@@ -4039,10 +4039,10 @@ or<br>
 <span class="n">...</span>
 </code></pre>
 <!--javascript black side-->
-<blockquote class="lang-specific javscript">
+<blockquote class="lang-specific javascript">
     <p>Get historical data of Federal Reserve by symbol or symbols. To get several symbols, separate them by ' ,' . <br>Remember, without a client key, only a sample of data will be provided.</p>
 </blockquote>
-</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
     <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
