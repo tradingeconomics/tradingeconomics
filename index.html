@@ -877,6 +877,8 @@ or you can specify a start date and end date<br>
 <p><span class="methods"></p>
 
 <ul>
+<li><p>Latest Credit Ratings for all countries.<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings?c=guest:guest">/ratings</a>    </p>    
 <li><p>Credit Rating of the specific country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest">/ratings/{country}</a>    </p>
 
@@ -1449,7 +1451,41 @@ Please note the sample request is limited in scope to a few countries and indica
   </code></pre>
   <blockquote class="lang-specific csharp">
       <p>Press ctrl + f5 to run.</p>  
-      </blockquote>
+</blockquote>
+<blockquote class="lang-specific java">
+    <p>Two Libraries are require to run this example<br>
+        <strong> - javax.websocket-client-api.1.1.jar</strong><br>
+        <strong> - tyrus-standalone-client-1.9.jar</strong></p>
+</blockquote>
+<pre class="highlight java"><code><span class="k">public</span> <span class="k">class</span> <span class="na">Streaming</span><span class="o"> {</span> 
+    <span class="k">public</span> <span class="k">static</span> <span class="na">void</span> <span class="n">main</span><span class="o">(</span><span class="na">String</span><span class="o">[] </span><span class="na">args</span><span class="o">)</span><span class="o"> {</span>
+        <span class="na">try</span><span class="o"> {</span>
+            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
+            <span class="na">client</span><span class="o">.</span><span class="n">addMessageHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">WebsocketClient</span><span class="o">.</span><span class="na">MessageHandler</span><span class="o">() {</span>
+                <span class="k">public</span> <span class="na">void</span> <span class="n">handleMessage</span><span class="o">(</span><span class="na">String</span> <span class="s">message</span><span class="o">) {</span>
+                    <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Receiving: "</span><span class="n"> + message</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+            <span class="na">Scanner</span> <span class="n">scan</span> <span class="o">=</span><span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">System</span><span class="o">.</span><span class="k">in</span><span class="o">);</span>
+            <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Enter topic for subscription: "</span><span class="o">);</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">scan</span><span class="o">.</span><span class="na">hasNext</span><span class="o">))</span><span class="o"> {</span>
+                <span class="na">String</span><span class="n"> to</span> <span class="o">=</span> <span class="k"> scan</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="na">String</span><span class="n"> subs</span> <span class="o">=</span> <span class="s"> "{\"topic\": \"subscribe\", \"to\": \""</span> <span class="n">+ to +</span><span class="s"> "\</span><span class="n">calendar</span><span class="s">" }"</span><span class="o">;</span>
+                <span class="k">client</span><span class="o">.</span><span class="na">sendMessage</span><span class="n">(subs);</span>
+            <span class="o">}</span>
+            <span class="na">Thread</span><span class="o">.</span><span class="k">sleep</span><span class="o">(</span><span class="s">30000</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="na">InterruptedException</span> <span class="n">ex</span><span class="o">) {</span>   
+            <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"InterruptedException exception: "</span><span class="n"> + </span><span class="na">ex</span><span class="o">.</span><span class="n">getMessage()</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="na">URISyntaxException</span> <span class="n">ex</span><span class="o">) {</span> 
+            <span class="n">System.</span><span class="na">err</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"URISyntaxException exception: "</span><span class="n"> + </span><span class="na">ex</span><span class="o">.</span><span class="n">getMessage()</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>    
+<span class="o">}</span>
+</code></pre>
+<blockquote class="lang-specific java">
+    <p>Without a client Key, only "EURUSD:CUR" market symbol will give you data. <a target = '_blank' href="https://docs.tradingeconomics.com/?java#streaming13">See market streaming</a></p><br>
+    <p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
+</blockquote>
 <!--streaming calendar white side-->
 <p>The Trading Economics API streaming endpoint can be used to receive live calendar releases and market data utilizing a persistent web socket connection. Streaming data from the API consists of making an Authorization request and leaving the socket open to continually receive data. You can authorize using your API client credentials (key/secret). Then you will be able to subscribe to 1 or more of our streaming channels. </p>
 
@@ -2539,6 +2575,37 @@ Or type in any empty cell:</p>
 <blockquote class="lang-specific csharp">
     <p>Press ctrl + f5 to run.</p>  
     </blockquote>
+<!--streaming java black side-->
+<blockquote class="lang-specific java">
+    <p>Two Libraries are require to run this example<br>
+        <strong> - javax.websocket-client-api.1.1.jar</strong><br>
+        <strong> - tyrus-standalone-client-1.9.jar</strong></p>
+</blockquote>
+<pre class="highlight java"><code><span class="k">public</span> <span class="k">class</span> <span class="na">Streaming</span><span class="o"> {</span> 
+    <span class="k">public</span> <span class="k">static</span> <span class="na">void</span> <span class="n">main</span><span class="o">(</span><span class="na">String</span><span class="o">[] </span><span class="na">args</span><span class="o">)</span><span class="o"> {</span>
+        <span class="na">try</span><span class="o"> {</span>
+            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
+            <span class="na">client</span><span class="o">.</span><span class="n">addMessageHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">WebsocketClient</span><span class="o">.</span><span class="na">MessageHandler</span><span class="o">() {</span>
+                <span class="k">public</span> <span class="na">void</span> <span class="n">handleMessage</span><span class="o">(</span><span class="na">String</span> <span class="s">message</span><span class="o">) {</span>
+                    <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Receiving: "</span><span class="n"> + message</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+            <span class="na">Scanner</span> <span class="n">scan</span> <span class="o">=</span><span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">System</span><span class="o">.</span><span class="k">in</span><span class="o">);</span>
+            <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Enter topic for subscription: "</span><span class="o">);</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">scan</span><span class="o">.</span><span class="na">hasNext</span><span class="o">))</span><span class="o"> {</span>
+                <span class="na">String</span><span class="n"> to</span> <span class="o">=</span> <span class="k"> scan</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="na">String</span><span class="n"> subs</span> <span class="o">=</span> <span class="s"> "{\"topic\": \"subscribe\", \"to\": \""</span> <span class="n">+ to +</span><span class="s"> "\</span><span class="n">EURUSD:CUR</span><span class="s">" }"</span><span class="o">;</span>
+                <span class="k">client</span><span class="o">.</span><span class="na">sendMessage</span><span class="n">(subs);</span>
+            <span class="o">}</span>
+            <span class="na">Thread</span><span class="o">.</span><span class="k">sleep</span><span class="o">(</span><span class="s">30000</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="na">InterruptedException</span> <span class="n">ex</span><span class="o">) {</span>   
+            <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"InterruptedException exception: "</span><span class="n"> + </span><span class="na">ex</span><span class="o">.</span><span class="n">getMessage()</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="na">URISyntaxException</span> <span class="n">ex</span><span class="o">) {</span> 
+            <span class="n">System.</span><span class="na">err</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"URISyntaxException exception: "</span><span class="n"> + </span><span class="na">ex</span><span class="o">.</span><span class="n">getMessage()</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>    
+<span class="o">}</span>
+</code></pre>
 <!--streaming markets white side-->
 <p><strong>Response fields for the markets subscription:</strong></p>
 
