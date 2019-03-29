@@ -200,7 +200,7 @@ strong {
 	border: 0.5px dashed #666;
 }
 
-@media (max-width: 790px) {
+@media screen and (max-width: 790px) {
 	#mobileHeader {
 		display: block;
 		width: 100%;
