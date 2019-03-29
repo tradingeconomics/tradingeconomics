@@ -91,6 +91,7 @@ $('#contentContainer').scroll(() => {
         insideMethods = false;
     }
 })
+
 /*
 setInterval(function() {
     if (insideMethods == false) {
@@ -105,6 +106,7 @@ setInterval(function() {
     }
 }, 1000);
 */
+
 //Sub categories of #methods are hidden by default
 $('#mainMenu ul ul').css('height','0px');
 
