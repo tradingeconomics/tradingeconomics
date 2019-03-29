@@ -219,7 +219,7 @@ strong {
 		display: block;
 		position: fixed;
 		width: 28px;
-		margin-top: 68px;
+		margin-top: 50px;
 		padding: 4px 4px 4px 7px;
 		background-color: #333;
 	}
@@ -228,5 +228,5 @@ strong {
 		width: 100%;
 		margin-left: 0;
 	}
-	
+
 }
