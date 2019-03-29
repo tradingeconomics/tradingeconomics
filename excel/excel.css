@@ -52,11 +52,20 @@ a {
 	text-decoration: none;
 	color: #428bca;
 	font-weight: 600;
+	margin-left: 2px;
+}
+
+#TElogo {
+	margin-left: -4.5px;
 }
 
 #mainMenu a {
-	color: #ddd;
-	font-weight: 100;
+	color: #fff;
+	font-weight: 300;
+	font-size: 0.925rem;
+	line-height: 25px;
+	padding-left: 12px;
+	display: block;
 }
 
 hr {
@@ -65,55 +74,54 @@ hr {
 }
 
 #mainMenu {
-	width: 240px;
+	width: 200px;
     height: 100vh;
 	background-color: #333;
 	float: left;
 	overflow: auto;
 	color: #fff;
 	position: fixed;
-	transition: opacity 1s linear;
-}
-
-#TElogo {
-	margin: 20px 0 0 30px;
 }
 
 #mainMenu div {
-	margin: 32px 0 50px 0;
-	line-height: 1.8rem;
-	background-color: #111;
-	padding: 15px 0;
+	margin-top: 35px;
 }
 
 #mainMenu li {
 	display: block;
-	padding: 2px 0 2px 32px;
-	letter-spacing: 0.1rem;
-	font-size: 1.2rem;
+	padding: 0px 15px;
+	font-size: 19px;
+	line-height: 28px;
 	transition: background-color 0.125s linear;
 }
 
 #mainMenu li:hover {
 	cursor: pointer;
-	padding-left: 45px; 
-	transition: padding 0.125s linear;
 }
 
-#mainMenu div ul ul {
-	margin-left: 20px;
+#mainMenu ul {
+	background-color: #333;
 }
 
-#mainMenu span {
-	font-size: 1rem;
-	margin: 32px;
+#mainMenu ul ul {
+	background-color: #222;
+	background-image: linear-gradient(#111, #222, #111);
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #666;
+	transition: height 0.2s linear;
+	overflow: hidden;
+}
+
+#mainMenu ul ul li {
+	padding-left: 25px;
+	font-size: 0.95rem;
 }
 
 #contentContainer {
 	height: 100vh;
 	overflow: auto;
 	float: left;
-	margin-left: 240px;
+	margin-left: 200px;
 }
 
 #contentContainer section {
@@ -185,6 +193,11 @@ strong {
 
 #burger {
 	display: none;
+}
+
+#dashedHr {
+	margin: 20px 0;
+	border: 0.5px dashed #666;
 }
 
 @media (max-width: 790px) {
