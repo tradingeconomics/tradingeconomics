@@ -21,7 +21,7 @@ earningsLi.onclick = () => { window.location = 'index.html#earnings'; }
 infoInputsLi.onclick = () => { window.location = 'index.html#infoInputs'; }
 apiKeyLi.onclick = () => { window.location = 'index.html#apiKey'; }
 
-let colorBlue = '#428bca';
+let colorBlue = '#185aa9';
     
 function clearAllLiColors() {
     installationLi.style.backgroundColor = 'transparent';
@@ -79,89 +79,19 @@ $('#contentContainer').scroll(() => {
         clearAllLiColors()
         apiKeyLi.style.backgroundColor = colorBlue;
     }
+    //Setting sub categories of #methods visibility
+    if($('#methods').position().top <= 0 && $('#infoInputs').position().top >= 0) {
+        insideMethods = true;
+        $('#mainMenu ul ul').css('height','142px');
+    }
+    else {
+        $('#mainMenu ul ul').css('height','0px');
+        insideMethods = false;
+    }
 })
 
-//On mouse leave highlights the categorie back to colorBlue (otherwise would lose it's hightlight)
-installationLi.onmouseover = () => { installationLi.style.backgroundColor = '#666'; }
-installationLi.onmouseleave  = () => { 
-    installationLi.style.backgroundColor = 'transparent'; 
-    if($('#installation').position().top <= 0 && $('#connection').position().top >= 0) {
-        clearAllLiColors()
-        installationLi.style.backgroundColor = colorBlue;
-    }
-}
-connectionLi.onmouseover = () => { connectionLi.style.backgroundColor = '#666'; }
-connectionLi.onmouseleave  = () => { 
-    connectionLi.style.backgroundColor = 'transparent'; 
-    if($('#connection').position().top <= 0 && $('#methods').position().top >= 0) {
-        clearAllLiColors()
-        connectionLi.style.backgroundColor = colorBlue;
-    }
-}
-methodsLi.onmouseover = () => { methodsLi.style.backgroundColor = '#666'; }
-methodsLi.onmouseleave  = () => { 
-    methodsLi.style.backgroundColor = 'transparent'; 
-    if($('#methods').position().top <= 0 && $('#indicators').position().top >= 0) {
-        clearAllLiColors()
-        methodsLi.style.backgroundColor = colorBlue;
-    }
-}
-indicatorsLi.onmouseover = () => { indicatorsLi.style.backgroundColor = '#666'; }
-indicatorsLi.onmouseleave  = () => { 
-    indicatorsLi.style.backgroundColor = 'transparent'; 
-    if($('#indicators').position().top <= 0 && $('#calendar').position().top >= 0) {
-        clearAllLiColors()
-        indicatorsLi.style.backgroundColor = colorBlue;
-    }
-}
-calendarLi.onmouseover = () => { calendarLi.style.backgroundColor = '#666'; }
-calendarLi.onmouseleave  = () => { 
-    calendarLi.style.backgroundColor = 'transparent'; 
-    if($('#calendar').position().top <= 0 && $('#forecast').position().top >= 0) {
-        clearAllLiColors()
-        calendarLi.style.backgroundColor = colorBlue;
-    }
-}
-forecastLi.onmouseover = () => { forecastLi.style.backgroundColor = '#666'; }
-forecastLi.onmouseleave  = () => { 
-    forecastLi.style.backgroundColor = 'transparent'; 
-    if($('#forecast').position().top <= 0 && $('#markets').position().top >= 0) {
-        clearAllLiColors()
-        forecastLi.style.backgroundColor = colorBlue;
-    }
-}
-marketsLi.onmouseover = () => { marketsLi.style.backgroundColor = '#666'; }
-marketsLi.onmouseleave  = () => { 
-    marketsLi.style.backgroundColor = 'transparent'; 
-    if($('#markets').position().top <= 0 && $('#earnings').position().top >= 0) {
-        clearAllLiColors()
-        marketsLi.style.backgroundColor = colorBlue;
-    }
-}
-earningsLi.onmouseover = () => { earningsLi.style.backgroundColor = '#666'; }
-earningsLi.onmouseleave  = () => { 
-    earningsLi.style.backgroundColor = 'transparent'; 
-    if($('#earnings').position().top <= 0 && $('#infoInputs').position().top >= 0) {
-        clearAllLiColors()
-        earningsLi.style.backgroundColor = colorBlue;
-    }
-}
-infoInputsLi.onmouseover = () => { infoInputsLi.style.backgroundColor = '#666'; }
-infoInputsLi.onmouseleave  = () => { 
-    infoInputsLi.style.backgroundColor = 'transparent'; 
-    if($('#infoInputs').position().top <= 0 && $('#apiKey').position().top >= 0) {
-        clearAllLiColors()
-        infoInputsLi.style.backgroundColor = colorBlue;
-    }
-}
-apiKeyLi.onmouseover = () => { apiKeyLi.style.backgroundColor = '#666'; }
-apiKeyLi.onmouseleave  = () => { 
-    apiKeyLi.style.backgroundColor = 'transparent'; 
-    if($('#apiKey').position().top <= 0) {
-        clearAllLiColors()
-        apiKeyLi.style.backgroundColor = colorBlue;
-    }
-}
+//Sub categories of #methods are hidden by default
+$('#mainMenu ul ul').css('height','0px');
 
 //Setting #mainMenu visibility for mobile devices; Click the burger to show the menu, click back to hide
 $('#burger').click(() => {
