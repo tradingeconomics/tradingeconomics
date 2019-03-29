@@ -106,7 +106,7 @@
         });
       </script>
   </head>
-  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;,&quot;r&quot;,&quot;javascript&quot;,&quot;csharp&quot;,&quot;java&quot;,&quot;php&quot;]">
+  <body class="index" data-languages="[&quot;python&quot;,&quot;r&quot;,&quot;javascript&quot;,&quot;csharp&quot;,&quot;java&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -122,7 +122,6 @@
               <a href="#" data-language-name="csharp">C#</a>
               <a href="#" data-language-name="java">Java</a>
               <a href="#" data-language-name="php">PHP</a>
-              <a href="#" data-language-name="shell">Excel</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -134,10 +133,16 @@
             <li><a target = '_blank' href=" https://github.com/ieconomics/open-api">GitHub</a></li>
             <li><a target = '_blank' href=" excel/index.html">Excel</a></li>
             <li><a target = '_blank' href=" tableau/index.html">Tableau</a></li>
+            <ul><p style="border-top: 1px dashed #666"></p></ul>
             <li><a target = '_blank' href=" https://tradingeconomics.com/contact.aspx?subject=api">Support</a></li>
         </ul>
     </div>
-    <div class="page-wrapper">
+    </div>
+</div>  
+
+    <div id="toc">
+</div>
+      <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="introduction">Introduction</h1>
@@ -158,14 +163,7 @@ The API can be used to feed a custom developed application, a public website or 
 </blockquote>     
 <pre class="highlight python"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">tradingeconomics</span>
 </code></pre>
-<blockquote class="lang-specific shell">
-<p>
-  Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
-We support Excel 2010, 2013, 2016 (32bit and 64bit) only for Windows. 
-</p>
-<br>
-<p>After installing the Trading Economics Excel Add In click on TE tab and than click on login button and follow instructions.</p>
-</blockquote>
+
 <!--R black side-->
 <blockquote class="lang-specific r">
 <p>You can get R from the official website: <a target = '_blank' href="https://cran.r-project.org/">https://cran.r-project.org/</a>     
@@ -283,6 +281,9 @@ See below how to install a package that’s sitting on GitHub.</p>
 <h3 id="git-hub">GitHub</h3>
 <p>You can look for other examples on how to use our API in different programming languages, in our <a target = '_blank' href=" https://github.com/ieconomics/open-api">GitHub</a> repository.</p>
 
+<h3 id="excel">Excel</h3>
+<p> Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
+We support Excel 2010, 2013, 2016 (32bit and 64bit) <strong>only for Windows.</strong></p>
 <h3 id="tableau">Tableau</h3>
 <p>The Trading Economics Tableau Connector links the <a target = '_blank' href=" tableau/index.html">Tableau</a> software to our API, it allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates.
 <br></p>
@@ -463,13 +464,7 @@ Click on any method below for a sample. Please note the sample request is limite
 <span class="c1">//parse your data to satusfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
-<!--Excel black side-->
-<blockquote class="lang-specific shell">
-    <p>Click Indicators button on TE ribbon and then follow the instructions in the dialog box.    
-    Or type in any empty cell:</p>
-</blockquote>
-    <pre class="highlight shell"><code><span class="o">=</span>TEIndicators<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"bankruptcies"</span>, <span class="s2">"Title,LatestValue,LatestValueDate,Source,Unit,CategoryGroup,Frequency,PreviousValue,PreviousValueDate"</span>, B2<span class="o">)</span>
-    </code></pre>
+
 <!--Indicators white-->
 <h3 id="methods">Methods</h3>
 
@@ -635,13 +630,7 @@ For several countries and indicators</p>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
-<!--Excel black side-->
-<blockquote class="lang-specific shell">
-<p>Click Historical button on TE ribbon and then follow the instructions in the dialog box.    
-Or type in any empty cell:</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="o">=</span>TEHistorical<span class="o">(</span> <span class="s2">"andorra"</span>, <span class="s2">"gdp per capita"</span>, <span class="s2">"2010-01-01"</span>, <span class="s2">"2017-10-29"</span>, <span class="s2">"Country,Category,DateTime,Value,Frequency,HistoricalDataSymbol,LastUpdate"</span>, B2<span class="o">)</span>
-</code></pre>
+
   <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>To get a list of Historical data for specific country and indicator. <br>Remember, without a client key only a sample of data will be provided.</p>
@@ -1136,13 +1125,7 @@ or you can specify a start date and end date<br>
 <span class="mi">25</span>     <span class="mi">143324</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
 
 </code></pre>
-<!--Excel black side-->
-<blockquote class="lang-specific shell">
-<p>Click Calendar button on TE ribbon and then follow the instructions in the dialog box.    
-Or type in any empty cell:</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="o">=</span>TECalendar<span class="o">(</span> <span class="s2">"germany"</span>, <span class="s2">"services pmi"</span>, <span class="s2">"2017-03-24"</span>, <span class="s2">"2017-06-24"</span>, <span class="s2">"Date,Category,Actual,Previous,Forecast,TEForecast,Importance,LastUpdate"</span>, B2<span class="o">)</span>
-</code></pre>
+
   <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>To get calendar events. <br>Remember, without a client key only a sample of data will be provided.</p>
@@ -1546,7 +1529,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <td style="text-align: left">1 = low, 2 = medium, 3 = high</td>
 </tr>
 </tbody></table>
-<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?csharp#streaming">C# (C Sharp)</a></p>
+<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>,</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a> <strong>,</strong> <a href="https://ieconomics.github.io/open-api/?csharp#streaming">C# (C Sharp)</a> <strong>and</strong> <a href="https://ieconomics.github.io/open-api/?java#streaming">Java</a></p>
 
 <p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 
@@ -1601,13 +1584,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="mi">2</span>  <span class="n">United</span> <span class="n">States</span>         <span class="n">GDP</span>         <span class="o">...</span>           <span class="mf">20220.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 <span class="mi">3</span>  <span class="n">United</span> <span class="n">States</span>  <span class="n">Population</span>         <span class="o">...</span>             <span class="mf">328.49</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 </code></pre>
-<!--Excel black side-->
-<blockquote class="lang-specific shell">
-<p>Click Forecasts button on TE ribbon and then follow the instructions in the dialog box.    
-Or type in any empty cell:</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="o">=</span>TEForecasts<span class="o">(</span> <span class="s2">"united states"</span>, <span class="s2">"gdp"</span>, <span class="s2">"Country,Category,LatestValue,LatestValueDate,YearEnd,YearEnd2,q1,q1_date,q4,q4_date"</span>, B2<span class="o">)</span>
-</code></pre>
+
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get forecasts by country or countries. To get several countries, please separate them by ' , '. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -1852,13 +1829,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="p">{</span><span class="s">'Symbol'</span><span class="p">:</span> <span class="s">'INDU:IND'</span><span class="p">,</span> <span class="s">'Ticker'</span><span class="p">:</span> <span class="s">'INDU'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">:</span> <span class="s">'Dow Jones'</span><span class="p">,</span> <span class="s">'Type'</span><span class="p">:</span> <span class="s">'index'</span><span class="p">,</span> <span class="o">...</span> <span class="s">'LastUpdate'</span><span class="p">:</span> <span class="s">'2018-06-28T11:35:00'</span><span class="p">}]</span>
 
 </code></pre>
-<!--Excel black side-->
-<blockquote class="lang-specific shell">
-<p>Click Markets button on TE ribbon and then follow the instructions in the dialog box.    
-Or type in any empty cell:</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="o">=</span>TEMarkets<span class="o">(</span> <span class="s2">"currency"</span>, <span class="s2">"Symbol,Name,Date,Last,Importance,DailyChange,DailyPercentChange,WeeklyChange,WeeklyPercentChange,YTDChange,YTDPercentChange,yesterday,lastWeek,startYear"</span>, B2<span class="o">)</span>
-</code></pre>
+
   <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get markets commodities. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -2665,7 +2636,7 @@ Or type in any empty cell:</p>
 </tr>
 </tbody></table>
 
-<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming13">Python</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming13">NodeJS (JavaScript)</a> <strong>or</strong> <a href="https://ieconomics.github.io/open-api/?csharp#streaming13">C# (C Sharp)</a></p> 
+<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming13">Python</a> <strong>,</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a> <strong>,</strong> <a href="https://ieconomics.github.io/open-api/?csharp#streaming">C# (C Sharp)</a> <strong>and</strong> <a href="https://ieconomics.github.io/open-api/?java#streaming">Java</a></p> 
 
 <p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 
@@ -4198,9 +4169,7 @@ or<br>
                <div>
                 <a href="#" data-language-name="r">R</a>
               </div>
-                            <div>
-                <a href="#" data-language-name="shell">Excel</a>
-              </div>
+           
           </div>
       </div>
     </div>
