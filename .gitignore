@@ -254,3 +254,5 @@ python/**/*.pyc
 /java/webSocket/nbproject/private/
 /java/streaming/nbproject/private/
 /test/nbproject/private/
+
+*.idea
