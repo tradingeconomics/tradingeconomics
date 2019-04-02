@@ -1413,32 +1413,76 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote>
 <!--streaming calendar c# black side-->
 <blockquote class="lang-specific csharp">
-  <p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest<br>
-    For other markets or calendar topic "key:secret" is required.<br><br>
-    Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package
+  <p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest.<a target = '_blank' href="https://docs.tradingeconomics.com/?java#streaming13"> See market streaming</a></p><br>
+    For other markets or calendar topic "key:secret" is required.  
   </p>  
   </blockquote>
-  <pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
-  <span class="p">{</span>
-  <span class="k">  using</span><span class="p">(</span><span class="k">var</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">WebSocket</span><span class="p">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="p">))</span>
-  <span class="p">  {</span>  
-  <span class="n">    ws</span><span class="p">.</span><span class="n">OnMessage</span><span class="p">+=</span><span class="p">(</span><span class="nf">sender</span><span class="p">,</span><span class="nf">e</span><span class="p">)</span><span class="p">=></span>
-  
-    <span class="kt">   Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Receiving : "</span> <span class="nf">+ e.Data</span><span class="p">)<span class="p">;</span>
-  
-  <span class="n">    ws</span> <span class="n">.Connect</span> <span class="p">();</span>
-  <span class="n">    ws</span><span class="p">.</span><span class="n">Send</span><span class="p">(</span><span class="s">""{\"topic\": \"subscribe\", \"to\": \"calendar\" }""</span> <span class="p">);</span> 
-  
-  <span class="n">    ws</span> <span class="p">.</span><span class="n">OnError</span><span class="p">+=</span><span class="p">(</span><span class="nf">sender</span><span class="p">,</span><span class="nf">e</span><span class="p">)</span><span class="p">=></span>
-    <span class="kt">   Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Error : "</span> <span class="nf">+ e</span><span class="p">)<span class="p">;</span>
-  <span class="kt">   Console</span><span class="p">.</span><span class="k">ReadKey</span><span class="p">(</span><span class="s">true</span><span class="p">)<span class="p">;</span>
-      
-  <span class="p">  }</span>
-  <span class="p">}</span>
-  </code></pre>
-  <blockquote class="lang-specific csharp">
-      <p>Press ctrl + f5 to run.</p>  
-</blockquote>
+<pre class="highlight csharp"><code>
+<span class="k">namespace</span> CSharpExamples
+{
+    <span class="k">class</span> <span class="kt">Streamer</span>
+    {    
+        <span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
+        <span class="k">static void</span> Main(<span class="k">string</span>[] args)
+        {    
+            <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
+            string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
+            <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
+                _clientKey = k;
+
+            <span class="c1">// to subscribe for the TE Calendar</span>
+            string <span class="kt">calendarTopic</span> = <span class="s">"calendar"</span>;
+
+            <span class="k">Console</span>.WriteLine(<span class="s">"About to connect the socket!"</span>);
+
+            RunStreamer(<span class="kt">calendarTopic</span>).Wait();
+
+            <span class="k">Console</span>.WriteLine(<span class="s">"Connection closed, press any key to exit..."</span>);
+            <span class="k">Console</span>.ReadLine();
+        }
+
+        <span class="k">public static async</span> <span class="kt">Task</span> RunStreamer(<span class="kt">string</span> subscribeTo)
+        {
+            <span class="k">try</span>
+            {
+                <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket()</span>)
+                {
+                    <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(new <span class="k">Uri</span>(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="k">CancellationToken</span>.None);
+
+                    <span class="k">if</span> (cws.<span class="kt">State</span> == <span class="kt">WebSocketState</span>.Open)
+                    {
+                        <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
+                        <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="k">CancellationToken</span>.None);
+                    }
+
+                    <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
+
+                    <span class="k">while</span> (cws.<span class="kt">State</span> == <span class="s">WebSocketState</span>.Open)
+                    {
+                        <span class="k">var</span> buffer = <span class="k">new</span> ArraySegment<span class="k">< byte ></byte></span>(new byte[<span class="s">1024</span>]);
+                        <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer, <span class="kt">CancellationToken</span>.None);
+                        <span class="k">if</span> (<span class="kt">result</span>.MessageType == <span class="kt">WebSocketMessageType</span>.Close)
+                        {
+                            <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(<span class="k">WebSocketCloseStatus</span>.<span class="kt">NormalClosure</span>, string.<span class="s">Empty</span> , <span class="kt">CancellationToken</span>.None);
+                        }
+
+                        <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {<span class="kt">Encoding</span>.<span class="k">UTF8</span>.GetString(<span class="kt">buffer</span>.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
+                    }
+                }
+            }
+            <span class="k">catch</span> (<span class="kt">Exception</span> e)
+            {
+                <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message:</span> {e.<span class="kt">Message</span>}<span class="s">"</span>);
+            }
+        }
+    }
+}
+   
+</code></pre>
+<blockquote class="lang-specific csharp"></blockquote>
+<pre class="highlight csharp"><code>
+      Press <span class="s">ctrl + f5 </span>to run.  
+</code></pre>
 <blockquote class="lang-specific java">
     <p>Two Libraries are require to run this example<br>
         <strong> - javax.websocket-client-api.1.1.jar</strong><br>
@@ -2524,32 +2568,76 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote>
 <!--streaming markets c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest<br>
-      For other markets or calendar topic "key:secret" is required.<br><br>
-      Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package
-    </p>  
-    </blockquote>
-<pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
-<span class="p">{</span>
-<span class="k">  using</span><span class="p">(</span><span class="k">var</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">WebSocket</span><span class="p">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="p">))</span>
-<span class="p">  {</span>  
-<span class="n">    ws</span><span class="p">.</span><span class="n">OnMessage</span><span class="p">+=</span><span class="p">(</span><span class="nf">sender</span><span class="p">,</span><span class="nf">e</span><span class="p">)</span><span class="p">=></span>
+<p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest.<br>
+    For other markets topic "key:secret" is required.  
+</p>  
+</blockquote>
+<pre class="highlight csharp"><code>
+<span class="k">namespace</span> CSharpExamples
+{
+    <span class="k">class</span> <span class="kt">Streamer</span>
+    {    
+        <span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
+        <span class="k">static void</span> Main(<span class="k">string</span>[] args)
+        {    
+            <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
+            string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
+            <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
+                _clientKey = k;
 
-  <span class="kt">   Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Receiving : "</span> <span class="nf">+ e.Data</span><span class="p">)<span class="p">;</span>
+            <span class="c1">// to subscribe for the TE Calendar</span>
+            string <span class="kt">marketEuroCurrencyTopic</span> = <span class="s">"EURUSD:CUR"</span>;
 
-<span class="n">    ws</span> <span class="n">.Connect</span> <span class="p">();</span>
-<span class="n">    ws</span><span class="p">.</span><span class="n">Send</span><span class="p">(</span><span class="s">"{\"topic\": \"subscribe\", \"to\": \"EURUSD:CUR\" }"</span> <span class="p">);</span> 
+            <span class="k">Console</span>.WriteLine(<span class="s">"About to connect the socket!"</span>);
 
-<span class="n">    ws</span> <span class="p">.</span><span class="n">OnError</span><span class="p">+=</span><span class="p">(</span><span class="nf">sender</span><span class="p">,</span><span class="nf">e</span><span class="p">)</span><span class="p">=></span>
-  <span class="kt">   Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Error : "</span> <span class="nf">+ e</span><span class="p">)<span class="p">;</span>
-<span class="kt">   Console</span><span class="p">.</span><span class="k">ReadKey</span><span class="p">(</span><span class="s">true</span><span class="p">)<span class="p">;</span>
+            RunStreamer(<span class="kt">marketEuroCurrencyTopic</span>).Wait();
+
+            <span class="k">Console</span>.WriteLine(<span class="s">"Connection closed, press any key to exit..."</span>);
+            <span class="k">Console</span>.ReadLine();
+        }
+
+        <span class="k">public static async</span> <span class="kt">Task</span> RunStreamer(<span class="kt">string</span> subscribeTo)
+        {
+            <span class="k">try</span>
+            {
+                <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket()</span>)
+                {
+                    <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(new <span class="k">Uri</span>(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="k">CancellationToken</span>.None);
+
+                    <span class="k">if</span> (cws.<span class="kt">State</span> == <span class="kt">WebSocketState</span>.Open)
+                    {
+                        <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
+                        <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="k">CancellationToken</span>.None);
+                    }
+
+                    <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
+
+                    <span class="k">while</span> (cws.<span class="kt">State</span> == <span class="s">WebSocketState</span>.Open)
+                    {
+                        <span class="k">var</span> buffer = <span class="k">new</span> ArraySegment<span class="k">< byte ></byte></span>(new byte[<span class="s">1024</span>]);
+                        <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer, <span class="kt">CancellationToken</span>.None);
+                        <span class="k">if</span> (<span class="kt">result</span>.MessageType == <span class="kt">WebSocketMessageType</span>.Close)
+                        {
+                            <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(<span class="k">WebSocketCloseStatus</span>.<span class="kt">NormalClosure</span>, string.<span class="s">Empty</span> , <span class="kt">CancellationToken</span>.None);
+                        }
+
+                        <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {<span class="kt">Encoding</span>.<span class="k">UTF8</span>.GetString(<span class="kt">buffer</span>.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
+                    }
+                }
+            }
+            <span class="k">catch</span> (<span class="kt">Exception</span> e)
+            {
+                <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message:</span> {e.<span class="kt">Message</span>}<span class="s">"</span>);
+            }
+        }
+    }
+}
     
-<span class="p">  }</span>
-<span class="p">}</span>
 </code></pre>
-<blockquote class="lang-specific csharp">
-    <p>Press ctrl + f5 to run.</p>  
-    </blockquote>
+<blockquote class="lang-specific csharp"></blockquote>
+<pre class="highlight csharp"><code>
+    Press <span class="s">ctrl + f5 </span>to run.  
+</code></pre>
 <!--streaming java black side-->
 <blockquote class="lang-specific java">
     <p>Two Libraries are require to run this example<br>
