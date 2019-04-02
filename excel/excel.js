@@ -36,8 +36,6 @@ function clearAllLiColors() {
     searchLi.style.backgroundColor = 'transparent';
 }
 
-let insideMethods = false;
-
 //On scroll checks which categorie should be highlighted in the #mainMenu
 $('#contentContainer').scroll(() => { 
     clearAllLiColors()
@@ -83,32 +81,26 @@ $('#contentContainer').scroll(() => {
     }
     //Setting sub categories of #methods visibility
     if($('#methods').position().top <= 0 && $('#refresh').position().top >= 0) {
-        insideMethods = true;
         $('#mainMenu ul ul').css('height','142px');
     }
     else {
         $('#mainMenu ul ul').css('height','0px');
-        insideMethods = false;
     }
-})
-
-/*
-setInterval(function() {
-    if (insideMethods == false) {
-        console.log('if')
-        setInterval(function() {
-            $('#mainMenu ul ul').css('display','none');
-        }, 200)
+    //Hiding border
+    /*
+    if($('#mainMenu ul ul').css('height') == '0px') {
+        $('#mainMenu ul ul').css('border','0px');
+        console.log(0)
     }
     else {
-        console.log('else')
-        $('#mainMenu ul ul').css('display','block');
-    }
-}, 1000);
-*/
+        $('#mainMenu ul ul').css('border-width','1px');
+        console.log(1)
+    }*/
+})
 
 //Sub categories of #methods are hidden by default
 $('#mainMenu ul ul').css('height','0px');
+//$('#mainMenu ul ul').css('border','0px');
 
 //Setting #mainMenu visibility for mobile devices; Click the burger to show the menu, click back to hide
 $('#burger').click(() => {
