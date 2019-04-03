@@ -2885,8 +2885,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <h2 id="latest-news">Latest news</h2>
 <!--Python Latest News black side-->
 <blockquote class="lang-specific python">
-<p>To get the latest news by country, or country and indicator, ( te.getNews(country = 'United States', indicator = 'Imports' ).</p>
-<br>
+
 <p>To get several countries and indicators.</p>
 <br>
 </blockquote>  
@@ -3035,9 +3034,6 @@ Please note the sample request is limited in scope to a few countries and indica
 <h2 id="latest-articles">Latest articles</h2>
 <!--Python Latest Articles black side-->
 <blockquote class="lang-specific python">  
-<p>To get the latest articles by country, or countries ( te.getArticles(country = 'United States') ), ( te.getArticles(country = ['United States', 'China']) ).</p>
-<p>By indicator or indicators, ( te.getArticles(indicator = 'Imports') ), ( te.getArticles(indicator = ['Imports', 'Exports']) ).</p>
-<br>
 <p>To get the latest articles by several countries and indicators and also with a start index and limit size.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getArticles</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="p">[</span> <span class="s">'united states'</span><span class="p">,<span class="s">'Portugal'</span><span class="p">]<span class="p">,<span class="s">indicator</span><span class="o">=<span class="p">[</span><span class="s">'Imports'</span><span class="p">,<span class="s">'Interest rate'<span class="p">]<span class="p">,</span><span class="s">start</span><span class="o">=</span><span class="s">10</span><span class="p">,</span><span class="s">lim</span><span class="o">=<span class="s">5</span><span class="p">)</span>
@@ -3229,7 +3225,11 @@ Please note the sample request is limited in scope to a few countries and indica
 <span>...</span>      
 </code></pre>
 <blockquote class="lang-specific python">  
-<br>
+<p>To get World Bank data by category.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCategories</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">'Demographics'</span><span class="p">)</span>
+</code></pre> 
+<blockquote class="lang-specific python">  
 <p>To get World Bank data by category, and page number.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCategories</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">'Demographics'</span><span class="p">,</span><span class="s">page_number</span><span class="o">=</span><span class="s">2</span><span class="p">)</span>
@@ -3239,7 +3239,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="mi">1</span>       <span class="n">Demographics</span>     <span class="n">...</span>    <span class="mi">2017-10-16</span><span class="n">T</span><span class="mi">09:03:02.733</span>
 <span class="mi">2</span>       <span class="n">Demographics</span>     <span class="n">...</span>     <span class="mi">2017-10-16</span><span class="n">T</span><span class="mi">09:03:02.72</span>
 <span>...</span>      
-</code></pre>
+</code></pre>     
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get World Bank categories. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -3650,8 +3650,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <h2 id="country">Country</h2>
 <!--Python Comtrade country black side-->
 <blockquote class="lang-specific python">  
-<br>
-<p>To get Comtrade by country or countries.</p>
+<p>To get Comtrade by country.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'China'</span><span class="p">)</span>
 
@@ -3662,10 +3661,14 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <blockquote class="lang-specific python">  
-<br>
-<p>To get Comtrade by country or countries and page number.</p>
+<p>To get Comtrade by several countries.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="p">[</span> <span class="s">'China'<span class="p">,</span><span class="s">'Portugal'</span><span class="p">]</span><span class="p">,</span><span class="s">page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">= [</span><span class="s">'China', 'united states', 'japan'</span><span class="p">])</span>
+</code></pre>       
+<blockquote class="lang-specific python">  
+<p>To get Comtrade by countries and page number.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="p">[</span><span class="s">'China'<span class="p">,</span><span class="s">'Portugal'</span><span class="p">]</span><span class="p">,</span><span class="s">page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
 
           <span class="n">symbol</span>   <span class="n">...</span>                                                   <span class="n">title</span>           
 <span class="mi">0</span>     <span class="n">CHN473XX011</span>   <span class="n">...</span>            <span class="n">China Imports from LAIA, nes of Live animals</span>
@@ -3673,6 +3676,11 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">24</span>    <span class="n">CHNPRT41082</span>   <span class="n">...</span>      <span class="n"> China Exports to Portugal of Chamois (includin...</span>
 <span class="mi">25</span>    <span class="n">CHNPRT41091</span>   <span class="n">...</span>      <span class="n"> China Imports from Portugal of Patent and pate...</span>        
 <span class="n">...</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+<p>To get Comtrade by country and page number.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="s">'China'<span class="p">,</span><span class="s"> page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
 </code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
@@ -3965,13 +3973,24 @@ Because there are too many results, this method has pagination. Each page is lim
 
 </code></pre>
 <blockquote class="lang-specific python">  
+<p>To get Federal Reserve snapshots by url.</p>
 <br>
-<p>To get Federal Reserve snapshots by url ( te.getFedRSnaps(url = 'united states''/united-states/white-to-non-white-racial-dissimilarity-index-for-benton-county-ar-fed-data.html') ).</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">url</span> <span class="o">=</span> <span class="s">'united states''/united-states/white-to-non-white-racial-dissimilarity-index-for-benton-county-ar-fed-data.html'</span><span class="p">)</span>                     
+</code></pre>
+<blockquote class="lang-specific python">  
+<p>To get Federal Reserve snapshots by country.</p>
 <br>
-<p>To get Federal Reserve snapshots by country ( te.getFedRSnaps(country = 'united states') ).</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span><span class="p">)</span>                     
+</code></pre>
+<blockquote class="lang-specific python"> 
+<p>To get Federal Reserve snapshots by state.</p>
 <br>
-<p>To get Federal Reserve snapshots by state ( te.getFedRSnaps(state = 'tennessee') ).</p>
-<br>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s">'tennessee'</span><span class="p">)</span>                     
+</code></pre>
+<blockquote class="lang-specific python"> 
 <p>To get Federal Reserve snapshots by county or state and page number.</p>
 <br>
 </blockquote>  
@@ -4124,9 +4143,11 @@ or<br>
 <h2 id="historical">Historical</h2>
 <!--Python Federal Reserve historical black side-->
 <blockquote class="lang-specific python">  
-<br>
-<p>To get Federal Reserve historical data by more than one symbol ( te.getFedRHistorical(symbol = ['racedisparity005007', '2020ratio002013']) ).</p>  
-<br>
+<p>To get Federal Reserve historical data by more than one symbol.</p>  
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">= [</span> <span class="s">'racedisparity005007', '2020ratio002013'</span><span class="p">] )</span>                     
+</code></pre>
+<blockquote class="lang-specific python">
 <p>To get Federal Reserve historical data by symbol.</p>
 <br>
 </blockquote>  
