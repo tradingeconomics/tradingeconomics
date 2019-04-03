@@ -1188,23 +1188,77 @@ or you can specify a start date and end date<br>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/calendarid/{put calendar ID here}'</span><span class="p">,</span>
 </code></pre>
 <!--c# black side-->
-<pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
-<span class="p">{</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
-    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
-    <span class="c1">//ADD Authorization</span>
-    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"Client"</span><span class="p">,</span> <span class="s">"guest:guest"</span><span class="p">);</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
-    <span class="c1">//SET Parameters</span>
-    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/calendar"</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Your custom response parser code</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<blockquote class="lang-specific csharp">
+    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/C%23/Calendar.cs">Check here for the complete sample code.</a> </p><br>
+    <p>To get all Calendar events.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
+<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+{
+    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
+    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
+    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
+        _clientKey = k;
+
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events"</span>);
+    <span class="k">var</span> getCalendarResult = <span class="kt">GetCalendarEvents</span>().Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarResult</span>);
+
+    <span class="k">Console</span>.ReadLine();
+}
 </code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events between two dates.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get all calendar events between dates"</span>);
+    <span class="k">var</span> getCalendarBetweenDatesResult = <span class="kt">GetCalendarEventsByDate</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>)).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarBetweenDatesResult</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events for a specific country.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events for a specific country"</span>);
+    <span class="k">var</span> getCalendarForCountryResult = <span class="kt">GetCalendarEventsByCountries</span>(<span class="s">"united states"</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForCountryResult</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events  by country/countries and dates.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by date and countries"</span>);
+    <span class="k">var</span> getCalendarForCountriesAndDatesResult = <span class="kt">GetCalendarEventsByCountriesAndDates</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>), <span class="s">"united states", "china"</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForCountriesAndDatesResult</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events by indicator.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by economics indicator"</span>);
+    <span class="k">var</span> getCalendarForIndicatorResult = <span class="kt">GetCalendarEventsByIndicator</span>(<span class="s">"inflation rate"</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForIndicatorResult</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events by indicator, countries and dates.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by economics indicator, countries and dates"</span>);
+    <span class="k">var</span> getCalendarForIndicatorCountriesAndDatesResult = <span class="kt">GetCalendarEventsByIndicatorCountriesAndDates</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>), <span class="k">new</span> string[] {<span class="s">"united states"</span>  }, <span class="s">"inflation rate"</span>)<span class="s">"united states", "china"</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForIndicatorCountriesAndDatesResult</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events by id.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by id"</span>);
+    <span class="k">var</span> getCalendarByIdResult = <span class="kt">GetCalendarEventsById</span>(<span class="s">174108, 160025, 160030</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarByIdResult</span>);
+</code></pre>
+
+           
+         
 <!--java black side-->
 <pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//calendar"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
@@ -1417,72 +1471,30 @@ Please note the sample request is limited in scope to a few countries and indica
     For other markets or calendar topic "key:secret" is required.  
   </p>  
   </blockquote>
-<pre class="highlight csharp"><code>
-<span class="k">namespace</span> CSharpExamples
-{
-    <span class="k">class</span> <span class="kt">Streamer</span>
-    {    
-        <span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-        <span class="k">static void</span> Main(<span class="k">string</span>[] args)
-        {    
-            <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-            string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-            <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-                _clientKey = k;
+<pre class="highlight csharp"><code>  
+<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
+<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+{    
+    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
+    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
+    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
+        _clientKey = k;
 
-            <span class="c1">// to subscribe for the TE Calendar</span>
-            string <span class="kt">calendarTopic</span> = <span class="s">"calendar"</span>;
+    <span class="c1">// to subscribe for the TE Calendar</span>
+    string <span class="kt">calendarTopic</span> = <span class="s">"calendar"</span>;
 
-            <span class="k">Console</span>.WriteLine(<span class="s">"About to connect the socket!"</span>);
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to connect the socket!"</span>);
 
-            RunStreamer(<span class="kt">calendarTopic</span>).Wait();
+    RunStreamer(<span class="kt">calendarTopic</span>).Wait();
 
-            <span class="k">Console</span>.WriteLine(<span class="s">"Connection closed, press any key to exit..."</span>);
-            <span class="k">Console</span>.ReadLine();
-        }
-
-        <span class="k">public static async</span> <span class="kt">Task</span> RunStreamer(<span class="kt">string</span> subscribeTo)
-        {
-            <span class="k">try</span>
-            {
-                <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket()</span>)
-                {
-                    <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(new <span class="k">Uri</span>(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="k">CancellationToken</span>.None);
-
-                    <span class="k">if</span> (cws.<span class="kt">State</span> == <span class="kt">WebSocketState</span>.Open)
-                    {
-                        <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
-                        <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="k">CancellationToken</span>.None);
-                    }
-
-                    <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
-
-                    <span class="k">while</span> (cws.<span class="kt">State</span> == <span class="s">WebSocketState</span>.Open)
-                    {
-                        <span class="k">var</span> buffer = <span class="k">new</span> ArraySegment<span class="k">< byte ></byte></span>(new byte[<span class="s">1024</span>]);
-                        <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer, <span class="kt">CancellationToken</span>.None);
-                        <span class="k">if</span> (<span class="kt">result</span>.MessageType == <span class="kt">WebSocketMessageType</span>.Close)
-                        {
-                            <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(<span class="k">WebSocketCloseStatus</span>.<span class="kt">NormalClosure</span>, string.<span class="s">Empty</span> , <span class="kt">CancellationToken</span>.None);
-                        }
-
-                        <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {<span class="kt">Encoding</span>.<span class="k">UTF8</span>.GetString(<span class="kt">buffer</span>.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
-                    }
-                }
-            }
-            <span class="k">catch</span> (<span class="kt">Exception</span> e)
-            {
-                <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message:</span> {e.<span class="kt">Message</span>}<span class="s">"</span>);
-            }
-        }
-    }
+    <span class="k">Console</span>.WriteLine(<span class="s">"Connection closed, press any key to exit..."</span>);
+    <span class="k">Console</span>.ReadLine();
 }
-   
 </code></pre>
-<blockquote class="lang-specific csharp"></blockquote>
-<pre class="highlight csharp"><code>
-      Press <span class="s">ctrl + f5 </span>to run.  
-</code></pre>
+<blockquote class="lang-specific csharp">
+    <p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/C%23/Streamer.cs">Check here for the complete sample code.</a> </p>
+</blockquote>
+
 <blockquote class="lang-specific java">
     <p>Two Libraries are require to run this example<br>
         <strong> - javax.websocket-client-api.1.1.jar</strong><br>
@@ -2572,72 +2584,30 @@ Please note the sample request is limited in scope to a few countries and indica
     For other markets topic "key:secret" is required.  
 </p>  
 </blockquote>
-<pre class="highlight csharp"><code>
-<span class="k">namespace</span> CSharpExamples
-{
-    <span class="k">class</span> <span class="kt">Streamer</span>
-    {    
-        <span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-        <span class="k">static void</span> Main(<span class="k">string</span>[] args)
-        {    
-            <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-            string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-            <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-                _clientKey = k;
+<pre class="highlight csharp"><code>   
+<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
+<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+{    
+    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
+    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
+    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
+        _clientKey = k;
 
-            <span class="c1">// to subscribe for the TE Markets</span>
-            string <span class="kt">marketEuroCurrencyTopic</span> = <span class="s">"EURUSD:CUR"</span>;
+    <span class="c1">// to subscribe for the TE Markets</span>
+    string <span class="kt">marketEuroCurrencyTopic</span> = <span class="s">"EURUSD:CUR"</span>;
 
-            <span class="k">Console</span>.WriteLine(<span class="s">"About to connect the socket!"</span>);
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to connect the socket!"</span>);
 
-            RunStreamer(<span class="kt">marketEuroCurrencyTopic</span>).Wait();
+    RunStreamer(<span class="kt">marketEuroCurrencyTopic</span>).Wait();
 
-            <span class="k">Console</span>.WriteLine(<span class="s">"Connection closed, press any key to exit..."</span>);
-            <span class="k">Console</span>.ReadLine();
-        }
-
-        <span class="k">public static async</span> <span class="kt">Task</span> RunStreamer(<span class="kt">string</span> subscribeTo)
-        {
-            <span class="k">try</span>
-            {
-                <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket()</span>)
-                {
-                    <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(new <span class="k">Uri</span>(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="k">CancellationToken</span>.None);
-
-                    <span class="k">if</span> (cws.<span class="kt">State</span> == <span class="kt">WebSocketState</span>.Open)
-                    {
-                        <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
-                        <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="k">CancellationToken</span>.None);
-                    }
-
-                    <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
-
-                    <span class="k">while</span> (cws.<span class="kt">State</span> == <span class="s">WebSocketState</span>.Open)
-                    {
-                        <span class="k">var</span> buffer = <span class="k">new</span> ArraySegment<span class="k">< byte ></byte></span>(new byte[<span class="s">1024</span>]);
-                        <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer, <span class="kt">CancellationToken</span>.None);
-                        <span class="k">if</span> (<span class="kt">result</span>.MessageType == <span class="kt">WebSocketMessageType</span>.Close)
-                        {
-                            <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(<span class="k">WebSocketCloseStatus</span>.<span class="kt">NormalClosure</span>, string.<span class="s">Empty</span> , <span class="kt">CancellationToken</span>.None);
-                        }
-
-                        <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {<span class="kt">Encoding</span>.<span class="k">UTF8</span>.GetString(<span class="kt">buffer</span>.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
-                    }
-                }
-            }
-            <span class="k">catch</span> (<span class="kt">Exception</span> e)
-            {
-                <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message:</span> {e.<span class="kt">Message</span>}<span class="s">"</span>);
-            }
-        }
-    }
-}
-    
+    <span class="k">Console</span>.WriteLine(<span class="s">"Connection closed, press any key to exit..."</span>);
+    <span class="k">Console</span>.ReadLine();
+} 
 </code></pre>
-<blockquote class="lang-specific csharp"></blockquote>
-<pre class="highlight csharp"><code>
-    Press <span class="s">ctrl + f5 </span>to run.  
-</code></pre>
+<blockquote class="lang-specific csharp">
+    <p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/C%23/Streamer.cs">Check here for the complete sample code.</a> </p>
+</blockquote>
+
 <!--streaming java black side-->
 <blockquote class="lang-specific java">
     <p>Two Libraries are require to run this example<br>
