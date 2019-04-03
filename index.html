@@ -1845,15 +1845,35 @@ Please note the sample request is limited in scope to a few countries and indica
 <h2 id="snapshots">Snapshots</h2>
 <!--R black side-->
 <blockquote class="lang-specific r">
-<p>To get information about commodities in data frame format type:</p>
+<p>marketsField can be:<br>Commodities</p>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'commodities'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+<span class="n">Output</span><span class="p">:</span>
+        <span class="n">Symbol</span>   <span class="n">...</span>           <span class="n">Name</span>     <span class="o">...</span>    <span class="n">DailyChange</span>    <span class="o">...</span>
+<span class="mi">2</span>     <span class="n">BDIY</span><span class="p">:</span><span class="n">IND</span>   <span class="o">...</span>     <span class="n">Baltic Dry</span>     <span class="o">...</span>        <span class="mf">-11.000</span>    <span class="o">...</span>
+<span class="mi">21</span>    <span class="n">BEEF</span><span class="p">:</span><span class="n">IND</span>   <span class="o">...</span>           <span class="n">Beef</span>     <span class="o">...</span>        <span class="mf">-0.0700</span>    <span class="o">...</span> 
+<span class="mi">3</span>      <span class="n">CHE</span><span class="p">:</span><span class="n">IND</span>   <span class="o">...</span>         <span class="n">Cheese</span>     <span class="o">...</span>        <span class="mf">-0.0010</span>    <span class="o">...</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p> Index</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'index'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Currency</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'currency'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Bond</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'bond'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <!--Python Markets Snapshots black side-->
 <blockquote class="lang-specific python">
 <p>To get stock market index data:</p>
 </blockquote>
-<!--python black side-->
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
 <span class="n">Output</span><span class="p">:</span>
@@ -2005,13 +2025,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="c1">//parse your data to satusfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
-
-<!--R market snapshots black side-->
-<blockquote class="lang-specific r">
-<br>  
-<p>marketsField can be: 'commodities', 'currency', 'index', 'bond'.</p>
-<br>
-</blockquote>  
+ 
 <!--markets white side-->
 <h3 id="methods">Methods</h3>
 
@@ -2126,7 +2140,17 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific r">
 <p>To get markets search by country, category and page number.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span><span class="s1">'markets'</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span><span class="p"> (</span><span class="s1">'index'</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get markets search by country.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'united states'</span><span class="p">)</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get markets search by country and categories.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'united states'</span><span class="p">,</span> <span class="s1">category = </span><span class="p">(</span><span class="s1">'index', 'markets'</span><span class="p">)</span><span class="p">)</span>
 </span></code></pre>
 <!--markets white side-->
 <p><span class="methods"></p>
