@@ -1,6 +1,6 @@
-#Using *Golang*
+#*Golang*
 
-You can check here how to  [install Go](https://golang.org/doc/install)
+[install Go](https://golang.org/doc/install)
 
 To run the example 
 ```go
