@@ -348,6 +348,11 @@ Click on any method below for a sample. Please note the sample request is limite
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get a list of all indicators per country.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">),</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
 <!--Python Indicators black side-->
 <blockquote class="lang-specific python">
 <p>To get List of Indicators by Country: </p>
@@ -1188,23 +1193,77 @@ or you can specify a start date and end date<br>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/calendarid/{put calendar ID here}'</span><span class="p">,</span>
 </code></pre>
 <!--c# black side-->
-<pre class="highlight csharp"><code><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">HttpClient</span><span class="p">())</span>
-<span class="p">{</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"https://api.tradingeconomics.com/"</span><span class="p">);</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="nf">Clear</span><span class="p">();</span>
-    <span class="c1">//ADD Acept Header to tell the server what data type you want</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Accept</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">MediaTypeWithQualityHeaderValue</span><span class="p">(</span><span class="s">"application/xml"</span><span class="p">));</span>
-    <span class="c1">//ADD Authorization</span>
-    <span class="n">AuthenticationHeaderValue</span> <span class="n">auth</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AuthenticationHeaderValue</span><span class="p">(</span><span class="s">"Client"</span><span class="p">,</span> <span class="s">"guest:guest"</span><span class="p">);</span>
-    <span class="n">client</span><span class="p">.</span><span class="n">DefaultRequestHeaders</span><span class="p">.</span><span class="n">Authorization</span> <span class="p">=</span> <span class="n">auth</span><span class="p">;</span>
-    <span class="c1">//SET Parameters</span>
-    <span class="n">HttpResponseMessage</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">client</span><span class="p">.</span><span class="nf">GetAsync</span><span class="p">(</span><span class="s">"/calendar"</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">IsSuccessStatusCode</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">//Your custom response parser code</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<blockquote class="lang-specific csharp">
+    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/C%23/Calendar.cs">Check here for the complete sample code.</a> </p><br>
+    <p>To get all Calendar events.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
+<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+{
+    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
+    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
+    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
+        _clientKey = k;
+
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events"</span>);
+    <span class="k">var</span> getCalendarResult = <span class="kt">GetCalendarEvents</span>().Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarResult</span>);
+
+    <span class="k">Console</span>.ReadLine();
+}
 </code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events between two dates.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get all calendar events between dates"</span>);
+    <span class="k">var</span> getCalendarBetweenDatesResult = <span class="kt">GetCalendarEventsByDate</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>)).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarBetweenDatesResult</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events for a specific country.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events for a specific country"</span>);
+    <span class="k">var</span> getCalendarForCountryResult = <span class="kt">GetCalendarEventsByCountries</span>(<span class="s">"united states"</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForCountryResult</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events  by country/countries and dates.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by date and countries"</span>);
+    <span class="k">var</span> getCalendarForCountriesAndDatesResult = <span class="kt">GetCalendarEventsByCountriesAndDates</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>), <span class="s">"united states", "china"</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForCountriesAndDatesResult</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events by indicator.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by economics indicator"</span>);
+    <span class="k">var</span> getCalendarForIndicatorResult = <span class="kt">GetCalendarEventsByIndicator</span>(<span class="s">"inflation rate"</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForIndicatorResult</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events by indicator, countries and dates.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by economics indicator, countries and dates"</span>);
+    <span class="k">var</span> getCalendarForIndicatorCountriesAndDatesResult = <span class="kt">GetCalendarEventsByIndicatorCountriesAndDates</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>), <span class="k">new</span> string[] {<span class="s">"united states"</span>  }, <span class="s">"inflation rate"</span>)<span class="s">"united states", "china"</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForIndicatorCountriesAndDatesResult</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get Calendar events by id.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by id"</span>);
+    <span class="k">var</span> getCalendarByIdResult = <span class="kt">GetCalendarEventsById</span>(<span class="s">174108, 160025, 160030</span>).Result;
+    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarByIdResult</span>);
+</code></pre>
+
+           
+         
 <!--java black side-->
 <pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//calendar"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
@@ -1413,32 +1472,45 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote>
 <!--streaming calendar c# black side-->
 <blockquote class="lang-specific csharp">
-  <p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest<br>
-    For other markets or calendar topic "key:secret" is required.<br><br>
-    Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package
+  <p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest.<a target = '_blank' href="https://docs.tradingeconomics.com/?csharp#streaming13"> See market streaming</a></p><br>
+    For other markets or calendar topic "key:secret" is required.  
   </p>  
   </blockquote>
-  <pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
-  <span class="p">{</span>
-  <span class="k">  using</span><span class="p">(</span><span class="k">var</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">WebSocket</span><span class="p">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="p">))</span>
-  <span class="p">  {</span>  
-  <span class="n">    ws</span><span class="p">.</span><span class="n">OnMessage</span><span class="p">+=</span><span class="p">(</span><span class="nf">sender</span><span class="p">,</span><span class="nf">e</span><span class="p">)</span><span class="p">=></span>
-  
-    <span class="kt">   Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Receiving : "</span> <span class="nf">+ e.Data</span><span class="p">)<span class="p">;</span>
-  
-  <span class="n">    ws</span> <span class="n">.Connect</span> <span class="p">();</span>
-  <span class="n">    ws</span><span class="p">.</span><span class="n">Send</span><span class="p">(</span><span class="s">""{\"topic\": \"subscribe\", \"to\": \"calendar\" }""</span> <span class="p">);</span> 
-  
-  <span class="n">    ws</span> <span class="p">.</span><span class="n">OnError</span><span class="p">+=</span><span class="p">(</span><span class="nf">sender</span><span class="p">,</span><span class="nf">e</span><span class="p">)</span><span class="p">=></span>
-    <span class="kt">   Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Error : "</span> <span class="nf">+ e</span><span class="p">)<span class="p">;</span>
-  <span class="kt">   Console</span><span class="p">.</span><span class="k">ReadKey</span><span class="p">(</span><span class="s">true</span><span class="p">)<span class="p">;</span>
-      
-  <span class="p">  }</span>
-  <span class="p">}</span>
-  </code></pre>
-  <blockquote class="lang-specific csharp">
-      <p>Press ctrl + f5 to run.</p>  
+<pre class="highlight csharp"><code>  
+<span class="k">try</span> 
+{
+    <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket</span>())
+    {    
+        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
+        
+        <span class="k">if</span> (cws.<span class="k">State</span> == <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
+            <span class="k">await</span> result = <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="kt">CancellationToken</span>.None);
+        }
+        <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
+        <span class="k">while</span> (cws.<span class="k">State</span>== <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(<span class="k">new byte</span>[<span class="s">1024</span>]);
+            <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer,<span class="kt"> CancellationToken</span>.None);   
+            <span class="k">if</span> (result.<span class="k">MessageType </span>== <span class="kt">WebSocketMessageType</span>.Close)
+            {
+                <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(WebSocketCloseStatus.<span class="s">NormalClosure</span>, string.<span class="k">Empty</span>, <span class="kt"> CancellationToken</span>.None);
+            }
+            <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {Encoding.<span class="k">UTF8</span>.<span class="kt">GetString</span>(buffer.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
+        }
+    }
+}
+<span class="k">catch</span> (<span class="kt">Exception</span> e)
+}
+    <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message: </span>{e.Message}<span class="s">"</span>);
+}          
+
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/C%23/Streamer.cs">Check here for the complete sample code.</a> </p>
 </blockquote>
+
 <blockquote class="lang-specific java">
     <p>Two Libraries are require to run this example<br>
         <strong> - javax.websocket-client-api.1.1.jar</strong><br>
@@ -1789,15 +1861,35 @@ Please note the sample request is limited in scope to a few countries and indica
 <h2 id="snapshots">Snapshots</h2>
 <!--R black side-->
 <blockquote class="lang-specific r">
-<p>To get information about commodities in data frame format type:</p>
+<p>marketsField can be:<br>Commodities</p>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'commodities'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+<span class="n">Output</span><span class="p">:</span>
+        <span class="n">Symbol</span>   <span class="n">...</span>           <span class="n">Name</span>     <span class="o">...</span>    <span class="n">DailyChange</span>    <span class="o">...</span>
+<span class="mi">2</span>     <span class="n">BDIY</span><span class="p">:</span><span class="n">IND</span>   <span class="o">...</span>     <span class="n">Baltic Dry</span>     <span class="o">...</span>        <span class="mf">-11.000</span>    <span class="o">...</span>
+<span class="mi">21</span>    <span class="n">BEEF</span><span class="p">:</span><span class="n">IND</span>   <span class="o">...</span>           <span class="n">Beef</span>     <span class="o">...</span>        <span class="mf">-0.0700</span>    <span class="o">...</span> 
+<span class="mi">3</span>      <span class="n">CHE</span><span class="p">:</span><span class="n">IND</span>   <span class="o">...</span>         <span class="n">Cheese</span>     <span class="o">...</span>        <span class="mf">-0.0010</span>    <span class="o">...</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p> Index</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'index'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Currency</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'currency'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Bond</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'bond'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <!--Python Markets Snapshots black side-->
 <blockquote class="lang-specific python">
 <p>To get stock market index data:</p>
 </blockquote>
-<!--python black side-->
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
 <span class="n">Output</span><span class="p">:</span>
@@ -1949,13 +2041,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="c1">//parse your data to satusfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
-
-<!--R market snapshots black side-->
-<blockquote class="lang-specific r">
-<br>  
-<p>marketsField can be: 'commodities', 'currency', 'index', 'bond'.</p>
-<br>
-</blockquote>  
+ 
 <!--markets white side-->
 <h3 id="methods">Methods</h3>
 
@@ -2070,7 +2156,17 @@ Please note the sample request is limited in scope to a few countries and indica
 <blockquote class="lang-specific r">
 <p>To get markets search by country, category and page number.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span><span class="p">(</span><span class="s1">'index'</span><span class="p">,</span><span class="s1">'markets'</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span><span class="p"> (</span><span class="s1">'index'</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get markets search by country.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'united states'</span><span class="p">)</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get markets search by country and categories.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'united states'</span><span class="p">,</span> <span class="s1">category = </span><span class="p">(</span><span class="s1">'index', 'markets'</span><span class="p">)</span><span class="p">)</span>
 </span></code></pre>
 <!--markets white side-->
 <p><span class="methods"></p>
@@ -2524,32 +2620,45 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote>
 <!--streaming markets c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest<br>
-      For other markets or calendar topic "key:secret" is required.<br><br>
-      Using Microsoft Visual Studio - Install (Discord.Addons.WebSocketSharp) NuGet Package
-    </p>  
-    </blockquote>
-<pre class="highlight csharp"><code><span class="k">using</span><span class="kt"> <span class="n">WebSocketSharp</span> <span class="p">;</span> 
-<span class="p">{</span>
-<span class="k">  using</span><span class="p">(</span><span class="k">var</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">WebSocket</span><span class="p">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="p">))</span>
-<span class="p">  {</span>  
-<span class="n">    ws</span><span class="p">.</span><span class="n">OnMessage</span><span class="p">+=</span><span class="p">(</span><span class="nf">sender</span><span class="p">,</span><span class="nf">e</span><span class="p">)</span><span class="p">=></span>
+<p>Only a single market topic "EURUSD:CUR" can be subscribed using guest:guest.<br>
+    For other markets topic "key:secret" is required.  
+</p>  
+</blockquote>
+<pre class="highlight csharp"><code>   
+<span class="k">try</span> 
+{
+    <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket</span>())
+    {    
+        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
+        
+        <span class="k">if</span> (cws.<span class="k">State</span> == <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
+            <span class="k">await</span> result = <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="kt">CancellationToken</span>.None);
+        }
+        <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
+        <span class="k">while</span> (cws.<span class="k">State</span>== <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(<span class="k">new byte</span>[<span class="s">1024</span>]);
+            <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer,<span class="kt"> CancellationToken</span>.None);   
+            <span class="k">if</span> (result.<span class="k">MessageType </span>== <span class="kt">WebSocketMessageType</span>.Close)
+            {
+                <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(WebSocketCloseStatus.<span class="s">NormalClosure</span>, string.<span class="k">Empty</span>, <span class="kt"> CancellationToken</span>.None);
+            }
+            <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {Encoding.<span class="k">UTF8</span>.<span class="kt">GetString</span>(buffer.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
+        }
+    }
+}
+<span class="k">catch</span> (<span class="kt">Exception</span> e)
+}
+    <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message: </span>{e.Message}<span class="s">"</span>);
+} 
 
-  <span class="kt">   Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Receiving : "</span> <span class="nf">+ e.Data</span><span class="p">)<span class="p">;</span>
-
-<span class="n">    ws</span> <span class="n">.Connect</span> <span class="p">();</span>
-<span class="n">    ws</span><span class="p">.</span><span class="n">Send</span><span class="p">(</span><span class="s">"{\"topic\": \"subscribe\", \"to\": \"EURUSD:CUR\" }"</span> <span class="p">);</span> 
-
-<span class="n">    ws</span> <span class="p">.</span><span class="n">OnError</span><span class="p">+=</span><span class="p">(</span><span class="nf">sender</span><span class="p">,</span><span class="nf">e</span><span class="p">)</span><span class="p">=></span>
-  <span class="kt">   Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">"Error : "</span> <span class="nf">+ e</span><span class="p">)<span class="p">;</span>
-<span class="kt">   Console</span><span class="p">.</span><span class="k">ReadKey</span><span class="p">(</span><span class="s">true</span><span class="p">)<span class="p">;</span>
-    
-<span class="p">  }</span>
-<span class="p">}</span>
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Press ctrl + f5 to run.</p>  
-    </blockquote>
+    <p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/C%23/Streamer.cs">Check here for the complete sample code.</a> </p>
+</blockquote>
+
 <!--streaming java black side-->
 <blockquote class="lang-specific java">
     <p>Two Libraries are require to run this example<br>
@@ -2827,8 +2936,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <h2 id="latest-news">Latest news</h2>
 <!--Python Latest News black side-->
 <blockquote class="lang-specific python">
-<p>To get the latest news by country, or country and indicator, ( te.getNews(country = 'United States', indicator = 'Imports' ).</p>
-<br>
+
 <p>To get several countries and indicators.</p>
 <br>
 </blockquote>  
@@ -2977,9 +3085,6 @@ Please note the sample request is limited in scope to a few countries and indica
 <h2 id="latest-articles">Latest articles</h2>
 <!--Python Latest Articles black side-->
 <blockquote class="lang-specific python">  
-<p>To get the latest articles by country, or countries ( te.getArticles(country = 'United States') ), ( te.getArticles(country = ['United States', 'China']) ).</p>
-<p>By indicator or indicators, ( te.getArticles(indicator = 'Imports') ), ( te.getArticles(indicator = ['Imports', 'Exports']) ).</p>
-<br>
 <p>To get the latest articles by several countries and indicators and also with a start index and limit size.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getArticles</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="p">[</span> <span class="s">'united states'</span><span class="p">,<span class="s">'Portugal'</span><span class="p">]<span class="p">,<span class="s">indicator</span><span class="o">=<span class="p">[</span><span class="s">'Imports'</span><span class="p">,<span class="s">'Interest rate'<span class="p">]<span class="p">,</span><span class="s">start</span><span class="o">=</span><span class="s">10</span><span class="p">,</span><span class="s">lim</span><span class="o">=<span class="s">5</span><span class="p">)</span>
@@ -3171,7 +3276,11 @@ Please note the sample request is limited in scope to a few countries and indica
 <span>...</span>      
 </code></pre>
 <blockquote class="lang-specific python">  
-<br>
+<p>To get World Bank data by category.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCategories</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">'Demographics'</span><span class="p">)</span>
+</code></pre> 
+<blockquote class="lang-specific python">  
 <p>To get World Bank data by category, and page number.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBCategories</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">'Demographics'</span><span class="p">,</span><span class="s">page_number</span><span class="o">=</span><span class="s">2</span><span class="p">)</span>
@@ -3181,7 +3290,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="mi">1</span>       <span class="n">Demographics</span>     <span class="n">...</span>    <span class="mi">2017-10-16</span><span class="n">T</span><span class="mi">09:03:02.733</span>
 <span class="mi">2</span>       <span class="n">Demographics</span>     <span class="n">...</span>     <span class="mi">2017-10-16</span><span class="n">T</span><span class="mi">09:03:02.72</span>
 <span>...</span>      
-</code></pre>
+</code></pre>     
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get World Bank categories. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -3592,8 +3701,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <h2 id="country">Country</h2>
 <!--Python Comtrade country black side-->
 <blockquote class="lang-specific python">  
-<br>
-<p>To get Comtrade by country or countries.</p>
+<p>To get Comtrade by country.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'China'</span><span class="p">)</span>
 
@@ -3604,10 +3712,14 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="n">...</span>
 </code></pre>
 <blockquote class="lang-specific python">  
-<br>
-<p>To get Comtrade by country or countries and page number.</p>
+<p>To get Comtrade by several countries.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="p">[</span> <span class="s">'China'<span class="p">,</span><span class="s">'Portugal'</span><span class="p">]</span><span class="p">,</span><span class="s">page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">= [</span><span class="s">'China', 'united states', 'japan'</span><span class="p">])</span>
+</code></pre>       
+<blockquote class="lang-specific python">  
+<p>To get Comtrade by countries and page number.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="p">[</span><span class="s">'China'<span class="p">,</span><span class="s">'Portugal'</span><span class="p">]</span><span class="p">,</span><span class="s">page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
 
           <span class="n">symbol</span>   <span class="n">...</span>                                                   <span class="n">title</span>           
 <span class="mi">0</span>     <span class="n">CHN473XX011</span>   <span class="n">...</span>            <span class="n">China Imports from LAIA, nes of Live animals</span>
@@ -3615,6 +3727,11 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">24</span>    <span class="n">CHNPRT41082</span>   <span class="n">...</span>      <span class="n"> China Exports to Portugal of Chamois (includin...</span>
 <span class="mi">25</span>    <span class="n">CHNPRT41091</span>   <span class="n">...</span>      <span class="n"> China Imports from Portugal of Patent and pate...</span>        
 <span class="n">...</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+<p>To get Comtrade by country and page number.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="s">'China'<span class="p">,</span><span class="s"> page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
 </code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
@@ -3907,13 +4024,24 @@ Because there are too many results, this method has pagination. Each page is lim
 
 </code></pre>
 <blockquote class="lang-specific python">  
+<p>To get Federal Reserve snapshots by url.</p>
 <br>
-<p>To get Federal Reserve snapshots by url ( te.getFedRSnaps(url = 'united states''/united-states/white-to-non-white-racial-dissimilarity-index-for-benton-county-ar-fed-data.html') ).</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">url</span> <span class="o">=</span> <span class="s">'united states''/united-states/white-to-non-white-racial-dissimilarity-index-for-benton-county-ar-fed-data.html'</span><span class="p">)</span>                     
+</code></pre>
+<blockquote class="lang-specific python">  
+<p>To get Federal Reserve snapshots by country.</p>
 <br>
-<p>To get Federal Reserve snapshots by country ( te.getFedRSnaps(country = 'united states') ).</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span><span class="p">)</span>                     
+</code></pre>
+<blockquote class="lang-specific python"> 
+<p>To get Federal Reserve snapshots by state.</p>
 <br>
-<p>To get Federal Reserve snapshots by state ( te.getFedRSnaps(state = 'tennessee') ).</p>
-<br>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s">'tennessee'</span><span class="p">)</span>                     
+</code></pre>
+<blockquote class="lang-specific python"> 
 <p>To get Federal Reserve snapshots by county or state and page number.</p>
 <br>
 </blockquote>  
@@ -4066,9 +4194,11 @@ or<br>
 <h2 id="historical">Historical</h2>
 <!--Python Federal Reserve historical black side-->
 <blockquote class="lang-specific python">  
-<br>
-<p>To get Federal Reserve historical data by more than one symbol ( te.getFedRHistorical(symbol = ['racedisparity005007', '2020ratio002013']) ).</p>  
-<br>
+<p>To get Federal Reserve historical data by more than one symbol.</p>  
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">= [</span> <span class="s">'racedisparity005007', '2020ratio002013'</span><span class="p">] )</span>                     
+</code></pre>
+<blockquote class="lang-specific python">
 <p>To get Federal Reserve historical data by symbol.</p>
 <br>
 </blockquote>  
