@@ -93,7 +93,8 @@ $('#contentContainer').scroll(() => {
     else {
         $('#mainMenu ul ul').css('height','0px');
     }
-    //Hiding border
+})
+//Hiding border
     /*
     if($('#mainMenu ul ul').css('height') == '0px') {
         $('#mainMenu ul ul').css('border','0px');
@@ -104,7 +105,6 @@ $('#contentContainer').scroll(() => {
         console.log(1)
     }*/
     
-})
 
 //Sub categories of #methods are hidden by default
 $('#mainMenu ul ul').css('height','0px');
