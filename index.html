@@ -348,6 +348,11 @@ Click on any method below for a sample. Please note the sample request is limite
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get a list of all indicators per country.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">),</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
 <!--Python Indicators black side-->
 <blockquote class="lang-specific python">
 <p>To get List of Indicators by Country: </p>
@@ -1472,24 +1477,35 @@ Please note the sample request is limited in scope to a few countries and indica
   </p>  
   </blockquote>
 <pre class="highlight csharp"><code>  
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
-{    
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
-
-    <span class="c1">// to subscribe for the TE Calendar</span>
-    string <span class="kt">calendarTopic</span> = <span class="s">"calendar"</span>;
-
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to connect the socket!"</span>);
-
-    RunStreamer(<span class="kt">calendarTopic</span>).Wait();
-
-    <span class="k">Console</span>.WriteLine(<span class="s">"Connection closed, press any key to exit..."</span>);
-    <span class="k">Console</span>.ReadLine();
+<span class="k">try</span> 
+{
+    <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket</span>())
+    {    
+        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
+        
+        <span class="k">if</span> (cws.<span class="k">State</span> == <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
+            <span class="k">await</span> result = <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="kt">CancellationToken</span>.None);
+        }
+        <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
+        <span class="k">while</span> (cws.<span class="k">State</span>== <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(<span class="k">new byte</span>[<span class="s">1024</span>]);
+            <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer,<span class="kt"> CancellationToken</span>.None);   
+            <span class="k">if</span> (result.<span class="k">MessageType </span>== <span class="kt">WebSocketMessageType</span>.Close)
+            {
+                <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(WebSocketCloseStatus.<span class="s">NormalClosure</span>, string.<span class="k">Empty</span>, <span class="kt"> CancellationToken</span>.None);
+            }
+            <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {Encoding.<span class="k">UTF8</span>.<span class="kt">GetString</span>(buffer.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
+        }
+    }
 }
+<span class="k">catch</span> (<span class="kt">Exception</span> e)
+}
+    <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message: </span>{e.Message}<span class="s">"</span>);
+}          
+
 </code></pre>
 <blockquote class="lang-specific csharp">
     <p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/C%23/Streamer.cs">Check here for the complete sample code.</a> </p>
@@ -2609,24 +2625,35 @@ Please note the sample request is limited in scope to a few countries and indica
 </p>  
 </blockquote>
 <pre class="highlight csharp"><code>   
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
-{    
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
-
-    <span class="c1">// to subscribe for the TE Markets</span>
-    string <span class="kt">marketEuroCurrencyTopic</span> = <span class="s">"EURUSD:CUR"</span>;
-
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to connect the socket!"</span>);
-
-    RunStreamer(<span class="kt">marketEuroCurrencyTopic</span>).Wait();
-
-    <span class="k">Console</span>.WriteLine(<span class="s">"Connection closed, press any key to exit..."</span>);
-    <span class="k">Console</span>.ReadLine();
+<span class="k">try</span> 
+{
+    <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket</span>())
+    {    
+        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
+        
+        <span class="k">if</span> (cws.<span class="k">State</span> == <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
+            <span class="k">await</span> result = <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="kt">CancellationToken</span>.None);
+        }
+        <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
+        <span class="k">while</span> (cws.<span class="k">State</span>== <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(<span class="k">new byte</span>[<span class="s">1024</span>]);
+            <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer,<span class="kt"> CancellationToken</span>.None);   
+            <span class="k">if</span> (result.<span class="k">MessageType </span>== <span class="kt">WebSocketMessageType</span>.Close)
+            {
+                <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(WebSocketCloseStatus.<span class="s">NormalClosure</span>, string.<span class="k">Empty</span>, <span class="kt"> CancellationToken</span>.None);
+            }
+            <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {Encoding.<span class="k">UTF8</span>.<span class="kt">GetString</span>(buffer.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
+        }
+    }
+}
+<span class="k">catch</span> (<span class="kt">Exception</span> e)
+}
+    <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message: </span>{e.Message}<span class="s">"</span>);
 } 
+
 </code></pre>
 <blockquote class="lang-specific csharp">
     <p><a target = '_blank' href="https://github.com/ieconomics/open-api/blob/master/C%23/Streamer.cs">Check here for the complete sample code.</a> </p>
