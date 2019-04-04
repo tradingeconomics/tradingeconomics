@@ -103,6 +103,7 @@ $('#contentContainer').scroll(() => {
         $('#mainMenu ul ul').css('border-width','1px');
         console.log(1)
     }*/
+    
 })
 
 //Sub categories of #methods are hidden by default
