@@ -1,5 +1,3 @@
-#*Golang*
-
 [install Go](https://golang.org/doc/install)
 
 To run the example 
