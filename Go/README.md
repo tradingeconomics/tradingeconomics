@@ -1,11 +1,11 @@
 [install Go](https://golang.org/doc/install)
 
-To run the example 
+Run the example 
 ```go
-In comand line go to your GOPATH. (example: C:\Go\src\calendar)
+In command line go to your GOPATH. (example: C:\Go\src\calendar)
 ```
 
-You have to build 
+Build
 
 ```go
 C:\Go\src\calendar>go build
