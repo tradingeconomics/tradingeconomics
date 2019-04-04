@@ -1,7 +1,5 @@
 #Using *Golang*
 
-The Go programming language is an open source project to make programmers more productive.
-
 You can check here how to  [install Go](https://golang.org/doc/install)
 
 To run the example 
