@@ -1,12 +1,12 @@
 Metadata-Version: 1.1
 Name: tradingeconomics
-Version: 0.2.935
+Version: 0.2.936
 Summary: Library to download data from Trading Economics API
 Home-page: https://github.com/ieconomics/open-api
 Author: Trading Economics
 Author-email: olexandr.baturin@tradingeconomics.com
 License: MIT
-Download-URL: https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.935.zip
+Download-URL: https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.936.zip
 Description: ---
         title: "Trading Economics API"
         output: html_document
