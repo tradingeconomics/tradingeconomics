@@ -80,7 +80,6 @@ def checkFedRPage(linkAPI, page_number):
     return linkAPI
 
 
-
 def getFedRStates(county = None, output_type = None):
     """
     List of all US states and list of all counties per state.
@@ -122,8 +121,8 @@ def getFedRStates(county = None, output_type = None):
         linkAPI = 'https://api.tradingeconomics.com/fred/counties/' + quote("".join(county))
     
     if name == None and county == None:
-        linkAPI = 'https://api.tradingeconomics.com/fred/states'       
-       
+        linkAPI = 'https://api.tradingeconomics.com/fred/states'  
+        
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
@@ -325,4 +324,63 @@ def getFedRHistorical(symbol = None, output_type = None):
     else:      
         raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
+
+
+def getFedRCounty(output_type = None):
+    """
+    List of Pike County, AR.
+    =================================================================================
+
+    Parameters:
+    -----------
+    county:list.
+             List of strings of all Pike County categories.
+             
+    output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    Notes:
+    ------
+    No parameters are required, because it can only be Pike County.
+
+    Example
+    -------
+    getFedRCounty(output_type = None)
+
+    """
+             
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
     
+    
+    linkAPI = 'https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR'
+     
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+
+    
+    try:
+        code = urlopen(linkAPI)
+        code = code.getcode() 
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+    
+    if len(webResults) > 0:            
+        maindf = pd.DataFrame(webResults)    
+      
+    else:
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+    return output     

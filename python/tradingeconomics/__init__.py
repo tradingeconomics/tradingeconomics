@@ -12,27 +12,27 @@ if PY3: # Python 3+
     from .calendar import getCalendarData
     from .forecasts import getForecastData
     from .indicators import getIndicatorData, getRatings, getLatestUpdates
-    from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents
+    from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch
     from .historicalMarkets import fetchMarkets
     from .glob import login, subscribe
     from .stream import run
-    from .earnings import getEarnings
+    from .earnings import getEarnings, getEarningsType
     from .news import getNews, getArticles, getArticleId
     from .worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
-    from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical
-    from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical
+    from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries
+    from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
 else: # Python 2.X
     from historical import getHistoricalData, getHistoricalRatings
     from calendar import getCalendarData
     from forecasts import getForecastData
     from indicators import getIndicatorData, getRatings, getLatestUpdates
-    from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents
+    from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch 
     from historicalMarkets import fetchMarkets
     from glob import login, subscribe
     from stream import run
-    from earnings import getEarnings
+    from earnings import getEarnings, getEarningsType
     from news import getNews, getArticles, getArticleId
     from worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
-    from comtrade import getCmtCategories, getCmtCountry, getCmtHistorical
-    from federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical
+    from comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries
+    from federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
     
