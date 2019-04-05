@@ -784,11 +784,17 @@ or you can specify a start date and end date<br>
 <h2 id="credit-rating">Credit Rating</h2>
 <!--Python Credit Rating black side-->
 <blockquote class="lang-specific python">
+<br>
+<br>
+<p>To get Credit Rating data for one country.</p>
+
+</blockquote>    
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getRatings</span><span class="p">(</span><span class="n">country</span><span class="o">=</span> <span class="s">'United states'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</span></code></pre> 
+<blockquote class="lang-specific python">
   <br>
   <br>
-  <p>To get Credit Rating data for one country ( te.getRatings(country = 'United States', output_type = 'df') ), for several countries.</p>
-  <br>
-  <br>
+  <p>To get Credit Rating data for several countries.</p>
 </blockquote>    
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getRatings</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'United states'</span><span class="p">,<span class="s">'Japan'</span><span class="p">]</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
@@ -796,13 +802,18 @@ or you can specify a start date and end date<br>
   <span class="mi">0</span>            <span class="n">Japan</span>     <span class="mi">77</span>     <span class="n">Positive</span>      <span class="n">A+</span>      <span class="n">Positive</span>        <span class="n">A1</span>            <span class="n">Stable</span>        <span class="n">A</span>           <span class="n">Stable</span>        <span class="n">NaN</span>
   <span class="mi">1</span>    <span class="n">United States</span>     <span class="mi">98</span>       <span class="n">Stable</span>     <span class="n">AA+</span>        <span class="n">Stable</span>       <span class="n">Aaa</span>            <span class="n">Stable</span>      <span class="n">AAA</span>           <span class="n">Stable</span>        <span class="n">NaN</span>
 </span></code></pre> 
+<blockquote class="lang-specific python">
+<br>
+<br>
+<p>To get Credit Rating historical data for one country.</p>
 
+</blockquote>    
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalRatings</span><span class="p">(</span><span class="n">country</span><span class="o">=</span> <span class="s">'United states'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</span></code></pre>
 <blockquote class="lang-specific python">
   <br>
   <br>
-  <p>To get Credit Rating historical data for one country ( te.getHistoricalRatings(country = 'United States') ), for several countries.</p>
-  <br>
-  <br>
+  <p>To get Credit Rating historical data for several countries.</p>
 </blockquote>    
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalRatings</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'United states'</span><span class="p">,<span class="s">'United Kingdom'</span><span class="p">]</span><span class="p">)</span>
 
@@ -1624,8 +1635,9 @@ Please note the sample request is limited in scope to a few countries and indica
 </span></code></pre>
 <!--Python Forecasts black side-->
 <blockquote class="lang-specific python">
-<p>Forecasted values for specific a country, in this case United States. </p>
 <br>
+<br>    
+<p>Forecasted values for specific a country, in this case United States. </p>
 <br>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
@@ -1642,10 +1654,31 @@ Please note the sample request is limited in scope to a few countries and indica
 </code></pre>
 <blockquote class="lang-specific python">
 <br>
-<br>  
+<br>
+<p>Forecasted values for more than one country. </p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">= [</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span> ], <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<br>
+<br>    
+<p>Forecasted values for a specific indicator. </p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">indicator</span><span class="o">= </span><span class="s">'gdp'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<br>
+<br>    
+<p>Forecasted values for more than one indicator. </p>
+
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">indicator</span><span class="o">= [</span><span class="s">'gdp'</span>, <span class="s">'population'</span>], <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre> 
+<blockquote class="lang-specific python"> 
+<br>
+<br>    
 <p>Forecasted values for several countries and indicators. </p>
-<br>
-<br>
+
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span><span class="o">=</span><span class="p">[</span><span class="s">'gdp'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">],</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
@@ -2152,6 +2185,22 @@ Please note the sample request is limited in scope to a few countries and indica
 
 <p></span> </p>
 <h3 id="search">Search</h3>
+<!--python market search black side-->
+<blockquote class="lang-specific python">
+<p>To search markets by country.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsSearch</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'japan'</span>)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To search markets by country and category.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsSearch</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'japan'</span>, <span class="n">category</span> = <span class="s">'index'</span>)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>To search markets by country and categories and page number.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsSearch</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'japan'</span>, <span class="n">category</span> = [<span class="s">'index'</span>, <span class="s">'markets'</span>], page = <span class="s">2</span>  )</span>
+</code></pre>
 <!--R Markets Search black side-->
 <blockquote class="lang-specific r">
 <p>To get markets search by country, category and page number.</p>
@@ -2929,7 +2978,14 @@ Please note the sample request is limited in scope to a few countries and indica
 
 
 <h1 id="news">News</h1>
+<!--Python Latest News black side-->
+<blockquote class="lang-specific python">
 
+<p>To get the latest news.</p>
+<br>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">output_type</span> <span class="o">= <span class="s">None</span>)</span>
+</code></pre>
 <p>Click on any method below for a sample.
 Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
 
@@ -3719,7 +3775,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <blockquote class="lang-specific python">  
 <p>To get Comtrade by countries and page number.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="p">[</span><span class="s">'China'<span class="p">,</span><span class="s">'Portugal'</span><span class="p">]</span><span class="p">,</span><span class="s">page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="p">[</span><span class="s">'China'<span class="p">,</span><span class="s">'Portugal'</span><span class="p">]</span><span class="p">,</span><span class="n">page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
 
           <span class="n">symbol</span>   <span class="n">...</span>                                                   <span class="n">title</span>           
 <span class="mi">0</span>     <span class="n">CHN473XX011</span>   <span class="n">...</span>            <span class="n">China Imports from LAIA, nes of Live animals</span>
@@ -3731,7 +3787,12 @@ Because there are too many results, this method has pagination. Each page is lim
 <blockquote class="lang-specific python">  
 <p>To get Comtrade by country and page number.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="s">'China'<span class="p">,</span><span class="s"> page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="s">'China'<span class="p">,</span><span class="n"> page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+<p>To get Comtrade between two countries and page number.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtTwoCountries</span><span class="p">(</span><span class="n">country1</span> <span class="o">=</span><span class="s">'portugal'<span class="p">,<span class="n">country2</span> <span class="o">=</span><span class="s">'spain'</span>,<span class="n"> page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
 </code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
@@ -4052,6 +4113,12 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">1</span>        <span class="n">TNOFAR</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.713</span> 
 <span class="mi">2</span>        <span class="n">TNOI96</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.217</span>       
 <span class="n">...</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+<p>To get Federal Reserve snapshots on Pike County, AR.</p>
+<br>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRCounty</span><span class="p">(</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">None</span><span class="p">)</span>                     
 </code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
