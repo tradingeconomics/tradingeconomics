@@ -346,7 +346,7 @@ def getMarketsComponents(symbols, output_type = None):
         raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
 
-def getMarketsSearch(country, category, page, output_type = None):    
+def getMarketsSearch(country=None, category = None, page = None, output_type = None):    
     """
     Search for country, category and page number.
     ==========================================================
@@ -367,6 +367,7 @@ def getMarketsSearch(country, category, page, output_type = None):
     getMarketsSearch(country = 'japan', category = ['index', 'markets'], page = None, output_type = None)
     getMarketsSearch(country = 'japan', category = 'index', page = None, output_type = None)
     """
+    
     try:
         _create_unverified_https_context = ssl._create_unverified_context
     except AttributeError:
@@ -378,6 +379,7 @@ def getMarketsSearch(country, category, page, output_type = None):
         linkAPI = 'https://api.tradingeconomics.com/markets/search/' + quote(",".join(country), safe='') 
     else:   
         linkAPI = 'https://api.tradingeconomics.com/markets/search/' + quote(country, safe='')
+    
    
     try:
         linkAPI += '?c=' + glob.apikey
@@ -387,7 +389,13 @@ def getMarketsSearch(country, category, page, output_type = None):
    
     if (category) is not None:
         linkAPI = checkCategory(linkAPI, category)
-    linkAPI = checkPage(linkAPI, page)
+    else:
+        linkAPI = checkCategory(linkAPI, category='index')
+    if (page) is not None:
+        linkAPI = checkPage(linkAPI, page)
+    else:
+        linkAPI = checkPage(linkAPI, page=1)
+    
     try:       
         code = urlopen(linkAPI)
         code = code.getcode() 
