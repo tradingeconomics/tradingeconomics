@@ -6,6 +6,7 @@ let historicalLi = document.getElementById('historicalLi');
 let calendarLi = document.getElementById('calendarLi');
 let marketsLi = document.getElementById('marketsLi');
 let forecastsLi = document.getElementById('forecastsLi');
+let ratingsLi = document.getElementById('ratingsLi');
 let refreshLi = document.getElementById('refreshLi');
 let searchLi = document.getElementById('searchLi');
 
@@ -18,6 +19,7 @@ historicalLi.onclick = () => { window.location = 'index.html#historical'; }
 calendarLi.onclick = () => { window.location = 'index.html#calendar'; }
 marketsLi.onclick = () => { window.location = 'index.html#markets'; }
 forecastsLi.onclick = () => { window.location = 'index.html#forecasts'; }
+ratingsLi.onclick = () => { window.location = 'index.html#ratings'; }
 refreshLi.onclick = () => { window.location = 'index.html#refresh'; }
 searchLi.onclick = () => { window.location = 'index.html#search'; }
 
@@ -32,6 +34,7 @@ function clearAllLiColors() {
     calendarLi.style.backgroundColor = 'transparent';
     marketsLi.style.backgroundColor = 'transparent';
     forecastsLi.style.backgroundColor = 'transparent';
+    ratingsLi.style.backgroundColor = 'transparent';
     refreshLi.style.backgroundColor = 'transparent';
     searchLi.style.backgroundColor = 'transparent';
 }
@@ -71,6 +74,10 @@ $('#contentContainer').scroll(() => {
         clearAllLiColors()
         forecastsLi.style.backgroundColor = colorBlue;
     }
+    if($('#ratings').position().top <= 0) {
+        clearAllLiColors()
+        ratingsLi.style.backgroundColor = colorBlue;
+    }
     if($('#refresh').position().top <= 0) {
         clearAllLiColors()
         refreshLi.style.backgroundColor = colorBlue;
@@ -81,12 +88,13 @@ $('#contentContainer').scroll(() => {
     }
     //Setting sub categories of #methods visibility
     if($('#methods').position().top <= 0 && $('#refresh').position().top >= 0) {
-        $('#mainMenu ul ul').css('height','142px');
+        $('#mainMenu ul ul').css('height','170px');
     }
     else {
         $('#mainMenu ul ul').css('height','0px');
     }
-    //Hiding border
+})
+//Hiding border
     /*
     if($('#mainMenu ul ul').css('height') == '0px') {
         $('#mainMenu ul ul').css('border','0px');
@@ -96,7 +104,7 @@ $('#contentContainer').scroll(() => {
         $('#mainMenu ul ul').css('border-width','1px');
         console.log(1)
     }*/
-})
+    
 
 //Sub categories of #methods are hidden by default
 $('#mainMenu ul ul').css('height','0px');
