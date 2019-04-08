@@ -9,7 +9,7 @@ PY3 = sys.version_info[0] == 3
 
 if PY3: # Python 3+
     from .historical import getHistoricalData, getHistoricalRatings
-    from .calendar import getCalendarData
+    from .calendar import getCalendarData, getCalendarId
     from .forecasts import getForecastData
     from .indicators import getIndicatorData, getRatings, getLatestUpdates
     from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch
@@ -23,7 +23,7 @@ if PY3: # Python 3+
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
 else: # Python 2.X
     from historical import getHistoricalData, getHistoricalRatings
-    from calendar import getCalendarData
+    from calendar import getCalendarData, getCalendarId
     from forecasts import getForecastData
     from indicators import getIndicatorData, getRatings, getLatestUpdates
     from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch 
