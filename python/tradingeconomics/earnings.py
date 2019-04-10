@@ -112,3 +112,64 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
     else:      
         raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
+
+
+def getEarningsType(type=None, output_type=None):
+    """
+    Returns earnings by type.
+    ==========================================================
+
+    Parameters:
+    -----------
+    type: string or list.
+             String to get data by type.
+             Type can be: earnings, ipo and dividends.
+
+    output_type: string.
+             'df'(default) for data frame,
+             'raw' for list of unparsed data. 
+
+    Example
+    -------
+    getEarningsType(type = 'ipo')
+    """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+        
+    
+    linkAPI = 'https://api.tradingeconomics.com/earnings?type=' 
+    if type:
+        linkAPI += quote((type), safe='')  
+    try:
+        linkAPI += '&c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+    
+   
+
+    print(linkAPI)
+    try:       
+        code = urlopen(linkAPI)
+        code = code.getcode() 
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
+    
+    if len(webResults) > 0:
+        names = ['date', 'symbol', 'type', 'name', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
+        names2 = ['Date', 'Symbol', 'Type', 'Name', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
+        maindf = pd.DataFrame(webResults, columns=names2)     
+        
+    else:
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf#.dropna()
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+    return output

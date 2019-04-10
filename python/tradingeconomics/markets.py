@@ -32,7 +32,20 @@ class DateError(ValueError):
 
 class WebRequestError(ValueError):
     pass
-    
+
+def checkPage(linkAPI, page):
+    if page != None:
+        linkAPI += '&page={0}'.format(page)
+    return linkAPI
+
+def checkCategory(linkAPI, category):
+    if type(category) is str:
+        linkAPI += '&category=' + quote (category, safe='')
+    else:
+        linkAPI += '&category=' + quote(",".join(category), safe="")
+    return linkAPI
+   
+   
 def getMarketsData(marketsField, output_type=None):
     """
     Returns a list of available commodities, currencies, indeces or 
@@ -316,6 +329,78 @@ def getMarketsComponents(symbols, output_type = None):
         code = urlopen(linkAPI)
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
+    if len(webResults) > 0:
+        names = ['symbol','ticker','name', 'country', 'date', 'type', 'decimals', 'last', 'marketcap','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear', 'isin', 'lastupdate']
+        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Type', 'decimals', 'Last', 'MarketCap', 'URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'LastUpdate']    
+        maindf = pd.DataFrame(webResults, columns=names2)     
+
+    else:
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+    return output
+
+def getMarketsSearch(country=None, category = None, page = None, output_type = None):    
+    """
+    Search for country, category and page number.
+    ==========================================================
+
+    Parameters:
+    -----------
+    symbols: string.
+            String to get data for country and category. 
+    
+    output_type: string.
+             'df'(default) for data frame,
+             'raw' for list of unparsed data. 
+
+    Example
+    -------
+    getMarketsSearch(country = 'japan', category = None, page = None, output_type = None)
+    getMarketsSearch(country = 'japan', category = 'index', page = None, output_type = None)
+    getMarketsSearch(country = 'japan', category = ['index', 'markets'], page = None, output_type = None)
+    getMarketsSearch(country = 'japan', category = 'index', page = None, output_type = None)
+    """
+    
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+
+    if type(country) is not str:        
+        linkAPI = 'https://api.tradingeconomics.com/markets/search/' + quote(",".join(country), safe='') 
+    else:   
+        linkAPI = 'https://api.tradingeconomics.com/markets/search/' + quote(country, safe='')
+    
+   
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+    
+   
+    if (category) is not None:
+        linkAPI = checkCategory(linkAPI, category)
+    else:
+        linkAPI = checkCategory(linkAPI, category='index')
+    if (page) is not None:
+        linkAPI = checkPage(linkAPI, page)
+    else:
+        linkAPI = checkPage(linkAPI, page=1)
+    
+    try:       
+        code = urlopen(linkAPI)
+        code = code.getcode() 
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:

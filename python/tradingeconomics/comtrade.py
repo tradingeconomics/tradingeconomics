@@ -248,5 +248,72 @@ def getCmtHistorical(symbol = None, output_type = None):
     else:      
         raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
-  
+
+def getCmtTwoCountries(country1 = None, country2 = None, page_number = None, output_type = None):
+    """
+    Get detailed information about Comtrade between two countries.
+    =================================================================================
+
+    Parameters:
+    -----------
+    country:list.
+             List of strings of all categories between two countries with pagination.
+                
+    output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+ 
+    Example
+    -------
+    getCmtTwoCountries(country1 = 'portugal', country2 = 'spain', page_number = 3, output_type = None)
+    
+    """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    
+    linkAPI = 'https://api.tradingeconomics.com/comtrade/country'
+
+
+    if country1 and country2 == None:
+        linkAPI = 'https://api.tradingeconomics.com/comtrade/country'
+    else:
+        linkAPI = 'https://api.tradingeconomics.com/comtrade/country/' + quote(country1) + '/' + quote(country2)   
+    
+    if page_number != None:
+        linkAPI = checkCmtPage(linkAPI, page_number)
+
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+    
+    try:
+        code = urlopen(linkAPI)
+        code = code.getcode() 
+        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+    
+    if len(webResults) > 0:
+        if country1 and country2 == None:
+            names2 = ['id', 'name', 'parentId', 'pretty_name']
+        else:
+            names = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title']
+            names2 = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title']   
+        maindf = pd.DataFrame(webResults, columns=names2)    
+    
+    else:  
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+    return output 
+
     

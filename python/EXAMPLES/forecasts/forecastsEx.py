@@ -26,7 +26,7 @@ print(mydata)
 print("===============================================================================================================")
 
 #To get forecast data by several countries and indicators 
-mydata = te.getForecastData(country = ['United States', 'India'], indicator = ['Imports','Exports'], output_type= 'df')
+mydata = te.getForecastData(country = ['United States', 'India'], indicator = ['Imports','Exports'], output_type= None)
 print(mydata)
 
 

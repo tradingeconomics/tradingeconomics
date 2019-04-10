@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -11,12 +10,15 @@ namespace CSharpExamples
         /// <summary>
         /// Store the client key to be used through the program
         /// </summary>
-        static string _clientKey;
+        static string _clientKey = "guest:guest";
 
         static void Main(string[] args)
         {
             // set the client key
-            _clientKey = ConfigurationManager.AppSettings["clientkey"];
+            Console.WriteLine("Provide a API key; otherwise, press ENTER to use the default test key...");
+            string k = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(k))
+                _clientKey = k;
 
             // get  calendar events
             Console.WriteLine("About to get calendar events");
