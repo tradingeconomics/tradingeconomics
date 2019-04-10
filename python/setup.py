@@ -1,20 +1,24 @@
 from setuptools import setup, find_packages
+from os import path
+import io
 
 def readme():
-    with open('README.rst') as f:
-        return f.read()
+    this_directory = path.abspath(path.dirname(__file__))
+    with io.open(path.join(this_directory, 'README.rst'), encoding='utf-8') as f:
+      return f.read()
 
 setup(
   name = 'tradingeconomics',
   packages = find_packages(exclude=['tests*']),  
-  version = '0.2.936',
+  version = '0.2.947',
   description = 'Library to download data from Trading Economics API',
-  long_description = readme(),
+  long_description =readme(),
+  long_description_content_type='text/x-rst',
   author = 'Trading Economics',
   author_email = 'olexandr.baturin@tradingeconomics.com',
   license = 'MIT',
   url = 'https://github.com/ieconomics/open-api', 
-  download_url = 'https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.936.zip', 
+  download_url = 'https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.947.zip', 
   keywords = ['tradingeconomics', 'data'], 
   classifiers = [ 'Programming Language :: Python :: 2.7'],
   install_requires = ['pandas', 'websocket-client'],

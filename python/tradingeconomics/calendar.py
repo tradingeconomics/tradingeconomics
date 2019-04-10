@@ -170,7 +170,7 @@ def getCalendarId(id = None, output_type = None):
 
     getCalendarId(id = 160025, output_type = None)
     
-    getCalendarId(id = [174108,160025,160030], output_type = None)
+    getCalendarId(id = [174108,160025,160030], output_type = 'df')
 
     """
     try:
