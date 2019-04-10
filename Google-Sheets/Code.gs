@@ -72,7 +72,7 @@ function printData(json) {
     function letterToColumn(letter)
     {
         var column = 0, length = letter.length
-        for (var i = 0 i < length i++)
+        for (var i = 0; i < length; i++)
         {
           column += (letter.charCodeAt(i) - 64) * Math.pow(26, length - i - 1)
         }
@@ -116,16 +116,7 @@ function printData(json) {
 function openHtml() {
     Logger.log("Opening HTML")
 
-    //var url = 'https://sso.tradingeconomics.com'
     var url  = 'forms.html'
-
-    /*
-    var html = HtmlService.createHtmlOutput('<a href="https://sso.tradingeconomics.com">Authenticate</a>')
-            .setWidth(860)
-            .setHeight(520)
-        SpreadsheetApp.getUi() // Or DocumentApp or SlidesApp or FormApp.
-            .showModalDialog(html, 'Trading Economics - Google Sheets Add-On')*/
-
     var html = HtmlService.createHtmlOutputFromFile(url)
         .setWidth(860)
         .setHeight(520)
