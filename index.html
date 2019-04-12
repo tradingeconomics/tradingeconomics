@@ -146,24 +146,19 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="introduction">Introduction</h1>
-<!--Introduction-->
-<p>The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
-Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. 
-The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at <a target = '_blank' href="https://tradingeconomics.com/analytics/api.aspx">Trading Economics</a>.</p>
 <!--python black side-->
 <blockquote class="lang-specific python">
-  <p>You can get Python from: <a target = '_blank' href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>   
-    <br>
+<p>You can get Python from: <a target = '_blank' href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>   
+    <br><br>
     We support Python 2.7 and Python 3.6.
     Then you need to install the tradingeconomics package. You can do so in a variety of ways.    
-  </p>
+</p>
 <br>
 <p>Install the tradingeconomics package using pip, a package management system used to install and manage software packages written in Python.
-   In Windows Command Prompt or Linux bash type:</p>
+    In Windows Command Prompt or Linux bash type:</p>
 </blockquote>     
 <pre class="highlight python"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">tradingeconomics</span>
 </code></pre>
-
 <!--R black side-->
 <blockquote class="lang-specific r">
 <p>You can get R from the official website: <a target = '_blank' href="https://cran.r-project.org/">https://cran.r-project.org/</a>     
@@ -215,7 +210,11 @@ See below how to install a package that’s sitting on GitHub.</p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
 </code></pre>
-<p>Before proceeding select your language tab on the right. </p>
+        
+<!--Introduction-->
+<p>The Trading Economics Application Programming Interface (API) provides direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
+Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. 
+The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel.
 
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
@@ -281,13 +280,6 @@ See below how to install a package that’s sitting on GitHub.</p>
 <h3 id="git-hub">GitHub</h3>
 <p>You can look for other examples on how to use our API in different programming languages, in our <a target = '_blank' href=" https://github.com/ieconomics/open-api">GitHub</a> repository.</p>
 
-<h3 id="excel">Excel</h3>
-<p> Download the <a target = '_blank' href=" https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi">Trading Economics Excel Add In</a> installer, launch it and follow the instructions.<br>    
-We support Excel 2010, 2013, 2016 (32bit and 64bit) <strong>only for Windows.</strong></p>
-<h3 id="tableau">Tableau</h3>
-<p>The Trading Economics Tableau Connector links the <a target = '_blank' href=" tableau/index.html">Tableau</a> software to our API, it allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates.
-<br></p>
-
 <h3 id="data-types">Data Types</h3>
 <p>You can request data in several formats:<br></p>
 
@@ -326,14 +318,14 @@ Using Headers auth:<br>
 <h3 id="notes">Notes</h3>
 
 <ul>
-<li>All API calls have a maximum limitation of 10000 rows. This limit can be different depending on your subscription.<br></li>
-<li>API calls for Earnings, World Bank, Comtrade and Federal Reserv data have a maximum limitation of 500 rows.</li>
+<li>All API calls have a maximum limitation of 10000 rows. Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. <br></li>
+<li>API calls for Earnings, World Bank, Comtrade and Federal Reserve data have a maximum limitation of 500 rows.</li>
 </ul>
 <!--Indicators white-->
 <h1 id="indicators">Indicators</h1>
 
 <p>Here you can get a list of all indicators, indicators by country, country-indicator pair and historical information for specific country and indicator.
-Click on any method below for a sample. Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
+Click on any method below for a sample.</p>
 <!--R indicators black side-->
 <blockquote class="lang-specific r">
 <p>For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt </p>
@@ -532,7 +524,7 @@ Click on any method below for a sample. Please note the sample request is limite
 </tr>
 <tr>
 <td style="text-align: left"><strong>Adjustment</strong></td>
-<td style="text-align: left">&mdash;&ndash;</td>
+<td style="text-align: left">Data description, for example: base period, price adjustement, seasonality</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Frequency</strong></td>
@@ -548,11 +540,11 @@ Click on any method below for a sample. Please note the sample request is limite
 </tr>
 <tr>
 <td style="text-align: left"><strong>PreviousValue</strong></td>
-<td style="text-align: left">Previous released value</td>
+<td style="text-align: left">Previously released value</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>PreviousValueDate</strong></td>
-<td style="text-align: left">Date of the previous released value</td>
+<td style="text-align: left">Date of the previously released value</td>
 </tr>
 </tbody></table>
 
@@ -572,6 +564,7 @@ Click on any method below for a sample. Please note the sample request is limite
 </span></code></pre>
 <!--Python Historical black side-->
 <blockquote class="lang-specific python">
+<br>    
 <p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united kingdom'</span><span class="p">,</span> <span class="n">indicator</span><span class="o">=</span><span class="s">'gdp'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2015-01-01'</span><span class="p">)</span>
@@ -589,51 +582,13 @@ Click on any method below for a sample. Please note the sample request is limite
 </blockquote> 
 
 <blockquote class="lang-specific python">
+<br><br>
 <p>Putting country name or indicator name in square brackets will return a dictionary type.
 For several countries and indicators</p>
 </blockquote> 
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span><span class="o">=</span><span class="p">[</span><span class="s">'exports'</span><span class="p">,</span><span class="s">'imports'</span><span class="p">],</span> 
                      <span class="n">initDate</span><span class="o">=</span><span class="s">'1990-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2015-01-01'</span><span class="p">)</span>
 
-<span class="n">Output</span><span class="p">:</span>
-<span class="p">{</span><span class="s">'China'</span><span class="p">:</span> 
-  <span class="p">{</span><span class="s">'Exports'</span><span class="p">:</span> 
-    <span class="p">[</span><span class="n">dict_values</span><span class="p">([</span>
-    <span class="mi">1990</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">31</span>      <span class="mf">28.42</span>
-    <span class="mi">1990</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span>      <span class="mf">32.53</span>
-                   <span class="o">...</span>
-    <span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span>    <span class="mf">2116.33</span>
-    <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>    <span class="mf">2273.72</span>
-    <span class="n">Name</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span><span class="p">])</span>
-    <span class="p">],</span> 
-    <span class="s">'Imports'</span><span class="p">:</span> 
-    <span class="p">[</span><span class="n">dict_values</span><span class="p">([</span>
-    <span class="mi">1990</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">31</span>      <span class="mf">25.70</span>
-    <span class="mi">1990</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span>      <span class="mf">35.30</span>
-                   <span class="o">...</span>
-    <span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span>    <span class="mf">1567.79</span>
-    <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>    <span class="mf">1775.93</span>
-    <span class="n">Name</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span><span class="p">])]</span>
-  <span class="p">},</span> 
-  <span class="s">'United States'</span><span class="p">:</span> 
-  <span class="p">{</span><span class="s">'Exports'</span><span class="p">:</span> 
-    <span class="p">[</span><span class="n">dict_values</span><span class="p">([</span>
-    <span class="mi">1990</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">31</span>     <span class="mf">43315.0</span>
-    <span class="mi">1990</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span>     <span class="mf">43412.0</span>
-                    <span class="o">...</span>
-    <span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span>    <span class="mf">197778.0</span>
-    <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>    <span class="mf">197411.0</span>
-    <span class="n">Name</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span><span class="p">])],</span> 
-    <span class="s">'Imports'</span><span class="p">:</span> 
-    <span class="p">[</span><span class="n">dict_values</span><span class="p">([</span>
-    <span class="mi">1990</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">31</span>     <span class="mf">50769.0</span>
-    <span class="mi">1990</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">28</span>     <span class="mf">48553.0</span>
-                    <span class="o">...</span>
-    <span class="mi">2014</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span>    <span class="mf">237634.0</span>
-    <span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>    <span class="mf">239840.0</span>
-    <span class="n">Name</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span><span class="p">])]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
 </code></pre>
 
   <!--javascript black side-->
@@ -820,10 +775,8 @@ or you can specify a start date and end date<br>
               <span class="n">Country</span>           <span class="n">Date</span>       <span class="o">Agency</span>    <span class="n">Rating</span>           <span class="n">Outlook</span>    
   <span class="mi">0</span>    <span class="n">United Kingdom</span>     <span class="mi">20-02-2019</span>        <span class="n">Fitch</span>        <span class="n">AA</span>    <span class="n">Negative Watch</span>               
   <span class="mi">1</span>    <span class="n">United Kingdom</span>     <span class="mi">22-09-2017</span>      <span class="n">Moody's</span>       <span class="n">Aa2</span>            <span class="n">Stable</span> 
-  <span class="mi">2</span>    <span class="n">United Kingdom</span>     <span class="mi">28-06-2016</span>        <span class="n">Fitch</span>        <span class="n">AA</span>          <span class="n">Negative</span>
-  <span class="mi">6</span>     <span class="n">United States</span>     <span class="mi">22-04-2014</span>          <span class="n">S&P</span>       <span class="n">AAA</span>            <span class="n">Stable</span>
-  <span class="mi">7</span>     <span class="n">United States</span>     <span class="mi">21-03-2014</span>         <span class="n">DBRS</span>       <span class="n">AAA</span>            <span class="n">Stable</span>
-  <span class="mi">8</span>     <span class="n">United States</span>     <span class="mi">15-10-2013</span>        <span class="n">Fitch</span>       <span class="n">AAA</span>            <span class="n">Stable</span>
+  <span class="mi">3</span>     <span class="n">United States</span>     <span class="mi">21-03-2014</span>         <span class="n">DBRS</span>       <span class="n">AAA</span>            <span class="n">Stable</span>
+  <span class="mi">4</span>     <span class="n">United States</span>     <span class="mi">15-10-2013</span>        <span class="n">Fitch</span>       <span class="n">AAA</span>            <span class="n">Stable</span>
       
 </span></code></pre> 
 <!--R credit rating black side-->
@@ -891,17 +844,16 @@ or you can specify a start date and end date<br>
 <li><p>Credit Rating of the specific country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest">/ratings/{country}</a>    </p>
 
-<ul>
-<li>Historical credit rating<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br></li>
-</ul></li>
+<li>Historical credit rating for one country<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br> </p>
+
 <li><p>Credit Rating for multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states,portugal?c=guest:guest">/ratings/{countries}</a>    </p>
 
-<ul>
-<li>Historical credit rating<br>
+
+<li>Historical credit rating for multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br></li>
-</ul></li>
+</li>
 </ul>
 
 <p></span></p>
@@ -928,11 +880,11 @@ or you can specify a start date and end date<br>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Rating</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Outlook</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>TE_Outlook</strong></td>
@@ -1055,7 +1007,7 @@ or you can specify a start date and end date<br>
 </tr>
 </tbody></table>
 <!--Calendar R black side-->
-<h1 id="calendar">Calendar</h1>
+<h1 id="calendar">Economic Calendar</h1>
 <h2 id="events">Events</h2>
 
 <blockquote class="lang-specific r">
@@ -1321,9 +1273,7 @@ or you can specify a start date and end date<br>
 <span class="c1">//parse your data to satusfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
-<p>Here you can get calendar events. 
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
+<p>The economic calendar covers around 1600 events for more than 150 countries a month.</p>
 
 <!--calendar white side-->
 <h3 id="methods">Methods</h3>
@@ -1349,6 +1299,9 @@ Please note the sample request is limited in scope to a few countries and indica
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a> </p></li>
 <li><p>Filter calendar events by calendar ID<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/calendar/calendarid/174108,160025,160030?c=guest:guest">/calendar/calendarid/{calendarids}?c=guest:guest</a>     </p></li>
+<li><p>Filter calendar events by ticker and date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/ticker/IJCUSA,SPAINFACORD,BAHRAININFNRATE?c=guest:guest">/calendar/ticker/{ticker}?c=guest:guest</a><br>  
+<a target = '_blank' href="https://api.tradingeconomics.com/calendar/ticker/IJCUSA,SPAINFACORD,BAHRAININFNRATE/2018-01-01/2018-03-01?c=guest:guest">/calendar/ticker/{ticker}/{yyyy-mm-dd}/{yyyy-mm-dd}?c=guest:guest</a>     </p></li> 
 </ul>
 
 <p></span> </p>
@@ -1407,7 +1360,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 <tr>
 <td style="text-align: left"><strong>DateSpan</strong></td>
-<td style="text-align: left">&mdash;&ndash;</td>
+<td style="text-align: left"> <strong>0</strong> Indicates that the time of the event is known, <strong>1</strong> indicates that we only know the date of event, the exact time of event is unknown</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Importance</strong></td>
@@ -1420,14 +1373,6 @@ Please note the sample request is limited in scope to a few countries and indica
 <tr>
 <td style="text-align: left"><strong>Revised</strong></td>
 <td style="text-align: left">Value reported in the previous period after revision (if there is no revision field remains empty)</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Currency</strong></td>
-<td style="text-align: left">&mdash;&ndash;</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Unit</strong></td>
-<td style="text-align: left">Unit of the value</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>OCountry</strong></td>
@@ -1454,6 +1399,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <h2 id="streaming">Streaming</h2>
 <!--streaming calendar python black side-->
 <blockquote class="lang-specific python">
+<br><br><br><br><br><br><br><br>
 <p>
  Copy this code and execute
 </p>
@@ -1635,9 +1581,6 @@ Please note the sample request is limited in scope to a few countries and indica
 <td style="text-align: left">1 = low, 2 = medium, 3 = high</td>
 </tr>
 </tbody></table>
-<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming">Python</a> <strong>,</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a> <strong>,</strong> <a href="https://ieconomics.github.io/open-api/?csharp#streaming">C# (C Sharp)</a> <strong>and</strong> <a href="https://ieconomics.github.io/open-api/?java#streaming">Java</a></p>
-
-<p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 
 <h1 id="forecast">Forecast</h1>
 <!--Forecasts R black side-->
@@ -1796,9 +1739,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="c1">//parse your data to satisfy your needs....
 </span><span class="cp">?&gt;</span>
 </code></pre>
-<p>Here you can get forecast values by country, by indicator, by country and indicator.
-Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
+
 <!--forecasts white side-->
 <h3 id="methods">Methods</h3>
 
@@ -1908,13 +1849,10 @@ Please note the sample request is limited in scope to a few countries and indica
 </tbody></table>
 <!--markets white side-->
 <h1 id="markets">Markets</h1>
-
+<h2 id="snapshots">Snapshots</h2>
 <p>Here you can get a list of available commodities, currencies, indexes or bonds and their latest values. 
 Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.<br>
 <strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
-
-<h2 id="snapshots">Snapshots</h2>
 <!--R black side-->
 <blockquote class="lang-specific r">
 <p>marketsField can be:<br>Commodities</p>
@@ -2100,8 +2038,6 @@ Please note the sample request is limited in scope to a few countries and indica
  
 <!--markets white side-->
 <h3 id="methods">Methods</h3>
-
-<p><strong>Snapshot of latest quotes</strong></p>
 
 <p><span class="methods"></p>
 
@@ -2389,9 +2325,9 @@ Please note the sample request is limited in scope to a few countries and indica
 <td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
-<h3 id="json-csv-xml">JSON CSV XML</h3>
-
-<p>For all methods listed above, you can get data in next formats:</p>
+<h3 id="json-csv-xml"></h3>
+<br>
+<p><strong>For all methods listed above, you can get data in:</strong></p>
 
 <p><span class="methods"></p>
   <ul>
@@ -2535,9 +2471,6 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="mi">1</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">30</span><span class="n">T08</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24407.2207</span>  <span class="mf">24409.2109</span>
 <span class="mi">2</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mi">30</span><span class="n">T08</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24410.2109</span>  <span class="mf">24411.2109</span>
  <span class="o">...</span>       <span class="o">...</span>                  <span class="o">...</span>     <span class="o">...</span>             <span class="o">...</span>         <span class="o">...</span>
-<span class="mi">9997</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span><span class="n">T15</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24744.1191</span>  <span class="mf">24755.1094</span>
-<span class="mi">9998</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span><span class="n">T15</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24749.1094</span>  <span class="mf">24749.1094</span>
-<span class="mi">9999</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">18</span><span class="n">T15</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">24750.1094</span>  <span class="mf">24754.1191</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>To get intraday market data for a specific symbol starting on certain date and time run:</p>
@@ -2550,9 +2483,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <span class="mi">1</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">13</span><span class="n">T15</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">25201.9395</span>  <span class="mf">25206.9395</span>
 <span class="mi">2</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">13</span><span class="n">T15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">25201.8809</span>  <span class="mf">25208.8809</span>
  <span class="o">...</span>       <span class="o">...</span>                  <span class="o">...</span>     <span class="o">...</span>             <span class="o">...</span>         <span class="o">...</span>
-<span class="mi">9997</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span><span class="n">T16</span><span class="p">:</span><span class="mo">06</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">23884.9300</span>  <span class="mf">23890.0200</span>
-<span class="mi">9998</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span><span class="n">T16</span><span class="p">:</span><span class="mo">07</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">23888.4000</span>  <span class="mf">23903.0400</span>
-<span class="mi">9999</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">04</span><span class="n">T16</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">23903.5000</span>  <span class="mf">23942.3900</span>
+
 </code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
@@ -2640,6 +2571,7 @@ Please note the sample request is limited in scope to a few countries and indica
 <h2 id="streaming">Streaming</h2>
 <!--streaming markets python black side-->
 <blockquote class="lang-specific python">
+<br><br><br><br> <br><br>     
 <p>
  Copy this code and execute
 </p>
@@ -2817,8 +2749,6 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 </tbody></table>
 
-<p><strong>Check how to use it with</strong> <a href="https://ieconomics.github.io/open-api/?python#streaming13">Python</a> <strong>,</strong> <a href="https://ieconomics.github.io/open-api/?javascript#streaming">NodeJS (JavaScript)</a> <strong>,</strong> <a href="https://ieconomics.github.io/open-api/?csharp#streaming">C# (C Sharp)</a> <strong>and</strong> <a href="https://ieconomics.github.io/open-api/?java#streaming">Java</a></p> 
-
 <p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 
 
@@ -2844,7 +2774,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">type</span><span class="o">=</span><span class="s1">'dividends'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-<h3 id="earnings-ipo-dividends">Earnings, IPO, Dividends</h3>
+
 <!--python earnings black side-->
 <blockquote class="lang-specific python">
 <p>To get default earnings calendar:</p>
@@ -2990,7 +2920,7 @@ Please note the sample request is limited in scope to a few countries and indica
 </tr>
 <tr>
 <td style="text-align: left"><strong>Currency</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left"></td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>LastUpdate</strong></td>
@@ -3001,21 +2931,15 @@ Please note the sample request is limited in scope to a few countries and indica
 
 
 <h1 id="news">News</h1>
+<h2 id="latest-news">Latest news</h2>
 <!--Python Latest News black side-->
 <blockquote class="lang-specific python">
-
 <p>To get the latest news.</p>
 <br>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">output_type</span> <span class="o">= <span class="s">None</span>)</span>
 </code></pre>
-<p>Click on any method below for a sample.
-Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. Trading Economics live acounts have access to more than 20 million indicators for nearly 200 countries.</p>
-
-<h2 id="latest-news">Latest news</h2>
-<!--Python Latest News black side-->
 <blockquote class="lang-specific python">
-
 <p>To get several countries and indicators.</p>
 <br>
 </blockquote>  
@@ -3424,7 +3348,6 @@ Because there are too many results, this method has pagination. Each page is lim
 <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">/worldBank/category/{category}/{page_number}</a></p></li>
 </ul>
 
-<p>All of this can be formatted to json by appending &ldquo;&amp;format=json&rdquo;</p>
 
 <p></span></p>
 
@@ -3580,8 +3503,6 @@ Because there are too many results, this method has pagination. Each page is lim
 <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">/worldBank/indicator?c=guest:guest&amp;url={url1}</a></p></li>
 </ul>
 
-<p>All of this can be formatted to json by appending &ldquo;&amp;format=json&rdquo;</p>
-
 <p></span></p>
 
 <h3 id="response-fields">Response Fields</h3>
@@ -3622,7 +3543,7 @@ Because there are too many results, this method has pagination. Each page is lim
 </tr>
 <tr>
 <td style="text-align: left"><strong>Description</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">Description</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Frequency</strong></td>
@@ -3634,7 +3555,7 @@ Because there are too many results, this method has pagination. Each page is lim
 </tr>
 <tr>
 <td style="text-align: left"><strong>Title</strong></td>
-<td style="text-align: left">&mdash;                                                            &mdash;</td>
+<td style="text-align: left">Title</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>URL</strong></td>
@@ -3668,8 +3589,6 @@ Because there are too many results, this method has pagination. Each page is lim
 <li>Historical data for a specific indicator<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">/worldBank/historical?c=guest:guest&amp;s={series_code}</a></li>
 </ul>
-
-<p>All of this can be formatted to json by appending &ldquo;&amp;format=json&rdquo;</p>
 
 <p></span></p>
 
