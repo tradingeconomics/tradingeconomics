@@ -9,49 +9,71 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <style>
         #wrapper {
-            max-width: 980px;
+            width: 90%;
             margin: auto auto;
             text-align: center;
         }
         
+        #wr2 {
+            min-height: 77.5vh;
+        }
+        
         h1 {
-            margin-top: 60px;
+            margin-top: 40px;
             font-weight: 600;
+            font-size: 2.4rem;
         }
         
         button {
-            height: 40px; 
-            margin: 12px;
-            padding: 0 30px;
+            color: #333;
+            width: 90%;
+            margin: 4px;
+            padding: 5px 10px;
             border: 0;
+            font-size: 1.3rem;
+            transition: all 0.25s;
+            border-radius: 4px; 
         }
         
         label {
-            margin-top: 16px;
+            color: #333;
+            margin-top: 12px;
+            font-size: 1.2rem;
         }
         
         input {
+            font-size: 1.2rem;
+            width: 90%;
             text-align: center;
         }
         
+        span {
+            color: #333;
+        }
+        
         .form-control {
-            border-radius: 0;
-            margin: 4px 0 8px 0;
-            height: 40px;
+            border-radius: 4px;
+            margin: 2px 0 8px 0;
+            padding: 0 5px;
             display: inline-block;
+            font-size: 1.3rem;
+            border: 1px solid #f2f2f7;
+            color: #666;
         }
         
         .btn-group {
-            width: 200px;
+            width: 180px;
         }
         
         #method {
             width: 100%;
-            margin: 20px 0 10px 0;
+            margin: 60px 0 10px 0;
         }
         
         .dropdown-menu {
-          border-radius: 0;
+            border-radius: 4px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
         }
         
         .dropdown-item {
@@ -65,775 +87,840 @@
         }
         
         .dropdown-item:hover {
-            background-color: #efeff7;
+            background-color: #f2f2f7;
         }
         
         #gettingWhatTitle {
-            margin: 40px 0 10px 0;
-            font-size: 2.2rem;
+            margin: 20px 0 10px 0;
+            font-size: 1.4rem;
             font-weight: 600;
             display: block;
         }
         
-        .btn-default {
-            min-height: 50px; 
-            background-color: #efeff7;
+        ._btn-info {
+            border: 2px solid #f2f2f7;
         }
         
-        .btn-default:focus, .pressedBtnGray, .btn-default:hover {
-            background-color: #d6d6e6;
+        ._btn-default, ._btn-info {
+            background-color: transparent;
+            color: #333;
         }
         
-        .pressedBtnBlue, .btn-info:focus, .btn-info:hover {
-            background-color: #2e96b6;
+        ._btn-default {
+            border: 1px solid #f2f2f7;
+        }
+
+        ._btn-default:focus, .pressedBtnGray, ._btn-default:hover {
+            background-color: #f2f2f7;
         }
         
-        footer {
-            margin-bottom: 40px;
+        .pressedBtnBlue, ._btn-info:focus, ._btn-info:hover {
+            background-color: #f2f2f7;
+            color: #333;
+        }
+        
+        ._btn-primary {
+            background-color: #21a364;
+            color: #fff;
+        }
+        
+        ._btn-primary:hover {
+            background-color: #008142;
+        }
+        
+        #submitButton {
+            background-color: #c5c5d3;
+            width: 120px;
+        }
+        
+        #submitButton:hover {
+            background-color: #b0b0bf;
+        }
+        
+        #wrapper footer {
+            font-weight: 100; 
+            font-size: 1rem; 
+            text-align: left;
+            padding-bottom: 30px;
+            color: #999;
+        }
+        
+        .glyphicon {
+            color: #54d685;
+        }
+        
+        #loading {
+            z-index: 1;
+            position: fixed;
+            width: 90%;
+            height: 100%;
+            background-color: rgb(255,255,255,0.75);
         }
     </style>
 </head>
 <body>
-    <div id="wrapper">                
-        <h1>Get Trading Economics Data</h1>
-
-        <div class="btn-group">
-            <button id="method" type="button" class="btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select one Method
-            </button>
-            <div class="dropdown-menu">
-                <button value="indicators" class="dropdown-item">Indicators</button>
-                <button value="calendar" class="dropdown-item">Calendar</button>
-                <button value="forecast" class="dropdown-item">Forecast</button>
-                <button value="markets" class="dropdown-item">Markets</button>
-                <button value="earnings" class="dropdown-item">Earnings</button>
-                <button value="news" class="dropdown-item">News</button>
-            </div>
-        </div>
-        <form>
-            <div class="form-inline">
-                <div id="indicatorsContainer">
-                    <button id='allIndicatorsBtn' type="button" class="btn-info">All Indicators</button>
-                    <button id='historicalDataBtn' type="button" class="btn-info">Historical Data</button>
-                    <button id='creditRatingBtn' type="button" class="btn-info">Credit Rating</button>
-                    <button id='updatesBtn' type="button" class="btn-info">Updates</button>
-                    <hr id="indicatorsHr">
-
-                    <div id="allIndicatorsBtnContainer">
-                        <button id="getEveryTeApiIndicatorName" type="button" class="btn-default">Get Every TE API Indicator Name</button>
-                        <button id="getEveryIndicatorOfaCountry" type="button" class="btn-default">Get Every Indicator of a Country</button>
-                        <button id="getThatIndicatorForAllCountries" type="button" class="btn-default">Get that Indicator for all Countries</button>
-                    </div>
-
-                    <div id="historicalDataBtnContainer">
-                        <button id="getSpecificCountriesAndIndicators" type="button" class="btn-default">Get Specific Countries and Indicators</button>
-                        <button id="getSpecificCountriesAndIndicatorsStartingFromaDate" type="button" class="btn-default">Get Specific Countries and Indicators Starting From a Date</button>
-                        <button id="getSpecificCountriesAndIndicatorsFromDateToDate" type="button" class="btn-default">Get Specific Countries and Indicators From Date to Date</button>
-                        <button id="getDataByTicker" type="button" class="btn-default">Get Data by Ticker</button>
-                    </div>
-
-                    <div id="creditRatingBtnContainer">
-                        <button id="getLatestRatingsForAllCountries" type="button" class="btn-default">Get Latest Ratings For All Countries</button>
-                        <button id="getCountryRating" type="button" class="btn-default">Get Country Rating</button>
-                        <button id="getCountryHistoricalRating" type="button" class="btn-default">Get Country Historical Rating</button>
-                    </div>
-
-                    <div id="updatesBtnContainer">
-                        <button id="getAllUpdates" type="button" class="btn-default">Get All Updates</button>
-                        <button id="getUpdatesStartingFromADate" type="button" class="btn-default">Get Updates Starting From a Date</button>
-                    </div>
-                </div>
-
-                <div id="calendarContainer">
-                    <hr>
-                    <button id="getAllCalendarEvents" type="button" class="btn-default">Get All Calendar Events</button>
-                    <button id="getCalendarEventsFromDateToDate" type="button" class="btn-default">Get Calendar Events From Date to Date</button>
-                    <button id="getCalendarEventsForSpecificCountries" type="button" class="btn-default">Get Calendar Events for Specific Countries</button>
-                    <button id="getCalendarEventsForSpecificCountriesFromDateToDate" type="button" class="btn-default">Get Calendar Events for Specific Countries From Date to Date</button>
-                    <button id="getCalendarEventsForSpecificIndicator" type="button" class="btn-default">Get Calendar Events for Specific Indicator</button>
-                    <button id="getCalendarEventsForSpecificIndicatorFromDateToDate" type="button" class="btn-default">Get Calendar Events for Specific Indicator From Date to Date</button>
-                    <button id="getCalendarEventsForSpecificCountriesAndIndicators" type="button" class="btn-default">Get Calendar Events for Specific Countries and Indicators</button>
-                    <button id="getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate" type="button" class="btn-default">Get Calendar Events for Specific Countries and Indicators From Date to Date</button>
-                    <button id="getCalendarEventsByCalendarId" type="button" class="btn-default">Get Calendar Events by Calendar ID</button>
-                </div>
-
-                <div id="forecastContainer">
-                    <hr>
-                    <button id="getForecastsForSpecificCountries" type="button" class="btn-default">Get Forecasts for Specific Countries</button>
-                    <button id="getForecastsForSpecificIndicator" type="button" class="btn-default">Get Forecasts for Specific Indicators</button>
-                    <button id="getForecastsForSpecificCountriesAndIndicators" type="button" class="btn-default">Get Forecasts for Specific Countries and Indicators</button>
-                </div>
-
-                <div id="marketsContainer">
-                    <button id='snapshotsBtn' type="button" class="btn-info">Snapshots</button>
-                    <button id='historicalDataMarketsBtn' type="button" class="btn-info">Historical Data</button>
-                    <button id='intradayDataBtn' type="button" class="btn-info">Intraday Data</button>
-                    <button id='marketListsBtn' type="button" class="btn-info">Market Lists</button>
-                    <hr id="marketsHr">
-
-                    <div id="snapshotsBtnContainer">
-                        <button id='getCommodities' type="button" class="btn-default">Get Commodities</button>
-                        <button id='getMajorCurrencies' type="button" class="btn-default">Get Major Currencies</button>
-                        <button id='getCurrencyCrosses' type="button" class="btn-default">Get Currency Crosses</button>
-                        <button id='getStockMarketIndexes' type="button" class="btn-default">Get Stock Market Indexes</button>
-                        <button id='getGovernmentBonds' type="button" class="btn-default">Get Government Bonds</button>
-                        <button id='getSpecificMarketsBySymbol' type="button" class="btn-default">Get Specific Markets by Symbol</button>
-                    </div>
-
-                    <div id="historicalDataMarketsBtnContainer">
-                        <button id='getSpecificHistoricalMarketsDataBySymbol' type="button" class="btn-default">Get Specific Historical Markets Data by Symbol</button>
-                        <button id='getSpecificHistoricalMarketsDataBySymbolStartingFromDate' type="button" class="btn-default">Get Specific Historical Markets Data by Symbol Starting From Date</button>
-                        <button id='getSpecificHistoricalMarketsDataBySymbolFromDateToDate' type="button" class="btn-default">Get Specific Historical Markets Data by Symbol From Date To Date</button>
-                    </div>
-
-                    <div id="intradayDataBtnContainer">
-                        <button id='getIntradayPricesByMarketSymbol' type="button" class="btn-default">Get Intraday Prices by Market Symbol</button>
-                        <button id='getIntradayPricesByMarketSymbolStartingFromDateAndHour' type="button" class="btn-default">Get Intraday Prices by Market Symbol Starting From Date and Hour</button>
-                        <button id='getIntradayPricesByMarketSymbolFromDateToDate' type="button" class="btn-default">Get Intraday Prices by Market Symbol From Date to Date</button>
-                    </div>
-
-                    <div id="marketListsBtnContainer">
-                        <button id='getLatestPeersPricesByMarketSymbol' type="button" class="btn-default">Get Latest Peers Prices by Market Symbol</button>
-                        <button id='getStockMarketsIndexComponentsbySymbol' type="button" class="btn-default">Get Stock Markets Index Components by Symbol</button>
-                    </div>
-                </div>
-
-                <div id="earningsContainer">
-                    <hr>
-                    <button id="getDefaultEarningsCalendar" type="button" class="btn-default">Get Default Earnings Calendar</button>
-                    <button id="getEarningsCalendarStartingFromDate" type="button" class="btn-default">Get Earnings Calendar Starting From Date</button>
-                    <button id="getEarningsCalendarByMarketStartingFromDate" type="button" class="btn-default">Get Earnings Calendar by Market Starting From Date</button>
-                    <button id="getEarningsCalendarByMarketFromDateToDate" type="button" class="btn-default">Get Earnings Calendar by Market From Date to Date</button>
-                    <button id="getEarningsCalendarByCountry" type="button" class="btn-default">Get Earnings Calendar by Country</button>
-                    <button id="getEarningsByType" type="button" class="btn-default">Get Earnings by Type</button>
-                </div>
-
-                <div id="newsContainer">
-                    <button id='latestNewsBtn' type="button" class="btn-info">Latest News</button>
-                    <button id='lastestArticlesBtn' type="button" class="btn-info">Latest Articles</button>
-                    <hr id="newsHr">
-
-                    <div id="latestNewsBtnContainer">
-                        <button id="getLatestNews" type="button" class="btn-default">Get Latest News</button>
-                        <button id="getNewsByCountry" type="button" class="btn-default">Get News by Country</button>
-                        <button id="getNewsByIndicator" type="button" class="btn-default">Get News by Indicator</button>
-                        <button id="getNewsByCountryAndIndicator" type="button" class="btn-default">Get News by Country and Indicator</button>
-                        <button id="getNewsListSpecifyingStartIndexAndListSize" type="button" class="btn-default">Get News List Specifying Start Index and List Size</button>
-                    </div>
-
-                    <div id="lastestArticlesBtnContainer">
-                        <button id="getLatestArticles" type="button" class="btn-default">Get Latest Articles</button>
-                        <button id="getArticlesByCountry" type="button" class="btn-default">Get Articles by Country</button>
-                        <button id="getArticlesByCountryFromDateToDate" type="button" class="btn-default">Get Articles by Country From Date to Date</button>
-                        <button id="getLatestArticlesByIndicator" type="button" class="btn-default">Get Latest Articles by Indicator</button>
-                        <button id="getLatestArticlesByCountryAndIndicator" type="button" class="btn-default">Get Latest Articles by Country and Indicator</button>
-                        <button id="getArticlesById" type="button" class="btn-default">Get Articles by ID</button>
-                        <button id="getArticlesListSpecifyingStartIndexAndListSize" type="button" class="btn-default">Get Articles List Specifying Start Index and List Size</button>
-                    </div>
-                </div>
-
-                <!--Input Fields-->
-                <hr id="gettingWhatHr">
-                <span id="gettingWhatTitle">Test Title</span>
-
-                <div id="indicatorInputContainer">
-                    <label for="indicatorInput" class="text-center">Indicators</label><br>
-                    <input type="text" class="form-control" id="indicatorInput" value="GDP, Consumer Confidence, Unemployment Rate" style="width: 600px;">
-                </div>
-
-                <div id="countryInputContainer">
-                    <label for="countryInput" class="text-center">Countries</label><br>
-                    <input type="text" class="form-control" id="countryInput" value="United States, United Kingdom, Australia" style="width: 600px;">
-                </div>
-
-                <div id="tickerInputContainer">
-                    <label for="tickerInput" class="text-center">Ticker</label><br>
-                    <input type="text" class="form-control" id="tickerInput" value="USURTOT" style="width: 160px;">
-                </div>
-
-                <div id="calendarIdInputContainer">
-                    <label for="calendarIdInput" class="text-center">Calendar ID</label><br>
-                    <input type="text" class="form-control" id="calendarIdInput" value="174108, 160025, 160030" style="width: 320px;">
-                </div>
-
-                <div id="currencyISOInputContainer">
-                    <label for="currencyISOInput" class="text-center">Currency ISO</label><br>
-                    <input type="text" class="form-control" id="currencyISOInput" value="EUR" style="width: 320px;">
-                </div>
-
-                <div id="marketSymbolInputContainer">
-                    <label for="marketSymbolInput" class="text-center">Market Symbol<br><span style="font-weight:100; font-size: 1.2rem;">Stock, Index, Currency, Commodity or Bond<br>Some options will not accept all of the above</span></label><br>
-                    <input type="text" class="form-control" id="marketSymbolInput" value="AAPL:US, INDU:IND, MSFT:US" style="width: 320px;">
-                </div>
-                
-                <div id="earningsTypeInputContainer">
-                    <label for="earningsTypeInput" class="text-center">Earnings Type<br><span style="font-weight:100; font-size: 1.2rem;">Earnings, Dividends, IPO or Stock Splits<br>Only one Type at a Time</span></label><br>
-                    <input type="text" class="form-control" id="earningsTypeInput" value="Earnings" style="width: 320px;">
-                </div>
-            
-                <div id="startIndexListSizeInputContainer">
-                    <label for="startIndexInput" class="text-center">Start Index and List Size</label><br>
-                    <input type="text" class="form-control" id="startIndexInput" value="10" style="width: 160px;">
-                    <input type="text" class="form-control" id="listSizeInput" value="15" style="width: 160px;">
-                </div>
-
-                <div id="articleIdInputContainer">
-                    <label for="articleIdInput" class="text-center">Article ID<br><span style="font-weight:100; font-size: 1.2rem;">Only one ID at a Time</span></label><br>
-                    <input type="text" class="form-control" id="articleIdInput" value="20580" style="width: 320px;">
-                </div>
-
-                <div id="dateFromOneInputContainer">
-                    <label id="dateFromOneInputLabel" for="dateFromOneInput" class="text-center">Starting From Date</label><br>
-                    <input type="text" class="form-control" id="dateFromOneInput" value="2014-12-31" style="width: 160px;">
-                </div>
-
-                <div id="dateFromToInputContainer">
-                    <label for="dateFromInput" class="text-center">From Date To Date</label><br>
-                    <input type="text" class="form-control" id="dateFromInput" value="2007-12-31" style="width: 160px;">
-                    <input type="text" class="form-control" id="dateToInput" value="2017-12-31" style="width: 160px;">
-                </div>
-                
-                <div id="hourInputContainer">
-                    <label for="hourInput" class="text-center">Hour</label><br>
-                    <input type="text" class="form-control" id="hourInput" value="15:30" style="width: 160px;">
-                </div>
-            
-                <div id="apiKeyInputContainer">
-                    <label for="apiKeyInput">API Key</label><br>
-                    <input type="text" class="form-control" id="apiKeyInput" value="guest:guest" style="width: 300px;">
+    <div id="wrapper">   
+        <div id="loading"></div>
+        <div id="wr2">
+            <!--<h1>Trading Economics<br><span style="font-weight: 400; font-size: 2rem;">Google Sheets</span></h1>-->
+    
+            <div class="btn-group">
+                <button id="method" type="button" class="_btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-menu-down"></span> Select One Method 
+                </button>
+                <div class="dropdown-menu">
+                    <button value="indicators" class="dropdown-item">Indicators</button>
+                    <button value="calendar" class="dropdown-item">Calendar</button>
+                    <button value="forecast" class="dropdown-item">Forecast</button>
+                    <button value="markets" class="dropdown-item">Markets</button>
+                    <button value="earnings" class="dropdown-item">Earnings</button>
+                    <button value="news" class="dropdown-item">News</button>
                 </div>
             </div>
-        </form>
-        <div class="center-block">
-            <button type="button" id="submitButton" class="btn-primary center-block" style="margin-top: 20px;">Submit</button><br>
-        </div>
+            <form>
+                <div class="form-inline">
+                    <div id="indicatorsContainer">
+                        <button id='allIndicatorsBtn' type="button" class="_btn-info">All Indicators</button>
+                        <button id='historicalDataBtn' type="button" class="_btn-info">Historical Data</button>
+                        <button id='creditRatingBtn' type="button" class="_btn-info">Credit Rating</button>
+                        <button id='updatesBtn' type="button" class="_btn-info">Updates</button>
+                        <hr id="indicatorsHr">
+    
+                        <div id="allIndicatorsBtnContainer">
+                            <button id="getEveryIndicatorOfaCountry" type="button" class="_btn-default">Get Every Indicator of a Country</button>
+                            <button id="getThatIndicatorForAllCountries" type="button" class="_btn-default">Get that Indicator for all Countries</button>
+                            <button id="getEveryTeApiIndicatorName" type="button" class="_btn-default">Get Every TE API Indicator Name</button>
+                        </div>
+    
+                        <div id="historicalDataBtnContainer">
+                            <button id="getSpecificCountriesAndIndicators" type="button" class="_btn-default">Get Specific Countries and Indicators</button>
+                            <button id="getSpecificCountriesAndIndicatorsStartingFromaDate" type="button" class="_btn-default">Get Specific Countries and Indicators Starting From a Date</button>
+                            <button id="getSpecificCountriesAndIndicatorsFromDateToDate" type="button" class="_btn-default">Get Specific Countries and Indicators From Date to Date</button>
+                            <button id="getDataByTicker" type="button" class="_btn-default">Get Data by Ticker</button>
+                        </div>
+    
+                        <div id="creditRatingBtnContainer">
+                            <button id="getLatestRatingsForAllCountries" type="button" class="_btn-default">Get Latest Ratings For All Countries</button>
+                            <button id="getCountryRating" type="button" class="_btn-default">Get Country Rating</button>
+                            <button id="getCountryHistoricalRating" type="button" class="_btn-default">Get Country Historical Rating</button>
+                        </div>
+    
+                        <div id="updatesBtnContainer">
+                            <button id="getAllUpdates" type="button" class="_btn-default">Get All Updates</button>
+                            <button id="getUpdatesStartingFromADate" type="button" class="_btn-default">Get Updates Starting From a Date</button>
+                        </div>
+                    </div>
+    
+                    <div id="calendarContainer">
+                        <hr>
+                        <button id="getAllCalendarEvents" type="button" class="_btn-default">Get All Calendar Events</button>
+                        <button id="getCalendarEventsFromDateToDate" type="button" class="_btn-default">Get Calendar Events From Date to Date</button>
+                        <button id="getCalendarEventsForSpecificCountries" type="button" class="_btn-default">Get Calendar Events for Specific Countries</button>
+                        <button id="getCalendarEventsForSpecificCountriesFromDateToDate" type="button" class="_btn-default">Get Calendar Events for Specific Countries From Date to Date</button>
+                        <button id="getCalendarEventsForSpecificIndicator" type="button" class="_btn-default">Get Calendar Events for Specific Indicator</button>
+                        <button id="getCalendarEventsForSpecificIndicatorFromDateToDate" type="button" class="_btn-default">Get Calendar Events for Specific Indicator From Date to Date</button>
+                        <button id="getCalendarEventsForSpecificCountriesAndIndicators" type="button" class="_btn-default">Get Calendar Events for Specific Countries and Indicators</button>
+                        <button id="getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate" type="button" class="_btn-default">Get Calendar Events for Specific Countries and Indicators From Date to Date</button>
+                        <button id="getCalendarEventsByCalendarId" type="button" class="_btn-default">Get Calendar Events by Calendar ID</button>
+                    </div>
+    
+                    <div id="forecastContainer">
+                        <hr>
+                        <button id="getForecastsForSpecificCountries" type="button" class="_btn-default">Get Forecasts for Specific Countries</button>
+                        <button id="getForecastsForSpecificIndicator" type="button" class="_btn-default">Get Forecasts for Specific Indicators</button>
+                        <button id="getForecastsForSpecificCountriesAndIndicators" type="button" class="_btn-default">Get Forecasts for Specific Countries and Indicators</button>
+                    </div>
+    
+                    <div id="marketsContainer">
+                        <button id='snapshotsBtn' type="button" class="_btn-info">Snapshots</button>
+                        <button id='historicalDataMarketsBtn' type="button" class="_btn-info">Historical Data</button>
+                        <button id='intradayDataBtn' type="button" class="_btn-info">Intraday Data</button>
+                        <button id='marketListsBtn' type="button" class="_btn-info">Market Lists</button>
+                        <hr id="marketsHr">
+    
+                        <div id="snapshotsBtnContainer">
+                            <button id='getCommodities' type="button" class="_btn-default">Get Commodities</button>
+                            <button id='getMajorCurrencies' type="button" class="_btn-default">Get Major Currencies</button>
+                            <button id='getCurrencyCrosses' type="button" class="_btn-default">Get Currency Crosses</button>
+                            <button id='getStockMarketIndexes' type="button" class="_btn-default">Get Stock Market Indexes</button>
+                            <button id='getGovernmentBonds' type="button" class="_btn-default">Get Government Bonds</button>
+                            <button id='getSpecificMarketsBySymbol' type="button" class="_btn-default">Get Specific Markets by Symbol</button>
+                        </div>
+    
+                        <div id="historicalDataMarketsBtnContainer">
+                            <button id='getSpecificHistoricalMarketsDataBySymbol' type="button" class="_btn-default">Get Specific Historical Markets Data by Symbol</button>
+                            <button id='getSpecificHistoricalMarketsDataBySymbolStartingFromDate' type="button" class="_btn-default">Get Specific Historical Markets Data by Symbol Starting From Date</button>
+                            <button id='getSpecificHistoricalMarketsDataBySymbolFromDateToDate' type="button" class="_btn-default">Get Specific Historical Markets Data by Symbol From Date To Date</button>
+                        </div>
+    
+                        <div id="intradayDataBtnContainer">
+                            <button id='getIntradayPricesByMarketSymbol' type="button" class="_btn-default">Get Intraday Prices by Market Symbol</button>
+                            <button id='getIntradayPricesByMarketSymbolStartingFromDateAndHour' type="button" class="_btn-default">Get Intraday Prices by Market Symbol Starting From Date and Hour</button>
+                            <button id='getIntradayPricesByMarketSymbolFromDateToDate' type="button" class="_btn-default">Get Intraday Prices by Market Symbol From Date to Date</button>
+                        </div>
+    
+                        <div id="marketListsBtnContainer">
+                            <button id='getLatestPeersPricesByMarketSymbol' type="button" class="_btn-default">Get Latest Peers Prices by Market Symbol</button>
+                            <button id='getStockMarketsIndexComponentsbySymbol' type="button" class="_btn-default">Get Stock Markets Index Components by Symbol</button>
+                        </div>
+                    </div>
+    
+                    <div id="earningsContainer">
+                        <hr>
+                        <button id="getDefaultEarningsCalendar" type="button" class="_btn-default">Get Default Earnings Calendar</button>
+                        <button id="getEarningsCalendarStartingFromDate" type="button" class="_btn-default">Get Earnings Calendar Starting From Date</button>
+                        <button id="getEarningsCalendarByMarketStartingFromDate" type="button" class="_btn-default">Get Earnings Calendar by Market Starting From Date</button>
+                        <button id="getEarningsCalendarByMarketFromDateToDate" type="button" class="_btn-default">Get Earnings Calendar by Market From Date to Date</button>
+                        <button id="getEarningsCalendarByCountry" type="button" class="_btn-default">Get Earnings Calendar by Country</button>
+                        <button id="getEarningsByType" type="button" class="_btn-default">Get Earnings by Type</button>
+                    </div>
+    
+                    <div id="newsContainer">
+                        <button id='latestNewsBtn' type="button" class="_btn-info">Latest News</button>
+                        <button id='lastestArticlesBtn' type="button" class="_btn-info">Latest Articles</button>
+                        <hr id="newsHr">
+    
+                        <div id="latestNewsBtnContainer">
+                            <button id="getLatestNews" type="button" class="_btn-default">Get Latest News</button>
+                            <button id="getNewsByCountry" type="button" class="_btn-default">Get News by Country</button>
+                            <button id="getNewsByIndicator" type="button" class="_btn-default">Get News by Indicator</button>
+                            <button id="getNewsByCountryAndIndicator" type="button" class="_btn-default">Get News by Country and Indicator</button>
+                            <button id="getNewsListSpecifyingStartIndexAndListSize" type="button" class="_btn-default">Get News List Specifying Start Index and List Size</button>
+                        </div>
+    
+                        <div id="lastestArticlesBtnContainer">
+                            <button id="getLatestArticles" type="button" class="_btn-default">Get Latest Articles</button>
+                            <button id="getArticlesByCountry" type="button" class="_btn-default">Get Articles by Country</button>
+                            <button id="getArticlesByCountryFromDateToDate" type="button" class="_btn-default">Get Articles by Country From Date to Date</button>
+                            <button id="getLatestArticlesByIndicator" type="button" class="_btn-default">Get Latest Articles by Indicator</button>
+                            <button id="getLatestArticlesByCountryAndIndicator" type="button" class="_btn-default">Get Latest Articles by Country and Indicator</button>
+                            <button id="getArticlesById" type="button" class="_btn-default">Get Articles by ID</button>
+                            <button id="getArticlesListSpecifyingStartIndexAndListSize" type="button" class="_btn-default">Get Articles List Specifying Start Index and List Size</button>
+                        </div>
+                    </div>
+    
+                    <!--Input Fields-->
+                    <hr id="gettingWhatHr">
+                    <span id="gettingWhatTitle">Test Title</span>
+    
+                    <div id="indicatorInputContainer">
+                        <label for="indicatorInput" class="text-center">Indicators</label><br>
+                        <input type="text" class="form-control" id="indicatorInput" value="GDP, Consumer Confidence, Unemployment Rate">
+                    </div>
+    
+                    <div id="countryInputContainer">
+                        <label for="countryInput" class="text-center">Countries</label><br>
+                        <input type="text" class="form-control" id="countryInput" value="United States, United Kingdom, Australia">
+                    </div>
+    
+                    <div id="tickerInputContainer">
+                        <label for="tickerInput" class="text-center">Ticker</label><br>
+                        <input type="text" class="form-control" id="tickerInput" value="USURTOT">
+                    </div>
+    
+                    <div id="calendarIdInputContainer">
+                        <label for="calendarIdInput" class="text-center">Calendar ID</label><br>
+                        <input type="text" class="form-control" id="calendarIdInput" value="174108, 160025, 160030">
+                    </div>
+    
+                    <div id="currencyISOInputContainer">
+                        <label for="currencyISOInput" class="text-center">Currency ISO</label><br>
+                        <input type="text" class="form-control" id="currencyISOInput" value="EUR">
+                    </div>
+    
+                    <div id="marketSymbolInputContainer">
+                        <label for="marketSymbolInput" class="text-center">Market Symbol<br><span style="font-weight:100; font-size: 1rem; color: #999;">Stock, Index, Currency, Commodity or Bond<br>Some options will not accept all of the above</span></label><br>
+                        <input type="text" class="form-control" id="marketSymbolInput" value="AAPL:US, INDU:IND, MSFT:US">
+                    </div>
+                    
+                    <div id="earningsTypeInputContainer">
+                        <label for="earningsTypeInput" class="text-center">Earnings Type<br><span style="font-weight:100; font-size: 1rem; color: #999;">Earnings, Dividends, IPO or Stock Splits<br>Only one Type at a Time</span></label><br>
+                        <input type="text" class="form-control" id="earningsTypeInput" value="Earnings">
+                    </div>
+                
+                    <div id="startIndexListSizeInputContainer">
+                        <label for="startIndexInput" class="text-center">Start Index and List Size</label><br>
+                        <input type="text" class="form-control" id="startIndexInput" value="10">
+                        <input type="text" class="form-control" id="listSizeInput" value="15">
+                    </div>
+    
+                    <div id="articleIdInputContainer">
+                        <label for="articleIdInput" class="text-center">Article ID<br><span style="font-weight:100; font-size: 1rem; color: #999;">Only one ID at a Time</span></label><br>
+                        <input type="text" class="form-control" id="articleIdInput" value="20580">
+                    </div>
+    
+                    <div id="dateFromOneInputContainer">
+                        <label id="dateFromOneInputLabel" for="dateFromOneInput" class="text-center">Starting From Date</label><br>
+                        <input type="text" class="form-control" id="dateFromOneInput" value="2014-12-31">
+                    </div>
+    
+                    <div id="dateFromToInputContainer">
+                        <label for="dateFromInput" class="text-center">From Date To Date</label><br>
+                        <input type="text" class="form-control" id="dateFromInput" value="2007-12-31">
+                        <input type="text" class="form-control" id="dateToInput" value="2017-12-31">
+                    </div>
+                    
+                    <div id="hourInputContainer">
+                        <label for="hourInput" class="text-center">Hour</label><br>
+                        <input type="text" class="form-control" id="hourInput" value="15:30">
+                    </div>
+                
+                    <div id="apiKeyInputContainer">
+                        <label for="apiKeyInput">API Key</label><br>
+                        <input type="text" class="form-control" id="apiKeyInput" value="guest:guest">
+                    </div>
+                </div>
+            </form>
+            <button type="button" id="submitButton" class="_btn-primary center-block" style="margin-top: 20px;">Submit</button><br>
+        </div>    
         <footer>
             <hr>
-            <span style="font-weight:100; font-size: 1.2rem;">
-                The API key guest:guest is limited to some indicators and rows.<br>
-                Please <a href="https://billing.tradingeconomics.com/plans.aspx?source=google-sheets" target="_blank">subscribe</a> to one of our plans if you do not have an API key yet.<br>
-                Pick only one indicator/country/symbol if the Add-On fails to display multiple ones. (For some requests only).<br>
+            <p>
+                The API key guest:guest is limited to some indicators and rows.
+                Please <a href="https://billing.tradingeconomics.com/plans.aspx?source=google-sheets" target="_blank">subscribe</a> to one of our plans if you do not have an API key yet.
+                Pick only one indicator, country, symbol (...) if the Add-On fails to display multiple ones.
                 Should you have any questions please <a href="https://tradingeconomics.com/contact.aspx?subject=googleSheets" target="_blank">contact us</a>.
-            </span>
+            </p>
         </footer>
     </div>
     <script>
         $(document).ready(function() {
-
-		var inputsID = ['indicatorInput', 'countryInput', 'tickerInput', 'calendarIdInput', 'currencyISOInput', 'marketSymbolInput', 'dateFromOneInput', 'dateFromInput', 'dateToInput', 'earningsTypeInput', 'startIndexInput', 'listSizeInput', 'articleIdInput', 'hourInput']
-		var inputsSelected = []
-
-		//Selecting Input Fields
-		for (var i in inputsID) {
-			inputsSelected[i] = document.getElementById(inputsID[i])
-		}
-
-		var urlToBakeCode = ''
-
-		var submitButton = document.getElementById('submitButton')
-		submitButton.onclick = function() { 
-
-			var _baseUrl = ''
-			var _urlAfter = null
-
-			for(var i in inputsSelected) {
-				inputsSelected[i].value = inputsSelected[i].value.trim()
-			}
-
-			//Creating the specific url's foreach case
-			//Indicators
-			if (urlToBakeCode == 'getEveryTeApiIndicatorName') { _baseUrl = '/indicators' }
-			else if (urlToBakeCode == 'getEveryIndicatorOfaCountry') { _baseUrl = '/country/' + inputsSelected[1].value } 
-			else if (urlToBakeCode == 'getThatIndicatorForAllCountries') { _baseUrl = '/country/all/' + inputsSelected[0].value } 
-			else if (urlToBakeCode == 'getSpecificCountriesAndIndicators') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
-			else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsStartingFromaDate') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[6].value }
-			else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getDataByTicker') { _baseUrl = '/historical/ticker/' + inputsSelected[2].value + '/' + inputsSelected[6].value }
-            else if (urlToBakeCode == 'getLatestRatingsForAllCountries') { _baseUrl = '/ratings' }
-            else if (urlToBakeCode == 'getCountryRating') { _baseUrl = '/ratings/' + inputsSelected[1].value }
-			else if (urlToBakeCode == 'getCountryHistoricalRating') { _baseUrl = '/ratings/historical/' + inputsSelected[1].value }
-			else if (urlToBakeCode == 'getAllUpdates') { _baseUrl = '/updates' }
-			else if (urlToBakeCode == 'getUpdatesStartingFromADate') { _baseUrl = '/updates/' + inputsSelected[6].value }
-			//Calendar
-			else if (urlToBakeCode == 'getAllCalendarEvents') { _baseUrl = '/calendar' }
-			else if (urlToBakeCode == 'getCalendarEventsFromDateToDate') { _baseUrl = '/calendar/country/All/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountries') { _baseUrl = '/calendar/country/' + inputsSelected[1].value }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesFromDateToDate') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificIndicator') { _baseUrl = '/calendar/indicator/' + inputsSelected[0].value }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificIndicatorFromDateToDate') { _baseUrl = '/calendar/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicators') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
-			else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getCalendarEventsByCalendarId') { _baseUrl = '/calendar/calendarid/' + inputsSelected[3].value }
-			//Forecast
-			else if (urlToBakeCode == 'getForecastsForSpecificCountries') { _baseUrl = '/forecast/country/' + inputsSelected[1].value }
-			else if (urlToBakeCode == 'getForecastsForSpecificIndicator') { _baseUrl = '/forecast/indicator/' + inputsSelected[0].value }
-			else if (urlToBakeCode == 'getForecastsForSpecificCountriesAndIndicators') { _baseUrl = '/forecast/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
-			//Markets
-			else if (urlToBakeCode == 'getCommodities') { _baseUrl = '/markets/commodities' }
-			else if (urlToBakeCode == 'getMajorCurrencies') { _baseUrl = '/markets/currency' }
-			else if (urlToBakeCode == 'getCurrencyCrosses') {_baseUrl = '/markets/currency', _urlAfter = 'cross=' + inputsSelected[4].value }
-			else if (urlToBakeCode == 'getStockMarketIndexes') { _baseUrl = '/markets/index' }
-			else if (urlToBakeCode == 'getGovernmentBonds') { _baseUrl = '/markets/bond' }
-			else if (urlToBakeCode == 'getSpecificMarketsBySymbol') { _baseUrl = '/markets/symbol/' + inputsSelected[5].value }
-			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbol') { _baseUrl = '/markets/historical/' + inputsSelected[5].value }
-			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbolStartingFromDate') { _baseUrl = '/markets/historical/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value }
-			else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbolFromDateToDate') { _baseUrl = '/markets/historical/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + '&d2=' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbol') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value }
-			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolStartingFromDateAndHour') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value + ' ' + inputsSelected[13].value }
-			else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolFromDateToDate') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + 'd2=' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getLatestPeersPricesByMarketSymbol') { _baseUrl = '/markets/peers/' + inputsSelected[5].value }
-			else if (urlToBakeCode == 'getStockMarketsIndexComponentsbySymbol') { _baseUrl = '/markets/components/' + inputsSelected[5].value }
-			//Earnings
-			else if (urlToBakeCode == 'getDefaultEarningsCalendar') { _baseUrl = '/earnings' }
-			else if (urlToBakeCode == 'getEarningsCalendarStartingFromDate') { _baseUrl = '/earnings', _urlAfter = 'd1=' + inputsSelected[6].value }
-			else if (urlToBakeCode == 'getEarningsCalendarByMarketStartingFromDate') { _baseUrl = '/earnings/symbol/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value }
-			else if (urlToBakeCode == 'getEarningsCalendarByMarketFromDateToDate') { _baseUrl = '/earnings/symbol/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + '&d2=' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getEarningsCalendarByCountry') { _baseUrl = '/earnings/country/' + inputsSelected[1].value }
-			//else if (urlToBakeCode == 'getEarningsByType') { _baseUrl = '/earnings?type=' + inputsSelected[9].value }
-			//News
-			else if (urlToBakeCode == 'getLatestNews') { _baseUrl = '/news' }
-			else if (urlToBakeCode == 'getNewsByCountry') { _baseUrl = '/news/country/' + inputsSelected[1].value }
-			else if (urlToBakeCode == 'getNewsByIndicator') { _baseUrl = '/news/indicator/' + inputsSelected[0].value }
-			else if (urlToBakeCode == 'getNewsByCountryAndIndicator') { _baseUrl = '/news/country/' + inputsSelected[1].value + '/' + inputsSelected[0].value }
-			else if (urlToBakeCode == 'getNewsListSpecifyingStartIndexAndListSize') { _baseUrl = '/news', _urlAfter = 'limit=' + inputsSelected[11].value + '&start=' + inputsSelected[10].value }
-			else if (urlToBakeCode == 'getLatestArticles') { _baseUrl = '/articles' }
-			else if (urlToBakeCode == 'getArticlesByCountry') { _baseUrl = '/articles/country/' + inputsSelected[1].value }
-			else if (urlToBakeCode == 'getArticlesByCountryFromDateToDate') { _baseUrl = '/articles/country/' + inputsSelected[1].value + '/from/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
-			else if (urlToBakeCode == 'getLatestArticlesByIndicator') { _baseUrl = '/articles/indicator/' + inputsSelected[0].value }
-			else if (urlToBakeCode == 'getLatestArticlesByCountryAndIndicator') { _baseUrl = '/articles/country/' + inputsSelected[1].value + '/' + inputsSelected[0].value }
-			else if (urlToBakeCode == 'getArticlesById') { _baseUrl = '/articles/id/' + inputsSelected[12].value }
-			else if (urlToBakeCode == 'getArticlesListSpecifyingStartIndexAndListSize') { _baseUrl = '/articles', _urlAfter = 'lim=' + inputsSelected[11].value + '&start=' + inputsSelected[10].value }
-
-			//This object will further complete the url with the API Key 
-			var urlObj = {
-				urlBase: _baseUrl,
-				apiKey: $('#apiKeyInput').val().trim(),
-				urlAfter: _urlAfter
-			}
-
-			var apiCall = ''
-
-            if(urlObj.urlAfter == null) {
-                apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey + '&googleSheets'
+            
+            function loadingData(hideShow) {
+                $('#loading').css('visibility', hideShow)
             }
-            else {
-                apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey + '&' + urlObj.urlAfter + '&googleSheets'
+            loadingData('hidden')
+    
+            var inputsID = ['indicatorInput', 'countryInput', 'tickerInput', 'calendarIdInput', 'currencyISOInput', 'marketSymbolInput', 'dateFromOneInput', 'dateFromInput', 'dateToInput', 'earningsTypeInput', 'startIndexInput', 'listSizeInput', 'articleIdInput', 'hourInput']
+            var inputsSelected = []
+    
+            //Selecting Input Fields
+            for (var i in inputsID) {
+                inputsSelected[i] = document.getElementById(inputsID[i])
             }
- 
-            //Sending Api Call to Code.gs to Print the Data (End of this script)
-            google.script.run.urlToJson(apiCall)
-            google.script.host.close()
-		}
-
-		//DOM Selections
-		var indicatorsHr = document.getElementById('indicatorsHr')
-		var marketsHr = document.getElementById('marketsHr')
-		var newsHr = document.getElementById('newsHr')
-		var gettingWhatHr = document.getElementById('gettingWhatHr')
-		var gettingWhatTitle = document.getElementById('gettingWhatTitle')
-		var dateFromOneInputLabel = document.getElementById('dateFromOneInputLabel')
-		var apiKeyInput = document.getElementById('apiKeyInput')
-		//Indicators
-		var indicatorsContainer = document.getElementById('indicatorsContainer')
-		var allIndicatorsBtn = document.getElementById('allIndicatorsBtn')
-		var allIndicatorsBtnContainer = document.getElementById('allIndicatorsBtnContainer')
-		var historicalDataBtn = document.getElementById('historicalDataBtn')
-		var historicalDataBtnContainer = document.getElementById('historicalDataBtnContainer')
-		var creditRatingBtn = document.getElementById('creditRatingBtn')
-		var creditRatingBtnContainer = document.getElementById('creditRatingBtnContainer')
-		var updatesBtn = document.getElementById('updatesBtn')
-		var updatesBtnContainer = document.getElementById('updatesBtnContainer')
-		var getEveryTeApiIndicatorName = document.getElementById('getEveryTeApiIndicatorName')
-		var getEveryIndicatorOfaCountry = document.getElementById('getEveryIndicatorOfaCountry')
-		var getThatIndicatorForAllCountries = document.getElementById('getThatIndicatorForAllCountries')
-		var getSpecificCountriesAndIndicators = document.getElementById('getSpecificCountriesAndIndicators')
-		var getSpecificCountriesAndIndicatorsStartingFromaDate = document.getElementById('getSpecificCountriesAndIndicatorsStartingFromaDate')
-		var getSpecificCountriesAndIndicatorsFromDateToDate = document.getElementById('getSpecificCountriesAndIndicatorsFromDateToDate')
-		var getDataByTicker = document.getElementById('getDataByTicker')
-		var getLatestRatingsForAllCountries = document.getElementById('getLatestRatingsForAllCountries')
-        var getCountryRating = document.getElementById('getCountryRating')
-		var getCountryHistoricalRating = document.getElementById('getCountryHistoricalRating')
-		var getAllUpdates = document.getElementById('getAllUpdates')
-		var getUpdatesStartingFromADate = document.getElementById('getUpdatesStartingFromADate')
-		//Calendar
-		var calendarContainer = document.getElementById('calendarContainer')
-		var getAllCalendarEvents = document.getElementById('getAllCalendarEvents')
-		var getCalendarEventsFromDateToDate = document.getElementById('getCalendarEventsFromDateToDate')
-		var getCalendarEventsForSpecificCountries = document.getElementById('getCalendarEventsForSpecificCountries')
-		var getCalendarEventsForSpecificCountriesFromDateToDate = document.getElementById('getCalendarEventsForSpecificCountriesFromDateToDate')
-		var getCalendarEventsForSpecificIndicator = document.getElementById('getCalendarEventsForSpecificIndicator')
-		var getCalendarEventsForSpecificIndicatorFromDateToDate = document.getElementById('getCalendarEventsForSpecificIndicatorFromDateToDate')
-		var getCalendarEventsForSpecificCountriesAndIndicators = document.getElementById('getCalendarEventsForSpecificCountriesAndIndicators')
-		var getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate = document.getElementById('getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate')
-		var getCalendarEventsByCalendarId = document.getElementById('getCalendarEventsByCalendarId')
-		//Forecast
-		var forecastContainer = document.getElementById('forecastContainer')
-		var getForecastsForSpecificCountries = document.getElementById('getForecastsForSpecificCountries')
-		var getForecastsForSpecificIndicator = document.getElementById('getForecastsForSpecificIndicator')
-		var getForecastsForSpecificCountriesAndIndicators = document.getElementById('getForecastsForSpecificCountriesAndIndicators')
-		//Markets
-		var marketsContainer = document.getElementById('marketsContainer')
-		var snapshotsBtn = document.getElementById('snapshotsBtn')
-		var snapshotsBtnContainer = document.getElementById('snapshotsBtnContainer')
-		var historicalDataMarketsBtn = document.getElementById('historicalDataMarketsBtn')
-		var historicalDataMarketsBtnContainer = document.getElementById('historicalDataMarketsBtnContainer')
-		var intradayDataBtn = document.getElementById('intradayDataBtn')
-		var intradayDataBtnContainer = document.getElementById('intradayDataBtnContainer')
-		var marketListsBtn = document.getElementById('marketListsBtn')
-		var marketListsBtnContainer = document.getElementById('marketListsBtnContainer')
-		var getCommodities = document.getElementById('getCommodities')
-		var getMajorCurrencies = document.getElementById('getMajorCurrencies')
-		var getCurrencyCrosses = document.getElementById('getCurrencyCrosses')
-		var getStockMarketIndexes = document.getElementById('getStockMarketIndexes')
-		var getGovernmentBonds = document.getElementById('getGovernmentBonds')
-		var getSpecificHistoricalMarketsDataBySymbol = document.getElementById('getSpecificHistoricalMarketsDataBySymbol')
-		var getSpecificHistoricalMarketsDataBySymbolStartingFromDate = document.getElementById('getSpecificHistoricalMarketsDataBySymbolStartingFromDate')
-		var getSpecificHistoricalMarketsDataBySymbolFromDateToDate = document.getElementById('getSpecificHistoricalMarketsDataBySymbolFromDateToDate')
-		var getIntradayPricesByMarketSymbol = document.getElementById('getIntradayPricesByMarketSymbol')
-		var getIntradayPricesByMarketSymbolStartingFromDateAndHour = document.getElementById('getIntradayPricesByMarketSymbolStartingFromDateAndHour')
-		var getIntradayPricesByMarketSymbolFromDateToDate = document.getElementById('getIntradayPricesByMarketSymbolFromDateToDate')
-		var getLatestPeersPricesByMarketSymbol = document.getElementById('getLatestPeersPricesByMarketSymbol')
-		var getStockMarketsIndexComponentsbySymbol = document.getElementById('getStockMarketsIndexComponentsbySymbol')
-		//Earnings
-		var earningsContainer = document.getElementById('earningsContainer')
-		var getDefaultEarningsCalendar = document.getElementById('getDefaultEarningsCalendar')
-		var getEarningsCalendarStartingFromDate = document.getElementById('getEarningsCalendarStartingFromDate')
-		var getEarningsCalendarByMarketStartingFromDate = document.getElementById('getEarningsCalendarByMarketStartingFromDate')
-		var getEarningsCalendarByMarketFromDateToDate = document.getElementById('getEarningsCalendarByMarketFromDateToDate')
-		var getEarningsCalendarByCountry = document.getElementById('getEarningsCalendarByCountry')
-		var getEarningsByType = document.getElementById('getEarningsByType')
-		//News
-		var newsContainer = document.getElementById('newsContainer')
-		var latestNewsBtn = document.getElementById('latestNewsBtn')
-		var latestNewsBtnContainer = document.getElementById('latestNewsBtnContainer')
-		var lastestArticlesBtn = document.getElementById('lastestArticlesBtn')
-		var lastestArticlesBtnContainer = document.getElementById('lastestArticlesBtnContainer')
-		var getLatestNews = document.getElementById('getLatestNews')
-		var getNewsByCountry = document.getElementById('getNewsByCountry')
-		var getNewsByIndicator = document.getElementById('getNewsByIndicator')
-		var getNewsByCountryAndIndicator = document.getElementById('getNewsByCountryAndIndicator')
-		var getNewsListSpecifyingStartIndexAndListSize = document.getElementById('getNewsListSpecifyingStartIndexAndListSize')
-		var getLatestArticles = document.getElementById('getLatestArticles')
-		var getArticlesByCountry = document.getElementById('getArticlesByCountry')
-		var getArticlesByCountryFromDateToDate = document.getElementById('getArticlesByCountryFromDateToDate')
-		var getLatestArticlesByIndicator = document.getElementById('getLatestArticlesByIndicator')
-		var getLatestArticlesByCountryAndIndicator = document.getElementById('getLatestArticlesByCountryAndIndicator')
-		var getArticlesById = document.getElementById('getArticlesById')
-		var getArticlesListSpecifyingStartIndexAndListSize = document.getElementById('getArticlesListSpecifyingStartIndexAndListSize')
-		//Input/Form Containers
-		var indicatorInputContainer = document.getElementById('indicatorInputContainer')
-		var countryInputContainer = document.getElementById('countryInputContainer')
-		var tickerInputContainer = document.getElementById('tickerInputContainer')
-		var calendarIdInputContainer = document.getElementById('calendarIdInputContainer')
-		var currencyISOInputContainer = document.getElementById('currencyISOInputContainer')
-		var marketSymbolInputContainer = document.getElementById('marketSymbolInputContainer')
-		var dateFromOneInputContainer = document.getElementById('dateFromOneInputContainer')
-		var dateFromToInputContainer = document.getElementById('dateFromToInputContainer')
-		var earningsTypeInputContainer = document.getElementById('earningsTypeInputContainer')
-		var startIndexListSizeInputContainer = document.getElementById('startIndexListSizeInputContainer')
-		var articleIdInputContainer = document.getElementById('articleIdInputContainer')
-		var hourInputContainer = document.getElementById('hourInputContainer')
-		var apiKeyInputContainer = document.getElementById('apiKeyInputContainer')
-
-		//Hide Everything
-		function hideContainers() {
-			indicatorsContainer.style.display = 'none'
-			allIndicatorsBtnContainer.style.display = 'none'
-			historicalDataBtnContainer.style.display = 'none'
-			creditRatingBtnContainer.style.display = 'none'
-			updatesBtnContainer.style.display = 'none'
-			calendarContainer.style.display = 'none'
-			forecastContainer.style.display = 'none'
-			marketsContainer.style.display = 'none'
-			snapshotsBtnContainer.style.display = 'none'
-			historicalDataMarketsBtnContainer.style.display = 'none'
-			intradayDataBtnContainer.style.display = 'none'
-			marketListsBtnContainer.style.display = 'none'
-			earningsContainer.style.display = 'none'
-			newsContainer.style.display = 'none'
-			latestNewsBtnContainer.style.display = 'none'
-			lastestArticlesBtnContainer.style.display = 'none'
-		}
-
-		function hideCleanInputFields() {
-			//Hide Input Fields
-			gettingWhatHr.style.display = 'none'
-			gettingWhatTitle.textContent = ''
-			indicatorInputContainer.style.display = 'none'
-			countryInputContainer.style.display = 'none'
-			tickerInputContainer.style.display = 'none'
-			calendarIdInputContainer.style.display = 'none'
-			currencyISOInputContainer.style.display = 'none'
-			marketSymbolInputContainer.style.display = 'none'
-			dateFromOneInputContainer.style.display = 'none'
-			dateFromToInputContainer.style.display = 'none'
-			earningsTypeInputContainer.style.display = 'none'
-			startIndexListSizeInputContainer.style.display = 'none'
-			articleIdInputContainer.style.display = 'none'
-			hourInputContainer.style.display = 'none'
-			apiKeyInputContainer.style.display = 'none'
-			submitButton.style.display = 'none'
-			//Defaulting Input Fields
-			indicatorInput.value = 'GDP, Consumer Confidence, Unemployment Rate'
-			countryInput.value = 'United States, United Kingdom, Australia'
-			tickerInput.value = 'USURTOT'
-			calendarIdInput.value = '174108, 160025, 160030'
-			currencyISOInput.value = 'EUR'
-			marketSymbolInput.value = 'AAPL:US, INDU:IND, MSFT:US'
-			dateFromOneInput.value = '2014-12-31'
-			dateFromInput.value = '2007-12-31'
-			dateToInput.value = '2017-12-31'
-			earningsTypeInput.value = 'Earnings'
-			startIndexInput.value = '10'
-			listSizeInput.value = '15'
-			articleIdInput.value = '20580'
-
-			dateFromOneInputLabel.textContent = 'Starting From Date'
-			
-			$('*').removeClass('pressedBtnGray')
-		}
-
-		//Setting What Input Fields to Show foreach Button
-		function eachButtonSetup(thisButton, _indicatorInputContainer, _countryInputContainer, _tickerInputContainer, _calendarIdInputContainer, _currencyISOInputContainer, _marketSymbolInputContainer, _dateFromOneInputContainer, _dateFromToInputContainer, _earningsTypeInputContainer, _startIndexListSizeInputContainer, _articleIdInputContainer, _hourInputContainer) {
-			hideCleanInputFields()
-			gettingWhatHr.style.display = 'block'
-			gettingWhatTitle.textContent = thisButton.textContent
-			apiKeyInputContainer.style.display = 'block'
-			submitButton.style.display = 'block'
-			urlToBakeCode = thisButton.id
-			thisButton.classList.add('pressedBtnGray')
-			
-			if (_indicatorInputContainer != '') { indicatorInputContainer.style.display = _indicatorInputContainer } //Param: 2
-			if (_countryInputContainer != '') { countryInputContainer.style.display = _countryInputContainer } //Param: 3
-			if (_tickerInputContainer != '') { tickerInputContainer.style.display = _tickerInputContainer } //Param: 4
-			if (_calendarIdInputContainer != '') { calendarIdInputContainer.style.display = _calendarIdInputContainer } //Param: 5
-			if (_currencyISOInputContainer != '') { currencyISOInputContainer.style.display = _currencyISOInputContainer } //Param: 6
-			if (_marketSymbolInputContainer != '') { marketSymbolInputContainer.style.display = _marketSymbolInputContainer } //Param: 7
-			if (_dateFromOneInputContainer != '') { dateFromOneInputContainer.style.display = _dateFromOneInputContainer } //Param: 8
-			if (_dateFromToInputContainer != '') { dateFromToInputContainer.style.display = _dateFromToInputContainer } //Param: 9
-			if (_earningsTypeInputContainer != '') { earningsTypeInputContainer.style.display = _earningsTypeInputContainer } //Param: 10
-			if (_startIndexListSizeInputContainer != '') { startIndexListSizeInputContainer.style.display = _startIndexListSizeInputContainer } //Param: 11
-			if (_articleIdInputContainer != '') { articleIdInputContainer.style.display = _articleIdInputContainer } //Param: 12
-			if (_hourInputContainer != '') { hourInputContainer.style.display = _hourInputContainer } //Param: 13
-		}
-
-		hideContainers()
-		hideCleanInputFields()
-
-		function buttonStyle(btn) {
-			$('*').removeClass('pressedBtnBlue')
-			btn.classList.add('pressedBtnBlue')
-			hideCleanInputFields()
-		}
-
-		//This code block runs when the selected method changes
-		//Here are defined what buttons to be shown depending on the selected method
-	    $('.dropdown-item').click(function() {
-			
-			methodValue = this.value
-
-			var dropDownButton = document.getElementById('method')
-			dropDownButton.textContent = this.textContent
-
-			hideContainers()
-			hideCleanInputFields()
-
-			$('*').removeClass('pressedBtnBlue')
-
-			if (methodValue == 'indicators') {
-				indicatorsContainer.style.display = 'block'
-
-				allIndicatorsBtnContainer.style.display = 'none'
-				historicalDataBtnContainer.style.display = 'none'
-				creditRatingBtnContainer.style.display = 'none'
-				updatesBtnContainer.style.display = 'none'
-
-				indicatorsHr.style.display = 'none'
-
-				allIndicatorsBtn.onclick = function() {
-					buttonStyle(allIndicatorsBtn)
-					indicatorsHr.style.display = 'block'
-					allIndicatorsBtnContainer.style.display = 'block'
-					historicalDataBtnContainer.style.display = 'none'
-					creditRatingBtnContainer.style.display = 'none'
-					updatesBtnContainer.style.display = 'none'
-				}
-
-				historicalDataBtn.onclick = function() {
-					buttonStyle(historicalDataBtn)
-					indicatorsHr.style.display = 'block'
-					allIndicatorsBtnContainer.style.display = 'none'
-					historicalDataBtnContainer.style.display = 'block'
-					creditRatingBtnContainer.style.display = 'none'
-					updatesBtnContainer.style.display = 'none'
-				}
-
-				creditRatingBtn.onclick = function() {
-					buttonStyle(creditRatingBtn)
-					indicatorsHr.style.display = 'block'
-					allIndicatorsBtnContainer.style.display = 'none'
-					historicalDataBtnContainer.style.display = 'none'
-					creditRatingBtnContainer.style.display = 'block'
-					updatesBtnContainer.style.display = 'none'
-				}
-
-				updatesBtn.onclick = function() {
-					buttonStyle(updatesBtn)
-					indicatorsHr.style.display = 'block'
-					allIndicatorsBtnContainer.style.display = 'none'
-					historicalDataBtnContainer.style.display = 'none'
-					creditRatingBtnContainer.style.display = 'none'
-					updatesBtnContainer.style.display = 'block'
-				}
-
-				getEveryTeApiIndicatorName.onclick = function() { eachButtonSetup(getEveryTeApiIndicatorName) }
-				getEveryIndicatorOfaCountry.onclick = function() { eachButtonSetup(getEveryIndicatorOfaCountry, '', 'block') }
-				getThatIndicatorForAllCountries.onclick = function() { eachButtonSetup(getThatIndicatorForAllCountries, 'block') }
-				getSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicators, 'block', 'block') }
-				getSpecificCountriesAndIndicatorsStartingFromaDate.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicatorsStartingFromaDate, 'block', 'block', '', '', '', '', 'block') }
-				getSpecificCountriesAndIndicatorsFromDateToDate.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicatorsFromDateToDate, 'block', 'block', '', '', '', '', '', 'block') }
-				getDataByTicker.onclick = function() { eachButtonSetup(getDataByTicker, '', '', 'block', '', '', '', 'block') }
-				getLatestRatingsForAllCountries.onclick = function() { eachButtonSetup(getLatestRatingsForAllCountries) }
-                getCountryRating.onclick = function() { eachButtonSetup(getCountryRating, '', 'block') }
-				getCountryHistoricalRating.onclick = function() { eachButtonSetup(getCountryHistoricalRating, '', 'block') }
-				getAllUpdates.onclick = function() { eachButtonSetup(getAllUpdates) }
-				getUpdatesStartingFromADate.onclick = function() { eachButtonSetup(getUpdatesStartingFromADate, '', '', '', '', '', '', 'block') }
-			}
-
-			else if (methodValue == 'calendar') {
-				calendarContainer.style.display = "block"
-
-				getAllCalendarEvents.onclick = function() { eachButtonSetup(getAllCalendarEvents) }
-				getCalendarEventsFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsFromDateToDate, '', '', '', '', '', '', '', 'block') }
-				getCalendarEventsForSpecificCountries.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountries, '', 'block') }
-				getCalendarEventsForSpecificCountriesFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesFromDateToDate, '', 'block', '', '', '', '', '', 'block') }
-				getCalendarEventsForSpecificIndicator.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificIndicator, 'block') }
-				getCalendarEventsForSpecificIndicatorFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificIndicatorFromDateToDate, 'block', '', '', '', '', '', '', 'block') }
-				getCalendarEventsForSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesAndIndicators, 'block', 'block') }
-				getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate, 'block', 'block', '', '', '', '', '', 'block') }
-				getCalendarEventsByCalendarId.onclick = function() { eachButtonSetup(getCalendarEventsByCalendarId, '', '', '', 'block') }
-			}
-
-			else if (methodValue == 'forecast') {
-				forecastContainer.style.display = "block"
-
-				getForecastsForSpecificCountries.onclick = function() { eachButtonSetup(getForecastsForSpecificCountries, '', 'block') }
-				getForecastsForSpecificIndicator.onclick = function() { eachButtonSetup(getForecastsForSpecificIndicator, 'block') }
-				getForecastsForSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getForecastsForSpecificCountriesAndIndicators, 'block', 'block') }
-			}
-
-			else if (methodValue == 'markets') {
-				marketsContainer.style.display = 'block'
-
-				snapshotsBtnContainer.style.display = 'none'
-				historicalDataMarketsBtnContainer.style.display = 'none'
-				intradayDataBtnContainer.style.display = 'none'
-				marketListsBtnContainer.style.display = 'none'
-
-				marketsHr.style.display = 'none'
-
-				snapshotsBtn.onclick = function() {
-					buttonStyle(snapshotsBtn)
-					marketsHr.style.display = 'block'
-					snapshotsBtnContainer.style.display = 'block'
-					historicalDataMarketsBtnContainer.style.display = 'none'
-					intradayDataBtnContainer.style.display = 'none'
-					marketListsBtnContainer.style.display = 'none'
-				}
-
-				historicalDataMarketsBtn.onclick = function() {
-					buttonStyle(historicalDataMarketsBtn)
-					marketsHr.style.display = 'block'
-					snapshotsBtnContainer.style.display = 'none'
-					historicalDataMarketsBtnContainer.style.display = 'block'
-					intradayDataBtnContainer.style.display = 'none'
-					marketListsBtnContainer.style.display = 'none'
-				}
-
-				intradayDataBtn.onclick = function() {
-					buttonStyle(intradayDataBtn)
-					marketsHr.style.display = 'block'
-					snapshotsBtnContainer.style.display = 'none'
-					historicalDataMarketsBtnContainer.style.display = 'none'
-					intradayDataBtnContainer.style.display = 'block'
-					marketListsBtnContainer.style.display = 'none'
-				}
-
-				marketListsBtn.onclick = function() {
-					buttonStyle(marketListsBtn)
-					marketsHr.style.display = 'block'
-					snapshotsBtnContainer.style.display = 'none'
-					historicalDataMarketsBtnContainer.style.display = 'none'
-					intradayDataBtnContainer.style.display = 'none'
-					marketListsBtnContainer.style.display = 'block'
-				}
-
-				getCommodities.onclick = function() { eachButtonSetup(getCommodities) }
-				getMajorCurrencies.onclick = function() { eachButtonSetup(getMajorCurrencies) }
-				getCurrencyCrosses.onclick = function() { eachButtonSetup(getCurrencyCrosses, '', '', '', '', 'block') }
-				getStockMarketIndexes.onclick = function() { eachButtonSetup(getStockMarketIndexes) }
-				getGovernmentBonds.onclick = function() { eachButtonSetup(getGovernmentBonds) }
-				getSpecificMarketsBySymbol.onclick = function() { eachButtonSetup(getSpecificMarketsBySymbol, '', '', '', '', '', 'block') }
-				getSpecificHistoricalMarketsDataBySymbol.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbol, '', '', '', '', '', 'block') }
-				getSpecificHistoricalMarketsDataBySymbolStartingFromDate.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbolStartingFromDate, '', '', '', '', '', 'block', 'block') }
-				getSpecificHistoricalMarketsDataBySymbolFromDateToDate.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbolFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
-				getIntradayPricesByMarketSymbol.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbol, '', '', '', '', '', 'block') }
-				getIntradayPricesByMarketSymbolStartingFromDateAndHour.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbolStartingFromDateAndHour, '', '', '', '', '', 'block', 'block', '', '', '', '', 'block'), dateFromOneInputLabel.textContent = 'Filter by Date' }
-				getIntradayPricesByMarketSymbolFromDateToDate.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbolFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
-				getLatestPeersPricesByMarketSymbol.onclick = function() { eachButtonSetup(getLatestPeersPricesByMarketSymbol, '', '', '', '', '', 'block') }
-				getStockMarketsIndexComponentsbySymbol.onclick = function() { eachButtonSetup(getStockMarketsIndexComponentsbySymbol, '', '', '', '', '', 'block') }
-			}
-
-			else if (methodValue == 'earnings') {
-				earningsContainer.style.display = 'block'
-
-				getEarningsByType.style.display = 'none'
-
-				getDefaultEarningsCalendar.onclick = function() { eachButtonSetup(getDefaultEarningsCalendar) }
-				getEarningsCalendarStartingFromDate.onclick = function() { eachButtonSetup(getEarningsCalendarStartingFromDate, '', '', '', '', '', '', 'block') }
-				getEarningsCalendarByMarketStartingFromDate.onclick = function() { eachButtonSetup(getEarningsCalendarByMarketStartingFromDate, '', '', '', '', '', 'block', 'block') }
-				getEarningsCalendarByMarketFromDateToDate.onclick = function() { eachButtonSetup(getEarningsCalendarByMarketFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
-				getEarningsCalendarByCountry.onclick = function() { eachButtonSetup(getEarningsCalendarByCountry, '', 'block') }
-				//getEarningsByType.onclick = function() { eachButtonSetup(getEarningsByType, '', '', '', '', '', '', '', '', 'block') }
-			}
-
-			else if (methodValue == 'news') {
-				newsContainer.style.display = 'block'
-
-				latestNewsBtnContainer.style.display = 'none'
-				lastestArticlesBtnContainer.style.display = 'none'
-
-				newsHr.style.display = 'none'
-
-				latestNewsBtn.onclick = function() {
-					buttonStyle(latestNewsBtn)
-					newsHr.style.display = 'block'
-					latestNewsBtnContainer.style.display = 'block'
-					lastestArticlesBtnContainer.style.display = 'none'
-				}
-
-				lastestArticlesBtn.onclick = function() {
-					buttonStyle(lastestArticlesBtn)
-					newsHr.style.display = 'block'
-					latestNewsBtnContainer.style.display = 'none'
-					lastestArticlesBtnContainer.style.display = 'block'
-				}
-
-				getLatestNews.onclick = function() { eachButtonSetup(getLatestNews) }
-				getNewsByCountry.onclick = function() { eachButtonSetup(getNewsByCountry, '', 'block') }
-				getNewsByIndicator.onclick = function() { eachButtonSetup(getNewsByIndicator, 'block') }
-				getNewsByCountryAndIndicator.onclick = function() { eachButtonSetup(getNewsByCountryAndIndicator, 'block', 'block') }
-				getNewsListSpecifyingStartIndexAndListSize.onclick = function() { eachButtonSetup(getNewsListSpecifyingStartIndexAndListSize, '', '', '', '', '', '', '', '', '', 'block') }
-				getLatestArticles.onclick = function() { eachButtonSetup(getLatestArticles) }
-				getArticlesByCountry.onclick = function() { eachButtonSetup(getArticlesByCountry, '', 'block') }
-				getArticlesByCountryFromDateToDate.onclick = function() { eachButtonSetup(getArticlesByCountryFromDateToDate, '', 'block', '', '', '', '', '', 'block') }
-				getLatestArticlesByIndicator.onclick = function() { eachButtonSetup(getLatestArticlesByIndicator, 'block') }
-				getLatestArticlesByCountryAndIndicator.onclick = function() { eachButtonSetup(getLatestArticlesByCountryAndIndicator, 'block', 'block') }
-				getArticlesById.onclick = function() { eachButtonSetup(getArticlesById, '', '', '', '', '', '', '', '', '', '', 'block') }
-				getArticlesListSpecifyingStartIndexAndListSize.onclick = function() { eachButtonSetup(getArticlesListSpecifyingStartIndexAndListSize, '', '', '', '', '', '', '', '', '', 'block') }
-			}
-		})
-	})
+    
+            var urlToBakeCode = ''
+    
+            var submitButton = document.getElementById('submitButton')
+            submitButton.onclick = function() { 
+    
+                var _baseUrl = ''
+                var _urlAfter = null
+    
+                for(var i in inputsSelected) {
+                    inputsSelected[i].value = inputsSelected[i].value.trim()
+                }
+    
+                //Creating the specific url's foreach case
+                //Indicators
+                if (urlToBakeCode == 'getEveryTeApiIndicatorName') { _baseUrl = '/indicators' }
+                else if (urlToBakeCode == 'getEveryIndicatorOfaCountry') { _baseUrl = '/country/' + inputsSelected[1].value } 
+                else if (urlToBakeCode == 'getThatIndicatorForAllCountries') { _baseUrl = '/country/all/' + inputsSelected[0].value } 
+                else if (urlToBakeCode == 'getSpecificCountriesAndIndicators') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
+                else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsStartingFromaDate') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[6].value }
+                else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getDataByTicker') { _baseUrl = '/historical/ticker/' + inputsSelected[2].value + '/' + inputsSelected[6].value }
+                else if (urlToBakeCode == 'getLatestRatingsForAllCountries') { _baseUrl = '/ratings' }
+                else if (urlToBakeCode == 'getCountryRating') { _baseUrl = '/ratings/' + inputsSelected[1].value }
+                else if (urlToBakeCode == 'getCountryHistoricalRating') { _baseUrl = '/ratings/historical/' + inputsSelected[1].value }
+                else if (urlToBakeCode == 'getAllUpdates') { _baseUrl = '/updates' }
+                else if (urlToBakeCode == 'getUpdatesStartingFromADate') { _baseUrl = '/updates/' + inputsSelected[6].value }
+                //Calendar
+                else if (urlToBakeCode == 'getAllCalendarEvents') { _baseUrl = '/calendar' }
+                else if (urlToBakeCode == 'getCalendarEventsFromDateToDate') { _baseUrl = '/calendar/country/All/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getCalendarEventsForSpecificCountries') { _baseUrl = '/calendar/country/' + inputsSelected[1].value }
+                else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesFromDateToDate') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getCalendarEventsForSpecificIndicator') { _baseUrl = '/calendar/indicator/' + inputsSelected[0].value }
+                else if (urlToBakeCode == 'getCalendarEventsForSpecificIndicatorFromDateToDate') { _baseUrl = '/calendar/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicators') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
+                else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getCalendarEventsByCalendarId') { _baseUrl = '/calendar/calendarid/' + inputsSelected[3].value }
+                //Forecast
+                else if (urlToBakeCode == 'getForecastsForSpecificCountries') { _baseUrl = '/forecast/country/' + inputsSelected[1].value }
+                else if (urlToBakeCode == 'getForecastsForSpecificIndicator') { _baseUrl = '/forecast/indicator/' + inputsSelected[0].value }
+                else if (urlToBakeCode == 'getForecastsForSpecificCountriesAndIndicators') { _baseUrl = '/forecast/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
+                //Markets
+                else if (urlToBakeCode == 'getCommodities') { _baseUrl = '/markets/commodities' }
+                else if (urlToBakeCode == 'getMajorCurrencies') { _baseUrl = '/markets/currency' }
+                else if (urlToBakeCode == 'getCurrencyCrosses') {_baseUrl = '/markets/currency', _urlAfter = 'cross=' + inputsSelected[4].value }
+                else if (urlToBakeCode == 'getStockMarketIndexes') { _baseUrl = '/markets/index' }
+                else if (urlToBakeCode == 'getGovernmentBonds') { _baseUrl = '/markets/bond' }
+                else if (urlToBakeCode == 'getSpecificMarketsBySymbol') { _baseUrl = '/markets/symbol/' + inputsSelected[5].value }
+                else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbol') { _baseUrl = '/markets/historical/' + inputsSelected[5].value }
+                else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbolStartingFromDate') { _baseUrl = '/markets/historical/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value }
+                else if (urlToBakeCode == 'getSpecificHistoricalMarketsDataBySymbolFromDateToDate') { _baseUrl = '/markets/historical/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + '&d2=' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getIntradayPricesByMarketSymbol') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value }
+                else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolStartingFromDateAndHour') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value + ' ' + inputsSelected[13].value }
+                else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolFromDateToDate') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + 'd2=' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getLatestPeersPricesByMarketSymbol') { _baseUrl = '/markets/peers/' + inputsSelected[5].value }
+                else if (urlToBakeCode == 'getStockMarketsIndexComponentsbySymbol') { _baseUrl = '/markets/components/' + inputsSelected[5].value }
+                //Earnings
+                else if (urlToBakeCode == 'getDefaultEarningsCalendar') { _baseUrl = '/earnings' }
+                else if (urlToBakeCode == 'getEarningsCalendarStartingFromDate') { _baseUrl = '/earnings', _urlAfter = 'd1=' + inputsSelected[6].value }
+                else if (urlToBakeCode == 'getEarningsCalendarByMarketStartingFromDate') { _baseUrl = '/earnings/symbol/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[6].value }
+                else if (urlToBakeCode == 'getEarningsCalendarByMarketFromDateToDate') { _baseUrl = '/earnings/symbol/' + inputsSelected[5].value, _urlAfter = 'd1=' + inputsSelected[7].value + '&d2=' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getEarningsCalendarByCountry') { _baseUrl = '/earnings/country/' + inputsSelected[1].value }
+                //else if (urlToBakeCode == 'getEarningsByType') { _baseUrl = '/earnings?type=' + inputsSelected[9].value }
+                //News
+                else if (urlToBakeCode == 'getLatestNews') { _baseUrl = '/news' }
+                else if (urlToBakeCode == 'getNewsByCountry') { _baseUrl = '/news/country/' + inputsSelected[1].value }
+                else if (urlToBakeCode == 'getNewsByIndicator') { _baseUrl = '/news/indicator/' + inputsSelected[0].value }
+                else if (urlToBakeCode == 'getNewsByCountryAndIndicator') { _baseUrl = '/news/country/' + inputsSelected[1].value + '/' + inputsSelected[0].value }
+                else if (urlToBakeCode == 'getNewsListSpecifyingStartIndexAndListSize') { _baseUrl = '/news', _urlAfter = 'limit=' + inputsSelected[11].value + '&start=' + inputsSelected[10].value }
+                else if (urlToBakeCode == 'getLatestArticles') { _baseUrl = '/articles' }
+                else if (urlToBakeCode == 'getArticlesByCountry') { _baseUrl = '/articles/country/' + inputsSelected[1].value }
+                else if (urlToBakeCode == 'getArticlesByCountryFromDateToDate') { _baseUrl = '/articles/country/' + inputsSelected[1].value + '/from/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+                else if (urlToBakeCode == 'getLatestArticlesByIndicator') { _baseUrl = '/articles/indicator/' + inputsSelected[0].value }
+                else if (urlToBakeCode == 'getLatestArticlesByCountryAndIndicator') { _baseUrl = '/articles/country/' + inputsSelected[1].value + '/' + inputsSelected[0].value }
+                else if (urlToBakeCode == 'getArticlesById') { _baseUrl = '/articles/id/' + inputsSelected[12].value }
+                else if (urlToBakeCode == 'getArticlesListSpecifyingStartIndexAndListSize') { _baseUrl = '/articles', _urlAfter = 'lim=' + inputsSelected[11].value + '&start=' + inputsSelected[10].value }
+    
+                //This object will further complete the url with the API Key 
+                var urlObj = {
+                    urlBase: _baseUrl,
+                    apiKey: $('#apiKeyInput').val().trim(),
+                    urlAfter: _urlAfter
+                }
+    
+                //If Problems With Api Key Set it to guest:guest
+                if(urlObj.apiKey == '' || urlObj.apiKey == null || urlObj.apiKey == undefined) {
+                    urlObj.apiKey = 'guest:guest'
+                }
+                
+                var apiCall = ''
+    
+                if(urlObj.urlAfter == null) {
+                    apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey + '&googleSheets'
+                }
+                else {
+                    apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey + '&' + urlObj.urlAfter + '&googleSheets'
+                }
+                
+                //Loading Screen Appears
+                loadingData('visible')
+                
+                //Sending Api Call to Code.gs to Print the Data (Closes Loading Screen in the End)
+                google.script.run.withSuccessHandler(loadingData).urlToJson(apiCall)
+                
+                /*
+                //Reseting the Add On Layout
+                setTimeout(function() {
+                    hideContainers()
+                    hideCleanInputFields()
+                    $('#method').text('Select One Method')
+                }, 0)*/
+            }
+    
+            //DOM Selections
+            var indicatorsHr = document.getElementById('indicatorsHr')
+            var marketsHr = document.getElementById('marketsHr')
+            var newsHr = document.getElementById('newsHr')
+            var gettingWhatHr = document.getElementById('gettingWhatHr')
+            var gettingWhatTitle = document.getElementById('gettingWhatTitle')
+            var dateFromOneInputLabel = document.getElementById('dateFromOneInputLabel')
+            var apiKeyInput = document.getElementById('apiKeyInput')
+            //Indicators
+            var indicatorsContainer = document.getElementById('indicatorsContainer')
+            var allIndicatorsBtn = document.getElementById('allIndicatorsBtn')
+            var allIndicatorsBtnContainer = document.getElementById('allIndicatorsBtnContainer')
+            var historicalDataBtn = document.getElementById('historicalDataBtn')
+            var historicalDataBtnContainer = document.getElementById('historicalDataBtnContainer')
+            var creditRatingBtn = document.getElementById('creditRatingBtn')
+            var creditRatingBtnContainer = document.getElementById('creditRatingBtnContainer')
+            var updatesBtn = document.getElementById('updatesBtn')
+            var updatesBtnContainer = document.getElementById('updatesBtnContainer')
+            var getEveryTeApiIndicatorName = document.getElementById('getEveryTeApiIndicatorName')
+            var getEveryIndicatorOfaCountry = document.getElementById('getEveryIndicatorOfaCountry')
+            var getThatIndicatorForAllCountries = document.getElementById('getThatIndicatorForAllCountries')
+            var getSpecificCountriesAndIndicators = document.getElementById('getSpecificCountriesAndIndicators')
+            var getSpecificCountriesAndIndicatorsStartingFromaDate = document.getElementById('getSpecificCountriesAndIndicatorsStartingFromaDate')
+            var getSpecificCountriesAndIndicatorsFromDateToDate = document.getElementById('getSpecificCountriesAndIndicatorsFromDateToDate')
+            var getDataByTicker = document.getElementById('getDataByTicker')
+            var getLatestRatingsForAllCountries = document.getElementById('getLatestRatingsForAllCountries')
+            var getCountryRating = document.getElementById('getCountryRating')
+            var getCountryHistoricalRating = document.getElementById('getCountryHistoricalRating')
+            var getAllUpdates = document.getElementById('getAllUpdates')
+            var getUpdatesStartingFromADate = document.getElementById('getUpdatesStartingFromADate')
+            //Calendar
+            var calendarContainer = document.getElementById('calendarContainer')
+            var getAllCalendarEvents = document.getElementById('getAllCalendarEvents')
+            var getCalendarEventsFromDateToDate = document.getElementById('getCalendarEventsFromDateToDate')
+            var getCalendarEventsForSpecificCountries = document.getElementById('getCalendarEventsForSpecificCountries')
+            var getCalendarEventsForSpecificCountriesFromDateToDate = document.getElementById('getCalendarEventsForSpecificCountriesFromDateToDate')
+            var getCalendarEventsForSpecificIndicator = document.getElementById('getCalendarEventsForSpecificIndicator')
+            var getCalendarEventsForSpecificIndicatorFromDateToDate = document.getElementById('getCalendarEventsForSpecificIndicatorFromDateToDate')
+            var getCalendarEventsForSpecificCountriesAndIndicators = document.getElementById('getCalendarEventsForSpecificCountriesAndIndicators')
+            var getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate = document.getElementById('getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate')
+            var getCalendarEventsByCalendarId = document.getElementById('getCalendarEventsByCalendarId')
+            //Forecast
+            var forecastContainer = document.getElementById('forecastContainer')
+            var getForecastsForSpecificCountries = document.getElementById('getForecastsForSpecificCountries')
+            var getForecastsForSpecificIndicator = document.getElementById('getForecastsForSpecificIndicator')
+            var getForecastsForSpecificCountriesAndIndicators = document.getElementById('getForecastsForSpecificCountriesAndIndicators')
+            //Markets
+            var marketsContainer = document.getElementById('marketsContainer')
+            var snapshotsBtn = document.getElementById('snapshotsBtn')
+            var snapshotsBtnContainer = document.getElementById('snapshotsBtnContainer')
+            var historicalDataMarketsBtn = document.getElementById('historicalDataMarketsBtn')
+            var historicalDataMarketsBtnContainer = document.getElementById('historicalDataMarketsBtnContainer')
+            var intradayDataBtn = document.getElementById('intradayDataBtn')
+            var intradayDataBtnContainer = document.getElementById('intradayDataBtnContainer')
+            var marketListsBtn = document.getElementById('marketListsBtn')
+            var marketListsBtnContainer = document.getElementById('marketListsBtnContainer')
+            var getCommodities = document.getElementById('getCommodities')
+            var getMajorCurrencies = document.getElementById('getMajorCurrencies')
+            var getCurrencyCrosses = document.getElementById('getCurrencyCrosses')
+            var getStockMarketIndexes = document.getElementById('getStockMarketIndexes')
+            var getGovernmentBonds = document.getElementById('getGovernmentBonds')
+            var getSpecificHistoricalMarketsDataBySymbol = document.getElementById('getSpecificHistoricalMarketsDataBySymbol')
+            var getSpecificHistoricalMarketsDataBySymbolStartingFromDate = document.getElementById('getSpecificHistoricalMarketsDataBySymbolStartingFromDate')
+            var getSpecificHistoricalMarketsDataBySymbolFromDateToDate = document.getElementById('getSpecificHistoricalMarketsDataBySymbolFromDateToDate')
+            var getIntradayPricesByMarketSymbol = document.getElementById('getIntradayPricesByMarketSymbol')
+            var getIntradayPricesByMarketSymbolStartingFromDateAndHour = document.getElementById('getIntradayPricesByMarketSymbolStartingFromDateAndHour')
+            var getIntradayPricesByMarketSymbolFromDateToDate = document.getElementById('getIntradayPricesByMarketSymbolFromDateToDate')
+            var getLatestPeersPricesByMarketSymbol = document.getElementById('getLatestPeersPricesByMarketSymbol')
+            var getStockMarketsIndexComponentsbySymbol = document.getElementById('getStockMarketsIndexComponentsbySymbol')
+            //Earnings
+            var earningsContainer = document.getElementById('earningsContainer')
+            var getDefaultEarningsCalendar = document.getElementById('getDefaultEarningsCalendar')
+            var getEarningsCalendarStartingFromDate = document.getElementById('getEarningsCalendarStartingFromDate')
+            var getEarningsCalendarByMarketStartingFromDate = document.getElementById('getEarningsCalendarByMarketStartingFromDate')
+            var getEarningsCalendarByMarketFromDateToDate = document.getElementById('getEarningsCalendarByMarketFromDateToDate')
+            var getEarningsCalendarByCountry = document.getElementById('getEarningsCalendarByCountry')
+            var getEarningsByType = document.getElementById('getEarningsByType')
+            //News
+            var newsContainer = document.getElementById('newsContainer')
+            var latestNewsBtn = document.getElementById('latestNewsBtn')
+            var latestNewsBtnContainer = document.getElementById('latestNewsBtnContainer')
+            var lastestArticlesBtn = document.getElementById('lastestArticlesBtn')
+            var lastestArticlesBtnContainer = document.getElementById('lastestArticlesBtnContainer')
+            var getLatestNews = document.getElementById('getLatestNews')
+            var getNewsByCountry = document.getElementById('getNewsByCountry')
+            var getNewsByIndicator = document.getElementById('getNewsByIndicator')
+            var getNewsByCountryAndIndicator = document.getElementById('getNewsByCountryAndIndicator')
+            var getNewsListSpecifyingStartIndexAndListSize = document.getElementById('getNewsListSpecifyingStartIndexAndListSize')
+            var getLatestArticles = document.getElementById('getLatestArticles')
+            var getArticlesByCountry = document.getElementById('getArticlesByCountry')
+            var getArticlesByCountryFromDateToDate = document.getElementById('getArticlesByCountryFromDateToDate')
+            var getLatestArticlesByIndicator = document.getElementById('getLatestArticlesByIndicator')
+            var getLatestArticlesByCountryAndIndicator = document.getElementById('getLatestArticlesByCountryAndIndicator')
+            var getArticlesById = document.getElementById('getArticlesById')
+            var getArticlesListSpecifyingStartIndexAndListSize = document.getElementById('getArticlesListSpecifyingStartIndexAndListSize')
+            //Input/Form Containers
+            var indicatorInputContainer = document.getElementById('indicatorInputContainer')
+            var countryInputContainer = document.getElementById('countryInputContainer')
+            var tickerInputContainer = document.getElementById('tickerInputContainer')
+            var calendarIdInputContainer = document.getElementById('calendarIdInputContainer')
+            var currencyISOInputContainer = document.getElementById('currencyISOInputContainer')
+            var marketSymbolInputContainer = document.getElementById('marketSymbolInputContainer')
+            var dateFromOneInputContainer = document.getElementById('dateFromOneInputContainer')
+            var dateFromToInputContainer = document.getElementById('dateFromToInputContainer')
+            var earningsTypeInputContainer = document.getElementById('earningsTypeInputContainer')
+            var startIndexListSizeInputContainer = document.getElementById('startIndexListSizeInputContainer')
+            var articleIdInputContainer = document.getElementById('articleIdInputContainer')
+            var hourInputContainer = document.getElementById('hourInputContainer')
+            var apiKeyInputContainer = document.getElementById('apiKeyInputContainer')
+    
+            //Hide Everything
+            function hideContainers() {
+                indicatorsContainer.style.display = 'none'
+                allIndicatorsBtnContainer.style.display = 'none'
+                historicalDataBtnContainer.style.display = 'none'
+                creditRatingBtnContainer.style.display = 'none'
+                updatesBtnContainer.style.display = 'none'
+                calendarContainer.style.display = 'none'
+                forecastContainer.style.display = 'none'
+                marketsContainer.style.display = 'none'
+                snapshotsBtnContainer.style.display = 'none'
+                historicalDataMarketsBtnContainer.style.display = 'none'
+                intradayDataBtnContainer.style.display = 'none'
+                marketListsBtnContainer.style.display = 'none'
+                earningsContainer.style.display = 'none'
+                newsContainer.style.display = 'none'
+                latestNewsBtnContainer.style.display = 'none'
+                lastestArticlesBtnContainer.style.display = 'none'
+            }
+    
+            function hideCleanInputFields() {
+                //Hide Input Fields
+                gettingWhatHr.style.display = 'none'
+                gettingWhatTitle.textContent = ''
+                indicatorInputContainer.style.display = 'none'
+                countryInputContainer.style.display = 'none'
+                tickerInputContainer.style.display = 'none'
+                calendarIdInputContainer.style.display = 'none'
+                currencyISOInputContainer.style.display = 'none'
+                marketSymbolInputContainer.style.display = 'none'
+                dateFromOneInputContainer.style.display = 'none'
+                dateFromToInputContainer.style.display = 'none'
+                earningsTypeInputContainer.style.display = 'none'
+                startIndexListSizeInputContainer.style.display = 'none'
+                articleIdInputContainer.style.display = 'none'
+                hourInputContainer.style.display = 'none'
+                apiKeyInputContainer.style.display = 'none'
+                submitButton.style.display = 'none'
+                //Defaulting Input Fields
+                indicatorInput.value = 'GDP, Consumer Confidence, Unemployment Rate'
+                countryInput.value = 'United States, United Kingdom, Australia'
+                tickerInput.value = 'USURTOT'
+                calendarIdInput.value = '174108, 160025, 160030'
+                currencyISOInput.value = 'EUR'
+                marketSymbolInput.value = 'AAPL:US, INDU:IND, MSFT:US'
+                dateFromOneInput.value = '2014-12-31'
+                dateFromInput.value = '2007-12-31'
+                dateToInput.value = '2017-12-31'
+                earningsTypeInput.value = 'Earnings'
+                startIndexInput.value = '10'
+                listSizeInput.value = '15'
+                articleIdInput.value = '20580'
+    
+                dateFromOneInputLabel.textContent = 'Starting From Date'
+                
+                $('*').removeClass('pressedBtnGray')
+            }
+    
+            //Setting What Input Fields to Show foreach Button
+            function eachButtonSetup(thisButton, _indicatorInputContainer, _countryInputContainer, _tickerInputContainer, _calendarIdInputContainer, _currencyISOInputContainer, _marketSymbolInputContainer, _dateFromOneInputContainer, _dateFromToInputContainer, _earningsTypeInputContainer, _startIndexListSizeInputContainer, _articleIdInputContainer, _hourInputContainer) {
+                hideCleanInputFields()
+                gettingWhatHr.style.display = 'block'
+                gettingWhatTitle.textContent = thisButton.textContent
+                apiKeyInputContainer.style.display = 'block'
+                submitButton.style.display = 'block'
+                urlToBakeCode = thisButton.id
+                thisButton.classList.add('pressedBtnGray')
+                
+                if (_indicatorInputContainer != '') { indicatorInputContainer.style.display = _indicatorInputContainer } //Param: 2
+                if (_countryInputContainer != '') { countryInputContainer.style.display = _countryInputContainer } //Param: 3
+                if (_tickerInputContainer != '') { tickerInputContainer.style.display = _tickerInputContainer } //Param: 4
+                if (_calendarIdInputContainer != '') { calendarIdInputContainer.style.display = _calendarIdInputContainer } //Param: 5
+                if (_currencyISOInputContainer != '') { currencyISOInputContainer.style.display = _currencyISOInputContainer } //Param: 6
+                if (_marketSymbolInputContainer != '') { marketSymbolInputContainer.style.display = _marketSymbolInputContainer } //Param: 7
+                if (_dateFromOneInputContainer != '') { dateFromOneInputContainer.style.display = _dateFromOneInputContainer } //Param: 8
+                if (_dateFromToInputContainer != '') { dateFromToInputContainer.style.display = _dateFromToInputContainer } //Param: 9
+                if (_earningsTypeInputContainer != '') { earningsTypeInputContainer.style.display = _earningsTypeInputContainer } //Param: 10
+                if (_startIndexListSizeInputContainer != '') { startIndexListSizeInputContainer.style.display = _startIndexListSizeInputContainer } //Param: 11
+                if (_articleIdInputContainer != '') { articleIdInputContainer.style.display = _articleIdInputContainer } //Param: 12
+                if (_hourInputContainer != '') { hourInputContainer.style.display = _hourInputContainer } //Param: 13
+            }
+    
+            hideContainers()
+            hideCleanInputFields()
+    
+            function buttonStyle(btn) {
+                $('*').removeClass('pressedBtnBlue')
+                btn.classList.add('pressedBtnBlue')
+                hideCleanInputFields()
+            }
+    
+            //This code block runs when the selected method changes
+            //Here are defined what buttons to be shown depending on the selected method
+            $('.dropdown-item').click(function() {
+                
+                methodValue = this.value
+    
+                var dropDownButton = document.getElementById('method')
+                dropDownButton.innerHTML = '<span class="glyphicon glyphicon-menu-down"></span>' + ' ' + this.textContent
+                //dropDownButton.textContent = /*'<span class="glyphicon glyphicon-menu-down"></span>' + ' ' +*/ this.textContent
+    
+                hideContainers()
+                hideCleanInputFields()
+    
+                $('*').removeClass('pressedBtnBlue')
+    
+                if (methodValue == 'indicators') {
+                    indicatorsContainer.style.display = 'block'
+    
+                    allIndicatorsBtnContainer.style.display = 'none'
+                    historicalDataBtnContainer.style.display = 'none'
+                    creditRatingBtnContainer.style.display = 'none'
+                    updatesBtnContainer.style.display = 'none'
+    
+                    indicatorsHr.style.display = 'none'
+    
+                    allIndicatorsBtn.onclick = function() {
+                        buttonStyle(allIndicatorsBtn)
+                        indicatorsHr.style.display = 'block'
+                        allIndicatorsBtnContainer.style.display = 'block'
+                        historicalDataBtnContainer.style.display = 'none'
+                        creditRatingBtnContainer.style.display = 'none'
+                        updatesBtnContainer.style.display = 'none'
+                    }
+    
+                    historicalDataBtn.onclick = function() {
+                        buttonStyle(historicalDataBtn)
+                        indicatorsHr.style.display = 'block'
+                        allIndicatorsBtnContainer.style.display = 'none'
+                        historicalDataBtnContainer.style.display = 'block'
+                        creditRatingBtnContainer.style.display = 'none'
+                        updatesBtnContainer.style.display = 'none'
+                    }
+    
+                    creditRatingBtn.onclick = function() {
+                        buttonStyle(creditRatingBtn)
+                        indicatorsHr.style.display = 'block'
+                        allIndicatorsBtnContainer.style.display = 'none'
+                        historicalDataBtnContainer.style.display = 'none'
+                        creditRatingBtnContainer.style.display = 'block'
+                        updatesBtnContainer.style.display = 'none'
+                    }
+    
+                    updatesBtn.onclick = function() {
+                        buttonStyle(updatesBtn)
+                        indicatorsHr.style.display = 'block'
+                        allIndicatorsBtnContainer.style.display = 'none'
+                        historicalDataBtnContainer.style.display = 'none'
+                        creditRatingBtnContainer.style.display = 'none'
+                        updatesBtnContainer.style.display = 'block'
+                    }
+    
+                    getEveryTeApiIndicatorName.onclick = function() { eachButtonSetup(getEveryTeApiIndicatorName) }
+                    getEveryIndicatorOfaCountry.onclick = function() { eachButtonSetup(getEveryIndicatorOfaCountry, '', 'block') }
+                    getThatIndicatorForAllCountries.onclick = function() { eachButtonSetup(getThatIndicatorForAllCountries, 'block') }
+                    getSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicators, 'block', 'block') }
+                    getSpecificCountriesAndIndicatorsStartingFromaDate.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicatorsStartingFromaDate, 'block', 'block', '', '', '', '', 'block') }
+                    getSpecificCountriesAndIndicatorsFromDateToDate.onclick = function() { eachButtonSetup(getSpecificCountriesAndIndicatorsFromDateToDate, 'block', 'block', '', '', '', '', '', 'block') }
+                    getDataByTicker.onclick = function() { eachButtonSetup(getDataByTicker, '', '', 'block', '', '', '', 'block') }
+                    getLatestRatingsForAllCountries.onclick = function() { eachButtonSetup(getLatestRatingsForAllCountries) }
+                    getCountryRating.onclick = function() { eachButtonSetup(getCountryRating, '', 'block') }
+                    getCountryHistoricalRating.onclick = function() { eachButtonSetup(getCountryHistoricalRating, '', 'block') }
+                    getAllUpdates.onclick = function() { eachButtonSetup(getAllUpdates) }
+                    getUpdatesStartingFromADate.onclick = function() { eachButtonSetup(getUpdatesStartingFromADate, '', '', '', '', '', '', 'block') }
+                }
+    
+                else if (methodValue == 'calendar') {
+                    calendarContainer.style.display = "block"
+    
+                    getAllCalendarEvents.onclick = function() { eachButtonSetup(getAllCalendarEvents) }
+                    getCalendarEventsFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsFromDateToDate, '', '', '', '', '', '', '', 'block') }
+                    getCalendarEventsForSpecificCountries.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountries, '', 'block') }
+                    getCalendarEventsForSpecificCountriesFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesFromDateToDate, '', 'block', '', '', '', '', '', 'block') }
+                    getCalendarEventsForSpecificIndicator.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificIndicator, 'block') }
+                    getCalendarEventsForSpecificIndicatorFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificIndicatorFromDateToDate, 'block', '', '', '', '', '', '', 'block') }
+                    getCalendarEventsForSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesAndIndicators, 'block', 'block') }
+                    getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate.onclick = function() { eachButtonSetup(getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate, 'block', 'block', '', '', '', '', '', 'block') }
+                    getCalendarEventsByCalendarId.onclick = function() { eachButtonSetup(getCalendarEventsByCalendarId, '', '', '', 'block') }
+                }
+    
+                else if (methodValue == 'forecast') {
+                    forecastContainer.style.display = "block"
+    
+                    getForecastsForSpecificCountries.onclick = function() { eachButtonSetup(getForecastsForSpecificCountries, '', 'block') }
+                    getForecastsForSpecificIndicator.onclick = function() { eachButtonSetup(getForecastsForSpecificIndicator, 'block') }
+                    getForecastsForSpecificCountriesAndIndicators.onclick = function() { eachButtonSetup(getForecastsForSpecificCountriesAndIndicators, 'block', 'block') }
+                }
+    
+                else if (methodValue == 'markets') {
+                    marketsContainer.style.display = 'block'
+    
+                    snapshotsBtnContainer.style.display = 'none'
+                    historicalDataMarketsBtnContainer.style.display = 'none'
+                    intradayDataBtnContainer.style.display = 'none'
+                    marketListsBtnContainer.style.display = 'none'
+    
+                    marketsHr.style.display = 'none'
+    
+                    snapshotsBtn.onclick = function() {
+                        buttonStyle(snapshotsBtn)
+                        marketsHr.style.display = 'block'
+                        snapshotsBtnContainer.style.display = 'block'
+                        historicalDataMarketsBtnContainer.style.display = 'none'
+                        intradayDataBtnContainer.style.display = 'none'
+                        marketListsBtnContainer.style.display = 'none'
+                    }
+    
+                    historicalDataMarketsBtn.onclick = function() {
+                        buttonStyle(historicalDataMarketsBtn)
+                        marketsHr.style.display = 'block'
+                        snapshotsBtnContainer.style.display = 'none'
+                        historicalDataMarketsBtnContainer.style.display = 'block'
+                        intradayDataBtnContainer.style.display = 'none'
+                        marketListsBtnContainer.style.display = 'none'
+                    }
+    
+                    intradayDataBtn.onclick = function() {
+                        buttonStyle(intradayDataBtn)
+                        marketsHr.style.display = 'block'
+                        snapshotsBtnContainer.style.display = 'none'
+                        historicalDataMarketsBtnContainer.style.display = 'none'
+                        intradayDataBtnContainer.style.display = 'block'
+                        marketListsBtnContainer.style.display = 'none'
+                    }
+    
+                    marketListsBtn.onclick = function() {
+                        buttonStyle(marketListsBtn)
+                        marketsHr.style.display = 'block'
+                        snapshotsBtnContainer.style.display = 'none'
+                        historicalDataMarketsBtnContainer.style.display = 'none'
+                        intradayDataBtnContainer.style.display = 'none'
+                        marketListsBtnContainer.style.display = 'block'
+                    }
+    
+                    getCommodities.onclick = function() { eachButtonSetup(getCommodities) }
+                    getMajorCurrencies.onclick = function() { eachButtonSetup(getMajorCurrencies) }
+                    getCurrencyCrosses.onclick = function() { eachButtonSetup(getCurrencyCrosses, '', '', '', '', 'block') }
+                    getStockMarketIndexes.onclick = function() { eachButtonSetup(getStockMarketIndexes) }
+                    getGovernmentBonds.onclick = function() { eachButtonSetup(getGovernmentBonds) }
+                    getSpecificMarketsBySymbol.onclick = function() { eachButtonSetup(getSpecificMarketsBySymbol, '', '', '', '', '', 'block') }
+                    getSpecificHistoricalMarketsDataBySymbol.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbol, '', '', '', '', '', 'block') }
+                    getSpecificHistoricalMarketsDataBySymbolStartingFromDate.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbolStartingFromDate, '', '', '', '', '', 'block', 'block') }
+                    getSpecificHistoricalMarketsDataBySymbolFromDateToDate.onclick = function() { eachButtonSetup(getSpecificHistoricalMarketsDataBySymbolFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
+                    getIntradayPricesByMarketSymbol.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbol, '', '', '', '', '', 'block') }
+                    getIntradayPricesByMarketSymbolStartingFromDateAndHour.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbolStartingFromDateAndHour, '', '', '', '', '', 'block', 'block', '', '', '', '', 'block'), dateFromOneInputLabel.textContent = 'Filter by Date' }
+                    getIntradayPricesByMarketSymbolFromDateToDate.onclick = function() { eachButtonSetup(getIntradayPricesByMarketSymbolFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
+                    getLatestPeersPricesByMarketSymbol.onclick = function() { eachButtonSetup(getLatestPeersPricesByMarketSymbol, '', '', '', '', '', 'block') }
+                    getStockMarketsIndexComponentsbySymbol.onclick = function() { eachButtonSetup(getStockMarketsIndexComponentsbySymbol, '', '', '', '', '', 'block') }
+                }
+    
+                else if (methodValue == 'earnings') {
+                    earningsContainer.style.display = 'block'
+    
+                    getEarningsByType.style.display = 'none'
+    
+                    getDefaultEarningsCalendar.onclick = function() { eachButtonSetup(getDefaultEarningsCalendar) }
+                    getEarningsCalendarStartingFromDate.onclick = function() { eachButtonSetup(getEarningsCalendarStartingFromDate, '', '', '', '', '', '', 'block') }
+                    getEarningsCalendarByMarketStartingFromDate.onclick = function() { eachButtonSetup(getEarningsCalendarByMarketStartingFromDate, '', '', '', '', '', 'block', 'block') }
+                    getEarningsCalendarByMarketFromDateToDate.onclick = function() { eachButtonSetup(getEarningsCalendarByMarketFromDateToDate, '', '', '', '', '', 'block', '', 'block') }
+                    getEarningsCalendarByCountry.onclick = function() { eachButtonSetup(getEarningsCalendarByCountry, '', 'block') }
+                    //getEarningsByType.onclick = function() { eachButtonSetup(getEarningsByType, '', '', '', '', '', '', '', '', 'block') }
+                }
+    
+                else if (methodValue == 'news') {
+                    newsContainer.style.display = 'block'
+    
+                    latestNewsBtnContainer.style.display = 'none'
+                    lastestArticlesBtnContainer.style.display = 'none'
+    
+                    newsHr.style.display = 'none'
+    
+                    latestNewsBtn.onclick = function() {
+                        buttonStyle(latestNewsBtn)
+                        newsHr.style.display = 'block'
+                        latestNewsBtnContainer.style.display = 'block'
+                        lastestArticlesBtnContainer.style.display = 'none'
+                    }
+    
+                    lastestArticlesBtn.onclick = function() {
+                        buttonStyle(lastestArticlesBtn)
+                        newsHr.style.display = 'block'
+                        latestNewsBtnContainer.style.display = 'none'
+                        lastestArticlesBtnContainer.style.display = 'block'
+                    }
+    
+                    getLatestNews.onclick = function() { eachButtonSetup(getLatestNews) }
+                    getNewsByCountry.onclick = function() { eachButtonSetup(getNewsByCountry, '', 'block') }
+                    getNewsByIndicator.onclick = function() { eachButtonSetup(getNewsByIndicator, 'block') }
+                    getNewsByCountryAndIndicator.onclick = function() { eachButtonSetup(getNewsByCountryAndIndicator, 'block', 'block') }
+                    getNewsListSpecifyingStartIndexAndListSize.onclick = function() { eachButtonSetup(getNewsListSpecifyingStartIndexAndListSize, '', '', '', '', '', '', '', '', '', 'block') }
+                    getLatestArticles.onclick = function() { eachButtonSetup(getLatestArticles) }
+                    getArticlesByCountry.onclick = function() { eachButtonSetup(getArticlesByCountry, '', 'block') }
+                    getArticlesByCountryFromDateToDate.onclick = function() { eachButtonSetup(getArticlesByCountryFromDateToDate, '', 'block', '', '', '', '', '', 'block') }
+                    getLatestArticlesByIndicator.onclick = function() { eachButtonSetup(getLatestArticlesByIndicator, 'block') }
+                    getLatestArticlesByCountryAndIndicator.onclick = function() { eachButtonSetup(getLatestArticlesByCountryAndIndicator, 'block', 'block') }
+                    getArticlesById.onclick = function() { eachButtonSetup(getArticlesById, '', '', '', '', '', '', '', '', '', '', 'block') }
+                    getArticlesListSpecifyingStartIndexAndListSize.onclick = function() { eachButtonSetup(getArticlesListSpecifyingStartIndexAndListSize, '', '', '', '', '', '', '', '', '', 'block') }
+                }
+            })
+        })
     </script>
 </body>
 
