@@ -27,7 +27,8 @@ def credCheck(credentials):
     #    raise CredentialsError('Invalid credentials.')
     if ':' not in credentials:
         raise CredentialsError('Invalid credentials.')
-        
+    
+
 def out_type(init_format, isCommodity = False):
     if isCommodity:
         list_of_countries= init_format.Title.unique()
