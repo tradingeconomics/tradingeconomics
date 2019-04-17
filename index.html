@@ -2570,10 +2570,10 @@ Click on any method below for a sample.
 
 <h2 id="streaming">Streaming</h2>
 <!--streaming markets python black side-->
-<blockquote class="lang-specific python">
-<br><br><br><br> <br><br>     
+<blockquote class="lang-specific python">    
 <p>
- Copy this code and execute
+ Copy this code and execute<br><br>
+ Subscribe to one symbol
 </p>
 </blockquote>
 <pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
@@ -2585,6 +2585,15 @@ Click on any method below for a sample.
   <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
 <span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'EURUSD:CUR'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<p>
+    Subscribe to multiple symbols
+</p>
+</blockquote>
+<pre class="highlight python"><code>
+<span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span> [<span class="s">'EURUSD:CUR'</span>, <span class="s">'AAPL:US'</span>, <span class="s">'CL1:COM'</span>] <span class="p">)</span>
 <span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
 </code></pre>
 <!--streaming markets javascript black side-->
