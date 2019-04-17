@@ -1,7 +1,7 @@
 import tradingeconomics as te
 import json
 
-te.login('yu06vzmlllju1qz:mtvmbg847pwz3jn')
+te.login('guest:guest')
 
 def on_message(ws, message):
   print json.loads(message)
