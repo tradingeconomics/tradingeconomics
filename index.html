@@ -1094,27 +1094,16 @@ or you can specify a start date and end date<br>
 
 </code></pre>
 <blockquote class="lang-specific python">
+    <br><br>
 <p>
     Get Calendar events by a specific Id.
 </p>
 </blockquote>
 <pre class="highlight python"><code>
 <span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="s"> 160025</span><span class="p">)</span>
-</code></pre>
-<blockquote class="lang-specific python">
-<p>
-    Get Calendar events by more than one Id.
-</p>
-</blockquote>
-<pre class="highlight python"><code>
-<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o">=</span> [<span class="s"> 160025</span>, <span class="s"> 174108</span>, <span class="s"> 160030</span>, <span class="n">output_type</span><span class="o">=</span> <span class="s"> 'df'</span><span class="p">)</span>
-
 
   <span class="n">CalendarId</span>                 <span class="n">Date</span>    <span class="o">...</span>                 <span class="n">Category</span>   <span class="n">Importance</span>
 <span class="mi">0</span>     <span class="mi">160025</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">21</span><span class="n">T07</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="n">Factory Orders</span>            <span class="mi">1</span>
-<span class="mi">1</span>     <span class="mi">160030</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">23</span><span class="n">T06</span><span class="p">:</span><span class="mo">15</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="n">Inflation Rate</span>            <span class="mi">1</span>
-<span class="mi">2</span>     <span class="mi">174108</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">19</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                 <span class="n">Holidays</span>            <span class="mi">2</span>
-
 
 </code></pre>
   <!--javascript black side-->
@@ -2874,7 +2863,7 @@ Click on any method below for a sample.
 <li><p>Filter earnings calendar by country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> </p></li>
 <li><p>Filter earnings by type<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/earnings?type=earnings">/earnings?type=earnings</a>    </p></li>
+<a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li>
 </ul>
 
 <p></span> </p>
