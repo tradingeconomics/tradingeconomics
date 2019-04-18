@@ -21,20 +21,22 @@ def on_error(ws, error):
 
 def on_open(ws):
     print("+++ Socket is open!")
-    print("+++ Subscribe to {0}".format(glob._event))
-    ws.send(json.dumps({'topic': 'subscribe', 'to': glob._event}) )
+    for ev in glob._event:
+        print("+++ Subscribe to {0}".format(ev))
+        ws.send(json.dumps({'topic': 'subscribe', 'to': ev}) )
 
 def build_url():
     return te_url + "?client=" + glob.apikey + "&app=python&token=20171116"
 
-def start_socket(on_message_client, *args):    
+def start_socket(on_message_client, *args):  
     def _on_message(web_sock, message):
         """ 
             made so we do not have to reinitialize connection
         """
         t = threading.Thread(target=on_message_client, args=(web_sock, message))
         t.start()
-
+       
+      
     def _on_close(web_sock):
         if (function_to_restart[1]) :
             t = threading.Thread(target=function_to_restart[1], args=(web_sock, json.dumps({"msg" : "CLOSING"})))
@@ -52,7 +54,7 @@ def start_socket(on_message_client, *args):
     ws.on_open = on_open
     ws.run_forever()
     ws.close()
-
+    
 
 def run(on_message_client, *args): ##passing on args ('on_close_client')
 
@@ -64,3 +66,6 @@ def run(on_message_client, *args): ##passing on args ('on_close_client')
         start_socket(function_to_restart[0], function_to_restart[1])
     else:
         start_socket(function_to_restart[0])
+    
+
+	

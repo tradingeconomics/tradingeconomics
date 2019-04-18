@@ -7,6 +7,7 @@ from . import functions as fn
 from . import glob
 import ssl
 
+
 PY3 = sys.version_info[0] == 3
 
 if PY3: # Python 3+
@@ -31,6 +32,8 @@ class LoginError(AttributeError):
 
 class WebRequestError(ValueError):
     pass
+
+
 
 def paramCheck (country, indicator = None):
     if type(country) is str and indicator == None:
@@ -84,6 +87,8 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
 
     getCalendarData(country = ['United States', 'India'], category = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
     """
+    
+    
     try:
         _create_unverified_https_context = ssl._create_unverified_context
     except AttributeError:
@@ -125,16 +130,21 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
         code = urlopen(linkAPI)
         code = code.getcode()
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
-
+   
+    
     except ValueError:
+         
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+        
+            
+        
     if len(webResults) > 0:
         names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'importance']
         names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'Importance']
         maindf = pd.DataFrame()  
         for i in range(len(names)):
             names[i] =  [d[names2[i]] for d in webResults]
-            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
+            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)   
     else:
         raise ParametersError ('No data available for the provided parameters.')  
     if output_type == None or output_type =='dict':
