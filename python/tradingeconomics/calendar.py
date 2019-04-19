@@ -53,7 +53,16 @@ def paramCheck (country, indicator = None):
         linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(multiCountry) + '/indicator/' + quote(multiIndicator)
     return linkAPI
         
- 
+def checkCalendarId(id):
+    linkAPI = 'https://api.tradingeconomics.com/calendar/calendarid'      
+    if type(id) is str:
+        linkAPI +=  '/' + quote(str(id))
+    else:
+        linkAPI += '/' + quote(",".join(id))
+    return linkAPI
+
+
+
 def getCalendarData(country = None, category = None, initDate = None, endDate = None, output_type = None):
     
     """
@@ -133,29 +142,35 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
    
     
     except ValueError:
-         
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-        
-            
-        
-    if len(webResults) > 0:
-        names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'importance']
-        names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'Importance']
-        maindf = pd.DataFrame()  
-        for i in range(len(names)):
-            names[i] =  [d[names2[i]] for d in webResults]
-            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)   
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:
+            if len(webResults) > 0:
+                names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'importance']
+                names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'Importance']
+                maindf = pd.DataFrame()  
+                for i in range(len(names)):
+                    names[i] =  [d[names2[i]] for d in webResults]
+                    maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)   
+            else:
+                    raise ParametersError ('No data available for the provided parameters.')  
+            if output_type == None or output_type =='dict':
+                output = fn.out_type(maindf)
+            elif output_type == 'df': 
+                output = maindf
+            elif output_type == 'raw':
+                output = webResults
+            else:
+                raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')  
-    if output_type == None or output_type =='dict':
-        output = fn.out_type(maindf)
-    elif output_type == 'df': 
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
-    return output
+        return ''
+
 
 def getCalendarId(id = None, output_type = None):
     
@@ -179,10 +194,11 @@ def getCalendarId(id = None, output_type = None):
     getCalendarId(id = None, output_type = None)
 
     getCalendarId(id = 160025, output_type = None)
-    
-    getCalendarId(id = [174108,160025,160030], output_type = 'df')
 
+    getCalendarId(id = ['174108','160025','160030'], output_type = 'df')
+    
     """
+    
     try:
         _create_unverified_https_context = ssl._create_unverified_context
     except AttributeError:
@@ -193,35 +209,46 @@ def getCalendarId(id = None, output_type = None):
     if id == None:
         linkAPI = 'https://api.tradingeconomics.com/calendar'
     else:
-        linkAPI = 'https://api.tradingeconomics.com/calendar/calendarid' + "/" + str(id)
-    
+        linkAPI = checkCalendarId(id)
+   
+    print (linkAPI)    
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    print(linkAPI)
+    
     try:
         code = urlopen(linkAPI)
         code = code.getcode()
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
 
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if len(webResults) > 0:
-        names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'importance']
-        names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'Importance']
-        maindf = pd.DataFrame()  
-        for i in range(len(names)):
-            names[i] =  [d[names2[i]] for d in webResults]
-            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    
+    if code == 200:
+        try:
+            if len(webResults) > 0:
+                names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'importance']
+                names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'Importance']
+                maindf = pd.DataFrame()  
+                for i in range(len(names)):
+                    names[i] =  [d[names2[i]] for d in webResults]
+                    maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
+            else:
+                raise ParametersError ('No data available for the provided parameters.')  
+            if output_type == None or output_type =='dict':
+                output = fn.out_type(maindf)
+            elif output_type == 'df': 
+                output = maindf
+            elif output_type == 'raw':
+                output = webResults
+            else:
+                raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')  
-    if output_type == None or output_type =='dict':
-        output = fn.out_type(maindf)
-    elif output_type == 'df': 
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
-    return output
+        return ''

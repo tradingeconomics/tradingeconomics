@@ -122,31 +122,41 @@ def fetchMarkets(symbol = None, initDate=None, endDate=None, output_type=None):
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if len(webResults) > 0:
-        #date = [d['Date'] for d in webResults]        
-        #myOpen = [d['Open'] for d in webResults]
-        #myHigh = [d['High'] for d in webResults]
-        #myLow = [d['Low'] for d in webResults]
-        #myClose = [d['Close'] for d in webResults]
-        #mySymbol = [d['Symbol'] for d in webResults]
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:
+            if len(webResults) > 0:
+                #date = [d['Date'] for d in webResults]        
+                #myOpen = [d['Open'] for d in webResults]
+                #myHigh = [d['High'] for d in webResults]
+                #myLow = [d['Low'] for d in webResults]
+                #myClose = [d['Close'] for d in webResults]
+                #mySymbol = [d['Symbol'] for d in webResults]
 
-        results = {'dates': [d['Date'] for d in webResults], 
-                    'open': [d['Open'] for d in webResults], 
-                    'high': [d['High'] for d in webResults], 
-                    'low': [d['Low'] for d in webResults], 
-                    'close': [d['Close'] for d in webResults], 
-                    'symbol':[d['Symbol'] for d in webResults]}
-        results = parseData(results)
+                results = {'dates': [d['Date'] for d in webResults], 
+                            'open': [d['Open'] for d in webResults], 
+                            'high': [d['High'] for d in webResults], 
+                            'low': [d['Low'] for d in webResults], 
+                            'close': [d['Close'] for d in webResults], 
+                            'symbol':[d['Symbol'] for d in webResults]}
+                results = parseData(results)
 
-    else:
-        raise ParametersError ('No data available for the provided parameters.')  
-    if output_type == None or output_type =='dict':        
-        output = results
-    elif output_type == 'raw':        
-        output = webResults
-    else:       
-        raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
-    return output
+            else:
+                raise ParametersError ('No data available for the provided parameters.')  
+            if output_type == None or output_type =='dict':        
+                output = results
+            elif output_type == 'raw':        
+                output = webResults
+            else:       
+                raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
+            return output
     
+        except ValueError:
+            pass
+    else:
+        return ''
+            
 

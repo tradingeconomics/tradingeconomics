@@ -147,30 +147,38 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:
 
-    if len(webResults) > 0:
-        if country == None:
-            print ('Without country indication only a list of available indicators will be returned...')
-            output = {'Category': [d['Category'] for d in webResults], 
-                        'CategoryGroup': [d['CategoryGroup'] for d in webResults]}
-            return pd.DataFrame(output)
-        else:
-            maindf = getResults(webResults, country)  
+            if len(webResults) > 0:
+                if country == None:
+                    print ('Without country indication only a list of available indicators will be returned...')
+                    output = {'Category': [d['Category'] for d in webResults], 
+                                'CategoryGroup': [d['CategoryGroup'] for d in webResults]}
+                    return pd.DataFrame(output)
+                else:
+                    maindf = getResults(webResults, country)  
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+
+            if output_type == None or output_type =='dict':
+                output = fn.out_type(maindf)
+            elif output_type == 'df': 
+                output = maindf
+            elif output_type == 'raw':
+                output = webResults
+            else:
+                raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for results directly from web.')      
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')
-
-    if output_type == None or output_type =='dict':
-        output = fn.out_type(maindf)
-    elif output_type == 'df': 
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for results directly from web.')      
-    return output
-
-  
+        return ''   
+ 
 def getRatings(country=['united states', 'china'], rating = None, output_type='df'):
     """
     Return a list of all countrys by rating.
@@ -221,23 +229,32 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try: 
+            
+            if len(webResults) > 0:
+                names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook']
+                names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook']    
+                maindf = pd.DataFrame(webResults, columns=names2)    
+            
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='df':        
+                output = maindf
+            elif output_type == 'raw':        
+                output = webResults
+            else:      
+                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+            return output
     
-    if len(webResults) > 0:
-        names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook']
-        names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook']    
-        maindf = pd.DataFrame(webResults, columns=names2)    
-      
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
-    return output
-
+        return ''
 
 def getLatestUpdates(initDate = None, output_type = None):
     """
@@ -293,20 +310,29 @@ def getLatestUpdates(initDate = None, output_type = None):
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
-    
-    if len(webResults) > 0:
-        names = ['historicalDataSymbol', 'lastUpdate']
-        names2 = ['HistoricalDataSymbol', 'LastUpdate']    
-        maindf = pd.DataFrame(webResults, columns=names2)    
-      
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:
+            
+            if len(webResults) > 0:
+                names = ['historicalDataSymbol', 'lastUpdate']
+                names2 = ['HistoricalDataSymbol', 'LastUpdate']    
+                maindf = pd.DataFrame(webResults, columns=names2)    
+            
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='df':        
+                output = maindf
+            elif output_type == 'raw':        
+                output = webResults
+            else:      
+                raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
-    return output
+        return ''  
 

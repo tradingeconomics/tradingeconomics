@@ -95,7 +95,6 @@ def paramCheck (country, indicator):
         linkAPI += '/indicator/' + quote(",".join(indicator), safe='') 
     return linkAPI
 
-
 def checkCountryHistoricalRatings(country):
     linkAPI = 'https://api.tradingeconomics.com/ratings/historical/'       
     if type(country) is str:
@@ -203,24 +202,32 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-   
-    if len(webResults) > int(0):
-        results = {'dates': [d['DateTime'] for d in webResults],
-                    'values': [d[u'Value'] for d in webResults]}
-        if (type(country)== str and type(indicator) == str):
-            results = parseData(results)
-        else:
-            results = multiParams(webResults)
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:
+            if len(webResults) > int(0):
+                results = {'dates': [d['DateTime'] for d in webResults],
+                            'values': [d[u'Value'] for d in webResults]}
+                if (type(country)== str and type(indicator) == str):
+                    results = parseData(results)
+                else:
+                    results = multiParams(webResults)
+            else:
+                raise ParametersError ('No data available for the provided parameters.')  
+            if output_type == None or output_type =='dict':        
+                output = results
+            elif output_type == 'raw':        
+                output = webResults
+            else:       
+                raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')  
-    if output_type == None or output_type =='dict':        
-        output = results
-    elif output_type == 'raw':        
-        output = webResults
-    else:       
-        raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
-    return output
+        return '' 
 
 def getHistoricalRatings(country = None, rating = None, output_type = None):
     """
@@ -276,20 +283,28 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
-    
-    if len(webResults) > 0:
-        names = ['country','date', 'agency', 'rating', 'outlook']
-        names2 = ['Country','Date', 'Agency', 'Rating', 'Outlook']    
-        maindf = pd.DataFrame(webResults, columns=names2)    
-      
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:            
+            if len(webResults) > 0:
+                names = ['country','date', 'agency', 'rating', 'outlook']
+                names2 = ['Country','Date', 'Agency', 'Rating', 'Outlook']    
+                maindf = pd.DataFrame(webResults, columns=names2)    
+            
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='df':        
+                output = maindf
+            elif output_type == 'raw':        
+                output = webResults
+            else:      
+                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
-    return output
-  
+        return ''        
+        

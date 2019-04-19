@@ -402,18 +402,27 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
         
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
-        names = ['symbol','ticker','name', 'country', 'date', 'type', 'decimals', 'last', 'marketcap','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear', 'isin', 'lastupdate']
-        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Type', 'decimals', 'Last', 'MarketCap', 'URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'LastUpdate']    
-        maindf = pd.DataFrame(webResults, columns=names2)     
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:  
+            if len(webResults) > 0:
+                names = ['symbol','ticker','name', 'country', 'date', 'type', 'decimals', 'last', 'marketcap','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear', 'isin', 'lastupdate']
+                names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Type', 'decimals', 'Last', 'MarketCap', 'URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'LastUpdate']    
+                maindf = pd.DataFrame(webResults, columns=names2)     
 
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='df':        
+                output = maindf
+            elif output_type == 'raw':        
+                output = webResults
+            else:      
+                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
-    return output
+        return ''

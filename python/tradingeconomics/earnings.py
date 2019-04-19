@@ -90,28 +90,38 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
         raise LoginError('You need to do login before making any request')
         
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
-    
+    print(linkAPI)
     try:       
         code = urlopen(linkAPI)
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try: 
     
-    if len(webResults) > 0:
-        names = ['date', 'symbol', 'name', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
-        names2 = ['Date', 'Symbol', 'Name', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
-        maindf = pd.DataFrame(webResults, columns=names2)     
-        
+            if len(webResults) > 0:
+                names = ['date', 'symbol', 'name', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
+                names2 = ['Date', 'Symbol', 'Name', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
+                maindf = pd.DataFrame(webResults, columns=names2)     
+                
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='df':        
+                output = maindf#.dropna()
+            elif output_type == 'raw':        
+                output = webResults
+            else:      
+                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
-        output = maindf#.dropna()
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
-    return output
+        return ''
 
 
 def getEarningsType(type=None, output_type=None):
@@ -157,19 +167,28 @@ def getEarningsType(type=None, output_type=None):
         code = code.getcode() 
         webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    
-    if len(webResults) > 0:
-        names = ['date', 'symbol', 'type', 'name', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
-        names2 = ['Date', 'Symbol', 'Type', 'Name', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
-        maindf = pd.DataFrame(webResults, columns=names2)     
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:
+            if len(webResults) > 0:
+                names = ['date', 'symbol', 'type', 'name', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
+                names2 = ['Date', 'Symbol', 'Type', 'Name', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
+                maindf = pd.DataFrame(webResults, columns=names2)     
+                
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='df':        
+                output = maindf#.dropna()
+            elif output_type == 'raw':        
+                output = webResults
+            else:      
+                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+            return output
         
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
-        output = maindf#.dropna()
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
-    return output
+        return ''
