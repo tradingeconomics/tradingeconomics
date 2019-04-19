@@ -38,7 +38,13 @@
         label {
             color: #333;
             margin-top: 12px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        label span {
+            font-weight:100; 
+            font-size: 1.1rem; 
+            color: #999;
         }
         
         input {
@@ -68,6 +74,7 @@
         #method {
             width: 100%;
             margin: 60px 0 10px 0;
+            padding: 8px;
         }
         
         .dropdown-menu {
@@ -139,10 +146,10 @@
         
         #wrapper footer {
             font-weight: 100; 
-            font-size: 1rem; 
+            font-size: 1.1rem; 
             text-align: left;
             padding-bottom: 30px;
-            color: #999;
+            color: #b9b9b9;
         }
         
         .glyphicon {
@@ -303,14 +310,14 @@
                     <hr id="gettingWhatHr">
                     <span id="gettingWhatTitle">Test Title</span>
     
-                    <div id="indicatorInputContainer">
-                        <label for="indicatorInput" class="text-center">Indicators</label><br>
-                        <input type="text" class="form-control" id="indicatorInput" value="GDP, Consumer Confidence, Unemployment Rate">
-                    </div>
-    
                     <div id="countryInputContainer">
                         <label for="countryInput" class="text-center">Countries</label><br>
                         <input type="text" class="form-control" id="countryInput" value="United States, United Kingdom, Australia">
+                    </div>
+    
+                    <div id="indicatorInputContainer">
+                        <label for="indicatorInput" class="text-center">Indicators</label><br>
+                        <input type="text" class="form-control" id="indicatorInput" value="GDP, Consumer Confidence, Unemployment Rate">
                     </div>
     
                     <div id="tickerInputContainer">
@@ -329,12 +336,12 @@
                     </div>
     
                     <div id="marketSymbolInputContainer">
-                        <label for="marketSymbolInput" class="text-center">Market Symbol<br><span style="font-weight:100; font-size: 1rem; color: #999;">Stock, Index, Currency, Commodity or Bond<br>Some options will not accept all of the above</span></label><br>
+                        <label for="marketSymbolInput" class="text-center">Market Symbol<br><span>Stock, Index, Currency, Commodity or Bond<br>Some options will not accept all of the above</span></label><br>
                         <input type="text" class="form-control" id="marketSymbolInput" value="AAPL:US, INDU:IND, MSFT:US">
                     </div>
                     
                     <div id="earningsTypeInputContainer">
-                        <label for="earningsTypeInput" class="text-center">Earnings Type<br><span style="font-weight:100; font-size: 1rem; color: #999;">Earnings, Dividends, IPO or Stock Splits<br>Only one Type at a Time</span></label><br>
+                        <label for="earningsTypeInput" class="text-center">Earnings Type<br><span>Earnings, Dividends, IPO or Stock Splits<br>Only one Type at a Time</span></label><br>
                         <input type="text" class="form-control" id="earningsTypeInput" value="Earnings">
                     </div>
                 
@@ -345,7 +352,7 @@
                     </div>
     
                     <div id="articleIdInputContainer">
-                        <label for="articleIdInput" class="text-center">Article ID<br><span style="font-weight:100; font-size: 1rem; color: #999;">Only one ID at a Time</span></label><br>
+                        <label for="articleIdInput" class="text-center">Article ID<br><span>Only one ID at a Time</span></label><br>
                         <input type="text" class="form-control" id="articleIdInput" value="20580">
                     </div>
     

@@ -21,17 +21,18 @@ namespace CSharpExamples
             if (!string.IsNullOrWhiteSpace(k))
                 _clientKey = k;
 
-            // to subscribe for a market, in this example Euro x USD
-            string marketEuroCurrencyTopic = "EURUSD:CUR";
+            Console.WriteLine("Enter a topic (ex EURUSD:CUR,calendar): ");
 
-            // to subscribe for the TE Calendar
-            string calendarTopic = "calendar";
+
+            string topic  = Console.ReadLine();
+ 
+            Console.WriteLine("Subscribing to " + topic);
 
             Console.WriteLine("About to connect the socket!");
 
             // this method receives as paramenter the name of the topic you are subscribing for
             // for a complete reference, refer to: http://docs.tradingeconomics.com/ searching for STREAMING
-            RunStreamer(marketEuroCurrencyTopic).Wait();
+            RunStreamer(topic).Wait();
 
             Console.WriteLine("Connection closed, press any key to exit...");
             Console.ReadLine();

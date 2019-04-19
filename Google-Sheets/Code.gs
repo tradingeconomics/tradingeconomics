@@ -17,7 +17,6 @@ function urlToJson(url) {
 }
 
 function printData(json) {
-
     Logger.log('Printing Data')
 
     //Getting GSheets Context
@@ -86,7 +85,7 @@ function printData(json) {
     Logger.log('i1: ' + i1)
     
     for(var i in json) {
-    
+          
         //Storing Numeric Part of the Selected Cell
         var i2 = ''
         for(var num in numToNum) {
@@ -95,19 +94,20 @@ function printData(json) {
         Logger.log('i2: ' + i2)
         
         //Printing Headers
+        Logger.log('Printing Headers')
         for(var header in json[0]) {
             
             activeSs.getRange(i2, i1).setValue(header)
             i1++
         }
         
-        //Printing Data
+        //Printing Rows
+        Logger.log('Printing Rows')
         for(var i in json)
         {
             var _i1 = letterToColumn(charToNumber)
             i2++
             for(var j in json[i]) {
-                
                 activeSs.getRange(i2, _i1).setValue(json[i][j])
                 _i1++
             }
@@ -131,5 +131,5 @@ function onOpen(e) {
 }
 
 function onInstall(e) {
-    onOpen(e)
+  onOpen(e)
 }
