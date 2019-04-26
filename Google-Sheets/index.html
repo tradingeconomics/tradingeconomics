@@ -74,7 +74,7 @@
         #method {
             width: 100%;
             margin: 60px 0 10px 0;
-            padding: 8px;
+            padding: 6px;
         }
         
         .dropdown-menu {
@@ -161,7 +161,13 @@
             position: fixed;
             width: 90%;
             height: 100%;
-            background-color: rgb(255,255,255,0.75);
+            animation: fadeInOut 2s infinite;
+        }
+        
+        @keyframes fadeInOut {
+            0%   { background-color: rgb(255,255,255,0.45); }
+            50% { background-color: rgb(255,255,255,0.9); }
+            100% { background-color: rgb(255,255,255,0.45); }
         }
     </style>
 </head>
@@ -312,69 +318,69 @@
     
                     <div id="countryInputContainer">
                         <label for="countryInput" class="text-center">Countries</label><br>
-                        <input type="text" class="form-control" id="countryInput" value="United States, United Kingdom, Australia">
+                        <input type="text" class="form-control" id="countryInput">
                     </div>
     
                     <div id="indicatorInputContainer">
                         <label for="indicatorInput" class="text-center">Indicators</label><br>
-                        <input type="text" class="form-control" id="indicatorInput" value="GDP, Consumer Confidence, Unemployment Rate">
+                        <input type="text" class="form-control" id="indicatorInput">
                     </div>
     
                     <div id="tickerInputContainer">
                         <label for="tickerInput" class="text-center">Ticker</label><br>
-                        <input type="text" class="form-control" id="tickerInput" value="USURTOT">
+                        <input type="text" class="form-control" id="tickerInput">
                     </div>
     
                     <div id="calendarIdInputContainer">
                         <label for="calendarIdInput" class="text-center">Calendar ID</label><br>
-                        <input type="text" class="form-control" id="calendarIdInput" value="174108, 160025, 160030">
+                        <input type="text" class="form-control" id="calendarIdInput">
                     </div>
     
                     <div id="currencyISOInputContainer">
                         <label for="currencyISOInput" class="text-center">Currency ISO</label><br>
-                        <input type="text" class="form-control" id="currencyISOInput" value="EUR">
+                        <input type="text" class="form-control" id="currencyISOInput">
                     </div>
     
                     <div id="marketSymbolInputContainer">
                         <label for="marketSymbolInput" class="text-center">Market Symbol<br><span>Stock, Index, Currency, Commodity or Bond<br>Some options will not accept all of the above</span></label><br>
-                        <input type="text" class="form-control" id="marketSymbolInput" value="AAPL:US, INDU:IND, MSFT:US">
+                        <input type="text" class="form-control" id="marketSymbolInput">
                     </div>
                     
                     <div id="earningsTypeInputContainer">
                         <label for="earningsTypeInput" class="text-center">Earnings Type<br><span>Earnings, Dividends, IPO or Stock Splits<br>Only one Type at a Time</span></label><br>
-                        <input type="text" class="form-control" id="earningsTypeInput" value="Earnings">
+                        <input type="text" class="form-control" id="earningsTypeInput">
                     </div>
                 
                     <div id="startIndexListSizeInputContainer">
                         <label for="startIndexInput" class="text-center">Start Index and List Size</label><br>
-                        <input type="text" class="form-control" id="startIndexInput" value="10">
-                        <input type="text" class="form-control" id="listSizeInput" value="15">
+                        <input type="text" class="form-control" id="startIndexInput">
+                        <input type="text" class="form-control" id="listSizeInput">
                     </div>
     
                     <div id="articleIdInputContainer">
                         <label for="articleIdInput" class="text-center">Article ID<br><span>Only one ID at a Time</span></label><br>
-                        <input type="text" class="form-control" id="articleIdInput" value="20580">
+                        <input type="text" class="form-control" id="articleIdInput">
                     </div>
     
                     <div id="dateFromOneInputContainer">
                         <label id="dateFromOneInputLabel" for="dateFromOneInput" class="text-center">Starting From Date</label><br>
-                        <input type="text" class="form-control" id="dateFromOneInput" value="2014-12-31">
+                        <input type="text" class="form-control" id="dateFromOneInput">
                     </div>
     
                     <div id="dateFromToInputContainer">
                         <label for="dateFromInput" class="text-center">From Date To Date</label><br>
-                        <input type="text" class="form-control" id="dateFromInput" value="2007-12-31">
-                        <input type="text" class="form-control" id="dateToInput" value="2017-12-31">
+                        <input type="text" class="form-control" id="dateFromInput">
+                        <input type="text" class="form-control" id="dateToInput">
                     </div>
                     
                     <div id="hourInputContainer">
                         <label for="hourInput" class="text-center">Hour</label><br>
-                        <input type="text" class="form-control" id="hourInput" value="15:30">
+                        <input type="text" class="form-control" id="hourInput">
                     </div>
                 
                     <div id="apiKeyInputContainer">
                         <label for="apiKeyInput">API Key</label><br>
-                        <input type="text" class="form-control" id="apiKeyInput" value="guest:guest">
+                        <input type="text" class="form-control" id="apiKeyInput" placeholder="Insert Here">
                     </div>
                 </div>
             </form>
@@ -383,8 +389,7 @@
         <footer>
             <hr>
             <p>
-                The API key guest:guest is limited to some indicators and rows.
-                Please <a href="https://billing.tradingeconomics.com/plans.aspx?source=google-sheets" target="_blank">subscribe</a> to one of our plans if you do not have an API key yet.
+                Please <a href="https://developer.tradingeconomics.com" target="_blank">subscribe</a> to one of our plans if you do not have an API key yet.
                 Pick only one indicator, country, symbol (...) if the Add-On fails to display multiple ones.
                 Should you have any questions please <a href="https://tradingeconomics.com/contact.aspx?subject=googleSheets" target="_blank">contact us</a>.
             </p>
@@ -489,10 +494,11 @@
                     urlAfter: _urlAfter
                 }
     
+                /*
                 //If Problems With Api Key Set it to guest:guest
                 if(urlObj.apiKey == '' || urlObj.apiKey == null || urlObj.apiKey == undefined) {
                     urlObj.apiKey = 'guest:guest'
-                }
+                } */
                 
                 var apiCall = ''
     
@@ -509,8 +515,7 @@
                 //Sending Api Call to Code.gs to Print the Data (Closes Loading Screen in the End)
                 google.script.run.withSuccessHandler(loadingData).urlToJson(apiCall)
                 
-                /*
-                //Reseting the Add On Layout
+                /*//Reseting the Add On Layout
                 setTimeout(function() {
                     hideContainers()
                     hideCleanInputFields()
@@ -673,8 +678,8 @@
                 calendarIdInput.value = '174108, 160025, 160030'
                 currencyISOInput.value = 'EUR'
                 marketSymbolInput.value = 'AAPL:US, INDU:IND, MSFT:US'
-                dateFromOneInput.value = '2014-12-31'
-                dateFromInput.value = '2007-12-31'
+                dateFromOneInput.value = '2017-12-31'
+                dateFromInput.value = '2014-12-31'
                 dateToInput.value = '2017-12-31'
                 earningsTypeInput.value = 'Earnings'
                 startIndexInput.value = '10'
