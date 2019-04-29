@@ -312,7 +312,7 @@ Using Headers auth:<br>
 <li>401 - Unauthorized (The user doesn&rsquo;t have an access, client key missing or wrong)<br></li>
 <li>403 - Forbidden (The user hit the maximum limit of downloads or was blocked)<br></li>
 <li>400 - Bad Request (Some error with a request, like a typo, wrong parameter, etc.)<br></li>
-<li>409 - Conflict (Throttle, to many requests per second, beyond the API limit)<br></li>
+<li>409 - Conflict (Throttle, to many requests per second, beyond the API limit - 1 request per second)<br></li>
 </ul>
 
 <h3 id="notes">Notes</h3>
@@ -2874,7 +2874,7 @@ Click on any method below for a sample.
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings calendar by country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> </p></li>
-<li><p>Filter earnings by type<br>
+<li><p>Filter earnings by type: earnings, ipo, dividends.<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li>
 </ul>
 
