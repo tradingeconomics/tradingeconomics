@@ -133,6 +133,7 @@
             <li><a target = '_blank' href=" https://github.com/tradingeconomics/open-api">GitHub</a></li>
             <li><a target = '_blank' href=" excel/index.html">Excel</a></li>
             <li><a target = '_blank' href=" tableau/index.html">Tableau</a></li>
+            <li><a target = '_blank' href=" http://docs.tradingeconomics.com/googleSheets/">Google Sheets</a></li>
             <ul><p style="border-top: 1px dashed #666"></p></ul>
             <li><a target = '_blank' href=" https://tradingeconomics.com/contact.aspx?subject=api">Support</a></li>
         </ul>
@@ -437,7 +438,7 @@ Click on any method below for a sample.</p>
 <span class="p">}</span>
 </code></pre>
 <!--Java black side-->
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//indicators"</span><span class="o">;</span>
+<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com/indicators"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
 <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
@@ -445,6 +446,9 @@ Click on any method below for a sample.</p>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
 </code></pre>
 <!--PHP black side-->
+<blockquote class="lang-specific php">
+    <p>To get a list of all indicators. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -458,10 +462,23 @@ Click on any method below for a sample.</p>
 
     <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
 <span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
-<span class="c1">//parse your data to satusfy your needs....
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
 </span><span class="cp">?&gt;</span>
 </code></pre>
-
+<blockquote class="lang-specific php">
+    <p>To get a list of indicators by country.</p>
+</blockquote>
+<pre class="highlight php"><code>
+    <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country/{put country name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get a list of a specific indicator for all countries.</p>
+</blockquote>
+<pre class="highlight php"><code>
+    <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country/all/{put indicator name here}'</span><span class="p">;</span>
+</code></pre>
 <!--Indicators white-->
 <h3 id="methods">Methods</h3>
 
@@ -658,8 +675,11 @@ For several countries and indicators</p>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
 </code></pre>
 <!--PHP black side-->
+<blockquote class="lang-specific php">
+    <p>To get a list of all indicators. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/historical/country/{put country or countries name here}/indicator/{put indicators name here}'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
     <span class="s2">"Authorization: Client guest:guest"</span>
@@ -672,7 +692,21 @@ For several countries and indicators</p>
     <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
 <span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
 <span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
 </span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get a historical indicators, by start date. Date format is - yyyy-mm-dd</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/historical/country/{put country or countries name here}/indicator/{put indicators name here}/{put date here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get a historical indicators by symbol and date.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/historical/ticker/{put symbol name here}/{put date here}'</span><span class="p">;</span>
 </code></pre>
 <!--Indicators Methods white-->
 <h3 id="methods">Methods</h3>
@@ -798,40 +832,74 @@ or you can specify a start date and end date<br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="s1">'United States'</span><span class="w"> </span></span><span class="p">)</span>          
 </span></code></pre>
-  <!--javascript black side-->
-  <blockquote class="lang-specific javascript">
-      <p>To get credit rating for specific country. <br>Remember, without a client key only a sample of data will be provided.</p>
-  </blockquote>
-  <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-  <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-      <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-  <span class="p">};</span>
-  <span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-      <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-      <span class="na">path</span><span class="p">:</span> <span class="s1">'/ratings/{put country name here}'</span><span class="p">,</span>
-      <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-  <span class="p">};</span>
-  <span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-  <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-  <span class="p">});</span>
-  <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// your code here if you want to use the results !</span>
-  <span class="p">});</span>
-  <span class="p">}</span>
-  
-  <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-  </code></pre>
-  <blockquote class="lang-specific javascript">
-      <p>To get historical ratings.</p>
-  </blockquote>
-  </code></pre><pre class="highlight javascript"><code>
-      <span class="na">path</span><span class="p">:</span> <span class="s1">'/ratings/historical/{put country name here}'</span><span class="p">,</span>
-  </code></pre>
+<!--javascript black side-->
+<blockquote class="lang-specific javascript">
+    <p>To get credit rating for specific country. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
+    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/ratings/{put country name here}'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+<span class="p">};</span>
+<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
+<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// your code here if you want to use the results !</span>
+<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get historical ratings.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/ratings/historical/{put country name here}'</span><span class="p">,</span>
+</code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get a list of all credit ratings. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/ratings'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get ratings by country or countries.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/ratings/{put country or countries name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get a historical ratings by country or countries.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/ratings/historical/{put country or countries name here}'</span><span class="p">;</span>
+</code></pre>
   
 <!--credit rating white side-->
 <h3 id="methods">Methods</h3>
@@ -975,6 +1043,20 @@ or you can specify a start date and end date<br>
   </code></pre><pre class="highlight javascript"><code>
       <span class="na">path</span><span class="p">:</span> <span class="s1">'/updates/{put date here}'</span><span class="p">,</span>
   </code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get latest updates.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/updates'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get updates by date. Date format is - yyyy-mm-dd.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/updates/{put date here}'</span><span class="p">;</span>
+</code></pre>
+
  <!--Indicators latest updates white-->
 <h3 id="methods">Methods</h3>
 
@@ -1248,9 +1330,7 @@ or you can specify a start date and end date<br>
     <span class="k">var</span> getCalendarByIdResult = <span class="kt">GetCalendarEventsById</span>(<span class="s">174108, 160025, 160030</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarByIdResult</span>);
 </code></pre>
-
-           
-         
+        
 <!--java black side-->
 <pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//calendar"</span><span class="o">;</span>
 <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
@@ -1258,7 +1338,12 @@ or you can specify a start date and end date<br>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
     <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-</code></pre><pre class="highlight php"><code><span class="cp">&lt;?php</span>
+</code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get a list of all calendar events. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/calendar'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
@@ -1271,8 +1356,52 @@ or you can specify a start date and end date<br>
 
     <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
 <span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
-<span class="c1">//parse your data to satusfy your needs....
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
 </span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get calendar events by start and end date.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/calendar/country/All/{put start date here}/{put end date here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get calendar events by country or countries.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/calendar/country/{put country or countries name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get calendar events by country or countries and dates.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/calendar/country/{put country or countries name here}/{put start date here}/{put end date here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get calendar events by indicator or indicators.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/calendar/indicator/{put indicator or indicators name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get calendar events by country or countries and indicator or indicators.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/calendar/country/{put country or countries name here}/indicator/{put indicator or indicators name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get calendar events by it's specific id.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/calendar/calendarid/{put id or ids here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get calendar events by ticker. You can also filter by dates.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/calendar/ticker/{put symbol here}'</span><span class="p">;</span>
 </code></pre>
 <p>The economic calendar covers around 1600 events for more than 150 countries a month.</p>
 
@@ -1724,8 +1853,11 @@ or you can specify a start date and end date<br>
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
 </code></pre> 
 <!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get forecasts by country or countries. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/forecast/country/{put country or countries name here}'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
     <span class="s2">"Authorization: Client guest:guest"</span>
@@ -1738,9 +1870,24 @@ or you can specify a start date and end date<br>
     <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
 <span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
 <span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
 </span><span class="cp">?&gt;</span>
 </code></pre>
-
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get forecasts by indicator or indicators.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/forecast/indicator/{put indicator or indicators name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get forecasts by country or countries and by indicator or indicators.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/forecast/country/{put country or countries name here}/indicator/{put indicator or indicators name here}'</span><span class="p">;</span>
+</code></pre>
 <!--forecasts white side-->
 <h3 id="methods">Methods</h3>
 
@@ -2020,8 +2167,11 @@ Click on any method below for a sample.
 <span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
 </code></pre> 
 <!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get markets commodities. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/commodities'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
     <span class="s2">"Authorization: Client guest:guest"</span>
@@ -2033,10 +2183,74 @@ Click on any method below for a sample.
 
     <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
 <span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
-<span class="c1">//parse your data to satusfy your needs....
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
 </span><span class="cp">?&gt;</span>
 </code></pre>
- 
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get markets currency.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/currency'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get currency crosses.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/currency?cross=eur'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get stock market indexes.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/index'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get goverment bonds.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/bond'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get one or more markets (stock, index, currency, commodity or bond).</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/symbol/{put symbol or symbols name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get markets by peers.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/peers/{put symbol name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br> 
+    <p>To get markets by components.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/components/{put symbol name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get stock market index components.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/components/{put symbol name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <br><br><br>
+    <p>To get stock market by country and page number.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/country/{put country name here}?page=2'</span><span class="p">;</span>
+</code></pre>
 <!--markets white side-->
 <h3 id="methods">Methods</h3>
 
@@ -2408,6 +2622,34 @@ Click on any method below for a sample.
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getHistoricalMarkets</span><span class="p">(<span class="nf">c</span><span class="p">(</span><span class="s1">'AAPL:US'</span><span class="p">,</span><span class="s1">'INDU:IND'</span><span class="p">),</span><span class="w"> </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2011-01-01'</span><span class="p">,</span><span class="n">endDate</span><span class="o">=</span><span class="s1">'2016-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get historical data for markets by one or more symbols. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/historical/{put symbol or symbols name here}'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get historical markets by symbol and dates. Date format - yyyy-mm-dd.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/historical/{put symbol name here}?d1={put date here}&d2={put date here}'</span><span class="p">;</span>
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -2520,6 +2762,25 @@ Click on any method below for a sample.
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getMarketsIntraday</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'AAPL:US'</span><span class="p">,</span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2019-02-01'</span><span class="p">,</span><span class="n">endDate</span> <span class="o">=</span><span class="s1">'2019-02-02'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To getintraday prices by symbol.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/intraday/{put symbol name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To getintraday prices by date and hour. Date/hour format - yyyy-mm-dd hh-mm.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/intraday/{put symbol name here}?d1={put date and hour here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To getintraday prices within a date interval. Date format - yyyy-mm-dd.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/intraday/{put symbol name here}?d1={put date here}&d2={put date here}'</span><span class="p">;</span>
+</code></pre>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -2858,7 +3119,47 @@ Click on any method below for a sample.
 </blockquote>
 <pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/earnings/country/{put country name here}'</span><span class="p">,</span>
-</code></pre>  
+</code></pre> 
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get earnings. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To filter earnings calendar by date. Date format - yyyy-mm-dd.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings?d1={put date here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To filter earnings calendar by market and date.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings/symbol/{put symbol name here}?d1={put date here}&d2={put date here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To filter earnings calendar by country.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings/country/{put country name here}'</span><span class="p">;</span>
+</code></pre> 
 <!--earnings white side-->
 <h3 id="methods">Methods</h3>
 
@@ -3034,6 +3335,41 @@ Click on any method below for a sample.
 <pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/country/{put country or countries name here}/{put indicator or indicators name here}'</span><span class="p">,</span>
 </code></pre> 
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get the latest news. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/news'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To filter news by country or countries.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/news/country/{put country or countries name here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To paginate news list by specifying start index and list size.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/news?limit={put limit size here}&start={put start index here}'</span><span class="p">;</span>
+</code></pre> 
+
 <h3 id="methods">Methods</h3>
 <!--latest news white side-->
 <p><span class="methods"></p>
@@ -3207,6 +3543,37 @@ Click on any method below for a sample.
 <pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/articles/id/{put country or countries name here}/{put ID here}'</span><span class="p">,</span>
 </code></pre> 
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get the latest articles. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/articles'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To filter articles by country.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/articles/country/{put country name here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To get articles by country within a date interval. Date format - yyyy-mm-dd.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/articles/country/{put country name here}/from/{put date here}/{put date here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To filter articles by id.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/articles/id/{put id here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To paginate articles list by specifying start index and list size.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/articles?lim={put limit size here}&start={put start index here}'</span><span class="p">;</span>
+</code></pre> 
 <!--latest articles white side-->
 <h3 id="methods">Methods</h3>
 
@@ -3224,7 +3591,7 @@ Click on any method below for a sample.
 <li><p>Latest articles by country and indicator<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/articles/country/united%20states/interest%20rate?c=guest:guest">/articles/country/{countries}/{indicators}</a>    </p></li>
 <li><p>Article by ID<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/<article_id></article></a></p></li>
+<a target = '_blank' href="https://api.tradingeconomics.com/articles/id/20580?c=guest:guest">/articles/id/{id}<article_id></article></a></p></li>
 <li><p>Paginate articles list by specifying start index and list size<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/articles?c=guest:guest&lim=10&start=10">/articles?c=guest:guest&amp;lim={list_size}&amp;start={start_index}</a>
 </span> </p></li>
@@ -3343,7 +3710,41 @@ Click on any method below for a sample.
 </blockquote>
 <pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/category/{put category name here}/{put page number here}'</span><span class="p">,</span>
+</code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get World Bank categories.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/categories'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get world bank data by category.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/category/{put category name here}'</span><span class="p">;</span>
 </code></pre> 
+<blockquote class="lang-specific php">
+    <p>To get world bank data by category, and page number.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/category/{put category name here}/{put page number here}'</span><span class="p">;</span>
+</code></pre>  
 <!--WB white side-->
 <h3 id="methods">Methods</h3>
 
@@ -3499,6 +3900,40 @@ Because there are too many results, this method has pagination. Each page is lim
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get world bank data by series code.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+    <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/indicator?s={put series_code here}'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get a list of indicators available for a specific country and page number.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/country/{put country name here}/{put page number here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To get world bank data by url.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/indicator?url={put url path here}'</span><span class="p">;</span>
+</code></pre> 
 <h3 id="methods">Methods</h3>
 <!--WB white side-->
 <p><span class="methods"></p>
@@ -3590,6 +4025,13 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">2</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.37488</span>        
 <span class="n">...</span>
 </code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get world bank  historical data for a specific indicator.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/historical?s={put series_code here}'</span><span class="p">;</span>
+</code></pre> 
 <!--WB historical white side-->
 <h3 id="methods">Methods</h3>
 
@@ -3665,6 +4107,28 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get Comtrade categories.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/comtrade/categories'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
 </code></pre>
 
 
@@ -3786,6 +4250,31 @@ Because there are too many results, this method has pagination. Each page is lim
 <pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/country/{put country1 name here}/{put country2 name here}/{put page number here}'</span><span class="p">,</span>
 </code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get detailed information about comtrade countries.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/comtrade/countries'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To get comtrade data by country.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/comtrade/country/{put country name here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To get comtrade data by country and page number.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/comtrade/country/{put country name here}/{put page number here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To get comtrade data between two countries.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/comtrade/country/{put country1 name here}/{put country2 name here}/{put page number here}'</span><span class="p">;</span>
+</code></pre> 
 <!--comtrade white side-->
 <h3 id="methods">Methods</h3>
 
@@ -3908,6 +4397,13 @@ Because there are too many results, this method has pagination. Each page is lim
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
 </code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get comtrade historical data.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/comtrade/historical/{put symbol name here}'</span><span class="p">;</span>
+</code></pre> 
 <!--comtrade historical white side-->
 <h3 id="methods">Methods</h3>
 
@@ -3991,6 +4487,28 @@ Because there are too many results, this method has pagination. Each page is lim
 </blockquote>
 <pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/counties/{put county name here}'</span><span class="p">,</span>
+</code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get a list of all US states.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/states'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
 <!--federal reserve white side-->
@@ -4117,6 +4635,43 @@ Because there are too many results, this method has pagination. Each page is lim
 </blockquote>
 <pre class="highlight javascript"><code>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/snapshot/county/{put county name here}/{put page number here}'</span><span class="p">,</span>
+</code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get federal reserve data by symbol.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/snapshot/symbol/{put symbol name here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To get federal reserve data by url.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/snapshot/url?url={put url path here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get federal reserve data by country.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/snapshot/country/{put country name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get federal reserve data by state.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/snapshot/state/{put state name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get federal reserve data by county.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/snapshot/county/{put county name here}'</span><span class="p">;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get federal reserve data by county and page number.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/snapshot/county/{put county name here}/{put page number here}'</span><span class="p">;</span>
 </code></pre>
 
 <p>Snapshots can be accessed through symbol, url, country, state or county. All have pagination.  </p>
@@ -4256,6 +4811,19 @@ or<br>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get federal reserve historical data by symbol.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/historical/{put symbol name here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To get federal reserve historical data by more than one symbol.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/fred/historical/{put symbols name here}'</span><span class="p">;</span>
 </code></pre>
 <h3 id="methods">Methods</h3>
 <!--fed reserve historical white side-->
