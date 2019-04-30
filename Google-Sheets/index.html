@@ -161,13 +161,14 @@
             position: fixed;
             width: 90%;
             height: 100%;
-            animation: fadeInOut 2s infinite;
+            animation: fadeInOut 3s infinite;
+            animation-timing-function: ease-in-out;
         }
         
         @keyframes fadeInOut {
-            0%   { background-color: rgb(255,255,255,0.45); }
-            50% { background-color: rgb(255,255,255,0.9); }
-            100% { background-color: rgb(255,255,255,0.45); }
+            0%   { background-color: rgb(255,255,255,0.5); }
+            50% { background-color: rgb(255,255,255,0.95); }
+            100% { background-color: rgb(255,255,255,0.5); }
         }
     </style>
 </head>
@@ -216,6 +217,7 @@
                             <button id="getLatestRatingsForAllCountries" type="button" class="_btn-default">Get Latest Ratings For All Countries</button>
                             <button id="getCountryRating" type="button" class="_btn-default">Get Country Rating</button>
                             <button id="getCountryHistoricalRating" type="button" class="_btn-default">Get Country Historical Rating</button>
+                            <button id="getHistoricalRatingsForAllCountries" type="button" class="_btn-default">Get Historical Ratings For All Countries</button>
                         </div>
     
                         <div id="updatesBtnContainer">
@@ -435,6 +437,7 @@
                 else if (urlToBakeCode == 'getLatestRatingsForAllCountries') { _baseUrl = '/ratings' }
                 else if (urlToBakeCode == 'getCountryRating') { _baseUrl = '/ratings/' + inputsSelected[1].value }
                 else if (urlToBakeCode == 'getCountryHistoricalRating') { _baseUrl = '/ratings/historical/' + inputsSelected[1].value }
+                else if (urlToBakeCode == 'getHistoricalRatingsForAllCountries') { _baseUrl = '/ratings/historical/all' }
                 else if (urlToBakeCode == 'getAllUpdates') { _baseUrl = '/updates' }
                 else if (urlToBakeCode == 'getUpdatesStartingFromADate') { _baseUrl = '/updates/' + inputsSelected[6].value }
                 //Calendar
@@ -551,6 +554,7 @@
             var getLatestRatingsForAllCountries = document.getElementById('getLatestRatingsForAllCountries')
             var getCountryRating = document.getElementById('getCountryRating')
             var getCountryHistoricalRating = document.getElementById('getCountryHistoricalRating')
+            var getHistoricalRatingsForAllCountries = document.getElementById('getHistoricalRatingsForAllCountries')
             var getAllUpdates = document.getElementById('getAllUpdates')
             var getUpdatesStartingFromADate = document.getElementById('getUpdatesStartingFromADate')
             //Calendar
@@ -795,6 +799,7 @@
                     getLatestRatingsForAllCountries.onclick = function() { eachButtonSetup(getLatestRatingsForAllCountries) }
                     getCountryRating.onclick = function() { eachButtonSetup(getCountryRating, '', 'block') }
                     getCountryHistoricalRating.onclick = function() { eachButtonSetup(getCountryHistoricalRating, '', 'block') }
+                    getHistoricalRatingsForAllCountries.onclick = function() { eachButtonSetup(getHistoricalRatingsForAllCountries) }
                     getAllUpdates.onclick = function() { eachButtonSetup(getAllUpdates) }
                     getUpdatesStartingFromADate.onclick = function() { eachButtonSetup(getUpdatesStartingFromADate, '', '', '', '', '', '', 'block') }
                 }

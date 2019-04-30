@@ -1,0 +1,11 @@
+To use TE Sheets Add-On:
+- Create a new Google Spreadsheet
+- From the spreadsheet, choose the menu Tools -> Script Editor
+- Rename de project from "Untitled project" to Trading Economics
+- Copy Code.gs from this Git and paste it to the new Code.gs file
+- Click on File > New > HTML file and name it index.html
+- Copy index.html from this Git and paste it to the new index.html file
+- Save both files 
+- Close the Script Editor tab and refresh your spreadsheet using F5
+- You will see a new menu after "Help", called "TE"
+- Click TE > Get Data to start using the Add-On
