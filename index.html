@@ -450,7 +450,7 @@ Click on any method below for a sample.</p>
     <p>To get a list of all indicators. <br>Remember, without a client key only a sample of data will be provided.</p>
 </blockquote>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/country'</span><span class="p">;</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/indicators'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
     <span class="s2">"Authorization: Client guest:guest"</span>
@@ -676,7 +676,7 @@ For several countries and indicators</p>
 </code></pre>
 <!--PHP black side-->
 <blockquote class="lang-specific php">
-    <p>To get a list of all indicators. <br>Remember, without a client key only a sample of data will be provided.</p>
+    <p>To get a list of historical data for specific country and indicator. <br>Remember, without a client key only a sample of data will be provided.</p>
 </blockquote>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/historical/country/{put country or countries name here}/indicator/{put indicators name here}'</span><span class="p">;</span>
@@ -697,13 +697,13 @@ For several countries and indicators</p>
 </span><span class="cp">?&gt;</span>
 </code></pre>
 <blockquote class="lang-specific php">
-    <p>To get a historical indicators, by start date. Date format is - yyyy-mm-dd</p>
+    <p>To get a historical data by start date. Date format is - yyyy-mm-dd</p>
 </blockquote>
 <pre class="highlight php"><code>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/historical/country/{put country or countries name here}/indicator/{put indicators name here}/{put date here}'</span><span class="p">;</span>
 </code></pre>
 <blockquote class="lang-specific php">
-    <p>To get a historical indicators by symbol and date.</p>
+    <p>To get a historical data by symbol and date.</p>
 </blockquote>
 <pre class="highlight php"><code>
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/historical/ticker/{put symbol name here}/{put date here}'</span><span class="p">;</span>
