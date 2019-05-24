@@ -458,12 +458,48 @@ Click on any method below for a sample.</p>
 </code></pre>
 
 <!--Java black side-->
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com/indicators"</span><span class="o">;</span>
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
-<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+<blockquote class="lang-specific java">
+    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Indicators.java">Check here for the complete sample code.</a></p>
+    <br><p>To get a list of all indicators.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getIndicators</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/indicators"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of all indicators"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+    <p>To get a list indicators by country.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getIndicatorsByCountry</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>); 
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/country"</span> <span class="n">+</span> <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of indicators by country"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+    <p>To get a list of all countries with a specific indicator.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getIndicatorsByIndicator</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put indicator name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"gdp"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>); 
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/country/all"</span> <span class="n">+</span> <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of all countries with a specific indicator"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
 </code></pre>
 <!--PHP black side-->
 <blockquote class="lang-specific php">
@@ -706,12 +742,44 @@ For several countries and indicators</p>
     <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalIndicatorsByCountries</span>);
 </code></pre>
 <!--Java black side-->
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//historical/country/{put country name here}/indicator/{put indicator name here}"</span><span class="o">;</span>
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
-<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+<blockquote class="lang-specific java">
+    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Indicators.java">Check here for the complete sample code.</a></p>
+    <br><p>To get historical data by country and indicator.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getHistoricalCountryIndicator</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span> + <span class="s">"/"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put indicator name here</span>
+    <span class="n">String </span><span class="na">params1</span> <span class="o">=</span> <span class="s">"gdp"</span>; 
+    <span class="n">params1 = </span><span class="na">params1</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/historical/country"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"indicator/"</span> + <span class="na">params1</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get historical data by country and indicator"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get historical data by country, indicator and start date.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getHistoricalCountryIndicatorDate</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span> + <span class="s">"/"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put indicator name here</span>
+    <span class="n">String </span><span class="na">params1</span> <span class="o">=</span> <span class="s">"gdp"</span>; 
+    <span class="n">params1 = </span><span class="na">params1</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put start date here (date format: yyyy-mm-dd)</span>
+    <span class="n">String </span><span class="na">date</span> <span class="o">=</span> <span class="s">"2013-01-01"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/historical/country"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"indicator/"</span> + <span class="na">params1</span> + <span class="s">"/"</span> + <span class="na">date</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get historical data by country, indicator and start date"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
 </code></pre>
 <!--PHP black side-->
 <blockquote class="lang-specific php">
@@ -984,6 +1052,50 @@ or you can specify a start date and end date<br>
     <span class="k">var</span> getHistoricalRatings = <span class="kt">GetHistoricalRatings  </span>(new string</span><span class="s">[]</span>{<span class="s">"united states"</span>, <span class="s">"portugal"</span>}).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalRatings  </span>);
 </code></pre>
+<!--java black side-->
+<blockquote class="lang-specific java">
+    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Ratings.java">Check here for the complete sample code.</a></p>
+    <br><p>To get a list of all credit ratings.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getRatings</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/ratings"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of all credit ratings"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get a list of credit ratings by country or countries.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getRatingsCountry</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country or countries name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/ratings"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of credit ratings by country or countries"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get a list of historical credit ratings for one country or multiple countries.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getRatingsHistoricalCountry</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country or countries name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states,portugal"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/ratings/historical"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of historical credit ratings for multiple countries"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
   
 <!--credit rating white side-->
 <h3 id="methods">Methods</h3>
@@ -1157,7 +1269,22 @@ or you can specify a start date and end date<br>
     <span class="k">var</span> getLatestUpdatesByDate = <span class="kt">GetLatestUpdatesByDate </span>(<span class="k">new </span>DateTime(<span class="s">2015, 03, 01</span>)).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getLatestUpdatesByDate   </span>);
 </code></pre>
-
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Ratings.java">Check here for the complete sample code.</a></p>
+<br><p>To get a list of the latest updates by start date.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getLatestUpdatesByDate</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put start date here (date format: yyyy-mm-dd)</span>
+    <span class="n">String </span><span class="na">date</span> <span class="o">=</span> <span class="s">"2018-01-01"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/updates"</span> + <span class="s">"/"</span> + <span class="na">date</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get latest updates by a start date"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 
  <!--Indicators latest updates white-->
 <h3 id="methods">Methods</h3>
@@ -2051,13 +2178,55 @@ or you can specify a start date and end date<br>
     </code></pre>
 
 <!--java black side-->
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//forecast/country/{put country name here}"</span><span class="o">;</span>
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
-<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-</code></pre> 
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Forecast.java">Check here for the complete sample code.</a></p>
+<br><p>To get forecasts by country.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getForecastByCountry</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/forecast/country"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get forecasts by country"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get forecasts by multiple indicators.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getForecastMultiIndicator</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put indicators name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"gdp,population"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/forecast/indicator"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get forecasts for multiple indicators"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get forecasts by country and indicator.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getForecastCountryIndicator</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span> + <span class="s">"/"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put indicator name here</span>
+    <span class="n">String </span><span class="na">params1</span> <span class="o">=</span> <span class="s">"gdp"</span>;
+    <span class="n">params1 = </span><span class="na">params1</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/forecast/country"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"indicator"</span> + <span class="s">"/"</span> + <span class="na">params1</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get forecasts by country and indicator"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get forecasts by country or countries. <br>Remember, without a client key only a sample of data will be provided.</p>
@@ -2440,13 +2609,116 @@ Click on any method below for a sample.
         <span class="k">Console</span>.WriteLine(<span class="kt">getMarketsByCountryPage</span>);
     </code></pre>
 <!--java black side-->
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//markets/commodities"</span><span class="o">;</span>
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
-<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
-</code></pre> 
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/MarketSnaps.java">Check here for the complete sample code.</a></p>
+<br><p>To get a list of commodities.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getMarketCommodities</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/commodities"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of commodities"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get a list of the major currencies.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getMarketCurrency</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/currency"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of the major currencies"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get markets by symbol or symbols.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getMarketSymbol</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol or symbols name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"aapl:us"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/symbol"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get markets by symbol or symbols"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get stock Market Index Components.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getMarketComponents</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put index component here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"psi20:ind"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/components"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get stock Market Index Components"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>The search will look into the categories: Indexes, markets(stocks), bonds, and commodities.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getMarketSearch</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put search term here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/search"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Search for country"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Search for country and category.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getMarketCategory</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put search term here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put category name here</span>
+    <span class="c1">//Categories available: index, markets, forex, bond and commodity</span>
+    <span class="n">String </span><span class="na">params1</span> <span class="o">=</span> <span class="s">"index,markets"</span>;
+    <span class="n">params1 = </span><span class="na">params1</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/search"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"?category="</span> + <span class="na">params1</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Search for country and category"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Search for country and category and page number.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getMarketCategoryPage</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put search term here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put category name here</span>
+    <span class="c1">//Categories available: index, markets, forex, bond and commodity</span>
+    <span class="n">String </span><span class="na">params1</span> <span class="o">=</span> <span class="s">"index,markets"</span>;
+    <span class="n">params1 = </span><span class="na">params1</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put page number here</span>
+    <span class="n">String </span><span class="na">page</span> <span class="o">=</span> <span class="s">"2"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/search"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"?category="</span> + <span class="na">params1</span> + <span class="s">"&page"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Search for country and category and page number"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get markets commodities. <br>Remember, without a client key only a sample of data will be provided.</p>
