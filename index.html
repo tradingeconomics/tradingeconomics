@@ -1434,12 +1434,80 @@ or you can specify a start date and end date<br>
 </code></pre>
         
 <!--java black side-->
-<pre class="highlight java"><code><span class="n">String</span> <span class="n">uri</span> <span class="o">=</span> <span class="s">"https://api.tradingeconomics.com//calendar"</span><span class="o">;</span>
-<span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">uri</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">"Accept"</span><span class="o">,</span> <span class="s">"application/xml"</span><span class="o">);</span>
-<span class="n">InputStream</span> <span class="n">xml</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">();</span>
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Calendar.java">Check here for the complete sample code.</a></p>
+<br><p>To get all calendar events.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getCalendar</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span> 
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/calendar"</span> <span class="n">;</span>    
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get all calendar events"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+    <p>To get calendar events between dates.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getCalendarBetweenDates</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put your dates here (date format: YYYY-MM-DD)</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"2016-12-02/2016-12-03"</span>; 
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/calendar/country/all"</span> <span class="n">+</span> <span class="s">"/"</span> + <span class="na">params</span>;    
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get calendar events between dates"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+    <p>To get calendar events by country or countries.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getCalendarByCountry</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country or countries name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states,china"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>); 
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/calendar/country"</span> <span class="n">+</span> <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get calendar by country or countries"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+    <p>To get calendar events by country and indicator.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getCalendarByCountryIndicator</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span> + <span class="s">"/"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>); 
+    <span class="c1">//put indicator name here</span>
+    <span class="n">String </span><span class="na">params1</span> <span class="o">=</span> <span class="s">"initial jobless claims"</span>; 
+    <span class="n">params1 = </span><span class="na">params1</span>.replaceAll(<span class="s">"\\s","%20""</span>); 
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/calendar/country"</span> <span class="n">+</span> <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"indicator"</span> + <span class="s">"/"</span> + <span class="na">params1</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get calendar by country and indicator"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+    <p>To get calendar by Id.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getCalendarById</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put id's here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"174108,160025, 160030"</span> + <span class="s">"/"</span>; 
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>); 
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/calendar/calendarid"</span> <span class="n">+</span> <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get calendar by specific id"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
 </code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
