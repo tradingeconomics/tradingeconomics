@@ -163,7 +163,7 @@
 <!--R black side-->
 <blockquote class="lang-specific r">
 <p>You can get R from the official website: <a target = '_blank' href="https://cran.r-project.org/">https://cran.r-project.org/</a>     
-Then you need to install the tradingeconomics package. At this moment our package is available to download from the <a target = '_blank' href="https://github.com/tradingeconomics/open-api/tree/master/R">GitHub</a> repository.    
+Then you need to install the tradingeconomics package. At this moment our package is available to download from the <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/tree/master/R">GitHub</a> repository.    
 See below how to install a package that’s sitting on GitHub.</p>
 <br>
 <p>Install the devtools package. You can do this from CRAN. Invoke R and then type:</p>
@@ -178,7 +178,7 @@ See below how to install a package that’s sitting on GitHub.</p>
 <blockquote class="lang-specific r">
 <p>Install the tradingeconomics package.</p>
 </blockquote>     
-<pre class="highlight r"><code><span class="n">install_github</span><span class="p">(</span><span class="s2">"tradingeconomics/open-api/R/tradingeconomics"</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">install_github</span><span class="p">(</span><span class="s2">"tradingeconomics/tradingeconomics/R/tradingeconomics"</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>To start using the Trading Economics R package, type in command window:</p>
@@ -261,6 +261,7 @@ The API can be used to feed a custom developed application, a public website or 
    Here is a practical example:
    <br>
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+
 </blockquote>
 <!--php black side-->
 <blockquote class="lang-specific php">
@@ -3237,7 +3238,43 @@ Click on any method below for a sample.
         <span class="k">var</span> getHistoricalSymbolBetweenDates = <span class="kt">GetHistoricalSymbolBetweenDates</span>(<span class="s">"aapl:us"</span>, new <span class="k">DateTime</span>(<span class="s">2015, 03, 01</span>), new <span class="k">DateTime</span>(<span class="s">2015, 01, 01</span>)).Result;
         <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalSymbolBetweenDates</span>);
     </code></pre>
-    
+
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/MarketHistorical.java">Check here for the complete sample code.</a></p>
+<br><p>To get historical data by symbol or symbols.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getHistoricalSymbol</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"aapl:us"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/historical"</span> +  <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Historical markets by symbo"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get markets historical data between dates.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getHistoricalBetweenDates</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"aapl:us"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put start date here</span>
+    <span class="n">String </span><span class="na">start_date</span> <span class="o">=</span> <span class="s">"2017-08-01"</span>;
+    <span class="c1">//put end date here</span>
+    <span class="n">String </span><span class="na">end_date</span> <span class="o">=</span> <span class="s">"2017-08-08"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/historical"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"?d1="</span> + <span class="na">start_date</span> + <span class="s">"&d2="</span> + <span class="na">end_date</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Historical markets between dates"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>   
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -3394,6 +3431,41 @@ Click on any method below for a sample.
     <span class="k">Console</span>.WriteLine(<span class="s">"About to get intraday prices by dates"</span>);
     <span class="k">var</span> getIntradaySymbolDates = <span class="kt">getIntradaySymbolDates</span>( <span class="s">"aapl:us"</span>, new <span class="k">DateTime</span>(<span class="s">2015, 03, 01</span>), new <span class="k">DateTime</span>(<span class="s">2015, 12, 31</span>)).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getIntradaySymbolDates</span>);
+</code></pre> 
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/MarketIntraday.java">Check here for the complete sample code.</a></p>
+<br><p>To get intraday for a single market.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getIntradayBySymbol</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"aapl:us"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/intraday"</span> +  <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Intraday for a single market"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get intraday by symbol date and time.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getIntradayByDateTime</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"aapl:us"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put date and time here (date format yyyy-mm-dd, time format: hh:mm)</span>
+    <span class="n">String </span><span class="na">date</span> <span class="o">=</span> <span class="s">"2017-08-10 15:30"</span>;
+    <span class="n">date = </span><span class="na">date</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/intraday"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"?d1="</span> + <span class="na">date</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Intraday by symbol date and time"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
 </code></pre> 
 <h3 id="methods">Methods</h3>
 
@@ -3819,7 +3891,38 @@ Click on any method below for a sample.
     <span class="k">var</span> getEarningsByType = <span class="kt">getEarningsByType</span>( <span class="s">"earnings" </span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getEarningsByType</span>);
 </code></pre>
-
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Earnings.java">Check here for the complete sample code.</a></p>
+<br><p>To get default earnings calendar.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getEarnings</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/earnings"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Default earnings calendar"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get earnings by symbol within a date interval.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getEarningsBetweenDates</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"msft:us"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put date here (date format yyyy-mm-dd)</span>
+    <span class="n">String </span><span class="na">date</span> <span class="o">=</span> <span class="s">"2016-01-01"</span> + <span class="s">"&d2="</span> + <span class="s">"2017-12-31"</span>;
+    <span class="n">date = </span><span class="na">date</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/earnings/symbol"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"?d1="</span> + <span class="na">date</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get earnings by symbol within a date interval"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <!--earnings white side-->
 <h3 id="methods">Methods</h3>
 
@@ -4071,6 +4174,36 @@ Click on any method below for a sample.
     <span class="k">var</span> getNewsList = <span class="kt">GetNewsList</span>( <span class="s">4, 2</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getNewsList</span>);
 </code></pre>
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/News.java">Check here for the complete sample code.</a></p>
+<br><p>To get the latest news.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getNews</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/news"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get the latest news"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>To get news by start index and limit size list.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getNewsByPage</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put limit list size here</span>
+    <span class="n">String </span><span class="na">limit</span> <span class="o">=</span> <span class="s">"15"</span>;
+    <span class="c1">//put start index here</span>
+    <span class="n">String </span><span class="na">start</span> <span class="o">=</span> <span class="s">"10"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/news"</span> + <span class="s">"?limit="</span> + <span class="na">limit</span> + <span class="s">"&start="</span> + <span class="na">start</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get news by start index and limit size list"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <h3 id="methods">Methods</h3>
 <!--latest news white side-->
 <p><span class="methods"></p>
@@ -4317,6 +4450,35 @@ Click on any method below for a sample.
     <span class="k">var</span> getArticlesList = <span class="kt">GetArticlesList</span>( <span class="s">4, 2</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getArticlesList</span>);
 </code></pre> 
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Articles.java">Check here for the complete sample code.</a></p>
+<br><p>To get the latest articles.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getArticles</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/articles"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get the latest articles"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get articles by country.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getArticlesByCountry</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/articles/country"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get articles by country"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <!--latest articles white side-->
 <h3 id="methods">Methods</h3>
 
@@ -4525,6 +4687,52 @@ Click on any method below for a sample.
     <span class="k">var</span> getWBCategoryPage = <span class="kt">GetWBCategoryPage</span>( <span class="s">"Education"</span>, <span class="s">4</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getWBCategoryPage</span>);
 </code></pre> 
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/WorldBank.java">Check here for the complete sample code.</a></p>
+<br><p>To get world bank main categories.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getWBCategories</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/categories"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get main categories"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get world bank data by category.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getWBByCategory</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put category  name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"Education"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/category"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank data by category"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get world bank data by category and page number.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getWBByPage</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put category  name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"Education"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put page number here</span>
+    <span class="n">String </span><span class="na">page</span> <span class="o">=</span> <span class="s">"2"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/category"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"/"</span> + <span class="na">page</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank data by category and page number"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <!--WB white side-->
 <h3 id="methods">Methods</h3>
 
@@ -4751,6 +4959,54 @@ Because there are too many results, this method has pagination. Each page is lim
     <span class="k">var</span> getWBCountryPage = <span class="kt">GetWBCountryPage</span>( <span class="s">"united states"</span>, <span class="s">4</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getWBCountryPage</span>);
 </code></pre> 
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>Get world bank data by specific indicator.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getWBIndicator</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put series code here</span>
+    <span class="n">String </span><span class="na">series_code</span> <span class="o">=</span> <span class="s">"fr.inr.rinr"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/indicator"</span> + <span class="s">"?s="</span> + <span class="na">series_code</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank data by specific indicator"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get world bank data by specific country and page.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getWBCountryPage</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country  name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"portugal"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put page number here</span>
+    <span class="n">String </span><span class="na">page</span> <span class="o">=</span> <span class="s">"2"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/country"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"/"</span> + <span class="na">page</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank data by specific country and page"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get world bank data by specific url.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getWBByUrl</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put category  name here</span>
+    <span class="n">String </span><span class="na">url</span> <span class="o">=</span> <span class="s">"/united-states/real-interest-rate-percent-wb-data.html"</span>;
+    <span class="n">url = </span><span class="na">url</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/indicator"</span> + <span class="s">"?url="</span> + <span class="na">url</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank data by specific url"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <h3 id="methods">Methods</h3>
 <!--WB white side-->
 <p><span class="methods"></p>
@@ -4859,7 +5115,22 @@ Because there are too many results, this method has pagination. Each page is lim
     <span class="k">var</span> getWBHistorical = <span class="kt">GetWBHistorical</span>( new string <span class="s">[]</span> { <span class="s">"usa.fr.inr.rinr"</span>}).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getWBHistorical</span>);
 </code></pre>
-
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>Get world bank historical data by specific series code.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getWBHistorical</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put series code here</span>
+    <span class="n">String </span><span class="na">series_code</span> <span class="o">=</span> <span class="s">"usa.fr.inr.rinr"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/historical"</span> + <span class="s">"?s="</span> + <span class="na">series_code</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank historical data by specific series code"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <!--WB historical white side-->
 <h3 id="methods">Methods</h3>
 
@@ -4979,7 +5250,21 @@ Because there are too many results, this method has pagination. Each page is lim
     <span class="k">Console</span>.ReadLine();
 }
 </code></pre> 
-
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Comtrade.java">Check here for the complete sample code.</a></p>
+<br><p>Get detailed information about comtrade main categories.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getComtradeCategories</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/comtrade/categories"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get detailed information about comtrade main categories"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+   
 <!--comtrade white side-->
 <h3 id="methods">Methods</h3>
 
@@ -5148,8 +5433,39 @@ Because there are too many results, this method has pagination. Each page is lim
     <span class="k">var</span> getComBetweenCountries = <span class="kt">GetComBetweenCountries</span>( <span class="s">"portugal", "spain"</span>, <span class="s">2</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getComBetweenCountries</span>);
 </code></pre>
-
-
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>Get detailed information about comtrade countries.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getComtradeCountries</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/comtrade/countries"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get detailed information about comtrade countries"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get comtrade data between countries and page number.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getComtradeBetweenTwoCountries</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country1  name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"portugal"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put country2  name here</span>
+    <span class="n">String </span><span class="na">params1</span> <span class="o">=</span> <span class="s">"spain"</span>;
+    <span class="n">params1 = </span><span class="na">params1</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put page number here</span>
+    <span class="n">String </span><span class="na">page</span> <span class="o">=</span> <span class="s">"2"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/comtrade/country"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"/"</span> + <span class="na">params1</span> + <span class="s">"/"</span> + <span class="na">page</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get comtrade data between countries and page number"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <!--comtrade white side-->
 <h3 id="methods">Methods</h3>
 
@@ -5288,6 +5604,22 @@ Because there are too many results, this method has pagination. Each page is lim
     <span class="k">var</span> getComHistorical = <span class="kt">GetComHistorical</span>( <span class="s">"PRTESP24031"</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getComHistorical</span>);
 </code></pre>
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>Get comtrade historical data by symbol.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getComtradeHistorical</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol  name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"PRTESP24031"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/comtrade/historical"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get comtrade historical data by symbol"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <!--comtrade historical white side-->
 <h3 id="methods">Methods</h3>
 
@@ -5412,6 +5744,21 @@ Because there are too many results, this method has pagination. Each page is lim
     <span class="k">var</span> getFredCounty = <span class="kt">GetFredCounty</span>( <span class="s">"arkansas"</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getFredCounty</span>);
 </code></pre>
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/FederalReserve.java">Check here for the complete sample code.</a></p>
+<br><p>Get a list of all states.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getFredStates</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/fred/states"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get a list of all states"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+
 <h3 id="methods">Methods</h3>
 <!--federal reserve white side-->
 <p><span class="methods">  </p>
@@ -5624,6 +5971,54 @@ Because there are too many results, this method has pagination. Each page is lim
     <span class="k">var</span> getFredSnapCountryPage = <span class="kt">GetFredSnapCountryPage</span>( <span class="s">"united states"</span>, <span class="s">2</span>).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getFredSnapCountryPage</span>);
 </code></pre>
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>Get fred snapshot by symbol.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getFredSymbol</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol   name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"AGEXMAK2A647NCEN"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/fred/snapshot/symbol"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get fred snapshot by symbol"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get fred data by county.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getFredCounty</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put category  name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"arkansas"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/fred/snapshot/county"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get fred data by county"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<p>Get fred data by country and page number.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getFredCountryPage</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put country  name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"united states"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put page number here</span>
+    <span class="n">String </span><span class="na">page</span> <span class="o">=</span> <span class="s">"2"</span>;
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/fred/snapshot/country"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"/"</span> + <span class="na">page</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get fred data by country and page number"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
 <p>Snapshots can be accessed through symbol, url, country, state or county. All have pagination.  </p>
 <!--fed reserve snapshots white side-->
 <h3 id="methods">Methods</h3>
@@ -5791,6 +6186,22 @@ or<br>
     <span class="k">Console</span>.WriteLine(<span class="s">"About to get fred historical by symbols"</span>);
     <span class="k">var</span> getFredHistoricalSymbols = <span class="kt">GetFredHistoricalSymbols</span>( new string <span class="s">[]</span> {<span class="s">"RACEDISPARITY005007", "2020RATIO002013"</span> }).Result;
     <span class="k">Console</span>.WriteLine(<span class="kt">getFredHistoricalSymbols</span>);
+</code></pre>
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>Get fred historical data by symbol or symbols.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getFredHistoricalSymbol</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol or symbols name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"RACEDISPARITY005007,2020RATIO002013"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/fred/historical"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get fred historical data by symbols"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
 </code></pre>
 <h3 id="methods">Methods</h3>
 <!--fed reserve historical white side-->
