@@ -30,59 +30,71 @@ source("R/functions.R")
 #'Without credentials, only sample data is returned.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getCalendarData(country = 'United States', indicator = 'Composite Pmi',
-#'  initDate = '2011-01-01', endDate = '2016-01-01')
-#' getCalendarData(country = c('United States', 'India'),
-#'  indicator = c('Composite Pmi', 'Bankruptcies'),
-#'   initDate = '2011-01-01', endDate = '2016-01-01')
+#'\dontrun{getCalendarData(), getCalendarData(id= c('174108','160025','160030')), getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'))
+#' getCalendarData(country = 'United States', indicator = 'initial jobless claims',initDate = '2016-12-01', endDate = '2017-02-25')
+#'getCalendarData(country = c('United States', 'India'),indicator = c('Composite Pmi', 'Bankruptcies'), initDate = '2011-01-01', endDate = '2016-01-01')
+#'getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'), initDate = '2018-01-01', endDate = '2018-03-01')
+#'getCalendarData(country = 'United States', indicator = 'initial jobless claims')
+#'getCalendarData(country = 'United States')
+#'getCalendarData(indicator = 'initial jobless claims')
 #'   }
 #'
 
-getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, endDate= NULL, outType = NULL) {
+getCalendarData <- function(country = NULL, indicator = NULL, id = NULL, ticker = NULL, initDate= NULL, endDate= NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/calendar"
 
   df_final = data.frame()
-  step = 10
 
-  for(i in seq(1, length(country), by = step)){
 
-    init = as.numeric(i)
-    finit = as.numeric(i)+step-1
-
-    if (is.null(country) & is.null(indicator)){
-      url <- base
-    } else if (is.null(country) & !is.null(indicator)){
-      url <- paste(base, 'country/all', 'indicator',
-                        paste(indicator, collapse = ','), sep = '/')
-    } else if (!is.null(country) & is.null(indicator)){
-      url <- paste(base, 'country',
-                   paste(na.omit(country[init:finit]), collapse = ','), sep = '/')
-    } else {
-      url <- paste(base, 'country', paste(na.omit(country[init:finit]), collapse = ','), 'indicator',
-                   paste(indicator, collapse = ','), sep = '/')
-    }
-
-    if (!is.null(initDate) & !is.null(endDate)){
-      dateCheck(initDate)
-      dateCheck(endDate)
-      if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
-      if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
-      url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
-    } else {
-      url <- url
-    }
-
-    url <- paste(url, '?c=', apiKey, sep = '')
-    url <- URLencode(url)
-    request <- GET(url)
-
-    checkRequestStatus(http_status(request)$message)
-
-    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
-
-    df_final = rbind(df_final, webResults)
-    Sys.sleep(0.5)
+  if (is.null(country) & is.null(indicator)){
+    url <- base
+  } else if (is.null(country) & !is.null(indicator)){
+    url <- paste(base, 'country/all', 'indicator',
+                      paste(indicator, collapse = ','), sep = '/')
+  } else if (!is.null(country) & is.null(indicator)){
+    url <- paste(base, 'country',
+                 paste(country, collapse = ','), sep = '/')
+  } else {
+    url <- paste(base, 'country', paste(country, collapse = ','), 'indicator',
+                 paste(indicator, collapse = ','), sep = '/')
   }
+  if (!is.null(id)){
+    url <- paste(base, "calendarid", paste(id, collapse = ','), sep = '/')
+  }
+  if (!is.null(ticker)){
+    url <- paste(base, "ticker", paste(ticker, collapse = ','), sep = '/')
+
+  }
+
+  if (!is.null(initDate) & !is.null(endDate)){
+    dateCheck(initDate)
+    dateCheck(endDate)
+    if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+    if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
+    url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
+  } else if (!is.null(initDate)){
+    dateCheck(initDate)
+    if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+    url <- paste(base, "All", collapse = NULL, sep = '/')
+
+  }else{
+    url <- url
+
+  }
+
+  print(url)
+
+  url <- paste(url, '?c=', apiKey, sep = '')
+  url <- URLencode(url)
+  request <- GET(url)
+
+  checkRequestStatus(http_status(request)$message)
+
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
+
 
   if (is.null(outType)| identical(outType, 'lst')){
     df_final <- split(df_final , f =  paste(df_final$Country,df_final$Category))
@@ -95,7 +107,7 @@ getCalendarData <- function(country = NULL, indicator = NULL, initDate= NULL, en
   }
 
   return(df_final)
- }
+}
 
 
 
