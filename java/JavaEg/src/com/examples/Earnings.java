@@ -12,7 +12,10 @@ public class Earnings
     {
         getEarnings();
         getEarningsByDate();
+        getEarningsSymbolDate();
         getEarningsBetweenDates();
+        getEarningsByCountry();
+        getEarningsByType();
 
     }
 
@@ -67,6 +70,22 @@ public class Earnings
         constructUrl(path);
 
     }
+
+    public static void getEarningsSymbolDate() throws IOException {
+
+        //put symbol here
+        String params = "aapl:us";
+        params = params.replaceAll("\\s","%20");
+        //put date here (date format: yyyy-mm-dd)
+        String date = "2017-01-01";
+        //set the path for the query
+        String path = "/earnings/symbol" + "/" + params + "?d1=" + date;
+
+        System.out.println("--------Get earnings by symbol and start date--------");
+        constructUrl(path);
+
+    }
+
     public static void getEarningsBetweenDates() throws IOException {
 
         //put symbol here
@@ -82,7 +101,29 @@ public class Earnings
 
     }
 
+    public static void getEarningsByCountry() throws IOException {
 
+        //put symbol here
+        String params = "united states";
+        params = params.replaceAll("\\s","%20");
+        //set the path for the query
+        String path = "/earnings/country" + "/" + params;
 
+        System.out.println("--------Get earnings by country--------");
+        constructUrl(path);
+
+    }
+
+    public static void getEarningsByType() throws IOException {
+
+        //put type here. Type can be earnings, ipo, dividends
+        String type = "earnings";
+        //set the path for the query
+        String path = "/earnings" + "?type=" + type;
+
+        System.out.println("--------Get earnings by type--------");
+        constructUrl(path);
+
+    }
 }
 
