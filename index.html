@@ -341,11 +341,24 @@ Click on any method below for a sample.</p>
 <p>To get several countries and indicators </p>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+              <span class="n">country</span>              <span class="n">Category</span>  <span class="n">LatestValue</span>   
+<span class="mi">2</span>               <span class="n">China</span>                   <span class="n">GDP</span>       <span class="mf">275.00</span>
+<span class="mi">21</span>              <span class="n">China</span>        <span class="n">Inflation Rate</span>          <span class="mf">2.5</span>
+<span class="mi">3</span>       <span class="n">United States</span>                   <span class="n">GDP</span>      <span class="mf">19390.6</span>
+<span class="mi">4</span>       <span class="n">United States</span>        <span class="n">Inflation Rate</span>            <span class="mf">2</span>
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>To get a list of all indicators per country.</p>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">),</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+                 <span class="n">country</span>                      <span class="n">Category</span>   <span class="n">LatestValue</span>   
+<span class="mi">2</span>          <span class="n">United States</span>         <span class="n">ADP Employment Change</span>        <span class="mf">275.00</span>
+<span class="mi">21</span>        <span class="n"> United States</span>    <span class="n">API Crude Oil Stock Change</span>          <span class="mf">2.40</span>
+<span class="mi">3</span>          <span class="n">United States</span>           <span class="n">Asylum Applications</span>       <span class="mf">7267.00</span>
 </span></code></pre>
 <!--Python Indicators black side-->
 <blockquote class="lang-specific python">
@@ -625,16 +638,33 @@ Click on any method below for a sample.</p>
 <h2 id="historical">Historical</h2>
 <!--Historical data R black side-->
 <blockquote class="lang-specific r">
-<p>For example, to get historical data of imports in United Kingdom type:</p>
+<p>To get historical data of imports in United Kingdom type.</p>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">,</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'imports'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+                  <span class="n">country</span>        <span class="n">Category</span>     <span class="n">Frequency</span>   
+<span class="mi">2</span>          <span class="n">United Kingdom</span>         <span class="n">Imports</span>       <span class="n">Monthly</span>
+<span class="mi">21</span>        <span class="n"> United Kingdom</span>         <span class="n">Imports</span>       <span class="n">Monthly</span>
+<span class="mi">3</span>          <span class="n">United Kingdom</span>         <span class="n">Imports</span>       <span class="n">Monthly</span>
 </span></code></pre>
 <blockquote class="lang-specific r">
-<p>To get historical data for several countries and indicators:</p>
+<p>To get historical data for several countries and indicators.</p>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'population'</span><span class="p">),</span><span class="w">
-                  </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w">
+                  </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span>,
                   </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get historical data by ticker.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'USURTOT'</span><span class="p">, <span class="n">initDate</span><span class="o"> = </span><span class="s">'2015-03-01'</span><span class="p">)</span>
+
+    <span class="n">Output</span><span class="p">:</span>
+                <span class="n">country</span>                     <span class="n">DateTime</span>     <span class="n">Frequency</span>   
+<span class="mi">2</span>          <span class="n">United States</span>         <span class="mf">2018-07-31T00:00:00</span>       <span class="n">Monthly</span>
+<span class="mi">21</span>        <span class="n"> United States</span>         <span class="mf">2018-08-31T00:00:00</span>       <span class="n">Monthly</span>
+<span class="mi">3</span>          <span class="n">United States</span>         <span class="mf">2018-09-30T00:00:00</span>       <span class="n">Monthly</span>
 </span></code></pre>
 <!--Python Historical black side-->
 <blockquote class="lang-specific python">
@@ -922,6 +952,18 @@ or you can specify a start date and end date<br>
       
 </span></code></pre> 
 <!--R credit rating black side-->
+<blockquote class="lang-specific r">
+<p>To get the last ratings for all countries.</p>
+<br>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="s1">'United States'</span><span class="p">)</span>  
+
+<span class="n">Output</span><span class="p">:</span>
+           <span class="n">country</span>         <span class="n">TE</span>     <span class="n">SP_Outlook</span>   
+<span class="mi">2</span>          <span class="n">Albania</span>         <span class="mf">35</span>         <span class="n">Stable</span>
+<span class="mi">21</span>        <span class="n"> Andorra</span>         <span class="mf">60</span>         <span class="n">Stable</span>
+<span class="mi">3</span>           <span class="n">Angola</span>         <span class="mf">26</span>       <span class="n">Negative</span>
+</span></code></pre>
 <blockquote class="lang-specific r">
 <p>To get Credit Rating by country.</p>
 <br>
@@ -1318,12 +1360,19 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
-<!--Calendar R black side-->
+
 <h1 id="calendar">Economic Calendar</h1>
 <h2 id="events">Events</h2>
 
+<!--R Latest updates black side-->
 <blockquote class="lang-specific r">
-<p>Shown next is how to get a data frame with information about calendar events for the United Kingdom</p>
+<p>To get all calendar events.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="p">)</span>           
+</code></pre> 
+
+<blockquote class="lang-specific r">
+<p>To get information about calendar events for the United Kingdom</p>
 </blockquote>       
 <pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 
@@ -1333,21 +1382,43 @@ or you can specify a start date and end date<br>
 </span><span class="m">3</span><span class="w">  </span><span class="m">2016-11-23</span><span class="nb">T</span><span class="m">12</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">               </span><span class="n">Calendar</span><span class="w"> </span><span class="n">Philip</span><span class="w"> </span><span class="n">Hammond</span><span class="w"> </span><span class="n">Makes</span><span class="w"> </span><span class="n">Autumn</span><span class="w"> </span><span class="n">Statement</span><span class="w">                                                                                  
 </span><span class="m">4</span><span class="w">  </span><span class="m">2016-11-24</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">               </span><span class="n">Calendar</span><span class="w">                </span><span class="n">BBA</span><span class="w"> </span><span class="n">Mortgage</span><span class="w"> </span><span class="n">Approvals</span><span class="w">       </span><span class="n">Oct</span><span class="w">                                               </span><span class="m">38.3</span><span class="n">K</span><span class="w">    </span><span class="m">38.8</span><span class="n">K</span><span class="w">      </span><span class="m">40.5</span><span class="n">K</span><span class="w">
 </span><span class="m">5</span><span class="w">  </span><span class="m">2016-11-25</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">        </span><span class="n">GDP</span><span class="w"> </span><span class="n">Growth</span><span class="w"> </span><span class="n">Rate</span><span class="w">           </span><span class="n">GDP</span><span class="w"> </span><span class="n">Growth</span><span class="w"> </span><span class="n">Rate</span><span class="w"> </span><span class="n">QoQ</span><span class="w"> </span><span class="m">2</span><span class="n">nd</span><span class="w"> </span><span class="n">Est</span><span class="w">        </span><span class="n">Q</span><span class="m">3</span><span class="w">      </span><span class="n">Office</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">National</span><span class="w"> </span><span class="n">Statistics</span><span class="w">            </span><span class="m">0.7</span><span class="o">%     0.5%</span><span class="w">       </span><span class="m">0.5</span><span class="o">%
-6  2016-11-25T09:30:00 United Kingdom GDP Annual Growth Rate           GDP Growth Rate YoY 2nd Est        Q3      Office for National Statistics            2.1%</span><span class="w">     </span><span class="m">2.3</span><span class="o">%       2.3%</span><span class="w">
-</span><span class="m">7</span><span class="w">  </span><span class="m">2016-11-25</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">               </span><span class="n">Calendar</span><span class="w">          </span><span class="n">Business</span><span class="w"> </span><span class="n">Investment</span><span class="w"> </span><span class="n">YoY</span><span class="w"> </span><span class="n">Prel</span><span class="w">       </span><span class="n">Sep</span><span class="w">                                               </span><span class="m">-0.8</span><span class="o">%    -2.1%</span><span class="w">      </span><span class="m">-0.3</span><span class="o">%
-8  2016-11-25T09:30:00 United Kingdom               Calendar          Business Investment QoQ Prel       Sep                                                  1%</span><span class="w">     </span><span class="m">0.6</span><span class="o">%       0.4%</span><span class="w">
-</span><span class="m">9</span><span class="w">  </span><span class="m">2016-11-25</span><span class="nb">T</span><span class="m">11</span><span class="o">:</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">               </span><span class="n">Calendar</span><span class="w">               </span><span class="n">CBI</span><span class="w"> </span><span class="n">Distributive</span><span class="w"> </span><span class="n">Trades</span><span class="w">       </span><span class="n">Nov</span><span class="w">                                                  </span><span class="m">21</span><span class="w">       </span><span class="m">12</span><span class="w">         </span><span class="m">15</span><span class="w">
-</span><span class="m">10</span><span class="w"> </span><span class="m">2016-11-29</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">               </span><span class="n">Calendar</span><span class="w">                      </span><span class="n">Mortgage</span><span class="w"> </span><span class="n">Lending</span><span class="w">       </span><span class="n">Oct</span><span class="w">                                               </span><span class="err">£</span><span class="m">3.2</span><span class="n">B</span><span class="w">                    
-</span><span class="m">11</span><span class="w"> </span><span class="m">2016-11-29</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">               </span><span class="n">Calendar</span><span class="w">        </span><span class="n">Net</span><span class="w"> </span><span class="n">Lending</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Individuals</span><span class="w"> </span><span class="n">MoM</span><span class="w">       </span><span class="n">Oct</span><span class="w">                                               </span><span class="err">£</span><span class="m">4.7</span><span class="n">B</span><span class="w">                    
-</span><span class="m">12</span><span class="w"> </span><span class="m">2016-11-29</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">        </span><span class="n">Consumer</span><span class="w"> </span><span class="n">Credit</span><span class="w">                   </span><span class="n">BoE</span><span class="w"> </span><span class="n">Consumer</span><span class="w"> </span><span class="n">Credit</span><span class="w">       </span><span class="n">Oct</span><span class="w">                     </span><span class="n">Bank</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">England</span><span class="w">          </span><span class="err">£</span><span class="m">1405</span><span class="n">M</span><span class="w">             </span><span class="err">£</span><span class="w"> </span><span class="m">1800</span><span class="n">M</span><span class="w">
-</span><span class="m">13</span><span class="w"> </span><span class="m">2016-11-29</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">     </span><span class="n">Mortgage</span><span class="w"> </span><span class="n">Approvals</span><span class="w">                    </span><span class="n">Mortgage</span><span class="w"> </span><span class="n">Approvals</span><span class="w">       </span><span class="n">Oct</span><span class="w">                     </span><span class="n">Bank</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">England</span><span class="w">          </span><span class="m">62.93</span><span class="n">K</span><span class="w">              </span><span class="m">61.23</span><span class="n">K</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-<p>Shown next is how to get a data frame with information about calendar events for several countries and indicators</p>
+<p>To get information about calendar events for several countries and indicators</p>
 </blockquote>       
 <pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp growth rate'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w">
                 </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w">
                 </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get information about calendar events for specific indicator.</p>
+</blockquote>       
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'initial jobless claims'</span><span class="p"><span class="p">)</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get information about calendar events for specific indicator within a date interval.</p>
+</blockquote>       
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'initial jobless claims'</span><span class="p">, </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w"></span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get calendar events by specific id.</p>
+</blockquote>       
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">id</span><span class="w"> = </span><span class="o">c</span><span class="w">(</span><span class="s1">'174108'</span><span class="p">, <span class="s1">'160025'</span>, <span class="s1">'160030'</span> )</span><span class="w">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">CalendarId</span>               <span class="n">date</span>      <span class="n">Country</span>                     <span class="n">Event</span>
+</span><span class="m">1</span><span class="w">  </span><span class="m">174108</span>  </span><span class="n">2018-06-19 00:00:00</span><span class="w">  </span><span class="n">Azerbaijan</span><span class="w">   </span><span class="n">Holidays End of Ramadan</span>                           
+</span><span class="m">2</span><span class="w">  </span><span class="m">160025</span>  </span><span class="n">2018-06-21 07:00:00</span><span class="w">       </span><span class="n">Spain</span><span class="w">            </span><span class="n">Factory Orders</span>                                   
+</span><span class="m">3</span><span class="w">  </span><span class="m">160030</span>  </span><span class="n">2018-06-23 06:15:00</span><span class="w">     </span><span class="n">Bahrain</span><span class="w">            </span><span class="n">Inflation Rate</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get calendar events for specific ticker.</p>
+</blockquote>       
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> c(</span><span class="s1">'IJCUSA'</span>, <span class="s1">'SPAINFACORD'</span><span class="p">)</span><span class="p">)</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get calendar events for specific ticker within a date interval.</p>
+</blockquote>       
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'IJCUSA'</span><span class="p">, </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w"></span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span>
 </span></code></pre>
 <!--Python Calendar black side-->
 <blockquote class="lang-specific python">
@@ -2016,16 +2087,33 @@ or you can specify a start date and end date<br>
 <p>Next code will provide a list with forecasted values of all indicators of United States </p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'united states'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+                 <span class="n">country</span>                      <span class="n">Category</span>         <span class="n">Q1</span>         <span class="n">Q2</span>         <span class="n">Q3</span>        <span class="n">Q4</span>
+<span class="mi">2</span>          <span class="n">United States</span>         <span class="n">ADP Employment Change</span>     <span class="mf">190.00</span>     <span class="mf">160.00</span>     <span class="mf">145.00</span>    <span class="mf">180.00</span>   
+<span class="mi">21</span>        <span class="n"> United States</span>    <span class="n">API Crude Oil Stock Change</span>      <span class="mf">-3.20</span>       <span class="mf">5.20</span>      <span class="mf">-3.20</span>     <span class="mf">-3.20</span> 
+<span class="mi">3</span>          <span class="n">United States</span>       <span class="n">Average Hourly Earnings</span>       <span class="mf">0.20</span>       <span class="mf">0.30</span>       <span class="mf">0.20</span>      <span class="mf">0.20</span> 
 </span></code></pre>
 <blockquote class="lang-specific r">
-<p>To get data in data frame format type:</p>
+<p>To get forecast data by country and indicator.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'united states'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'united states'</span>, <span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="s1">'imports'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+                 <span class="n">country</span>        <span class="n">Category</span>         <span class="n">Q1</span>         <span class="n">Q2</span>         <span class="n">Q3</span>        <span class="n">Q4</span>
+<span class="mi">2</span>          <span class="n">United States</span>         <span class="n">Imports</span>     <span class="mf">262000</span>     <span class="mf">269000</span>     <span class="mf">258000</span>    <span class="mf">255000</span>   
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>To get data in data frame format type for several countries and indicators:</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+                 <span class="n">country</span>          <span class="n">Category</span>        <span class="n">Q1</span>         <span class="n">Q2</span>         <span class="n">Q3</span>       <span class="n">Q4</span>
+<span class="mi">2</span>                  <span class="n">China</span>               <span class="n">GDP</span>   <span class="mf">13200.0</span>    <span class="mf">13200.0</span>    <span class="mf">13200.0</span>    <span class="mf">13900</span>   
+<span class="mi">21</span>                <span class="n"> China</span>    <span class="n">Inflation Rate</span>       <span class="mf">1.8</span>        <span class="mf">1.9</span>        <span class="mf">1.9</span>        <span class="mf">2</span> 
+<span class="mi">3</span>          <span class="n">United States</span>               <span class="n">GDP</span>   <span class="mf">20220.0</span>    <span class="mf">20220.0</span>    <span class="mf">20220.0</span>  <span class="mf">20700.0</span> 
+<span class="mi">3</span>          <span class="n">United States</span>    <span class="n">Inflation Rate</span>       <span class="mf">1.8</span>        <span class="mf">1.7</span>        <span class="mf">1.9</span>      <span class="mf">1.8</span> 
 </span></code></pre>
 <!--Python Forecasts black side-->
 <blockquote class="lang-specific python">
@@ -2398,6 +2486,13 @@ Click on any method below for a sample.
 <p>Currency</p>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'currency'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+            <span class="n">Symbol</span>    <span class="n">Ticker</span>           <span class="n">Country</span>       <span class="n">Last</span>       
+<span class="mi">1</span>       <span class="n">USDCVE:CUR</span>    <span class="n">USDCVE</span>        <span class="n">cape verde</span>      <span class="mf">98.85</span>        
+<span class="mi">2</span>      <span class="n"> USDKYD:CUR</span>    <span class="n">USDKYD</span>    <span class="n">cayman islands</span>      <span class="mf">0.825</span>                
+<span class="mi">3</span>       <span class="n">USDCLF:CUR</span>    <span class="n">USDCLF</span>             <span class="n">Chile</span>    <span class="mf">27754.5</span>    
+<span class="mi">4</span>       <span class="n">USDCNY:CUR</span>       <span class="n">CNY</span>             <span class="n">china</span>    <span class="mf">6.93466</span>             
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>Bond</p>
@@ -2893,6 +2988,13 @@ Click on any method below for a sample.
 <p>To get markets lists by components.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getMarketsList</span><span class="p">(<span class="nf">marketsField</span><span class="o">=</span><span class="s1">'components'</span><span class="p">,</span><span class="s1">'psi20:ind'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+      <span class="n">Symbol</span>    <span class="n">Ticker</span>     <span class="n">Country</span>       <span class="n">Last</span>       
+<span class="mi">1</span>    <span class="n">ALTR:PL</span>      <span class="n">ALTR</span>    <span class="n">Portugal</span>     <span class="mf">5.8350</span>        
+<span class="mi">2</span>     <span class="n">BCP:PL</span>    <span class="n">BCP:PL</span>    <span class="n">Portugal</span>    <span class="mf"> 0.2535</span>                
+<span class="mi">3</span>     <span class="n">COR:PL</span>    <span class="n">COR:PL</span>    <span class="n">Portugal</span>    <span class="mf">10.3400</span>    
+<span class="mi">4</span>     <span class="n">CTT:PL</span>    <span class="n">CTT:PL</span>    <span class="n">Portugal</span>     <span class="mf">2.2560</span>          
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>To get markets lists by peers.</p>
@@ -2933,7 +3035,12 @@ Click on any method below for a sample.
 <blockquote class="lang-specific r">
 <p>To get markets search by country, category and page number.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span><span class="p"> (</span><span class="s1">'index'</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'Japan'</span><span class="p">,</span> <span class="s1">'index'</span><span class="w"></span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
+
+        <span class="n">Output</span><span class="p">:</span>
+      <span class="n">Symbol</span>   <span class="n">Ticker</span>    <span class="n">Country</span>         <span class="n">Last</span>       
+<span class="mi">1</span>    <span class="n">NKY:IND</span>      <span class="n">NKY</span>      <span class="n">Japan</span>     <span class="mf">21003.37</span>        
+<span class="mi">2</span>    <span class="n">VXJ:IND</span>      <span class="n">VXJ</span>      <span class="n">Japan</span>        <span class="mf">17.68</span>                
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>To get markets search by country.</p>
@@ -2944,6 +3051,15 @@ Click on any method below for a sample.
 <p>To get markets search by country and categories.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'united states'</span><span class="p">,</span> <span class="s1">category = </span><span class="p">(</span><span class="s1">'index', 'markets'</span><span class="p">)</span><span class="p">)</span>
+
+    <span class="n">Output</span><span class="p">:</span>
+      <span class="n">Symbol</span>        <span class="n">Type</span>            <span class="n">Country</span>         <span class="n">Last</span>       
+<span class="mi">1</span>    <span class="n">ACWX:US</span>      <span class="n">stocks</span>      <span class="n">United States</span>       <span class="mf">47.680</span>        
+<span class="mi">2</span>    <span class="n">ADR:IND</span>       <span class="n">Index</span>      <span class="n">United States</span>     <span class="mf">5262.980</span>                
+<span class="mi">3</span>    <span class="n">BRKS:US</span>      <span class="n">stocks</span>      <span class="n">United States</span>       <span class="mf">36.050</span>                
+<span class="mi">4</span>     <span class="n">BZH:US</span>      <span class="n">stocks</span>      <span class="n">United States</span>       <span class="mf"> 9.270</span>                
+<span class="mi">5</span>   <span class="n">CCMP:IND</span>       <span class="n">Index</span>      <span class="n">United States</span>     <span class="mf">7607.351</span>                
+<span class="mi">6</span>     <span class="n">COT:US</span>      <span class="n">stocks</span>      <span class="n">United States</span>       <span class="mf">13.090</span>                
 </span></code></pre>
 <!--markets white side-->
 <p><span class="methods"></p>
@@ -3172,9 +3288,28 @@ Click on any method below for a sample.
 </code></pre>
 <!--R historical markets black side-->
 <blockquote class="lang-specific r">
-<p>To get from historical markets by symbol and date.</p>
+<p>To get from historical markets by symbol.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getHistoricalMarkets</span><span class="p">(<span class="s1">'AAPL:US'</span><span class="p">,</span><span class="w"> </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2011-01-01'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span> 
+       <span class="n">Symbol</span>         <span class="n">Open</span>            <span class="n">High</span>              <span class="n">Low</span>         <span class="n">Close</span>   
+<span class="mi">1</span>     <span class="n">AAPL:US</span>      <span class="mf">65.5871</span>         <span class="mf">65.6399</span>          <span class="mf">64.0499</span>       <span class="mf">64.8028</span>        
+<span class="mi">2</span>     <span class="n">AAPL:US</span>      <span class="mf">65.4871</span>         <span class="mf">65.5699</span>          <span class="mf">65.0785</span>       <span class="mf">65.1699</span>                
+                
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get from historical markets by symbols and date.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getHistoricalMarkets</span><span class="p">(<span class="nf">c</span><span class="p">(</span><span class="s1">'AAPL:US'</span><span class="p">,</span><span class="s1">'INDU:IND'</span><span class="p">),</span><span class="w"> </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2011-01-01'</span><span class="p">,</span><span class="n">endDate</span><span class="o">=</span><span class="s1">'2016-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span> 
+       <span class="n">Symbol</span>         <span class="n">Open</span>            <span class="n">High</span>              <span class="n">Low</span>         <span class="n">Close</span>   
+<span class="mi">1</span>     <span class="n">AAPL:US</span>      <span class="mf">65.5871</span>         <span class="mf">65.6399</span>          <span class="mf">64.0499</span>       <span class="mf">64.8028</span>        
+<span class="mi">2</span>    <span class="n">INDU:IND</span>   <span class="mf">13860.5800</span>      <span class="mf">14019.7800</span>       <span class="mf">13860.5800</span>    <span class="mf">14009.7900</span>                
+<span class="mi">3</span>    <span class="n">INDU:IND</span>   <span class="mf">12632.7600</span>      <span class="mf">12784.6200</span>       <span class="mf">12632.7600</span>    <span class="mf">12716.4600</span>                
+<span class="mi">4</span>     <span class="n">AAPL:US</span>      <span class="mf">65.4871</span>         <span class="mf">65.5699</span>          <span class="mf">65.0785</span>       <span class="mf">65.1699</span>                
+                
 </span></code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
@@ -3386,7 +3521,19 @@ Click on any method below for a sample.
 <p>To get markets intraday by symbol and date.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getMarketsIntraday</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'AAPL:US'</span><span class="p">,</span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2019-02-01'</span><span class="p">,</span><span class="n">endDate</span> <span class="o">=</span><span class="s1">'2019-02-02'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-</span></code></pre>
+
+     <span class="n">Output</span><span class="p">:</span> 
+        <span class="n">Symbol</span>                   <span class="n">Date</span>         <span class="n">Open</span>         <span class="n">High</span>          <span class="n">Low</span>        <span class="n">Close</span>   
+ <span class="mi">1</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T15:00:00</span>       <span class="mf">177.67</span>       <span class="mf">177.67</span>       <span class="mf">177.56</span>       <span class="mf">177.57</span>        
+ <span class="mi">2</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T14:59:00</span>       <span class="mf">177.73</span>       <span class="mf">177.80</span>       <span class="mf">177.73</span>       <span class="mf">177.76</span>                
+ <span class="mi">3</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T14:58:00</span>       <span class="mf">177.82</span>       <span class="mf">177.93</span>       <span class="mf">177.82</span>       <span class="mf">177.83</span>                
+ <span class="mi">4</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T14:57:00</span>       <span class="mf">177.92</span>       <span class="mf">177.92</span>       <span class="mf">177.85</span>       <span class="mf">177.87</span>                
+ <span class="mi">5</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T14:56:00</span>       <span class="mf">178.07</span>       <span class="mf">178.07</span>       <span class="mf">177.99</span>       <span class="mf">177.99</span>                
+ <span class="mi">6</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T14:55:00</span>       <span class="mf">178.01</span>       <span class="mf">178.10</span>       <span class="mf">178.00</span>       <span class="mf">178.10</span>                
+ <span class="mi">7</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T14:54:00</span>       <span class="mf">178.03</span>       <span class="mf">178.10</span>       <span class="mf">178.00</span>       <span class="mf">178.00</span>                
+ <span class="mi">8</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T14:53:00</span>       <span class="mf">178.13</span>       <span class="mf">178.13</span>       <span class="mf">177.96</span>       <span class="mf">177.97</span>                
+                 
+ </span></code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To getintraday prices by symbol.</p>
@@ -3730,7 +3877,14 @@ Click on any method below for a sample.
 <p>To get earnings by type. Type can be: earnings, dividends, ipo.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">type</span><span class="o">=</span><span class="s1">'dividends'</span><span class="p">)</span><span class="w">
-</span></code></pre>
+
+        <span class="n">Output</span><span class="p">:</span> 
+          <span class="n">Symbol</span>                   <span class="n">Date</span>   <span class="n">Actual</span>    <span class="n">Country</span>           
+ <span class="mi">1</span>     <span class="n">600309:CH</span>    <span class="n">2019-05-27T00:00:00</span>       <span class="mf">2</span>       <span class="n">China</span>              
+ <span class="mi">2</span>       <span class="n">AMRT:IJ</span>    <span class="n">2019-05-27T00:00:00</span>    <span class="mf">6.24</span>   <span class="n">Indonesia</span>                      
+ <span class="mi">3</span>       <span class="n">BMRI:IJ</span>    <span class="n">2019-05-27T00:00:00</span>  <span class="mf">241.22</span>   <span class="n">Indonesia</span>                     
+              
+ </span></code></pre>
 
 <!--python earnings black side-->
 <blockquote class="lang-specific python">
@@ -4057,7 +4211,14 @@ Click on any method below for a sample.
 <p>To get the latest news by start index and news limit.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(<span class="nf">limit</span><span class="o">=</span><span class="s1">'2'</span><span class="p">,</span><span class="n">start</span><span class="o"> =</span><span class="s1"> '1'</span><span class="p">)</span><span class="w">
-</span></code></pre>
+
+        <span class="n">Output</span><span class="p">:</span> 
+                    <span class="n">Symbol</span>                                                 <span class="n">title</span>                        <span class="n">Date</span>             
+ <span class="mi">1</span>                <span class="n">GCAN10YR</span>                 <span class="n">Canada 10Y Bond Yield Hits 9-week Low</span>     <span class="mf">2019-05-29T14:11:27.193</span>                    
+ <span class="mi">2</span>                <span class="n">GNTH10YR</span>          <span class="n">Netherlands 10Y Bond Yield Hits 31-month Low</span>      <span class="mf">2019-05-29T14:28:18.69</span>                     
+ <span class="mi">3</span>    <span class="n">UNITEDSTARICFEDMANIN</span>     <span class="n">US Fifth District Manufacturing Activity Index Up</span>         <span class="mf">2019-05-29T14:05:00</span>                    
+              
+ </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get the latest news. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -4575,7 +4736,44 @@ Click on any method below for a sample.
 <span class="mi">1</span>       <span class="n">Demographics</span>     <span class="n">...</span>    <span class="mi">2017-10-16</span><span class="n">T</span><span class="mi">09:03:02.733</span>
 <span class="mi">2</span>       <span class="n">Demographics</span>     <span class="n">...</span>     <span class="mi">2017-10-16</span><span class="n">T</span><span class="mi">09:03:02.72</span>
 <span>...</span>      
-</code></pre>     
+</code></pre> 
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>To get World Bank main categories.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getWorldBankCategories</span><span class="p">(</span><span class="n">outType</span><span class="w"> </span><span class="o">,</span>=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+<span class="n">Output</span><span class="p">:</span>
+               <span class="n">category</span>   
+<span class="mi">2</span>           <span class="n">Agriculture</span>
+<span class="mi">21</span>    <span class="n">Aid Effectiveness</span>
+<span class="mi">3</span>          <span class="n">Demographics</span>    
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p> To get World Bank data by specific category.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getWorldBankCategories</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'education'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>      
+       <span class="n">category</span>                                                             <span class="n">title</span>                          <span class="n">lastupdate</span>    
+<span class="mi">2</span>     <span class="n">Education</span><span class="p">        <span class="n">Literacy rate, youth total (% of people ages 15-24) UNESCO</span>             <span class="mf">2017-10-16T08:40:06.803</span>    
+<span class="mi">21</span>    <span class="n">Education</span><span class="p">           <span class="n">School enrolment, preprimary, national source (% gross)</span>             <span class="mf">2017-10-16T08:40:17.397</span>    
+<span class="mi">3</span>     <span class="n">Education</span><span class="p">             <span class="n">Gross intake ratio in grade 1, total, national source</span>             <span class="mf">2017-10-16T08:40:17.053</span>    
+
+</span></code></pre>
+
+<blockquote class="lang-specific r">
+<p>To get World Bank data by category and page number.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getWorldBankCategories</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Education'</span><span class="p">,</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2'</span><span class="p">)</span><span class="w">
+
+<span class="n">Output</span><span class="p">:</span>
+                      <span class="n">series_code</span>          <span class="n">category</span>                                                                                                      <span class="n">URL</span>    
+<span class="mi">3</span>           <span class="mf">5.2.6_ETH.BAS.AID.FIN</span>         <span class="n">Education</span>            <span class="n">/country-list/international-aid-disbursed-to-basic-education-finland-to-ethiopia-wb-data.html</span>    
+<span class="mi">4</span>           <span class="mf">5.2.6_GHA.BAS.AID.WFP</span>         <span class="n">Education</span>                <span class="n">/country-list/international-aid-disbursed-to-basic-education-wfp-to-djibouti-wb-data.html</span>    
+<span class="mi">5</span>      <span class="mf">5.2.6_GIN.BAS.AID.ADPP.KFW</span>         <span class="n">Education</span>                  <span class="n">/country-list/international-aid-disbursed-to-basic-education-kfw-to-guinea-wb-data.html</span>    
+
+</span></code></pre>    
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get World Bank categories. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -4860,6 +5058,42 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">0</span>       <span class="n">prt.bx.trf.curr.cd</span>     <span class="n">6.370007e+09</span>      <span class="n">...</span>        <span class="n">/portugal/current-transfers-receipts-bop-us-do...</span>    <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">07:15:10.083</span>            
 <span class="n">...</span>
 </code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>To get World Bank data for all countries by specific indicator.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getWorldBankIndicators</span><span class="p">(</span><span class="n">series_code</span><span class="w"> </span><span class="o">,</span>=</span><span class="w"> </span><span class="s1">'fr.inr.rinr'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                     <span class="n">symbol</span>       <span class="n">country</span>                                                                   <span class="n">URL</span>    
+<span class="mi">2</span>           <span class="mf">abw.fr.inr.rinr</span>         <span class="n">Aruba</span>                        <span class="n">/aruba/real-interest-rate-percent-wb-data.html</span>    
+<span class="mi">210</span>         <span class="mf">afg.fr.inr.rinr</span>   <span class="n">Afghanistan</span>                  <span class="n">/afghanistan/real-interest-rate-percent-wb-data.html</span>    
+<span class="mi">3</span>           <span class="mf">ago.fr.inr.rinr</span>        <span class="n">Angola</span>                       <span class="n">/angola/real-interest-rate-percent-wb-data.html</span>    
+
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p> To get World Bank data by country and page number.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getWorldBankIndicators</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'country'</span>, <span class="n">identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Portugal'</span>, <span class="n">page_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2'</span<span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>      
+       <span class="n">country</span>                       <span class="n">symbol</span>          <span class="n">last</span>    
+<span class="mi">2</span>     <span class="n">Portugal</span><span class="p">        <span class="n">prt.bar.sec.schl.25up</span>          <span class="mf">2.16</span>    
+<span class="mi">21</span>    <span class="n">Portugal</span><span class="p">     <span class="n">prt.bar.sec.schl.25up.fe</span>          <span class="mf">2.19</span>    
+<span class="mi">3</span>     <span class="n">Portugal</span><span class="p">        <span class="n">prt.bar.sec.schl.3034</span>          <span class="mf">3.59</span>    
+
+</span></code></pre>
+
+<blockquote class="lang-specific r">
+<p>To get World Bank data by URL.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getWorldBankIndicators</span><span class="p">(</span><span class="n">URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/united-states/real-interest-rate-percent-wb-data.html'</span><span class="p"><span class="p">)</span><span class="w">
+
+<span class="n">Output</span><span class="p">:</span>
+                     <span class="n">symbol</span>               <span class="n">country</span>                                                               <span class="n">URL</span>    
+<span class="mi">1</span>           <span class="mf">usa.fr.inr.rinr</span>         <span class="n">United States</span>            <span class="n">/united-states/real-interest-rate-percent-wb-data.html</span>    
+
+</span></code></pre> 
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get World Bank data by country and page number. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -5098,6 +5332,19 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">2</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.37488</span>        
 <span class="n">...</span>
 </code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>To get World Bank historical data by series code.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getWorldBankHistorical</span><span class="p">(</span><span class="w"> </span><span class="w"> </span><span class="s1">'usa.fr.inr.rinr'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                     <span class="n">symbol</span>                  <span class="n">date</span>         <span class="n">value</span>    
+<span class="mi">2</span>           <span class="n">usa.fr.inr.rinr</span>   <span class="mf">1961-06-15T00:00:00</span>       <span class="n">3.10788</span>    
+<span class="mi">210</span>         <span class="n">usa.fr.inr.rinr</span>   <span class="mf">1962-06-15T00:00:00</span>       <span class="n">3.21535</span>    
+<span class="mi">3</span>           <span class="n">usa.fr.inr.rinr</span>   <span class="mf">1963-06-15T00:00:00</span>       <span class="n">3.37488</span>    
+
+</span></code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get world bank  historical data for a specific indicator.</p>
@@ -5179,6 +5426,19 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">2</span>     <span class="mi">0102</span>   <span class="n">...</span>                        <span class="n">Bovine animals, live</span>        
 <span class="n">...</span>
 </code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>To get Comtrade categories.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getComtradeCategories</span><span class="p">(</span><span class="w"> outType</span><span class="w"> = </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+     <span class="n">parent_id</span>                                 <span class="n">pretty_name</span>          
+<span class="mi">2</span>           <span class="mf">a1</span>                                <span class="n">Live animals</span>    
+<span class="mi">210</span>         <span class="mf">01</span>      <span class="n">Horses, asses, mules and hinnies, live</span>    
+<span class="mi">3</span>           <span class="mf">01</span>                        <span class="n">Bovine animals, live</span>    
+
+</span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get Comtrade categories. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -5343,6 +5603,43 @@ Because there are too many results, this method has pagination. Each page is lim
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtTwoCountries</span><span class="p">(</span><span class="n">country1</span> <span class="o">=</span><span class="s">'portugal'<span class="p">,<span class="n">country2</span> <span class="o">=</span><span class="s">'spain'</span>,<span class="n"> page_number</span><span class="o">=</span><span class="s">3</span><span class="p">)</span>
 </code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>Get detailed information about Comtrade countries.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getComtradeCountry</span><span class="p">(</span><span class="w"> outType</span><span class="w"> = </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+            <span class="n">id</span>               <span class="n">name</span>        <span class="n">region</span>   
+<span class="mi">2</span>            <span class="mf">0</span>              <span class="n">World</span>         <span class="n">World</span>
+<span class="mi">291</span>         <span class="mf">10</span>         <span class="n">Antarctica</span>    <span class="n">Antarctica</span>
+<span class="mi">3</span>          <span class="mf">100</span>           <span class="n">Bulgaria</span>        <span class="n">Europe</span>
+
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Get a snapshot of data per country.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getComtradeCountry</span><span class="p">(</span><span class="s1">'Portugal'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                 <span class="n">symbol</span>         <span class="n">country1</span>          <span class="n">type</span>   
+<span class="mi">2</span>           <span class="mf">PRT49001061</span>         <span class="n">Portugal</span>        <span class="n">Import</span>
+<span class="mi">291</span>         <span class="mf">PRT49003022</span>         <span class="n">Portugal</span>        <span class="n">Export</span>
+<span class="mi">3</span>           <span class="mf">PRT49003032</span>         <span class="n">Portugal</span>        <span class="n">Export</span>
+
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Get a snapshot of data between countries.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getComtradeCountry</span><span class="p">(</span>c(<span class="s1">'Portugal'</span>, <span class="s1">'Spain'</span>), page_number = <span class="s1">'4'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                 <span class="n">symbol</span>         <span class="n">country1</span>   <span class="n">country2</span>      <span class="n">type</span>   
+<span class="mi">2</span>           <span class="mf">PRTESP35032</span>         <span class="n">Portugal</span>      <span class="n">Spain</span>    <span class="n">Export</span>
+<span class="mi">291</span>         <span class="mf">PRTESP35041</span>         <span class="n">Portugal</span>      <span class="n">Spain</span>    <span class="n">Import</span>
+<span class="mi">3</span>           <span class="mf">PRTESP35042</span>         <span class="n">Portugal</span>      <span class="n">Spain</span>    <span class="n">Export</span>
+
+</span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get detailed information about Comtrade countries. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -5560,6 +5857,19 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">2</span>       <span class="n">PRTESP24031</span>       <span class="mi">2000-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n">54310.0</span>        
 <span class="n">...</span>
 </code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>Get detailed information about Comtrade historical data by symbol.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getComtradeHistorical</span><span class="p">(</span><span class="s1">'PRTESP24031'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                <span class="n">symbol</span>                        <span class="n">date</span>        <span class="n">value</span>   
+<span class="mi">2</span>          <span class="mf">PRTESP24031</span>         <span class="n">1997-12-31T00:00:00</span>          <span class="n">707</span>
+<span class="mi">21</span>         <span class="mf">PRTESP24031</span>         <span class="n">1998-12-31T00:00:00</span>         <span class="n">7020</span>
+<span class="mi">3</span>          <span class="mf">PRTESP24031</span>         <span class="n">2000-12-31T00:00:00</span>        <span class="n">54310</span>
+
+</span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get Comtrade historical. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -5670,6 +5980,19 @@ Because there are too many results, this method has pagination. Each page is lim
 <span class="mi">2</span>        <span class="n">Boone County, AR</span>              
 <span class="n">...</span>
 </code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>Get a list of all US states.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getFedReserve</span><span class="p">(</span>category = <span class="s1">'states'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+            <span class="n">name</span>                         
+<span class="mi">8</span>        <span class="n">Alabama</span>         
+<span class="mi">9</span>         <span class="n">Alaska</span>         
+<span class="mi">10</span>       <span class="n">Arizona</span>         
+
+</span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get a list of all US states. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -5839,6 +6162,48 @@ Because there are too many results, this method has pagination. Each page is lim
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRCounty</span><span class="p">(</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">None</span><span class="p">)</span>                     
 </code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>Get a snapshot of Federal Reserve by symbol.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getFedReserveSnapshot</span><span class="p">(</span><span class="s1">'AGEXMAK2A647NCEN'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                   <span class="n">symbol</span>  <span class="n">Country</span>                                       <span class="n">Category</span>             
+<span class="mi">1</span>        <span class="n">AGEXMAK2A647NCEN</span>   <span class="n">Alaska</span>      <span class="n">Age 65 and Over Tax Exemptions for Alaska</span>
+        
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Get a snapshot of Federal Reserve by URL.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getFedReserveSnapshot</span><span class="p">(</span>URL = <span class="s1">'/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                  <span class="n">symbol</span>  <span class="n">Previous</span>                                                                              <span class="n">URL</span>             
+<span class="mi">1</span>        <span class="n">2020RATIO002013</span>   <span class="mf">9.93339</span>      <span class="n">/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html</span>
+        
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Get a snapshot of Federal Reserve by county.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getFedReserveSnapshot</span><span class="p">(</span>county = <span class="s1">'arkansas'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+          <span class="n">symbol</span>            <span class="n">Country</span>                                      <span class="n">Category</span>             
+<span class="mi">1</span>        <span class="n">ARCLLFN</span>   <span class="n">Clark County, AR</span>      <span class="n">Civilian Labor Force in Clark County, AR</span>
+        
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>Get a snapshot of Federal Reserve by country and page number.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getFedReserveSnapshot</span><span class="p">(</span>country = <span class="s1">'united states'</span>, page = <span class="s1">'2'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                    <span class="n">symbol</span>         <span class="n">Country</span>                                       <span class="n">Category</span>             
+<span class="mi">186</span>        <span class="n">A2218C1A027NBEA</span>   <span class="n">United States</span>                                 <span class="n">Dividends paid</span>
+<span class="mi">187</span>        <span class="n">A2219C1A027NBEA</span>   <span class="n">United States</span>    <span class="n">Dividends paid: Domestic corporate business</span>
+<span class="mi">188</span>        <span class="n">A221RC1A027NBEA</span>   <span class="n">United States</span>      <span class="n">Government saving: Social insurance funds</span>        
+</span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get a snapshot of Federal Reserve data by symbol. <br>Remember, without a client key, only a sample of data will be provided.</p>
@@ -6129,6 +6494,18 @@ or<br>
 <span class="mi">2</span>        <span class="n">racedisparity005007</span>      <span class="mi">2011-01-01</span><span class="n">T</span><span class="mi">00:00:00</span>     <span class="mi">36.59937</span> 
 <span class="n">...</span>
 </code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+<p>Get Federal Reserve historical data.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getFedHistorical</span><span class="p">(</span><span class="s1">'RACEDISPARITY005007'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+                      <span class="n">symbol</span>                  <span class="n">date</span>         <span class="n">value</span>             
+<span class="mi">2</span>        <span class="n">RACEDISPARITY005007</span>   <span class="n">2009-01-01T00:00:00</span>      <span class="mf">33.60301</span>
+<span class="mi">21</span>       <span class="n">RACEDISPARITY005007</span>   <span class="n">2010-01-01T00:00:00</span>      <span class="mf">36.29680</span>
+<span class="mi">3</span>        <span class="n">RACEDISPARITY005007</span>   <span class="n">2011-01-01T00:00:00</span>      <span class="mf">36.59937</span>        
+</span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
     <p>Get historical data of Federal Reserve by symbol or symbols. To get several symbols, separate them by ' ,' . <br>Remember, without a client key, only a sample of data will be provided.</p>
