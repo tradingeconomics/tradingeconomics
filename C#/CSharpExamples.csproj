@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CSharpExamples.Indicator</StartupObject>
+    <StartupObject>CSharpExamples.FederalReserve</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,10 +63,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Articles.cs" />
     <Compile Include="Calendar.cs" />
+    <Compile Include="Comtrade.cs" />
+    <Compile Include="Earnings.cs" />
+    <Compile Include="FederalReserve.cs" />
+    <Compile Include="Forecast.cs" />
     <Compile Include="Indicator.cs" />
+    <Compile Include="LatestUpdates.cs" />
+    <Compile Include="Markets.cs" />
+    <Compile Include="MarketsHistorical.cs" />
+    <Compile Include="MarketsIntraday.cs" />
+    <Compile Include="News.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ratings.cs" />
     <Compile Include="Streamer.cs" />
+    <Compile Include="WBCategory.cs" />
+    <Compile Include="WBHistorical.cs" />
+    <Compile Include="WBIndCoun.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

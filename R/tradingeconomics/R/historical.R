@@ -37,51 +37,52 @@ lower.Date <- function(country, indicator, apiKey){
 #'Without credentials only sample data will be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getHistoricalData(country = 'United States', indicator = 'Imports',
-#' initDate = '2011-01-01', endDate = '2016-01-01')
-#'getHistoricalData(country = c('United States', 'United Kingdom'),
-#' indicator = c('Imports','Exports'),
-#' initDate = '2011-01-01', endDate = '2016-01-01')
+#'\dontrun{ getHistoricalData(country = 'United States', indicator = 'Imports',initDate = '2011-01-01', endDate = '2016-01-01')
+#' getHistoricalData(country = c('United States', 'United Kingdom'),indicator = c('Imports','Exports'),initDate = '2011-01-01', endDate = '2016-01-01')
+#' getHistoricalData(ticker = 'USURTOT', initDate = '2015-03-01')
+#' getHistoricalData(country = c('United States', 'United Kingdom'), indicator = c('Imports','Exports'))
+#' getHistoricalData(country = 'United States', indicator = 'Imports')
+#'
 #' }
 
 
-getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL, outType = NULL){
-  base <-  "https://api.tradingeconomics.com/historical/country"
+getHistoricalData <- function(country = NULL, indicator = NULL, ticker = NULL, initDate= NULL, endDate= NULL, outType = NULL){
+  base <-  "https://api.tradingeconomics.com/historical"
 
   df_final = data.frame()
-  step = 10
 
-  for(i in seq(1, length(country), by = step)){
-
-    init = as.numeric(i)
-    finit = as.numeric(i)+step-1
-
-    url_base <- paste(base, paste(na.omit(country[init:finit]), collapse = ','), 'indicator',
-                      paste(indicator, collapse = ','), sep = '/')
+    if (!is.null(country) & !is.null(indicator)){
+      url <- paste(base,"country",  paste(country, collapse = ','), 'indicator',
+                   paste(indicator, collapse = ','), sep = '/')
+    }
 
 
+    if (!is.null(ticker)){
+      url <- paste(base, "ticker",paste(ticker, collapse = ','), sep = '/')
+    }
     if (is.null(initDate) & is.null(endDate)){
         initDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
-        url_base <- paste(url_base, paste(initDate, sep = '/'), sep = '/')
+        url <- paste(url, paste(initDate, sep = '/'), sep = '/')
     } else if (is.null(initDate) & !is.null(endDate)){
         dateCheck(endDate)
         lowDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
         if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
-        url_base <- paste(url_base, paste(lowDate, endDate, sep = '/'), sep = '/')
+        url <- paste(url, paste(lowDate, endDate, sep = '/'), sep = '/')
     } else if (!is.null(initDate) & is.null(endDate)){
         dateCheck(initDate)
         if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
-        url_base <- paste(url_base, initDate, sep = '/')
+        url <- paste(url, initDate, sep = '/')
     } else {
         dateCheck(initDate)
         dateCheck(endDate)
         if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
         if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
         if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
-        url_base <- paste(url_base, paste(initDate, endDate, sep = '/'), sep = '/')
+        url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
     }
 
-    url <- paste(url_base, '?c=', apiKey, sep = '')
+
+    url <- paste(url, '?c=', apiKey, sep = '')
     url <- URLencode(url)
     request <- GET(url)
 
@@ -91,7 +92,7 @@ getHistoricalData <- function(country, indicator, initDate= NULL, endDate= NULL,
 
     df_final = rbind(df_final, webResults)
     Sys.sleep(0.5)
-  }
+
 
   if (is.null(outType)| identical(outType, 'lst')){
     df_final <- split(df_final , f =  paste(df_final$Country, df_final$Category))
