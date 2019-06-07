@@ -43,7 +43,20 @@ $rowCols = implode( '', $rowCols);
 <h1 style="text-align:center; color:#000;">Trading Economics</h1> 
 <h2 style="text-align:center; color:#000;">Credit Ratings for all countries</h2>  
 <br>   
-<table border="2px solid black" style="border-collapse: collapse; background-color:#fff;" align="center" width="80%" cellpadding="2" cellspacing-="3" >     
+<table border="2px solid black" style="border-collapse: collapse; background-color:#fff;" align="center" width="80%" cellpadding="2" cellspacing-="3" >  
+<tr>
+      <th>Country</th>
+      <th>TE</th>
+      <th>TE_Outlook</th>
+      <th>SP</th>
+      <th>SP_Outlook</th>
+      <th>Moodys</th>
+      <th>Moodys_Outlook</th>
+      <th>Fitch</th>
+      <th>Fitch_Outlook</th>
+      <th>DBRS</th>
+      <th>DBRS_Outlook</th>
+</tr>      
 <tbody>
 <?php echo $rowCols;?>
 </tbody>

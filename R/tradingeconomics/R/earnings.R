@@ -25,7 +25,7 @@ source("R/functions.R")
 #'getEarnings(initDate = '2017-01-01', outType = 'df')
 #'getEarnings(indicator='msft:us', category="symbol" , '2017-01-01' )
 #'getEarnings(indicator='msft:us', category="symbol", '2016-01-01','2017-01-01', outType = 'df')
-#'getEarnings(type ='dividends')
+#'getEarnings(type ='dividends', outType = 'df')
 #'}
 #'
 

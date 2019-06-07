@@ -17,7 +17,7 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 #'Without credentials only sample information will be provided.
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getMarketsData(marketsField = 'index')
+#'\dontrun{ getMarketsData(marketsField = 'currency')
 #'}
 
 getMarketsData <- function(marketsField, outType = NULL){
@@ -312,7 +312,7 @@ getMarketsList <- function(marketsField, symbol = NULL, outType = NULL){
 #'A country must be provided.
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getMarketsSearch('united states'), getMarketsSearch( 'united states', 'index')
+#'\dontrun{ getMarketsSearch('united states'), getMarketsSearch( 'japan', 'index')
 #' getMarketsSearch('united states', category = c('index' ,'markets')), getMarketsSearch('japan', ('index', 'markets'), '2')
 #'}
 

@@ -80,7 +80,7 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
 #'Without credentials only sample information will be provided.
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getFedReserveSnapshot('AGEXMAK2A647NCEN')
+#'\dontrun{ getFedReserveSnapshot('AGEXMAK2A647NCEN', outType = 'df')
 #'getFedReserveSnapshot(county = 'arkansas'), getFedReserveSnapshot(county ='Pike County')
 #'getFedReserveSnapshot(country = 'united states', page = '2'), getFedReserveSnapshot(country = 'united states')
 #'getFedReserveSnapshot(URL = '/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' )
