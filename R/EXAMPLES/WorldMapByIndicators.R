@@ -6,7 +6,7 @@ library(maps)
 
 #Get data from the Trading Economics API
 get_te_data <- function(ind){
-  login('B33A6EC71531406:B1F63EC6473C45E')
+  login('Your_Key:Your_Secret')
   world_ind <- getIndicatorData(country = "all", indicator = ind, outType = 'df')
   world_ind$Country <- as.character(world_ind$Country)
   world_ind[world_ind == "United States"] <- "USA"
