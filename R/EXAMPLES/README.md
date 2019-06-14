@@ -28,7 +28,7 @@ When you reach the line:
 The console will ask you to insert the indicator you want to use to create the map.
 
 You can use the following link to check the indicator list:
-    
-    [Indicator list](https://api.tradingeconomics.com/indicators)
+
+ [Trading Economics Indicator list](https://api.tradingeconomics.com/indicators)
 
 Finally, you just have to run the final line of code.
