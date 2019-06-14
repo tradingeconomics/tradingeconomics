@@ -7,7 +7,7 @@ We recommend installing Rstudio when programming in R.
 ## World Map Indicators example
 
 In this example we use the API to get the latest data on all countries for a single indicator and display it on a world map.  
-Each country will display the the corresponding colour of the indicator colour scale.
+Each country will display the corresponding colour of the indicator colour scale.
 
 To use this example you first need to install the following packages:
 
@@ -27,8 +27,8 @@ When you reach the line:
 
 The console will ask you to insert the indicator you want to use to create the map.
 
-You can use the following link to check the indicators list:
+You can use the following link to check the indicator list:
     
-    https://api.tradingeconomics.com/indicators
+    [Indicator list](https://api.tradingeconomics.com/indicators)
 
-Finally you just have to run the final line of code.
+Finally, you just have to run the final line of code.
