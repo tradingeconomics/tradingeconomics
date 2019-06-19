@@ -144,7 +144,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
 
     Notes
     ----- 
-    At least one parameter must be provided.
+    Must choose a country and an indicator.
 
     Example
     -------
