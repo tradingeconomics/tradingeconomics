@@ -232,6 +232,7 @@ The API can be used to feed a custom developed application, a public website or 
    <br>
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
+
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
 <p>
@@ -247,6 +248,22 @@ The API can be used to feed a custom developed application, a public website or 
    <br>
    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
+<br><br><br><br>
+<blockquote class="lang-specific csharp">
+    <p><strong>To run our c# examples you can go to an online editor</strong></p>
+</blockquote>
+<blockquote class="lang-specific csharp">
+    <p>Open the online editor:</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+<span><a target = '_blank' href="https://repl.it/languages/csharp"> https://repl.it/languages/csharp</a></span><br> 
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Paste the code on the editor window</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+<span>Hit <soan class='s'>run</soan> button</span><br>
+</code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>
@@ -436,40 +453,52 @@ Click on any method below for a sample.</p>
   </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Indicator.cs">Check here for the complete sample code.</a> </p><br>
-    <p>To get all Calendar events.</p>
+    <p>Without an API key only a small sample of data will be given.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a> </p><br>
+    <p>To get a list of all indicators.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+<span class="k">using</span> <span class="s">System</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">IO</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">Net</span>;
+
+<span class="kt">namespace</span> <span class="s">Examples</span>.<span class="s">System</span>.<span class="s">Net</span>
 {
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
+    <span class="kt">public class</span> <span class="s">Indicators</span>
+    {
+        <span class="kt">public static void</span> Main()
+        {
+            <span class="c1">// replace guest:guest with your key</span>
+            <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+                <span class="kt">"https://api.tradingeconomics.com/indicators?c=guest:guest"</span>);
+            <span class="s">WebResponse</span> <span class="k">response</span> = <span class="k">request</span>.GetResponse(); 
+            <span class="k">Console</span>.WriteLine(((<span class="s">HttpWebResponse</span>)<span class="k">response</span>).StatusDescription);    
 
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get all indicators"</span>);
-    <span class="k">var</span> getIndicatorsResult  = <span class="kt">GetIndicators</span>().Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getIndicatorsResult</span>);
-
-    <span class="k">Console</span>.ReadLine();
+            <span class="k">using</span> (<span class="s">Stream</span> <span class="k">dataStream</span> = <span class="k">response</span>.GetResponseStream())
+            { 
+                <span class="s">StreamReader</span> <span class="k">reader</span> = new <span class="s">StreamReader</span>(<span class="k">dataStream</span>);
+                <span class="kt">String</span> <span class="k">responseFromServer</span> = <span class="k">reader</span>.ReadToEnd();
+                <span class="k">Console</span>.WriteLine(<span class="s">responseFromServer</span>);
+            }     
+            <span class="k">response</span>.Close();
+        }
+    }        
 }
 </code></pre>
 <blockquote class="lang-specific csharp">
     <p>Get a list of indicators from a country.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a indicator for all country"</span>);
-    <span class="k">var</span> getIndicatorsByCountry  = <span class="kt">GetIndicatorsByCountry</span>(<span class="s">"united states"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getIndicatorsByCountry</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get an indicators from all countries.</p>
+    <p>Get specific indicator for all countries.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of indicators of a country"</span>);
-    <span class="k">var</span> getIndicatorsAllCountries   = <span class="kt">GetIndicatorsAllCountries</span>(<span class="s">"gdp"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getIndicatorsAllCountries</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/country/all/</span>{put indicator name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 
 <!--Java black side-->
@@ -743,40 +772,29 @@ For several countries and indicators</p>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Indicator.cs">Check here for the complete sample code.</a> </p><br>
-    <p>To get historical indicators given countries and indicators between start and end dates.</p>
+    <p>To get historical data for given countries and indicators.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
-{
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
-
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get historical list of indicator for multiple countries between start and end dates"</span>);
-    <span class="k">var</span> getHistoricalIndicatorsByCountriesDates   = <span class="kt">GetHistoricalIndicatorsByCountries</span>(new string</span><span class="s">[]</span>{<span class="s">"united states"</span>},new string</span><span class="s">[]</span>{<span class="s">"gdp"</span>}, <span class="k">new </span>DateTime(<span class="s">2015, 01, 01</span>), <span class="k">new </span>DateTime(<span class="s">2015, 12, 31</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalIndicatorsByCountriesDates</span>);
-
-    <span class="k">Console</span>.ReadLine();
-}
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/historical/country/</span>{put country name here}<span class="kt">/indicator/</span>{put indicator name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get historical data given a ticker.</p>
+    <p>Get historical data for given countries and indicators in a date range (date format: YYYY-MM-DD).</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get historical data given a ticker"</span>);
-    <span class="k">var</span> getHistoricalByTicker= <span class="kt">GetHistorycalByTicker</span>(<span class="s">"USURTOT"</span>, <span class="k">new </span>DateTime(<span class="s">2015, 03, 01</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalByTicker</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/historical/country/</span>{put country name here}<span class="kt">/indicator/</span>{put indicator name here}<span class="kt">/</span>{put start date here}<span class="kt">/</span>{put end date here}<span class="kt">?c=guest:guest"</span>);  
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get historical indicators given countries and indicators.</p>
+    <p>Get historical by ticker and start date.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of indicator for multiple countries"</span>);
-    <span class="k">var</span> getHistoricalIndicatorsByCountries    = <span class="kt">GetHistoricalIndicatorsByCountries</span>(new string</span><span class="s">[]</span>{<span class="s">"united states"</span>}, new string</span><span class="s">[]</span>{<span class="s">"gdp"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalIndicatorsByCountries</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/historical/ticker/</span>{put ticker symbol here}<span class="kt">/</span>{put start date here}<span class="kt">?c=guest:guest"</span>);
+    
 </code></pre>
 <!--Java black side-->
 <blockquote class="lang-specific java">
@@ -1059,48 +1077,52 @@ or you can specify a start date and end date<br>
 </code></pre>
 <!--C# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Ratings.cs">Check here for the complete sample code.</a> </p><br>
+    <p>Without an API key only a small sample of data will be given.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a> </p><br>
     <p>To get all credit ratings.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+<span class="k">using</span> <span class="s">System</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">IO</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">Net</span>;
+
+<span class="kt">namespace</span> <span class="s">Examples</span>.<span class="s">System</span>.<span class="s">Net</span>
 {
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
+    <span class="kt">public class</span> <span class="s">Indicators</span>
+    {
+        <span class="kt">public static void</span> Main()
+        {
+            <span class="c1">// replace guest:guest with your key</span>
+            <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+                <span class="kt">"https://api.tradingeconomics.com/ratings?c=guest:guest"</span>);
+            <span class="s">WebResponse</span> <span class="k">response</span> = <span class="k">request</span>.GetResponse(); 
+            <span class="k">Console</span>.WriteLine(((<span class="s">HttpWebResponse</span>)<span class="k">response</span>).StatusDescription);    
 
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get credit ratings"</span>);
-    <span class="k">var</span> getRatings = <span class="kt">GetRatings </span>(new string</span><span class="s">[]</span>{<span class="s">"united states"</span>},new string</span><span class="s">[]</span>{<span class="s">"gdp"</span>}, <span class="k">new </span>DateTime(<span class="s">2015, 01, 01</span>), <span class="k">new </span>DateTime(<span class="s">2015, 12, 31</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getRatings </span>);
-
-    <span class="k">Console</span>.ReadLine();
+            <span class="k">using</span> (<span class="s">Stream</span> <span class="k">dataStream</span> = <span class="k">response</span>.GetResponseStream())
+            { 
+                <span class="s">StreamReader</span> <span class="k">reader</span> = new <span class="s">StreamReader</span>(<span class="k">dataStream</span>);
+                <span class="kt">String</span> <span class="k">responseFromServer</span> = <span class="k">reader</span>.ReadToEnd();
+                <span class="k">Console</span>.WriteLine(<span class="s">responseFromServer</span>);
+            }     
+            <span class="k">response</span>.Close();
+        }
+    }        
 }
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get a list of ratings from a country.</p>
+    <p>Get a list of ratings from a country or countries.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of ratings from a country"</span>);
-    <span class="k">var</span> getRatingsByCountry = <span class="kt">GetRatingsByCountry </span>(<span class="s">"united states"</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getRatingsByCountry </span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/ratings/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);   
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get a list of ratings for multiple countries.</p>
+    <p>Get historical ratings for one or multiple countries .</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of ratings for multiple countries"</span>);
-    <span class="k">var</span> getRatingsByCountries = <span class="kt">GetRatingsByCountries </span>(new string</span><span class="s">[]</span>{<span class="s">"united states"</span>, <span class="s">"portugal"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getRatingsByCountries </span>);
-</code></pre>
-<blockquote class="lang-specific csharp">
-    <p>Get historical ratings for multiple countries .</p>
-</blockquote>
-<pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get historical ratings for multiple countries "</span>);
-    <span class="k">var</span> getHistoricalRatings = <span class="kt">GetHistoricalRatings  </span>(new string</span><span class="s">[]</span>{<span class="s">"united states"</span>, <span class="s">"portugal"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalRatings  </span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/ratings/historical</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
@@ -1304,21 +1326,20 @@ or you can specify a start date and end date<br>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/LatestUpdates.cs">Check here for the complete sample code.</a> </p><br>
     <p>Get the latest updates.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of the lastest updates"</span>);
-    <span class="k">var</span> getLatestUpdates = <span class="kt">GetLatestUpdates </span>(</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getLatestUpdates  </span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/updates?c=guest:guest"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get latest updates by a specific date.</p>
+    <p>Get latest updates by a specific date (date format: YYY-MM-DD).</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get latest updates by a specific date "</span>);
-    <span class="k">var</span> getLatestUpdatesByDate = <span class="kt">GetLatestUpdatesByDate </span>(<span class="k">new </span>DateTime(<span class="s">2015, 03, 01</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getLatestUpdatesByDate   </span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/updates/</span>{put date here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
@@ -1573,72 +1594,68 @@ or you can specify a start date and end date<br>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/open-api/blob/master/C%23/Calendar.cs">Check here for the complete sample code.</a> </p><br>
+    <p>Without an API key only a small sample of data will be given.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a> </p><br>
     <p>To get all Calendar events.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+<span class="k">using</span> <span class="s">System</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">IO</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">Net</span>;
+
+<span class="kt">namespace</span> <span class="s">Examples</span>.<span class="s">System</span>.<span class="s">Net</span>
 {
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
+    <span class="kt">public class</span> <span class="s">Calendar</span>
+    {
+        <span class="kt">public static void</span> Main()
+        {
+            <span class="c1">// replace guest:guest with your key</span>
+            <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+                <span class="kt">"https://api.tradingeconomics.com/calendar?c=guest:guest"</span>);
+            <span class="s">WebResponse</span> <span class="k">response</span> = <span class="k">request</span>.GetResponse(); 
+            <span class="k">Console</span>.WriteLine(((<span class="s">HttpWebResponse</span>)<span class="k">response</span>).StatusDescription);    
 
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events"</span>);
-    <span class="k">var</span> getCalendarResult = <span class="kt">GetCalendarEvents</span>().Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarResult</span>);
-
-    <span class="k">Console</span>.ReadLine();
+            <span class="k">using</span> (<span class="s">Stream</span> <span class="k">dataStream</span> = <span class="k">response</span>.GetResponseStream())
+            { 
+                <span class="s">StreamReader</span> <span class="k">reader</span> = new <span class="s">StreamReader</span>(<span class="k">dataStream</span>);
+                <span class="kt">String</span> <span class="k">responseFromServer</span> = <span class="k">reader</span>.ReadToEnd();
+                <span class="k">Console</span>.WriteLine(<span class="s">responseFromServer</span>);
+            }     
+            <span class="k">response</span>.Close();
+        }
+    }        
 }
 </code></pre> 
 <blockquote class="lang-specific csharp">
     <p>Get Calendar events between two dates.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get all calendar events between dates"</span>);
-    <span class="k">var</span> getCalendarBetweenDatesResult = <span class="kt">GetCalendarEventsByDate</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarBetweenDatesResult</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/calendar/country/All/</span>{put start date here}<span class="kt">/</span>{put start date here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get Calendar events for a specific country.</p>
+    <p>Get Calendar events  by country or countries and dates (date format: YYYY-MM-DD).</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events for a specific country"</span>);
-    <span class="k">var</span> getCalendarForCountryResult = <span class="kt">GetCalendarEventsByCountries</span>(<span class="s">"united states"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForCountryResult</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/calendar/country/</span>{put country name here}<span class="kt">/</span>{put start date here}<span class="kt">/</span>{put start date here}<span class="kt">?c=guest:guest"</span>);
 </code></pre> 
 <blockquote class="lang-specific csharp">
-    <p>Get Calendar events  by country/countries and dates.</p>
+    <p>Get Calendar events by indicator or indicators.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by date and countries"</span>);
-    <span class="k">var</span> getCalendarForCountriesAndDatesResult = <span class="kt">GetCalendarEventsByCountriesAndDates</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>), <span class="s">"united states", "china"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForCountriesAndDatesResult</span>);
-</code></pre> 
-<blockquote class="lang-specific csharp">
-    <p>Get Calendar events by indicator.</p>
-</blockquote>
-<pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by economics indicator"</span>);
-    <span class="k">var</span> getCalendarForIndicatorResult = <span class="kt">GetCalendarEventsByIndicator</span>(<span class="s">"inflation rate"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForIndicatorResult</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/calendar/indicator/</span>{put indicator name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
-<blockquote class="lang-specific csharp">
-    <p>Get Calendar events by indicator, countries and dates.</p>
-</blockquote>
-<pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by economics indicator, countries and dates"</span>);
-    <span class="k">var</span> getCalendarForIndicatorCountriesAndDatesResult = <span class="kt">GetCalendarEventsByIndicatorCountriesAndDates</span>(<span class="k">new</span> DateTime(<span class="s">2016, 12, 02</span>), <span class="k">new</span> DateTime(<span class="s">2016, 12, 03</span>), <span class="k">new</span> string[] {<span class="s">"united states"</span>  }, <span class="s">"inflation rate"</span>)<span class="s">"united states", "china"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarForIndicatorCountriesAndDatesResult</span>);
-</code></pre> 
 <blockquote class="lang-specific csharp">
     <p>Get Calendar events by id.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get calendar events by id"</span>);
-    <span class="k">var</span> getCalendarByIdResult = <span class="kt">GetCalendarEventsById</span>(<span class="s">174108, 160025, 160030</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getCalendarByIdResult</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/calendar/calendarid/</span>{put id here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
         
 <!--java black side-->
@@ -2224,58 +2241,69 @@ or you can specify a start date and end date<br>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-        <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Forecast.cs">Check here for the complete sample code.</a> </p><br>
-        <p>To get forecasts for a specific country.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-    <span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-    <span class="k">static void</span> Main(<span class="kt">string</span>[] args)
-    {
-        <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-        string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-        <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-            _clientKey = k;
-    
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get forecasts for a specific country"</span>);
-        <span class="k">var</span> getForecastByCountry = <span class="kt">GetForecastByCountry </span>(<span class="s">"united states"</span>).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getForecastByCountry </span>);
-    
-        <span class="k">Console</span>.ReadLine();
-    }
-    </code></pre> 
-    <blockquote class="lang-specific csharp">
-        <p>Get forecasts for multiple countries.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get forecasts for multiple countries"</span>);
-        <span class="k">var</span> getForecastsByCountries = <span class="kt">GetForecastsByCountries </span>(new string <span class="s">[]</span> {<span class="s">"united states"</span>}).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getForecastsByCountries </span>);
-    </code></pre>
-    <blockquote class="lang-specific csharp">
-        <p>Get forecasts for a specific indicator.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get forecasts for a specific indicator"</span>);
-        <span class="k">var</span> getForecastsByIndicator = <span class="kt">GetForecastsByIndicator </span>(<span class="s">"gdp"</span>).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getForecastsByIndicator </span>);
-    </code></pre> 
-    <blockquote class="lang-specific csharp">
-        <p>Get forecasts for multiple indicatorss.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get forecasts for multiple indicators"</span>);
-        <span class="k">var</span> getForecastsMultiIndicator = <span class="kt">GetForecastsMultiIndicator </span>( new string <span class="s">[]</span> {<span class="s">"gdp", "population"</span>}).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getForecastsMultiIndicator </span>);
-    </code></pre> 
-    <blockquote class="lang-specific csharp">
-        <p>Get forecasts for country and indicato.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get forecasts for country and indicato"</span>);
-        <span class="k">var</span> getForecastsByCountryIndicator = <span class="kt">GetForecastsByCountryIndicator </span>(<span class="s">"united states", "gdp"</span>).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getForecastsByCountryIndicator </span>);
-    </code></pre>
+    <p>Without an API key only a small sample of data will be given.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a> </p><br>
+    <p>To get forecasts for a specific country.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+<span class="k">using</span> <span class="s">System</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">IO</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">Net</span>;
 
+<span class="kt">namespace</span> <span class="s">Examples</span>.<span class="s">System</span>.<span class="s">Net</span>
+{
+    <span class="kt">public class</span> <span class="s">Forecasts</span>
+    {
+        <span class="kt">public static void</span> Main()
+        {
+            <span class="c1">// replace guest:guest with your key</span>
+            <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+                <span class="kt">"https://api.tradingeconomics.com/forecast/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
+            <span class="s">WebResponse</span> <span class="k">response</span> = <span class="k">request</span>.GetResponse(); 
+            <span class="k">Console</span>.WriteLine(((<span class="s">HttpWebResponse</span>)<span class="k">response</span>).StatusDescription);    
+
+            <span class="k">using</span> (<span class="s">Stream</span> <span class="k">dataStream</span> = <span class="k">response</span>.GetResponseStream())
+            { 
+                <span class="s">StreamReader</span> <span class="k">reader</span> = new <span class="s">StreamReader</span>(<span class="k">dataStream</span>);
+                <span class="kt">String</span> <span class="k">responseFromServer</span> = <span class="k">reader</span>.ReadToEnd();
+                <span class="k">Console</span>.WriteLine(<span class="s">responseFromServer</span>);
+            }     
+            <span class="k">response</span>.Close();
+        }
+    }        
+}
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get forecasts for multiple countries.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/forecast/country/</span>{put countries name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get forecasts for a specific indicator or indicators.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/forecast/indicator/</span>{put indicators name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get forecasts for country and indicator.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/forecast/country/</span>{put countries name here}<span class="kt">/indicator/</span>{put indicators name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get forecasts by specif ticker or tickers.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/forecast/ticker/</span>{put tickers name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Forecast.java">Check here for the complete sample code.</a></p>
@@ -2629,97 +2657,109 @@ Click on any method below for a sample.
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-        <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Markets.cs">Check here for the complete sample code.</a> </p><br>
-        <p>To get markets commodities.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-    <span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-    <span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+    <p>Without an API key only a small sample of data will be given. <br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a> </p><br>
+    <p>To get markets commodities.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+<span class="k">using</span> <span class="s">System</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">IO</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">Net</span>;
+
+<span class="kt">namespace</span> <span class="s">Examples</span>.<span class="s">System</span>.<span class="s">Net</span>
+{
+    <span class="kt">public class</span> <span class="s">Markets</span>
     {
-        <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-        string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-        <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-            _clientKey = k;
-    
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get markets commodities"</span>);
-        <span class="k">var</span> getCommodities = <span class="kt">GetCommodities</span>().Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getCommodities</span>);
-    
-        <span class="k">Console</span>.ReadLine();
-    }
-    </code></pre> 
-    <blockquote class="lang-specific csharp">
-        <p>Get markets currency.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get markets currency"</span>);
-        <span class="k">var</span> getCurrency = <span class="kt">GetCurrency</span>().Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getCurrency</span>);
-    </code></pre>
-    <blockquote class="lang-specific csharp">
-        <p>Get currency crosses.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get currency crosses (EUR)"</span>);
-        <span class="k">var</span> getCurrencyCrosses = <span class="kt">GetCurrencyCrosses</span>().Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getCurrencyCrosses</span>);
-    </code></pre> 
-    <blockquote class="lang-specific csharp">
-        <p>Get markets indexes.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get markets indexes"</span>);
-        <span class="k">var</span> getMarketIndex = <span class="kt">GetMarketIndex</span>().Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getMarketIndex</span>);
-    </code></pre> 
-    <blockquote class="lang-specific csharp">
-        <p>Get markets bonds.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get markets bonds"</span>);
-        <span class="k">var</span> getMarketsBonds = <span class="kt">GetMarketsBonds</span>().Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getMarketsBonds</span>);
-    </code></pre>
-    <blockquote class="lang-specific csharp">
-        <p>Get markets for multiple symbols.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get markets for multiple symbols."</span>);
-        <span class="k">var</span> getMarketSymbols = <span class="kt">GetMarketSymbols</span>( new string <span class="s">[]</span> {<span class="s">"aapl:us","indu:ind" </span>}).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getMarketSymbols</span>);
-    </code></pre>
-    <blockquote class="lang-specific csharp">
-        <p>Get markets for a specific symbol.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get markets for a specific symbol."</span>);
-        <span class="k">var</span> getMarketSymbol = <span class="kt">GetMarketSymbol</span>( <span class="s">"aapl:us"</span>).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getMarketSymbol</span>);
-    </code></pre>
-    <blockquote class="lang-specific csharp">
-        <p>Get markets peers.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get markets peers."</span>);
-        <span class="k">var</span> getMarketsPeers = <span class="kt">GetMarketsPeers</span>( <span class="s">"aapl:us"</span>).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getMarketsPeers</span>);
-    </code></pre>
-    <blockquote class="lang-specific csharp">
-        <p>Get stock market index components.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get stock market index components."</span>);
-        <span class="k">var</span> getMarketsComponents = <span class="kt">getMarketsComponents</span>( <span class="s">"psi20:ind"</span>).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getMarketsComponents</span>);
-    </code></pre>
-    <blockquote class="lang-specific csharp">
-        <p>Get stock market by country and page number.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get stock market by country and page number."</span>);
-        <span class="k">var</span> getMarketsByCountryPage = <span class="kt">GetMarketsByCountryPage </span>( <span class="s">"united states"</span>, <span class="s">4</span>).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getMarketsByCountryPage</span>);
-    </code></pre>
+        <span class="kt">public static void</span> Main()
+        {
+            <span class="c1">// replace guest:guest with your key</span>
+            <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+                <span class="kt">"https://api.tradingeconomics.com/markets/commodities?c=guest:guest"</span>);
+            <span class="s">WebResponse</span> <span class="k">response</span> = <span class="k">request</span>.GetResponse(); 
+            <span class="k">Console</span>.WriteLine(((<span class="s">HttpWebResponse</span>)<span class="k">response</span>).StatusDescription);    
+
+            <span class="k">using</span> (<span class="s">Stream</span> <span class="k">dataStream</span> = <span class="k">response</span>.GetResponseStream())
+            { 
+                <span class="s">StreamReader</span> <span class="k">reader</span> = new <span class="s">StreamReader</span>(<span class="k">dataStream</span>);
+                <span class="kt">String</span> <span class="k">responseFromServer</span> = <span class="k">reader</span>.ReadToEnd();
+                <span class="k">Console</span>.WriteLine(<span class="s">responseFromServer</span>);
+            }     
+            <span class="k">response</span>.Close();
+        }
+    }        
+}
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get markets currency.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/currency?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get currency crosses.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/currency?cross=</span>{currency to cross example: eur}<span class="kt">&c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get markets indexes.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/index?c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get markets bonds.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/bond?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get markets for multiple symbols.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/symbol/</span>{put symbols here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get markets for a specific symbol (you can choose from stock, index, currency, commodity or bond).</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/symbol/</span>{put symbol here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get markets peers.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/peers/</span>{put symbol here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get stock market index components.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/components/</span>{put symbol here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get stock market by country and page number.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/country/</span>{put country name here}<span class="kt">?c=guest:guest&page=</span>{put page number here}<span class="kt">"</span>);
+</code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/MarketSnaps.java">Check here for the complete sample code.</a></p>
@@ -3358,38 +3398,37 @@ Click on any method below for a sample.
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-        <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/MarketsHistorical.cs">Check here for the complete sample code.</a> </p><br>
-        <p>Get historical markets data by market.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get historical markets data by market"</span>);
-        <span class="k">var</span> getHistoricalBySymbol = <span class="kt">GetHistoricalBySymbol</span>(<span class="s"> "aapl:us" </span>).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalBySymbol</span>);
-    </code></pre>
-    <blockquote class="lang-specific csharp">
-        <p>Get historical markets data by multiple markets.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get historical markets data by multiple markets"</span>);
-        <span class="k">var</span> getHistoricalBySymbols = <span class="kt">getHistoricalBySymbols</span>( new string <span class="s">[] </span>{ <span class="s">"aapl:us", "indu:ind"</span>}).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getCurrencyCgetHistoricalBySymbols</span>);
-    </code></pre> 
-    <blockquote class="lang-specific csharp">
-        <p>Get historical markets data by date.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get historical markets data by date"</span>);
-        <span class="k">var</span> getHistoricalSymbolDate = <span class="kt">GetHistoricalSymbolDate</span>( <span class="s">"indu:ind"</span>, new <span class="k">DateTime</span>(<span class="s">2015, 01, 01</span>)).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalSymbolDate</span>);
-    </code></pre> 
-    <blockquote class="lang-specific csharp">
-        <p>Get historical markets data within a date interval.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="k">Console</span>.WriteLine(<span class="s">"About to get historical markets data within a date interval"</span>);
-        <span class="k">var</span> getHistoricalSymbolBetweenDates = <span class="kt">GetHistoricalSymbolBetweenDates</span>(<span class="s">"aapl:us"</span>, new <span class="k">DateTime</span>(<span class="s">2015, 03, 01</span>), new <span class="k">DateTime</span>(<span class="s">2015, 01, 01</span>)).Result;
-        <span class="k">Console</span>.WriteLine(<span class="kt">getHistoricalSymbolBetweenDates</span>);
-    </code></pre>
+    <p>Get historical markets data by market.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/historical/</span>{put symbol name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get historical markets data by multiple markets.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/historical/</span>{put symbols name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get historical markets data by date.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/historical/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get historical markets data within a date interval.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/historical/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&d2=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
+</code></pre>
 
 <!--java black side-->
 <blockquote class="lang-specific java">
@@ -3573,30 +3612,29 @@ Click on any method below for a sample.
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/MarketsIntraday.cs">Check here for the complete sample code.</a> </p><br>
     <p>Get Intraday prices for a single market.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get Intraday prices for a single market"</span>);
-    <span class="k">var</span> getIntradaySymbol = <span class="kt">GetIntradaySymbol</span>(<span class="s"> "aapl:us" </span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getIntradaySymbol</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/intraday/</span>{put symbol name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get intraday prices by date and hour.</p>
+    <p>Get intraday prices by date and hour (date format: YYYY-MM-DD HH:MM).</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get intraday prices by date and hour"</span>);
-    <span class="k">var</span> getIntradayDateHour = <span class="kt">getIntradayDateHour</span>( <span class="s">"indu:ind"</span>, new <span class="k">DateTime</span>(<span class="s">2015, 01, 01, 15, 00, 0</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getIntradayDateHour</span>);
-</code></pre> 
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/intraday/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
+</code></pre>
 <blockquote class="lang-specific csharp">
     <p>Get intraday prices by date.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get intraday prices by dates"</span>);
-    <span class="k">var</span> getIntradaySymbolDates = <span class="kt">getIntradaySymbolDates</span>( <span class="s">"aapl:us"</span>, new <span class="k">DateTime</span>(<span class="s">2015, 03, 01</span>), new <span class="k">DateTime</span>(<span class="s">2015, 12, 31</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getIntradaySymbolDates</span>);
-</code></pre> 
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/intraday/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&d2=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
+</code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/MarketIntraday.java">Check here for the complete sample code.</a></p>
@@ -4021,48 +4059,44 @@ Click on any method below for a sample.
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Earnings.cs">Check here for the complete sample code.</a> </p><br>
     <p>To get default earnings calendar.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
-{
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
-
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get default earnings calendar"</span>);
-    <span class="k">var</span> getEarnings = <span class="kt">getEarnings</span>().Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getEarnings</span>);
-
-    <span class="k">Console</span>.ReadLine();
-}
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings?c=guest:guest"</span>);
 </code></pre> 
-<blockquote class="lang-specific csharp">
-    <p>Get earnings calendar by date.</p>
-</blockquote>
-<pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get earnings calendar by date"</span>);
-    <span class="k">var</span> getEarningsByDate = <span class="kt">GetEarningsByDate</span>( new <span class="k">DateTime</span> ( <span class="s">2015, 01, 01</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getEarningsByDate</span>);
-</code></pre>
 <blockquote class="lang-specific csharp">
     <p>Get earnings calendar by market and date.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get earnings calendar by market and date"</span>);
-    <span class="k">var</span> getEarningsByMarketDate = <span class="kt">GetEarningsByMarketDate</span>( <span class="s">"aapl:us"</span>, new <span class="k">DateTime</span>( <span class="s">2015, 03, 01</span>)).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getEarningsByMarketDate</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings/symbol/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
 </code></pre> 
 <blockquote class="lang-specific csharp">
-    <p>Filter earnings by type.</p>
+    <p>Get earnings calendar by market in a date range (date format: YYYY-MM-DD).</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get earnings by type."</span>);
-    <span class="k">var</span> getEarningsByType = <span class="kt">getEarningsByType</span>( <span class="s">"earnings" </span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getEarningsByType</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings/symbol/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&d2=</span>{put date here}<span class="kt"></span><span class="kt">&c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Filter earnings by country.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Filter earnings by type (type can be: earnings, ipo, dividends).</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings?c=guest:guest&type=</span>{put type here}<span class="kt">"</span>);
 </code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
@@ -4315,45 +4349,52 @@ Click on any method below for a sample.
 </code></pre> 
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/News.cs">Check here for the complete sample code.</a> </p><br>
+    <p>Without an API key only a small sample of data will be given.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a> </p><br> 
     <p>To get lastest news.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">Console</span>.WriteLine(<span class="s">"About to get lastest news"</span>);
-<span class="k">var</span> getNews = <span class="kt">GetNews</span>().Result;
-<span class="k">Console</span>.WriteLine(<span class="kt">getNews</span>);
+<span class="k">using</span> <span class="s">System</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">IO</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">Net</span>;
+
+<span class="kt">namespace</span> <span class="s">Examples</span>.<span class="s">System</span>.<span class="s">Net</span>
+{
+    <span class="kt">public class</span> <span class="s">News</span>
+    {
+        <span class="kt">public static void</span> Main()
+        {
+            <span class="c1">// replace guest:guest with your key</span>
+            <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+                <span class="kt">"https://api.tradingeconomics.com/news?c=guest:guest"</span>);
+            <span class="s">WebResponse</span> <span class="k">response</span> = <span class="k">request</span>.GetResponse(); 
+            <span class="k">Console</span>.WriteLine(((<span class="s">HttpWebResponse</span>)<span class="k">response</span>).StatusDescription);    
+
+            <span class="k">using</span> (<span class="s">Stream</span> <span class="k">dataStream</span> = <span class="k">response</span>.GetResponseStream())
+            { 
+                <span class="s">StreamReader</span> <span class="k">reader</span> = new <span class="s">StreamReader</span>(<span class="k">dataStream</span>);
+                <span class="kt">String</span> <span class="k">responseFromServer</span> = <span class="k">reader</span>.ReadToEnd();
+                <span class="k">Console</span>.WriteLine(<span class="s">responseFromServer</span>);
+            }     
+            <span class="k">response</span>.Close();
+        }
+    }        
+}
 </code></pre> 
 <blockquote class="lang-specific csharp">
     <p>Get lastest news by country, or countries.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get lastest news by country, or countries"</span>);
-    <span class="k">var</span> getNewsByCountry = <span class="kt">GetNewsByCountry</span>( new string <span class="s">[]</span>{<span class="s">"nited states"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getNewsByCountry</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/news/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p>Get latest news by indicator, or indicators.</p>
+    <p>Get latest news by specifying start index and list size.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get latest news by indicator, or indicators"</span>);
-    <span class="k">var</span> getNewsByIndicator = <span class="kt">GetNewsByIndicator</span>( new string <span class="s">[]</span>{<span class="s">"inflation rate"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getNewsByIndicator</span>);
-</code></pre> 
-<blockquote class="lang-specific csharp">
-    <p>Get latest news by country and indicator, or countries and indicators.</p>
-</blockquote>
-<pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get latest news by country and indicator, or countries and indicators"</span>);
-    <span class="k">var</span> getNewsCountryIndicator = <span class="kt">GetNewsCountryIndicator</span>( new string <span class="s">[]</span>{<span class="s">"united states"</span>}, new string <span class="s">[]</span>{<span class="s">"inflation rate"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getNewsCountryIndicator</span>);
-</code></pre> 
-<blockquote class="lang-specific csharp">
-    <p>Paginate news list by specifying start index and list size.</p>
-</blockquote>
-<pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list by specifying start index and list size."</span>);
-    <span class="k">var</span> getNewsList = <span class="kt">GetNewsList</span>( <span class="s">4, 2</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getNewsList</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/news?c=guest:guest&limit=</span>{put list size number}<span class="kt">&start=</span>{put start index here}<span class="kt">"</span>);
 </code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
@@ -4592,46 +4633,45 @@ Click on any method below for a sample.
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Articles.cs">Check here for the complete sample code.</a> </p><br>
     <p>To get lastest Articles.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">Console</span>.WriteLine(<span class="s">"About to get lastest Articles"</span>);
-<span class="k">var</span> getArticles = <span class="kt">GetArticles</span>().Result;
-<span class="k">Console</span>.WriteLine(<span class="kt">getArticles</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/articles?c=guest:guest"</span>);
 </code></pre> 
 <blockquote class="lang-specific csharp">
     <p>Get lastest articles by country, or countries.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get lastest articles by country, or countries"</span>);
-    <span class="k">var</span> getArticlesByCountry = <span class="kt">GetArticlesByCountry</span>( new string <span class="s">[]</span>{<span class="s">"united states"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getArticlesByCountry</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/articles/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
     <p>Get latest articles by indicator, or indicators.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get latest articles by indicator, or indicators"</span>);
-    <span class="k">var</span> getArticlesByIndicator = <span class="kt">GetArticlesByIndicator</span>( new string <span class="s">[]</span>{<span class="s">"inflation rate"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getArticlesByIndicator</span>);
-</code></pre> 
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/articles/indicator/</span>{put indicator name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
 <blockquote class="lang-specific csharp">
     <p>Get articles by country and indicator, or countries and indicators.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get articles by country and indicator, or countries and indicators"</span>);
-    <span class="k">var</span> getArticlesCountryIndicator = <span class="kt">GetArticlesCountryIndicator</span>( new string <span class="s">[]</span>{<span class="s">"united states"</span>}, new string <span class="s">[]</span>{<span class="s">"inflation rate"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getArticlesCountryIndicator</span>);
-</code></pre> 
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/articles/country/</span>{put country name here}<span class="kt">/indicator/</span>{put indicator name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
 <blockquote class="lang-specific csharp">
     <p>Paginate articles list by specifying start index and list size.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list by specifying start index and list size."</span>);
-    <span class="k">var</span> getArticlesList = <span class="kt">GetArticlesList</span>( <span class="s">4, 2</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getArticlesList</span>);
-</code></pre> 
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/articles?c=guest:guest&lim=</span>{put list size number}<span class="kt">&start=</span>{put start index here}<span class="kt">"</span>);
+</code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Articles.java">Check here for the complete sample code.</a></p>
@@ -4872,41 +4912,53 @@ Click on any method below for a sample.
 </code></pre> 
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/WBCategory.cs">Check here for the complete sample code.</a> </p><br>
+    <p>Without an API key only a small sample of data will be given.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a> </p><br>
     <p>To get world bank categories.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
+<span class="k">using</span> <span class="s">System</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">IO</span>;
+<span class="k">using</span> <span class="s">System</span>.<span class="s">Net</span>;
+
+<span class="kt">namespace</span> <span class="s">Examples</span>.<span class="s">System</span>.<span class="s">Net</span>
 {
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
+    <span class="kt">public class</span> <span class="s">WorldBank</span>
+    {
+        <span class="kt">public static void</span> Main()
+        {
+            <span class="c1">// replace guest:guest with your key</span>
+            <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+                <span class="kt">"https://api.tradingeconomics.com/worldBank/categories?c=guest:guest"</span>);
+            <span class="s">WebResponse</span> <span class="k">response</span> = <span class="k">request</span>.GetResponse(); 
+            <span class="k">Console</span>.WriteLine(((<span class="s">HttpWebResponse</span>)<span class="k">response</span>).StatusDescription);    
 
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get world bank categories"</span>);
-    <span class="k">var</span> getWB = <span class="kt">GetWB</span>().Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getWB</span>);
-
-    <span class="k">Console</span>.ReadLine();
+            <span class="k">using</span> (<span class="s">Stream</span> <span class="k">dataStream</span> = <span class="k">response</span>.GetResponseStream())
+            { 
+                <span class="s">StreamReader</span> <span class="k">reader</span> = new <span class="s">StreamReader</span>(<span class="k">dataStream</span>);
+                <span class="kt">String</span> <span class="k">responseFromServer</span> = <span class="k">reader</span>.ReadToEnd();
+                <span class="k">Console</span>.WriteLine(<span class="s">responseFromServer</span>);
+            }     
+            <span class="k">response</span>.Close();
+        }
+    }        
 }
 </code></pre> 
 <blockquote class="lang-specific csharp">
     <p>Filtering by category.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get WB by category"</span>);
-    <span class="k">var</span> getWBCategory = <span class="kt">GetWBCategory</span>( <span class="s">"Education"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getWBCategory</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/worldBank/category/</span>{put category name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
     <p>Filtering by the category and page number.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get WB by category and page number"</span>);
-    <span class="k">var</span> getWBCategoryPage = <span class="kt">GetWBCategoryPage</span>( <span class="s">"Education"</span>, <span class="s">4</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getWBCategoryPage</span>);
-</code></pre> 
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/worldBank/category/</span>{put category name here}<span class="kt">/</span>{put page number here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/WorldBank.java">Check here for the complete sample code.</a></p>
@@ -5181,40 +5233,31 @@ Because there are too many results, this method has pagination. Each page is lim
 </code></pre> 
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/WBIndCoun.cs">Check here for the complete sample code.</a> </p><br>
+    <br><br>
     <p>To get world bank information by indicators series code.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
-{
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
-
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get world bank information by indicators series code"</span>);
-    <span class="k">var</span> getWBSeries = <span class="kt">GetWBSeries</span>( new string <span class="s">[]</span> { <span class="s">"fr.inr.rinr"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getWBSeries</span>);
-
-    <span class="k">Console</span>.ReadLine();
-}
-</code></pre> 
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=</span>{put series_code here}<span class="k">"</span>);
+</code></pre>
 <blockquote class="lang-specific csharp">
+    <br><br>
     <p>Filtering by url.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get WB by url"</span>);
-    <span class="k">var</span> getWBUrl = <span class="kt">GetWBUrl</span>( <span class="s">"united-states/real-interest-rate-percent-wb-data.html"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getWBUrl</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=</span>{put url here}<span class="k">"</span>);
 </code></pre>
 <blockquote class="lang-specific csharp">
+    <br><br>
     <p>Filtering by the country and page number.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get WB by country and page number"</span>);
-    <span class="k">var</span> getWBCountryPage = <span class="kt">GetWBCountryPage</span>( <span class="s">"united states"</span>, <span class="s">4</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getWBCountryPage</span>);
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/worldBank/country/</span>{put country name here}<span class="k">/</span>{put page number here}<span class="k">?c=guest:guest"</span>);
 </code></pre> 
 <!--java black side-->
 <blockquote class="lang-specific java">
@@ -5377,14 +5420,13 @@ Because there are too many results, this method has pagination. Each page is lim
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/WBHistorical.cs">Check here for the complete sample code.</a> </p><br>
     <p>Historical data for a specific indicator.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get historical data for a specific indicator"</span>);
-    <span class="k">var</span> getWBHistorical = <span class="kt">GetWBHistorical</span>( new string <span class="s">[]</span> { <span class="s">"usa.fr.inr.rinr"</span>}).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getWBHistorical</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=</span>{put series_code here}<span class="kt">"</span>);
+</code></pre> 
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>Get world bank historical data by specific series code.</p>
@@ -5515,24 +5557,12 @@ Because there are too many results, this method has pagination. Each page is lim
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Comtrade.cs">Check here for the complete sample code.</a> </p><br>
 <p>To get comtrade categories.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-<span class="k">static string</span> _clientKey = <span class="s">"guest:guest"</span>;
-<span class="k">static void</span> Main(<span class="kt">string</span>[] args)
-{
-    <span class="k">Console</span>.WriteLine(<span class="s">"Provide a API key; otherwise, press ENTER to use the default test key..."</span>);
-    string <span class="s">k</span> = <span class="k">Console</span>.ReadLine();
-    <span class="k">if</span> (!<span class="k">string</span>.IsNullOrWhiteSpace(<span class="s">k</span>))
-        _clientKey = k;
-
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get comtrade categories"</span>);
-    <span class="k">var</span> getComCategories = <span class="kt">GetComCategories</span>().Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getComCategories</span>);
-
-    <span class="k">Console</span>.ReadLine();
-}
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/comtrade/categories?c=guest:guest"</span>);
 </code></pre> 
 <!--java black side-->
 <blockquote class="lang-specific java">
@@ -5735,26 +5765,34 @@ Because there are too many results, this method has pagination. Each page is lim
     <p>Get comtrade countries .</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get comtrade countries"</span>);
-    <span class="k">var</span> getComCountries = <span class="kt">GetComCountries</span>().Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getComCountries</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/comtrade/countries?c=guest:guest"</span>);
+</code></pre> 
 <blockquote class="lang-specific csharp">
     <p>Filtering by the country and page number.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"Filtering by the country and page number"</span>);
-    <span class="k">var</span> getComCountryPage = <span class="kt">GetComCountryPage</span>( <span class="s">"portugal"</span>, <span class="s">4</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getComCountryPage</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/comtrade/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get comtrade by country and page number.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/comtrade/country/</span>{put country name here}<span class="kt">/</span>{put page number here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <blockquote class="lang-specific csharp">
     <p>Get comtrade between two countries and page number.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"Get comtrade between two countries and page number"</span>);
-    <span class="k">var</span> getComBetweenCountries = <span class="kt">GetComBetweenCountries</span>( <span class="s">"portugal", "spain"</span>, <span class="s">2</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getComBetweenCountries</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/comtrade/country/</span>{put country1 name here}<span class="kt">/</span>{put country2 name here}<span class="kt">/</span>{put page number here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>Get detailed information about comtrade countries.</p>
@@ -5936,10 +5974,10 @@ Because there are too many results, this method has pagination. Each page is lim
     <p>Get comtrade historical data by symbol.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get comtrade historical data by symbol"</span>);
-    <span class="k">var</span> getComHistorical = <span class="kt">GetComHistorical</span>( <span class="s">"PRTESP24031"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getComHistorical</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/comtrade/historical/</span>{put symbol name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>Get comtrade historical data by symbol.</p>
@@ -6078,22 +6116,21 @@ Because there are too many results, this method has pagination. Each page is lim
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/FederalReserve.cs">Check here for the complete sample code.</a> </p><br>
 <p>To get fred states.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of fred states"</span>);
-    <span class="k">var</span> getFredStates = <span class="kt">GetFredStates</span>().Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredStates</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/states?c=guest:guest"</span>);
+</code></pre> 
 <blockquote class="lang-specific csharp">
-<p>To get fred per state.</p>
+<p>To get fred counties per state.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of fred data per state"</span>);
-    <span class="k">var</span> getFredCounty = <span class="kt">GetFredCounty</span>( <span class="s">"arkansas"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredCounty</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/counties/</span>{put county name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/FederalReserve.java">Check here for the complete sample code.</a></p>
@@ -6320,50 +6357,50 @@ Because there are too many results, this method has pagination. Each page is lim
 <p>Filtering by symbol.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of fred by symbol"</span>);
-    <span class="k">var</span> getFredSymbol = <span class="kt">GetFredSymbol</span>( <span class="s">"AGEXMAK2A647NCEN"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredSymbol</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/snapshot/symbol/</span>{put symbol name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <blockquote class="lang-specific csharp">
 <p>Filtering by url.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get a list of fred by url"</span>);
-    <span class="k">var</span> getFredUrl = <span class="kt">GetFredUrl</span>( <span class="s">"/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredUrl</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/snapshot/url?c=guest:guest&url=</span>{put url here}<span class="kt">"</span>);
+</code></pre> 
 <blockquote class="lang-specific csharp">
 <p>Get fred data by country.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get fred data by country"</span>);
-    <span class="k">var</span> getFredSnapCountry = <span class="kt">GetFredSnapCountry</span>( <span class="s">"united-states"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredSnapCountry</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/snapshot/country/</span>{put country here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <blockquote class="lang-specific csharp">
 <p>Get fred data by state.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get fred data by state"</span>);
-    <span class="k">var</span> getFredSnapState = <span class="kt">GetFredSnapState</span>( <span class="s">"tennessee"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredSnapState</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/snapshot/state/</span>{put state here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <blockquote class="lang-specific csharp">
 <p>Get fred data by county.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get fred data by county"</span>);
-    <span class="k">var</span> getFredSnapCounty = <span class="kt">GetFredSnapCounty</span>( <span class="s">"arkansas"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredSnapCounty</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/snapshot/county/</span>{put county here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <blockquote class="lang-specific csharp">
 <p>Get fred data by country and page.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get fred data by country and page"</span>);
-    <span class="k">var</span> getFredSnapCountryPage = <span class="kt">GetFredSnapCountryPage</span>( <span class="s">"united states"</span>, <span class="s">2</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredSnapCountryPage</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/snapshot/country/</span>{put country here}<span class="kt">/</span>{put page number here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>Get fred snapshot by symbol.</p>
@@ -6579,21 +6616,14 @@ or<br>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
-<p>Get fred historical by symbol.</p>
+<p>Get fred historical by symbol or symbols.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get fred historical by symbol"</span>);
-    <span class="k">var</span> getFredHistorical = <span class="kt">GetFredHistorical</span>( <span class="s">"RACEDISPARITY005007"</span>).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredHistorical</span>);
-</code></pre>
-<blockquote class="lang-specific csharp">
-<p>Get fred historical by symbols.</p>
-</blockquote>
-<pre class="highlight csharp"><code>
-    <span class="k">Console</span>.WriteLine(<span class="s">"About to get fred historical by symbols"</span>);
-    <span class="k">var</span> getFredHistoricalSymbols = <span class="kt">GetFredHistoricalSymbols</span>( new string <span class="s">[]</span> {<span class="s">"RACEDISPARITY005007", "2020RATIO002013"</span> }).Result;
-    <span class="k">Console</span>.WriteLine(<span class="kt">getFredHistoricalSymbols</span>);
-</code></pre>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/fred/historical/</span>{put symbol here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
+
 <!--java black side-->
 <blockquote class="lang-specific java">
 <p>Get fred historical data by symbol or symbols.</p>
