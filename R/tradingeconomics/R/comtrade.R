@@ -63,7 +63,7 @@ getComtradeCategories <- function(id = NULL, outType = NULL){
 #'Without credentials only sample information will be provided. Without a country, a list of countries will be provided.
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getComtradeCountry()
+#'\dontrun{ getComtradeCountry(outType = 'df')
 #'getComtradeCountry('portugal')
 #'getComtradeCountry('portugal', page_number = '2')
 #'getComtradeCountry(c('portugal', 'spain'), page_number = '4')

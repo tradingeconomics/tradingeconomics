@@ -82,8 +82,8 @@ getWorldBankCategories <- function( category = NULL, outType = NULL, page = NULL
 #'indicator and country by using series_code or url.
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getWorldBankIndicators(series_code = 'fr.inr.rinr')
-#'getWorldBankIndicators(identifier = 'portugal',category = 'country', page_number = '2')
+#'\dontrun{ getWorldBankIndicators(series_code = 'fr.inr.rinr', outType = 'df')
+#'getWorldBankIndicators(identifier = 'portugal',category = 'country', page_number = '2', outType = 'df')
 #'getWorldBankIndicators(series_code = 'usa.fr.inr.rinr')
 #'getWorldBankIndicators(URL = '/united-states/real-interest-rate-percent-wb-data.html')
 #'}

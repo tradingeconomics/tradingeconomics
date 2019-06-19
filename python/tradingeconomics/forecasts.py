@@ -122,7 +122,7 @@ def getForecastData(country = None, indicator = None, output_type = None):
     if code == 200:
         try:
             isCommodity = False
-            if (country != None and country.strip().lower() == 'commodity') or (indicator != None and indicator.strip().lower() == 'commodity'):
+            if (country != None and country == 'commodity') or (indicator != None and indicator == 'commodity'):
                     isCommodity = True
             if len(webResults) > 0:
                 if isCommodity:

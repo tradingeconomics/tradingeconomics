@@ -20,8 +20,9 @@ source("R/functions.R")
 #'Without credentials default information will be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
 #'@examples
-#'\dontrun{ getIndicatorData(country = 'United States', indicators = 'Imports', output_type = 'df')
-#'getIndicatorData(country = c('United States', 'Portugal'), indicators = c('Imports','Exports'))
+#'\dontrun{ getIndicatorData(country = 'United States', indicator = 'Imports', outType = 'df')
+#'getIndicatorData(country = c('United States', 'china'), indicator = c('gdp','inflation rate'))
+#'getIndicatorData(country = 'United States', outType = 'df')
 #'}
 
 

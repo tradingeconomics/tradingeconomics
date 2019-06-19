@@ -23,7 +23,9 @@ source("R/functions.R")
 #' @seealso \code{\link{getMarketsData}}, \code{\link{getIndicatorData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
 #'@examples
 #'\dontrun{ getForecastData(country = 'United States', indicator = 'Imports')
-#'getForecastData(country = c('United States', 'India'), indicator = c('Imports','Exports'))
+#'getForecastData(country = c('United States', 'china'), indicator = c('gdp','inflation rate'))
+#' getForecastData(country = 'United States')
+#' getForecastData(indicator = 'Imports')
 #'}
 
 

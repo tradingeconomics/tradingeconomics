@@ -30,7 +30,7 @@ source("R/functions.R")
 #'Without credentials, only sample data is returned.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{getCalendarData(), getCalendarData(id= c('174108','160025','160030')), getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'))
+#'\dontrun{getCalendarData(), getCalendarData(id= c('174108','160025','160030'), outType = 'df'), getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'))
 #' getCalendarData(country = 'United States', indicator = 'initial jobless claims',initDate = '2016-12-01', endDate = '2017-02-25')
 #'getCalendarData(country = c('United States', 'India'),indicator = c('Composite Pmi', 'Bankruptcies'), initDate = '2011-01-01', endDate = '2016-01-01')
 #'getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'), initDate = '2018-01-01', endDate = '2018-03-01')
