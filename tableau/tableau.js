@@ -270,8 +270,9 @@
 
 		function capitalize(_string) {
 			
-			return _string.toUpperCase()
-			
+			try { return _string.toUpperCase() }
+			catch { return '' }
+
 			//Failed capitalizeFirstLetter attempt (need time)
 			/*alert(num);
 
@@ -303,7 +304,7 @@
 
 			//Atributting value to the columns defined earlier
 			for (var i = 0; i < resp.length; i++) {
-			
+
 				if(!resp[i].date) { resp[i].date = ''}
 				if(!resp[i].q1_date) { resp[i].q1_date = ''}
 				if(!resp[i].q2_date) { resp[i].q2_date = ''}
