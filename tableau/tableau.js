@@ -268,12 +268,17 @@
 
 		var dataCategory =  urlObj.urlBase.split('/')[1]
 
-		function capitalizeFirstLetter(_string) {
+		function capitalize(_string) {
 			
-			let string = _string.toLowerCase();
+			return _string.toUpperCase()
+			
+			//Failed capitalizeFirstLetter attempt (need time)
+			/*alert(num);
 
-			let stringToReturn = "";
-			let i = 0;
+			var string = _string.toLowerCase()
+
+			var stringToReturn = ""
+			var i = 0
 
 			while (true) {
 				if (string.split(" ")[i] != undefined) {
@@ -281,7 +286,7 @@
 					stringToReturn += string.split(" ")[0].charAt(0).toUpperCase() + string.split(" ")[i].substring(1)
 
 					if (string.split(" ")[i + 1] != undefined) {
-						stringToReturn += " ";
+						stringToReturn += " "
 					}
 					else {
 						//alert(stringToReturn)
@@ -289,7 +294,7 @@
 					}
 				}
 				i++
-			}
+			}*/
 		}
 
     	$.getJSON(apiCall, function(resp) {
@@ -315,11 +320,11 @@
 				if (dataCategory == 'news' || dataCategory == 'articles') {
 					tableData.push({
 					'Id' : resp[i].id,
-					'Title' : capitalizeFirstLetter(resp[i].title),
+					'Title' : resp[i].title,
 					'Date' : resp[i].date.split('T')[0],
 					'Description' : resp[i].description,
 					'Country' : resp[i].country,
-					'Category' : capitalizeFirstLetter(resp[i].category),
+					'Category' : capitalize(resp[i].category),
 					'Symbol' : resp[i].symbol,
 					'Url' : resp[i].url,
 					})
@@ -331,10 +336,10 @@
 					'Name'  : resp[i].Name,
 					'Symbol' : resp[i].Symbol,
 					'CalendarId' : resp[i].CalendarId,
-					'Title' : capitalizeFirstLetter(resp[i].Title),
+					'Title' : resp[i].Title,
 					'CalendarReference' : resp[i].CalendarReference,
 					'Country' : resp[i].Country,
-					'Category' : capitalizeFirstLetter(resp[i].Category),
+					'Category' : capitalize(resp[i].Category),
 					'CategoryGroup' : resp[i].CategoryGroup,
 					'Reference' : resp[i].Reference,
 					'Event' : resp[i].Event,
