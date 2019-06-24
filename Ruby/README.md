@@ -7,14 +7,20 @@
 [https://www.ruby-lang.org/en/downloads/](https://www.ruby-lang.org/en/downloads/)
 
 
-#### Copy the sample code
+#### Copy the sample code to a folder at your choice
 
-#### Open a command prompt 
+Open a command prompt and go to your script path 
 
-Go to your script path and type **ruby** before the script name
+#### This script requires *httparty*:
 ```ruby
-eg.: c:\users\rubyExamples>ruby marketSnap.rb
+gem install httparty
 ```
+
+#### Then type **ruby** before the script name:
+```ruby
+eg.: c:\path>ruby marketSnap.rb
+```
+ 
 #### In this case the output will be:
 ```ruby
 put your client key
