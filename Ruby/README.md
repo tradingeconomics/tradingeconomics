@@ -7,7 +7,7 @@
 [https://www.ruby-lang.org/en/downloads/](https://www.ruby-lang.org/en/downloads/)
 
 
-### Copy the sample code
+#### Copy the sample code
 
 #### Open a command prompt 
 
@@ -18,7 +18,7 @@ eg.: c:\users\rubyExamples>ruby marketSnap.rb
 #### In this case the output will be:
 ```ruby
 put your client key
-"type - guest:guest, or your client key"
+"type - guest:guest for data sample, or your API Key"
 ```
 
 ```ruby
