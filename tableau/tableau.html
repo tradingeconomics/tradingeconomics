@@ -5,16 +5,16 @@
     <title>Trading Economics</title>
     <meta http-equiv="Cache-Control" content="no-store" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="tradingeconomicsWDC.css">
+    <link rel="stylesheet" type="text/css" href="tableau.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="https://connectors.tableau.com/libs/tableauwdc-2.2.latest.js" type="text/javascript"></script>
-    <script src="tradingeconomicsWDC.js" type="text/javascript"></script>
+    <script src="tableau.js" type="text/javascript"></script>
 </head>
 
 <body>
     <div id="wrapper">                
-        <h1>Get Trading Economics Data</h1>
+        <h1>Trading Economics - Tableau</h1>
 
         <div class="btn-group">
             <button id="method" type="button" class="btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -154,14 +154,14 @@
                 <hr id="gettingWhatHr">
                 <span id="gettingWhatTitle">Test Title</span>
 
-                <div id="indicatorInputContainer">
-                    <label for="indicatorInput" class="text-center">Indicators</label><br>
-                    <input type="text" class="form-control" id="indicatorInput" value="GDP, Consumer Confidence, Unemployment Rate" style="width: 600px;">
-                </div>
-
                 <div id="countryInputContainer">
                     <label for="countryInput" class="text-center">Countries</label><br>
                     <input type="text" class="form-control" id="countryInput" value="United States, United Kingdom, Australia" style="width: 600px;">
+                </div>
+
+                <div id="indicatorInputContainer">
+                    <label for="indicatorInput" class="text-center">Indicators</label><br>
+                    <input type="text" class="form-control" id="indicatorInput" value="GDP, Consumer Confidence, Unemployment Rate" style="width: 600px;">
                 </div>
 
                 <div id="tickerInputContainer">
@@ -227,7 +227,7 @@
         </div>
         <footer>
             <hr>
-            <span style="font-weight:100; font-size: 1.2rem;">Some data requests will not work correctly with API Key as 'guest:guest'.<br>May be possible to use only one indicator/country/symbol(...) at a time depending on the option chosen.<br>For more infomation visit Trading Economics API Documentation website.</span>
+            <span style="font-weight:100; font-size: 1.2rem;">Free users have only the following countries available: Sweden, Mexico, New Zealand and Thailand. To upgrade your plan please contact support@tradingeconomics.com.</span>
         </footer>
     </div>
 </body>

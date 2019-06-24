@@ -1,4 +1,7 @@
+// version: 20190621
+
 (function () {
+	
     var myConnector = tableau.makeConnector();
 
     myConnector.getSchema = function (schemaCallback) {
@@ -268,13 +271,51 @@
 
 		var dataCategory =  urlObj.urlBase.split('/')[1]
 
+		function capitalizeFirstLetter(_string) {
+			
+			try {
+				var string = _string.toLowerCase()
+	
+				var stringToReturn = ""
+				var i = 0
+	
+				while (true) {
+					if (string.split(" ")[i] != undefined) {
+	
+						stringToReturn += string.split(" ")[i].charAt(0).toUpperCase() + string.split(" ")[i].substring(1)
+	
+						if (string.split(" ")[i + 1] != undefined) {
+							stringToReturn += " "
+						}
+						else {
+							return stringToReturn
+						}
+					}
+					i++
+				}
+			}
+			catch(err) {
+				console.log(err)
+				return _string
+			}
+		}
+
+		// Checks if the HTTP status is forbidden(or other fail) before getJSON function
+		$.ajax({
+			type: 'GET',
+			url: apiCall
+		})
+		.fail(function() {
+			doneCallback()
+		})
+
     	$.getJSON(apiCall, function(resp) {
 
 			var tableData = []
 
 			//Atributting value to the columns defined earlier
 			for (var i = 0; i < resp.length; i++) {
-			
+
 				if(!resp[i].date) { resp[i].date = ''}
 				if(!resp[i].q1_date) { resp[i].q1_date = ''}
 				if(!resp[i].q2_date) { resp[i].q2_date = ''}
@@ -291,11 +332,11 @@
 				if (dataCategory == 'news' || dataCategory == 'articles') {
 					tableData.push({
 					'Id' : resp[i].id,
-					'Title' : resp[i].title,
+					'Title' : capitalizeFirstLetter(resp[i].title),
 					'Date' : resp[i].date.split('T')[0],
 					'Description' : resp[i].description,
-					'Country' : resp[i].country,
-					'Category' : resp[i].category,
+					'Country' : capitalizeFirstLetter(resp[i].country),
+					'Category' : capitalizeFirstLetter(resp[i].category),
 					'Symbol' : resp[i].symbol,
 					'Url' : resp[i].url,
 					})
@@ -304,13 +345,13 @@
 				
 				tableData.push({
 					'Ticker' : resp[i].Ticker,
-					'Name'  : resp[i].Name ,
+					'Name'  : capitalizeFirstLetter(resp[i].Name),
 					'Symbol' : resp[i].Symbol,
 					'CalendarId' : resp[i].CalendarId,
-					'Title' : resp[i].Title,
+					'Title' : capitalizeFirstLetter(resp[i].Title),
 					'CalendarReference' : resp[i].CalendarReference,
-					'Country' : resp[i].Country,
-					'Category' : resp[i].Category,
+					'Country' : capitalizeFirstLetter(resp[i].Country),
+					'Category' : capitalizeFirstLetter(resp[i].Category),
 					'CategoryGroup' : resp[i].CategoryGroup,
 					'Reference' : resp[i].Reference,
 					'Event' : resp[i].Event,
@@ -391,7 +432,7 @@
 			table.appendRows(tableData)
 			doneCallback()
 		})
-		
+		//doneCallback()
 	}
 	
     tableau.registerConnector(myConnector)
