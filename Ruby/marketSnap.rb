@@ -1,8 +1,10 @@
 require 'httparty'
 
+
 puts "put your client key"
 $name = STDIN.gets
 puts "you are logged in as " +$name
+
 puts "Choose commodities, currency, index or bond"
 $snap = STDIN.gets
 
@@ -17,3 +19,6 @@ response.code
 response.body
 
 puts response.body
+
+
+
