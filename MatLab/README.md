@@ -25,19 +25,16 @@
 ```
 
 ![clientKey](/images/clientKey.png)
-
 ```
 Choose one country and one indicator, press "Show" to see the chart
 ```
 
 ![LineChart](/images/LineChart.png)
-
 ```
 Choose type of chart
 ```
 
 ![TypeChart](/images/TypeChart.png)
-
 ```
 Press "Show"
 ```
