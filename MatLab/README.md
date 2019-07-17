@@ -24,19 +24,19 @@
 3 - Press "No Client Key" to just see a demo.
 ```
 
-![clientKey](/images/clientKey.png)
+![clientKey](./images/clientKey.png)
 ```
 Choose one country and one indicator, press "Show" to see the chart
 ```
 
-![LineChart](/images/LineChart.png)
+![LineChart](./images/LineChart.png)
 ```
 Choose type of chart
 ```
 
-![TypeChart](/images/TypeChart.png)
+![TypeChart](./images/TypeChart.png)
 ```
 Press "Show"
 ```
 
-![HistChart](/images/HistChart.png)
+![HistChart](./images/HistChart.png)
