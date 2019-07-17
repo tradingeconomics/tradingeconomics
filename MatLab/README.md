@@ -29,7 +29,7 @@
 Choose one country and one indicator, press "Show" to see the chart
 ```
 
-![LineChart](./images/LineChart.png)
+![LineChart](./images/lineChart.png)
 ```
 Choose type of chart
 ```
