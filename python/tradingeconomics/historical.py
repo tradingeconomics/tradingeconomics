@@ -216,13 +216,15 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
                 else:
                     results = multiParams(webResults)
             else:
-                raise ParametersError ('No data available for the provided parameters.')  
-            if output_type == None or output_type =='dict':        
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='dict':
+                output = results 
+            elif output_type == 'df':
                 output = results
             elif output_type == 'raw':        
                 output = webResults
             else:       
-                raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
+                raise ParametersError ('output_type options : dict(default) for dictionary or raw for unparsed results.')
             return output
         except ValueError:
             pass
@@ -240,7 +242,7 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
              String to get data for one country. List of strings to get data for
              several countries. For example, country = ['United States', 'Australia'].
         output_type: string.
-             'dict'(default) for dictionary format output,
+             'df'(default) for dictionary format output,
              'raw' for list of dictionaries without any parsing.
 
     Notes
@@ -297,11 +299,11 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
             else:
                 raise ParametersError ('No data available for the provided parameters.')
             if output_type == None or output_type =='df':        
-                output = maindf
+                output = maindf     
             elif output_type == 'raw':        
                 output = webResults
             else:      
-                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+                raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
             return output
         except ValueError:
             pass
