@@ -23,17 +23,17 @@
 2 - A test key will only give you access to a sample of countries.
 3 - Press "No Client Key" to just see a demo.
 ```
-![alt text](\clientKey.png)
+![alt text](images\clientKey.png)
 
 ```
 Choose one country and one indicator, press "Show" to see the chart
 ```
-![alt text](\LineChart.png)
+![alt text](images\LineChart.png)
 ```
 Choose type of chart
 ```
-![alt text](\TypeChart.png)
+![alt text](images\TypeChart.png)
 ```
 Press "Show"
 ```
-![alt text](\HistChart.png)
+![alt text](images\HistChart.png)
