@@ -8,7 +8,7 @@ te.subscribe('calendar')
 
 def on_message(ws, message):
     data = json.loads(message)
-    print data
+    print (data)
 
 
 

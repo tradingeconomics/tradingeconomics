@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[classdef TradingEconomicsSampleGUI < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                       matlab.ui.Figure
+        GridLayout                     matlab.ui.container.GridLayout
+        LeftPanel                      matlab.ui.container.Panel
+        PutyourclientkeyhereEditFieldLabel  matlab.ui.control.Label
+        Key                            matlab.ui.control.EditField
+        TRADINGECONOMICSLabel          matlab.ui.control.Label
+        TogetatestkeygotoLabel         matlab.ui.control.Label
+        TestKeyButton                  matlab.ui.control.Button
+        NoClientKeyButton              matlab.ui.control.Button
+        IfyouwantademopresshereLabel   matlab.ui.control.Label
+        VisitusatLabel                 matlab.ui.control.Label
+        tradingeconomicscomButton      matlab.ui.control.Button
+        LogOutButton                   matlab.ui.control.Button
+        CenterPanel                    matlab.ui.container.Panel
+        UIAxes                         matlab.ui.control.UIAxes
+        RightPanel                     matlab.ui.container.Panel
+        IndicatorsHistoricalDataLabel  matlab.ui.control.Label
+        ShowButton                     matlab.ui.control.StateButton
+        ChooseCountryDropDownLabel     matlab.ui.control.Label
+        ChooseCountryDropDown          matlab.ui.control.DropDown
+        ChooseIndicatorDropDownLabel   matlab.ui.control.Label
+        ChooseIndicatorDropDown        matlab.ui.control.DropDown
+        TypeofchartDropDownLabel       matlab.ui.control.Label
+        TypeofchartDropDown            matlab.ui.control.DropDown
+        ClearButton                    matlab.ui.control.Button
+    end
+
+    % Properties that correspond to apps with auto-reflow
+    properties (Access = private)
+        onePanelWidth = 576;
+        twoPanelWidth = 768;
+    end
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Value changing function: Key
+        function KeyValueChanging(app, event)
+            changingValue = event.Value;
+            app.Key.Value = event.Value;
+            url = "https://api.tradingeconomics.com/country/all/gdp?c=" + app.Key.Value
+            data = webread(url)
+            transpose({data.Country})
+            app.ChooseCountryDropDown.ItemsData = {data.Country}
+            app.ChooseCountryDropDown.Items = {data.Country}
+            url = "https://api.tradingeconomics.com/country/" + app.ChooseCountryDropDown.Value + '?c=' + app.Key.Value;
+           
+            data = webread(url);
+            transpose({data.Category})
+            app.ChooseIndicatorDropDown.ItemsData = {data.Category};
+            app.ChooseIndicatorDropDown.Items = {data.Category};
+            
+
+        end
+
+        % Value changed function: ShowButton
+        function ShowButtonValueChanged(app, event)
+            value = app.ShowButton.Value;
+            url = ['https://api.tradingeconomics.com/historical/country/', app.ChooseCountryDropDown.Value , '/indicator/' , app.ChooseIndicatorDropDown.Value , '?c=' , app.Key.Value];
+          
+            data = webread(url);
+            dn = []
+            
+            for k = [1:length(data)]
+               disp(data(k));
+               disp('')
+               dn(k) =  datenum(data(k).DateTime, 'yyyy-mm-dd');
+            end
+            
+            x = dn;
+            y = [data.Value];
+            cla(app.UIAxes,'reset');
+            grid(app.UIAxes); 
+            if isequal(app.TypeofchartDropDown.Value ,'Line')
+                plot(app.UIAxes,x, y,'--g');
+                datetick(app.UIAxes,'x' ,10, 'keepticks');
+                title(app.UIAxes,app.ChooseCountryDropDown.Value);
+                xlabel(app.UIAxes,app.ChooseIndicatorDropDown.Value);
+            elseif isequal(app.TypeofchartDropDown.Value, 'Bar')
+                bar(app.UIAxes,x, y,  "b");
+                datetick(app.UIAxes,'x' ,10,'keepticks');
+                title(app.UIAxes,app.ChooseCountryDropDown.Value);
+                xlabel(app.UIAxes,app.ChooseIndicatorDropDown.Value);
+            elseif isequal(app.TypeofchartDropDown.Value, 'Stem')
+                stem(app.UIAxes,x, y);
+                datetick(app.UIAxes,'x' ,10, 'keeplimits','keepticks');
+                title(app.UIAxes,app.ChooseCountryDropDown.Value);
+                xlabel(app.UIAxes,app.ChooseIndicatorDropDown.Value);
+            elseif isequal(app.TypeofchartDropDown.Value ,'Histogram') 
+                histogram2(app.UIAxes,x, y, 'FaceColor','flat');
+                datetick(app.UIAxes,'x' ,10, 'keeplimits','keepticks');
+                title(app.UIAxes,app.ChooseCountryDropDown.Value);
+                xlabel(app.UIAxes,app.ChooseIndicatorDropDown.Value);
+            end
+            
+            hold(app.UIAxes);
+            %app.TypeofchartDropDown.Value;
+            
+          
+        end
+
+        % Button pushed function: ClearButton
+        function ClearButtonPushed(app, event)
+            cla(app.UIAxes,'reset'); 
+            grid(app.UIAxes); 
+            app.updateAppLayout;
+        end
+
+        % Changes arrangement of the app based on UIFigure width
+        function updateAppLayout(app, event)
+            currentFigureWidth = app.UIFigure.Position(3);
+            if(currentFigureWidth <= app.onePanelWidth)
+                % Change to a 3x1 grid
+                app.GridLayout.RowHeight = {442, 442, 442};
+                app.GridLayout.ColumnWidth = {'1x'};
+                app.CenterPanel.Layout.Row = 1;
+                app.CenterPanel.Layout.Column = 1;
+                app.LeftPanel.Layout.Row = 2;
+                app.LeftPanel.Layout.Column = 1;
+                app.RightPanel.Layout.Row = 3;
+                app.RightPanel.Layout.Column = 1;
+            elseif (currentFigureWidth > app.onePanelWidth && currentFigureWidth <= app.twoPanelWidth)
+                % Change to a 2x2 grid
+                app.GridLayout.RowHeight = {442, 442};
+                app.GridLayout.ColumnWidth = {'1x', '1x'};
+                app.CenterPanel.Layout.Row = 1;
+                app.CenterPanel.Layout.Column = [1,2];
+                app.LeftPanel.Layout.Row = 2;
+                app.LeftPanel.Layout.Column = 1;
+                app.RightPanel.Layout.Row = 2;
+                app.RightPanel.Layout.Column = 2;
+            else
+                % Change to a 1x3 grid
+                app.GridLayout.RowHeight = {'1x'};
+                app.GridLayout.ColumnWidth = {269, '1x', 245};
+                app.LeftPanel.Layout.Row = 1;
+                app.LeftPanel.Layout.Column = 1;
+                app.CenterPanel.Layout.Row = 1;
+                app.CenterPanel.Layout.Column = 2;
+                app.RightPanel.Layout.Row = 1;
+                app.RightPanel.Layout.Column = 3;
+            end
+        end
+
+        % Value changed function: ChooseCountryDropDown
+        function ChooseCountryDropDownValueChanged(app, event)
+            app.ChooseCountryDropDown.Value = event.Value;
+            url = "https://api.tradingeconomics.com/country/" + app.ChooseCountryDropDown.Value + '?c=' + app.Key.Value;
+           
+            data = webread(url);
+            transpose({data.Category})
+            app.ChooseIndicatorDropDown.ItemsData = {data.Category};
+            app.ChooseIndicatorDropDown.Items = {data.Category};
+   
+
+        end
+
+        % Button pushed function: NoClientKeyButton
+        function NoClientKeyButtonPushed(app, event)
+            
+            url = 'https://api.tradingeconomics.com/historical/country/united states/indicator/gdp?c=guest:guest';
+            data = webread(url);
+            transpose({data.Category})
+            transpose({data.Country})
+            app.ChooseCountryDropDown.Items = {data.Country}
+            app.ChooseIndicatorDropDown.Items = {data.Category};
+         
+            dn = []
+            for k = [1:length(data)]
+               disp(data(k));
+               disp('')
+               dn(k) =  datenum(data(k).DateTime, 'yyyy-mm-dd');
+            end
+            x = dn;
+            y = [data.Value];
+            cla(app.UIAxes,'reset');
+            grid(app.UIAxes);
+            if isequal(app.TypeofchartDropDown.Value ,'Line')
+                plot(app.UIAxes,x, y,'--g');
+                datetick(app.UIAxes,'x' ,10, 'keepticks');
+                title(app.UIAxes,'United States');
+                xlabel(app.UIAxes,'GDP');
+            elseif isequal(app.TypeofchartDropDown.Value, 'Bar')
+                bar(app.UIAxes,x, y,  "b");
+                datetick(app.UIAxes,'x' ,10,'keeplimits', 'keepticks');
+                title(app.UIAxes,'United States');
+                xlabel(app.UIAxes,'GDP');
+            elseif isequal(app.TypeofchartDropDown.Value, 'Stem')
+                stem(app.UIAxes,x, y);
+                datetick(app.UIAxes,'x' ,10, 'keepticks');
+                title(app.UIAxes,'United States');
+                xlabel(app.UIAxes,'GDP');
+            elseif isequal(app.TypeofchartDropDown.Value ,'Histogram') 
+                histogram2(app.UIAxes,x, y, 'FaceColor','flat');
+                datetick(app.UIAxes,'x' ,10, 'keepticks');
+                title(app.UIAxes,'United States');
+                xlabel(app.UIAxes,'GDP');
+            end
+            
+            hold(app.UIAxes);
+            
+        end
+
+        % Value changed function: ChooseIndicatorDropDown
+        function ChooseIndicatorDropDownValueChanged(app, event)
+            value = app.ChooseIndicatorDropDown.Value;
+          
+        end
+
+        % Button pushed function: TestKeyButton
+        function TestKeyButtonPushed(app, event)
+            url = 'https://developer.tradingeconomics.com';
+            web(url);
+        end
+
+        % Button pushed function: tradingeconomicscomButton
+        function tradingeconomicscomButtonPushed(app, event)
+            url = 'https://tradingeconomics.com';
+            web(url);
+        end
+
+        % Value changed function: TypeofchartDropDown
+        function TypeofchartDropDownValueChanged(app, event)
+            value = app.TypeofchartDropDown.Value;
+            
+    
+        end
+
+        % Button pushed function: LogOutButton
+        function LogOutButtonPushed(app, event)
+            app.Key.Value = '';
+            cla(app.UIAxes,'reset'); 
+            app.ChooseIndicatorDropDown.Items = {};
+            app.ChooseCountryDropDown.Items = {};
+            grid(app.UIAxes); 
+            app.updateAppLayout;
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.AutoResizeChildren = 'off';
+            app.UIFigure.Position = [100 100 989 442];
+            app.UIFigure.Name = 'UI Figure';
+            app.UIFigure.SizeChangedFcn = createCallbackFcn(app, @updateAppLayout, true);
+
+            % Create GridLayout
+            app.GridLayout = uigridlayout(app.UIFigure);
+            app.GridLayout.ColumnWidth = {269, '1x', 245};
+            app.GridLayout.RowHeight = {'1x'};
+            app.GridLayout.ColumnSpacing = 0;
+            app.GridLayout.RowSpacing = 0;
+            app.GridLayout.Padding = [0 0 0 0];
+            app.GridLayout.Scrollable = 'on';
+
+            % Create LeftPanel
+            app.LeftPanel = uipanel(app.GridLayout);
+            app.LeftPanel.ForegroundColor = [1 1 1];
+            app.LeftPanel.BackgroundColor = [0.7137 0.8039 0.9412];
+            app.LeftPanel.Layout.Row = 1;
+            app.LeftPanel.Layout.Column = 1;
+
+            % Create PutyourclientkeyhereEditFieldLabel
+            app.PutyourclientkeyhereEditFieldLabel = uilabel(app.LeftPanel);
+            app.PutyourclientkeyhereEditFieldLabel.HorizontalAlignment = 'right';
+            app.PutyourclientkeyhereEditFieldLabel.FontName = 'Montserrat';
+            app.PutyourclientkeyhereEditFieldLabel.Position = [55 310 152 22];
+            app.PutyourclientkeyhereEditFieldLabel.Text = 'Put your client key here:';
+
+            % Create Key
+            app.Key = uieditfield(app.LeftPanel, 'text');
+            app.Key.ValueChangingFcn = createCallbackFcn(app, @KeyValueChanging, true);
+            app.Key.HandleVisibility = 'callback';
+            app.Key.HorizontalAlignment = 'center';
+            app.Key.FontName = 'Montserrat';
+            app.Key.Tooltip = {''};
+            app.Key.Position = [15 287 241 22];
+
+            % Create TRADINGECONOMICSLabel
+            app.TRADINGECONOMICSLabel = uilabel(app.LeftPanel);
+            app.TRADINGECONOMICSLabel.FontName = 'Montserrat';
+            app.TRADINGECONOMICSLabel.FontSize = 18;
+            app.TRADINGECONOMICSLabel.FontWeight = 'bold';
+            app.TRADINGECONOMICSLabel.Position = [27 354 221 50];
+            app.TRADINGECONOMICSLabel.Text = 'TRADING ECONOMICS';
+
+            % Create TogetatestkeygotoLabel
+            app.TogetatestkeygotoLabel = uilabel(app.LeftPanel);
+            app.TogetatestkeygotoLabel.FontName = 'Montserrat';
+            app.TogetatestkeygotoLabel.Position = [62 258 144 22];
+            app.TogetatestkeygotoLabel.Text = 'To get a test key go to:';
+
+            % Create TestKeyButton
+            app.TestKeyButton = uibutton(app.LeftPanel, 'push');
+            app.TestKeyButton.ButtonPushedFcn = createCallbackFcn(app, @TestKeyButtonPushed, true);
+            app.TestKeyButton.FontName = 'Montserrat';
+            app.TestKeyButton.Position = [40 234 187 23];
+            app.TestKeyButton.Text = 'Test Key';
+
+            % Create NoClientKeyButton
+            app.NoClientKeyButton = uibutton(app.LeftPanel, 'push');
+            app.NoClientKeyButton.ButtonPushedFcn = createCallbackFcn(app, @NoClientKeyButtonPushed, true);
+            app.NoClientKeyButton.FontName = 'Montserrat';
+            app.NoClientKeyButton.Position = [40 175 187 23];
+            app.NoClientKeyButton.Text = 'No Client Key';
+
+            % Create IfyouwantademopresshereLabel
+            app.IfyouwantademopresshereLabel = uilabel(app.LeftPanel);
+            app.IfyouwantademopresshereLabel.FontName = 'Montserrat';
+            app.IfyouwantademopresshereLabel.Position = [40 199 197 22];
+            app.IfyouwantademopresshereLabel.Text = 'If you want a demo, press here:';
+
+            % Create VisitusatLabel
+            app.VisitusatLabel = uilabel(app.LeftPanel);
+            app.VisitusatLabel.FontName = 'Montserrat';
+            app.VisitusatLabel.Position = [97 144 67 25];
+            app.VisitusatLabel.Text = 'Visit us at:';
+
+            % Create tradingeconomicscomButton
+            app.tradingeconomicscomButton = uibutton(app.LeftPanel, 'push');
+            app.tradingeconomicscomButton.ButtonPushedFcn = createCallbackFcn(app, @tradingeconomicscomButtonPushed, true);
+            app.tradingeconomicscomButton.FontName = 'Montserrat';
+            app.tradingeconomicscomButton.Position = [37 125 190 23];
+            app.tradingeconomicscomButton.Text = ' tradingeconomics.com';
+
+            % Create LogOutButton
+            app.LogOutButton = uibutton(app.LeftPanel, 'push');
+            app.LogOutButton.ButtonPushedFcn = createCallbackFcn(app, @LogOutButtonPushed, true);
+            app.LogOutButton.BackgroundColor = [0.902 0.902 0.902];
+            app.LogOutButton.FontName = 'Montserrat';
+            app.LogOutButton.Position = [81 47 100 23];
+            app.LogOutButton.Text = 'Log Out';
+
+            % Create CenterPanel
+            app.CenterPanel = uipanel(app.GridLayout);
+            app.CenterPanel.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.CenterPanel.Layout.Row = 1;
+            app.CenterPanel.Layout.Column = 2;
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.CenterPanel);
+            title(app.UIAxes, '')
+            xlabel(app.UIAxes, '')
+            ylabel(app.UIAxes, '')
+            app.UIAxes.FontName = 'Montserrat';
+            app.UIAxes.MinorGridLineStyle = '-';
+            app.UIAxes.XGrid = 'on';
+            app.UIAxes.YGrid = 'on';
+            app.UIAxes.Position = [7 17 441 387];
+
+            % Create RightPanel
+            app.RightPanel = uipanel(app.GridLayout);
+            app.RightPanel.BackgroundColor = [0.7098 0.8 0.9412];
+            app.RightPanel.Layout.Row = 1;
+            app.RightPanel.Layout.Column = 3;
+
+            % Create IndicatorsHistoricalDataLabel
+            app.IndicatorsHistoricalDataLabel = uilabel(app.RightPanel);
+            app.IndicatorsHistoricalDataLabel.FontName = 'Montserrat';
+            app.IndicatorsHistoricalDataLabel.FontSize = 14;
+            app.IndicatorsHistoricalDataLabel.FontWeight = 'bold';
+            app.IndicatorsHistoricalDataLabel.Position = [26 331 195 50];
+            app.IndicatorsHistoricalDataLabel.Text = 'Indicators Historical Data';
+
+            % Create ShowButton
+            app.ShowButton = uibutton(app.RightPanel, 'state');
+            app.ShowButton.ValueChangedFcn = createCallbackFcn(app, @ShowButtonValueChanged, true);
+            app.ShowButton.Text = 'Show';
+            app.ShowButton.BackgroundColor = [0.902 0.902 0.902];
+            app.ShowButton.FontName = 'Montserrat';
+            app.ShowButton.Position = [73 86 100 23];
+
+            % Create ChooseCountryDropDownLabel
+            app.ChooseCountryDropDownLabel = uilabel(app.RightPanel);
+            app.ChooseCountryDropDownLabel.HorizontalAlignment = 'right';
+            app.ChooseCountryDropDownLabel.FontName = 'Montserrat';
+            app.ChooseCountryDropDownLabel.Position = [63 289 103 22];
+            app.ChooseCountryDropDownLabel.Text = 'Choose Country';
+
+            % Create ChooseCountryDropDown
+            app.ChooseCountryDropDown = uidropdown(app.RightPanel);
+            app.ChooseCountryDropDown.Items = {};
+            app.ChooseCountryDropDown.ItemsData = {'app.choosecountryDropDown'};
+            app.ChooseCountryDropDown.ValueChangedFcn = createCallbackFcn(app, @ChooseCountryDropDownValueChanged, true);
+            app.ChooseCountryDropDown.FontName = 'Montserrat';
+            app.ChooseCountryDropDown.Position = [25 266 191 22];
+            app.ChooseCountryDropDown.Value = {};
+
+            % Create ChooseIndicatorDropDownLabel
+            app.ChooseIndicatorDropDownLabel = uilabel(app.RightPanel);
+            app.ChooseIndicatorDropDownLabel.HorizontalAlignment = 'right';
+            app.ChooseIndicatorDropDownLabel.FontName = 'Montserrat';
+            app.ChooseIndicatorDropDownLabel.Position = [64 235 109 22];
+            app.ChooseIndicatorDropDownLabel.Text = 'Choose Indicator';
+
+            % Create ChooseIndicatorDropDown
+            app.ChooseIndicatorDropDown = uidropdown(app.RightPanel);
+            app.ChooseIndicatorDropDown.Items = {};
+            app.ChooseIndicatorDropDown.ItemsData = {'app.ChooseIndicatorDropDown'};
+            app.ChooseIndicatorDropDown.ValueChangedFcn = createCallbackFcn(app, @ChooseIndicatorDropDownValueChanged, true);
+            app.ChooseIndicatorDropDown.FontName = 'Montserrat';
+            app.ChooseIndicatorDropDown.Position = [26 212 190 22];
+            app.ChooseIndicatorDropDown.Value = {};
+
+            % Create TypeofchartDropDownLabel
+            app.TypeofchartDropDownLabel = uilabel(app.RightPanel);
+            app.TypeofchartDropDownLabel.HorizontalAlignment = 'right';
+            app.TypeofchartDropDownLabel.FontName = 'Montserrat';
+            app.TypeofchartDropDownLabel.Position = [69 179 85 22];
+            app.TypeofchartDropDownLabel.Text = 'Type of chart';
+
+            % Create TypeofchartDropDown
+            app.TypeofchartDropDown = uidropdown(app.RightPanel);
+            app.TypeofchartDropDown.Items = {'Line', 'Bar', 'Stem', 'Histogram'};
+            app.TypeofchartDropDown.ValueChangedFcn = createCallbackFcn(app, @TypeofchartDropDownValueChanged, true);
+            app.TypeofchartDropDown.Tooltip = {''};
+            app.TypeofchartDropDown.Position = [26 157 189 22];
+            app.TypeofchartDropDown.Value = 'Line';
+
+            % Create ClearButton
+            app.ClearButton = uibutton(app.RightPanel, 'push');
+            app.ClearButton.ButtonPushedFcn = createCallbackFcn(app, @ClearButtonPushed, true);
+            app.ClearButton.BackgroundColor = [0.902 0.902 0.902];
+            app.ClearButton.FontName = 'Montserrat';
+            app.ClearButton.Position = [74 47 100 23];
+            app.ClearButton.Text = 'Clear';
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = TradingEconomicsSampleGUI
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end]]></w:t></w:r></w:p></w:body></w:document>
