@@ -1,42 +1,45 @@
 let installationLi = document.getElementById('installationLi');
 let loginLi = document.getElementById('loginLi');
+let searchLi = document.getElementById('searchLi');
 let methodsLi = document.getElementById('methodsLi');
-let indicatorsLi = document.getElementById('indicatorsLi');
-let historicalLi = document.getElementById('historicalLi');
+let indicators_latestLi = document.getElementById('indicators-latestLi');
+let indicators_historicalLi = document.getElementById('indicators-historicalLi');
 let calendarLi = document.getElementById('calendarLi');
 let marketsLi = document.getElementById('marketsLi');
 let forecastsLi = document.getElementById('forecastsLi');
 let ratingsLi = document.getElementById('ratingsLi');
+let updatesLi = document.getElementById('updatesLi');
 let refreshLi = document.getElementById('refreshLi');
-let searchLi = document.getElementById('searchLi');
 
 //Go to the Categorie Selected in Web Page
 installationLi.onclick = () => { window.location = 'index.html#installation'; }
 loginLi.onclick = () => { window.location = 'index.html#login'; }
+searchLi.onclick = () => { window.location = 'index.html#search'; }
 methodsLi.onclick = () => { window.location = 'index.html#methods'; }
-indicatorsLi.onclick = () => { window.location = 'index.html#indicators'; }
-historicalLi.onclick = () => { window.location = 'index.html#historical'; }
+indicators_latestLi.onclick = () => { window.location = 'index.html#indicators-latest'; }
+indicators_historicalLi.onclick = () => { window.location = 'index.html#indicators-historical'; }
 calendarLi.onclick = () => { window.location = 'index.html#calendar'; }
 marketsLi.onclick = () => { window.location = 'index.html#markets'; }
 forecastsLi.onclick = () => { window.location = 'index.html#forecasts'; }
 ratingsLi.onclick = () => { window.location = 'index.html#ratings'; }
+updatesLi.onclick = () => { window.location = 'index.html#updates'; }
 refreshLi.onclick = () => { window.location = 'index.html#refresh'; }
-searchLi.onclick = () => { window.location = 'index.html#search'; }
 
 let colorBlue = '#185aa9';
     
 function clearAllLiColors() {
     installationLi.style.backgroundColor = 'transparent';
     loginLi.style.backgroundColor = 'transparent';
+    searchLi.style.backgroundColor = 'transparent';
     methodsLi.style.backgroundColor = 'transparent';
-    indicatorsLi.style.backgroundColor = 'transparent';
-    historicalLi.style.backgroundColor = 'transparent';
+    indicators_latestLi.style.backgroundColor = 'transparent';
+    indicators_historicalLi.style.backgroundColor = 'transparent';
     calendarLi.style.backgroundColor = 'transparent';
     marketsLi.style.backgroundColor = 'transparent';
     forecastsLi.style.backgroundColor = 'transparent';
     ratingsLi.style.backgroundColor = 'transparent';
+    updatesLi.style.backgroundColor = 'transparent';
     refreshLi.style.backgroundColor = 'transparent';
-    searchLi.style.backgroundColor = 'transparent';
 }
 
 //On scroll checks which categorie should be highlighted in the #mainMenu
@@ -50,17 +53,21 @@ $('#contentContainer').scroll(() => {
         clearAllLiColors()
         loginLi.style.backgroundColor = colorBlue;
     }
+    if($('#search').position().top <= 0) {
+        clearAllLiColors()
+        searchLi.style.backgroundColor = colorBlue;
+    }
     if($('#methods').position().top <= 0) {
         clearAllLiColors()
         methodsLi.style.backgroundColor = colorBlue;
     }
-    if($('#indicators').position().top <= 0) {
+    if($('#indicators-latest').position().top <= 0) {
         clearAllLiColors()
-        indicatorsLi.style.backgroundColor = colorBlue;
+        indicators_latestLi.style.backgroundColor = colorBlue;
     }
-    if($('#historical').position().top <= 0) {
+    if($('#indicators-historical').position().top <= 0) {
         clearAllLiColors()
-        historicalLi.style.backgroundColor = colorBlue;
+        indicators_historicalLi.style.backgroundColor = colorBlue;
     }
     if($('#calendar').position().top <= 0) {
         clearAllLiColors()
@@ -78,17 +85,17 @@ $('#contentContainer').scroll(() => {
         clearAllLiColors()
         ratingsLi.style.backgroundColor = colorBlue;
     }
+    if($('#updates').position().top <= 0) {
+        clearAllLiColors()
+        updatesLi.style.backgroundColor = colorBlue;
+    }
     if($('#refresh').position().top <= 0) {
         clearAllLiColors()
         refreshLi.style.backgroundColor = colorBlue;
     }
-    if($('#search').position().top <= 0) {
-        clearAllLiColors()
-        searchLi.style.backgroundColor = colorBlue;
-    }
     //Setting sub categories of #methods visibility
     if($('#methods').position().top <= 0 && $('#refresh').position().top >= 0) {
-        $('#mainMenu ul ul').css('height','170px');
+        $('#mainMenu ul ul').css('height','196px');
     }
     else {
         $('#mainMenu ul ul').css('height','0px');

@@ -73,6 +73,10 @@ hr {
 	border: 1px solid #ddd;
 }
 
+.marginBottom {
+	margin-bottom: 15px;
+}
+
 #mainMenu {
 	width: 200px;
     height: 100vh;
