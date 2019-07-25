@@ -159,7 +159,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
     else:
         ssl._create_default_https_context = _create_unverified_https_context
 
-    if type(country) is str or type(indicator) is str: 
+    if type(country) is str and type(indicator) is str: 
         linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(country)  + '/indicator/' + quote(indicator) 
     else:
         linkAPI = paramCheck(country, indicator)
