@@ -179,7 +179,6 @@ getFedHistorical <- function(symbol = NULL, outType = NULL){
 
 
   url <- paste(url, '?c=', apiKey, sep = '')
-  print(url)
   url <- URLencode(url)
   request <- GET(url)
 

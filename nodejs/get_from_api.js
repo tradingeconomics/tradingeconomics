@@ -17,7 +17,10 @@ callback = function(response) {
 });
 response.on('end', function () {
     // parse results !
-    console.log(buffer)
+    //console.log(buffer)
+            
+    console.log(JSON.parse(buffer));
+    
 });
 }
   
