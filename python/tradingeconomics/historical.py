@@ -1,3 +1,4 @@
+
 import json
 import itertools
 import urllib 
@@ -165,7 +166,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
         linkAPI = paramCheck(country, indicator)
         
     if initDate == None and endDate == None:
-        minDate = [(datetime.now() - relativedelta(years=10)).strftime('%Y-%m-%d') ]
+        minDate = [(datetime.now() - relativedelta(years=15)).strftime('%Y-%m-%d') ]
         linkAPI = fn.finalLink(linkAPI, minDate) 
     if initDate == None and (endDate is not None): 
         raise DateError('initDate value is missing') 
@@ -198,9 +199,9 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
         raise LoginError('You need to do login before making any request')
     
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
@@ -230,6 +231,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
             pass
     else:
         return '' 
+    
 
 def getHistoricalRatings(country = None, rating = None, output_type = None):
     """
@@ -281,9 +283,9 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
         raise LoginError('You need to do login before making any request')
     
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
@@ -309,4 +311,4 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
             pass
     else:
         return ''        
-        
+     

@@ -118,9 +118,9 @@ def fetchMarkets(symbol = None, initDate=None, endDate=None, output_type=None):
         linkAPI += '&d1=' + initDate + '&d2=' + endDate   
     
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))

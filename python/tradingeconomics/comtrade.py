@@ -88,9 +88,9 @@ def getCmtCategories(category = None, output_type = None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
     
@@ -160,9 +160,9 @@ def getCmtCountry(country = None, page_number = None, output_type = None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
     
@@ -228,9 +228,9 @@ def getCmtHistorical(symbol = None, output_type = None):
         raise LoginError('You need to do login before making any request')
  
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
     
@@ -292,9 +292,9 @@ def getCmtTwoCountries(country1 = None, country2 = None, page_number = None, out
         raise LoginError('You need to do login before making any request')
     
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
     

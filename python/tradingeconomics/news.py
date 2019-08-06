@@ -192,9 +192,9 @@ def getNews(country = None, indicator = None, start= None, limit = None, output_
     linkAPI = checkIndex(linkAPI, start)
   
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
@@ -324,9 +324,9 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
     linkAPI = checkIndex(linkAPI, start)
 
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
@@ -392,9 +392,9 @@ def getArticleId(id = None, output_type = None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))

@@ -51,6 +51,7 @@ def out_type(init_format, isCommodity = False):
             del dict_cat[l]['Category']
     return dict_start
        
+       
 def validate(date_text):      
         try:
             try:
@@ -71,6 +72,7 @@ def finalLink(link, prmtr):
             linkAPI = linkAPI + '/' + prmtr
         linkAPI = linkAPI + '/' + str( prmtr[i])            
     return linkAPI
+    
 
 def checkDates(baseLink, initDate=None, endDate=None):
     if (initDate is not None) and endDate == None :

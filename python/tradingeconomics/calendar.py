@@ -136,11 +136,9 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode()
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
-   
-    
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
@@ -218,10 +216,9 @@ def getCalendarId(id = None, output_type = None):
         raise LoginError('You need to do login before making any request')
     
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode()
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
-
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))

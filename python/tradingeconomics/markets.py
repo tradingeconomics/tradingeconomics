@@ -82,9 +82,9 @@ def getMarketsData(marketsField, output_type=None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -145,9 +145,9 @@ def getMarketsBySymbol(symbols, output_type=None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -212,9 +212,9 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
     
 
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -269,9 +269,9 @@ def getMarketsPeers(symbols, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -326,9 +326,9 @@ def getMarketsComponents(symbols, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -397,9 +397,9 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
         linkAPI = checkPage(linkAPI, page=1)
     
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
         
     except ValueError:
         if code != 200:

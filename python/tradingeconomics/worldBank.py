@@ -122,9 +122,9 @@ def getWBCategories(category = None, page_number = None, output_type = None):
         raise LoginError('You need to do login before making any request')
    
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
     
@@ -195,9 +195,9 @@ def getWBIndicator(series_code = None, url = None, output_type = None):
     print (linkAPI)       
    
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode()
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     
@@ -262,9 +262,9 @@ def getWBCountry(country = None, page_number = None, output_type = None):
         raise LoginError('You need to do login before making any request')
     
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode()
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     
@@ -323,9 +323,9 @@ def getWBHistorical(series_code = None, output_type = None):
         linkAPI += '?c=' + glob.apikey + '&s=' + quote(str(series_code))   
     
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
     
