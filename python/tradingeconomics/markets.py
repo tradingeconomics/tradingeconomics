@@ -40,9 +40,9 @@ def checkPage(linkAPI, page):
 
 def checkCategory(linkAPI, category):
     if type(category) is str:
-        linkAPI += '&category=' + quote (category, safe='')
+        linkAPI += '?category=' + quote (category, safe='')
     else:
-        linkAPI += '&category=' + quote(",".join(category), safe="")
+        linkAPI += '?category=' + quote(",".join(category), safe="")
     return linkAPI
    
    
@@ -82,9 +82,9 @@ def getMarketsData(marketsField, output_type=None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -145,9 +145,9 @@ def getMarketsBySymbol(symbols, output_type=None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -212,9 +212,9 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
     
 
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -269,9 +269,9 @@ def getMarketsPeers(symbols, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -326,9 +326,9 @@ def getMarketsComponents(symbols, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
@@ -379,28 +379,27 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
         linkAPI = 'https://api.tradingeconomics.com/markets/search/' + quote(",".join(country), safe='') 
     else:   
         linkAPI = 'https://api.tradingeconomics.com/markets/search/' + quote(country, safe='')
+    if (category) is not None:    
+        linkAPI = checkCategory(linkAPI, category)       
+    if (page) is not None:
+        linkAPI = checkPage(linkAPI, page)
     
-   
     try:
-        linkAPI += '?c=' + glob.apikey
+        if (category)is not None:
+            linkAPI += '&c=' + glob.apikey
+        else:
+            linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     
    
-    if (category) is not None:
-        linkAPI = checkCategory(linkAPI, category)
-    else:
-        linkAPI = checkCategory(linkAPI, category='index')
-    if (page) is not None:
-        linkAPI = checkPage(linkAPI, page)
-    else:
-        linkAPI = checkPage(linkAPI, page=1)
+    
     
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
-        
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
+        print(linkAPI)    
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))

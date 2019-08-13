@@ -60,8 +60,8 @@ def checkRatings(rating, linkAPI):
     return linkAPI    
 
 def getResults(webResults, country):
-        names = ['country', 'category', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'categorygroup', 'frequency', 'previousvalue', 'previousvaluedate']
-        names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'Source', 'Unit', 'CategoryGroup', 'Frequency', 'PreviousValue', 'PreviousValueDate']
+        names = ['country', 'category', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'categorygroup', 'frequency','historicaldatasymbol', 'createdate', 'previousvalue', 'previousvaluedate']
+        names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'Source', 'Unit', 'CategoryGroup', 'Frequency', 'HistoricalDataSymbol', 'CreateDate', 'PreviousValue', 'PreviousValueDate']
         maindf = pd.DataFrame() 
         
         for i in range(len(names)):
@@ -143,9 +143,9 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
@@ -225,9 +225,9 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
         raise LoginError('You need to do login before making any request')
 
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
@@ -306,9 +306,9 @@ def getLatestUpdates(initDate = None, output_type = None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))

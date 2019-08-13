@@ -1,7 +1,7 @@
 var http = require('http');
 var headers = {
     'Accept': 'Application/xml',
-    'Authorization': 'Client yu06vzmlllju1qz:mtvmbg847pwz3jn'//'Client guest:guest'//'OAuth2 YOUR_TOKEN_VALUE'
+    'Authorization': 'Client guest:guest'//'OAuth2 YOUR_TOKEN_VALUE'
 };
 var buffer = '';
 var options = {
@@ -17,7 +17,10 @@ callback = function(response) {
 });
 response.on('end', function () {
     // parse results !
-    console.log(buffer)
+    //console.log(buffer)
+            
+    console.log(JSON.parse(buffer));
+    
 });
 }
   

@@ -7,5 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "http": "0.0.0",
+    "inquirer": "^6.5.0",
+    "request": "^2.88.0",
+    "superagent": "^5.1.0"
+  }
 }

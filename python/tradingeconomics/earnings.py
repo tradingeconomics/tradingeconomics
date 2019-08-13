@@ -92,10 +92,9 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
     print(linkAPI)
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
-
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
@@ -158,14 +157,11 @@ def getEarningsType(type=None, output_type=None):
         linkAPI += '&c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    
-   
 
-    print(linkAPI)
     try:       
-        code = urlopen(linkAPI)
-        code = code.getcode() 
-        webResults = json.loads(urlopen(linkAPI).read().decode('utf-8'))
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))
