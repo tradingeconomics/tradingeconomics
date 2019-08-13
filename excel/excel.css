@@ -123,13 +123,14 @@ hr {
 	font-size: 0.95rem;
 }
 
-.iframeContainer{
+.iframeContainer {
 	position: relative;
 	width: 100%;
-	padding-bottom: 56.25%; 
-	height: 0;
+	max-width: 720px;
+	height: auto;
 }
-.iframeContainer iframe{
+
+.iframeContainer iframe {
 	position: absolute;
 	top:0;
 	left: 0;

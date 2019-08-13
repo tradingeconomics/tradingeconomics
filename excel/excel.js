@@ -11,6 +11,9 @@ let ratingsLi = document.getElementById('ratingsLi');
 let updatesLi = document.getElementById('updatesLi');
 let refreshLi = document.getElementById('refreshLi');
 
+let marBtm;
+setVideoHeight();
+
 //Go to the Categorie Selected in Web Page
 installationLi.onclick = () => { window.location = 'index.html#installation'; }
 loginLi.onclick = () => { window.location = 'index.html#login'; }
@@ -145,6 +148,14 @@ window.onresize = () => {
     if(window.innerWidth <= 790) {
         $('#mainMenu').css('visibility','hidden');
     }
+
+    setVideoHeight();
+}
+
+//Making the height of the video responsive
+function setVideoHeight() {
+    marBtm = $('.iframeContainer').css('width').replace('px', '') / 1.8;
+    $('.iframeContainer').css('padding-bottom', marBtm);
 }
 
 //Google Analytics to track from where the user got to TE Excel Add In v1 download
