@@ -1,5 +1,6 @@
 let installationLi = document.getElementById('installationLi');
 let loginLi = document.getElementById('loginLi');
+let apiKeyLi = document.getElementById('apiKeyLi');
 let searchLi = document.getElementById('searchLi');
 let methodsLi = document.getElementById('methodsLi');
 let indicators_latestLi = document.getElementById('indicators-latestLi');
@@ -17,6 +18,7 @@ setVideoHeight();
 //Go to the Categorie Selected in Web Page
 installationLi.onclick = () => { window.location = 'index.html#installation'; }
 loginLi.onclick = () => { window.location = 'index.html#login'; }
+apiKeyLi.onclick = () => { window.location = 'index.html#apiKey'; }
 searchLi.onclick = () => { window.location = 'index.html#search'; }
 methodsLi.onclick = () => { window.location = 'index.html#methods'; }
 indicators_latestLi.onclick = () => { window.location = 'index.html#indicators-latest'; }
@@ -33,6 +35,7 @@ let colorBlue = '#185aa9';
 function clearAllLiColors() {
     installationLi.style.backgroundColor = 'transparent';
     loginLi.style.backgroundColor = 'transparent';
+    apiKeyLi.style.backgroundColor = 'transparent';
     searchLi.style.backgroundColor = 'transparent';
     methodsLi.style.backgroundColor = 'transparent';
     indicators_latestLi.style.backgroundColor = 'transparent';
@@ -56,6 +59,10 @@ $('#contentContainer').scroll(() => {
         clearAllLiColors()
         loginLi.style.backgroundColor = colorBlue;
     }
+    if($('#apiKey').position().top <= 0) {
+        clearAllLiColors()
+        apiKeyLi.style.backgroundColor = colorBlue;
+    }
     if($('#search').position().top <= 0) {
         clearAllLiColors()
         searchLi.style.backgroundColor = colorBlue;
@@ -71,6 +78,10 @@ $('#contentContainer').scroll(() => {
     if($('#indicators-historical').position().top <= 0) {
         clearAllLiColors()
         indicators_historicalLi.style.backgroundColor = colorBlue;
+    }
+    if($('#updates').position().top <= 0) {
+        clearAllLiColors()
+        updatesLi.style.backgroundColor = colorBlue;
     }
     if($('#calendar').position().top <= 0) {
         clearAllLiColors()
@@ -88,17 +99,13 @@ $('#contentContainer').scroll(() => {
         clearAllLiColors()
         ratingsLi.style.backgroundColor = colorBlue;
     }
-    if($('#updates').position().top <= 0) {
-        clearAllLiColors()
-        updatesLi.style.backgroundColor = colorBlue;
-    }
     if($('#refresh').position().top <= 0) {
         clearAllLiColors()
         refreshLi.style.backgroundColor = colorBlue;
     }
     //Setting sub categories of #methods visibility
     if($('#methods').position().top <= 0 && $('#refresh').position().top >= 0) {
-        $('#mainMenu ul ul').css('height','196px');
+        $('#mainMenu ul ul').css('height','202px');
     }
     else {
         $('#mainMenu ul ul').css('height','0px');
