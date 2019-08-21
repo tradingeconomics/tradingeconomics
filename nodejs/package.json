@@ -9,9 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bl": "^3.0.0",
+    "deasync": "^0.1.15",
     "http": "0.0.0",
     "inquirer": "^6.5.0",
+    "node-fetch": "^2.6.0",
+    "promise": "^8.0.3",
     "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "superagent": "^5.1.0"
   }
 }
