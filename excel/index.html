@@ -14,16 +14,18 @@
                 <ul>
                     <li id="installationLi">Installation</li>
                     <li id="loginLi">Login</li>
+                    <li id="apiKeyLi">API Key</li>
                     <li id="searchLi">Search</li>
                     <li id="methodsLi">Methods</li>
                     <ul>
                         <li id="indicators-latestLi">Latest</li>
                         <li id="indicators-historicalLi">Historical</li>
+                        <li id="updatesLi">Updates</li>
                         <li id="calendarLi">Calendar</li>
                         <li id="marketsLi">Markets</li>
                         <li id="forecastsLi">Forecasts</li>
                         <li id="ratingsLi">Ratings</li>
-                        <li id="updatesLi">Updates</li>
+                        <!--<li id="updatesLi">Updates</li>-->
                     </ul>
                     <li id="refreshLi">Refresh</li>
                 </ul>
@@ -68,11 +70,20 @@
         <section>
             <h2>Login</h2>
             <p>
-                After installing the Add-In, open Excel, click on TE tab, then click on the login button and insert your Excel key.<br> 
-                Please <a href="https://developer.tradingeconomics.com?source=excel-docs">subscribe</a> to one of our plans if you do not have one.
+                After installing the Add-In, open Excel, click on TE tab, then click on the login. The first time you use this software you will be logged as "guest:guest" with limited access to our data.<br> 
+                To overcome this limitations you need to get an API key and paste it on the "APIkey" menu (more info at API Key in this Docs).<br>
+                Please <a href="https://developer.tradingeconomics.com?source=excel-docs">subscribe</a> to one of our plans if you do not have a key yet.
             </p>
             <img class="marginBottom" src="images/login1.png"><br>
-            <img src="images/login2.png">
+            <!--<img src="images/login2.png">-->
+        </section>
+        <hr id="apiKey">
+        <section>
+            <h2>API Key</h2>
+            <p>By default, the first time you use this Add-In, you will be logged as "guest:guest" with limited access to our data.</p>
+            <img class="marginBottom" src="images/apiKey1.png"><br>
+            <p>To overcome this limitations you need to get an API key and paste it in this menu.</p>
+            <img class="marginBottom" src="images/apiKey2.png"><br>
         </section>
         <hr id="search">
         <section >
@@ -116,6 +127,15 @@
                 <img src="images/indicators-historical3.png">
                 <p>The Result:</p>
                 <img src="images/indicators-historical4.png">
+            </section>
+            <hr id="updates">
+            <section>
+                <h3>Updates</h3>
+                <p>Updates let you see what data points were most recently updated on our database.<p>
+                <img src="images/indicators-latest1.png">
+                <p>You can choose between last week and last month data updates.</p>
+                <p>The Result:</p>
+                <img src="images/updates3.png">
             </section>
             <hr id="calendar">
             <section>
@@ -169,7 +189,7 @@
                 <p>The Ratings Historical Result:</p>
                 <img src="images/ratings4.png">
             </section>
-            <hr id="updates">
+            <!--<hr id="updates">
             <section>
                 <h3>Updates</h3>
                 <p>Updates let you see what data was most recently updated on our database.</p>
@@ -180,7 +200,7 @@
                 <img src="images/updates2.png"><br>
                 <p>The Result:</p>
                 <img src="images/updates3.png">
-            </section>
+            </section>-->
         </section>
         <hr id="refresh">
         <section id="lastSection">
