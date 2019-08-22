@@ -2,8 +2,9 @@
 
 
 global.url_base = 'https://api.tradingeconomics.com';
+global.apikey;
    
-function login(apikey){
+function login(apikey = 'guest:guest'){
 
     global.apikey = apikey;
 
@@ -12,9 +13,9 @@ function login(apikey){
     }else{
         apikey = apikey;
     }
+
+    return console.log("you are logged in as " + apikey);
     
-    return console.log("you are logged in as "+apikey);
-     
 }
 
 

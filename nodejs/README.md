@@ -1,4 +1,7 @@
-#Description
-NodeJS examples on how to access TradingEconomics API data.
+## Description
+Node package on how to access TradingEconomics API data.
 
-##QuickStart
+## QuickStart
+First install the package:
+
+```javascript

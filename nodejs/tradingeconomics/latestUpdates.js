@@ -1,9 +1,9 @@
 'use strict'
 
 const auth = require('./auth.js');
-const http = require('https');
 const date = require('./functions.js');
 const func = require('./functions.js');
+const fetch = require('node-fetch');
 
 //setting global variable to be used outside this module
 global.start_date = null;
@@ -34,9 +34,14 @@ function getLatestUpdates(){
 
   date.checkDates(start_date); 
   Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-  return fetch(Data).then(function(response){
-    return response.json(); // process it inside the `then` when calling the function
-});
+  
+  return fetch(Data)
+  .then(func.handleErrors)   
+  .then(function(response) {    
+      return response.json(); // process it inside the `then` when calling the function       
+  }).catch(function (err) {
+      return err.message;
+  });
  
 }
 

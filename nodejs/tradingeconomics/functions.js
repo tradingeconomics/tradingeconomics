@@ -1,4 +1,4 @@
-
+'use strict'
 
 var checkDates = function(start_date, end_date){
 
@@ -11,5 +11,13 @@ var checkDates = function(start_date, end_date){
     return;
   }
 
+function handleErrors(response) {
+  if (!response.ok) {
+      throw Error(response.statusText);
+  }
+  return response;
+}  
+
+module.exports.handleErrors = handleErrors;
 
 module.exports.checkDates = checkDates;
