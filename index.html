@@ -220,18 +220,38 @@ The API can be used to feed a custom developed application, a public website or 
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
 <p>
-  <strong>Multiple Parameters</strong>
+  <strong>Trading Economics Node package</strong>
    <br>
    
     <br>      
-   Almost all of the Trading Economics WEB API methods support multiple parameters.  
-   <br>   
-   Whenever a method requires a country name or indicator name to be specified, you can provide more than one of each, separated by commas.
+   You can get Node.js from: <a target = '_blank' href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>
    <br> 
-   Here is a practical example:
+   <br>  
+   First install tradingeconomics package. In Windows Command Prompt or Linux bash type:
    <br>
-   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+</p>
+</blockquote>   
+    </code></pre><pre class="highlight javascript"><code>
+    <span class="na">npm install</span> <span class="o">tradingeconomics</span></span>
+    </code></pre>
+<blockquote class="lang-specific javascript">    
+<p>   
+    To start using the Trading Economics Node package:
+   <br>
 </blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">const</span> <span class="kd">te</span> = require(<span class="s1">'tradingeconomics'</span>);</span>
+</code></pre>
+<blockquote class="lang-specific javascript">    
+    <p>   
+        If you have a client key type it, if not just leave it blank and a sample of data will be provided.
+       <br>
+       <br>You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a>
+    </blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="kd">te</span>.login(<span class="s1">'client_key'</span>);</span>
+</code></pre>
+
 
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
@@ -412,45 +432,37 @@ Click on any method below for a sample.</p>
 </code></pre>
   <!--javascript black side-->
   <blockquote class="lang-specific javascript">
-      <p>To get a list of all indicators. <br>Remember, without a client key only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+      <p>To get a list of all indicators, no parameters are required. </p>
   </blockquote>
-  <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-  <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-      <span class="c1">// replace guest:guest with your key</span>
-      <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-  <span class="p">};</span>
-  <span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-      <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-      <span class="na">path</span><span class="p">:</span> <span class="s1">'/indicators'</span><span class="p">,</span>
-      <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-  <span class="p">};</span>
-  <span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-  <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-  <span class="p">});</span>
-  <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// your code here if you want to use the results !</span>
-  <span class="p">});</span>
-  <span class="p">}</span>
-  
-  <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>       
-  </code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
   <blockquote class="lang-specific javascript">
-      <p>To get a list of indicators by country.</p>
+      <p>To get a list of indicators by country or countries.</p>
   </blockquote>
-  </code></pre><pre class="highlight javascript"><code>
-  <span class="na">path</span><span class="p">:</span> <span class="s1">'/country</span><span class="s1">/{put country name here}'</span><span class="p">,</span>
-  </code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">country</span> = [<span class="s1">'china', 'portugal'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
   <blockquote class="lang-specific javascript">
       <p>To get a list of all countries with a specific indicator.</p>
   </blockquote>
-  </code></pre><pre class="highlight javascript"><code>
-  <span class="na">path</span><span class="p">:</span> <span class="s1">'/country</span><span class="s1">/all</span><span class="s1">/{put indicator name here}'</span><span class="p">,</span>
-  </code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">indicator</span> = <span class="s1">'gdp'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get a list of indicators by ticker.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">ticker</span> = <span class="s1">'usurtot'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+      </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+  });</span>
+</code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
     <p>Without an API key only a small sample of data will be given.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a> </p><br>
@@ -601,6 +613,7 @@ Click on any method below for a sample.</p>
 
 <h3 id="response-fields">Response Fields</h3>
 
+
 <table><thead>
 <tr>
 <th style="text-align: left"></th>
@@ -731,44 +744,29 @@ For several countries and indicators</p>
 
   <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>To get a list of Historical data for specific country and indicator. <br>Remember, without a client key only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>To get a list of Historical data for specific country or countries and indicator.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/historical/country/{put country name here}/indicator/{put indicator name here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">country</span> = [<span class="s1">'china'</span><span class="o">,</span><span class="s1">'portugal'</span> </span>], <span class="kd">indicator</span> = <span class="s1">'gdp'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+  </code></pre>
 <blockquote class="lang-specific javascript">
     <p>You can specify a start date, or even start and end date (date format is yyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/historical/country/{put country name here}/indicator/{put indicator name here}/{put start date here}/{put end date here}'</span><span class="p">,</span>
-</code></pre>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">country</span> = [<span class="s1">'china'</span><span class="o">,</span><span class="s1">'portugal'</span> </span>], <span class="kd">indicator</span> = <span class="s1">'gdp'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>, 
+    <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){ 
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+  </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>You can specify a symbol, and a start date (date format is yyy-mm-dd).</p>
+    <p>You can specify a ticker, and a start date (date format is yyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/historical/ticker/{put symbol name here}/{put start date here}'</span><span class="p">,</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">ticker</span> = <span class="s1">'usurtot'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02' </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
@@ -1008,38 +1006,36 @@ or you can specify a start date and end date<br>
 </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>To get credit rating for specific country. <br>Remember, without a client key only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>To get credit ratings for all countries, no parameters are required. </p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/ratings/{put country name here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get credit rating for specific country. </p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get credit ratings for multiple countries. </p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">country</span> = [<span class="s1">'china'</span>, <span class="s1">'portugal'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>To get historical ratings.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/ratings/historical/{put country name here}'</span><span class="p">,</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = [<span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
 </code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
@@ -1278,39 +1274,21 @@ or you can specify a start date and end date<br>
 
   <!--javascript black side-->
   <blockquote class="lang-specific javascript">
-      <p>To get the latest updates. <br>Remember, without a client key only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+      <p>To get the latest updates, no parameters are required. </p>
   </blockquote>
-  <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-  <span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-      <span class="c1">// replace guest:guest with your key</span>
-      <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-  <span class="p">};</span>
-  <span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-      <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-      <span class="na">path</span><span class="p">:</span> <span class="s1">'/updates'</span><span class="p">,</span>
-      <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-  <span class="p">};</span>
-  <span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-  <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-  <span class="p">});</span>
-  <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// your code here if you want to use the results !</span>
-  <span class="p">});</span>
-  <span class="p">}</span>
-  
-  <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-  </code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getLatestUpdates</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
   <blockquote class="lang-specific javascript">
-      <p>To get updates by a specific date (date format is yyyy-mm-dd).</p>
+      <p>To get updates from a starting date (date format is yyyy-mm-dd).</p>
   </blockquote>
-  </code></pre><pre class="highlight javascript"><code>
-      <span class="na">path</span><span class="p">:</span> <span class="s1">'/updates/{put date here}'</span><span class="p">,</span>
-  </code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getLatestUpdates</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get latest updates.</p>
@@ -1532,65 +1510,69 @@ or you can specify a start date and end date<br>
 </code></pre>
   <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>To get calendar events. <br>Remember, without a client key only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>To get all calendar events, no parameters are required.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>To filter calendar events by a date (date format is yyyy-mm-dd).</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/country/All/{put start date here}/{put end date here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2016-02-10'  </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>To get calendar events by country, or by country and date (date format is yyyy-mm-dd).</p>
+    <p>To get calendar events by country.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/country/{put country or countries name here}'</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/country/{put country or countries name here}/{put start date here}/{put end date here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>To get calendar events by indicator, or by indicator and date (date format is yyyy-mm-dd).</p>
+    <p>To get calendar events by country and date (date format is yyyy-mm-dd).</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/indicator/{put indicator or indicators name here}/{put start date here}/{put end date here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2016-02-10'  </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>To get calendar events by indicator, or by indicator and date (date format is yyyy-mm-dd).</p>
+    <p>To get calendar events by indicator.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/indicator/{put indicator or indicators name here}/{put start date here}/{put end date here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">indicator</span> = <span class="s1">'interest rate'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get calendar events by indicator and date (date format is yyyy-mm-dd).</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">indicator</span> = <span class="s1">'inflation rate'</span>, <span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>,
+    <span class="kd">end_date</span> = <span class="s1">'2016-02-10'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Filter calendar events by calendar ID.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/calendar/calendarid/{put calendar ID here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">id</span> = [<span class="s1">'174108'</span>,<span class="s1">'160025'</span>,<span class="s1">'160030'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Filter calendar events by ticker.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">ticker</span> = [<span class="s1">'SPAINFACORD'</span>,<span class="s1">'BAHRAININFNRATE'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
@@ -2200,44 +2182,52 @@ or you can specify a start date and end date<br>
 
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get forecasts by country or countries. To get several countries, please separate them by ' , '. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get forecasts by country. </p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/forecast/country/{put country or countries name here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get forecasts by indicator or indicators. To get several indicators, please separate them by ' , '.</p>
+    <p>Get forecasts for multiple countries. </p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/forecast/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = [<span class="s1">'china'</span>,<span class="s1">'united states'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get forecasts by country and indicator.To get several countries and indicators, please separate them by ' , '.</p>
+    <p>Get forecasts by indicator.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/forecast/country/{put country or countries name here}/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">indicator</span> = <span class="s1">'gdp'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get forecasts for multiple indicators.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">indicator</span> = [<span class="s1">'gdp'</span>,<span class="s1">'population'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get forecasts by ticker.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">ticker</span> = <span class="s1">'usurtot'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get forecasts by country and indicator.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">indicator</span> = <span class="s1">'interest rate'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
@@ -2427,47 +2417,47 @@ or you can specify a start date and end date<br>
 </thead><tbody>
 <tr>
 <td style="text-align: left"><strong>Category</strong></td>
-<td style="text-align: left">Indicator Category Name</td>
+<td style="text-align: left">Name of the indicator</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Title</strong></td>
-<td style="text-align: left">Combination of country/category</td>
+<td style="text-align: left">Combination of country and indicator name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastDate</strong></td>
-<td style="text-align: left">Date when forecasting was done</td>
+<td style="text-align: left">Date of the forecast</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastValue</strong></td>
-<td style="text-align: left">Forcastvalue for the ForecastDate</td>
+<td style="text-align: left">Forecast value at the time of the forecast date</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastValue1</strong></td>
-<td style="text-align: left">Forecast value for year end after q4_date</td>
+<td style="text-align: left">Forecast value for the year end</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastValue2</strong></td>
-<td style="text-align: left">Forecast value for year end after ForecastValue1</td>
+<td style="text-align: left">Forecast value for the year end following ForecastValue1</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastValue3</strong></td>
-<td style="text-align: left">Forecast value for year end after ForecastValue2</td>
+<td style="text-align: left">Forecast value for the year end following ForecastValue2</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastValue1Q</strong></td>
-<td style="text-align: left">Forecast value for the date in d1_date</td>
+<td style="text-align: left">Forecast value for the next quarter</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastValue2Q</strong></td>
-<td style="text-align: left">Forecast value for the date in d2_date</td>
+<td style="text-align: left">Forecast value for the quarter following ForecastValue1Q</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastValue3Q</strong></td>
-<td style="text-align: left">Forecast value for the date in d3_date</td>
+<td style="text-align: left">Forecast value for the quarter following ForecastValue2Q</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>ForecastValue4Q</strong></td>
-<td style="text-align: left">Forecast value for the date in d4_date</td>
+<td style="text-align: left">Forecast value for the quarter following ForecastValue3Q</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>LatestValue</strong></td>
@@ -2479,19 +2469,19 @@ or you can specify a start date and end date<br>
 </tr>
 <tr>
 <td style="text-align: left"><strong>q1_date</strong></td>
-<td style="text-align: left">1 quarter ahead release date</td>
+<td style="text-align: left">Date for ForecastValue1Q </td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>q2_date</strong></td>
-<td style="text-align: left">2 quarters ahead release date</td>
+<td style="text-align: left">Date for ForecastValue2Q </td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>q3_date</strong></td>
-<td style="text-align: left">3 quarters ahead release date</td>
+<td style="text-align: left">Date for ForecastValue3Q </td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>q4_date</strong></td>
-<td style="text-align: left">4 quarters ahead release date</td>
+<td style="text-align: left">Date for ForecastValue4Q </td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Frequency</strong></td>
@@ -2580,80 +2570,100 @@ Click on any method below for a sample.
 
   <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get markets commodities. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get markets commodities. </p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/commodities'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">marketsField</span> = <span class="s1">'commodities'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Get major currencies.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/currency'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">marketsField</span> = <span class="s1">'currency'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Get stock market indexes.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/index'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">marketsField</span> = <span class="s1">'index'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Get government bonds.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/bond'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">marketsField</span> = <span class="s1">'bond'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get markets by symbol or symbols. To get several symbols, please separate them by ' ,'.</p>
+    <p>Get markets by symbol.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/symbol/{put symbol or symbols name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get markets for multiple symbols.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">symbol</span> = [<span class="s1">'aapl:us'</span>, <span class="s1">'indu:ind'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Get a snapshot of the latest peers prices by market.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/peers/{put symbol name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">peers_symbol</span> = <span class="s1">'aapl:us'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Get stock index markets components.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/components/{put symbol name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">components_symbol</span> = <span class="s1">'psi20:ind'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Get stock market by country.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/country/{put country name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">country</span> = <span class="s1">'japan'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get stock market by searching for country.</p>
+    <p>Get stock market searching for country.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/search/{put country name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">search_term</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'index'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get stock market searching for country and category.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">search_term</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'index'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get stock market searching for country and page number.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">search_term</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'index'</span>, <span class="kd">page</span> = <span class="s1">'0'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
@@ -3316,32 +3326,21 @@ Click on any method below for a sample.
 </code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get markets historical data by market symbol or symbols. To get several symbols, separate them by ' , '. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a>    </p>
+    <p>Get markets historical data by market symbol or symbols.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/historical/{put symbol or symbols name here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalMarkets</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get markets historical data by market symbol or symbols and dates.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalMarkets</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>,
+    <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <!--R historical markets black side-->
 <blockquote class="lang-specific r">
@@ -3546,32 +3545,21 @@ Click on any method below for a sample.
 </code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get markets intraday data by market symbol. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get markets intraday data by market symbol.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/markets/intraday/{put symbol name here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketsIntraday</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get markets intraday data by market symbol and dates.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketsIntraday</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-03-03'</span>, 
+    <span class="kd">end_date</span> = <span class="s1">'2019-04-04'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <!--R markets intraday black side-->
 <blockquote class="lang-specific r">
@@ -3984,39 +3972,45 @@ Click on any method below for a sample.
 </code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get earnings default calendar. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get earnings default calendar, no parameters are required.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/earnings'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get earnings calendar by date.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get earnings calendar by symbol and date.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">symbol</span> = <span class="s1">'CMCSA:US'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Get earnings calendar by country.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/earnings/country/{put country name here}'</span><span class="p">,</span>
-</code></pre> 
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get earnings calendar by type. Type can be: earnings, ipo and dividends.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">type</span> = <span class="s1">'ipo'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get earnings. <br>Remember, without a client key only a sample of data will be provided.</p>
@@ -4274,44 +4268,44 @@ Click on any method below for a sample.
  </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get the latest news. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get the latest news.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/news'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get news by indicator or indicators. To get several indicators, separate them by ' ,' .</p>
+    <p>Get news by country.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <blockquote class="lang-specific javascript">
-    <p>Get news by country or countries and indicator or indicators. To get several countries and indicators, separate them by ' ,' .</p>
+    <p>Get news by indicator.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/country/{put country or countries name here}/{put indicator or indicators name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">indicator</span> = <span class="s1">'imports'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get news by country and indicator.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">indicator</span> = <span class="s1">'imports'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get news list by specifying start index and list size.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">limit</span> = <span class="s1">'4'</span>, <span class="kd">start</span> = <span class="s1">'2'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
@@ -4549,56 +4543,44 @@ Click on any method below for a sample.
 </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get the latest articles. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get the latest articles, no parameters are required.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/articles'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getArticles</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
-    <p>Get latest articles by country or countries. To get several countries, separate them by ' ,' .</p>
+    <p>Get latest articles by country.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/country/{put country or countries name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getArticles</span>(<span class="kd">country</span> = <span class="s1">'portugal'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <blockquote class="lang-specific javascript">
     <p>Get latest articles by indicator or indicators.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/news/indicator/{put indicator or indicators name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getArticles</span>(<span class="kd">indicator</span> = <span class="s1">'exports'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <blockquote class="lang-specific javascript">
     <p>Get latest articles by country or countries and indicator or indicators.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/articles/country/{put country or countries name here}/{put indicator or indicators name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getArticles</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">indicator</span> = <span class="s1">'exports'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <blockquote class="lang-specific javascript">
   <p>Get articles by a specific ID.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/articles/id/{put country or countries name here}/{put ID here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getArticles</span>(<span class="kd">id</span> = <span class="s1">'20580'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
@@ -4837,45 +4819,29 @@ Click on any method below for a sample.
 </span></code></pre>    
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get World Bank categories. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get World Bank categories.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/categories'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBank</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
     <p>Get World Bank data by a specific category.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/category/{put category name here}'</span><span class="p">,</span>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBank</span>(<span class="kd">category</span> = <span class="s1">'education'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <blockquote class="lang-specific javascript">
     <p>Get World Bank data by a specific category and page number.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/category/{put category name here}/{put page number here}'</span><span class="p">,</span>
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBank</span>(<span class="kd">category</span> = <span class="s1">'education'</span>, <span class="kd">page</span> = <span class="s1">'2'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get World Bank categories.</p>
@@ -5170,33 +5136,29 @@ Because there are too many results, this method has pagination. Each page is lim
 </span></code></pre> 
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get World Bank data by country and page number. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get World Bank data by series code.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/country/{put country name here}/{put page number here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBank</span>(<span class="kd">series_code</span> = <span class="s1">'fr.inr.rinr'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get World Bank data by country and page number.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBank</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">page</span> = <span class="s1">'2'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get World Bank data by url.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBank</span>(<span class="kd">URL</span> = <span class="s1">'/united-states/real-interest-rate-percent-wb-data.html'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get world bank data by series code.</p>
@@ -5443,6 +5405,15 @@ Because there are too many results, this method has pagination. Each page is lim
     <span class="k">constructUrl</span> (<span class="na">path</span>);
 }
 </code></pre>
+<!--javascript black side-->
+<blockquote class="lang-specific javascript">
+    <p>Get World Bank historical data.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBankHistorical</span>(<span class="kd">series_code</span> = <span class="s1">'usa.fr.inr.rinr'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--WB historical white side-->
 <h3 id="methods">Methods</h3>
 
@@ -5506,33 +5477,13 @@ Because there are too many results, this method has pagination. Each page is lim
 </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get Comtrade categories. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get Comtrade categories.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/comtrade/categories'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">category</span> = <span class="s1">'categories'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get Comtrade categories.</p>
@@ -5696,45 +5647,37 @@ Because there are too many results, this method has pagination. Each page is lim
 </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get detailed information about Comtrade countries. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get detailed information about Comtrade countries. </p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/comtrade/countries'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">category</span> = <span class="s1">'countries'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get a snapshot of data per country.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
     <p>You can request each page separately.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/comtrade/country/{put country name here}/{put page number here}'</span><span class="p">,</span>
-</code></pre> 
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">page</span> = <span class="s1">'2'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>  
 <blockquote class="lang-specific javascript">
     <p>Get a snapshot of trade between two countries (with pagination).</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/worldBank/country/{put country1 name here}/{put country2 name here}/{put page number here}'</span><span class="p">,</span>
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">country1</span> = <span class="s1">'china'</span>, <span class="kd">page</span> = <span class="s1">'2'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get detailed information about comtrade countries.</p>
@@ -5935,33 +5878,13 @@ Because there are too many results, this method has pagination. Each page is lim
 </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get Comtrade historical. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get Comtrade historical data by symbol.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/comtrade/historical/{put symbol name here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">symbol</span> = <span class="s1">'PRTESP24031'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get comtrade historical data.</p>
@@ -6059,39 +5982,21 @@ Because there are too many results, this method has pagination. Each page is lim
 </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get a list of all US states. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get a list of all US states. </p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/states'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
     <p>Get a list of all counties per state.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/counties/{put county name here}'</span><span class="p">,</span>
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">counties</span> = <span class="s1">'arkansas'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get a list of all US states.</p>
@@ -6270,51 +6175,37 @@ Because there are too many results, this method has pagination. Each page is lim
 </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get a snapshot of Federal Reserve data by symbol. <br>Remember, without a client key, only a sample of data will be provided.<br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get a snapshot of Federal Reserve data by symbol. </p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/snapshot/symbol/{put symbol name here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">symbol</span> = <span class="s1">'AGEXMAK2A647NCEN'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
     <p>Get a snapshot of Federal Reserve data by county.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/snapshot/county/{put county name here}'</span><span class="p">,</span>
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">county</span> = <span class="s1">'arkansas'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
     <p>Get a snapshot of Federal Reserve data by state.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/snapshot/state/{put state name here}'</span><span class="p">,</span>
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">state</span> = <span class="s1">'tennessee'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
-<p>Get a snapshot of Federal Reserve data by county and page number.</p>
+<p>Get a snapshot of Federal Reserve data by url.</p>
 </blockquote>
-<pre class="highlight javascript"><code>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/snapshot/county/{put county name here}/{put page number here}'</span><span class="p">,</span>
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">URL</span> = <span class="s1">'/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get federal reserve data by symbol.</p>
@@ -6573,34 +6464,13 @@ or<br>
 </span></code></pre>
 <!--javascript black side-->
 <blockquote class="lang-specific javascript">
-    <p>Get historical data of Federal Reserve by symbol or symbols. To get several symbols, separate them by ' ,' . <br>Remember, without a client key, only a sample of data will be provided.
-    <br> You can get your test key at <a target = '_blank' href=http://developer.tradingeconomics.com>http://developer.tradingeconomics.com</a></p>
+    <p>Get historical data of Federal Reserve by symbol or symbols.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'https'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'Accept'</span><span class="p">:</span> <span class="s1">'Application/xml'</span><span class="p">,</span>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'Client guest:guest'</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="s1">'api.tradingeconomics.com'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'/fred/historical/symbol/{put symbol, or symbols name here}'</span><span class="p">,</span>
-    <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
-<span class="p">};</span>
-<span class="na">options<span class="p">.</span>path</span><span class="p"> =</span> <span class="na">options<span class="p">.</span>path</span><span class="p">.</span><span class="s1">replace</span><span class="p"> (</span><span class="kd">' '</span><span class="p">,</span><span class="kd">'%20'</span></span><span class="p">)</span></span><span class="p">;</span>
-<span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">chunk</span><span class="p">;</span>
-<span class="p">});</span>
-<span class="nx">response</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// your code here if you want to use the results !</span>
-<span class="p">});</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">).</span><span class="nx">end</span><span class="p">();</span>         
-</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">historical_symbol</span> = <span class="s1">'RACEDISPARITY005007'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!--php black side-->
 <blockquote class="lang-specific php">
     <p>To get federal reserve historical data by symbol.</p>
