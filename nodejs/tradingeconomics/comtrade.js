@@ -22,6 +22,7 @@ global.symbol = null;
     getComtrade(country ='united states', page = '2');
     getComtrade(country = 'china' );       
     getComtrade(symbol ='PRTESP24031' );              
+    getComtrade(country ='china', country1 = 'united states', page = '2' );              
 
 ***********************************************************************************/
 
@@ -50,7 +51,7 @@ function getComtrade(){
     }
 
     Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-    
+
     return fetch(Data)
     .then(func.handleErrors)   
     .then(function(response) {    

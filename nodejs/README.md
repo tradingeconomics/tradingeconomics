@@ -60,3 +60,5 @@ hmetic calculations. For further country-specific definition details please refe
     verbose_unit: '%',
     last_update: '2017-10-16T08:40:06.803' },
 ````
+
+### Know more about other methods on our [docs](https://docs.tradingeconomics.com/?javascript#introduction)
