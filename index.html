@@ -1033,7 +1033,7 @@ or you can specify a start date and end date<br>
     <p>To get historical ratings.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = [<span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -1176,15 +1176,20 @@ or you can specify a start date and end date<br>
 <li><p>Credit Rating of the specific country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest">/ratings/{country}</a>    </p>
 
-<li>Historical credit rating for one country<br>
+<li><p>Historical credit rating for one country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br> </p>
 
 <li><p>Credit Rating for multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states,portugal?c=guest:guest">/ratings/{countries}</a>    </p>
 
+<li><p>Historical credit rating for multiple countries<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br>
 
-<li>Historical credit rating for multiple countries<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br></li>
+<li><p>Historical credit rating by start and end date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
+
+<li><p>You can specify only a start date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}</a><br>
 </li>
 </ul>
 
@@ -3898,8 +3903,71 @@ Click on any method below for a sample.
 </tbody></table>
 
 <p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
+<h2 id="marketForecast">Market Forecasts</h2>
+<h3 id="methods">Methods</h3>
+<p><span class="methods"></p>
 
+    <ul>
+    <li><p>Get market forecasts for major indexes by category<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/index?c=guest:guest">/markets/forecasts/{category}</a></p></li>
+    <li><p>Major Get market forecasts by symbol<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/symbol/BULGARIAGOVB10Y:GOV,LITHUANIAGOVBON10Y:GOV,GBGB10YR:GOV?c=guest:guest">/markets/forecasts/symbol/{symbols}</a> </p></li>
 
+    </ul>
+    <p></span> </p>
+    <h3 id="response-fields">Response Fields</h3>
+
+    <table><thead>
+    <tr>
+    <th style="text-align: left"></th>
+    <th style="text-align: left"></th>
+    </tr>
+    </thead><tbody>
+    <tr>
+    <td style="text-align: left"><strong>Symbol</strong></td>
+    <td style="text-align: left">Unique symbol used by Trading Economics</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Country</strong></td>
+    <td style="text-align: left">Country name</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Date</strong></td>
+    <td style="text-align: left">Release time and date in UTC</td>    
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Type</strong></td>
+    <td style="text-align: left">Market category can be: index, commodities, currency and bond</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Last</strong></td>
+    <td style="text-align: left">Latest released value</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>URL</strong></td>
+    <td style="text-align: left">Hyperlink at Trading Economics</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Importance</strong></td>
+    <td style="text-align: left">Indicator importance from 0(lowest) to 1000(highest)</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Forecast1</strong></td>
+    <td style="text-align: left">Forecast value for the next quarter</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Forecast2</strong></td>
+    <td style="text-align: left">	Forecast value  for the next quarter following Forecast1</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Forecast3</strong></td>
+    <td style="text-align: left">	Forecast value  for the next quarter following Forecast2</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Forecast4</strong></td>
+    <td style="text-align: left">	Forecast value  for the next quarter following Forecast3</td>
+    </tr>
+    </tbody></table>    
 <h2 id="earnings">Earnings</h2>
 <!--R earnings black side-->
 <blockquote class="lang-specific r">
