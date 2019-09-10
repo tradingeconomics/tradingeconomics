@@ -1113,6 +1113,14 @@ or you can specify a start date and end date<br>
     <span class="kt">"https://api.tradingeconomics.com/ratings/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);   
 </code></pre>
 <blockquote class="lang-specific csharp">
+    <p>Get historical ratings by country and dates (date format is: YYYY-MM-DD).</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/ratings/historical</span>{put country name here}<span class="kt">/</span>{put start date here}<span class="kt">/</span>{put end date here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
     <p>Get historical ratings for one or multiple countries .</p>
 </blockquote>
 <pre class="highlight csharp"><code>
@@ -3904,13 +3912,98 @@ Click on any method below for a sample.
 
 <p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 <h2 id="marketForecast">Market Forecasts</h2>
+<!--c# black side-->
+<blockquote class="lang-specific csharp">
+    <p>Get major indexes by category (category can be: index, bond, commodity and currency).</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/forecasts/</span>{put category name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get major market forecasts by symbol.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/forecasts/</span>{put symbol here}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p>Get major market forecasts with multiple symbols.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/markets/forecasts/</span>{put symbols here separated by commas ','}<span class="kt">?c=guest:guest"</span>);
+</code></pre>
+<!--java black side-->
+<blockquote class="lang-specific java">
+<p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/MarketForecast.java">Check here for the complete sample code.</a></p>
+<br><p>To get market forecasts by category.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getMarketForecastCategory</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put category here (category can be: index, bond, currency and commodity)</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"index"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/forecasts"</span> +  <span class="s">"/"</span> + <span class="na">params</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Market Forecasts by category"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+<br><p>To get market forecasts by symbol or multiple symbols.</p>
+    </blockquote>
+    <pre class="highlight java"><code>
+    <span class="n">public static void</span> <span class="k">getMarketForecastSymbol</span><span class="o">()</span> <span class="na">throws</span> IOException
+    <span class="n">{</span>
+        <span class="c1">//put symbols here</span>
+        <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"BULGARIAGOVB10Y:GOV,LITHUANIAGOVBON10Y:GOV,GBGB10YR:GOV"</span>;
+        <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+        <span class="c1">//set the path</span>
+        <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/markets/forecasts/symbol"</span> +  <span class="s">"/"</span> + <span class="na">params</span>;   
+        <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Market Forecasts by multiple symbols"</span>);
+        <span class="k">constructUrl</span> (<span class="na">path</span>);
+    }
+    </code></pre>
+<!--php black side-->
+<blockquote class="lang-specific php">
+    <p>To get market forecasts by category (category can be: index, bond, currency and commodity).</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/forecasts/{put category name here}'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To get market forecasts for symbol or symbols.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/forecasts/symbol/{put symbol here}'</span><span class="p">;</span>
+</code></pre>     
 <h3 id="methods">Methods</h3>
 <p><span class="methods"></p>
 
     <ul>
     <li><p>Get market forecasts for major indexes by category<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/index?c=guest:guest">/markets/forecasts/{category}</a></p></li>
-    <li><p>Major Get market forecasts by symbol<br>
+    <li><p>Get major market forecasts by symbol<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/symbol/BULGARIAGOVB10Y:GOV,LITHUANIAGOVBON10Y:GOV,GBGB10YR:GOV?c=guest:guest">/markets/forecasts/symbol/{symbols}</a> </p></li>
 
     </ul>
