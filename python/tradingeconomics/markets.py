@@ -51,7 +51,6 @@ def getMarketsData(marketsField, output_type=None):
     Returns a list of available commodities, currencies, indeces or 
     bonds and their latest values.
     ==========================================================
-
     Parameters:
     -----------
     marketsField: string.
@@ -61,7 +60,6 @@ def getMarketsData(marketsField, output_type=None):
     output_type: string.
              'df'(default) for data frame,
              'raw' for list of unparsed data. 
-
     Example
     -------
     getMarketsData(marketsField = 'index')
@@ -112,7 +110,6 @@ def getMarketsBySymbol(symbols, output_type=None):
     """
     Returns a markets information for specific symbols.
     ==========================================================
-
     Parameters:
     -----------
     symbols: string or list.
@@ -122,7 +119,6 @@ def getMarketsBySymbol(symbols, output_type=None):
     output_type: string.
              'df'(default) for data frame,
              'raw' for list of unparsed data. 
-
     Example
     -------
     getMarketsBySymbol(symbols = 'indu:ind')
@@ -169,7 +165,6 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
     """
     Returns a markets intraday information for specific symbols.
     ==========================================================
-
     Parameters:
     -----------
     symbols: string or list.
@@ -178,13 +173,10 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
     
     initDate: string with format: YYYY-MM-DD.
              For example: '2011-01-01' 
-
     endDate: string with format: YYYY-MM-DD.    
-
     output_type: string.
              'df'(default) for data frame,
              'raw' for list of unparsed data. 
-
     Example
     -------
     getMarketsIntraday(symbols = 'indu:ind')
@@ -229,14 +221,13 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
     return output
 
 def getMarketsPeers(symbols, output_type = None):
     """
     Returns a markets peers information for specific symbols.
     ==========================================================
-
     Parameters:
     -----------
     symbols: string or list.
@@ -246,7 +237,6 @@ def getMarketsPeers(symbols, output_type = None):
     output_type: string.
              'df'(default) for data frame,
              'raw' for list of unparsed data. 
-
     Example
     -------
     getMarketsPeers(symbols = 'indu:ind')
@@ -293,7 +283,6 @@ def getMarketsComponents(symbols, output_type = None):
     """
     Returns a stock market index components information for specific symbols.
     ==========================================================
-
     Parameters:
     -----------
     symbols: string or list.
@@ -303,7 +292,6 @@ def getMarketsComponents(symbols, output_type = None):
     output_type: string.
              'df'(default) for data frame,
              'raw' for list of unparsed data. 
-
     Example
     -------
     getMarketsComponents(symbols = 'psi20:ind')
@@ -350,7 +338,6 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
     """
     Search for country, category and page number.
     ==========================================================
-
     Parameters:
     -----------
     symbols: string.
@@ -359,7 +346,6 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
     output_type: string.
              'df'(default) for data frame,
              'raw' for list of unparsed data. 
-
     Example
     -------
     getMarketsSearch(country = 'japan', category = None, page = None, output_type = None)
@@ -425,71 +411,3 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
             pass
     else:
         return ''
-
-def getMarketsForecasts(symbols=None, category=None, output_type=None):
-    """
-    Returns a markets forecast information for specific symbols, and by category.
-    =============================================================================
-
-    Parameters:
-    -----------
-    symbols: string or list.
-            String to get data for symbol. List of strings to get data for
-             several symbols. For example, symbols = ['BULGARIAGOVB10Y:GOV','LITHUANIAGOVBON10Y:GOV','GBGB10YR:GOV'].
-
-    category: string.
-            String to get market forecasts by category. Category can be: 'index', 'bond', 'currency' and 'commodity'         
-             
-    output_type: string.
-             'df'(default) for data frame,
-             'raw' for list of unparsed data. 
-
-    Example
-    -------
-    getMarketsForecasts(symbols = 'BULGARIAGOVB10Y:GOV', output_type = 'df')
-    getMarketsForecasts(symbols = ['BULGARIAGOVB10Y:GOV','LITHUANIAGOVBON10Y:GOV','GBGB10YR:GOV'])
-    getMarketsForecasts(category = ['aapl:us', 'indu:ind'], output_type = 'raw')
-    """
-    try:
-        _create_unverified_https_context = ssl._create_unverified_context
-    except AttributeError:
-        pass
-    else:
-        ssl._create_default_https_context = _create_unverified_https_context
-      
-    
-    if type(symbols) is str:        
-        linkAPI = 'https://api.tradingeconomics.com/markets/forecasts/symbol' + "/" + symbols 
-    else:
-        linkAPI = 'https://api.tradingeconomics.com/markets/forecasts/symbol' + "/" + quote(",".join(symbols), safe='')        
-   
-    if category is not None:        
-        linkAPI = 'https://api.tradingeconomics.com/markets/forecasts/' + category 
-    else:
-        linkAPI    
-    
-    try:
-        linkAPI += '?c=' + glob.apikey
-    except AttributeError:
-        raise LoginError('You need to do login before making any request')
-    print(linkAPI)
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
-        names = ['symbol', 'country', 'date', 'type', 'last', 'url','importance','forecast1','forecast2','forecast3','forecast4']
-        names2 = ['Symbol', 'Country', 'Date', 'Type', 'Last', 'URL','Importance', 'Forecast1','Forecast2','Forecast3','Forecast4']    
-        maindf = pd.DataFrame(webResults, columns=names2)     
-
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
-    return output

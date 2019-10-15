@@ -1,4 +1,3 @@
-
 import json
 import itertools
 import urllib 
@@ -91,7 +90,7 @@ def paramCheck (country, indicator):
     else:
         linkAPI += quote(",".join(country), safe='') 
     if type(indicator) is str:
-        linkAPI += '/indicator/' + quote(indicator)
+        linkAPI += '/indicator/' + quote(indicator, safe='')
     else:
         linkAPI += '/indicator/' + quote(",".join(indicator), safe='') 
     return linkAPI
@@ -126,7 +125,6 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
     """
     Return historical information for specific country and indicator.
     =================================================================
-
     Parameters:
     -----------
     country: string or list.
@@ -142,15 +140,12 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
     output_type: string.
              'dict'(default) for dictionary format output,
              'raw' for list of dictionaries without any parsing.
-
     Notes
     ----- 
     Must choose a country and an indicator.
-
     Example
     -------
     getHistoricalData(country = 'United States', indicator = 'Imports', initDate = '2011-01-01', endDate = '2016-01-01')
-
     getHistoricalData(country = ['United States', 'china'], indicator = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
     """
     try:
@@ -161,7 +156,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
         ssl._create_default_https_context = _create_unverified_https_context
 
     if type(country) is str and type(indicator) is str: 
-        linkAPI = paramCheck (country, indicator)
+        linkAPI = 'https://api.tradingeconomics.com/historical/country/' + quote(country)  + '/indicator/' + quote(indicator) 
     else:
         linkAPI = paramCheck(country, indicator)
         
@@ -233,11 +228,10 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
         return '' 
     
 
-def getHistoricalRatings(country = None, initDate=None, endDate=None, rating = None, output_type = None):
+def getHistoricalRatings(country = None, rating = None, output_type = None):
     """
     Return historical information for specific country.
     =================================================================
-
     Parameters:
     -----------
     country: string or list.
@@ -246,15 +240,12 @@ def getHistoricalRatings(country = None, initDate=None, endDate=None, rating = N
         output_type: string.
              'df'(default) for dictionary format output,
              'raw' for list of dictionaries without any parsing.
-
     Notes
     ----- 
     Without credentials only sample data will be provided.
-
     Example
     -------
     getHistoricalRatings(country = 'United States', rating = None)
-
     getHistoricalRatings(country = ['United States', 'United Kingdom'], rating = None)
     """
     try:
@@ -273,39 +264,15 @@ def getHistoricalRatings(country = None, initDate=None, endDate=None, rating = N
         linkAPI = linkAPI
     else:
         linkAPI = checkRatings(linkAPI, rating)
-
     if (country == None) and (rating == None):
         linkAPI = 'https://api.tradingeconomics.com/ratings/historical/united%20states'   
     else:
         linkAPI = linkAPI
-
-    if (initDate is not None) and (endDate is not None) :
-        try: 
-            fn.validate(initDate)
-        except ValueError:
-            raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
-        try: 
-            fn.validate(endDate)
-        except ValueError:
-            raise DateError ('Incorrect endDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
-        try:        
-            fn.validatePeriod(initDate, endDate)
-        except ValueError:
-            raise DateError ('Invalid time period.')
-        linkAPI += '/' + initDate + '/' + endDate   
-    if (initDate is not None) and (endDate == None) :
-        try: 
-            fn.validate(initDate)
-        except ValueError:
-            raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
-        linkAPI += '/' + initDate       
-       
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-      
-    print(linkAPI) 
+    
     try:
         response = urlopen(linkAPI)
         code = response.getcode()
@@ -334,5 +301,4 @@ def getHistoricalRatings(country = None, initDate=None, endDate=None, rating = N
         except ValueError:
             pass
     else:
-        return ''        
-     
+        return ''     

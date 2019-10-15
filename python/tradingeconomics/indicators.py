@@ -97,7 +97,6 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
     """
     Return a list of all indicators, indicators by country or country-indicator pair.
     =================================================================================
-
     Parameters:
     -----------
     country: string or list.
@@ -110,15 +109,12 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
     output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
              'raw' for list of dictionaries directly from the web. 
-
     Notes
     -----
     All parameters are optional. Without parameters a list of all indicators will be provided. 
-
     Example
     -------
     getIndicatorData(country = 'United States', indicators = 'Imports', output_type = 'df')
-
     getIndicatorData(country = ['United States', 'Portugal'], indicators = ['Imports','Exports'])
     """
     try:
@@ -183,7 +179,6 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
     """
     Return a list of all countrys by rating.
     =================================================================================
-
     Parameters:
     -----------
     country: string or list.
@@ -192,15 +187,12 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
         output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
              'raw' for list of dictionaries directly from the web. 
-
     Notes
     -----
     All parameters are optional. Without parameters a list of all indicators will be provided. 
-
     Example
     -------
     getRatings(country = 'United States', rating = None, output_type = 'df')
-
     getRatings(country = ['United States', 'Portugal'], rating = None, output_type = 'df')
     """
     try:
@@ -223,7 +215,7 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-     
+
     try:
         response = urlopen(linkAPI)
         code = response.getcode()
@@ -260,7 +252,6 @@ def getLatestUpdates(initDate = None, output_type = None):
     """
     Return a list of latest updates, and last updates by initial date.
     =================================================================================
-
     Parameters:
     -----------
         initDate:string or list.
@@ -269,17 +260,13 @@ def getLatestUpdates(initDate = None, output_type = None):
         output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
              'raw' for list of dictionaries directly from the web. 
-
     Notes
     -----
     Without parameters a list of latest updates will be provided. 
-
     Example
     -------
     getLatestUpdates(initDate = None, output_type = None)
-
     getLatestUpdates(initDate = '2018-08-15', output_type = None)
-
     """
     
     try:
@@ -335,4 +322,3 @@ def getLatestUpdates(initDate = None, output_type = None):
             pass
     else:
         return ''  
-
