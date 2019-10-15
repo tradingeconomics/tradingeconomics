@@ -12,7 +12,7 @@ if PY3: # Python 3+
     from .calendar import getCalendarData, getCalendarId
     from .forecasts import getForecastData
     from .indicators import getIndicatorData, getRatings, getLatestUpdates
-    from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch
+    from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts
     from .historicalMarkets import fetchMarkets
     from .glob import login, subscribe
     from .stream import run
@@ -26,7 +26,7 @@ else: # Python 2.X
     from calendar import getCalendarData, getCalendarId
     from forecasts import getForecastData
     from indicators import getIndicatorData, getRatings, getLatestUpdates
-    from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch 
+    from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts 
     from historicalMarkets import fetchMarkets
     from glob import login, subscribe
     from stream import run

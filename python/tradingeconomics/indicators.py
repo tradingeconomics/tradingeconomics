@@ -223,7 +223,7 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-
+     
     try:
         response = urlopen(linkAPI)
         code = response.getcode()
