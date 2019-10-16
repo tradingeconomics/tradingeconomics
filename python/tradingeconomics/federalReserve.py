@@ -254,7 +254,7 @@ def getFedRSnaps(symbol = None, url = None, country = None, state = None, county
     return output
   
 
-def getFedRHistorical(symbol = None, output_type = None):
+def getFedRHistorical(symbol = None, page_number = None, output_type = None):
     """
     Get Historical data.
     =================================================================================
@@ -269,7 +269,10 @@ def getFedRHistorical(symbol = None, output_type = None):
     output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
              'raw' for list of dictionaries directly from the web. 
-
+    page_number: string.
+              each page gives up to 200 results, as there are too many results we can get results per page
+              for example:
+                  page_number = '70' 
     Notes
     -----
     A symbol is required. 
@@ -279,6 +282,8 @@ def getFedRHistorical(symbol = None, output_type = None):
     getFedRHistorical(symbol = 'racedisparity005007', output_type = None)
 
     getFedRHistorical(symbol = ['racedisparity005007', '2020ratio002013'], output_type = None)
+
+    getFedRHistorical(symbol ='T10YFF', page_number = '70', output_type = 'df')
     
     """
     try:
@@ -297,33 +302,45 @@ def getFedRHistorical(symbol = None, output_type = None):
             linkAPI +=  quote(symbol)
         else:    
             linkAPI += quote(",".join(symbol))
+
+    if page_number != None:
+        linkAPI +=  "/" + page_number
+    
     try:
         linkAPI += '?c=' + glob.apikey
+        print(linkAPI)
     except AttributeError:
-        raise LoginError('You need to do login before making any request') 
-
-    
+        raise LoginError('You need to do login before making any request')
     try:
         response = urlopen(linkAPI)
-        code = response.getcode()
+        code = response.getcode()        
         webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
-    
-    if len(webResults) > 0:
-        names = ['symbol', 'date', 'value']
-        names2 = ['symbol', 'date', 'value']    
-        maindf = pd.DataFrame(webResults, columns=names2)    
-      
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+     
+    if code == 200:
+        try:
+            if len(webResults) > 0:
+                names = ['symbol', 'date', 'value']
+                names2 = ['symbol', 'date', 'value']    
+                maindf = pd.DataFrame(webResults, columns=names2)    
+            
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='df':        
+                output = maindf
+            elif output_type == 'raw':        
+                output = webResults
+            else:      
+                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+            return output
+        except ValueError:
+            pass
     else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
-    return output
+        return ''    
 
 
 def getFedRCounty(output_type = None):
