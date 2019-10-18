@@ -8,6 +8,7 @@ PY3 = sys.version_info[0] == 3
 
 
 if PY3: # Python 3+
+    from .historicalDB import getHistorical
     from .historical import getHistoricalData, getHistoricalRatings
     from .calendar import getCalendarData, getCalendarId
     from .forecasts import getForecastData
@@ -22,6 +23,7 @@ if PY3: # Python 3+
     from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
 else: # Python 2.X
+    from historicalDB import getHistorical
     from historical import getHistoricalData, getHistoricalRatings
     from calendar import getCalendarData, getCalendarId
     from forecasts import getForecastData
