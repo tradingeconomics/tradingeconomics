@@ -706,12 +706,11 @@ Click on any method below for a sample.</p>
 <p>To get historical data by ticker.</p>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'USURTOT'</span><span class="p">, <span class="n">initDate</span><span class="o"> = </span><span class="s">'2015-03-01'</span><span class="p">)</span>
-
-    <span class="n">Output</span><span class="p">:</span>
-                <span class="n">country</span>                     <span class="n">DateTime</span>     <span class="n">Frequency</span>   
-<span class="mi">2</span>          <span class="n">United States</span>         <span class="mf">2018-07-31T00:00:00</span>       <span class="n">Monthly</span>
-<span class="mi">21</span>        <span class="n"> United States</span>         <span class="mf">2018-08-31T00:00:00</span>       <span class="n">Monthly</span>
-<span class="mi">3</span>          <span class="n">United States</span>         <span class="mf">2018-09-30T00:00:00</span>       <span class="n">Monthly</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get historical data by symbol.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span></span><span class="s1">'USURTOT'</span><span class="p">)</span>
 </span></code></pre>
 <!--Python Historical black side-->
 <blockquote class="lang-specific python">
@@ -719,19 +718,7 @@ Click on any method below for a sample.</p>
 <p>In some cases (getCalendarData and getHistoricalData), the start date (initDate) and end date (endDate) of the results can be specified.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united kingdom'</span><span class="p">,</span> <span class="n">indicator</span><span class="o">=</span><span class="s">'gdp'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2015-01-01'</span><span class="p">)</span>
-
-<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
-                  <span class="mi">0</span>
-<span class="mi">2006</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2588.08</span>
-<span class="mi">2007</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2969.73</span>
-              <span class="o">...</span>
-<span class="mi">2013</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2712.30</span>
-<span class="mi">2014</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span>  <span class="mf">2990.20</span>
 </code></pre>
-<blockquote class="lang-specific python">
-<p> <strong>Note:</strong> Making request for one country and one indicator, without putting country name and indicator name in square brackets, will return pandas.DataFrame type(example above).</p>
-</blockquote> 
-
 <blockquote class="lang-specific python">
 <br><br>
 <p>Putting country name or indicator name in square brackets will return a dictionary type.
@@ -742,8 +729,23 @@ For several countries and indicators</p>
 
 </code></pre>
 <blockquote class="lang-specific python">
-    <br><br>
-    
+<br><br>
+<p>Putting country name or indicator name in square brackets will return a dictionary type.
+For several countries and indicators</p>
+</blockquote> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span><span class="o">=</span><span class="p">[</span><span class="s">'exports'</span><span class="p">,</span><span class="s">'imports'</span><span class="p">],</span> 
+                     <span class="n">initDate</span><span class="o">=</span><span class="s">'1990-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2015-01-01'</span><span class="p">)</span>
+
+</code></pre>
+<blockquote class="lang-specific python">
+<br><br>
+<p>Getting historical data by ticker or TE symbol.</p>
+</blockquote> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'USURTOT'</span><span class="p">)</span>
+                      
+
+</code></pre>
+<blockquote class="lang-specific python">
  </blockquote>
  <pre class="highlight python"><code> 
     <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/python/EXAMPLES/historical/bulkHistorical.py"><p><stong>                                           »»»» BULK DOWNLOAD EXAMPLE «««« </stong></p></a>
@@ -3316,19 +3318,14 @@ Click on any method below for a sample.
 <h2 id="historical">Historical</h2>
 <!--Python Historical Markets black side-->
 <blockquote class="lang-specific python">
+<p>To get historical by symbol</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'aapl:us'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
 <p>To get historical market data for specific symbol and time range:</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-06-15'</span><span class="p">)</span>
-
-<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
-              <span class="n">symbol</span>      <span class="nb">open</span>      <span class="n">high</span>       <span class="n">low</span>     <span class="n">close</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">03</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">19872.86</span>  <span class="mf">19938.53</span>  <span class="mf">19775.93</span>  <span class="mf">19881.76</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">04</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">19890.94</span>  <span class="mf">19956.14</span>  <span class="mf">19878.83</span>  <span class="mf">19942.16</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">05</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">19924.56</span>  <span class="mf">19948.60</span>  <span class="mf">19811.12</span>  <span class="mf">19899.29</span>
-<span class="o">...</span>              <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>       <span class="o">...</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">13</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21256.83</span>  <span class="mf">21332.77</span>  <span class="mf">21256.83</span>  <span class="mf">21328.47</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">14</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21342.71</span>  <span class="mf">21391.97</span>  <span class="mf">21294.09</span>  <span class="mf">21374.56</span>
-<span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mf">21291.69</span>  <span class="mf">21367.28</span>  <span class="mf">21261.87</span>  <span class="mf">21359.90</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>To get historical market data for multiple symbols and specific time range:</p>
@@ -3378,15 +3375,12 @@ Click on any method below for a sample.
 <blockquote class="lang-specific r">
 <p>To get from historical markets by symbols and date.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getHistoricalMarkets</span><span class="p">(<span class="nf">c</span><span class="p">(</span><span class="s1">'AAPL:US'</span><span class="p">,</span><span class="s1">'INDU:IND'</span><span class="p">),</span><span class="w"> </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2011-01-01'</span><span class="p">,</span><span class="n">endDate</span><span class="o">=</span><span class="s1">'2016-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-
-    <span class="n">Output</span><span class="p">:</span> 
-       <span class="n">Symbol</span>         <span class="n">Open</span>            <span class="n">High</span>              <span class="n">Low</span>         <span class="n">Close</span>   
-<span class="mi">1</span>     <span class="n">AAPL:US</span>      <span class="mf">65.5871</span>         <span class="mf">65.6399</span>          <span class="mf">64.0499</span>       <span class="mf">64.8028</span>        
-<span class="mi">2</span>    <span class="n">INDU:IND</span>   <span class="mf">13860.5800</span>      <span class="mf">14019.7800</span>       <span class="mf">13860.5800</span>    <span class="mf">14009.7900</span>                
-<span class="mi">3</span>    <span class="n">INDU:IND</span>   <span class="mf">12632.7600</span>      <span class="mf">12784.6200</span>       <span class="mf">12632.7600</span>    <span class="mf">12716.4600</span>                
-<span class="mi">4</span>     <span class="n">AAPL:US</span>      <span class="mf">65.4871</span>         <span class="mf">65.5699</span>          <span class="mf">65.0785</span>       <span class="mf">65.1699</span>                
-                
+<pre class="highlight r"><code><span class="n">getHistoricalMarkets</span><span class="p">(<span class="nf">c</span><span class="p">(</span><span class="s1">'AAPL:US'</span><span class="p">,</span><span class="s1">'INDU:IND'</span><span class="p">),</span><span class="w"> </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2011-01-01'</span><span class="p">,</span><span class="n">endDate</span><span class="o">=</span><span class="s1">'2016-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">               
+</span></code></pre>
+<blockquote class="lang-specific r">
+<p>To get from historical markets by symbol.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(<span class="s1">'AAPL:US'</span><span class="p">)</span>             
 </span></code></pre>
 <!--php black side-->
 <blockquote class="lang-specific php">
@@ -5519,27 +5513,27 @@ Because there are too many results, this method has pagination. Each page is lim
 <h2 id="historical">Historical</h2>
 <blockquote class="lang-specific python">  
 <br>
+<p>To get World Bank historical data by using symbol.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(<span class="s">'usa.fr.inr.rinr:worldbank'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+<br>
 <p>To get World Bank historical data by specific indicator.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBHistorical</span><span class="p">(</span><span class="n">series_code</span> <span class="o">=</span> <span class="s">'usa.fr.inr.rinr'</span><span class="p">)</span>
-
-                 <span class="n">symbol</span>                      <span class="n">date</span>      <span class="n">value</span>           
-<span class="mi">0</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">1961-06-15</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.10788</span>
-<span class="mi">1</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-06-10</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.21535</span>
-<span class="mi">2</span>       <span class="n">usa.fr.inr.rinr</span>       <span class="mi">2018-05-12</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">3.37488</span>        
-<span class="n">...</span>
 </code></pre>
 <!--R black side-->
+<blockquote class="lang-specific r">
+<p>To get World Bank historical data using TE symbol.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span><span class="s">'usa.fr.inr.rinr:worldbank'</span><span class="p">)</span>
+
+</span></code></pre>
 <blockquote class="lang-specific r">
 <p>To get World Bank historical data by series code.</p>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getWorldBankHistorical</span><span class="p">(</span><span class="w"> </span><span class="w"> </span><span class="s1">'usa.fr.inr.rinr'</span><span class="p">)</span><span class="w">
-
-    <span class="n">Output</span><span class="p">:</span>
-                     <span class="n">symbol</span>                  <span class="n">date</span>         <span class="n">value</span>    
-<span class="mi">2</span>           <span class="n">usa.fr.inr.rinr</span>   <span class="mf">1961-06-15T00:00:00</span>       <span class="n">3.10788</span>    
-<span class="mi">210</span>         <span class="n">usa.fr.inr.rinr</span>   <span class="mf">1962-06-15T00:00:00</span>       <span class="n">3.21535</span>    
-<span class="mi">3</span>           <span class="n">usa.fr.inr.rinr</span>   <span class="mf">1963-06-15T00:00:00</span>       <span class="n">3.37488</span>    
 
 </span></code></pre>
 <!--php black side-->
@@ -6024,6 +6018,12 @@ Because there are too many results, this method has pagination. Each page is lim
 <!--Python Comtrade Historical black side-->
 <blockquote class="lang-specific python">  
 <br>
+<p>To get Comtrade historical data using TE symbol.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'PRTESP24031:comtrade'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+<br>
 <p>To get Comtrade historical data by specific symbol.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'PRTESP24031'</span><span class="p">)</span>
@@ -6036,15 +6036,15 @@ Because there are too many results, this method has pagination. Each page is lim
 </code></pre>
 <!--R black side-->
 <blockquote class="lang-specific r">
+    <p>Get detailed information about Comtrade historical data using TE symbol.</p>
+    </blockquote>   
+    <pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span><span class="s1">'PRTESP24031:comtrade'</span><span class="p">)</span><span class="w">
+    
+    </span></code></pre>
+<blockquote class="lang-specific r">
 <p>Get detailed information about Comtrade historical data by symbol.</p>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getComtradeHistorical</span><span class="p">(</span><span class="s1">'PRTESP24031'</span><span class="p">)</span><span class="w">
-
-    <span class="n">Output</span><span class="p">:</span>
-                <span class="n">symbol</span>                        <span class="n">date</span>        <span class="n">value</span>   
-<span class="mi">2</span>          <span class="mf">PRTESP24031</span>         <span class="n">1997-12-31T00:00:00</span>          <span class="n">707</span>
-<span class="mi">21</span>         <span class="mf">PRTESP24031</span>         <span class="n">1998-12-31T00:00:00</span>         <span class="n">7020</span>
-<span class="mi">3</span>          <span class="mf">PRTESP24031</span>         <span class="n">2000-12-31T00:00:00</span>        <span class="n">54310</span>
 
 </span></code></pre>
 <!--javascript black side-->
@@ -6605,6 +6605,12 @@ or<br>
 
 <h2 id="historical">Historical</h2>
 <!--Python Federal Reserve historical black side-->
+<blockquote class="lang-specific python">
+<p>To get Federal Reserve historical data using TE symbol.</p>
+<br>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'racedisparity005007:fred'</span><span class="p">)</span>
+</code></pre>
 <blockquote class="lang-specific python">  
 <p>To get Federal Reserve historical data by more than one symbol.</p>  
 </blockquote>
@@ -6615,14 +6621,13 @@ or<br>
 <br>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'racedisparity005007'</span><span class="p">)</span>
-
-                      <span class="n">symbol</span>                     <span class="n">date</span>        <span class="n">value</span>                
-<span class="mi">0</span>        <span class="n">racedisparity005007</span>      <span class="mi">2009-01-01</span><span class="n">T</span><span class="mi">00:00:00</span>     <span class="mi">33.60301</span>
-<span class="mi">1</span>        <span class="n">racedisparity005007</span>      <span class="mi">2010-01-01</span><span class="n">T</span><span class="mi">00:00:00</span>     <span class="mi">36.29680</span>
-<span class="mi">2</span>        <span class="n">racedisparity005007</span>      <span class="mi">2011-01-01</span><span class="n">T</span><span class="mi">00:00:00</span>     <span class="mi">36.59937</span> 
-<span class="n">...</span>
 </code></pre>
 <!--R black side-->
+<blockquote class="lang-specific r">
+<p>Get Federal Reserve historical data using TE symbol.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span><span class="s1">'RACEDISPARITY005007:fred'</span><span class="p">)</span><span class="w">
+</span></code></pre>
 <blockquote class="lang-specific r">
 <p>Get Federal Reserve historical data.</p>
 </blockquote>   
