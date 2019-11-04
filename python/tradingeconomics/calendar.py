@@ -147,8 +147,8 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     if code == 200:
         try:
             if len(webResults) > 0:
-                names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'unit', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'importance', 'lastupdate', 'symbol']
-                names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Unit', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'Importance', 'LastUpdate', 'Symbol']
+                names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'url', 'datespan',  'importance', 'lastupdate', 'revised', 'currency', 'unit', 'ocountry' 'ocategory', 'ticker', 'symbol']
+                names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'URL', 'DateSpan',  'Importance', 'LastUpdate', 'Revised', 'Currency', 'Unit', 'OCountry', 'OCategory', 'Ticker','Symbol']
                 maindf = pd.DataFrame()  
                 for i in range(len(names)):
                     names[i] =  [d[names2[i]] for d in webResults]
