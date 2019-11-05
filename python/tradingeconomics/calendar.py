@@ -149,10 +149,13 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
             if len(webResults) > 0:
                 names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'url', 'datespan',  'importance', 'lastupdate', 'revised', 'currency', 'unit', 'ocountry' 'ocategory', 'ticker', 'symbol']
                 names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'URL', 'DateSpan',  'Importance', 'LastUpdate', 'Revised', 'Currency', 'Unit', 'OCountry', 'OCategory', 'Ticker','Symbol']
-                maindf = pd.DataFrame()  
+                #maindf = pd.DataFrame()
+                maindf = pd.DataFrame(webResults, columns=names2)  
+                '''
                 for i in range(len(names)):
                     names[i] =  [d[names2[i]] for d in webResults]
-                    maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)   
+                    maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
+                '''       
             else:
                     raise ParametersError ('No data available for the provided parameters.')  
             if output_type == None or output_type =='dict':
@@ -162,7 +165,7 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
             elif output_type == 'raw':
                 output = webResults
             else:
-                raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results.') 
+                raise ParametersError ('output_type options : df for data frame, dict(default) for dictionary by country, raw for unparsed results.') 
             return output
         except ValueError:
             pass
