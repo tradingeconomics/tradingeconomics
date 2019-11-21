@@ -44,7 +44,7 @@
 				{id : 'CreateDate', alias : 'CreateDate', dataType : tableau.dataTypeEnum.date},
 		        {id : 'PreviousValue', alias : 'PreviousValue', dataType : tableau.dataTypeEnum.float},
 				{id : 'PreviousValueDate', alias : 'PreviousValueDate', dataType : tableau.dataTypeEnum.date}
-		    ]
+			]
 		    var tableInfo = {
 		        id : 'indicatorsFeed',
 		        alias : 'Trading Economics Indicators Data',
@@ -295,7 +295,7 @@
 				}
 			}
 			catch(err) {
-				console.log(err)
+				//console.log(err)
 				return _string
 			}
 		}
@@ -327,7 +327,7 @@
 				if(!resp[i].LatestValueDate) { resp[i].LatestValueDate = ''}
 				if(!resp[i].CreateDate) { resp[i].CreateDate = ''}
 				if(!resp[i].LastUpdate) { resp[i].LastUpdate = ''}
-				if(!resp[i].unit) { resp[i].unit = ''}
+				if(!resp[i].Unit) { resp[i].Unit = ''}
 				
 				if (dataCategory == 'news' || dataCategory == 'articles') {
 					tableData.push({
@@ -342,7 +342,7 @@
 					})
 					continue
 				}
-				
+
 				tableData.push({
 					'Ticker' : resp[i].Ticker,
 					'Name'  : capitalizeFirstLetter(resp[i].Name),
@@ -414,7 +414,7 @@
 					'Q2' : resp[i].q2,
 					'Q3' : resp[i].q3,
 					'Q4' : resp[i].q4,
-					'Unit' : String(resp[i].unit),
+					'Unit' : String(resp[i].Unit),
 					'Open' : resp[i].Open,
 					'High' : resp[i].High,
 					'Low' : resp[i].Low,
