@@ -90,7 +90,7 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
         raise LoginError('You need to do login before making any request')
         
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
-    print(linkAPI)
+    #print(linkAPI)
     try:       
         response = urlopen(linkAPI)
         code = response.getcode()
@@ -104,8 +104,8 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
         try: 
     
             if len(webResults) > 0:
-                names = ['date', 'symbol', 'name', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
-                names2 = ['Date', 'Symbol', 'Name', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
+                names = ['date', 'symbol', 'name', 'type', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
+                names2 = ['Date', 'Symbol', 'Name', 'Type', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
                 maindf = pd.DataFrame(webResults, columns=names2)     
                 
             else:

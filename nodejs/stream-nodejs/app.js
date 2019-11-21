@@ -4,20 +4,14 @@
 var te_client = require('./te_client'),
 	Client = new te_client({
 		url: 'ws://stream.tradingeconomics.com/',
-		key: '59227A99EC24455', //API_CLIENT_KEY
-		secret: '98A5977ABBE149C' //API_CLIENT_SECRET
+		key: 'yu06vzmlllju1qz', //API_CLIENT_KEY
+		secret: 'mtvmbg847pwz3jn' //API_CLIENT_SECRET
 		//reconnect: true
 	});
+	
 
-
-Client.subscribe('EURUSD:CUR');
-
-Client.subscribe('EURGBP:CUR');
-
-
-//Client.subscribe('CL1');
-
-
+	
+Client.subscribe('calendar');
 
 
 Client.on('message', function(msg){
