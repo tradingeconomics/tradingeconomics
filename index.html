@@ -601,6 +601,8 @@ Click on any method below for a sample.</p>
 <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a></p></li>
 <li><p>List of indicators by country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a></p></li>
+<li><p>List of indicators by country and group( you can check groups in the "categoryGroup" field of /indicators)<br>
+<a target = '_blank' href="http://api.tradingeconomics.com/country/united%20states?c=guest:guest&group=gdp">/country/{country}?c=guest:guest&group={group}</a></p></li>
 <li><p>Specific indicator for all countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicator}</a></p></li>
 <li><p>Specific indicator by ticker<br>
@@ -1955,7 +1957,7 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific javascript">
 <p>Step 2</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="nx">cd</span> <span class="nx">open</span><span class="o">-</span><span class="nx">api</span><span class="o">/</span><span class="nx">stream</span><span class="o">/</span><span class="nx">nodejs</span>
+<pre class="highlight javascript"><code><span class="nx">cd</span> <span class="nx">tradingeconomics</span><span class="o">/</span><span class="nx">nodejs</span><span class="o">/</span><span class="nx">stream-nodejs</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
 <p>Step 3 - Install dependencies</p>
@@ -3755,12 +3757,12 @@ Click on any method below for a sample.
 <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
     Step 1 - Clone repository</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/tradingeconomics/open-api.git</span>
+<pre class="highlight javascript"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/tradingeconomics/tradingeconomics</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
 <p>Step 2</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="nx">cd</span> <span class="nx">open</span><span class="o">-</span><span class="nx">api</span><span class="o">/</span><span class="nx">stream</span><span class="o">/</span><span class="nx">nodejs</span>
+<pre class="highlight javascript"><code><span class="nx">cd</span> <span class="nx">tradingeconomics</span><span class="o">/</span><span class="nx">nodejs</span><span class="o">/</span><span class="nx">stream-nodejs</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
 <p>Step 3 - Install dependencies</p>
