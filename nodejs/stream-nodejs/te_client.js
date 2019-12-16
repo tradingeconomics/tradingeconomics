@@ -6,6 +6,7 @@ var events = require("events");
 var WebSocket = require('ws'),
 	defaultOptions = {
 		url: 'ws://stream.tradingeconomics.com/', 
+		
 		key: 'guest',
 		secret: 'guest',
 		reconnect: true, //reconnect on error/disconnect 

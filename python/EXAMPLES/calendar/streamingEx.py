@@ -1,7 +1,7 @@
 import tradingeconomics as te
 import json
 
-te.login('guest:guest')
+te.login('yu06vzmlllju1qz:mtvmbg847pwz3jn')
 
 te.subscribe('calendar')
 

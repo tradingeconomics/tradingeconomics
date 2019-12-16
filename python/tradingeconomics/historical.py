@@ -207,10 +207,12 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
             if len(webResults) > int(0):
                 results = {'dates': [d['DateTime'] for d in webResults],
                             'values': [d[u'Value'] for d in webResults]}
+                          
                 if (type(country)== str and type(indicator) == str):
                     results = parseData(results)
                 else:
                     results = multiParams(webResults)
+                     
             else:
                 raise ParametersError ('No data available for the provided parameters.')
             if output_type == None or output_type =='dict':
@@ -225,8 +227,10 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
         except ValueError:
             pass
     else:
-        return '' 
-    
+        return ''   
+
+ 
+     
 
 def getHistoricalRatings(country = None, rating = None, output_type = None):
     """
@@ -272,7 +276,7 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    
+    print(linkAPI)
     try:
         response = urlopen(linkAPI)
         code = response.getcode()

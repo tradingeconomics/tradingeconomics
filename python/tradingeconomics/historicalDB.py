@@ -151,8 +151,8 @@ def getHistorical(symbol = None, initDate = None, endDate = None, output_type = 
         
             if('ticker' in linkAPI):        
                 if len(webResults) > 0:
-                    names = ['country', 'category', 'datetime', 'close', 'frequency', 'historicaldatasymbol', 'lastupdate']
-                    names2 = ['Country', 'Category', 'DateTime', 'Close', 'Frequency', 'HistoricalDataSymbol', 'LastUpdate']
+                    names = ['country', 'category', 'datetime', 'value', 'frequency', 'historicaldatasymbol', 'lastupdate']
+                    names2 = ['Country', 'Category', 'DateTime', 'Value', 'Frequency', 'HistoricalDataSymbol', 'LastUpdate']
                     maindf = pd.DataFrame(webResults, columns=names2) 
                 
                 else:
