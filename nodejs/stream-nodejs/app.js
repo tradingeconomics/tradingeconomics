@@ -3,10 +3,7 @@
 
 var te_client = require('./te_client'),
 	Client = new te_client({
-		//url: 'ws://18.212.118.141:80/', 
-		//url: 'ws://54.159.58.73:80/', 
-		url: 'wss://stream.tradingeconomics.com/',
-		//url: 'http://stream.tradingeconomics.com/',
+		url: 'ws://stream.tradingeconomics.com/',
 		key: 'guest', //API_CLIENT_KEY
 		secret: 'guest' //API_CLIENT_SECRET
 		//reconnect: true
@@ -14,8 +11,7 @@ var te_client = require('./te_client'),
 	
 
 	
-Client.subscribe('indu:ind');
-
+Client.subscribe('calendar');
 
 
 Client.on('message', function(msg){

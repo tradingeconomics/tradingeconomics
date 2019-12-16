@@ -171,7 +171,7 @@ def getHistorical(symbol = None, initDate = None, endDate = None, output_type = 
             elif output_type == 'raw':        
                 output = webResults
             else:      
-                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+                raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
             return output
         except ValueError:
             pass

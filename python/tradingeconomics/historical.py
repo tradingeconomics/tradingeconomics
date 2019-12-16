@@ -229,9 +229,6 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
     else:
         return ''   
 
- 
-     
-
 def getHistoricalRatings(country = None, rating = None, output_type = None):
     """
     Return historical information for specific country.
