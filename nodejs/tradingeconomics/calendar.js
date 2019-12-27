@@ -12,6 +12,7 @@ global.ticker = null;
 global.id = null;
 global.start_date = null;
 global.end_date = null;
+global.utc = null;
 
 //This function builds the path to get the API request:
 /***************************************************************************************************************  
@@ -19,11 +20,15 @@ global.end_date = null;
     parameters:
         String or list: country, indicator, ticker, id 
         Date: start_date, end_date
+        UTC: choose utc time zone
 
     example:
         getCalendar();
+        getCalendar(utc='-60');
         getCalendar(start_date = '2016-02-01', end_date = '2016-02-10');
+        getCalendar(start_date = '2016-02-01', end_date = '2016-02-10', utc='180');
         getCalendar(country = ['china', 'portugal']);
+        getCalendar(country = ['china', 'portugal'], utc='120');
         getCalendar(country ='china', start_date = '2016-02-01', end_date = '2016-02-10');
         getCalendar(indicator = 'interest rate' ); 
         getCalendar(indicator ='inflation rate', start_date = '2016-02-01', end_date = '2016-02-10');       
@@ -71,14 +76,20 @@ function getCalendar(){
     if(country === null && indicator === null && start_date === null && end_date === null && ticker === null && id === null){
         url = '/calendar';
     }
-    
+  
     date.checkDates(start_date, end_date); 
-    Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-    
+    if(utc){
+        Data = url_base + url + '?c=' + apikey.replace (' ','%20') + '&UTC=' + utc;
+    }else{
+        Data = url_base + url + '?c=' + apikey.replace (' ','%20');
+    }
+   console.log(Data);
+
     return fetch(Data)
     .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
+    .then(function(response) {      
+        return response.json(); // process it inside the `then` when calling the function
+             
     }).catch(function (err) {
         return err.message;
     });
