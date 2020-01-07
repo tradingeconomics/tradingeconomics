@@ -151,14 +151,13 @@
 <blockquote class="lang-specific python">
 <p>You can get Python from: <a target = '_blank' href="https://www.python.org/downloads/">https://www.python.org/downloads/</a>   
     <br><br>
-    We support Python 2.7 and Python 3.6.
     Then you need to install the tradingeconomics package. You can do so in a variety of ways.    
 </p>
 <br>
 <p>Install the tradingeconomics package using pip, a package management system used to install and manage software packages written in Python.
     In Windows Command Prompt or Linux bash type:</p>
 </blockquote>     
-<pre class="highlight python"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">tradingeconomics</span>
+<pre class="highlight python"><code><span class="n">pip3</span> <span class="n">install</span> <span class="n">tradingeconomics</span>
 </code></pre>
 <!--R black side-->
 <blockquote class="lang-specific r">
@@ -3686,6 +3685,8 @@ Click on any method below for a sample.
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-10%2015:30">/markets/intraday/{symbol}?d1=yyyy-mm-dd hh:mm</a></p></li>
 <li><p>Filter intraday prices by date<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>   </p></li>
+<li><p>Aggregate intraday prices by interval - allowed intervals: 1m, 5m, 10m, 15m, 30m, 1h, 2h, 4h<br>
+<a target = '_blank' href="http://api.tradingeconomics.com//markets/intraday/CL1:COM?agr=5d&d1=2020-01-01%2000:00&d2=2020-12-01%2015:30&client=guest:guest">/markets/intraday/{symbol}?agr={inerval}&d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>   </p></li>
 </ul>
 
 <p></span> </p>
