@@ -229,7 +229,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
     else:
         return ''   
 
-def getHistoricalRatings(country = None, rating = None, output_type = None):
+def getHistoricalRatings(country = None, rating = None, initDate = None, endDate=None, output_type = None):
     """
     Return historical information for specific country.
     =================================================================
@@ -248,6 +248,9 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
     -------
     getHistoricalRatings(country = 'United States', rating = None)
     getHistoricalRatings(country = ['United States', 'United Kingdom'], rating = None)
+    getHistoricalRatings(country = 'United States', initDate ='2011-01-01')
+    getHistoricalRatings(country = 'United States', initDate ='2011-01-01', endDate = '2012-01-01')
+    
     """
     try:
         _create_unverified_https_context = ssl._create_unverified_context
@@ -269,6 +272,10 @@ def getHistoricalRatings(country = None, rating = None, output_type = None):
         linkAPI = 'https://api.tradingeconomics.com/ratings/historical/united%20states'   
     else:
         linkAPI = linkAPI
+    if (initDate is not None) and (endDate == None):
+        linkAPI = checkCountryHistoricalRatings(country) + "/" + initDate
+    elif (initDate is not None) and (endDate is not None):
+        linkAPI = checkCountryHistoricalRatings(country) + "/" + initDate + "/" + endDate
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:

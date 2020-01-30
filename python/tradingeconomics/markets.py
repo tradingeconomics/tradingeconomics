@@ -411,3 +411,66 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
             pass
     else:
         return ''
+
+
+def getMarketsForecasts(symbol=None, category=None, output_type = None):
+    """
+    Returns a stock market forecast information for specific symbols and categories.
+    ================================================================================
+    Parameters:
+    -----------
+    symbol: string or list.
+            String to get data for symbol. List of strings to get data for
+             several symbols. For example, symbols = ['aapl:us', 'indu:ind'].
+    category: string.
+            String to get data by category.  
+            For example, category = 'index'         
+             
+    output_type: string.
+             'df'(default) for data frame,
+             'raw' for list of unparsed data. 
+    Example
+    -------
+    getMarketsForecasts(category = 'bond')
+    getMarketsForecasts(symbol = ['psi20:ind', 'indu:ind'], output_type = 'df')
+    getMarketsForecasts(symbol =  'indu:ind', output_type = 'df')
+    """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+
+    if type(symbol) is str:        
+        linkAPI = 'http://api.tradingeconomics.com/markets/forecasts/symbol/'+ quote(str(symbol), safe='') 
+    else:   
+        linkAPI = 'http://api.tradingeconomics.com/markets/forecasts/symbol/' + quote(",".join(symbol), safe='') 
+    
+    if type(category) is str:        
+        linkAPI = 'http://api.tradingeconomics.com/markets/forecasts/' + quote(str(category), safe='')
+    
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+    try:       
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
+    if len(webResults) > 0:
+        names = ['symbol','country', 'date', 'type','last', 'url','importance','forecast1','forecast2','forecast2','forecast4']
+        names2 = ['Symbol','Country', 'Date', 'Type','Last', 'Url','Importance','Forecast1','Forecast2','Forecast2','Forecast4']   
+        maindf = pd.DataFrame(webResults, columns=names2)     
+
+    else:
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+    return output        
