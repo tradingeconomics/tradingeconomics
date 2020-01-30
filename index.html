@@ -3917,6 +3917,34 @@ Click on any method below for a sample.
 
 <p>For a detailed list of available live data please <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
 <h2 id="marketForecast">Market Forecasts</h2>
+<!--Python mkt forecasts black side-->
+<blockquote class="lang-specific python">
+<p>Get market forecasts for major indexes by category.</p>
+<br>
+<p>Categories can be: bond, currency, index and commodity.</p>
+</blockquote>  
+<br>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsForecasts</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s">'bond'</span><span class="p">)</span>
+</code></pre>
+<br>
+<blockquote class="lang-specific python">
+<p>Get major market forecasts by symbol</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsForecasts</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="n">'df'</span><span class="p">)</span>
+</code></pre>
+<br>
+<blockquote class="lang-specific python">
+<p>Get major market forecasts by multiple symbols</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsForecasts</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">['psi20:ind', 'indu:ind']</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="n">'df'</span><span class="p">)</span>
+<br>
+    <span class="n">Output</span><span class="p">:</span>
+<br>
+      <span class="n">Symbol</span>     <span class="n">Date</span>                    <span class="o">...</span>      <span class="n">Forecast1</span>     <span class="n">Forecast2</span>      <span class="n">Forecast3</span>
+<span class="mi">0</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>   <span class="mi">2020</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">30</span><span class="n">T18</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">27912.478664</span>  <span class="mf">27912.478664</span>   <span class="mf">27333.878320</span>
+<span class="mi">1</span>     <span class="n">PSI20</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2020</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">30</span><span class="n">T00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">5117.214378</span>   <span class="mf">5117.214378</span>    <span class="mf">5014.337428</span>
+
+</code></pre>
 <!--c# black side-->
 <blockquote class="lang-specific csharp">
     <p>Get major indexes by category (category can be: index, bond, commodity and currency).</p>
