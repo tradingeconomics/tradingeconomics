@@ -206,7 +206,9 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
         try:
             if len(webResults) > int(0):
                 results = {'dates': [d['DateTime'] for d in webResults],
-                            'values': [d[u'Value'] for d in webResults]}
+                            'values': [d[u'Value'] for d in webResults],
+                            }
+                            
                           
                 if (type(country)== str and type(indicator) == str):
                     results = parseData(results)
@@ -218,7 +220,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
             if output_type == None or output_type =='dict':
                 output = results 
             elif output_type == 'df':
-                output = results
+                output= results = pd.DataFrame(webResults) 
             elif output_type == 'raw':        
                 output = webResults
             else:       
