@@ -1930,7 +1930,7 @@ or you can specify a start date and end date<br>
 <h2 id="streaming">Streaming</h2>
 <!--streaming calendar python black side-->
 <blockquote class="lang-specific python">
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br>
 <p>
  Copy this code and execute
 </p>
@@ -1945,6 +1945,18 @@ or you can specify a start date and end date<br>
 
 <span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'calendar'</span><span class="p">)</span>
 <span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <br><br><br><br><br>
+<p>
+    This is the returned output:
+</p>
+</blockquote>
+<pre class="highlight python"><code>
+<span class="n">{ </span></span><span class="s">'event' </span><span class="n">: 'Industrial Production YoY', </span></span><span class="s">'country' </span><span class="n">: 'Euro Area', </span></span><span class="s">'ticker' </span><span class="n">: 'EUIPEMUY', </span></span><span class="s">'actual' </span><span class="n">: '-4.1%', </span>
+  </span><span class="s">'previous' </span><span class="n">: '-1.5%', </span></span><span class="s">'revised' </span><span class="n">: None, </span></span><span class="s">'date' </span><span class="n">: '2020-02-12T10:00:00', </span></span><span class="s">'referenceDate' </span><span class="n">: '2019-12-31T00:00:00', </span></span>
+  <span class="s">'reference' </span><span class="n">: 'Dec', </span></span><span class="s">'calendarId' </span><span class="n">: '234510', </span></span><span class="s">'importance' </span><span class="n">: '2', </span><span class="s">'teforecast' </span><span class="n">: '-2%', </span><span class="s">'forecast' </span><span class="n">: '-1.6%', </span>
+  <span class="s">'symbol' </span><span class="n">: 'EUROAREAINDPROMOM', </span><span class="s">'source' </span><span class="n">: None, </span><span class="s">'topic' </span><span class="n">: 'calendar' }</span>
 </code></pre>
 <!--streaming calendar javascript black side-->
 <blockquote class="lang-specific javascript">
@@ -2084,8 +2096,16 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Specific event name in the calendar</td>
 </tr>
 <tr>
+<td style="text-align: left"><strong>ticker</strong></td>
+<td style="text-align: left">Unique ticker used by Trading Economics</td>
+</tr>
+<tr>
 <td style="text-align: left"><strong>reference</strong></td>
 <td style="text-align: left">The period for which released data refers to</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>referenceDate</strong></td>
+<td style="text-align: left">The date period for which released data refers to</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>source</strong></td>
@@ -2098,6 +2118,18 @@ or you can specify a start date and end date<br>
 <tr>
 <td style="text-align: left"><strong>previous</strong></td>
 <td style="text-align: left">Value for the previous period after the revision (if revision is applicable)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>revised</strong></td>
+<td style="text-align: left">Value reported in the previous period after revision</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>symbol</strong></td>
+<td style="text-align: left">Unique symbol used by Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>calendarId</strong></td>
+<td style="text-align: left">Unique calendar ID used by Trading Economics</td>	
 </tr>
 <tr>
 <td style="text-align: left"><strong>forecast</strong></td>
