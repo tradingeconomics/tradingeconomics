@@ -598,6 +598,24 @@ Click on any method below for a sample.</p>
 <ul>
 <li><p>List of all indicators<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a></p></li>
+</ul>
+<h3 id="response-fields">Response Fields</h3>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>CategoryGroup</strong></td>
+<td style="text-align: left">Category group name</td>
+</tr>
+</tbody></table>
+<ul>
 <li><p>List of indicators by country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a></p></li>
 <li><p>List of indicators by country and group( you can check groups in the "categoryGroup" field of /indicators)<br>
@@ -924,7 +942,7 @@ or you can specify a start date and end date<br>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Close</strong></td>
-<td style="text-align: left">Value</td>
+<td style="text-align: left">Value *</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Frequency</strong></td>
@@ -939,7 +957,10 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
+<p><span class="methods"></p>
 
+<p><strong>*Python package response field returns Value instead of Close.</strong></p>
+<p></span> </p>    
 
 <h2 id="credit-rating">Credit Rating</h2>
 <!--Python Credit Rating black side-->
@@ -1194,24 +1215,10 @@ or you can specify a start date and end date<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings?c=guest:guest">/ratings</a>    </p>    
 <li><p>Credit Rating of the specific country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest">/ratings/{country}</a>    </p>
-
-<li><p>Historical credit rating for one country<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br> </p>
-
 <li><p>Credit Rating for multiple countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states,portugal?c=guest:guest">/ratings/{countries}</a>    </p>
-
-<li><p>Historical credit rating for multiple countries<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br>
-
-<li><p>Historical credit rating by start and end date<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
-
-<li><p>You can specify only a start date<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}</a><br>
 </li>
 </ul>
-
 <h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
@@ -1220,6 +1227,10 @@ or you can specify a start date and end date<br>
 <th style="text-align: left"></th>
 </tr>
 </thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
 <tr>
 <td style="text-align: left"><strong>TE</strong></td>
 <td style="text-align: left">Trading Economics rating</td>
@@ -1234,11 +1245,11 @@ or you can specify a start date and end date<br>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Rating</strong></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">Rating score</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Outlook</strong></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">Rating outlook</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>TE_Outlook</strong></td>
@@ -1268,6 +1279,60 @@ or you can specify a start date and end date<br>
 <td style="text-align: left"><strong>Fitch_outlook</strong></td>
 <td style="text-align: left">Fitch outlook</td>
 </tr>
+<tr>
+<td style="text-align: left"><strong>DBRS</strong></td>
+<td style="text-align: left">DBRS rating</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>DBRS_Outlook</strong></td>
+<td style="text-align: left">DBRS outlook</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><p>Historical credit rating for one country<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br> </p>
+
+<li><p>Historical credit rating for multiple countries<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br>
+
+<li><p>Historical credit rating by start and end date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
+
+<li><p>You can specify only a start date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}</a><br>
+</li>
+</ul>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Agency</strong></td>
+<td style="text-align: left">Rating agency</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Rating</strong></td>
+<td style="text-align: left">Rating score</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Outlook</strong></td>
+<td style="text-align: left">Rating outlook</td>
+</tr>
+
 </tbody></table>
 
 <h2 id="latest-updates">Latest updates</h2>
@@ -1382,6 +1447,14 @@ or you can specify a start date and end date<br>
 <th style="text-align: left"></th>
 </tr>
 </thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
 <tr>
 <td style="text-align: left"><strong>HistoricalDataSymbol</strong></td>
 <td style="text-align: left">Unique symbol used by Trading Economics</td>
@@ -2180,6 +2253,20 @@ or you can specify a start date and end date<br>
 <span class="mi">3</span>          <span class="n">United States</span>    <span class="n">Inflation Rate</span>       <span class="mf">1.8</span>        <span class="mf">1.7</span>        <span class="mf">1.9</span>      <span class="mf">1.8</span> 
 </span></code></pre>
 <!--Python Forecasts black side-->
+<blockquote class="lang-specific python"> 
+<p>*Forecast response fields can be diferent from Html response fields.</p>
+</blockquote>
+<pre class="highlight python"><code>
+<span class="mi">Python     --- <span class="p">match</span> ---    Html</span>
+                  
+<span class="n">yearend</span>    -------------    <span class="n">ForecastValue1</span> 
+<span class="n">yearend2</span>   -------------    <span class="n">ForecastValue2</span> 
+<span class="n">yearend3</span>   -------------    <span class="n">ForecastValue3</span> 
+<span class="n">q1</span>         -------------    <span class="n">ForecastValue1Q</span> 
+<span class="n">q2</span>         -------------    <span class="n">ForecastValue2Q</span> 
+<span class="n">q3</span>         -------------    <span class="n">ForecastValue3Q</span> 
+<span class="n">q4</span>         -------------    <span class="n">ForecastValue4Q</span> 
+</code></pre>
 <blockquote class="lang-specific python">
 <br>
 <br>    
@@ -2480,39 +2567,31 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Combination of country and indicator name</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastDate</strong></td>
-<td style="text-align: left">Date of the forecast</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>ForecastValue</strong></td>
-<td style="text-align: left">Forecast value at the time of the forecast date</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>ForecastValue1</strong></td>
+<td style="text-align: left"><strong>ForecastValue1 *</strong></td>
 <td style="text-align: left">Forecast value for the year end</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastValue2</strong></td>
+<td style="text-align: left"><strong>ForecastValue2 *</strong></td>
 <td style="text-align: left">Forecast value for the year end following ForecastValue1</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastValue3</strong></td>
+<td style="text-align: left"><strong>ForecastValue3 *</strong></td>
 <td style="text-align: left">Forecast value for the year end following ForecastValue2</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastValue1Q</strong></td>
+<td style="text-align: left"><strong>ForecastValue1Q *</strong></td>
 <td style="text-align: left">Forecast value for the next quarter</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastValue2Q</strong></td>
+<td style="text-align: left"><strong>ForecastValue2Q *</strong></td>
 <td style="text-align: left">Forecast value for the quarter following ForecastValue1Q</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastValue3Q</strong></td>
+<td style="text-align: left"><strong>ForecastValue3Q *</strong></td>
 <td style="text-align: left">Forecast value for the quarter following ForecastValue2Q</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastValue4Q</strong></td>
+<td style="text-align: left"><strong>ForecastValue4Q *</strong></td>
 <td style="text-align: left">Forecast value for the quarter following ForecastValue3Q</td>
 </tr>
 <tr>
@@ -2548,6 +2627,11 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Unique symbol used by Trading Economics</td>
 </tr>
 </tbody></table>
+<br>
+<br>
+<p><span class="methods"></p>
+<p><strong>*Check <a target = '_blank' href="http://docs.tradingeconomics.com/?python#forecast">python tab</a> to see response fields representing the fields marked above.</strong></p>
+
 <!--markets white side-->
 <h1 id="markets">Markets</h1>
 <h2 id="snapshots">Snapshots</h2>
@@ -3023,6 +3107,56 @@ Click on any method below for a sample.
 <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/markets/country/{put country name here}?page=2'</span><span class="p">;</span>
 </code></pre>
 <!--markets white side-->
+<h3 id="market-lists">Market Lists</h3>
+<p><span class="methods"></p>
+
+    <ul>
+    <li><p>Stock Market by country and page number<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest&page=2">/markets/country/{country}&amp;page=2</a></p></li>
+    </ul>
+    <h3 id="response-fields">Response Fields</h3>
+    <table><thead>
+        <tr>
+        <th style="text-align: left"></th>
+        <th style="text-align: left"></th>
+        </tr>
+        </thead><tbody>
+        <tr>
+        <td style="text-align: left"><strong>Symbol</strong></td>
+        <td style="text-align: left">Unique symbol used by Trading Economics</td>
+        </tr>
+        <tr>
+        <td style="text-align: left"><strong>Name</strong></td>
+        <td style="text-align: left">Indicator full name</td>
+        </tr>
+        <tr>
+        <td style="text-align: left"><strong>Country</strong></td>
+        <td style="text-align: left">Country name</td>
+        </tr>
+        <tr>
+        <td style="text-align: left"><strong>Type</strong></td>
+        <td style="text-align: left">Market type</td>
+        </tr>
+        <tr>
+        <td style="text-align: left"><strong>URL</strong></td>
+        <td style="text-align: left">Hyperlink at Trading Economics</td>
+        </tr>
+        <tr>
+        <td style="text-align: left"><strong>Frequency</strong></td>
+        <td style="text-align: left">Market frequency</td>
+        </tr>
+        </tbody></table>
+    <ul>
+    <li><p>A snapshot of latest peers prices by market<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a></p></li>
+    <li><p>Stock Market Index Components<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a></p></li>
+    </ul>
+    
+    
+    
+    
+    <p></span> </p>
 <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
@@ -3045,7 +3179,7 @@ Click on any method below for a sample.
 </ul>
 <p></span> </p>
 
-<h3 id="market-lists">Market Lists</h3>
+
 <!--Python Market lists black side-->
 <blockquote class="lang-specific python">
 <p>To get closely related items of a certain symbol:</p>
@@ -3123,19 +3257,7 @@ Click on any method below for a sample.
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getMarketsList</span><span class="p">(<span class="nf">marketsField</span><span class="o">=</span><span class="s1">'peers'</span><span class="p">,</span><span class="s1">'aapl:us'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-<!--markets white side-->
-<p><span class="methods"></p>
 
-<ul>
-<li><p>A snapshot of latest peers prices by market<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a></p></li>
-<li><p>Stock Market Index Components<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a></p></li>
-<li><p>Stock Market by country and page number<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest&page=2">/markets/country/{country}&amp;page=2</a></p></li>
-</ul>
-
-<p></span> </p>
 <h3 id="search">Search</h3>
 <!--python market search black side-->
 <blockquote class="lang-specific python">
@@ -3736,7 +3858,7 @@ Click on any method below for a sample.
 <td style="text-align: left">Unique symbol used by Trading Economics</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Datetime</strong></td>
+<td style="text-align: left"><strong>Date</strong></td>
 <td style="text-align: left">Release time and date in UTC</td>
 </tr>
 <tr>
@@ -3906,6 +4028,10 @@ Click on any method below for a sample.
 <td style="text-align: left">Symbol</td>
 </tr>
 <tr>
+<td style="text-align: left"><strong>i</strong></td>
+<td style="text-align: left">Ticker</td>
+</tr>
+<tr>
 <td style="text-align: left"><strong>bid</strong></td>
 <td style="text-align: left">Latest market bid price</td>
 </tr>
@@ -3928,6 +4054,10 @@ Click on any method below for a sample.
 <tr>
 <td style="text-align: left"><strong>type</strong></td>
 <td style="text-align: left">Type of market (currency/indexes/commodity)</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>prev</strong></td>
+<td style="text-align: left">Previous value</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>dhigh</strong></td>
@@ -4421,7 +4551,11 @@ Click on any method below for a sample.
 </tr>
 <tr>
 <td style="text-align: left"><strong>Currency</strong></td>
-<td style="text-align: left"></td>
+<td style="text-align: left">Currency</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Session</strong></td>
+<td style="text-align: left">Expected earnings release time</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>LastUpdate</strong></td>
@@ -5205,6 +5339,22 @@ javascript black side
 <ul>
 <li><p>Main categories<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/categories?c=guest:guest">/worldBank/categories</a></p></li>
+</ul>
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+</tbody></table>
+
+<ul>
 <li><p>Filtering by the main categories<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">/worldBank/category/{category}</a><br>
 Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
@@ -5228,35 +5378,35 @@ Because there are too many results, this method has pagination. Each page is lim
 </tr>
 <tr>
 <td style="text-align: left"><strong>series_code</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left">WB symbol for the series</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>series_name</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left">WB Name for the series</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>sub_category</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">WB Sub category name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>sub_category2</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">WB Sub category name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>sub_category3</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">WB Sub category name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Title</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">WB Series title</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>long_definition</strong></td>
-<td style="text-align: left">&mdash;&ndash;</td>
+<td style="text-align: left">WB Series long definition</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>short_definition</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">WB Series short definition</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Source</strong></td>
@@ -5264,11 +5414,11 @@ Because there are too many results, this method has pagination. Each page is lim
 </tr>
 <tr>
 <td style="text-align: left"><strong>general_comments</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">WB general comments</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>aggregation_method</strong></td>
-<td style="text-align: left">&mdash;&ndash;</td>
+<td style="text-align: left">WB aggregation method</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>URL</strong></td>
@@ -5276,15 +5426,15 @@ Because there are too many results, this method has pagination. Each page is lim
 </tr>
 <tr>
 <td style="text-align: left"><strong>Organization</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">WB Organization</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Unit</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">Unit</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>verbose_unit</strong></td>
-<td style="text-align: left">&mdash;-</td>
+<td style="text-align: left">WB Verbose Unit</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>last_update</strong></td>
@@ -5766,6 +5916,33 @@ Because there are too many results, this method has pagination. Each page is lim
 <ul>
 <li>Get detailed information about Comtrade categories<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest">/comtrade/categories</a></li>
+</ul>
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Id</strong></td>
+<td style="text-align: left">Comtrade identifier</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>ParentId</strong></td>
+<td style="text-align: left">Comtrade identifier</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Pretty_Name</strong></td>
+<td style="text-align: left">Category pretty name</td>
+</tr>
+</tbody></table>
+<ul>
 <li>Get the latest updated indicators<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/updates?c=guest:guest">/comtrade/updates</a></li>
 </ul>
@@ -5778,23 +5955,38 @@ Because there are too many results, this method has pagination. Each page is lim
 <tr>
 <th style="text-align: left"></th>
 <th style="text-align: left"></th>
-</tr>
-</thead><tbody>
+
 <tr>
-<td style="text-align: left"><strong>Id</strong></td>
-<td style="text-align: left">&mdash;</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Name</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by Trading Economics</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ParentId</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left"><strong>Country1</strong></td>
+<td style="text-align: left">First country ame</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Pretty_Name</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left"><strong>Country2</strong></td>
+<td style="text-align: left">Second country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Type</strong></td>
+<td style="text-align: left">&mdash;&ndash;</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Title</strong></td>
+<td style="text-align: left">Title</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Last updated date</td>
 </tr>
 </tbody></table>
 
@@ -6007,6 +6199,42 @@ Because there are too many results, this method has pagination. Each page is lim
 <ul>
 <li><p>Get detailed information about Comtrade countries<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/countries?c=guest:guest">/comtrade/countries</a></p></li>
+</ul>
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Id</strong></td>
+<td style="text-align: left">Comtrade identifier</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Region</strong></td>
+<td style="text-align: left">Region</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Subregion</strong></td>
+<td style="text-align: left">Subregion</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>ISO</strong></td>
+<td style="text-align: left">Three letter country code</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Year</strong></td>
+<td style="text-align: left">Last update</td>
+</tr>
+
+</tbody></table>
+<ul>
 <li><p>Snapshot of data per country<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">/comtrade/country/{country}</a><br>
 Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
@@ -6025,30 +6253,7 @@ Because there are too many results, this method has pagination. Each page is lim
 <th style="text-align: left"></th>
 </tr>
 </thead><tbody>
-<tr>
-<td style="text-align: left"><strong>Id</strong></td>
-<td style="text-align: left">&mdash;</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Name</strong></td>
-<td style="text-align: left">&mdash;</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Region</strong></td>
-<td style="text-align: left">&mdash;</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Subregion</strong></td>
-<td style="text-align: left">&mdash;</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>ISO</strong></td>
-<td style="text-align: left">Three letter country code</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Year</strong></td>
-<td style="text-align: left">&mdash;</td>
-</tr>
+
 <tr>
 <td style="text-align: left"><strong>Symbol</strong></td>
 <td style="text-align: left">Unique symbol used by Trading Economics</td>
@@ -6063,7 +6268,7 @@ Because there are too many results, this method has pagination. Each page is lim
 </tr>
 <tr>
 <td style="text-align: left"><strong>Type</strong></td>
-<td style="text-align: left">&mdash;&ndash;</td>
+<td style="text-align: left">Trade type</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Category</strong></td>
@@ -6075,7 +6280,11 @@ Because there are too many results, this method has pagination. Each page is lim
 </tr>
 <tr>
 <td style="text-align: left"><strong>Title</strong></td>
-<td style="text-align: left">&mdash;&ndash;</td>
+<td style="text-align: left">Title</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Last updated</td>
 </tr>
 </tbody></table>
 
@@ -6644,11 +6853,11 @@ or<br>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Popularity</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left">Popularity ranking</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Start</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left">Indicator start date</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Unit</strong></td>
@@ -6656,7 +6865,7 @@ or<br>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Adjustment</strong></td>
-<td style="text-align: left">&mdash;</td>
+<td style="text-align: left">Adjustment</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>URL</strong></td>
