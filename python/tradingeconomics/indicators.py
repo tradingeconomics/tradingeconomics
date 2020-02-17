@@ -60,8 +60,8 @@ def checkRatings(rating, linkAPI):
     return linkAPI    
 
 def getResults(webResults, country):
-        names = ['country', 'category', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'categorygroup', 'frequency','historicaldatasymbol', 'createdate', 'previousvalue', 'previousvaluedate']
-        names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'Source', 'Unit', 'CategoryGroup', 'Frequency', 'HistoricalDataSymbol', 'CreateDate', 'PreviousValue', 'PreviousValueDate']
+        names = ['country', 'category', 'title', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'url', 'categorygroup', 'frequency','historicaldatasymbol', 'createdate', 'previousvalue', 'previousvaluedate']
+        names2 = ['Country', 'Category', 'Title', 'LatestValue', 'LatestValueDate',  'Source', 'Unit', 'URL', 'CategoryGroup', 'Frequency', 'HistoricalDataSymbol', 'CreateDate', 'PreviousValue', 'PreviousValueDate']
         maindf = pd.DataFrame() 
         
         for i in range(len(names)):
@@ -81,8 +81,8 @@ def getRatingResults(webResults, rating):
         return maindf
 
 def getUpdateResults(webResults, date):
-        names = ['historicalDataSymbol', 'lastUpdate']
-        names2 = ['HistoricalDataSymbol', 'LastUpdate']
+        names = ['country', 'category', 'historicalDataSymbol', 'lastUpdate']
+        names2 = ['Country', 'Category', 'HistoricalDataSymbol', 'LastUpdate']
         maindf = pd.DataFrame() 
         
         for i in range(len(names)):
@@ -226,13 +226,18 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
         else: 
             raise WebRequestError ('Something went wrong. Error code = ' + str(code))
     if code == 200:
-        try: 
+        try:
+            if len(webResults) > 0: 
             
-            if len(webResults) > 0:
-                names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook']
-                names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook']    
-                maindf = pd.DataFrame(webResults, columns=names2)    
-            
+                if(country==None):
+                    names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook', "dbrs", "dbrs_outlook"]
+                    names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook', "DBRS", "DBRS_Outlook"]    
+                    maindf = pd.DataFrame(webResults, columns=names2) 
+                else:
+                    names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook']
+                    names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook']    
+                    maindf = pd.DataFrame(webResults, columns=names2)    
+                
             else:
                 raise ParametersError ('No data available for the provided parameters.')
             if output_type == None or output_type =='df':        
@@ -305,8 +310,8 @@ def getLatestUpdates(initDate = None, output_type = None):
         try:
             
             if len(webResults) > 0:
-                names = ['historicalDataSymbol', 'lastUpdate']
-                names2 = ['HistoricalDataSymbol', 'LastUpdate']    
+                names = ['country', 'category', 'historicalDataSymbol', 'lastUpdate']
+                names2 = ['Country', 'Category', 'HistoricalDataSymbol', 'LastUpdate']   
                 maindf = pd.DataFrame(webResults, columns=names2)    
             
             else:

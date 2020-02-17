@@ -46,6 +46,62 @@ def checkCmtPage(linkAPI, page_number):
     
     return linkAPI
 
+def getCmtUpdates(output_type = None):
+    """
+    Get latest updates information on Comtrade.
+    =================================================================================
+
+    Parameters:
+    -----------         
+    output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+
+    Notes
+    -----
+    with no parameters a list of last updates will be given. 
+
+    Example
+    -------
+    getCmtUpdates(output_type = None)
+    
+    """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    
+    linkAPI = 'https://api.tradingeconomics.com/comtrade/updates'
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+
+    try:
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
+    except ValueError:
+        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
+    
+    if len(webResults) > 0:
+
+        names = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title', 'lastupdate']
+        names2 = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title', 'lastupdate']   
+        maindf = pd.DataFrame(webResults, columns=names2)    
+    
+    else:  
+        raise ParametersError ('No data available for the provided parameters.')
+    if output_type == None or output_type =='df':        
+        output = maindf
+    elif output_type == 'raw':        
+        output = webResults
+    else:      
+        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+    return output
+
 
 
 def getCmtCategories(category = None, output_type = None):
@@ -56,10 +112,10 @@ def getCmtCategories(category = None, output_type = None):
     Parameters:
     -----------
     category:list.
-             List of strings of all categories.           
+                List of strings of all categories.           
     output_type: string.
-             'dict'(default) for dictionary format output, 'df' for data frame,
-             'raw' for list of dictionaries directly from the web. 
+                'dict'(default) for dictionary format output, 'df' for data frame,
+                'raw' for list of dictionaries directly from the web. 
 
     Notes
     -----
@@ -76,7 +132,7 @@ def getCmtCategories(category = None, output_type = None):
         pass
     else:
         ssl._create_default_https_context = _create_unverified_https_context
-    
+
     linkAPI = 'https://api.tradingeconomics.com/comtrade/categories'
 
     if category == None:
@@ -93,12 +149,12 @@ def getCmtCategories(category = None, output_type = None):
         webResults = json.loads(response.read().decode('utf-8'))
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
-    
+
     if len(webResults) > 0:
         names = ['Id', 'name', 'parent_Id', 'pretty_Name']
         names2 = ['id', 'name', 'parentId', 'pretty_name']    
         maindf = pd.DataFrame(webResults, columns=names2)    
-      
+        
     else:
         raise ParametersError ('No data available for the provided parameters.')
     if output_type == None or output_type =='df':        
@@ -168,10 +224,10 @@ def getCmtCountry(country = None, page_number = None, output_type = None):
     
     if len(webResults) > 0:
         if country == None:
-            names2 = ['id', 'name', 'parentId', 'pretty_name']
+            names2 = ['id', 'name', 'region', 'subregion', 'iso', 'year']
         else:
-            names = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title']
-            names2 = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title']   
+            names = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title', 'lastupdate']
+            names2 = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title', 'lastupdate']   
         maindf = pd.DataFrame(webResults, columns=names2)    
     
     else:  

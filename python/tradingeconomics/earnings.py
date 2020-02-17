@@ -104,8 +104,8 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
         try: 
     
             if len(webResults) > 0:
-                names = ['date', 'symbol', 'name', 'type', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
-                names2 = ['Date', 'Symbol', 'Name', 'Type', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
+                names = ['date', 'symbol', 'name', 'type', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency',  'session', 'lastupdate']
+                names2 = ['Date', 'Symbol', 'Name', 'Type', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'Session', 'LastUpdate']    
                 maindf = pd.DataFrame(webResults, columns=names2)     
                 
             else:

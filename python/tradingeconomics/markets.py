@@ -48,7 +48,7 @@ def checkCategory(linkAPI, category):
    
 def getMarketsData(marketsField, output_type=None):
     """
-    Returns a list of available commodities, currencies, indeces or 
+    Returns a list of available commodities, currencies, indexes or 
     bonds and their latest values.
     ==========================================================
     Parameters:
@@ -71,9 +71,9 @@ def getMarketsData(marketsField, output_type=None):
     else:
         ssl._create_default_https_context = _create_unverified_https_context
         
-    fields =['commodities', 'currency', 'index', 'bonds']
+    fields =['commodities', 'currency', 'index', 'bond']
     if marketsField not in fields:
-        raise ParametersError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bonds\'.')
+        raise ParametersError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bond\'.')
     linkAPI = 'https://api.tradingeconomics.com/markets/' + quote(marketsField, safe='') 
     try:
         linkAPI += '?c=' + glob.apikey
@@ -86,12 +86,9 @@ def getMarketsData(marketsField, output_type=None):
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
-        if marketsField == 'bonds':
-            names = ['symbol','name', 'country', 'date', 'last', 'group','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear']
-            names2 = ['Symbol','Name', 'Country', 'Date', 'Last', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear']
-        else:
-            names = ['symbol','ticker','name', 'country', 'date', 'last', 'group','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear']
-            names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Last', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear']    
+    
+        names = ['symbol','ticker','name', 'country', 'date', 'last', 'group','url','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','ydtchange','ydtpercentualchange','yesterday','lastweek','lastmonth','lastyear','startyear', 'lastUpdate']
+        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Last', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'LastUpdate']    
         maindf = pd.DataFrame()     
         for i in range(len(names)):
             names[i] =  [d[names2[i]] for d in webResults]

@@ -112,15 +112,15 @@ def getWBCategories(category = None, page_number = None, output_type = None):
         linkAPI = 'https://api.tradingeconomics.com/worldBank/categories'
     else:
         linkAPI = 'https://api.tradingeconomics.com/worldBank/category/' + quote(str(category), safe='')
-     
+    
     if page_number != None:
         linkAPI = checkPageNumber(linkAPI, page_number)
-       
+     
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-   
+    print(linkAPI) 
     try:
         response = urlopen(linkAPI)
         code = response.getcode()
@@ -192,7 +192,7 @@ def getWBIndicator(series_code = None, url = None, output_type = None):
         linkAPI = 'https://api.tradingeconomics.com/worldBank/indicator' + '?c=' + glob.apikey + '&s=' + quote(str(series_code), safe='')            
     elif url != None:
         linkAPI = 'https://api.tradingeconomics.com/worldBank/indicator' + '?c=' + glob.apikey + '&url=' + quote(str(url), safe='')
-    print (linkAPI)       
+         
    
     try:       
         response = urlopen(linkAPI)
@@ -202,8 +202,8 @@ def getWBIndicator(series_code = None, url = None, output_type = None):
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     
     if len(webResults) > int(0):
-        names = ['symbol', 'last', 'previous', 'previousDate', 'country', 'category', 'description', 'frequency', 'unit', 'title', 'url', 'lastUpdate']
-        names2 = ['symbol', 'last', 'previous', 'previousDate', 'country', 'category', 'description', 'frequency', 'unit', 'title', 'URL', 'lastUpdate']
+        names = ['symbol', 'last', 'date', 'previous', 'previousDate', 'country', 'category', 'description', 'frequency', 'unit', 'title', 'url', 'lastUpdate']
+        names2 = ['symbol', 'last', 'date', 'previous', 'previousDate', 'country', 'category', 'description', 'frequency', 'unit', 'title', 'URL', 'lastUpdate']
         maindf = pd.DataFrame(webResults, columns=names2)     
     else:
         raise ParametersError ('No data available for the provided parameters.')
