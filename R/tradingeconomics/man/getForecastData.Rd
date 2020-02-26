@@ -34,7 +34,9 @@ Without credentials, only sample data is returned.
 
 \examples{
 \dontrun{ getForecastData(country = 'United States', indicator = 'Imports')
-getForecastData(country = c('United States', 'India'), indicator = c('Imports','Exports'))
+getForecastData(country = c('United States', 'china'), indicator = c('gdp','inflation rate'))
+getForecastData(country = 'United States')
+getForecastData(indicator = 'Imports')
 }
 }
 \seealso{

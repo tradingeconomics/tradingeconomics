@@ -4,9 +4,16 @@
 \alias{getLatestArticles}
 \title{Return latest articles information from Trading Economics API}
 \usage{
-getLatestArticles(country = NULL, indicator = NULL, id = NULL,
-  limit = NULL, start = NULL, initDate = NULL, endDate = NULL,
-  outType = NULL)
+getLatestArticles(
+  country = NULL,
+  indicator = NULL,
+  id = NULL,
+  limit = NULL,
+  start = NULL,
+  initDate = NULL,
+  endDate = NULL,
+  outType = NULL
+)
 }
 \arguments{
 \item{country}{string or list.

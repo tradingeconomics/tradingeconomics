@@ -4,8 +4,14 @@
 \alias{getHistoricalData}
 \title{Return historical information from Trading Economics API.}
 \usage{
-getHistoricalData(country, indicator, initDate = NULL, endDate = NULL,
-  outType = NULL)
+getHistoricalData(
+  country = NULL,
+  indicator = NULL,
+  ticker = NULL,
+  initDate = NULL,
+  endDate = NULL,
+  outType = NULL
+)
 }
 \arguments{
 \item{country}{string or list.
@@ -38,11 +44,12 @@ Without credentials only sample data will be provided.
 }
 
 \examples{
-\dontrun{ getHistoricalData(country = 'United States', indicator = 'Imports',
-initDate = '2011-01-01', endDate = '2016-01-01')
-getHistoricalData(country = c('United States', 'United Kingdom'),
-indicator = c('Imports','Exports'),
-initDate = '2011-01-01', endDate = '2016-01-01')
+\dontrun{ getHistoricalData(country = 'United Kingdom', indicator = 'Imports',initDate = '2011-01-01', endDate = '2016-01-01')
+getHistoricalData(country = c('United States', 'United Kingdom'),indicator = c('Imports','Exports'),initDate = '2011-01-01', endDate = '2016-01-01')
+getHistoricalData(ticker = 'USURTOT', initDate = '2015-03-01')
+getHistoricalData(country = c('United States', 'United Kingdom'), indicator = c('Imports','Exports'))
+getHistoricalData(country = 'United States', indicator = 'Imports')
+
 }
 }
 \seealso{

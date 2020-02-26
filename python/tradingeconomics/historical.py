@@ -219,9 +219,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
             else:
                 raise ParametersError ('No data available for the provided parameters.')
             
-            if output_type == None or output_type =='dict':
-                output = results 
-            elif output_type == 'df':
+            if output_type == None or output_type == 'df':
                 output= results = pd.DataFrame(webResults) 
             elif output_type == 'raw':        
                 output = webResults

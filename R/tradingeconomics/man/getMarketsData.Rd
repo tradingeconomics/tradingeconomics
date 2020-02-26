@@ -26,7 +26,7 @@ Without credentials only sample information will be provided.
 }
 
 \examples{
-\dontrun{ getMarketsData(marketsField = 'index')
+\dontrun{ getMarketsData(marketsField = 'currency')
 }
 }
 \seealso{

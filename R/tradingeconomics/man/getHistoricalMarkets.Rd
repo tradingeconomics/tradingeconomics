@@ -4,8 +4,12 @@
 \alias{getHistoricalMarkets}
 \title{Return historical information from Trading Economics API.}
 \usage{
-getHistoricalMarkets(symbol = NULL, initDate = NULL, endDate = NULL,
-  outType = NULL)
+getHistoricalMarkets(
+  symbol = NULL,
+  initDate = NULL,
+  endDate = NULL,
+  outType = NULL
+)
 }
 \arguments{
 \item{symbol}{string or list.

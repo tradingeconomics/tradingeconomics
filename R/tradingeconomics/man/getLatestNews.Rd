@@ -4,8 +4,13 @@
 \alias{getLatestNews}
 \title{Return latest news information from Trading Economics API}
 \usage{
-getLatestNews(identifier = NULL, category = NULL, limit = NULL,
-  start = NULL, outType = NULL)
+getLatestNews(
+  identifier = NULL,
+  category = NULL,
+  limit = NULL,
+  start = NULL,
+  outType = NULL
+)
 }
 \arguments{
 \item{limit, }{string.

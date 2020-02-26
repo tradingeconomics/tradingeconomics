@@ -4,8 +4,12 @@
 \alias{getMarketsIntraday}
 \title{Return markets intraday information from Trading Economics API.}
 \usage{
-getMarketsIntraday(symbol = NULL, initDate = NULL, endDate = NULL,
-  outType = NULL)
+getMarketsIntraday(
+  symbol = NULL,
+  initDate = NULL,
+  endDate = NULL,
+  outType = NULL
+)
 }
 \arguments{
 \item{symbol}{string or list.

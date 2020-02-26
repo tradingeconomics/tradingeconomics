@@ -4,8 +4,14 @@
 \alias{getEarnings}
 \title{Return earnings information from Trading Economics API}
 \usage{
-getEarnings(indicator = NULL, initDate = NULL, endDate = NULL,
-  type = NULL, category = NULL, outType = NULL)
+getEarnings(
+  indicator = NULL,
+  initDate = NULL,
+  endDate = NULL,
+  type = NULL,
+  category = NULL,
+  outType = NULL
+)
 }
 \arguments{
 \item{initDate, }{string.}
@@ -41,7 +47,7 @@ getEarnings('united states', outType = 'df' )
 getEarnings(initDate = '2017-01-01', outType = 'df')
 getEarnings(indicator='msft:us', category="symbol" , '2017-01-01' )
 getEarnings(indicator='msft:us', category="symbol", '2016-01-01','2017-01-01', outType = 'df')
-getEarnings(type ='dividends')
+getEarnings(type ='dividends', outType = 'df')
 }
 
 }

@@ -60,8 +60,8 @@ def checkRatings(rating, linkAPI):
     return linkAPI    
 
 def getResults(webResults, country):
-        names = ['country', 'category', 'title', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'url', 'categorygroup', 'frequency','historicaldatasymbol', 'createdate', 'previousvalue', 'previousvaluedate']
-        names2 = ['Country', 'Category', 'Title', 'LatestValue', 'LatestValueDate',  'Source', 'Unit', 'URL', 'CategoryGroup', 'Frequency', 'HistoricalDataSymbol', 'CreateDate', 'PreviousValue', 'PreviousValueDate']
+        names = ['country', 'category', 'title', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'url', 'categorygroup', 'adjustment', 'frequency','historicaldatasymbol', 'createdate', 'previousvalue', 'previousvaluedate']
+        names2 = ['Country', 'Category', 'Title', 'LatestValue', 'LatestValueDate',  'Source', 'Unit', 'URL', 'CategoryGroup', 'Adjustment', 'Frequency', 'HistoricalDataSymbol', 'CreateDate', 'PreviousValue', 'PreviousValueDate']
         maindf = pd.DataFrame() 
         
         for i in range(len(names)):

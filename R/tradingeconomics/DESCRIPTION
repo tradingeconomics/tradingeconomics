@@ -8,5 +8,5 @@ Description: "R version of Trading Economics API library."
 Depends: jsonlite, httr
 License: GPL-2
 LazyData: TRUE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Encoding: UTF-8
