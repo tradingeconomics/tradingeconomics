@@ -57,6 +57,7 @@ def fetchMarkets(symbol = None, initDate=None, endDate=None, output_type=None):
     endDate: string with format: YYYY-MM-DD.
     output_type: string.
              'dict'(default) for dictionary format output,
+             'df' for dataframe,
              'raw' for list of dictionaries without any parsing.
 
     Notes
@@ -147,11 +148,13 @@ def fetchMarkets(symbol = None, initDate=None, endDate=None, output_type=None):
             else:
                 raise ParametersError ('No data available for the provided parameters.')  
             if output_type == None or output_type =='dict':        
-                output = results
+                output = webResults
+            elif output_type == 'df':
+                output = results      
             elif output_type == 'raw':        
                 output = webResults
             else:       
-                raise ParametersError ('output_type options : dict(defoult) for dictionary or raw for unparsed results.')
+                raise ParametersError ('output_type options : dict(default) for dictionary or raw for unparsed results.')
             return output
     
         except ValueError:

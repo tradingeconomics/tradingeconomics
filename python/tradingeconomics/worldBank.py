@@ -92,9 +92,9 @@ def getWBCategories(category = None, page_number = None, output_type = None):
 
     Example
     -------
-    getWBCategories(category = None, page_number = None, output_type = None)
+    getWBCategories(category = None, output_type = None)
 
-    getWBCategories(category = ['education', 'agriculture'], page_number =3, output_type = None)
+    getWBCategories(category = ['education', 'agriculture'], output_type = None)
     """          
     url = ''
     try:
@@ -120,7 +120,7 @@ def getWBCategories(category = None, page_number = None, output_type = None):
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    print(linkAPI) 
+    
     try:
         response = urlopen(linkAPI)
         code = response.getcode()
@@ -132,18 +132,20 @@ def getWBCategories(category = None, page_number = None, output_type = None):
         if category == None:
             names2 = ['category']
         else:
-            names = ['category', 'series_name', 'sub_category', 'sub_category2', 'sub_category3', 'title', 'long_defenition', 'short_defenition', 'source', 'general_comments', 'aggregation_method', 'url', 'organization', 'unit', 'verbose_unit', 'last_update']
-            names2 = ['category', 'series_name', 'sub_category', 'sub_category2', 'sub_category3', 'title', 'long_defenition', 'short_defenition', 'source', 'general_comments', 'aggregation_method', 'URL', 'organization', 'unit', 'verbose_unit', 'last_update']    
+            names = ['category', 'series_code', 'series_name', 'sub_category', 'sub_category2', 'sub_category3', 'title', 'long_defenition', 'short_defenition', 'source', 'general_comments', 'aggregation_method', 'url', 'organization', 'unit', 'verbose_unit', 'last_update']
+            names2 = ['category', 'series_code','series_name', 'sub_category', 'sub_category2', 'sub_category3', 'title', 'long_defenition', 'short_defenition', 'source', 'general_comments', 'aggregation_method', 'URL', 'organization', 'unit', 'verbose_unit', 'last_update']    
         maindf = pd.DataFrame(webResults, columns=names2)    
       
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':        
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output
 
 def getWBIndicator(series_code = None, url = None, output_type = None):
@@ -207,12 +209,14 @@ def getWBIndicator(series_code = None, url = None, output_type = None):
         maindf = pd.DataFrame(webResults, columns=names2)     
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':        
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output
   
 def getWBCountry(country = None, page_number = None, output_type = None):
@@ -238,7 +242,7 @@ def getWBCountry(country = None, page_number = None, output_type = None):
 
     Example
     -------
-    getWBCountry(country = 'portugal', page_number = 3, output_type = None)
+    getWBCountry(country = 'portugal', output_type = None) # page_number is no longer needed!
     """ 
     linkAPI = 'https://api.tradingeconomics.com/worldBank/country/'          
     try:
@@ -274,12 +278,14 @@ def getWBCountry(country = None, page_number = None, output_type = None):
         maindf = pd.DataFrame(webResults, columns=names2)     
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':         
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output
 
 def getWBHistorical(series_code = None, output_type = None):
@@ -336,12 +342,14 @@ def getWBHistorical(series_code = None, output_type = None):
       
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':         
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output
   
     

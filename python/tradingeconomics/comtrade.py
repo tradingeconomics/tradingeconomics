@@ -94,12 +94,14 @@ def getCmtUpdates(output_type = None):
     
     else:  
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':        
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(defoult), df for data frame or raw for unparsed results.') 
     return output
 
 
@@ -157,12 +159,14 @@ def getCmtCategories(category = None, output_type = None):
         
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':         
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(defoult), df for data frame or raw for unparsed results.') 
     return output
 
 def getCmtCountry(country = None, page_number = None, output_type = None):
@@ -232,12 +236,14 @@ def getCmtCountry(country = None, page_number = None, output_type = None):
     
     else:  
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':         
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output
 
 def getCmtHistorical(symbol = None, output_type = None):
@@ -297,12 +303,14 @@ def getCmtHistorical(symbol = None, output_type = None):
       
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':         
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df  for data frame or raw for unparsed results.') 
     return output
 
 def getCmtTwoCountries(country1 = None, country2 = None, page_number = None, output_type = None):
@@ -364,12 +372,14 @@ def getCmtTwoCountries(country1 = None, country2 = None, page_number = None, out
     
     else:  
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':         
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output 
 
     

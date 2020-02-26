@@ -55,8 +55,8 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
     endDate: string with format: YYYY-MM-DD.
 
     output_type: string.
-             'df'(default) for data frame,
-             'raw' for list of unparsed data. 
+             ''dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web.  
 
     Example
     -------
@@ -110,12 +110,14 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
                 
             else:
                 raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='df':        
+            if output_type == None or output_type =='dict':
+                output = webResults
+            elif output_type == 'df':        
                 output = maindf#.dropna()
             elif output_type == 'raw':        
                 output = webResults
             else:      
-                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+                raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
             return output
         except ValueError:
             pass
@@ -135,8 +137,8 @@ def getEarningsType(type=None, output_type=None):
              Type can be: earnings, ipo and dividends.
 
     output_type: string.
-             'df'(default) for data frame,
-             'raw' for list of unparsed data. 
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web.  
 
     Example
     -------
@@ -155,9 +157,10 @@ def getEarningsType(type=None, output_type=None):
         linkAPI += quote((type), safe='')  
     try:
         linkAPI += '&c=' + glob.apikey
+      
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-
+    print(linkAPI) 
     try:       
         response = urlopen(linkAPI)
         code = response.getcode()
@@ -176,12 +179,14 @@ def getEarningsType(type=None, output_type=None):
                 
             else:
                 raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='df':        
+            if output_type == None or output_type =='dict':
+                output = webResults
+            elif output_type == 'df':          
                 output = maindf#.dropna()
             elif output_type == 'raw':        
                 output = webResults
             else:      
-                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+                raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
             return output
         
         except ValueError:

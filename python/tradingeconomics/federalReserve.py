@@ -147,12 +147,14 @@ def getFedRStates(county = None, output_type = None):
       
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':        
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(defoult), df for data frame or raw for unparsed results.') 
     return output  
 
 
@@ -193,15 +195,15 @@ def getFedRSnaps(symbol = None, url = None, country = None, state = None, county
 
     Example
     -------
-    getFedRSnaps(symbol = 'AGEXMAK2A647NCEN', url = None, country = None, state = None, county = None, page_number = None, output_type = None)
+    getFedRSnaps(symbol = 'AGEXMAK2A647NCEN', url = None, country = None, state = None, county = None, output_type = None)
 
     getFedRSnaps(symbol = None, url = 'united states''/united-states/white-to-non-white-racial-dissimilarity-index-for-benton-county-ar-fed-data.html', country = None, state = None, county = None, page_number = None, output_type = None)
   
-    getFedRSnaps(symbol = None, url = None, country = 'united states', state = None, county = None, page_number = None, output_type = None)
+    getFedRSnaps(symbol = None, url = None, country = 'united states', state = None, county = None, output_type = None)
 
-    getFedRSnaps(symbol = None, url = None, country = None, state = 'tennessee', county = None, page_number = 5, output_type = None)
+    getFedRSnaps(symbol = None, url = None, country = None, state = 'tennessee', county = None, output_type = None)
 
-    getFedRSnaps(symbol = None, url = None, country = None, state = None, county = 'arkansas', page_number = 10, output_type = None)
+    getFedRSnaps(symbol = None, url = None, country = None, state = None, county = 'arkansas', output_type = None)
   
     """
  
@@ -245,12 +247,14 @@ def getFedRSnaps(symbol = None, url = None, country = None, state = None, county
         maindf = pd.DataFrame(webResults, columns=names2)     
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':        
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output
   
 
@@ -308,7 +312,7 @@ def getFedRHistorical(symbol = None, page_number = None, output_type = None):
     
     try:
         linkAPI += '?c=' + glob.apikey
-        print(linkAPI)
+     
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
@@ -330,12 +334,14 @@ def getFedRHistorical(symbol = None, page_number = None, output_type = None):
             
             else:
                 raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='df':        
+            if output_type == None or output_type =='dict':
+                output = webResults
+            elif output_type == 'df':        
                 output = maindf
             elif output_type == 'raw':        
                 output = webResults
             else:      
-                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+                raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
             return output
         except ValueError:
             pass
@@ -394,10 +400,12 @@ def getFedRCounty(output_type = None):
       
     else:
         raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='df':        
+    if output_type == None or output_type =='dict':
+        output = webResults
+    elif output_type == 'df':       
         output = maindf
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output     

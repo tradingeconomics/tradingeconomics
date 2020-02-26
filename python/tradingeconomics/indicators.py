@@ -52,12 +52,7 @@ def checkIndic(indicators, linkAPI):
         linkAPI += '/' + quote(",".join(indicators), safe='')
     return linkAPI
 
-def checkRatings(rating, linkAPI):       
-    if type(rating) is str:
-        linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(rating, safe='')
-    else:
-        linkAPI += 'https://api.tradingeconomics.com/ratings/' + quote(",".join(rating), safe='')
-    return linkAPI    
+  
 
 def getResults(webResults, country):
         names = ['country', 'category', 'title', 'latestvalue', 'latestvaluedate', 'source', 'unit', 'url', 'categorygroup', 'adjustment', 'frequency','historicaldatasymbol', 'createdate', 'previousvalue', 'previousvaluedate']
@@ -70,15 +65,7 @@ def getResults(webResults, country):
         maindf['Country'] =  maindf['Country'].map(lambda x: x.strip())
         return maindf 
 
-def getRatingResults(webResults, rating):
-        names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook']
-        names2 = ['Country','Te', 'Te_Outlook', 'Sp', 'Sp_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook']
-        maindf = pd.DataFrame()  
-        for i in range(len(names)):  
-            names[i] = [d[names2[i]]  for d in webResults]
-            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
-        maindf['Rating'] =  maindf['Rating'].map(lambda x: x.strip())
-        return maindf
+
 
 def getUpdateResults(webResults, date):
         names = ['country', 'category', 'historicalDataSymbol', 'lastUpdate']
@@ -175,7 +162,7 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
     else:
         return ''   
  
-def getRatings(country=['united states', 'china'], rating = None, output_type='df'):
+def getRatings(country=None, rating = None, output_type='df'):
     """
     Return a list of all countrys by rating.
     =================================================================================
@@ -203,19 +190,16 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
         ssl._create_default_https_context = _create_unverified_https_context
     
     if country == None:
-        linkAPI = 'https://api.tradingeconomics.com/ratings/'
+        linkAPI = 'https://api.tradingeconomics.com/ratings'
     else:
         linkAPI = checkCountryRatings(country)
-    
-    if rating == None:
-        linkAPI = linkAPI
-    else:
-        linkAPI = checkRatings(rating, linkAPI)
+    print(linkAPI)
+
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-
+  
     try:
         response = urlopen(linkAPI)
         code = response.getcode()
@@ -229,18 +213,17 @@ def getRatings(country=['united states', 'china'], rating = None, output_type='d
         try:
             if len(webResults) > 0: 
             
-                if(country==None):
-                    names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook', "dbrs", "dbrs_outlook"]
-                    names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook', "DBRS", "DBRS_Outlook"]    
-                    maindf = pd.DataFrame(webResults, columns=names2) 
-                else:
-                    names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook']
-                    names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook']    
-                    maindf = pd.DataFrame(webResults, columns=names2)    
+            
+                names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook', "dbrs", "dbrs_outlook"]
+                names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook', "DBRS", "DBRS_Outlook"]    
+                maindf = pd.DataFrame(webResults, columns=names2) 
+                
                 
             else:
                 raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='df':        
+            if output_type == None or output_type =='dict':
+                output = fn.out_type(maindf)
+            elif output_type == 'df':       
                 output = maindf
             elif output_type == 'raw':        
                 output = webResults
@@ -316,7 +299,9 @@ def getLatestUpdates(initDate = None, output_type = None):
             
             else:
                 raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='df':        
+            if output_type == None or output_type =='dict':
+                output = fn.out_type(maindf)
+            elif output_type == 'df':        
                 output = maindf
             elif output_type == 'raw':        
                 output = webResults

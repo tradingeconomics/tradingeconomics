@@ -219,7 +219,9 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
             else:
                 raise ParametersError ('No data available for the provided parameters.')
             
-            if output_type == None or output_type == 'df':
+            if output_type == None or output_type =='dict':
+                output = webResults
+            elif output_type == 'df': 
                 output= results = pd.DataFrame(webResults) 
             elif output_type == 'raw':        
                 output = webResults
@@ -282,7 +284,7 @@ def getHistoricalRatings(country = None, rating = None, initDate = None, endDate
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    print(linkAPI)
+   
     try:
         response = urlopen(linkAPI)
         code = response.getcode()
@@ -301,7 +303,9 @@ def getHistoricalRatings(country = None, rating = None, initDate = None, endDate
             
             else:
                 raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='df':        
+            if output_type == None or output_type =='dict':
+                output = webResults
+            elif output_type == 'df':        
                 output = maindf     
             elif output_type == 'raw':        
                 output = webResults

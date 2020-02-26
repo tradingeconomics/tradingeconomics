@@ -147,7 +147,7 @@ def getForecastData(country = None, indicator = None, output_type = None):
             elif output_type == 'raw':
                 output = webResults
             else:
-                raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for unparsed results')
+                raise ParametersError ('output_type options : df for data frame, dict(default) for dictionary by country, raw for unparsed results')
             return output
         except ValueError:
             pass
