@@ -187,7 +187,7 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
             if initDate > str(date.today()):
                 raise DateError ('Initial date out of range.')
         linkAPI = fn.finalLink(linkAPI, [initDate])
-
+    print(linkAPI)
     try:
         linkAPI += '?c='+glob.apikey
     except AttributeError:

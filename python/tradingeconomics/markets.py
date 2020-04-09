@@ -474,8 +474,8 @@ def getMarketsForecasts(category=None, symbol=None,  output_type = None):
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
-        names = ['symbol','country', 'date', 'type','last', 'url','importance','forecast1','forecast2','forecast2','forecast4']
-        names2 = ['Symbol','Country', 'Date', 'Type','Last', 'Url','Importance','Forecast1','Forecast2','Forecast2','Forecast4']   
+        names = ['symbol','country', 'date', 'type','last', 'url','importance','forecast1','forecast2','forecast3','forecast4']
+        names2 = ['Symbol','Country', 'Date', 'Type','Last', 'Url','Importance','Forecast1','Forecast2','Forecast3','Forecast4']   
         maindf = pd.DataFrame(webResults, columns=names2)     
 
     else:
