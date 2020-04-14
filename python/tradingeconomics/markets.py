@@ -392,7 +392,6 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
         response = urlopen(linkAPI)
         code = response.getcode()
         webResults = json.loads(response.read().decode('utf-8'))
-        print(linkAPI)    
     except ValueError:
         if code != 200:
             print(urlopen(linkAPI).read().decode('utf-8'))

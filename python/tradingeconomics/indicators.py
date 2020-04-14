@@ -193,7 +193,6 @@ def getRatings(country=None, rating = None, output_type='df'):
         linkAPI = 'https://api.tradingeconomics.com/ratings'
     else:
         linkAPI = checkCountryRatings(country)
-    print(linkAPI)
 
     try:
         linkAPI += '?c=' + glob.apikey

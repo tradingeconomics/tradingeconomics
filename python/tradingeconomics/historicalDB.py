@@ -125,7 +125,6 @@ def getHistorical(symbol = None, initDate = None, endDate = None, output_type = 
             linkAPI += '&c='+glob.apikey 
         else:   
             linkAPI += '?c='+glob.apikey
-        print(linkAPI)
         
     except AttributeError:
         raise LoginError('You need to do login before making any request')

@@ -212,7 +212,6 @@ def getCalendarId(id = None, output_type = None):
     else:
         linkAPI = checkCalendarId(id)
    
-    print (linkAPI)    
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
