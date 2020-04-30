@@ -20,7 +20,7 @@ library(devtools)
 ```
 **Step 3.** Install the tradingeconomics package
 ```r
-install_github("ieconomics/open-api/R/tradingeconomics")
+install_github("tradingeconomics/tradingeconomics/R/tradingeconomics")
 ```
 
 ##How to use ?
