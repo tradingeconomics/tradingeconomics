@@ -1,5 +1,4 @@
 source("R/functions.R")
-library(stringr)
 
 
 #'Return historical information from Trading Economics API.
