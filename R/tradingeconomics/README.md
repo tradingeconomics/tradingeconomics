@@ -14,7 +14,7 @@ How to install a package that’s sitting on GitHub?
 ```r
 install.packages("devtools")
 ```
-**Step 2.** Load the devtools and stringr package.
+**Step 2.** Load the devtools and stringr packages.
 ```r
 library(devtools)
 library(stringr)
