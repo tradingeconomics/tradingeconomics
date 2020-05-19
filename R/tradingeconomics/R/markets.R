@@ -110,14 +110,19 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
       url <- paste(url_base, paste(initDate, sep = ''), sep = '&d1=')
 
   }
-    print(url)
-    url <- URLencode(url)
-    request <- GET(url)
 
-    checkRequestStatus(http_status(request)$message)
-    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
-    df_final = rbind(df_final, webResults)
-    Sys.sleep(0.5)
+  if (is.null(initDate)) {
+    url <- url_base
+  }
+
+  print(url)
+  url <- URLencode(url)
+  request <- GET(url)
+
+  checkRequestStatus(http_status(request)$message)
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
 
 
   if (is.null(outType)| identical(outType, 'lst')){

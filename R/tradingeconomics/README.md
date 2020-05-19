@@ -14,13 +14,14 @@ How to install a package that’s sitting on GitHub?
 ```r
 install.packages("devtools")
 ```
-**Step 2.** Load the devtools package.
+**Step 2.** Load the devtools and stringr packages.
 ```r
 library(devtools)
+library(stringr)
 ```
 **Step 3.** Install the tradingeconomics package
 ```r
-install_github("ieconomics/open-api/R/tradingeconomics")
+install_github("tradingeconomics/tradingeconomics/R/tradingeconomics")
 ```
 
 ##How to use ?
