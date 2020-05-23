@@ -39,8 +39,8 @@ def parseData(data):
     indx = datafr['dates']
     datafr = datafr[['symbol','open', 'high', 'low', 'close']]
     datafr = datafr.set_index(indx)
-    #datafr.index.name = None
-    del datafr.index.name
+    datafr.index.name = None
+    #del datafr.index.name
     return datafr    
     
     
