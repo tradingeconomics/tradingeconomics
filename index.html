@@ -146,6 +146,7 @@
       <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
+
         <h1 id="introduction">Introduction</h1>
 <!--python black side-->
 <blockquote class="lang-specific python">
@@ -362,6 +363,27 @@ Using Headers auth:<br>
 <li>All API calls have a maximum limitation of 10000 rows. Please note the sample request is limited in scope to a few countries and indicators and responds with a maximum of 10 rows. <br></li>
 <li>API calls for Earnings, World Bank, Comtrade and Federal Reserve data have a maximum limitation of 500 rows.</li>
 </ul>
+<!--Search-->
+<h1 id="search">Search</h1>
+<p>Here you can search for keyword or term, you can also search by category, this endpoint will give you results for a specific category you choose, if you do not know wich category to look for, just use the search/{term} endpoint option to look for something in our API.</p>
+<h2 id="search">Categories</h2>
+<h3 id="methods">Methods</h3>
+<p><span class="methods"></p>
+
+<ul>
+<li><p>List of categories available.<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/search/categories?c=guest:guest">/search/categories</a></p></li>
+</ul>
+
+<ul>
+<li><p>Search for term/keyword by category.<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/search/japan?category=markets&c=guest:guest">/search/{term}?category={category}</a></p></li>
+</ul>
+<ul>
+<li><p>Search for term/keyword in all categories available.<br>
+<a target = '_blank' href="http://api.tradingeconomics.com/search/gold?c=guest:guest">/search/{term}</a></p></li>
+</ul>
+
 <!--Indicators white-->
 <h1 id="indicators">Indicators</h1>
 
@@ -1438,6 +1460,10 @@ or you can specify a start date and end date<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/updates?client=guest:guest">/updates</a></p></li>
 <li><p>Updates since a specific date<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/updates/2018-01-01?client=guest:guest">/updates/{date}</a></p></li>
+<li><p>Get the Latest Updates by country.<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal?client=guest:guest">/updates/country/{country}</a></p></li>
+<li><p>Get the Latest Updates by country since a specific date<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal/2018-01-01?client=guest:guest">/updates/country/{country}/{date}</a></p></li>        
 </ul>
 
 <p></span></p>
