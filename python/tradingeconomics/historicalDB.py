@@ -85,9 +85,9 @@ def getHistorical(symbol = None, initDate = None, endDate = None, output_type = 
         linkAPI += 'historical/ticker/' + quote(symbol, safe='')
                 
     elif (':' in symbol): 
-        linkAPI += 'markets/historical/' + quote(symbol, safe='";" | "/" | "?" | ":" | "@" | "&" | "=" | "+" | "$" | "," | "~"') 
+        linkAPI += 'markets/historical/' + quote(symbol, safe='') 
     else:
-        linkAPI += 'markets/historical/' + quote(','.join(symbol), safe='";" | "/" | "?" | ":" | "@" | "&" | "=" | "+" | "$" | "," | "~"')    
+        linkAPI += 'markets/historical/' + quote(','.join(symbol), safe='')     
     
     if (initDate is not None) and (endDate is not None):
         try: 
