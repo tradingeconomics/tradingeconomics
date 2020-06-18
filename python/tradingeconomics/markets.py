@@ -73,7 +73,7 @@ def getMarketsData(marketsField, output_type=None):
         
     fields =['commodities', 'currency', 'index', 'bond']
     if marketsField not in fields:
-        raise ParametersError ('Accepted values for marketsField are \'commodity\', \'currency\', \'index\' or \'bond\'.')
+        raise ParametersError ('Accepted values for marketsField are \'commodities\', \'currency\', \'index\' or \'bond\'.')
     linkAPI = 'https://api.tradingeconomics.com/markets/' + quote(marketsField, safe='') 
     try:
         linkAPI += '?c=' + glob.apikey
@@ -98,7 +98,7 @@ def getMarketsData(marketsField, output_type=None):
     if output_type == None or output_type =='dict':
         output = webResults
     elif output_type == 'df':          
-        output = maindf.dropna()
+        output = maindf#.dropna()
     elif output_type == 'raw':        
         output = webResults
     else:      
