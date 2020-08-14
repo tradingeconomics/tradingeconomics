@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 
 //setting global variable to be used outside this module
 global.start_date = null;
+global.country = null;
 
 //This function builds the path to get the API request:
 /****************************************************************************************************************************  
@@ -16,7 +17,8 @@ global.start_date = null;
 
   example:
     getLatestUpdates(); 
-    getLatestUpdates(start_date = '2018-02-02');         
+    getLatestUpdates(start_date = '2018-02-02');
+    getLatestUpdates(start_date = '2018-02-02', country='china');          
 
 ******************************************************************************************************************************/
 
@@ -25,16 +27,22 @@ function getLatestUpdates(){
   var Data = '';
   var url = '';
    
-  if (start_date != null){              
+  if (start_date != null && country === null){              
       url = '/updates/' + start_date;    
+  }
+  if(country != null){
+      url = '/updates/country/' + country;
   } 
-  else{
+  if(start_date != null && country != null){
+      url = '/updates/country/' + country + '/' + start_date
+  } 
+  if(start_date === null && country === null){
       url = '/updates'
-  } 
-
+  }
+  
   date.checkDates(start_date); 
   Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-  
+
   return fetch(Data)
   .then(func.handleErrors)   
   .then(function(response) {    

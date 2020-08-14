@@ -9,6 +9,7 @@ const fetch = require('node-fetch');
 global.symbol = null;
 global.start_date = null;
 global.end_date = null;
+global.agr = null;
 
 //This function builds the path to get the API request:
 /****************************************************************************************************************************  
@@ -37,7 +38,10 @@ function getMarketsIntraday(){
     if (start_date != null && end_date != null){                   
         url =  '/markets/intraday/' + symbol + '?d1=' + start_date + '&d2=' + end_date;      
     }
-   
+    if (start_date != null && end_date != null && agr != null){                   
+        url =  '/markets/intraday/' + symbol + '?agr=' + agr + '?d1=' + start_date + '&d2=' + end_date;      
+    }
+    
     date.checkDates(start_date, end_date); 
 
     if(url.includes('?')){
@@ -45,7 +49,7 @@ function getMarketsIntraday(){
     }else{
         Data = url_base + url + '?c='+ apikey.replace (' ','%20');
     }
-    
+
     return fetch(Data)
     .then(func.handleErrors)   
     .then(function(response) {    

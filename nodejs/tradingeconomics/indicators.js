@@ -8,6 +8,7 @@ const fetch = require('node-fetch');
 global.country = null;
 global.indicator = null;
 global.ticker = null;
+global.group = null;
 
 
 //This function builds the path to get the API request:
@@ -19,8 +20,9 @@ global.ticker = null;
    example:
     getIndicatorData();
     getIndicatorData(country = ['china', 'portugal']);
-    getIndicatorData(indicator ='gdp' );        
-    getIndicatorData(ticker ='usurtot' );        
+    getIndicatorData(indicator ='gdp');        
+    getIndicatorData(ticker ='usurtot');
+    getIndicatorData(country ='china', group = 'housing');             
 
 *******************************************************************/
 
@@ -28,7 +30,7 @@ function getIndicatorData() {
     
     var url = '';
     var Data = '';
-
+ 
     if (country != null){    
         url = '/country/'+ country;    
     }
@@ -37,14 +39,20 @@ function getIndicatorData() {
     }
     if (ticker != null){     
         url = '/country/ticker/' + ticker;    
+    }
+    if (country != null && group != null){    
+        url = '/country/' + country + '?c=' + apikey + '&group=' + group ;
     }  
     if (country === null && indicator === null && ticker === null){     
         url = '/indicators';
     }
-
+    
+    if (url.includes(group)){
+        Data = url_base + url .replace (' ','%20');
+    }else{
+        Data = url_base + url + '?c=' + apikey.replace (' ','%20');
+    }
   
-    Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-
     return fetch(Data)
     .then(func.handleErrors)   
     .then(function(response) {    
@@ -52,8 +60,7 @@ function getIndicatorData() {
     }).catch(function (err) {
         return err.message;
     });
-   
-    
+     
 }   
 
 module.exports.getIndicatorData = getIndicatorData;

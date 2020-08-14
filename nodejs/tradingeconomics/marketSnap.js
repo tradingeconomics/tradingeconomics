@@ -13,12 +13,13 @@ global.peers_symbol = null;
 global.components_symbol = null;
 global.search_term = null;
 global.category = null;
-global.page = null;
+global.cross = null;
+
 
 //This function builds the path to get the API request:
 /******************************************************************************************************
    parameters:
-    country, symbol, peers_symbol, components_symbol, search_term, category, page, marketsField
+    country, symbol, peers_symbol, components_symbol, search_term, category, marketsField
     -> MarketsField can be:
         commodities, index, currency and bond
     -> Search_term: search by country
@@ -30,10 +31,11 @@ global.page = null;
     getMarketSnap(symbol = ['aapl:us', 'indu:ind']);        
     getMarketSnap(peers_symbol ='aapl:us' );        
     getMarketSnap(components_symbol ='psi20:ind');        
-    getMarketSnap(country ='japan');        
-    getMarketSnap(country ='united states', page = '0');        
+    getMarketSnap(country ='japan');
+    getMarketSnap(cross ='eur');          
+    getMarketSnap(country ='united states');        
     getMarketSnap(search_term ='japan', category = 'index, markets');        
-    getMarketSnap(search_term ='japan', category = 'index, markets', page = '0');        
+    getMarketSnap(search_term ='japan', category = 'index, markets');        
 
 *******************************************************************************************************/
 
@@ -57,6 +59,9 @@ function getMarketSnap(){
     if(symbol != null){
         url = '/markets/symbol/' + symbol;
     }
+    if(cross != null){
+        url = '/markets/currency/' + '?c=' + apikey + '&cross=' + cross;
+    }
     if (peers_symbol != null){
         url = '/markets/peers/' + peers_symbol;
     }
@@ -66,26 +71,20 @@ function getMarketSnap(){
     if(country != null){
         url = '/markets/country/' + country;
     }
-    if(country != null && page != null){
-        url = '/markets/country/' + country + '?c=' + apikey + '&page=' + page ;
-    }
+
     if(search_term != null){
         url = '/markets/search/' + search_term;   
     }
     if(category != null){
         url = '/markets/search/' + search_term + '?c=' + apikey + '&category=' + category ;
     }
-    if(search_term != null && category != null && page != null && category != null){
-        url = '/markets/search/' + search_term + '?c=' + apikey + '&category=' + category + '&page=' + page ;
-    }
-
         
-    if (url.includes(page || category)){
+    if (url.includes(category || cross)){
         Data = url_base + url .replace (' ','%20');
     }else{
         Data = url_base + url + '?c=' + apikey.replace (' ','%20');
     }
-   
+
     return fetch(Data)
     .then(func.handleErrors)   
     .then(function(response) {    

@@ -8,28 +8,25 @@ const fetch = require('node-fetch');
 global.counties = null;
 global.country = null;
 global.symbol = null;
-global.page = null;
 global.county = null;
 global.state = null;
-global.pike = null;
 global.URL = null;
 global.historical_symbol = null;
 
 //This function builds the path to get the API request:
 /****************************************************************************************************  
    parameters:
-    country, county, counties, states, page, symbol, URL, state, pike, historical(symbol)
+    country, county, counties, states, symbol, URL, state, pike, historical(symbol)
 
    example:
     getFred();
-    getFred(counties = 'arkansas');
-    getFred(country ='united states', page = '2');
+    getFred(counties = 'pike');
+    getFred(country ='united states');
     getFred(country = 'united states' );       
     getFred(symbol ='AGEXMAK2A647NCEN' );              
     getFred(URL ='/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' );              
-    getFred(county ='arkansas' );              
-    getFred(state ='tennessee' );              
-    getFred(pike ='pike' );              
+    getFred(county ='pike' );              
+    getFred(state ='tennessee' );                           
     getFred(historical_symbol ='RACEDISPARITY005007' );              
 
 ******************************************************************************************************/
@@ -39,32 +36,26 @@ function getFred(){
     var Data = '';
     var url = '';
 
-    if ((counties, country, county, symbol, URL, state, pike, historical_symbol) === null){    
+    if ((counties, country, county, symbol, URL, state, historical_symbol) === null){    
         url =  '/fred/states'; 
     }
     if (counties != null){      
         url = '/fred/counties/' + counties;    
     }
-    if (country != null){     
-        url = '/fred/snapshot/country/' + country;    
-    }
-    if (country != null && page != null){     
-        url = '/fred/snapshot/country/' + country + '/' + page;    
-    } 
     if (symbol != null){     
         url = '/fred/snapshot/symbol/' + symbol;    
     }
     if (URL != null){     
         url = '/fred/snapshot/url' + '?url=' + URL;    
     }
+    if (country != null){     
+        url = '/fred/snapshot/country/' + country;    
+    }
     if(state != null){
         url = '/fred/snapshot/state/' + state;
     }
     if(county != null){
         url = '/fred/snapshot/county/' + county;
-    }
-    if(pike != null){
-        url = '/fred/snapshot/county/Pike%20County,%20AR';
     }
     if(historical_symbol != null){
         url = '/fred/historical/' + historical_symbol;
@@ -75,7 +66,7 @@ function getFred(){
     }else{
         Data = url_base + url + '?c='+ apikey.replace (' ','%20');
     }
-
+ 
     return fetch(Data)
     .then(func.handleErrors)   
     .then(function(response) {    

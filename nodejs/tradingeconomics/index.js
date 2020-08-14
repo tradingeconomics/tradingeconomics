@@ -18,4 +18,6 @@ module.exports = Object.assign(
     require('./marketSnap.js'),
     require('./marketIntraday.js'),
     require('./marketHistorical.js'),
+    require('./marketForecasts.js'),
+    require('./search.js')
 );
