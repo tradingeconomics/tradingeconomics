@@ -19,8 +19,10 @@ global.agr = null;
   example:
     getMarketsIntraday(symbol ='aapl:us');
     getMarketsIntraday(symbol =['aapl:us', 'indu:ind']);
-    getMarketsIntraday(symbol ='indu:ind', start_date = '2018-02-01', end_date = '2019-03-01');         
-    getMarketsIntraday(symbol ='aapl:us', start_date = '2018-02-02' );      
+    getMarketsIntraday(symbol ='indu:ind', start_date = '2018-02-01', end_date = '2019-03-01');
+    getMarketsIntraday(symbol ='aapl:ind', start_date = '2018-02-01', end_date = '2018-02-02', agr = '10m');            
+    getMarketsIntraday(symbol ='aapl:us', start_date = '2018-02-02' );
+     
 
 ******************************************************************************************************************************/
 
@@ -39,7 +41,7 @@ function getMarketsIntraday(){
         url =  '/markets/intraday/' + symbol + '?d1=' + start_date + '&d2=' + end_date;      
     }
     if (start_date != null && end_date != null && agr != null){                   
-        url =  '/markets/intraday/' + symbol + '?agr=' + agr + '?d1=' + start_date + '&d2=' + end_date;      
+        url =  '/markets/intraday/' + symbol + '?agr=' + agr + '&d1=' + start_date + '&d2=' + end_date;      
     }
     
     date.checkDates(start_date, end_date); 
@@ -49,7 +51,7 @@ function getMarketsIntraday(){
     }else{
         Data = url_base + url + '?c='+ apikey.replace (' ','%20');
     }
-
+   
     return fetch(Data)
     .then(func.handleErrors)   
     .then(function(response) {    
@@ -62,4 +64,3 @@ function getMarketsIntraday(){
 }
 
 module.exports.getMarketsIntraday = getMarketsIntraday;
-
