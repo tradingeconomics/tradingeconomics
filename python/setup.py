@@ -20,7 +20,7 @@ setup(
   url = 'https://github.com/ieconomics/open-api', 
   download_url = 'https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.973.zip', 
   keywords = ['tradingeconomics', 'data'], 
-  classifiers = [ 'Programming Language :: Python :: 2.7 
+  classifiers = [ 'Programming Language :: Python :: 2.7',
                 'Programming Language :: Python :: 3',
                 'Programming Language :: Python :: 3.2',
                 'Programming Language :: Python :: 3.3',
