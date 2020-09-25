@@ -190,5 +190,3 @@ getFedHistorical <- function(symbol = NULL, outType = NULL){
 
 }
 
-
-getFedHistorical('RACEDISPARITY005007')

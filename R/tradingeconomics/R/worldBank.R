@@ -190,4 +190,4 @@ getWorldBankHistorical <- function(series_code = NULL, outType = NULL){
 
   return(df_final)
 }
-getWorldBankIndicators(category = 'country', identifier = 'Portugal')
+
