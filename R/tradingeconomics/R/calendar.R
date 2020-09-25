@@ -41,29 +41,42 @@ source("R/functions.R")
 #'
 
 getCalendarData <- function(country = NULL, indicator = NULL, id = NULL, ticker = NULL, initDate= NULL, endDate= NULL, outType = NULL){
-  base <- "https://api.tradingeconomics.com/calendar"
-
+  base <- "https://api.tradingeconomics.com/calendar/"
   df_final = data.frame()
 
-
-  if (is.null(country) & is.null(indicator)){
-    url <- base
-  } else if (is.null(country) & !is.null(indicator)){
-    url <- paste(base, 'country/all', 'indicator',
-                      paste(indicator, collapse = ','), sep = '/')
-  } else if (!is.null(country) & is.null(indicator)){
-    url <- paste(base, 'country',
-                 paste(country, collapse = ','), sep = '/')
-  } else {
-    url <- paste(base, 'country', paste(country, collapse = ','), 'indicator',
-                 paste(indicator, collapse = ','), sep = '/')
+  if (length(country) > 1){
+      country = paste(country, collapse = ',')
+    }
+  if (length(indicator) > 1){
+    indicator = paste(indicator, collapse = ',')
   }
-  if (!is.null(id)){
-    url <- paste(base, "calendarid", paste(id, collapse = ','), sep = '/')
+  if (length(ticker) > 1){
+    ticker = paste(ticker, collapse = ',')
   }
-  if (!is.null(ticker)){
-    url <- paste(base, "ticker", paste(ticker, collapse = ','), sep = '/')
+  if (length(id) > 1){
+    id = paste(id, collapse = ',')
+  }
 
+  if(!is.null(country)& !is.null(indicator)){
+    url <- paste('country', country, 'indicator', indicator, sep = '/')
+  }
+  else if (!is.null(country)){
+    url <- paste('country', country, sep = '/')
+  } 
+  else if (!is.null(indicator)){
+    url <- paste('indicator', indicator, sep = '/')
+  }
+  else if (!is.null(id)){
+    url <- paste("calendarid", id, sep = '/')
+  }
+  else if (!is.null(ticker)){
+    url <- paste("ticker", ticker, sep = '/')
+  }
+  else if(is.null(country) & !is.null(initDate) & !is.null(endDate)){
+    url <- 'country/all/'
+  }
+  else {
+    url <- ''
   }
 
   if (!is.null(initDate) & !is.null(endDate)){
@@ -72,19 +85,14 @@ getCalendarData <- function(country = NULL, indicator = NULL, id = NULL, ticker 
     if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
     if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
     url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
-  } else if (!is.null(initDate)){
+  } 
+  else if (!is.null(initDate)){
     dateCheck(initDate)
     if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
     url <- paste(base, "All", collapse = NULL, sep = '/')
-
-  }else{
-    url <- url
-
   }
 
-  print(url)
-
-  url <- paste(url, '?c=', apiKey, sep = '')
+  url <- paste(base, url, '?c=', apiKey, sep = '')
   url <- URLencode(url)
   request <- GET(url)
 
@@ -108,6 +116,3 @@ getCalendarData <- function(country = NULL, indicator = NULL, id = NULL, ticker 
 
   return(df_final)
 }
-
-
-

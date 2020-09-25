@@ -47,32 +47,42 @@ lower.Date <- function(country, indicator, apiKey){
 
 
 getHistoricalData <- function(country = NULL, indicator = NULL, ticker = NULL, initDate= NULL, endDate= NULL, outType = NULL){
-  base <-  "https://api.tradingeconomics.com/historical"
-
+  base <-  "https://api.tradingeconomics.com/historical/"
   df_final = data.frame()
 
+    if (length(country) > 1){
+      country = paste(country, collapse = ',')
+    }
+    if (length(indicator) > 1){
+      indicator = paste(indicator, collapse = ',')
+    }
+    if (length(ticker) > 1){
+      ticker = paste(ticker, collapse = ',')
+    }
+
     if (!is.null(country) & !is.null(indicator)){
-      url <- paste(base,"country",  paste(country, collapse = ','), 'indicator',
-                   paste(indicator, collapse = ','), sep = '/')
+      url <- paste("country", country,'indicator', indicator, sep = '/')
     }
-
-
     if (!is.null(ticker)){
-      url <- paste(base, "ticker",paste(ticker, collapse = ','), sep = '/')
+      url <- paste("ticker", ticker, sep = '/')
     }
+    
     if (is.null(initDate) & is.null(endDate)){
         initDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
         url <- paste(url, paste(initDate, sep = '/'), sep = '/')
-    } else if (is.null(initDate) & !is.null(endDate)){
+    }
+    else if (is.null(initDate) & !is.null(endDate)){
         dateCheck(endDate)
         lowDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
         if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
         url <- paste(url, paste(lowDate, endDate, sep = '/'), sep = '/')
-    } else if (!is.null(initDate) & is.null(endDate)){
+    } 
+    else if (!is.null(initDate) & is.null(endDate)){
         dateCheck(initDate)
         if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
         url <- paste(url, initDate, sep = '/')
-    } else {
+    } 
+    else {
         dateCheck(initDate)
         dateCheck(endDate)
         if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
@@ -80,9 +90,8 @@ getHistoricalData <- function(country = NULL, indicator = NULL, ticker = NULL, i
         if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
         url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
     }
-
-
-    url <- paste(url, '?c=', apiKey, sep = '')
+    
+    url <- paste(base, url, '?c=', apiKey, sep = '')  
     url <- URLencode(url)
     request <- GET(url)
 
@@ -111,5 +120,6 @@ getHistoricalData <- function(country = NULL, indicator = NULL, ticker = NULL, i
 
   return(df_final)
 }
+
 
 

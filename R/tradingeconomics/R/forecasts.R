@@ -29,31 +29,37 @@ source("R/functions.R")
 #'}
 
 
-getForecastData <- function(country = NULL, indicator = NULL, outType = NULL){
-  base <- "https://api.tradingeconomics.com/forecast"
-
+getForecastData <- function(country = NULL, indicator = NULL, outType = NULL, ticker = NULL){
+  base <- "https://api.tradingeconomics.com/forecast/"
   df_final = data.frame()
-  step = 10
 
-  for(i in seq(1, length(country), by = step)){
+  if (length(country) > 1){
+  country = paste(country, collapse = ',')
+  }
+  if (length(indicator) > 1){
+    indicator = paste(indicator, collapse = ',')
+  }
+  if (length(ticker) > 1){
+    ticker = paste(ticker, collapse = ',')
+  }
 
-    init = as.numeric(i)
-    finit = as.numeric(i)+step-1
+  if(!is.null(indicator) & !is.null(country)) {
+    url <- paste('country', country, 'indicator', indicator, sep = '/')
+  } 
+  else if (!is.null(indicator)){
+    url <- paste('indicator', indicator, sep = '/')
+  }
+  else if (!is.null(country)){
+    url <- paste('country', country, sep = '/')
+  } 
+  else if(!is.null(ticker)){
+    url <- paste('ticker', ticker, sep = '/')
+  }
+  else {
+    stop('At least one of parameters, country, ticker or indicator, should be indicated. ')
+  }
 
-    if (is.null(country) & is.null(indicator)){
-      stop('At least one of parameters, country or indicator, should be indicated. ')
-    } else if (is.null(country) & !is.null(indicator)){
-      url <- paste(base, 'indicator',
-                   paste(indicator, collapse = ','), sep = '/')
-    } else if (!is.null(country) & is.null(indicator)){
-      url <- paste(base, 'country',
-                   paste(na.omit(country[init:finit]), collapse = ','), sep = '/')
-    } else {
-      url <- paste(base, 'country', paste(na.omit(country[init:finit]), collapse = ','), 'indicator',
-                   paste(indicator, collapse = ','), sep = '/')
-    }
-
-    url <- paste(url, '?c=', apiKey, sep = '')
+    url <- paste(base, url, '?c=', apiKey, sep = '')
     url <- URLencode(url)
     request <- GET(url)
 
@@ -63,7 +69,6 @@ getForecastData <- function(country = NULL, indicator = NULL, outType = NULL){
 
     df_final = rbind(df_final, webResults)
     Sys.sleep(0.5)
-  }
 
   if (is.null(outType)| identical(outType, 'lst')){
     df_final <- split(df_final , f = df_final$Country)
@@ -75,6 +80,7 @@ getForecastData <- function(country = NULL, indicator = NULL, outType = NULL){
 
   return(df_final)
 }
+
 
 
 

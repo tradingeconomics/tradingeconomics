@@ -24,7 +24,6 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/fred"
   df_final = data.frame()
 
-
   if(!is.null(category == "name")) {
     url <- paste(base,"states", sep = '/')
 
@@ -34,9 +33,7 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
 
   }
 
-
   url <- paste(url, '?c=', apiKey, sep = '')
-
 
   url <- URLencode(url)
   request <- GET(url)
@@ -70,7 +67,6 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
 #' @param state string.
 #' @param symbol string.
 #' @param URL string.
-#' @param page string.
 #' @param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
@@ -82,11 +78,11 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
 #'@examples
 #'\dontrun{ getFedReserveSnapshot('AGEXMAK2A647NCEN', outType = 'df')
 #'getFedReserveSnapshot(county = 'arkansas'), getFedReserveSnapshot(county ='Pike County')
-#'getFedReserveSnapshot(country = 'united states', page = '2'), getFedReserveSnapshot(country = 'united states')
+#'getFedReserveSnapshot(country = 'united states'), getFedReserveSnapshot(country = 'united states')
 #'getFedReserveSnapshot(URL = '/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' )
 #'}
 #'
-getFedReserveSnapshot <- function(symbol = NULL, state = NULL, county = NULL, country = NULL, URL = NULL, page = NULL, outType = NULL){
+getFedReserveSnapshot <- function(symbol = NULL, state = NULL, county = NULL, country = NULL, URL = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/fred/snapshot"
   df_final = data.frame()
 
@@ -105,11 +101,6 @@ getFedReserveSnapshot <- function(symbol = NULL, state = NULL, county = NULL, co
   }
   if(!is.null(country)){
     url <- paste(base, 'country', paste(country, collapse = ','), sep = '/')
-
-    if(!is.null(page)){
-      url <- paste(url, paste(page, collapse = ','), sep = '/')
-
-    }
   }
   if(!is.null(state)){
     url <- paste(base, 'state', paste(state, collapse = ','), sep = '/')
@@ -168,15 +159,11 @@ getFedHistorical <- function(symbol = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/fred/historical"
   df_final = data.frame()
 
-
-
   if(is.null(symbol)) {
     print("A symbol is needed!")
   }else{
     url <- paste (base, paste(symbol, collapse = ','), sep = '/')
   }
-
-
 
   url <- paste(url, '?c=', apiKey, sep = '')
   url <- URLencode(url)
@@ -202,3 +189,6 @@ getFedHistorical <- function(symbol = NULL, outType = NULL){
   return(df_final)
 
 }
+
+
+getFedHistorical('RACEDISPARITY005007')

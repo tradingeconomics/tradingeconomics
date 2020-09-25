@@ -23,26 +23,28 @@ source("R/functions.R")
 
 
 getCreditRating <- function(country = NULL, outType = NULL){
-  base <- "https://api.tradingeconomics.com/ratings"
+  
+  base <- "https://api.tradingeconomics.com/ratings/"
   df_final = data.frame()
+  url = ''
+  
+  if (length(country) > 1){
+      country = paste(country, collapse = ',')
+    }
 
-  if(is.null(country)){
-    url <- paste(base, sep = '')
-
-  } else{
-    url <- paste(base,paste(country, collapse = ','), sep = '/')
-
+  if (!is.null(country)){
+    url <- paste(country, sep = '/')
   }
 
-    url <- paste(url, '?c=', apiKey, sep = '')
+  url <- paste(base, url, '?c=', apiKey, sep = '')
+  url <- URLencode(url)
+  
+  request <- GET(url)
 
-    url <- URLencode(url)
-    request <- GET(url)
-
-    checkRequestStatus(http_status(request)$message)
-    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
-    df_final = rbind(df_final, webResults)
-    Sys.sleep(0.5)
+  checkRequestStatus(http_status(request)$message)
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
 
 
   if (is.null(outType)| identical(outType, 'lst')){
@@ -82,21 +84,41 @@ getCreditRating <- function(country = NULL, outType = NULL){
 #'
 
 
-getCreditRatingHistorical <- function(country = NULL, outType = NULL){
+getCreditRatingHistorical <- function(country = NULL, outType = NULL, initDate= NULL, endDate= NULL){
 
   if(is.null(country)) {
     print("Country is needed.")
     return (NULL)
   }
 
-  base <-  "https://api.tradingeconomics.com/ratings/historical"
+  base <-  "https://api.tradingeconomics.com/ratings/historical/"
   df_final = data.frame()
 
   if(!is.null(country)){
-    url <- paste(base,paste(country, collapse = ','), sep = '/')
+    url <- paste(country, sep = '/')
   }
-    url <- paste(url, '?c=', apiKey, sep = '')
 
+  if (is.null(initDate) & !is.null(endDate)){
+    dateCheck(endDate)
+    lowDate <- seq(Sys.Date(), length=2, by="-10 years")[2]
+    if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
+    url <- paste(url, paste(lowDate, endDate, sep = '/'), sep = '/')
+  }
+  else if (!is.null(initDate) & is.null(endDate)){
+      dateCheck(initDate)
+      if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+      url <- paste(url, initDate, sep = '/')
+  }
+  else if(!is.null(initDate) & !is.null(endDate)) {
+      dateCheck(initDate)
+      dateCheck(endDate)
+      if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+      if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
+      if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
+      url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
+  }
+
+    url <- paste(base, url, '?c=', apiKey, sep = '')
     url <- URLencode(url)
     request <- GET(url)
 
@@ -116,6 +138,3 @@ getCreditRatingHistorical <- function(country = NULL, outType = NULL){
 
   return(df_final)
 }
-
-
-

@@ -24,10 +24,37 @@ getComtradeCategories <- function(id = NULL, outType = NULL){
   url <- paste(base, '?c=', apiKey, sep = '')
   df_final = data.frame()
 
-  print(url)
   url <- URLencode(url)
   request <- GET(url)
 
+  checkRequestStatus(http_status(request)$message)
+
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
+
+
+  if (is.null(outType)| identical(outType, 'lst')){
+    df_final <- split(df_final , f = paste(df_final$id))
+  } else if (identical(outType, 'df')){
+    df_final = df_final
+  } else {
+    stop('output_type options : df for data frame, lst(default) for list')
+  }
+
+  return(df_final)
+
+}
+
+getComtradeUpdates <- function(outType = NULL){
+
+  base <- "https://api.tradingeconomics.com/comtrade/updates"
+  url <- paste(base, '?c=', apiKey, sep = '')
+  df_final = data.frame()
+
+  url <- URLencode(url)
+  request <- GET(url)
 
   checkRequestStatus(http_status(request)$message)
 
@@ -76,7 +103,6 @@ getComtradeCountry <- function(country = NULL, page_number = NULL, outType = NUL
 
   if(is.null(country)){
     url <- paste(base, 'countries', sep= '/')
-
   }
   if(!is.null(country)){
     url <- paste(base, 'country', paste(country, collapse = '/'), sep = '/')
@@ -143,7 +169,6 @@ getComtradeHistorical <- function(symbol = NULL, outType = NULL){
 
   url <- paste(url, '?c=', apiKey, sep = '')
 
-  print(url)
   url <- URLencode(url)
   request <- GET(url)
 
@@ -168,3 +193,5 @@ getComtradeHistorical <- function(symbol = NULL, outType = NULL){
 
 
 }
+
+

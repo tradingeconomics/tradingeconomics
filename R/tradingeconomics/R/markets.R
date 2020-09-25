@@ -20,17 +20,39 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 #'\dontrun{ getMarketsData(marketsField = 'currency')
 #'}
 
-getMarketsData <- function(marketsField, outType = NULL){
-  base <- "https://api.tradingeconomics.com/markets"
+getMarketsData <- function(marketsField = NULL, country = NULL, symbol = NULL, cross=NULL, outType = NULL){
+  base <- "https://api.tradingeconomics.com/markets/"
   fields <- c('commodities', 'currency', 'index', 'bond')
 
-  if (!(marketsField %in% fields)){
-    stop('Possible values for marketsField are commodities, currency, index or bond')
-  } else {
-    url <- paste(base, marketsField, sep = '/')
+  if (length(symbol) > 1){
+      symbol = paste(symbol, collapse = ',')
+    }
+
+  if (!is.null(marketsField)){
+    if(marketsField %in% fields) {
+      url <- paste(marketsField, sep = '/')
+    }
+    else {
+      stop('Possible values for marketsField are commodities, currency, index or bond')
+    }
+  }
+  else if(!is.null(cross)) {
+    url <- paste('/currency?c=', apiKey, '&cross=', cross, sep = '')
+  }
+  else if(!is.null(symbol)) {
+    url <- paste('symbol', symbol, sep = '/')
+  }
+  else if(!is.null(country)) {
+    url <- paste('country', country, sep = '/')
   }
 
-  url <- paste(url, '?c=', apiKey, sep = '')
+  if(is.null(cross)){
+    url <- paste(base, url, '?c=', apiKey, sep = '')
+  }
+  else {
+    url <- paste(base, url, sep = '')
+  }
+
   url <- URLencode(url)
   request <- GET(url)
 
@@ -48,6 +70,7 @@ getMarketsData <- function(marketsField, outType = NULL){
 
   return(webResults)
 }
+
 
 
 #'Return historical information from Trading Economics API.
@@ -80,10 +103,8 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
   base <-  "https://api.tradingeconomics.com/markets/historical"
   df_final = data.frame()
 
-
   if(is.null(symbol)){
-    print("A symbol is needed!")
-    return(NULL)
+    stop("A symbol is needed!")
   }
 
   if(!is.null(symbol)){
@@ -93,7 +114,6 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
   url_base <- paste(url, '?c=', apiKey, sep = '')
 
   if(!is.null(initDate) & !is.null(endDate)){
-
     dateCheck(initDate)
     dateCheck(endDate)
     if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
@@ -101,21 +121,17 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
     if(initDate > endDate) stop('Incorrect time period initDate - endDate!')
 
     url <- paste(url_base, paste(initDate, endDate, sep = '&d2='), sep = '&d1=')
-
-
-  }else if(!is.null(initDate) & is.null(endDate)){
+  }
+  else if(!is.null(initDate) & is.null(endDate)){
     dateCheck(initDate)
     if (initDate > Sys.Date())stop('Incorrect time period initDate!')
-
       url <- paste(url_base, paste(initDate, sep = ''), sep = '&d1=')
-
   }
 
   if (is.null(initDate)) {
     url <- url_base
   }
 
-  print(url)
   url <- URLencode(url)
   request <- GET(url)
 
@@ -123,7 +139,6 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
   webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
   df_final = rbind(df_final, webResults)
   Sys.sleep(0.5)
-
 
   if (is.null(outType)| identical(outType, 'lst')){
     df_final <- split(df_final , f =  paste(df_final$Symbol))
@@ -170,50 +185,49 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
 #'
 
 
-getMarketsIntraday <- function (symbol = NULL, initDate = NULL, endDate = NULL, outType = NULL ){
-
-  base <-  "https://api.tradingeconomics.com/markets/intraday"
+getMarketsIntraday <- function (symbol = NULL, initDate = NULL, endDate = NULL, interval = NULL, outType = NULL ){
+  base <-  "https://api.tradingeconomics.com/markets/intraday/"
   df_final = data.frame()
 
-
   if(is.null(symbol)){
-    print("A symbol is needed!")
-    return(NULL)
+    stop("A symbol is needed!")
   }
 
-  if(!is.null(symbol)){
-    url <- paste(base, paste(symbol, collapse = ','), sep = '/')
-
+  if(!is.null(symbol) & !is.null(interval)){
+    url <- paste(symbol, '?agr=', interval, sep = '')
   }
-
-  url <- paste(url, '?c=', apiKey, sep = '')
+  else if(!is.null(symbol)){
+    url <- paste(paste(symbol, collapse = ','), paste( '?c=', apiKey, sep = ''), sep = '')
+  }
 
   if(!is.null(initDate) & !is.null(endDate)){
-
     dateCheck(initDate)
     dateCheck(endDate)
     if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
     if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
     if(initDate > endDate) stop('Incorrect time period initDate - endDate!')
-
     url <- paste(url, paste(initDate, endDate, sep = '&d2='), sep = '&d1=')
-
-
-  }else if(!is.null(initDate) & is.null(endDate)){
+  }
+  else if(!is.null(initDate) & is.null(endDate)){
     dateCheck(initDate)
     if (initDate > Sys.Date())stop('Incorrect time period initDate!')
-
     url <- paste(url, paste(initDate, sep = ''), sep = '&d1=')
-
+  }
+  
+  if(!is.null(interval)){
+    url <- paste(base, url, '&c=', apiKey, sep = '')
+  }
+  else{
+    url <- paste(base, url, sep = '')
   }
 
-    url <- URLencode(url)
-    request <- GET(url)
+  url <- URLencode(url)
+  request <- GET(url)
 
-    checkRequestStatus(http_status(request)$message)
-    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
-    df_final = rbind(df_final, webResults)
-    Sys.sleep(0.5)
+  checkRequestStatus(http_status(request)$message)
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
 
 
   if (is.null(outType)| identical(outType, 'lst')){
@@ -267,8 +281,7 @@ getMarketsList <- function(marketsField, symbol = NULL, outType = NULL){
   }
 
   if(is.null(symbol)){
-    print("A symbol is needed!")
-    return(NULL)
+    stop("A symbol is needed!")
   }
   for(i in seq(1, length(symbol), by = step)){
 
@@ -322,38 +335,27 @@ getMarketsList <- function(marketsField, symbol = NULL, outType = NULL){
 #'}
 
 
-getMarketsSearch <- function(country = NULL, category = NULL , page = NULL, outType = NULL){
-
-  if (is.null(country)){
-    print('Country name should be provided')
-    return(NULL)
-
-  }
-
+getMarketsSearch <- function(country = NULL, category = NULL , outType = NULL){
   base <- "https://api.tradingeconomics.com/markets/search"
-  url <- paste(base,paste(country, collapse = ','), sep = '/')
-  url_base <- paste(url, '?c=', apiKey, sep = '')
-
   df_final = data.frame()
 
-
-  if(!is.null(category)){
-
-    url_base <- paste(url_base, paste(category, collapse = ','), sep = '&category=')
-
+  if (is.null(country)){
+    stop('Country name should be provided')
   }
-  if(!is.null(category) & !is.null(page)){
-    url_base <- paste(url_base, paste(page, collapse = ','), sep = '&page=')
-
+  else if(!is.null(country) & !is.null(category)) {
+    url <- paste(base, '/', country, '?c=', apiKey, '&category=', category,  sep = '')
+  }
+  else if(!is.null(country)) {
+    url <- paste(base, country, paste('?c=', apiKey, sep = ''), sep = '/')
   }
 
-    url_base <- URLencode(url_base)
-    request <- GET(url_base )
+  url <- URLencode(url)
+  request <- GET(url )
 
-    checkRequestStatus(http_status(request)$message)
-    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
-    df_final = rbind(df_final, webResults)
-    Sys.sleep(0.5)
+  checkRequestStatus(http_status(request)$message)
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
 
 
   if (is.null(outType)| identical(outType, 'lst')){
@@ -365,6 +367,46 @@ getMarketsSearch <- function(country = NULL, category = NULL , page = NULL, outT
   }
 
   return(df_final)
+}
+
+getMarketsForecast <- function(symbol = NULL, category = NULL , outType = NULL){
+  base <- "https://api.tradingeconomics.com/markets/forecasts/"
+  df_final = data.frame()
+
+  if (length(symbol) > 1){
+      symbol = paste(symbol, collapse = ',')
+    }
+  if (length(category) > 1){
+      category = paste(category, collapse = ',')
+    }
+
+  if (!is.null(symbol)){
+    url <- paste('symbol', symbol, sep = '/')
+  }
+  else if(!is.null(category)) {
+    url <- paste(category, sep = '/')
+  }
+  else {
+   stop('Please enter a country or category')
+  }
+
+  url <- paste(base, url, '?c=', apiKey, sep = '')
+  url <- URLencode(url)
+  request <- GET(url )
+
+  checkRequestStatus(http_status(request)$message)
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
 
 
+  if (is.null(outType)| identical(outType, 'lst')){
+    df_final <- split(df_final , f = paste(df_final$Country))
+  } else if (identical(outType, 'df')){
+    df_final = df_final
+  } else {
+    stop('output_type options : df for data frame, lst(default) for list by country ')
+  }
+
+  return(df_final)
 }

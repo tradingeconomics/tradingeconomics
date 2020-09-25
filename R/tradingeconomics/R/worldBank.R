@@ -5,7 +5,7 @@ source("R/functions.R")
 #'@export getWorldBankCategories
 #'
 #' @param category string.
-#' @param page string.
+
 #' @param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
@@ -17,11 +17,11 @@ source("R/functions.R")
 #'@examples
 #'\dontrun{ getWorldBankCategories(outType = 'df')
 #'getWorldBankCategories(category = 'education')
-#'getWorldBankCategories(category = 'education', page = '2')
+#'getWorldBankCategories(category = 'education')
 #'}
 
 
-getWorldBankCategories <- function( category = NULL, outType = NULL, page = NULL){
+getWorldBankCategories <- function( category = NULL, outType = NULL){
 
   base <- "https://api.tradingeconomics.com/worldBank"
   url <- paste(base)
@@ -31,11 +31,6 @@ getWorldBankCategories <- function( category = NULL, outType = NULL, page = NULL
     url<- paste(base, 'category', paste(category, collapse = ','), sep = '/')
   }else{
     url <- paste(base, 'categories', sep = '/')
-  }
-  if(!is.null(category) & !is.null(page)){
-    url <- paste(base, 'category', paste(category, collapse = ','), sep = '/')
-    url <- paste(url, paste(page, collapse = ','), sep = '/')
-
   }
 
   url <- paste(url,  '?c=', apiKey, sep ='')
@@ -69,7 +64,6 @@ getWorldBankCategories <- function( category = NULL, outType = NULL, page = NULL
 #'
 #' @param indicator string.
 #' @param country string.
-#' @param page_number string.
 #' @param series_code string.
 #' @param url string.
 #' @param outType string.
@@ -83,13 +77,13 @@ getWorldBankCategories <- function( category = NULL, outType = NULL, page = NULL
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
 #'\dontrun{ getWorldBankIndicators(series_code = 'fr.inr.rinr', outType = 'df')
-#'getWorldBankIndicators(identifier = 'portugal',category = 'country', page_number = '2', outType = 'df')
+#'getWorldBankIndicators(identifier = 'portugal',category = 'country', outType = 'df')
 #'getWorldBankIndicators(series_code = 'usa.fr.inr.rinr')
 #'getWorldBankIndicators(URL = '/united-states/real-interest-rate-percent-wb-data.html')
 #'}
 
 
-getWorldBankIndicators <- function(category = NULL, identifier = NULL, series_code = NULL, page_number = NULL, URL = NULL, outType = NULL){
+getWorldBankIndicators <- function(category = NULL, identifier = NULL, series_code = NULL,  URL = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/worldBank"
   url <- paste(base)
   df_final = data.frame()
@@ -104,10 +98,6 @@ getWorldBankIndicators <- function(category = NULL, identifier = NULL, series_co
     } else {
       return("Category not recognized. It can be null, country or symbol.")
     }
-  }
-  if(!is.null(page_number)){
-    url <- paste(base,"country", paste(identifier, collapse = ','), sep = '/')
-    url <- paste(url, paste(page_number, collapse = ','), sep = '/')
   }
 
   url <- paste(url,  '?c=', apiKey, sep ='')
@@ -200,3 +190,4 @@ getWorldBankHistorical <- function(series_code = NULL, outType = NULL){
 
   return(df_final)
 }
+getWorldBankIndicators(category = 'country', identifier = 'Portugal')
