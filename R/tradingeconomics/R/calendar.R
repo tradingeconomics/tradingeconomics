@@ -20,6 +20,8 @@ source("R/functions.R")
 #'@param initDate string with format: YYYY-MM-DD.
 #'For example: '2011-01-01'.
 #'@param endDate string with format: YYYY-MM-DD.
+#'@param id string with calendar id
+#'@param ticker string with ticker
 #'@param outType string.
 #''df' for data frame,
 #''lst'(default) for list.

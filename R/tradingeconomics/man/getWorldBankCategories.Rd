@@ -4,7 +4,7 @@
 \alias{getWorldBankCategories}
 \title{Get World Bank values from Trading Economics API}
 \usage{
-getWorldBankCategories(category = NULL, outType = NULL, page = NULL)
+getWorldBankCategories(category = NULL, outType = NULL)
 }
 \arguments{
 \item{category}{string.}
@@ -12,8 +12,6 @@ getWorldBankCategories(category = NULL, outType = NULL, page = NULL)
 \item{outType}{string.
 'df' for data frame,
 'raw'(default) for list of unparsed data.}
-
-\item{page}{string.}
 }
 \value{
 Returns a list or data from World Bank.
@@ -29,7 +27,7 @@ Without credentials only sample information will be provided. Without a category
 \examples{
 \dontrun{ getWorldBankCategories(outType = 'df')
 getWorldBankCategories(category = 'education')
-getWorldBankCategories(category = 'education', page = '2')
+getWorldBankCategories(category = 'education')
 }
 }
 \seealso{

@@ -4,8 +4,8 @@ source("R/functions.R")
 #'Get Federal Reserve values from Trading Economics API
 #'@export getFedReserve
 #'
-#' @param county string.
-#' @param name string.
+#' @param category string.
+#' @param indicator string.
 #' @param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.

@@ -10,7 +10,6 @@ getFedReserveSnapshot(
   county = NULL,
   country = NULL,
   URL = NULL,
-  page = NULL,
   outType = NULL
 )
 }
@@ -22,8 +21,6 @@ getFedReserveSnapshot(
 \item{county}{string.}
 
 \item{URL}{string.}
-
-\item{page}{string.}
 
 \item{outType}{string.
 'df' for data frame,
@@ -43,7 +40,7 @@ Without credentials only sample information will be provided.
 \examples{
 \dontrun{ getFedReserveSnapshot('AGEXMAK2A647NCEN', outType = 'df')
 getFedReserveSnapshot(county = 'arkansas'), getFedReserveSnapshot(county ='Pike County')
-getFedReserveSnapshot(country = 'united states', page = '2'), getFedReserveSnapshot(country = 'united states')
+getFedReserveSnapshot(country = 'united states'), getFedReserveSnapshot(country = 'united states')
 getFedReserveSnapshot(URL = '/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' )
 }
 

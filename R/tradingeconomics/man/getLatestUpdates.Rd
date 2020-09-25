@@ -4,7 +4,7 @@
 \alias{getLatestUpdates}
 \title{Return the latest updates}
 \usage{
-getLatestUpdates(initDate = NULL, outType = NULL)
+getLatestUpdates(initDate = NULL, outType = NULL, country = NULL)
 }
 \arguments{
 \item{outType}{string.

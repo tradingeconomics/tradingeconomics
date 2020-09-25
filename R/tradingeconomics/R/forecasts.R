@@ -8,6 +8,7 @@ source("R/functions.R")
 #'@param country string or list.
 #'String to get data for one country. List of strings to get data for
 #'several countries. For example, country = c('United States', 'Australia').
+#'@param ticker string or list.
 #'@param indicator string or list.
 #'String  to get data for one category. List of strings to get data for several calendar events.
 #'For example, category = 'GDP Growth Rate' or

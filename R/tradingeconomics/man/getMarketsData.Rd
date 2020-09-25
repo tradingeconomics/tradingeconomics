@@ -4,7 +4,13 @@
 \alias{getMarketsData}
 \title{Get markets values from Trading Economics API}
 \usage{
-getMarketsData(marketsField, outType = NULL)
+getMarketsData(
+  marketsField = NULL,
+  country = NULL,
+  symbol = NULL,
+  cross = NULL,
+  outType = NULL
+)
 }
 \arguments{
 \item{marketsField}{string. Takes either one of 'commodity','currency',

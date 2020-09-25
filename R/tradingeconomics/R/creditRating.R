@@ -67,7 +67,9 @@ getCreditRating <- function(country = NULL, outType = NULL){
 #'@param country string or list.
 #'String for one country information. List of strings for
 #'several countrys, for example country = c('country_name', 'country_name').
-
+#'@param initDate string with format: YYYY-MM-DD.
+#'For example: '2011-01-01'.
+#'@param endDate string with format: YYYY-MM-DD.
 #'@param outType string.
 #''lst'(default) for lis format output, 'df' for data frame,
 #'

@@ -8,15 +8,12 @@ getWorldBankIndicators(
   category = NULL,
   identifier = NULL,
   series_code = NULL,
-  page_number = NULL,
   URL = NULL,
   outType = NULL
 )
 }
 \arguments{
 \item{series_code}{string.}
-
-\item{page_number}{string.}
 
 \item{outType}{string.
 'df' for data frame,
@@ -42,7 +39,7 @@ indicator and country by using series_code or url.
 
 \examples{
 \dontrun{ getWorldBankIndicators(series_code = 'fr.inr.rinr', outType = 'df')
-getWorldBankIndicators(identifier = 'portugal',category = 'country', page_number = '2', outType = 'df')
+getWorldBankIndicators(identifier = 'portugal',category = 'country', outType = 'df')
 getWorldBankIndicators(series_code = 'usa.fr.inr.rinr')
 getWorldBankIndicators(URL = '/united-states/real-interest-rate-percent-wb-data.html')
 }

@@ -4,7 +4,12 @@
 \alias{getForecastData}
 \title{Return forecast values from Trading Economics API}
 \usage{
-getForecastData(country = NULL, indicator = NULL, outType = NULL)
+getForecastData(
+  country = NULL,
+  indicator = NULL,
+  outType = NULL,
+  ticker = NULL
+)
 }
 \arguments{
 \item{country}{string or list.
@@ -19,6 +24,8 @@ category = c('Exports', 'Imports').}
 \item{outType}{string.
 'df' for data frame,
 'lst'(default) for list .}
+
+\item{ticker}{string or list.}
 }
 \value{
 Return a list or dataframe of forecast values by country, by indicator, by country and indicator.

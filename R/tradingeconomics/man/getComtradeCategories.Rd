@@ -4,16 +4,12 @@
 \alias{getComtradeCategories}
 \title{Get Comtrade values from Trading Economics API}
 \usage{
-getComtradeCategories(id = NULL, outType = NULL)
+getComtradeCategories(outType = NULL)
 }
 \arguments{
 \item{outType}{string.
 'df' for data frame,
 'raw'(default) for list of unparsed data.}
-
-\item{category}{string.}
-
-\item{page}{string.}
 }
 \value{
 Returns a list or data from World Bank.

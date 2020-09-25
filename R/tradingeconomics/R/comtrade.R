@@ -4,8 +4,6 @@ source("R/functions.R")
 #'Get Comtrade values from Trading Economics API
 #'@export getComtradeCategories
 #'
-#' @param category string.
-#' @param page string.
 #' @param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
@@ -18,7 +16,7 @@ source("R/functions.R")
 #'\dontrun{ getComtradeCategories(outType = 'df')
 #'}
 
-getComtradeCategories <- function(id = NULL, outType = NULL){
+getComtradeCategories <- function(outType = NULL){
 
   base <- "https://api.tradingeconomics.com/comtrade/categories"
   url <- paste(base, '?c=', apiKey, sep = '')
@@ -46,6 +44,21 @@ getComtradeCategories <- function(id = NULL, outType = NULL){
   return(df_final)
 
 }
+
+#'Get Comtrade values from Trading Economics API
+#'@export getComtradeUpdates
+#'
+#' @param outType string.
+#''df' for data frame,
+#''raw'(default) for list of unparsed data.
+#'
+#'@return Returns a list or data from World Bank.
+#'@section Notes:
+#'Without credentials only sample information will be provided. Without a category, a list of all categories will be provided.
+#'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
+#'@examples
+#'\dontrun{ getComtradeUpdates(outType = 'df')
+#'}
 
 getComtradeUpdates <- function(outType = NULL){
 
@@ -80,7 +93,6 @@ getComtradeUpdates <- function(outType = NULL){
 #'@export getComtradeCountry
 #'
 #' @param country string.
-#' @param page_number string.
 #' @param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
@@ -92,12 +104,12 @@ getComtradeUpdates <- function(outType = NULL){
 #'@examples
 #'\dontrun{ getComtradeCountry(outType = 'df')
 #'getComtradeCountry('portugal')
-#'getComtradeCountry('portugal', page_number = '2')
-#'getComtradeCountry(c('portugal', 'spain'), page_number = '4')
+#'getComtradeCountry('portugal')
+#'getComtradeCountry(c('portugal', 'spain'))
 #'}
 #'
 
-getComtradeCountry <- function(country = NULL, page_number = NULL, outType = NULL, id = NULL){
+getComtradeCountry <- function(country = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/comtrade"
   df_final = data.frame()
 
@@ -107,12 +119,7 @@ getComtradeCountry <- function(country = NULL, page_number = NULL, outType = NUL
   if(!is.null(country)){
     url <- paste(base, 'country', paste(country, collapse = '/'), sep = '/')
   }
-  if(!is.null(page_number)){
-    url <- paste(url, paste(page_number, collapse = ','), sep = '/')
-  }else{
-
-  }
-
+ 
   url <- paste(url, '?c=', apiKey, sep = '')
 
 

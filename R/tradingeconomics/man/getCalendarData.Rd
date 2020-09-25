@@ -24,6 +24,10 @@ String  to get data for one category. List of strings to get data for several ca
 For example, category = 'GDP Growth Rate' or
 category = c('Exports', 'Imports').}
 
+\item{id}{string with calendar id}
+
+\item{ticker}{string with ticker}
+
 \item{initDate}{string with format: YYYY-MM-DD.
 For example: '2011-01-01'.}
 

@@ -4,7 +4,12 @@
 \alias{getCreditRatingHistorical}
 \title{Return credit rating historical information by country, or countries, default is United Satates}
 \usage{
-getCreditRatingHistorical(country = NULL, outType = NULL)
+getCreditRatingHistorical(
+  country = NULL,
+  outType = NULL,
+  initDate = NULL,
+  endDate = NULL
+)
 }
 \arguments{
 \item{country}{string or list.
@@ -13,6 +18,11 @@ several countrys, for example country = c('country_name', 'country_name').}
 
 \item{outType}{string.
 'lst'(default) for lis format output, 'df' for data frame,}
+
+\item{initDate}{string with format: YYYY-MM-DD.
+For example: '2011-01-01'.}
+
+\item{endDate}{string with format: YYYY-MM-DD.}
 }
 \value{
 Return a list or data frame of historical information for specific country or countries.

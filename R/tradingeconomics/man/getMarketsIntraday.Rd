@@ -8,6 +8,7 @@ getMarketsIntraday(
   symbol = NULL,
   initDate = NULL,
   endDate = NULL,
+  interval = NULL,
   outType = NULL
 )
 }

@@ -20,14 +20,13 @@ getEarnings(
 
 \item{type, }{string.Could be earnings, ipo, or dividends.}
 
+\item{category}{string or list.}
+
 \item{outType}{string.
 'lst'(default) for lis format output, 'df' for data frame,}
 
 \item{country}{string or list.
 Filter earnings calendar by country.}
-
-\item{symbol}{string or list.
-String for symbol information.}
 }
 \value{
 Returns a list or data frame of information for specific country, or for specific symbol by initial and end dates.

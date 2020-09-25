@@ -4,18 +4,18 @@
 \alias{getMarketsSearch}
 \title{Get latest markets by peers and components from Trading Economics API}
 \usage{
-getMarketsSearch(country = NULL, category = NULL, page = NULL, outType = NULL)
+getMarketsSearch(country = NULL, category = NULL, outType = NULL)
 }
 \arguments{
 \item{country}{string.}
 
 \item{category}{string.}
 
-\item{page}{string}
-
 \item{outType}{string.
 'df' for data frame,
 'raw'(default) for list of unparsed data.}
+
+\item{page}{string}
 }
 \value{
 Returns a list or data frame of available Takes either one of 'index' or 'markets', 'bonds', 'commodities',

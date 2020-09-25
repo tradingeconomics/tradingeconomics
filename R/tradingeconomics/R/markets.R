@@ -369,6 +369,23 @@ getMarketsSearch <- function(country = NULL, category = NULL , outType = NULL){
   return(df_final)
 }
 
+#'Get latest markets forecast from Trading Economics API
+#'@export getMarketsForecast
+#'
+#' @param category string.
+#' @param symbol string.
+#' @param outType string.
+#''df' for data frame,
+#''raw'(default) for list of unparsed data.
+#'
+#'@return Returns a list or data frame of market forecasts by category or symbol.
+#'@section Notes:
+#'A country must be provided.
+#'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
+#'@examples
+#'\dontrun{ getMarketsForecast('index'), getMarketsForecast( symbol = 'BULGARIAGOVB10Y')
+#'}
+
 getMarketsForecast <- function(symbol = NULL, category = NULL , outType = NULL){
   base <- "https://api.tradingeconomics.com/markets/forecasts/"
   df_final = data.frame()

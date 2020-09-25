@@ -7,8 +7,7 @@ source("R/functions.R")
 #'Filter earnings calendar by country.
 #'@param outType string.
 #''lst'(default) for lis format output, 'df' for data frame,
-#'@param symbol string or list.
-#'String for symbol information.
+#'@param category string or list.
 #'@param initDate, string.
 #'@param endDate, string.
 #'@param type, string.Could be earnings, ipo, or dividends.

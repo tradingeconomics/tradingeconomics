@@ -7,13 +7,13 @@
 getFedReserve(indicator = NULL, category = NULL, outType = NULL)
 }
 \arguments{
+\item{indicator}{string.}
+
+\item{category}{string.}
+
 \item{outType}{string.
 'df' for data frame,
 'raw'(default) for list of unparsed data.}
-
-\item{county}{string.}
-
-\item{name}{string.}
 }
 \value{
 Returns a list or data from Federal Reserve.
