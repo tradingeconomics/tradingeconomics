@@ -4,8 +4,8 @@
 var te_client = require('./te_client'),
 	Client = new te_client({
 		url: 'ws://stream.tradingeconomics.com/',
-		key: 'yu06vzmlllju1qz', //API_CLIENT_KEY
-		secret: 'mtvmbg847pwz3jn' //API_CLIENT_SECRET
+		key: 'API_CLIENT_KEY', //API_CLIENT_KEY
+		secret: 'API_CLIENT_SECRET' //API_CLIENT_SECRET
 		//reconnect: true
 	});
 	
