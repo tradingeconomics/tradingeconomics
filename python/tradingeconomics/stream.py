@@ -1,5 +1,5 @@
 import websocket
-#import thread
+import ssl
 import time
 import sys
 import json
@@ -54,7 +54,7 @@ def start_socket(on_message_client, *args):
                               on_close = _on_close)
     
     ws.on_open = on_open
-    ws.run_forever()
+    ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE})
     ws.close()
     
 
