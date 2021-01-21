@@ -101,7 +101,7 @@ def getCmtUpdates(output_type = None):
     elif output_type == 'raw':        
         output = webResults
     else:      
-        raise ParametersError ('output_type options : dict(defoult), df for data frame or raw for unparsed results.') 
+        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output
 
 

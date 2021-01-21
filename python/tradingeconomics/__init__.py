@@ -22,6 +22,7 @@ if PY3: # Python 3+
     from .worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
     from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
+    from .eurostat import getEurostatData    
 else: # Python 2.X
     from historicalDB import getHistorical
     from historical import getHistoricalData, getHistoricalRatings
@@ -37,4 +38,8 @@ else: # Python 2.X
     from worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
     from comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates
     from federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
+    from eurostat import getEurostatData
+
+
+
     
