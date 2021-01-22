@@ -17,6 +17,7 @@
     "promise": "^8.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "superagent": "^5.1.0"
+    "superagent": "^5.1.0",
+    "tradingeconomics": "file:tradingeconomics"
   }
 }

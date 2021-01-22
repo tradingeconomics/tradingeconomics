@@ -19,5 +19,6 @@ module.exports = Object.assign(
     require('./marketIntraday.js'),
     require('./marketHistorical.js'),
     require('./marketForecasts.js'),
-    require('./search.js')
+    require('./search.js'),
+    require('./eurostat.js')
 );

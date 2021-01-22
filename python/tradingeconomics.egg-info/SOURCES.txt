@@ -14,6 +14,7 @@ tradingeconomics/functions.py
 tradingeconomics/glob.py
 tradingeconomics/historical.py
 tradingeconomics/historicalDB.py
+tradingeconomics/historicalEurostat.py
 tradingeconomics/historicalMarkets.py
 tradingeconomics/indicators.py
 tradingeconomics/markets.py
