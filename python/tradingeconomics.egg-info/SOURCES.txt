@@ -7,6 +7,7 @@ tradingeconomics/__init__.py
 tradingeconomics/calendar.py
 tradingeconomics/comtrade.py
 tradingeconomics/earnings.py
+tradingeconomics/eurostat.py
 tradingeconomics/federalReserve.py
 tradingeconomics/forecasts.py
 tradingeconomics/functions.py
