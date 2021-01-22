@@ -5675,6 +5675,23 @@ javascript black side
     of statistical methods across its member states and candidates for accession as well as EFTA countries.</p>
 
 <h2 id="lists">Lists</h2>
+<!----------------------------------->
+<!-----Python Eurostat black side---->
+<!----------------------------------->
+
+    <blockquote class="lang-specific python">  
+    <br>
+        <p>To get lists of countries available.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">lists</span> <span class="o">=</span> <span class="s">'countries'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+    <blockquote class="lang-specific python">  
+    <br>
+        <p>To get lists of categories available.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">lists</span> <span class="o">=</span> <span class="s">'categories'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
+    </code></pre>
+
 <p><span class="lists"></p>
 
 <ul>
@@ -5718,6 +5735,40 @@ javascript black side
 </tbody></table>
 
 <h2 id="eurostat">Categories and Countries</h2>
+<!----------------------------------->
+<!-----Python Eurostat black side---->
+<!----------------------------------->
+
+<blockquote class="lang-specific python">  
+    <br>
+        <p>Get Eurostat data by category group.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">category_group</span> <span class="o">=</span> <span class="s">'Poverty'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+    <blockquote class="lang-specific python">  
+    <br>
+        <p>Get Eurostat data by specific category.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">'People at risk of income poverty after social transfers'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
+    </code></pre>
+<blockquote class="lang-specific python">  
+    <br>
+        <p>Get Eurostat data by country.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+    <blockquote class="lang-specific python">  
+    <br>
+        <p>Get Eurostat data by country and category.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, category</span> <span class="o">=</span> <span class="s">'People at risk of income poverty after social transfers'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
+    </code></pre>
+    <blockquote class="lang-specific python">  
+    <br>
+        <p>Get Eurostat data by country and category group.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, category_group</span> <span class="o">=</span> <span class="s">'Poverty'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
+    </code></pre>
 <h3 id="methods">Methods</h3>
 <p><span class="methods"></p>
 
@@ -5829,6 +5880,28 @@ javascript black side
 
 <h2 id="eurostat">Historical</h2>
 
+<!----------------------------------->
+<!-----Python Eurostat black side---->
+<!----------------------------------->
+
+<blockquote class="lang-specific python">  
+    <br>
+        <p>Get historical Eurostat data by ID.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+<blockquote class="lang-specific python">  
+    <br>
+        <p>Get historical Eurostat data by ID and a start date.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n"><span class="n">, initDate</span> <span class="o">=</span> <span class="s">'2015-01-01'</span>, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>   
+<blockquote class="lang-specific python">  
+    <br>
+        <p>Get historical Eurostat data by ID and a date range.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n"><span class="n">, initDate</span> <span class="o">=</span> <span class="s">'2015-01-01'</span><span class="n">, endDate</span> <span class="o">=</span> <span class="s">'2020-01-01'</span>, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre> 
 <ul>
 <li><p>Get historical data by ID.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?c=guest:guest">/eurostat/historical/{id}</a></p></li>
