@@ -5691,6 +5691,26 @@ javascript black side
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">lists</span> <span class="o">=</span> <span class="s">'categories'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
     </code></pre>
+<!---------------------------------------->
+<!--javascript Eurostat lists black side-->
+<!---------------------------------------->
+
+<blockquote class="lang-specific javascript">
+    <p>Get Eurostat available countries.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">lists</span> = <span class="s1">'countries'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get Eurostat available categories.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">lists</span> = <span class="s1">'categories'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
 
 <p><span class="lists"></p>
 
@@ -5769,6 +5789,52 @@ javascript black side
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, category_group</span> <span class="o">=</span> <span class="s">'Poverty'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
     </code></pre>
+
+<!---------------------------------->
+<!--javascript Eurostat black side-->
+<!---------------------------------->
+
+<blockquote class="lang-specific javascript">
+    <p>Get Eurostat data by country.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get Eurostat data by category.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">category</span> = <span class="s1">'People at risk of income poverty after social transfers'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get Eurostat data by category group.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">category_group</span> = <span class="s1">'Poverty'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get Eurostat data by country and category.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>, <span class="kd">category</span> = <span class="s1">'People at risk of income poverty after social transfers'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get Eurostat data by country and category group.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>, <span class="kd">category_group</span> = <span class="s1">'Poverty'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<!--------------------------------------------->
 <h3 id="methods">Methods</h3>
 <p><span class="methods"></p>
 
@@ -5880,9 +5946,9 @@ javascript black side
 
 <h2 id="eurostat">Historical</h2>
 
-<!----------------------------------->
-<!-----Python Eurostat black side---->
-<!----------------------------------->
+<!---------------------------------------------->
+<!-----Python Eurostat historical black side---->
+<!---------------------------------------------->
 
 <blockquote class="lang-specific python">  
     <br>
@@ -5902,6 +5968,37 @@ javascript black side
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n"><span class="n">, initDate</span> <span class="o">=</span> <span class="s">'2015-01-01'</span><span class="n">, endDate</span> <span class="o">=</span> <span class="s">'2020-01-01'</span>, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
     </code></pre> 
+
+<!--------------------------------------------->
+<!--javascript Eurostat historical black side-->
+<!--------------------------------------------->
+
+<blockquote class="lang-specific javascript">
+    <p>Get historical data by ID.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get historical data by ID and a start date.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>, <span class="kd">start_date</span> = <span class="s1">'2017-01-01'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get historical data by ID between a date range.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>, <span class="kd">start_date</span> = <span class="s1">'2017-01-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2020-05-05'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<!---------------------------------->
+
 <ul>
 <li><p>Get historical data by ID.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?c=guest:guest">/eurostat/historical/{id}</a></p></li>
