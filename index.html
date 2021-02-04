@@ -2424,10 +2424,12 @@ or you can specify a start date and end date<br>
                 <span class="o">}</span>
             <span class="o">});</span>
             <span class="na">Scanner</span> <span class="n">scan</span> <span class="o">=</span><span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">System</span><span class="o">.</span><span class="k">in</span><span class="o">);</span>
+            <span class="c1">//It will ask you to subscribe to the topic on the terminal.</span>
             <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Enter topic for subscription: "</span><span class="o">);</span>
             <span class="k">while</span><span class="o">(</span><span class="n">scan</span><span class="o">.</span><span class="na">hasNext</span><span class="o">))</span><span class="o"> {</span>
+                <span class="c1">//input on the terminal will be "calendar"</span>
                 <span class="na">String</span><span class="n"> to</span> <span class="o">=</span> <span class="k"> scan</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
-                <span class="na">String</span><span class="n"> subs</span> <span class="o">=</span> <span class="s"> "{\"topic\": \"subscribe\", \"to\": \""</span> <span class="n">+ to +</span><span class="s"> "\</span><span class="n">calendar</span><span class="s">" }"</span><span class="o">;</span>
+                <span class="na">String</span><span class="n"> subs</span> <span class="o">=</span> <span class="s"> "{\"topic\": \"subscribe\", \"to\": \""</span> <span class="n">+ to +</span><span class="s"> "\" }"</span><span class="o">;</span>
                 <span class="k">client</span><span class="o">.</span><span class="na">sendMessage</span><span class="n">(subs);</span>
             <span class="o">}</span>
             <span class="na">Thread</span><span class="o">.</span><span class="k">sleep</span><span class="o">(</span><span class="s">30000</span><span class="o">);</span>
@@ -4451,10 +4453,12 @@ Click on any method below for a sample.
                 <span class="o">}</span>
             <span class="o">});</span>
             <span class="na">Scanner</span> <span class="n">scan</span> <span class="o">=</span><span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">System</span><span class="o">.</span><span class="k">in</span><span class="o">);</span>
+            <span class="c1">//It will ask you to subscribe to the topic on the terminal.</span>
             <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Enter topic for subscription: "</span><span class="o">);</span>
             <span class="k">while</span><span class="o">(</span><span class="n">scan</span><span class="o">.</span><span class="na">hasNext</span><span class="o">))</span><span class="o"> {</span>
+                <span class="c1">//input on the terminal will be a market symbol e.g.:"EURUSD:CUR"</span>
                 <span class="na">String</span><span class="n"> to</span> <span class="o">=</span> <span class="k"> scan</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
-                <span class="na">String</span><span class="n"> subs</span> <span class="o">=</span> <span class="s"> "{\"topic\": \"subscribe\", \"to\": \""</span> <span class="n">+ to +</span><span class="s"> "\</span><span class="n">EURUSD:CUR</span><span class="s">" }"</span><span class="o">;</span>
+                <span class="na">String</span><span class="n"> subs</span> <span class="o">=</span> <span class="s"> "{\"topic\": \"subscribe\", \"to\": \""</span> <span class="n">+ to +</span><span class="s"> "\" }"</span><span class="o">;</span>
                 <span class="k">client</span><span class="o">.</span><span class="na">sendMessage</span><span class="n">(subs);</span>
             <span class="o">}</span>
             <span class="na">Thread</span><span class="o">.</span><span class="k">sleep</span><span class="o">(</span><span class="s">30000</span><span class="o">);</span>
