@@ -1,9 +1,9 @@
 import tradingeconomics as te
 import json
 
-te.login('yu06vzmlllju1qz:mtvmbg847pwz3jn')
+te.login('guest:guest')
 
-te.subscribe('calendar')
+te.subscribe('EURUSD:CUR')
 
 
 def on_message(ws, message):
