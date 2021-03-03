@@ -491,7 +491,7 @@ Click on any method below for a sample.</p>
 <blockquote class="lang-specific r">
 <p>To get a list of all indicators per country.</p>
 </blockquote>   
-<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">),</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 
         <span class="n">Output</span><span class="p">:</span>
                  <span class="n">country</span>                      <span class="n">Category</span>   <span class="n">LatestValue</span>   
@@ -1179,7 +1179,7 @@ or you can specify a start date and end date<br>
     <p>To get the last ratings for all countries.</p>
 <br>
 </blockquote>  
-<pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="s1">'United States'</span><span class="p">)</span>  
+<pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="s1"></span><span class="p">)</span>  
 
 <span class="n">Output</span><span class="p">:</span>
            <span class="n">country</span>         <span class="n">TE</span>     <span class="n">SP_Outlook</span>   
@@ -3650,7 +3650,7 @@ Click on any method below for a sample.
 <blockquote class="lang-specific r">
     <p>To get markets search by country and categories.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'united states'</span><span class="p">,</span> <span class="s1">category = </span><span class="p">(</span><span class="s1">'index', 'markets'</span><span class="p">)</span><span class="p">)</span>
+<pre class="highlight r"><code><span class="n">getMarketsSearch</span><span class="p">(<span class="s1">'united states'</span><span class="p">,</span> <span class="s1">category = </span><span class="p">c(</span><span class="s1">'index', 'markets'</span><span class="p">)</span><span class="p">)</span>
 
     <span class="n">Output</span><span class="p">:</span>
       <span class="n">Symbol</span>        <span class="n">Type</span>            <span class="n">Country</span>         <span class="n">Last</span>       
@@ -6075,7 +6075,7 @@ javascript black side
 <blockquote class="lang-specific r">
     <p>To get World Bank main categories.</p>
 </blockquote>   
-<pre class="highlight r"><code><span class="n">getWorldBankCategories</span><span class="p">(</span><span class="n">outType</span><span class="w"> </span><span class="o">,</span>=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getWorldBankCategories</span><span class="p">(</span><span class="n">outType</span><span class="w"> </span><span class="o"></span>=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 
 <span class="n">Output</span><span class="p">:</span>
                <span class="n">category</span>   
@@ -6389,7 +6389,7 @@ javascript black side
 <blockquote class="lang-specific r">
     <p>To get World Bank data for all countries by specific indicator.</p>
 </blockquote>   
-<pre class="highlight r"><code><span class="n">getWorldBankIndicators</span><span class="p">(</span><span class="n">series_code</span><span class="w"> </span><span class="o">,</span>=</span><span class="w"> </span><span class="s1">'fr.inr.rinr'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getWorldBankIndicators</span><span class="p">(</span><span class="n">series_code</span><span class="w"> </span><span class="o"></span>=</span><span class="w"> </span><span class="s1">'fr.inr.rinr'</span><span class="p">)</span><span class="w">
 
     <span class="n">Output</span><span class="p">:</span>
                      <span class="n">symbol</span>       <span class="n">country</span>                                                                   <span class="n">URL</span>    
@@ -7046,7 +7046,7 @@ javascript black side
 <blockquote class="lang-specific r">
     <p>Get a snapshot of data between countries.</p>
 </blockquote>   
-<pre class="highlight r"><code><span class="n">getComtradeCountry</span><span class="p">(</span>c(<span class="s1">'Portugal'</span>)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getComtradeCountry</span><span class="p">(</span>c(<span class="s1">'Portugal'</span>, <span class="s1">'Spain'</span>))</span><span class="w">
 
     <span class="n">Output</span><span class="p">:</span>
                  <span class="n">symbol</span>         <span class="n">country1</span>   <span class="n">country2</span>      <span class="n">type</span>   
