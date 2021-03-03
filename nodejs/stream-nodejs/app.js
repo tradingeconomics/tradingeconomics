@@ -4,14 +4,14 @@
 var te_client = require('./te_client'),
 	Client = new te_client({
 		url: 'ws://stream.tradingeconomics.com/',
-		key: 'guest', //API_CLIENT_KEY
-		secret: 'guest' //API_CLIENT_SECRET
+		key: 'yu06vzmlllju1qz', //API_CLIENT_KEY
+		secret: 'mtvmbg847pwz3jn' //API_CLIENT_SECRET
 		//reconnect: true
 	});
 	
 
 	
-Client.subscribe('INDU:IND');
+Client.subscribe('GBPAUD:CUR');
 
 
 Client.on('message', function(msg){
