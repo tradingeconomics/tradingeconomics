@@ -40,12 +40,12 @@ getSearch <- function(search_term = NULL, category = NULL, outType = NULL){
   else if (is.null(category) & !is.null(search_term)){
     url <- paste(search_term)
     url <- paste(base, url, '?c=',apiKey, sep = '')
-    print(url)
+
   }
   else if (!is.null(search_term) & !is.null(category)){
     url <- paste(search_term,'?category=',category,sep = '')
     url <- paste(base, url, '&c=',apiKey, sep = '')
-    print(url)
+
   }
 
   url <- URLencode(url)
