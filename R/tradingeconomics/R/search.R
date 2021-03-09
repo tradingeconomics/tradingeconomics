@@ -1,5 +1,5 @@
-source("functions.R")
-source("login.R")
+source("R/functions.R")
+source("R/login.R")
 
 #'@import jsonlite
 #'@import httr
