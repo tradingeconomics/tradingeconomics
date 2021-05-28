@@ -5013,6 +5013,8 @@ Click on any method below for a sample.
 }
 </code></pre>
 
+
+
 <!----------------------->
 <!--earnings white side-->
 <!----------------------->
@@ -5099,7 +5101,137 @@ Click on any method below for a sample.
 </tr>
 </tbody></table>
 
+<!------------------------->
+<!--financials white side-->
+<!------------------------->
 
+<h2 id="financials">Financials</h2>
+    <p>Here you can get stocks fundamental information.</br>
+<strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
+
+<h3 id="methods">Methods</h3>
+
+<p><span class="methods"></p>
+
+<ul>
+<li><p>Financials data by stock symbol<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/financials/symbol/aapl:us?c=guest:guest">/financials/symbol/{symbol}</a>    </p></li>
+</ul>
+
+<p></span> </p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Trading Economics date time in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Last</strong></td>
+<td style="text-align: left">Lastest value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value1</strong></td>
+<td style="text-align: left">Value for the current quarter</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date1</strong></td>
+<td style="text-align: left">Date for the current quarter</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value2</strong></td>
+<td style="text-align: left">Value for the quarter prior to Value1</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date2</strong></td>
+<td style="text-align: left">Date for the quarter prior to Date1</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value3</strong></td>
+<td style="text-align: left">Value for the quarter prior to Value2</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date3</strong></td>
+<td style="text-align: left">Date for the quarter prior to Date2</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value4</strong></td>
+<td style="text-align: left">Value for the quarter prior to Value3</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date4</strong></td>
+<td style="text-align: left">Date for the quarter prior to Date3</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Unit</strong></td>
+<td style="text-align: left">Unit</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Currency</strong></td>
+<td style="text-align: left">Currency</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Stock</strong></td>
+<td style="text-align: left">Stock unique symbol used by Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>FinancialSymbol</strong></td>
+<td style="text-align: left">Financials category</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><p>Financials historical data<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest">/financials/historical/{symbol}</a>    </p></li>
+</ul>
+
+<h3 id="response-fields">Response Fields</h3>
+	
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Financials category</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Trading Economics date time in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value</strong></td>
+<td style="text-align: left">Close price value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Report Date</strong></td>
+<td style="text-align: left">Reporting date</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Reference</strong></td>
+<td style="text-align: left">Fiscal reference date</td>
+</tr>
+</tbody></table>
+
+<!------------------------->
+<!----------NEWS----------->
+<!------------------------->
 
 <h1 id="news">News</h1>
 <h2 id="latest-news">Latest news</h2>
