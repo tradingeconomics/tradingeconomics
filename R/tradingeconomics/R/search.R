@@ -1,11 +1,11 @@
 source("R/functions.R")
 
-
+#'Return search information from Trading Economics API
 #'@import jsonlite
 #'@import httr
 #'@importFrom utils URLencode
 #'
-#'Return search information from Trading Economics API
+#'
 #'@export getSearch
 #'
 #'@param category string.
@@ -23,10 +23,12 @@ source("R/functions.R")
 #'Without credentials default information will be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}} and \code{\link{getIndicatorData}} and \code{\link{getEurostatData}} and \code{\link{getEurostatHistorical}}
 #'@examples
-#'\dontrun{ getSearch()
-#'getSearch(search_term = 'gold, outType = 'df')
+#'\dontrun{getSearch()
+#' getSearch(search_term = 'gold', outType = 'df')
 #'getSearch(search_term = 'japan', , category= 'markets', outType = 'df')
-#'}
+#'getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'), initDate = '2018-01-01', endDate = '2018-03-01')
+#'   }
+#'
 
 
 getSearch <- function(search_term = NULL, category = NULL, outType = NULL){

@@ -1,10 +1,12 @@
 source("R/functions.R")
 
+
+#'Return search information from Trading Economics API
 #'@import jsonlite
 #'@import httr
 #'@importFrom utils URLencode
 #'
-#'Return search information from Trading Economics API
+#'
 #'@export getEurostatData
 #'
 #'@param lists string.
