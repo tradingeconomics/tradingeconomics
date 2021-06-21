@@ -21,5 +21,8 @@ module.exports = Object.assign(
     require('./marketForecasts.js'),
     require('./search.js'),
     require('./eurostat.js'),
-    require('./eurostatHistorical.js')
+    require('./eurostatHistorical.js'),
+    require('./financials.js'),
+    require('./financialsHistorical')
+    
 );
