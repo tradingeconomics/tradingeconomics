@@ -10,7 +10,7 @@ def readme():
 setup(
   name = 'tradingeconomics',
   packages = find_packages(exclude=['tests*']),  
-  version = '0.2.977',
+  version = '0.2.978',
   description = 'Library to download data from Trading Economics API',
   long_description =readme(),
   long_description_content_type='text/x-rst',
