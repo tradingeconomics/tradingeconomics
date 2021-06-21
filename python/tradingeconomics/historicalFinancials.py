@@ -65,6 +65,8 @@ def getHistoricalFinancials(symbol=None, category=None, output_type=None):
         ssl._create_default_https_context = _create_unverified_https_context
 
     if symbol is not None and category is not None:
+        if category.__contains__(' '):
+            category = category.replace(' ', '-')
         linkAPI = f"http://api.tradingeconomics.com/financials/historical/{symbol}:{category}"
     else:
         "symbol and category are required"
@@ -81,10 +83,7 @@ def getHistoricalFinancials(symbol=None, category=None, output_type=None):
     except ValueError:
         raise WebRequestError('Something went wrong. Error code = ' + str(code))
     if len(webResults) > 0:
-        # names = ['symbol', 'country', 'date', 'type', 'last', 'url', 'importance', 'forecast1', 'forecast2',
-        #          'forecast3', 'forecast4']
-        # names2 = ['Symbol', 'Country', 'Date', 'Type', 'Last', 'Url', 'Importance', 'Forecast1', 'Forecast2',
-        #           'Forecast3', 'Forecast4']
+
         maindf = pd.DataFrame(webResults)  # columns=names2
 
     else:
