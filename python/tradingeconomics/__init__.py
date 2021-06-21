@@ -23,7 +23,10 @@ if PY3: # Python 3+
     from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
     from .eurostat import getEurostatData
-    from .historicalEurostat import getHistoricalEurostat    
+    from .historicalEurostat import getHistoricalEurostat
+    from .financials import getFinancialsData
+    from .historicalFinancials import getHistoricalFinancials
+
 else: # Python 2.X
     from historicalDB import getHistorical
     from historical import getHistoricalData, getHistoricalRatings
@@ -40,7 +43,9 @@ else: # Python 2.X
     from comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates
     from federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
     from eurostat import getEurostatData
-    from historicalEurostat import getHistoricalEurostat    
+    from historicalEurostat import getHistoricalEurostat
+    from financials import getFinancialsData
+    from historicalFinancials import getHistoricalFinancials
 
 
 

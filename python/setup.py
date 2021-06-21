@@ -18,7 +18,7 @@ setup(
   author_email = 'olexandr.baturin@tradingeconomics.com',
   license = 'MIT',
   url = 'https://github.com/ieconomics/open-api', 
-  download_url = 'https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.977.zip', 
+  download_url = 'https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.978.zip',
   keywords = ['tradingeconomics', 'data'], 
   classifiers = [ 'Programming Language :: Python :: 2.7',
                 'Programming Language :: Python :: 3',
