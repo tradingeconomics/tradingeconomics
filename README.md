@@ -15,7 +15,7 @@ http://docs.tradingeconomics.com/
 
 
 
-**Python Jupyter Notebooks Examples**
+**Python Jupyter Notebooks**
 
 https://github.com/tradingeconomics/notebooks
 
