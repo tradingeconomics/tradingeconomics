@@ -10,9 +10,9 @@ The TE API provides you with direct access to 300.000 economic indicators, excha
 
 
 
-**Git**
+**Examples**
 
-´git clone https://github.com/tradingeconomics/tradingeconomics´
+`git clone https://github.com/tradingeconomics/tradingeconomics`
 
 
 **Documentation**
