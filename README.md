@@ -18,6 +18,7 @@ The TE API provides you with direct access to 300.000 economic indicators, excha
 http://docs.tradingeconomics.com/
 
 
+
 **Python Jupyer Notebooks Examples**
 
 https://github.com/tradingeconomics/notebooks
