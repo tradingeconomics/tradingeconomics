@@ -7083,7 +7083,7 @@ javascript black side
 </tr>
 <tr>
 <td style="text-align: left"><strong>Country1</strong></td>
-<td style="text-align: left">First country ame</td>
+<td style="text-align: left">First country name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Country2</strong></td>
@@ -7091,7 +7091,71 @@ javascript black side
 </tr>
 <tr>
 <td style="text-align: left"><strong>Type</strong></td>
-<td style="text-align: left">&mdash;&ndash;</td>
+<td style="text-align: left">Trade type</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>URL</strong></td>
+<td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Title</strong></td>
+<td style="text-align: left">Title</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Last updated date</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>Get total Imports by main category<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/india?c=guest:guest">/comtrade/import/{country}</a></li>
+<li>Total Exports by main category<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/united states?c=guest:guest">/comtrade/export/{country}</a></li>
+<li>Imports by specific category<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united kingdom/Coffee, tea, mate and spices?c=guest:guest">/comtrade/import/{country}/{category}</a></li>
+<li>Exports by specific category<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/live animals?c=guest:guest">/comtrade/export/{country}/{category}</a></li>
+
+
+</ul>
+
+<p></span></p>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country1</strong></td>
+<td style="text-align: left">First country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country2</strong></td>
+<td style="text-align: left">Second country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value</strong></td>
+<td style="text-align: left">Value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Year of the updated series</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Type</strong></td>
+<td style="text-align: left">Trade type</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Category</strong></td>
@@ -7356,11 +7420,23 @@ javascript black side
 <ul>
 <li><p>Snapshot of data per country<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">/comtrade/country/{country}</a><br>
-<!--Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
+
+<li><p>Snapshot of data per country filtered by type: import or export<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?type=export&c=guest:guest">/comtrade/country/{country}?type={type}</a><br>
+
+    <!--Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">/comtrade/country/{country}/{page_number}</a></p></li>-->
 <li><p>Snapshot of trade between two countries<br>
     <!--<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">/comtrade/country/{country_1}/{country_2}/{page_number}</a></p></li>-->
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">/comtrade/country/{country_1}/{country_2}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?c=guest:guest">/comtrade/country/{country_1}/{country_2}</a></p></li>
+<li><p>Snapshot of trade between two countries filtered by type: import or export<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?type=import&c=guest:guest">/comtrade/country/{country_1}/{country_2}?type={type}</a></p></li>
+
+<li><p>Total Imports by country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united states/totals?c=guest:guest">/comtrade/import/{country}/totals</a></p></li>
+<li><p>Total Exports by country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/totals?c=guest:guest">/comtrade/export/{country}/totals</a></p></li>
+            
 </ul>
 
 <p></span></p>
@@ -7383,8 +7459,16 @@ javascript black side
 <td style="text-align: left">First country ame</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Country2</strong></td>
+<td style="text-align: left"><strong>Country2*</strong></td>
 <td style="text-align: left">Second country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value</strong></td>
+<td style="text-align: left">Value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Year of the updated series</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Type</strong></td>
@@ -7407,7 +7491,7 @@ javascript black side
 <td style="text-align: left">Last updated</td>
 </tr>
 </tbody></table>
-
+<p>*Country2 is not used for total imports/exports by country.</p>
 <h2 id="historical">Historical</h2>
 
 <!----------------------------------------->   
