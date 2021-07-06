@@ -56,8 +56,8 @@
 ### *Packages latest versions:*
 Package | Version
 :---: |:---:
-*Python* |`0.2.980` 
-*Node* | `1.0.7`
+*Python* |`0.2.981` 
+*Node* | `1.0.8`
 *R* | `0.2.3`
 
 
