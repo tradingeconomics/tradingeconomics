@@ -20,12 +20,13 @@ if PY3: # Python 3+
     from .earnings import getEarnings, getEarningsType
     from .news import getNews, getArticles, getArticleId
     from .worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
-    from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates
+    from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates, getCmtCountryByCategory, getTotalByType, getCmtCountryFilterByType
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
     from .eurostat import getEurostatData
     from .historicalEurostat import getHistoricalEurostat
     from .financials import getFinancialsData
     from .historicalFinancials import getHistoricalFinancials
+
 
 else: # Python 2.X
     from historicalDB import getHistorical
@@ -40,7 +41,7 @@ else: # Python 2.X
     from earnings import getEarnings, getEarningsType
     from news import getNews, getArticles, getArticleId
     from worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
-    from comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates
+    from comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates, getCmtCountryByCategory, getTotalByType, getCmtCountryFilterByType
     from federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
     from eurostat import getEurostatData
     from historicalEurostat import getHistoricalEurostat
