@@ -424,18 +424,18 @@ def getCmtCountryByCategory(country=None, type=None, category=None, output_type=
 
         Example
         -------
-        getCmtType(country = 'Portugal', type = 'import', category = None, output_type = None )
+        getCmtCountryByCategory(country = 'Portugal', type = 'import', category = None, output_type = None )
 
-        getCmtType(country = 'United States', type = 'export', category = 'live animals', output_type = 'raw' )
+        getCmtCountryByCategory(country = 'United States', type = 'export', category = 'live animals', output_type = 'raw')
 
-        getCmtType(country = 'Brazil', type = import, category = 'Swine, live', output_type = 'df' )
+        getCmtCountryByCategory(country = 'Brazil', type = import, category = 'Swine, live', output_type = 'df' )
 
         """
 
     if country is None:
         return f'country is missing'
     if type is None:
-        return f"type is missing. Choose 'imports' or 'exports'"
+        return f"type is missing. Choose 'import' or 'export'"
 
     def getLinkApi(country, type, category):
         api_url_base = "https://api.tradingeconomics.com/comtrade"
@@ -602,18 +602,17 @@ def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_ty
 
         Example
         -------
-        getCmtType(country = 'Portugal', type = 'import', category = None, output_type = None )
+        getCmtType(country1 = 'Portugal', country2 = 'Spain' type = 'import' )
 
-        getCmtType(country = 'United States', type = 'export', category = 'live animals', output_type = 'raw' )
+        getCmtType(country1 = 'United States', type = 'export')
 
-        getCmtType(country = 'Brazil', type = import, category = 'Swine, live', output_type = 'df' )
 
         """
 
     if country1 is None:
         return f'country is missing'
     if type is None:
-        return f"type is missing. Choose 'imports' or 'exports'"
+        return f"type is missing. Choose 'import' or 'export'"
 
     def getLinkApi(country1, country2 ):
         api_url_base = "https://api.tradingeconomics.com/comtrade/country"
@@ -621,8 +620,6 @@ def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_ty
         if country2 is None:
             return f'{api_url_base}/{quote(country1)}'
         return f'{api_url_base}/{quote(country1)}/{quote(country2)}'
-
-
 
     link_api = getLinkApi(country1, country2)
 

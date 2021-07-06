@@ -10,6 +10,9 @@ module.exports = Object.assign(
     require('./articles.js'),
     require('./calendar.js'),
     require('./comtrade.js'),
+    require('./comtradeCountryByCategory.js'),
+    require('./comtradeCountryFilterByType.js'),
+    require('./comtradeTotalType.js'),
     require('./earnings.js'),
     require('./forecasts.js'),
     require('./federalReserve.js'),
@@ -23,6 +26,6 @@ module.exports = Object.assign(
     require('./eurostat.js'),
     require('./eurostatHistorical.js'),
     require('./financials.js'),
-    require('./financialsHistorical')
+    require('./financialsHistorical.js')
     
 );
