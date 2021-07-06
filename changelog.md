@@ -1,12 +1,12 @@
 #  Trading Economics API Change Log
 ### *Packages latest versions:*
-Package |  | Version
-:---: | --- |:---:
-*Python* |  |`0.2.980` 
-*Node* |  |`1.0.7`
-*R* |  |`0.2.3`
+Package | Version
+:---: |:---:
+*Python* |`0.2.980` 
+*Node* | `1.0.7`
+*R* | `0.2.3`
 
-```- Latest changes, improvments and bug fixes on the API:```
+### *Latest changes, improvments and bug fixes on the API:*
 + 2021/07
 
     + __Changed:__ markets/country role limitation, had a restraint of 250 rows.

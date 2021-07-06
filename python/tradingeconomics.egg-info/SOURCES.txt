@@ -9,12 +9,14 @@ tradingeconomics/comtrade.py
 tradingeconomics/earnings.py
 tradingeconomics/eurostat.py
 tradingeconomics/federalReserve.py
+tradingeconomics/financials.py
 tradingeconomics/forecasts.py
 tradingeconomics/functions.py
 tradingeconomics/glob.py
 tradingeconomics/historical.py
 tradingeconomics/historicalDB.py
 tradingeconomics/historicalEurostat.py
+tradingeconomics/historicalFinancials.py
 tradingeconomics/historicalMarkets.py
 tradingeconomics/indicators.py
 tradingeconomics/markets.py
