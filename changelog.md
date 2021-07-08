@@ -2,10 +2,14 @@
 
 
 ### *Latest changes, improvements and bug fixes on the API:*
+
 + 2021/07
 
     + __Changed:__ markets/country role limitation, had a restraint of 250 rows per page.
     + __Deprecated:__ pagination on markets/country.
+    + __Fixed__ markets/historical and intraday row limitation was not according to the rows a role could get.
+    + __Changed__ calendar to get the new limits on rows by role.
+    + __Added__ Source URL column to indicators and calendar endpoints.
 ---
 + 2021/06
 
