@@ -10,6 +10,9 @@ getHistoricalFinancialsData(symbol = NULL, category = NULL, outType = NULL)
 \item{symbol}{string or list.
 String to get data for one symbol. List of strings to get data for more than one symbol.}
 
+\item{category}{string.
+String to get data for one indicator.}
+
 \item{outType}{string.
 'df' for data frame,
 'lst'(default) for list.}
@@ -26,8 +29,9 @@ Without credentials only sample data will be provided.
 }
 
 \examples{
-getHistoricalFinancialData(symbol = 'aapl:us', category = 'assets', outType = 'df'))
-
+\dontrun{
+getHistoricalFinancialData(symbol = 'aapl:us', category = 'assets', outType = 'df')
+}
 
 }
 \seealso{

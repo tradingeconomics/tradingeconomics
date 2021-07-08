@@ -14,8 +14,6 @@ getMarketsSearch(country = NULL, category = NULL, outType = NULL)
 \item{outType}{string.
 'df' for data frame,
 'raw'(default) for list of unparsed data.}
-
-\item{page}{string}
 }
 \value{
 Returns a list or data frame of available Takes either one of 'index' or 'markets', 'bonds', 'commodities',
@@ -31,7 +29,8 @@ A country must be provided.
 
 \examples{
 \dontrun{ getMarketsSearch('united states'), getMarketsSearch( 'japan', 'index')
-getMarketsSearch('united states', category = c('index' ,'markets')), getMarketsSearch('japan', ('index', 'markets'), '2')
+getMarketsSearch('united states', category = c('index' ,'markets'))
+getMarketsSearch('japan', ('index', 'markets'), '2')
 }
 }
 \seealso{

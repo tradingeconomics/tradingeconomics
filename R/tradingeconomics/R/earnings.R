@@ -3,11 +3,12 @@ source("R/functions.R")
 
 #'Return earnings information from Trading Economics API
 #'@export getEarnings
-#'@param country string or list.
-#'Filter earnings calendar by country.
 #'@param outType string.
 #''lst'(default) for lis format output, 'df' for data frame,
 #'@param category string or list.
+#'string for market symbol
+#'@param indicator string.
+#'string for symbol
 #'@param initDate, string.
 #'@param endDate, string.
 #'@param type, string.Could be earnings, ipo, or dividends.
@@ -45,8 +46,8 @@ getEarnings <- function (indicator = NULL , initDate = NULL, endDate = NULL, typ
       return("Category not recognized. It can be null, country or symbol.")
     }
   }
-
-  url <- paste(url,  '?c=', apiKey, sep ='')
+  apikey_local <- .GlobalEnv$apiKey
+  url <- paste(url,  '?c=', apikey_local, sep ='')
 
   if (!is.null(initDate) ){
     dateCheck(initDate)

@@ -18,8 +18,13 @@ source("R/functions.R")
 #'Without credentials only sample data will be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{getHistorical('aapl:us'), getHistorical('USURTOT'),getHistorical('USURTOT', '2016-01-01'),getHistorical('aapl:us', '2016-01-01'),
-#'getHistorical('RACEDISPARITY005007:fred'), getHistorical('PRTESP24031:comtrade'), getHistorical('usa.fr.inr.rinr:worldbank')
+#'\dontrun{getHistorical('aapl:us')
+#'getHistorical('USURTOT')
+#'getHistorical('USURTOT', '2016-01-01')
+#'getHistorical('aapl:us', '2016-01-01'),
+#'getHistorical('RACEDISPARITY005007:fred')
+#'getHistorical('PRTESP24031:comtrade')
+#'getHistorical('usa.fr.inr.rinr:worldbank')
 #' }
 
 
@@ -71,13 +76,13 @@ getHistorical <- function(symbol = NULL, initDate= NULL, endDate= NULL, outType 
     url <- paste(url, paste(initDate, endDate, sep = '&d2='), sep = '?d1=')
 
   }
-
+  apikey_local <- .GlobalEnv$apiKey
   if(str_detect(url, 'worldbank')){
-    url <- paste(url, "&c=", apiKey, sep = '')
+    url <- paste(url, "&c=", apikey_local, sep = '')
   }else if (str_detect(url, 'd1')){
-    url <- paste(url, "&c=", apiKey, sep = '')
+    url <- paste(url, "&c=", apikey_local, sep = '')
   }else{
-    url <- paste(url, "?c=", apiKey, sep = '')
+    url <- paste(url, "?c=", apikey_local, sep = '')
   }
   url <- URLencode(url)
   request <- GET(url)

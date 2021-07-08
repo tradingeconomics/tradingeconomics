@@ -26,8 +26,9 @@ Without credentials only sample data will be provided.
 }
 
 \examples{
+\dontrun{
 getFinancialsData(symbol ='aapl:us,acm:us', outType = 'df')
-
+}
 
 }
 \seealso{

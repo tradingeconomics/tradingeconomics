@@ -31,8 +31,13 @@ Without credentials only sample data will be provided.
 }
 
 \examples{
-\dontrun{getHistorical('aapl:us'), getHistorical('USURTOT'),getHistorical('USURTOT', '2016-01-01'),getHistorical('aapl:us', '2016-01-01'),
-getHistorical('RACEDISPARITY005007:fred'), getHistorical('PRTESP24031:comtrade'), getHistorical('usa.fr.inr.rinr:worldbank')
+\dontrun{getHistorical('aapl:us')
+getHistorical('USURTOT')
+getHistorical('USURTOT', '2016-01-01')
+getHistorical('aapl:us', '2016-01-01'),
+getHistorical('RACEDISPARITY005007:fred')
+getHistorical('PRTESP24031:comtrade')
+getHistorical('usa.fr.inr.rinr:worldbank')
 }
 }
 \seealso{

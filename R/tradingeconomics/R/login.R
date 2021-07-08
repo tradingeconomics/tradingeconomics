@@ -5,8 +5,6 @@ credCheck <- function(usersApiKey){
 
 #'Insert users APIkey
 #'@export login
-#'
-#'
 #'@param usersApiKey string.
 
 login <- function(usersApiKey = NULL) {
@@ -19,8 +17,12 @@ login <- function(usersApiKey = NULL) {
 
      usersApiKey = gsub("[[:space:]]", "", usersApiKey)
      assign("apiKey", usersApiKey, envir = .GlobalEnv)
+     
+     #apikey <<- usersApiKey
+     
 
-    return(apiKey)
-  }
+    #return(apiKey)
+}
+
 
 

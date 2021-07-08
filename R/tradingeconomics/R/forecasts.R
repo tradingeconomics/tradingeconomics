@@ -59,8 +59,8 @@ getForecastData <- function(country = NULL, indicator = NULL, outType = NULL, ti
   else {
     stop('At least one of parameters, country, ticker or indicator, should be indicated. ')
   }
-
-    url <- paste(base, url, '?c=', apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+    url <- paste(base, url, '?c=', apikey_local, sep = '')
     url <- URLencode(url)
     request <- GET(url)
 

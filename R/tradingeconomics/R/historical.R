@@ -1,12 +1,12 @@
 source("R/functions.R")
-
-lower.Date <- function(country, indicator, apiKey){
+apikey_local <- .GlobalEnv$apiKey
+lower.Date <- function(country, indicator, apikey_local){
   base <-  "https://api.tradingeconomics.com/historical/country"
   url_base <- paste(base, paste(country, collapse = ','), 'indicator',
                     paste(indicator, collapse = ','), sep = '/')
-  if (is.null(apiKey))
+  if (is.null(apikey_local))
     credentials = 'guest:guest'
-  url <- paste(url_base, '?c=', apiKey, sep = '')
+  url <- paste(url_base, '?c=', apikey_local, sep = '')
   url <- URLencode(url)
   webData <-fromJSON(url)
   iDate <- webData$DateTime[1]
@@ -25,6 +25,8 @@ lower.Date <- function(country, indicator, apiKey){
 #'String  to get data for one category. List of strings to get data for several calendar events.
 #'For example, category = 'GDP Growth Rate' or
 #'category = c('Exports', 'Imports').
+#'@param ticker string.
+#'String Unique ticker used by Trading Economics
 #'@param initDate string with format: YYYY-MM-DD.
 #'For example: '2011-01-01'.
 #'@param endDate string with format: YYYY-MM-DD.
@@ -37,10 +39,13 @@ lower.Date <- function(country, indicator, apiKey){
 #'Without credentials only sample data will be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getHistoricalData(country = 'United Kingdom', indicator = 'Imports',initDate = '2011-01-01', endDate = '2016-01-01')
-#' getHistoricalData(country = c('United States', 'United Kingdom'),indicator = c('Imports','Exports'),initDate = '2011-01-01', endDate = '2016-01-01')
+#'\dontrun{ getHistoricalData(country = 'United Kingdom', indicator = 'Imports',
+#'initDate = '2011-01-01', endDate = '2016-01-01')
+#' getHistoricalData(country = c('United States', 'United Kingdom'),
+#' indicator = c('Imports','Exports'),initDate = '2011-01-01', endDate = '2016-01-01')
 #' getHistoricalData(ticker = 'USURTOT', initDate = '2015-03-01')
-#' getHistoricalData(country = c('United States', 'United Kingdom'), indicator = c('Imports','Exports'))
+#' getHistoricalData(country = c('United States', 'United Kingdom'), 
+#' indicator = c('Imports','Exports'))
 #' getHistoricalData(country = 'United States', indicator = 'Imports')
 #'
 #' }
@@ -49,7 +54,7 @@ lower.Date <- function(country, indicator, apiKey){
 getHistoricalData <- function(country = NULL, indicator = NULL, ticker = NULL, initDate= NULL, endDate= NULL, outType = NULL){
   base <-  "https://api.tradingeconomics.com/historical/"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
     if (length(country) > 1){
       country = paste(country, collapse = ',')
     }
@@ -91,7 +96,7 @@ getHistoricalData <- function(country = NULL, indicator = NULL, ticker = NULL, i
         url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
     }
     
-    url <- paste(base, url, '?c=', apiKey, sep = '')  
+    url <- paste(base, url, '?c=', apikey_local, sep = '')  
     url <- URLencode(url)
     request <- GET(url)
 

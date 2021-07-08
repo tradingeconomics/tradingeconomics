@@ -5,7 +5,7 @@ Version: 0.2.3
 Author: Olexandr Baturin <olexandr.baturin@tradingeconomics.com>
 Maintainer: Trading Economics <olexandr.baturin@tradingeconomics.com>
 Description: "R version of Trading Economics API library."
-Depends: jsonlite, httr
+Depends: jsonlite, httr, stringr, utils
 License: GPL-2
 LazyData: TRUE
 RoxygenNote: 7.1.1

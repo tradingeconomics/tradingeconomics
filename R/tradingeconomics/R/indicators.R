@@ -34,7 +34,7 @@ source("R/functions.R")
 getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL, ticker = NULL, group = NULL){
   base <- "https://api.tradingeconomics.com/"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
     if (length(country) > 1){
       country = paste(country, collapse = ',')
     }
@@ -58,14 +58,14 @@ getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL, t
       url <- paste('country', country, indicator, sep = '/')
     }
     else if (!is.null(country) & !is.null(group)){
-      url <- paste('country', country, paste('?c=', apiKey, '&group=', group, sep = ''), sep = '/')
+      url <- paste('country', country, paste('?c=', apikey_local, '&group=', group, sep = ''), sep = '/')
     }
     else if (!is.null(ticker)){
       url <- paste('country', 'ticker', ticker, sep = '/')
     }
 
     if(is.null(group)){
-      url <- paste(url, '?c=', apiKey, sep = '')
+      url <- paste(url, '?c=', apikey_local, sep = '')
     }
     url <- paste(base, url, sep = '')
 
@@ -93,11 +93,12 @@ getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL, t
 #'Return the latest updates
 #'@export getLatestUpdates
 #'
-#'@param date string or list.
-#'String for historical data lastupdate, or for historical data per date.
+#'@param country string.
+#'
 #'@param outType string.
 #''lst'(default) for lis format output, 'df' for data frame,
-#'
+#'@param initDate string
+#'String for historical data lastupdate, or for historical data per date.
 #'@section Notes:
 #'Historical data Symbol lastupdates.
 #'
@@ -113,7 +114,7 @@ getLatestUpdates <- function(initDate= NULL, outType = NULL, country = NULL){
   base <-  "https://api.tradingeconomics.com/updates/"
   df_final = data.frame()
   url = ''
-
+  apikey_local <- .GlobalEnv$apiKey
   if (length(country) > 1){
       country = paste(country, collapse = ',')
     }
@@ -128,7 +129,7 @@ getLatestUpdates <- function(initDate= NULL, outType = NULL, country = NULL){
     url <- paste('country', country, sep = '/')
   }
 
-  url <- paste(base, url, '?c=', apiKey, sep = '')
+  url <- paste(base, url, '?c=', apikey_local, sep = '')
   url <- URLencode(url)
   request <- GET(url)
 

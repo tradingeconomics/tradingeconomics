@@ -10,7 +10,8 @@ source("R/functions.R")
 #'
 #'@param symbol string or list.
 #'String to get data for one symbol. List of strings to get data for more than one symbol.
-
+#'@param category string.
+#'String to get data for one indicator.
 #'@param outType string.
 #''df' for data frame,
 #''lst'(default) for list.
@@ -20,8 +21,9 @@ source("R/functions.R")
 #'Without credentials only sample data will be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'getHistoricalFinancialData(symbol = 'aapl:us', category = 'assets', outType = 'df'))
-#' 
+#'\dontrun{
+#'getHistoricalFinancialData(symbol = 'aapl:us', category = 'assets', outType = 'df')
+#' }
 #' 
 
 
@@ -43,9 +45,9 @@ getHistoricalFinancialsData <- function(symbol = NULL, category = NULL , outType
   }
   
   print(url)
-  
-  print(paste('c=',apiKey, sep = ''))
-  url <- paste(base, url, '?c=',apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+  print(paste('c=',apikey_local, sep = ''))
+  url <- paste(base, url, '?c=',apikey_local, sep = '')
   
   print(url)
   
@@ -96,8 +98,9 @@ getHistoricalFinancialsData <- function(symbol = NULL, category = NULL , outType
 #'Without credentials only sample data will be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
 #'@examples
+#'\dontrun{
 #'getFinancialsData(symbol ='aapl:us,acm:us', outType = 'df')
-#' 
+#' }
 #' 
 
 
@@ -115,9 +118,10 @@ getFinancialsData <- function(symbol = NULL, outType = NULL){
   }
   
   print(url)
-  
-  print(paste('c=',apiKey, sep = ''))
-  url <- paste(base, url, '?c=',apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+  print(apikey_local)
+  print(paste('c=',apikey_local, sep = ''))
+  url <- paste(base, url, '?c=',apikey_local, sep = '')
   
   print(url)
   

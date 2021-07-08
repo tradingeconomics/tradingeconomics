@@ -13,6 +13,10 @@ getLatestNews(
 )
 }
 \arguments{
+\item{identifier}{string.}
+
+\item{category}{string.}
+
 \item{limit, }{string.
 Limits the list size.}
 
@@ -21,13 +25,6 @@ Specific starting index.}
 
 \item{outType}{string.
 'lst'(default) for lis format output, 'df' for data frame,}
-
-\item{country}{string or list.
-String for one country information. List of strings for
-several countrys, for example country = c('country_name', 'country_name').}
-
-\item{indicator, }{string.
-String for one indicator, or list of strings for several indicators.}
 }
 \value{
 Return a list or data frame of the latest news, by country or countries, by indicator and with page limit and start index number.

@@ -26,7 +26,8 @@ source("R/functions.R")
 #'\dontrun{getSearch()
 #' getSearch(search_term = 'gold', outType = 'df')
 #'getSearch(search_term = 'japan', , category= 'markets', outType = 'df')
-#'getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'), initDate = '2018-01-01', endDate = '2018-03-01')
+#'getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'),
+#'initDate = '2018-01-01', endDate = '2018-03-01')
 #'   }
 #'
 
@@ -34,19 +35,19 @@ source("R/functions.R")
 getSearch <- function(search_term = NULL, category = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/search/"
   df_final = data.frame()
-  
+  apikey_local <- .GlobalEnv$apiKey
   if (is.null(search_term) & is.null(category)){
     url <- 'categories'
-    url <- paste(base, url, '?c=',apiKey, sep = '')
+    url <- paste(base, url, '?c=',apikey_local, sep = '')
   }
   else if (is.null(category) & !is.null(search_term)){
     url <- paste(search_term)
-    url <- paste(base, url, '?c=',apiKey, sep = '')
+    url <- paste(base, url, '?c=',apikey_local, sep = '')
 
   }
   else if (!is.null(search_term) & !is.null(category)){
     url <- paste(search_term,'?category=',category,sep = '')
-    url <- paste(base, url, '&c=',apiKey, sep = '')
+    url <- paste(base, url, '&c=',apikey_local, sep = '')
 
   }
 
