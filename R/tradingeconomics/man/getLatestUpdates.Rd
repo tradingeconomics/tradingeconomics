@@ -7,11 +7,13 @@
 getLatestUpdates(initDate = NULL, outType = NULL, country = NULL)
 }
 \arguments{
+\item{initDate}{string
+String for historical data lastupdate, or for historical data per date.}
+
 \item{outType}{string.
 'lst'(default) for lis format output, 'df' for data frame,}
 
-\item{date}{string or list.
-String for historical data lastupdate, or for historical data per date.}
+\item{country}{string.}
 }
 \value{
 Return a list or data frame of historical information by lastupdate or by specific date.

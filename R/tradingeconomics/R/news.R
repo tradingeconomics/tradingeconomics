@@ -2,11 +2,9 @@ source("R/functions.R")
 
 #'Return latest news information from Trading Economics API
 #'@export getLatestNews
-#'@param country string or list.
-#'String for one country information. List of strings for
-#'several countrys, for example country = c('country_name', 'country_name').
-#'@param indicator, string.
-#'String for one indicator, or list of strings for several indicators.
+#'
+#'@param identifier string.
+#'@param category string.
 #'@param limit, string.
 #'Limits the list size.
 #'@param start, string.
@@ -48,8 +46,8 @@ getLatestNews <- function(identifier = NULL, category = NULL, limit = NULL, star
     }
   }
 
-
-  url <- paste(url, '?c=', apiKey, sep ='')
+  apikey_local <- .GlobalEnv$apiKey
+  url <- paste(url, '?c=', apikey_local, sep ='')
 
   if(!is.null(limit) & !is.null(start)){
     url <- paste(url, '&limit=' , paste(limit, collapse = ','), sep = '', paste('&start=', paste(start, collapse = ','), sep = '' ))
@@ -149,7 +147,8 @@ getLatestArticles <- function(country = NULL, indicator = NULL, id = NULL, limit
     url <- paste(base, 'id', paste(id, collapse = ','), sep = '/')
 
   }
-  url <- paste(url, '?c=', apiKey, sep ='')
+  apikey_local <- .GlobalEnv$apiKey
+  url <- paste(url, '?c=', apikey_local, sep ='')
 
   if(!is.null(limit) & !is.null(start)){
     url <- paste(url, '&lim=' , paste(limit, collapse = ','), sep = '', paste('&start=', paste(start, collapse = ','), sep = '' ))

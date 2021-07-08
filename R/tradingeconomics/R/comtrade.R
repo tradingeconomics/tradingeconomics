@@ -19,7 +19,8 @@ source("R/functions.R")
 getComtradeCategories <- function(outType = NULL){
 
   base <- "https://api.tradingeconomics.com/comtrade/categories"
-  url <- paste(base, '?c=', apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+  url <- paste(base, '?c=', apikey_local, sep = '')
   df_final = data.frame()
 
   url <- URLencode(url)
@@ -63,7 +64,8 @@ getComtradeCategories <- function(outType = NULL){
 getComtradeUpdates <- function(outType = NULL){
 
   base <- "https://api.tradingeconomics.com/comtrade/updates"
-  url <- paste(base, '?c=', apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+  url <- paste(base, '?c=', apikey_local, sep = '')
   df_final = data.frame()
 
   url <- URLencode(url)
@@ -112,7 +114,7 @@ getComtradeUpdates <- function(outType = NULL){
 getComtradeCountry <- function(country = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/comtrade"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
   if(is.null(country)){
     url <- paste(base, 'countries', sep= '/')
   }
@@ -120,7 +122,7 @@ getComtradeCountry <- function(country = NULL, outType = NULL){
     url <- paste(base, 'country', paste(country, collapse = '/'), sep = '/')
   }
  
-  url <- paste(url, '?c=', apiKey, sep = '')
+  url <- paste(url, '?c=', apikey_local, sep = '')
 
 
   url <- URLencode(url)
@@ -169,12 +171,12 @@ getComtradeCountry <- function(country = NULL, outType = NULL){
 getComtradeHistorical <- function(symbol = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/comtrade/historical"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
   if(!is.null(symbol)){
     url <- paste(base, paste(symbol, collapse = ','), sep = '/')
   }
 
-  url <- paste(url, '?c=', apiKey, sep = '')
+  url <- paste(url, '?c=', apikey_local, sep = '')
 
   url <- URLencode(url)
   request <- GET(url)

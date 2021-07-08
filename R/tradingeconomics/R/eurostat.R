@@ -17,7 +17,7 @@ source("R/functions.R")
 #'String for category information, for example category = 'People at risk of income poverty after social transfers'.
 #'@param country string.
 #'String for eurostats data by country, for example category = 'Denmark'.
-#'#'@param outType string.
+#'@param outType string.
 #''lst'(default) for list format output, 'df' for data frame,
 
 #'
@@ -71,8 +71,9 @@ getEurostatData <- function(lists = NULL, category_group = NULL, category = NULL
     url <- paste('/country/',country,'?category=',category,'&',sep='')
     }
   }
-  print(paste('c=',apiKey, sep = ''))
-  url <- paste(base, url, 'c=',apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+  print(paste('c=',apikey_local, sep = ''))
+  url <- paste(base, url, 'c=',apikey_local, sep = '')
   
   url <- URLencode(url)
   
@@ -148,8 +149,8 @@ getEurostatHistorical <- function(id = NULL, start_date= NULL, end_date= NULL, o
     url <- paste(base, paste(id, collapse = ','), sep = '/')
     
   }
-  
-  url_base <- paste(url, '?c=', apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+  url_base <- paste(url, '?c=', apikey_local, sep = '')
   
   if(!is.null(start_date) & !is.null(end_date)){
     dateCheck(start_date)
@@ -159,13 +160,13 @@ getEurostatHistorical <- function(id = NULL, start_date= NULL, end_date= NULL, o
     if(start_date > end_date) stop('Incorrect time period start_date - end_date!')
     
     url <- paste(url_base, paste(start_date, end_date, sep = '&d2='), sep = '&d1=')
-    url_base <- paste(url, '&c=', apiKey, sep = '')
+    url_base <- paste(url, '&c=', apikey_local, sep = '')
   }
   else if(!is.null(start_date) & is.null(end_date)){
     dateCheck(start_date)
     if (start_date > Sys.Date())stop('Incorrect time period start_date!')
     url <- paste(url_base, paste(start_date, sep = ''), sep = '&d1=')
-    url_base <- paste(url, '&c=', apiKey, sep = '')
+    url_base <- paste(url, '&c=', apikey_local, sep = '')
   }
   
   if (is.null(start_date)) {

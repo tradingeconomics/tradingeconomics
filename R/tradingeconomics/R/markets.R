@@ -6,12 +6,14 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 #'Get markets values from Trading Economics API
 #'@export getMarketsData
 #'
-#' @param marketsField string. Takes either one of 'commodity','currency',
-#' 'index' or 'bond' as options.
-#' @param outType string.
+#'@param marketsField string. Takes either one of 'commodity','currency',
+#''index' or 'bond' as options.
+#'@param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
-#'
+#'@param country string.
+#'@param symbol string.
+#'@param cross string.
 #'@return Returns a list or data frame of available commodities, currencies, indeces or bonds and their latest values.
 #'@section Notes:
 #'Without credentials only sample information will be provided.
@@ -23,7 +25,7 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 getMarketsData <- function(marketsField = NULL, country = NULL, symbol = NULL, cross=NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/markets/"
   fields <- c('commodities', 'currency', 'index', 'bond')
-
+  apikey_local <- .GlobalEnv$apiKey
   if (length(symbol) > 1){
       symbol = paste(symbol, collapse = ',')
     }
@@ -37,7 +39,7 @@ getMarketsData <- function(marketsField = NULL, country = NULL, symbol = NULL, c
     }
   }
   else if(!is.null(cross)) {
-    url <- paste('/currency?c=', apiKey, '&cross=', cross, sep = '')
+    url <- paste('/currency?c=', apikey_local, '&cross=', cross, sep = '')
   }
   else if(!is.null(symbol)) {
     url <- paste('symbol', symbol, sep = '/')
@@ -47,7 +49,7 @@ getMarketsData <- function(marketsField = NULL, country = NULL, symbol = NULL, c
   }
 
   if(is.null(cross)){
-    url <- paste(base, url, '?c=', apiKey, sep = '')
+    url <- paste(base, url, '?c=', apikey_local, sep = '')
   }
   else {
     url <- paste(base, url, sep = '')
@@ -91,7 +93,8 @@ getMarketsData <- function(marketsField = NULL, country = NULL, symbol = NULL, c
 #'A symbol must be provided.
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getHistoricalMarkets(c('AAPL:US','INDU:IND'),initDate = '2011-01-01', endDate = '2016-01-01', outType = 'df')
+#'\dontrun{ getHistoricalMarkets(c('AAPL:US','INDU:IND'),
+#'initDate = '2011-01-01', endDate = '2016-01-01', outType = 'df')
 #' getHistoricalMarkets('aapl:us', initDate =  '2019-02-20' )
 #'getHistoricalMarkets('AAPL:US', initDate = '2011-01-01', endDate = '2016-01-01')
 #'
@@ -99,7 +102,7 @@ getMarketsData <- function(marketsField = NULL, country = NULL, symbol = NULL, c
 
 
 getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, outType = NULL ){
-
+  apikey_local <- .GlobalEnv$apiKey
   base <-  "https://api.tradingeconomics.com/markets/historical"
   df_final = data.frame()
 
@@ -111,7 +114,7 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
     url <- paste(base, paste(symbol, collapse = ','), sep = '/')
   }
 
-  url_base <- paste(url, '?c=', apiKey, sep = '')
+  url_base <- paste(url, '?c=', apikey_local, sep = '')
 
   if(!is.null(initDate) & !is.null(endDate)){
     dateCheck(initDate)
@@ -163,10 +166,11 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
 #'@param symbol string or list.
 #'String to get data for one symbol. List of strings to get data for
 #'several symbols. For example, symbol = c('AAPL:US', 'INDU:IND').
+#'@param interval string.
 #'@param initDate string with format: YYYY-MM-DD.
 #'For example: '2011-01-01'.
 #'@param endDate string with format: YYYY-MM-DD.
-#'@param time string with format: hh:mm.
+#'
 #'@param outType string.
 #''df' for data frame,
 #''lst'(default) for list.
@@ -188,7 +192,7 @@ getHistoricalMarkets <- function(symbol = NULL, initDate= NULL, endDate= NULL, o
 getMarketsIntraday <- function (symbol = NULL, initDate = NULL, endDate = NULL, interval = NULL, outType = NULL ){
   base <-  "https://api.tradingeconomics.com/markets/intraday/"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
   if(is.null(symbol)){
     stop("A symbol is needed!")
   }
@@ -197,7 +201,7 @@ getMarketsIntraday <- function (symbol = NULL, initDate = NULL, endDate = NULL, 
     url <- paste(symbol, '?agr=', interval, sep = '')
   }
   else if(!is.null(symbol)){
-    url <- paste(paste(symbol, collapse = ','), paste( '?c=', apiKey, sep = ''), sep = '')
+    url <- paste(paste(symbol, collapse = ','), paste( '?c=', apikey_local, sep = ''), sep = '')
   }
 
   if(!is.null(initDate) & !is.null(endDate)){
@@ -215,7 +219,7 @@ getMarketsIntraday <- function (symbol = NULL, initDate = NULL, endDate = NULL, 
   }
   
   if(!is.null(interval)){
-    url <- paste(base, url, '&c=', apiKey, sep = '')
+    url <- paste(base, url, '&c=', apikey_local, sep = '')
   }
   else{
     url <- paste(base, url, sep = '')
@@ -271,6 +275,7 @@ getMarketsList <- function(marketsField, symbol = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/markets"
   fields <- c('peers', 'components')
   df_final = data.frame()
+  apikey_local <- .GlobalEnv$apiKey
   step = 10
 
   if (!(marketsField %in% fields)){
@@ -291,7 +296,7 @@ getMarketsList <- function(marketsField, symbol = NULL, outType = NULL){
 
     if(!is.null(symbol)){
       url_base <- paste(base,paste(marketsField, collapse = ','), paste(symbol, collapse = ','), sep = '/')
-      url <- paste(url_base, '?c=', apiKey, sep = '')
+      url <- paste(url_base, '?c=', apikey_local, sep = '')
     }
   }
 
@@ -319,7 +324,7 @@ getMarketsList <- function(marketsField, symbol = NULL, outType = NULL){
 #'
 #' @param category string.
 #' @param country string.
-#' @param page string
+#' 
 #' @param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
@@ -331,22 +336,23 @@ getMarketsList <- function(marketsField, symbol = NULL, outType = NULL){
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
 #'\dontrun{ getMarketsSearch('united states'), getMarketsSearch( 'japan', 'index')
-#' getMarketsSearch('united states', category = c('index' ,'markets')), getMarketsSearch('japan', ('index', 'markets'), '2')
+#' getMarketsSearch('united states', category = c('index' ,'markets'))
+#' getMarketsSearch('japan', ('index', 'markets'), '2')
 #'}
 
 
 getMarketsSearch <- function(country = NULL, category = NULL , outType = NULL){
   base <- "https://api.tradingeconomics.com/markets/search"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
   if (is.null(country)){
     stop('Country name should be provided')
   }
   else if(!is.null(country) & !is.null(category)) {
-    url <- paste(base, '/', country, '?c=', apiKey, '&category=', category,  sep = '')
+    url <- paste(base, '/', country, '?c=', apikey_local, '&category=', category,  sep = '')
   }
   else if(!is.null(country)) {
-    url <- paste(base, country, paste('?c=', apiKey, sep = ''), sep = '/')
+    url <- paste(base, country, paste('?c=', apikey_local, sep = ''), sep = '/')
   }
 
   url <- URLencode(url)
@@ -383,13 +389,14 @@ getMarketsSearch <- function(country = NULL, category = NULL , outType = NULL){
 #'A country must be provided.
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getMarketsForecast('index'), getMarketsForecast( symbol = 'BULGARIAGOVB10Y')
+#'\dontrun{ getMarketsForecast('index')
+#'getMarketsForecast( symbol = 'BULGARIAGOVB10Y')
 #'}
 
 getMarketsForecast <- function(symbol = NULL, category = NULL , outType = NULL){
   base <- "https://api.tradingeconomics.com/markets/forecasts/"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
   if (length(symbol) > 1){
       symbol = paste(symbol, collapse = ',')
     }
@@ -407,7 +414,7 @@ getMarketsForecast <- function(symbol = NULL, category = NULL , outType = NULL){
    stop('Please enter a country or category')
   }
 
-  url <- paste(base, url, '?c=', apiKey, sep = '')
+  url <- paste(base, url, '?c=', apikey_local, sep = '')
   url <- URLencode(url)
   request <- GET(url )
 

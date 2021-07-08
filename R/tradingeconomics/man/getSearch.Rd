@@ -34,7 +34,8 @@ Without credentials default information will be provided.
 \dontrun{getSearch()
 getSearch(search_term = 'gold', outType = 'df')
 getSearch(search_term = 'japan', , category= 'markets', outType = 'df')
-getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'), initDate = '2018-01-01', endDate = '2018-03-01')
+getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'),
+initDate = '2018-01-01', endDate = '2018-03-01')
   }
 
 }

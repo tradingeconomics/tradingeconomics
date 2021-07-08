@@ -13,17 +13,17 @@ getWorldBankIndicators(
 )
 }
 \arguments{
+\item{category}{string.}
+
+\item{identifier}{string.}
+
 \item{series_code}{string.}
+
+\item{URL}{string.}
 
 \item{outType}{string.
 'df' for data frame,
 'raw'(default) for list of unparsed data.}
-
-\item{indicator}{string.}
-
-\item{country}{string.}
-
-\item{url}{string.}
 }
 \value{
 Returns a list or data from World Bank.

@@ -4,9 +4,10 @@ source("R/functions.R")
 #'Get Federal Reserve values from Trading Economics API
 #'@export getFedReserve
 #'
-#' @param category string.
-#' @param indicator string.
-#' @param outType string.
+#'
+#'@param category string.
+#'@param indicator string.
+#'@param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
 #'
@@ -32,8 +33,8 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
     url <- paste(base,"counties", paste(indicator, collapse = ','), sep = '/')
 
   }
-
-  url <- paste(url, '?c=', apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+  url <- paste(url, '?c=', apikey_local, sep = '')
 
   url <- URLencode(url)
   request <- GET(url)
@@ -62,8 +63,8 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
 
 #'Get Federal Reserve values from Trading Economics API
 #'@export getFedReserveSnapshot
-#'
-#' @param county string.
+#'@param county string.
+#' @param country string.
 #' @param state string.
 #' @param symbol string.
 #' @param URL string.
@@ -77,18 +78,21 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
 #'\dontrun{ getFedReserveSnapshot('AGEXMAK2A647NCEN', outType = 'df')
-#'getFedReserveSnapshot(county = 'arkansas'), getFedReserveSnapshot(county ='Pike County')
-#'getFedReserveSnapshot(country = 'united states'), getFedReserveSnapshot(country = 'united states')
-#'getFedReserveSnapshot(URL = '/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' )
+#'getFedReserveSnapshot(county = 'arkansas')
+#'getFedReserveSnapshot(county ='Pike County')
+#'getFedReserveSnapshot(country = 'united states')
+#'getFedReserveSnapshot(country = 'united states')
+#'getFedReserveSnapshot(URL = '/united-states/income-inequality-in-aleutians-east
+#'-borough-ak-fed-data.html' )
 #'}
 #'
 getFedReserveSnapshot <- function(symbol = NULL, state = NULL, county = NULL, country = NULL, URL = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/fred/snapshot"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
   if(!is.null(URL)){
     url <- paste(base, 'url', sep = '/')
-    url <- paste(url, '?c=', apiKey, sep = '')
+    url <- paste(url, '?c=', apikey_local, sep = '')
     url <- paste(url, paste(URL, collapse = ','), sep = '&url=')
 
     url <- URLencode(url)
@@ -110,8 +114,8 @@ getFedReserveSnapshot <- function(symbol = NULL, state = NULL, county = NULL, co
     url <- paste(base, 'county', paste(county, collapse = ','), sep = '/')
 
   }
-
-  url <- paste(url, '?c=', apiKey, sep = '')
+  
+  url <- paste(url, '?c=', apikey_local, sep = '')
 
   url <- URLencode(url)
   request <- GET(url)
@@ -158,14 +162,14 @@ getFedReserveSnapshot <- function(symbol = NULL, state = NULL, county = NULL, co
 getFedHistorical <- function(symbol = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/fred/historical"
   df_final = data.frame()
-
+  apikey_local <- .GlobalEnv$apiKey
   if(is.null(symbol)) {
     print("A symbol is needed!")
   }else{
     url <- paste (base, paste(symbol, collapse = ','), sep = '/')
   }
 
-  url <- paste(url, '?c=', apiKey, sep = '')
+  url <- paste(url, '?c=', apikey_local, sep = '')
   url <- URLencode(url)
   request <- GET(url)
 

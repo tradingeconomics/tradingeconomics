@@ -20,6 +20,8 @@ getFedReserveSnapshot(
 
 \item{county}{string.}
 
+\item{country}{string.}
+
 \item{URL}{string.}
 
 \item{outType}{string.
@@ -39,9 +41,12 @@ Without credentials only sample information will be provided.
 
 \examples{
 \dontrun{ getFedReserveSnapshot('AGEXMAK2A647NCEN', outType = 'df')
-getFedReserveSnapshot(county = 'arkansas'), getFedReserveSnapshot(county ='Pike County')
-getFedReserveSnapshot(country = 'united states'), getFedReserveSnapshot(country = 'united states')
-getFedReserveSnapshot(URL = '/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' )
+getFedReserveSnapshot(county = 'arkansas')
+getFedReserveSnapshot(county ='Pike County')
+getFedReserveSnapshot(country = 'united states')
+getFedReserveSnapshot(country = 'united states')
+getFedReserveSnapshot(URL = '/united-states/income-inequality-in-aleutians-east
+-borough-ak-fed-data.html' )
 }
 
 }

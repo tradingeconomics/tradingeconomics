@@ -22,11 +22,11 @@ For example: '2011-01-01'.}
 
 \item{endDate}{string with format: YYYY-MM-DD.}
 
+\item{interval}{string.}
+
 \item{outType}{string.
 'df' for data frame,
 'lst'(default) for list.}
-
-\item{time}{string with format: hh:mm.}
 }
 \value{
 Return a list or data frame of intraday information for specific symbol with initial and end dates.

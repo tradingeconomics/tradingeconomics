@@ -16,6 +16,12 @@ getMarketsData(
 \item{marketsField}{string. Takes either one of 'commodity','currency',
 'index' or 'bond' as options.}
 
+\item{country}{string.}
+
+\item{symbol}{string.}
+
+\item{cross}{string.}
+
 \item{outType}{string.
 'df' for data frame,
 'raw'(default) for list of unparsed data.}

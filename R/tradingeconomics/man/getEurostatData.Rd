@@ -23,8 +23,9 @@ String for one category_group information, for example category_group = 'Poverty
 String for category information, for example category = 'People at risk of income poverty after social transfers'.}
 
 \item{country}{string.
-String for eurostats data by country, for example category = 'Denmark'.
-#'@param outType string.
+String for eurostats data by country, for example category = 'Denmark'.}
+
+\item{outType}{string.
 'lst'(default) for list format output, 'df' for data frame,}
 }
 \value{

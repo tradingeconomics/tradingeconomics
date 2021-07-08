@@ -27,7 +27,8 @@ A country must be provided.
 }
 
 \examples{
-\dontrun{ getMarketsForecast('index'), getMarketsForecast( symbol = 'BULGARIAGOVB10Y')
+\dontrun{ getMarketsForecast('index')
+getMarketsForecast( symbol = 'BULGARIAGOVB10Y')
 }
 }
 \seealso{

@@ -1,5 +1,8 @@
 #Shared functions
 
+
+
+
 dateCheck <- function(some_date){
   pattern <- "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
   if (!grepl(pattern, some_date)) stop('Incorrect date format!')
@@ -28,4 +31,7 @@ checkRequestStatus <- function(status_msg){
     stop(paste('Something went wrong: ', status_msg, sep=" "))
   }
 }
+
+
+
 

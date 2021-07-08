@@ -35,8 +35,8 @@ getCreditRating <- function(country = NULL, outType = NULL){
   if (!is.null(country)){
     url <- paste(country, sep = '/')
   }
-
-  url <- paste(base, url, '?c=', apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+  url <- paste(base, url, '?c=', apikey_local, sep = '')
   url <- URLencode(url)
   
   request <- GET(url)
@@ -119,8 +119,8 @@ getCreditRatingHistorical <- function(country = NULL, outType = NULL, initDate= 
       if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
       url <- paste(url, paste(initDate, endDate, sep = '/'), sep = '/')
   }
-
-    url <- paste(base, url, '?c=', apiKey, sep = '')
+  apikey_local <- .GlobalEnv$apiKey
+    url <- paste(base, url, '?c=', apikey_local, sep = '')
     url <- URLencode(url)
     request <- GET(url)
 
