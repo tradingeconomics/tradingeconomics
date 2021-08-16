@@ -3,6 +3,10 @@
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
++ 2021/08
+
+    + __Added__ Discontinued series endpoint.
+---
 + 2021/07
 
     + __Changed:__ markets/country role limitation, had a restraint of 250 rows per page.
