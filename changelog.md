@@ -5,7 +5,8 @@
 
 + 2021/08
 
-    + __Added__ Discontinued series endpoint.
+    + __Added__ Financials lists endpoint, list of companies with fundamentals data and also list of companies by country.
+    + __Added__ Discontinued series endpoint, containing series that were discontinued and will not have updated values.
 ---
 + 2021/07
 
