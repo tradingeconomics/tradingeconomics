@@ -53,8 +53,8 @@ def validateDates(initDate=None, endDate=None):
             if initDate > str(date.today()):
                 raise DateError ('Initial date out of range.')
         #baseLink += '&d1=' + quote(initDate)
-        dates_list.append(f'/{quote(initDate)}')
-        dates_list.append(f'/')
+        dates_list.append(f'{quote(initDate)}')
+        dates_list.append(f'')
         
 
 
@@ -72,68 +72,74 @@ def validateDates(initDate=None, endDate=None):
         except ValueError:
             raise DateError ('Invalid time period.')
         #baseLink += '&d1=' + quote(initDate) + '&d2=' + quote(endDate)
-        dates_list.append(f'/{quote(initDate)}')
-        dates_list.append(f'/{quote(endDate)}')
+        dates_list.append(quote(initDate))
+        dates_list.append(quote(endDate))
 
     if initDate == None and (endDate is not None):
         raise DateError('initDate value is missing')
     return dates_list
 
+def stringOrList(string_or_list):
+    if type(string_or_list) is not str:
+        return quote(",".join(string_or_list))
+    return quote(string_or_list)
 
-def parseCountry(country):
-    if type(country) is not str:
-        return '/country/' + quote(",".join(country))
-    return f'/country/{quote(country)}'
-
-
-def parseIndicator(indicator):
-    if type(indicator) is not str:
-        return '/indicator/' + quote(",".join(indicator))
-    return f'/indicator/{quote(indicator)}'
-
-
-
-#country and indicator have be quoted!!!
-
-
-
-def getCalendarData(country, indicator, start_date=None, end_date=None, importance=None):
+# missing out-put format parameter!!!!
+def getCalendarData(country=None, indicator=None, start_date=None, end_date=None, importance=None, calendar_id=None, ticker=None):
     # d is a DICTIONARY
     d = {
         'url_base': 'https://api.tradingeconomics.com/calendar',
-        'country': '/country/portugal,spain,brazil',
-        'indicator': '/indicator/balance%20of%20trade,personal%20spending,interest%20rate',
-        'start_date': '/2010-12-02',
-        'end_date': '/2016-12-03',
-        #'key': '?c=kjq3jx15aswdmed:77vy8tb3e7s5d45',
-        'key': glob.apikey,
+        'country': '',
+        'indicator': '',
+        'start_date': '',
+        'end_date': '',
+        'key': f'?c={glob.apikey}',
+        'importance': '',
+        'calendar_id': '',
+        'ticker': ''
 
-        'importance': '&importance=2'
+        # 'url_base': 'https://api.tradingeconomics.com/calendar',
+        # 'country': '/country/portugal,spain,brazil',
+        # 'indicator': '/indicator/balance%20of%20trade,personal%20spending,interest%20rate',
+        # 'start_date': '/2010-12-02',
+        # 'end_date': '/2016-12-03',
+        # #'key': '?c=kjq3jx15aswdmed:77vy8tb3e7s5d45',
+        # 'key': f'?c={glob.apikey}',
+        # 'importance': '&importance=2'
     }
+    #in all cases, start_date and end_date gets validation
+    if start_date and end_date:
+        all_selector =''
 
-    if country is not None:
-        d['country'] = parseCountry(country)
+        if country is None and indicator is None and ticker is None :
+            all_selector='/country/all'
 
-    if indicator is not None:
-        d['indicator'] = parseIndicator(indicator)
-
-    if start_date is not None:
         parsed_dates = validateDates(initDate=start_date, endDate=end_date)
-        d['start_date'] = parsed_dates[0]
-        d['end_date'] = parsed_dates[1]
+        
+        d['start_date'] = f'{all_selector}/{parsed_dates[0]}'
 
-    if importance is not None:
-        d['importance'] = importance
+        d['end_date'] = f'/{parsed_dates[1]}'
+
+    #  returns a ticker end-point specific url.
+    if ticker:
+        d['ticker'] = f'/ticker/{stringOrList(ticker)}'
+        return "%s%s%s%s%s" % (d['url_base'],d['ticker'], d['start_date'], d['end_date'], d['key'] )
+    #  return a calendar_id end-point specific url.
+    if calendar_id:
+        d['calendar_id'] = f'/calendarid/{stringOrList(calendar_id)}'
+        return "%s%s%s" % (d['url_base'], d['calendar_id'], d['key'])
+
+    # the next three conditions will conditionally format the end-point url. 
+    # if a condition is not satisfied, nothing will be added to the url
+    if country:
+        d['country'] = f'/country/{stringOrList(country)}'
+
+    if indicator:
+        d['indicator'] = f'/indicator/{stringOrList(indicator)}'
+
+    if importance:
+        d['importance'] = f'&importance={importance}'
+    
+    return "%s%s%s%s%s%s%s" % (d['url_base'], d['country'], d['indicator'], d['start_date'], d['end_date'], d['key'], d['importance'] )
 
     
-
-    
-    #url_string = f"{url_var_dict['url_base']}{url_var_dict['country']}{url_var_dict['indicator']}"
-    url_string = "%s%s%s%s%s%s%s" % (d['url_base'], d['country'], d['indicator'], d['start_date'], d['end_date'], d['key'], d['importance'] )
-
-
-    mydict = {"path": "/var/blah"}
-    curr = "1.1"
-    prev = "1.0"
-
-    mystr = "path: %s curr: %s prev: %s" % (mydict['path'], curr, prev)

@@ -12,7 +12,7 @@ if PY3: # Python 3+
     from .historical import getHistoricalData, getHistoricalRatings
     from .calendar import getCalendarData, getCalendarId
     from .forecasts import getForecastData
-    from .indicators import getIndicatorData, getRatings, getLatestUpdates
+    from .indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator
     from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross
     from .historicalMarkets import fetchMarkets
     from .glob import login, subscribe
@@ -33,7 +33,7 @@ else: # Python 2.X
     from historical import getHistoricalData, getHistoricalRatings
     from calendar import getCalendarData, getCalendarId
     from forecasts import getForecastData
-    from indicators import getIndicatorData, getRatings, getLatestUpdates
+    from indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator
     from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross
     from historicalMarkets import fetchMarkets
     from glob import login, subscribe

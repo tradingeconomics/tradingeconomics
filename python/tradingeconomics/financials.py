@@ -112,4 +112,56 @@ def getFinancialsData(symbols=None, output_type=None):
     else:
         return ''
 
+def stringOrList(string_or_list):
+    if type(string_or_list) is not str:
+        return quote(",".join(string_or_list))
+    return quote(string_or_list)
+
+def getFinancialsData2(symbol = None, country = None, output_type=None):
+    # IN PROGRESS, Description is not updated
+    """
+    Returns financial data.
+    ==========================================================
+
+    Parameters:
+    -----------
+    symbols: string or list.
+             String to get data for symbol. List of strings to get data for
+             several symbols.
+
+
+    output_type: string.
+             ''dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web.
+
+    Example
+    -------
+    getFinancialsData('aapl:us', 'df')
+    getFinancialsData(['aapl:us', 'ea:us'], 'df')
+    """
+
+
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/financials',
+        'symbol': '',
+        'country': '/companies',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    if country:
+        #the 'key' value has to be changed due to url enpoint use of '?' or '&' characters. 
+        d['key']=f'&c={glob.apikey}'
+        d['country'] = f'/companies?country={fn.stringOrList(country)}'
+    if symbol:
+        d['country'] = ''
+        d['symbol'] = f'/symbol/{fn.stringOrList(symbol)}'
+
+    
+    api_url_request = "%s%s%s%s" % (d['url_base'], d['symbol'],d['country'],  d['key']) 
+    print(api_url_request)
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+
+
 
