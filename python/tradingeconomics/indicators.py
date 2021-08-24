@@ -318,16 +318,14 @@ def getLatestUpdates(initDate = None, output_type = None):
     else:
         return ''
 
-
-
 def getDiscontinuedIndicator(country=None, output_type=None):
     """
     Returns a list of List of discontinued series for all countries, by country or multiple countries.
     =================================================================================
     Parameters:
     -----------
-        country:string or list.
-                 list of latest updates by initial date, for example:
+        country: string or list.
+                list of latest updates by initial date, for example:
                 country = 'china'
                 country = ['united states', 'china']          
         output_type: string.
@@ -336,10 +334,12 @@ def getDiscontinuedIndicator(country=None, output_type=None):
     Notes
     -----
     Without parameters a List of discontinued series for all countries will be provided. 
+    
     Example
     -------
-    getDiscontinuedIndicator()
-    getDiscontinuedIndicator(ountry = ['united states', 'china'], output_type = None)
+            getDiscontinuedIndicator()
+
+            getDiscontinuedIndicator(ountry = ['united states', 'china'], output_type = 'df')
     """
     
     # d is a dictionary used for create the api url

@@ -108,7 +108,7 @@ def dataRequest(api_request, output_type):
             else:
                 raise ParametersError ('No data available for the provided parameters.')
             if output_type == None or output_type =='dict':
-                output = out_type(maindf)
+                output = maindf.to_dict('dict')
             elif output_type == 'df':        
                 output = maindf
             elif output_type == 'raw':        

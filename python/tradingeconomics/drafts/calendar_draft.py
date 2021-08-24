@@ -5,8 +5,8 @@ import sys
 from datetime import *
 from . import functions as fn
 from . import glob
-from tradingeconomics import functions as fn #remove
-from tradingeconomics import glob #remove
+from tradingeconomics import functions as fn #remove before deploy
+from tradingeconomics import glob #remove before deploy
 import ssl
 
 
@@ -103,7 +103,7 @@ def getCalendarData(country=None, indicator=None, start_date=None, end_date=None
         # 'indicator': '/indicator/balance%20of%20trade,personal%20spending,interest%20rate',
         # 'start_date': '/2010-12-02',
         # 'end_date': '/2016-12-03',
-        # #'key': '?c=kjq3jx15aswdmed:77vy8tb3e7s5d45',
+        # #'key': '?c=guest:guest',
         # 'key': f'?c={glob.apikey}',
         # 'importance': '&importance=2'
     }
