@@ -1,3 +1,4 @@
+LICENSE.txt
 MANIFEST.in
 README.md
 README.rst
