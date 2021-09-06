@@ -3,18 +3,21 @@
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
-+ 2021/08
 
-    + __Added__ Financials lists endpoint, list of companies with fundamentals data and also list of companies by country.
-    + __Added__ Discontinued series endpoint, containing series that were discontinued and will not have updated values.
++ 2021/09
+
+    + __Fixed:__ Calls to calendar/country/indicator with no dates chosen were only getting the next 7 days, now it will go back the top limit rows by calendar role and also adds the 7 days forward, fixing the blank page with no data presented.
+    + __Deprecated:__ Columns "OCountry" and "OCategory" were removed from regular calendar calls.
+    + __Changed:__ calendar to get the new limits on rows by role for calendar translation.
+    + __Added:__ New column "OEvent" when in translated calendar queries.
 ---
 + 2021/07
 
     + __Changed:__ markets/country role limitation, had a restraint of 250 rows per page.
     + __Deprecated:__ pagination on markets/country.
-    + __Fixed__ markets/historical and intraday row limitation was not according to the rows a role could get.
-    + __Changed__ calendar to get the new limits on rows by role.
-    + __Added__ Source URL column to indicators and calendar endpoints.
+    + __Fixed:__ markets/historical and intraday row limitation was not according to the rows a role could get.
+    + __Changed:__ calendar to get the new limits on rows by role.
+    + __Added:__ Source URL column to indicators and calendar endpoints.
 ---
 + 2021/06
 
