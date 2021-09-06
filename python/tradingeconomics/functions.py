@@ -4,6 +4,8 @@ import re
 import itertools
 import urllib
 import sys
+import json
+import pandas as pd
 
 PY3 = sys.version_info[0] == 3
 
@@ -72,7 +74,52 @@ def finalLink(link, prmtr):
             linkAPI = linkAPI + '/' + prmtr
         linkAPI = linkAPI + '/' + str( prmtr[i])            
     return linkAPI
-    
+
+def stringOrList(string_or_list):
+    if type(string_or_list) is not str:
+        return quote(",".join(string_or_list))
+    return quote(string_or_list)
+
+def dataRequest(api_request, output_type):
+    class ParametersError(ValueError):
+        pass
+
+    class WebRequestError(ValueError):
+        pass
+
+
+    try:
+        response = urlopen(api_request)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
+    except ValueError:
+        if code != 200:
+            print(urlopen(api_request).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:
+            
+            if len(webResults) > 0:
+                #names = ['country', 'category', 'historicalDataSymbol', 'lastUpdate']
+                #names2 = ['Country', 'Category', 'HistoricalDataSymbol', 'LastUpdate']   
+                maindf = pd.DataFrame(webResults )#columns=names2    
+            
+            else:
+                raise ParametersError ('No data available for the provided parameters.')
+            if output_type == None or output_type =='dict':
+                output = maindf.to_dict('dict')
+            elif output_type == 'df':        
+                output = maindf
+            elif output_type == 'raw':        
+                output = webResults
+            else:      
+                raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
+            return output
+        except ValueError:
+            pass
+    else:
+        return ''    
 
 def checkDates(baseLink, initDate=None, endDate=None):
     if (initDate is not None) and endDate == None :

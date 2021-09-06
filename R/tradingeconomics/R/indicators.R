@@ -143,3 +143,85 @@ getLatestUpdates <- function(initDate= NULL, outType = NULL, country = NULL){
   return(df_final)
 }
 
+
+
+
+#'Returns List of Financials Discontinued Indicators by country name from Trading Economics API
+#'@export getDiscontinuedIndicators
+#'
+#'@param country string or list.
+#'String to get data for one country List of strings to get data for more than one country
+
+#'@param outType string.
+#''df' for data frame,
+#''lst'(default) for list.
+#'
+#'@return Returns List of Financials Discontinued Indicators by country name.
+#'@section Notes:
+#'Without credentials only sample data will be provided.
+#'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
+#'@examples
+#'\dontrun{
+#'getDiscontinuedIndicators(country =c("united states","china"), outType = 'df')
+#' }
+#'
+
+getDiscontinuedIndicators <- function(country = NULL, outType = NULL){
+  # Final string for the request data
+  data_request_url <- ""
+
+  #to get global 'apikey' to local function
+  apikey_local <- .GlobalEnv$apiKey
+
+  # Variables used to create the final string url
+  url_base_tag <- "https://api.tradingeconomics.com/country"
+  country_tag <- "/all"
+  discontinuated_tag <- "/discontinued"
+  key_tag <- paste('?c=',apikey_local, sep = '')
+
+  df_final = data.frame()
+
+  if(!is.null(country)){
+    if (length(country) > 1){
+      country = paste(country, collapse = ',')
+    }
+    country_tag <- paste('/', country, sep = '')
+  }
+
+  data_request_url <- paste(url_base_tag,country_tag,discontinuated_tag,key_tag, sep = '')
+  print(data_request_url)
+
+
+
+  data_request_url <- URLencode(data_request_url)
+
+  request <- GET(data_request_url)
+
+  checkRequestStatus(http_status(request)$message)
+
+
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
+
+  if (is.null(outType)| identical(outType, 'lst')){
+    df_final <- split(df_final , f =  paste(df_final$Country))
+
+
+  } else if (identical(outType, 'df')){
+    if (length(df_final) == 0){
+      print ("No data provided for selected parameters")
+
+    }else{
+      return(df_final)
+
+    }
+  } else {
+    stop('output_type options : df for data frame, lst(default) for list by country or symbol')
+  }
+
+
+  return(df_final)
+}
+

@@ -3,6 +3,7 @@ import urllib
 import pandas as pd
 import sys
 from datetime import *
+
 from . import functions as fn
 from . import glob
 import ssl
@@ -28,6 +29,10 @@ class LoginError(AttributeError):
 
 class WebRequestError(ValueError):
     pass
+
+class DateError(ValueError):
+    pass
+
             
 def checkCountry(country):
     linkAPI = 'https://api.tradingeconomics.com/country/'       
@@ -236,6 +241,7 @@ def getRatings(country=None, rating = None, output_type='df'):
         return ''
 
 def getLatestUpdates(initDate = None, output_type = None):
+    
     """
     Return a list of latest updates, and last updates by initial date.
     =================================================================================
@@ -310,4 +316,51 @@ def getLatestUpdates(initDate = None, output_type = None):
         except ValueError:
             pass
     else:
-        return ''  
+        return ''
+
+def getDiscontinuedIndicator(country=None, output_type=None):
+    """
+    Returns a list of List of discontinued series for all countries, by country or multiple countries.
+    =================================================================================
+    Parameters:
+    -----------
+        country: string or list.
+                list of latest updates by initial date, for example:
+                country = 'china'
+                country = ['united states', 'china']          
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+    Without parameters a List of discontinued series for all countries will be provided. 
+    
+    Example
+    -------
+            getDiscontinuedIndicator()
+
+            getDiscontinuedIndicator(ountry = ['united states', 'china'], output_type = 'df')
+    """
+    
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/country',
+        'country': '/all',
+        'discontinued_tag' : '/discontinued',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    if country:
+        d['country'] = f'/{fn.stringOrList(country)}'
+
+    api_url_request = "%s%s%s%s" % (d['url_base'], d['country'],d['discontinued_tag'],  d['key']) 
+    print(api_url_request)
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+
+
+
+
+
+
+     

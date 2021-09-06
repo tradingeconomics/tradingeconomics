@@ -2,11 +2,14 @@
 % Please edit documentation in R/financials.R
 \name{getFinancialsData}
 \alias{getFinancialsData}
-\title{Return Financials data by stock symbol from Trading Economics API}
+\title{Return Financials data by symbol or country from Trading Economics API}
 \usage{
-getFinancialsData(symbol = NULL, outType = NULL)
+getFinancialsData(country = NULL, symbol = NULL, outType = NULL)
 }
 \arguments{
+\item{country}{string or list.
+String to get data for one country List of strings to get data for more than one country.}
+
 \item{symbol}{string or list.
 String to get data for one symbol. List of strings to get data for more than one symbol.}
 
@@ -15,10 +18,10 @@ String to get data for one symbol. List of strings to get data for more than one
 'lst'(default) for list.}
 }
 \value{
-Return a list or data frame of Financials data by stock symbol.
+Return a list or data frame of Financials data by symbol or country.
 }
 \description{
-Return Financials data by stock symbol from Trading Economics API
+Return Financials data by symbol or country from Trading Economics API
 }
 \section{Notes}{
 
@@ -26,8 +29,8 @@ Without credentials only sample data will be provided.
 }
 
 \examples{
-\dontrun{
-getFinancialsData(symbol ='aapl:us,acm:us', outType = 'df')
+\dontrun{ getFinancialsData(symbol = c('aapl:us','acm:us'), outType = 'df')
+getFinancialsData(country = c('united states', 'china'), outType = 'df')
 }
 
 }

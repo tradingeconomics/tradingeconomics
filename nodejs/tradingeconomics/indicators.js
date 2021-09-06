@@ -18,14 +18,14 @@ global.group = null;
     String or list: country, indicator, ticker
 
    example:
-    getIndicatorData();
-    getIndicatorData(country = ['china', 'portugal']);
-    getIndicatorData(indicator ='gdp');        
-    getIndicatorData(ticker ='usurtot');
-    getIndicatorData(country ='china', group = 'housing');             
+
+        my_data = getIndicatorData();
+        my_data = getIndicatorData(country = ['china', 'portugal']);
+        my_data = getIndicatorData(indicator ='gdp');        
+        my_data = getIndicatorData(ticker ='usurtot');
+        my_data = getIndicatorData(country ='china', group = 'housing');             
 
 *******************************************************************/
-
 function getIndicatorData() {
     
     var url = '';
@@ -61,9 +61,51 @@ function getIndicatorData() {
         return err.message;
     });
      
-}   
+}
+
+//This function builds the path to get the API request:
+/****************************************************************  
+   WITHOUT PARAMETERS A LIST OF DISCONTINUED SERIES FOR ALL COUNTRIES WILL BE PROVIDED
+   
+   parameters:
+    String or list: country
+
+   example:
+
+        my_data = getDiscontinuedIndicators();
+        my_data = getDiscontinuedIndicators(country= 'united states')
+        my_data = getDiscontinuedIndicators(country = ['china', 'portugal']);
+    
+*******************************************************************/
+function getDiscontinuedIndicators(country=null) {
+
+    var d = {
+        'url_base': 'https://api.tradingeconomics.com/country',
+        'country': '/all',
+        'discontinued_tag' : '/discontinued',
+        'key': `?c=${apikey}`,
+        'output_type' : ''
+    }
+
+    var data = '';
+    
+    if (country != null){
+        d.country = `/${country}`
+    }
+    data = `${d.url_base}${d.country}${d.discontinued_tag}${d.key}`;
+    
+
+    return fetch(data.replace(' ', '%20'))
+    .then(func.handleErrors)   
+    .then(function(response) {    
+        return response.json(); // process it inside the `then` when calling the function       
+    }).catch(function (err) {
+        return err.message;
+    });
+}
 
 module.exports.getIndicatorData = getIndicatorData;
+module.exports.getDiscontinuedIndicators = getDiscontinuedIndicators
 
 
 

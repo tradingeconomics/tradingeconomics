@@ -10,7 +10,7 @@ def readme():
 setup(
   name = 'tradingeconomics',
   packages = find_packages(exclude=['tests*']),  
-  version = '0.2.981',
+  version = '0.2.982',
   description = 'Library to download data from Trading Economics API',
   long_description =readme(),
   long_description_content_type='text/x-rst',
@@ -18,7 +18,7 @@ setup(
   author_email = 'olexandr.baturin@tradingeconomics.com',
   license = 'MIT',
   url = 'https://github.com/ieconomics/open-api', 
-  download_url = 'https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.981.zip',
+  download_url = 'https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.2.982.zip',
   keywords = ['tradingeconomics', 'data'], 
   classifiers = [ 'Programming Language :: Python :: 2.7',
                 'Programming Language :: Python :: 3',
