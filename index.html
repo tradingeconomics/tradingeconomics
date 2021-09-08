@@ -114,8 +114,10 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-<a href="http://www.tradingeconomics.com/">           <img src="images/logo.png" class="tocify-wrapper--img" alt="Logo" />
-</a>        <div class="lang-selector">
+      
+<a href="http://www.tradingeconomics.com/" style="line-height: 14px; margin-top:0; color:white">
+    <img src="images/logo.png" class="tocify-wrapper--img" alt="Logo" />
+</a>         <div class="lang-selector">
               <a href="#" data-language-name="python">Python</a>             
               <a href="#" data-language-name="r">R</a>
               <a href="#" data-language-name="javascript">Javascript</a>
@@ -354,8 +356,6 @@ The API can be used to feed a custom developed application, a public website or 
 <!--Introduction white side-->
 <!--------------------------->        
 
-<h3 id="git-hub">GitHub</h3>
-<p>You can look for other examples on how to use our API in different programming languages, in our <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics">GitHub</a> repository.</p>
 
 <h3 id="data-types">Data Types</h3>
 <p>You can request data in several formats:<br></p>
@@ -380,9 +380,12 @@ The API can be used to feed a custom developed application, a public website or 
 Using Headers auth:<br>
 <code class="prettyprint">curl -i &quot;https://api.tradingeconomics.com/country/united%20states/&quot; -H &quot;Authorization: Client guest:guest&quot;</code></p>
 
-<p>Without APIkeys all requests will return the default sample data.</p>
+<p>Without an API key all requests will return the default sample data.</p>
 
-<h3 id="error-codes">Error codes</h3>
+<h3 id="git-hub">GitHub</h3>
+<p>You can look for other examples on how to use our API in different programming languages, in our <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics">GitHub</a> repository.</p>
+
+<h3 id="Error-codes">Status codes</h3>
 
 <ul>
 <li>200 - OK<br></li>
@@ -406,8 +409,8 @@ Using Headers auth:<br>
 <!--------------------->        
 
 <h1 id="search">Search</h1>
-    <p>Here you can search for keyword or term, you can also search by category, this endpoint will give you results for a specific category you choose, if you do not know wich category to look for, just use the search/{term} endpoint option to look for something in our API.</p>
-<h2 id="search">Categories</h2>
+    <p>You can search for keyword, term, or by category. If you do not know which category to look for, just use the search/{term} endpoint option.</p>
+
 
 <!-------------------------------->
 <!--javascript search black side-->
@@ -465,8 +468,6 @@ Using Headers auth:<br>
 
 <h1 id="indicators">Indicators</h1>
 
-<p>Here you can get a list of all indicators, indicators by country, country-indicator pair and historical information for specific country and indicator.
-Click on any method below for a sample.</p>
 
 <!--------------------------->        
 <!--R indicators black side-->
@@ -727,9 +728,9 @@ Click on any method below for a sample.</p>
 
 <!-------------------->        
 <!--Indicators white-->
-<!-------------------->        
+       
 
-<h3 id="methods">Methods</h3>
+<!--<h3 id="methods">Methods</h3>-->
 
 <p><span class="methods"></p>
 
@@ -764,12 +765,6 @@ Click on any method below for a sample.</p>
     <a target = '_blank' href="https://api.tradingeconomics.com//country/ticker/usurtot?c=guest:guest">/country/ticker/{ticker}</a></p></li>
 <li><p>Multiple indicators by ticker<br>
     <a target = '_blank' href="https://api.tradingeconomics.com//country/ticker/usurtot,wgdpchin?c=guest:guest">/country/ticker/{ticker}</a></p></li>
-<li><p>List of discontinued series for all countries.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/all/discontinued?c=guest:guest">/country/all/discontinued</a></p></li>
-<li><p>List of discontinued series by country.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/united%20states/discontinued?c=guest:guest">/country/{country}/discontinued</a></p></li>
-<li><p>List of discontinued series with multiple countries.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/united%20states,china/discontinued?c=guest:guest">/country/{countries}/discontinued</a></p></li>
 </ul>
 
 <p></span></p>
@@ -790,6 +785,10 @@ Click on any method below for a sample.</p>
 <tr>
 <td style="text-align: left"><strong>Category</strong></td>
 <td style="text-align: left">Category name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>CategoryGroup</strong></td>
+<td style="text-align: left">Category group name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Title</strong></td>
@@ -814,10 +813,6 @@ Click on any method below for a sample.</p>
 <tr>
 <td style="text-align: left"><strong>URL</strong></td>
 <td style="text-align: left">Hyperlink at Trading Economics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>CategoryGroup</strong></td>
-<td style="text-align: left">Category group name</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Adjustment</strong></td>
@@ -913,13 +908,12 @@ For several countries and indicators</p>
 <p>Getting historical data by ticker or TE symbol.</p>
 </blockquote> 
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'USURTOT'</span><span class="p">)</span>
-                      
-
+                    
 </code></pre>
 <blockquote class="lang-specific python">
  </blockquote>
  <pre class="highlight python"><code> 
-    <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/python/EXAMPLES/historical/bulkHistorical.py"><p><stong>                                           »»»» BULK DOWNLOAD EXAMPLE «««« </stong></p></a>
+    <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/python/EXAMPLES/historical/bulkHistorical.py"><p><stong>                                  »»»» BULK DOWNLOAD EXAMPLE «««« </stong></p></a>
 </code></pre> 
 
 <!------------------------->        
@@ -1068,7 +1062,7 @@ For several countries and indicators</p>
 <!--Indicators Methods white-->
 <!---------------------------->        
 
-<h3 id="methods">Methods</h3>
+<h3 id="methods"><!--Methods--></h3>
 
 <p><span class="methods"></p>
 
@@ -1133,6 +1127,20 @@ or you can specify a start date and end date<br>
 <p><strong>*Python package response field returns Value instead of Close.</strong></p>
 <p></span> </p>    
 
+<br>
+<br>
+<p><span class="methods"></p>
+<p><strong>Discontinued Series</strong></p>
+
+<ul>
+<li><p>List of discontinued series for all countries.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/all/discontinued?c=guest:guest">/country/all/discontinued</a></p></li>
+<li><p>List of discontinued series by country.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/united%20states/discontinued?c=guest:guest">/country/{country}/discontinued</a></p></li>
+<li><p>List of discontinued series with multiple countries.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/united%20states,china/discontinued?c=guest:guest">/country/{countries}/discontinued</a></p></li>
+</ul>
+<p><span></p>
 <h2 id="credit-rating">Credit Rating</h2>
 
 <!----------------------------------->        
@@ -1420,12 +1428,12 @@ or you can specify a start date and end date<br>
 <!--credit rating white side-->
 <!---------------------------->        
 
-<h3 id="methods">Methods</h3>
+<!-- <h3 id="methods">Methods</h3> -->
 
 <p><span class="methods"></p>
 
 <ul>
-<li><p>Latest Credit Ratings for all countries.<br>
+<li><p>Latest Credit Ratings.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/ratings?c=guest:guest">/ratings</a>    </p>    
 <li><p>Credit Rating of the specific country<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest">/ratings/{country}</a>    </p>
@@ -1433,6 +1441,20 @@ or you can specify a start date and end date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states,portugal?c=guest:guest">/ratings/{countries}</a>    </p>
 </li>
 </ul>
+<ul>
+    <li><p>Historical credit rating for one country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br> </p>
+    
+    <li><p>Historical credit rating for multiple countries<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br>
+    
+    <li><p>Historical credit rating by start and end date<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
+    
+    <li><p>You can specify only a start date<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}</a><br>
+    </li>
+    </ul>
 <h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
@@ -1448,22 +1470,6 @@ or you can specify a start date and end date<br>
 <tr>
 <td style="text-align: left"><strong>TE</strong></td>
 <td style="text-align: left">Trading Economics rating</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Release time and date in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Agency</strong></td>
-<td style="text-align: left">Rating agency</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Rating</strong></td>
-<td style="text-align: left">Rating score</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Outlook</strong></td>
-<td style="text-align: left">Rating outlook</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>TE_Outlook</strong></td>
@@ -1501,23 +1507,26 @@ or you can specify a start date and end date<br>
 <td style="text-align: left"><strong>DBRS_Outlook</strong></td>
 <td style="text-align: left">DBRS outlook</td>
 </tr>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release time and date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Agency</strong></td>
+<td style="text-align: left">Rating agency</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Rating</strong></td>
+<td style="text-align: left">Rating score</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Outlook</strong></td>
+<td style="text-align: left">Rating outlook</td>
+</tr>
 </tbody></table>
 
-<ul>
-<li><p>Historical credit rating for one country<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br> </p>
 
-<li><p>Historical credit rating for multiple countries<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br>
-
-<li><p>Historical credit rating by start and end date<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
-
-<li><p>You can specify only a start date<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}</a><br>
-</li>
-</ul>
-
+<!--
 <h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
@@ -1547,7 +1556,7 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Rating outlook</td>
 </tr>
 
-</tbody></table>
+</tbody></table>-->
 
 <h2 id="latest-updates">Latest updates</h2>
 
@@ -1682,7 +1691,7 @@ or you can specify a start date and end date<br>
 <!--Indicators latest updates white-->
 <!----------------------------------->        
 
-<h3 id="methods">Methods</h3>
+<!-- <h3 id="methods">Methods</h3> -->
 
 <p><span class="methods"></p>
 
@@ -2540,7 +2549,7 @@ or you can specify a start date and end date<br>
 </tr>
 </tbody></table>
 
-<h1 id="forecast">Forecast</h1>
+<h1 id="forecast">Forecasts</h1>
 
 <!-------------------------->
 <!--Forecasts R black side-->
@@ -2583,20 +2592,7 @@ or you can specify a start date and end date<br>
 <!--Python Forecasts black side-->
 <!------------------------------->
 
-<blockquote class="lang-specific python"> 
-    <p>*Forecast response fields can be diferent from Html response fields.</p>
-</blockquote>
-<pre class="highlight python"><code>
-<span class="mi">Python     --- <span class="p">match</span> ---    Html</span>
-                  
-<span class="n">yearend</span>    -------------    <span class="n">ForecastValue1</span> 
-<span class="n">yearend2</span>   -------------    <span class="n">ForecastValue2</span> 
-<span class="n">yearend3</span>   -------------    <span class="n">ForecastValue3</span> 
-<span class="n">q1</span>         -------------    <span class="n">ForecastValue1Q</span> 
-<span class="n">q2</span>         -------------    <span class="n">ForecastValue2Q</span> 
-<span class="n">q3</span>         -------------    <span class="n">ForecastValue3Q</span> 
-<span class="n">q4</span>         -------------    <span class="n">ForecastValue4Q</span> 
-</code></pre>
+
 <blockquote class="lang-specific python">
 <br>
 <br>    
@@ -2605,7 +2601,7 @@ or you can specify a start date and end date<br>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
-<span class="n">Output</span><span class="p">:</span>
+<!-- <span class="n">Output</span><span class="p">:</span>
            <span class="n">Country</span>         <span class="o">...</span>                       <span class="n">q4_date</span>
 <span class="mi">0</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 <span class="mi">1</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
@@ -2613,7 +2609,7 @@ or you can specify a start date and end date<br>
                <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
 <span class="mi">200</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 <span class="mi">201</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">202</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">202</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> -->
 </code></pre>
 <blockquote class="lang-specific python">
 <br>
@@ -2643,14 +2639,27 @@ or you can specify a start date and end date<br>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span><span class="o">=</span><span class="p">[</span><span class="s">'gdp'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">],</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
-<span class="n">Output</span><span class="p">:</span>
+<!-- <span class="n">Output</span><span class="p">:</span>
          <span class="n">Country</span>    <span class="n">Category</span>         <span class="o">...</span>                 <span class="n">q4</span>              <span class="n">q4_date</span>
 <span class="mi">0</span>          <span class="n">China</span>         <span class="n">GDP</span>         <span class="o">...</span>           <span class="mf">13100.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 <span class="mi">1</span>          <span class="n">China</span>  <span class="n">Population</span>         <span class="o">...</span>            <span class="mf">1407.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 <span class="mi">2</span>  <span class="n">United</span> <span class="n">States</span>         <span class="n">GDP</span>         <span class="o">...</span>           <span class="mf">20220.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">3</span>  <span class="n">United</span> <span class="n">States</span>  <span class="n">Population</span>         <span class="o">...</span>             <span class="mf">328.49</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
+<span class="mi">3</span>  <span class="n">United</span> <span class="n">States</span>  <span class="n">Population</span>         <span class="o">...</span>             <span class="mf">328.49</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> -->
 </code></pre>
-
+<blockquote class="lang-specific python"> 
+    <p>*Forecast response fields can be diferent from Html response fields.</p>
+</blockquote>
+<pre class="highlight python"><code>
+<span class="mi">Python     --- <span class="p">match</span> ---    Html</span>
+                  
+<span class="n">yearend</span>    -------------    <span class="n">ForecastValue1</span> 
+<span class="n">yearend2</span>   -------------    <span class="n">ForecastValue2</span> 
+<span class="n">yearend3</span>   -------------    <span class="n">ForecastValue3</span> 
+<span class="n">q1</span>         -------------    <span class="n">ForecastValue1Q</span> 
+<span class="n">q2</span>         -------------    <span class="n">ForecastValue2Q</span> 
+<span class="n">q3</span>         -------------    <span class="n">ForecastValue3Q</span> 
+<span class="n">q4</span>         -------------    <span class="n">ForecastValue4Q</span> 
+</code></pre>
 <!------------------------->
 <!--javascript black side-->
 <!------------------------->
@@ -2870,7 +2879,7 @@ or you can specify a start date and end date<br>
 <!--forecasts white side-->
 <!------------------------>
 
-<h3 id="methods">Methods</h3>
+<!--<h3 id="methods">Methods</h3>-->
 
 <p><span class="methods"></p>
 
@@ -2912,17 +2921,14 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Combination of country and indicator name</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastValue1 *</strong></td>
-<td style="text-align: left">Forecast value for the year end</td>
+<td style="text-align: left"><strong>LatestValue</strong></td>
+<td style="text-align: left">Last released value</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>ForecastValue2 *</strong></td>
-<td style="text-align: left">Forecast value for the year end following ForecastValue1</td>
+<td style="text-align: left"><strong>LatestValueDate</strong></td>
+<td style="text-align: left">Date of the last released value</td>
 </tr>
-<tr>
-<td style="text-align: left"><strong>ForecastValue3 *</strong></td>
-<td style="text-align: left">Forecast value for the year end following ForecastValue2</td>
-</tr>
+
 <tr>
 <td style="text-align: left"><strong>ForecastValue1Q *</strong></td>
 <td style="text-align: left">Forecast value for the next quarter</td>
@@ -2940,12 +2946,16 @@ or you can specify a start date and end date<br>
 <td style="text-align: left">Forecast value for the quarter following ForecastValue3Q</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>LatestValue</strong></td>
-<td style="text-align: left">Last released value</td>
+<td style="text-align: left"><strong>ForecastValue1 *</strong></td>
+<td style="text-align: left">Forecast value for the year end</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>LatestValueDate</strong></td>
-<td style="text-align: left">Date of the last released value</td>
+<td style="text-align: left"><strong>ForecastValue2 *</strong></td>
+<td style="text-align: left">Forecast value for the year end following ForecastValue1</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>ForecastValue3 *</strong></td>
+<td style="text-align: left">Forecast value for the year end following ForecastValue2</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>q1_date</strong></td>
@@ -3464,13 +3474,30 @@ Click on any method below for a sample.
 
 <h3 id="market-lists">Market Lists</h3>
 <p><span class="methods"></p>
-
+    
     <ul>
-    <li><p>Stock Market by country<br>
+    <li><p>Commodities<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a></p></li>
+    <li><p>Major Currencies<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> </p></li>
+    <li><p>Currency Crosses<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest&cross=EUR">/markets/currency?cross=eur</a></p></li>
+    <li><p>Stock Market Indexes<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a></p></li>
+    <li><p>Government Bonds<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/bond?c=guest:guest">/markets/bond</a></p></li>
+    <li><p>Individual Market (stock, index, currency, commodity or bond)<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest">/markets/symbol/{symbol}</a></p></li>
+    <li><p>Multiple Markets<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a></p></li>
+    </ul>
+    <p></span> </p>
+    <ul>
+    <li><p>List of stocks by country<br>
     <!--<a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest&page=2">/markets/country/{country}&amp;page=2</a></p></li>-->
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest">/markets/country/{country}</a></p></li>
     </ul>
-    <h3 id="response-fields">Response Fields</h3>
+    <!-- <h3 id="response-fields">Response Fields</h3>
     <table><thead>
         <tr>
         <th style="text-align: left"></th>
@@ -3501,8 +3528,8 @@ Click on any method below for a sample.
         <td style="text-align: left"><strong>Frequency</strong></td>
         <td style="text-align: left">Market frequency</td>
         </tr>
-        </tbody></table>
-    <ul>
+        </tbody></table>-->
+    <ul> 
     <li><p>A snapshot of latest peers prices by market<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a></p></li>
     <li><p>Stock Market Index Components<br>
@@ -3513,7 +3540,7 @@ Click on any method below for a sample.
     
     
     <p></span> </p>
-<h3 id="methods">Methods</h3>
+<!-- <h3 id="methods">Methods</h3>
 
 <p><span class="methods"></p>
 
@@ -3533,7 +3560,7 @@ Click on any method below for a sample.
 <li><p>Multiple Markets<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a></p></li>
 </ul>
-<p></span> </p>
+<p></span> </p> -->
 
 <!---------------------------------->
 <!--Python Market lists black side-->
@@ -3831,6 +3858,10 @@ Click on any method below for a sample.
 <td style="text-align: left"><strong>LastUpdate</strong></td>
 <td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
+<tr>
+<td style="text-align: left"><strong>Frequency</strong></td>
+<td style="text-align: left">Market frequency</td>
+</tr>
 </tbody></table>
 <h3 id="json-csv-xml"></h3>
 <br>
@@ -4047,18 +4078,18 @@ Click on any method below for a sample.
     <span class="k">constructUrl</span> (<span class="na">path</span>);
 }
 </code></pre>   
-<h3 id="methods">Methods</h3>
+<!-- <h3 id="methods">Methods</h3> -->
 
 <p><span class="methods"></p>
 
 <ul>
-<li><p>Historical markets data by market<br>
+<li><p>Historical Data for 1 instrument<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest">/markets/historical/{symbol}</a></p></li>
-<li><p>Historical markets data for multiple markets<br>
+<li><p>Historical Data for multiple instruments<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us,indu:ind?c=guest:guest">/markets/historical/{symbols}</a></p></li>
-<li><p>Filter historical markets data by date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01">/markets/historical/{symbol}?d1=yyyy-mm-dd</a></p></li>
-<li><p>Filter historical markets data by date<br>
+<!-- <li><p>Filter historical markets data by date<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01">/markets/historical/{symbol}?d1=yyyy-mm-dd</a></p></li> -->
+<li><p>Filter historical data by date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/historical/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a></p></li>
 </ul>
 
@@ -4277,12 +4308,12 @@ Click on any method below for a sample.
     <span class="k">constructUrl</span> (<span class="na">path</span>);
 }
 </code></pre> 
-<h3 id="methods">Methods</h3>
+<!-- <h3 id="methods">Methods</h3> -->
 
 <p><span class="methods"></p>
 
 <ul>
-<li><p>Intraday prices for a single market<br>
+<li><p>Intraday prices for a single instrument<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest">/markets/intraday/{symbol}</a></p></li>
 <li><p>Filter intraday prices by date and hour<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-10%2015:30">/markets/intraday/{symbol}?d1=yyyy-mm-dd hh:mm</a></p></li>
@@ -4561,7 +4592,6 @@ Click on any method below for a sample.
 
 <blockquote class="lang-specific python">
     <p>Get market forecasts for major indexes by category.</p>
-<br>
     <p>Categories can be: bond, currency, index and commodity.</p>
 </blockquote>  
 <br>
@@ -4714,15 +4744,19 @@ Click on any method below for a sample.
 </code></pre>
 
 
-<h3 id="methods">Methods</h3>
+<!-- <h3 id="methods">Methods</h3> -->
 <p><span class="methods"></p>
-
     <ul>
-    <li><p>Get market forecasts for major indexes by category<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/index?c=guest:guest">/markets/forecasts/{category}</a></p></li>
+    <li><p>Market forecasts for major stock market indexes<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/index?c=guest:guest">/markets/forecasts/index</a></p></li>
+    <li><p>Market forecasts for major exchange rates<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/currency?c=guest:guest">/markets/forecasts/currency</a></p></li>
+    <li><p>Market forecasts for major commodities<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/commodity?c=guest:guest">/markets/forecasts/commodity</a></p></li>
+    <li><p>Market forecasts for major bonds<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/bond?c=guest:guest">/markets/forecasts/bond</a></p></li>
     <li><p>Get major market forecasts by symbol<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/symbol/BULGARIAGOVB10Y:GOV,LITHUANIAGOVBON10Y:GOV,GBGB10YR:GOV?c=guest:guest">/markets/forecasts/symbol/{symbols}</a> </p></li>
-
     </ul>
     <p></span> </p>
     <h3 id="response-fields">Response Fields</h3>
@@ -5033,22 +5067,21 @@ Click on any method below for a sample.
 <!--earnings white side-->
 <!----------------------->
 
-<h3 id="methods">Methods</h3>
+<!-- <h3 id="methods">Methods</h3> -->
 
 <p><span class="methods"></p>
-
 <ul>
 <li><p>Default earnings calendar<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    </p></li>
 <li><p>Filter earnings calendar by date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01">/earnings?d1=yyyy-mm-dd</a>    </p></li>
-<li><p>Filter earnings calendar by market and date<br>
+<li><p>Filter earnings calendar by instrument and date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings calendar by country<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> </p></li>
-<li><p>Filter earnings by type: earnings, ipo, dividends.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li>
+<!-- <li><p>Filter earnings by type: earnings, ipo, dividends.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li> -->
 </ul>
 
 <p></span> </p>
@@ -5138,9 +5171,9 @@ Click on any method below for a sample.
 <li><p>Financials companies list filtered by more than one country (MAX countries = 5).<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?country=spain,germany&c=guest:guest">/financials/companies?country={countries}</a>    </p></li>
 </ul>
-<h3 id="response-fields">Response Fields</h3>
+<!-- <h3 id="response-fields">Response Fields</h3> -->
     
-<table><thead>
+<!-- <table><thead>
 <tr>
 <th style="text-align: left"></th>
 <th style="text-align: left"></th>
@@ -5158,13 +5191,16 @@ Click on any method below for a sample.
 <td style="text-align: left"><strong>Country</strong></td>
 <td style="text-align: left">Company Country</td>
 </tr>
-</tbody></table>
+</tbody></table> -->
 
 <ul>
 <li><p>Financials data by stock symbol<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/financials/symbol/aapl:us?c=guest:guest">/financials/symbol/{symbol}</a>    </p></li>
 </ul>
-
+<ul>
+<li><p>Financials historical data<br>
+    <a target = '_blank' href="http://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest">/financials/historical/{symbol}</a>    </p></li>
+</ul>
 <p></span> </p>
 
 <h3 id="response-fields">Response Fields</h3>
@@ -5178,6 +5214,14 @@ Click on any method below for a sample.
 <tr>
 <td style="text-align: left"><strong>Symbol</strong></td>
 <td style="text-align: left">Unique symbol used by Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">Name of the company</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Company Country</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Date</strong></td>
@@ -5235,16 +5279,32 @@ Click on any method below for a sample.
 <td style="text-align: left"><strong>FinancialSymbol</strong></td>
 <td style="text-align: left">Financials category</td>
 </tr>
+<tr>
+<td style="text-align: left"><strong>Category</strong></td>
+<td style="text-align: left">Financials category</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Value</strong></td>
+<td style="text-align: left">Close price value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Report Date</strong></td>
+<td style="text-align: left">Reporting date</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Reference</strong></td>
+<td style="text-align: left">Fiscal reference date</td>
+</tr>
 </tbody></table>
 
-<ul>
+<!-- <ul>
 <li><p>Financials historical data<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest">/financials/historical/{symbol}</a>    </p></li>
-</ul>
+</ul> -->
 
-<h3 id="response-fields">Response Fields</h3>
+<!-- <h3 id="response-fields">Response Fields</h3> -->
 	
-<table><thead>
+<!-- <table><thead>
 <tr>
 <th style="text-align: left"></th>
 <th style="text-align: left"></th>
@@ -5274,14 +5334,14 @@ Click on any method below for a sample.
 <td style="text-align: left"><strong>Reference</strong></td>
 <td style="text-align: left">Fiscal reference date</td>
 </tr>
-</tbody></table>
+</tbody></table> -->
 
 <!------------------------->
 <!----------NEWS----------->
 <!------------------------->
 
 <h1 id="news">News</h1>
-<h2 id="latest-news">Latest news</h2>
+<!-- <h2 id="latest-news">Latest news</h2> -->
 
 <!--------------------------------->
 <!--Python Latest News black side-->
@@ -5519,7 +5579,7 @@ Click on any method below for a sample.
     <span class="k">constructUrl</span> (<span class="na">path</span>);
 }
 </code></pre>
-<h3 id="methods">Methods</h3>
+<!-- <h3 id="methods">Methods</h3> -->
 
 <!-------------------------->
 <!--latest news white side-->
