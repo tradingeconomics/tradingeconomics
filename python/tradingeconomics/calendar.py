@@ -148,7 +148,7 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
         try:
             if len(webResults) > 0:
                 names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'url', 'datespan',  'importance', 'lastupdate', 'revised', 'currency', 'unit', 'ocountry' 'ocategory', 'ticker', 'symbol']
-                names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'URL', 'DateSpan',  'Importance', 'LastUpdate', 'Revised', 'Currency', 'Unit', 'OCountry', 'OCategory', 'Ticker','Symbol']
+                names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'URL', 'DateSpan',  'Importance', 'LastUpdate', 'Revised', 'Currency', 'Unit', 'Ticker','Symbol']
                 #maindf = pd.DataFrame()
                 maindf = pd.DataFrame(webResults, columns=names2)  
                 '''
