@@ -748,7 +748,7 @@ Using Headers auth:<br>
 <li><p>Specific indicator by ticker<br>
     <a target = '_blank' href="https://api.tradingeconomics.com//country/ticker/usurtot?c=guest:guest">/country/ticker/{ticker}</a></p></li>
 <li><p>Multiple indicators by ticker<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com//country/ticker/usurtot,wgdpchin?c=guest:guest">/country/ticker/{ticker}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com//country/ticker/usurtot,wgdpchin?c=guest:guest">/country/ticker/{ticker,ticker}</a></p></li>
 </ul>
 <p></span></p>
 
@@ -5802,11 +5802,11 @@ javascript black side
 
 <ul>
 <li><p>Search for term/keyword by category.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/search/japan?category=markets&c=guest:guest">/search/{term}?category={category}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/search/japan?category=markets&c=guest:guest">/search/{search_term}?category={category}</a></p></li>
 </ul>
 <ul>
 <li><p>Search for term/keyword in all categories available.<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/search/gold?c=guest:guest">/search/{term}</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/search/gold?c=guest:guest">/search/{search_term}</a></p></li>
 </ul>
 
 <!-----------------------------Eurostat Black Side-------------------------------> 
@@ -7101,10 +7101,10 @@ javascript black side
 <li>Get detailed information about Comtrade categories<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest">/comtrade/categories</a></li>
 </ul>
-<ul>
+<!-- <ul>
 <li>Get the latest updated indicators<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/updates?c=guest:guest">/comtrade/updates</a></li>
-</ul>
+</ul> -->
 <ul>
     <li>Get total Imports by main category<br>
         <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/india?c=guest:guest">/comtrade/import/{country}</a></li>
