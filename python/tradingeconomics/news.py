@@ -139,90 +139,7 @@ def checkArticleId(id):
 
 
 
-def getNews(country = None, indicator = None, start= None, limit = None, output_type = None):
-    """
-    Return a list of all news, indicators by country, limit or start index.
-    =================================================================================
 
-    Parameters:
-    -----------
-    country: string or list.
-             String for one country information. List of strings for 
-             several countrys, for example country = ['country_name', 'country_name'].
-    indicators: string or list.
-             String for one indicator. List of strings for several indicators, for example 
-             indicators = 'indicator_name' or 
-             indicators = ['indicator_name', 'indicator_name']
-    output_type: string.
-             'dict'(default) for dictionary format output, 'df' for data frame,
-             'raw' for list of dictionaries directly from the web. 
-
-    Notes
-    -----
-    All parameters are optional. Without parameters a list of all news will be provided. 
-
-    Example
-    -------
-    getNews(country = 'United States', indicator = 'Imports', start = 10, limit = 20, output_type = 'df')
-
-    getNews(country = ['United States', 'Portugal'], indicator = ['Imports','Exports'])
-    """          
-    try:
-        _create_unverified_https_context = ssl._create_unverified_context
-    except AttributeError:
-        pass
-    else:
-        ssl._create_default_https_context = _create_unverified_https_context
-
-    if country != None and indicator != None:
-        linkAPI = getNewsLink(country, indicator) 
-    elif country != None and indicator == None:
-        linkAPI = checkNewsCountry(country)      
-    elif country == None and indicator != None:
-        linkAPI = checkNewsIndic(indicator)
-    else:
-        linkAPI = 'https://api.tradingeconomics.com/news/' 
-             
-    try:
-        linkAPI += '?c=' + glob.apikey
-    except AttributeError:
-        raise LoginError('You need to do login before making any request')
-
-    linkAPI = checkLimit(linkAPI, limit)
-    linkAPI = checkIndex(linkAPI, start)
-  
-    try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-            if len(webResults) > 0:
-                    names = ['id', 'title', 'date', 'description', 'country', 'category', 'symbol', 'url']
-                    names2 = ['id', 'title', 'date', 'description', 'country', 'category', 'symbol', 'url']
-                    maindf = pd.DataFrame(webResults, columns=names2)    
-            
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-
-            if output_type == None or output_type =='dict':
-                output = maindf
-            elif output_type == 'df': 
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError ('output_type options : df for data frame, dict(default) for dictionary by country, raw for results directly from web.')      
-            return output    
-        except ValueError:
-            pass
-    else:
-        return ''
 
 def getArticles(country = None, indicator = None, initDate = None, endDate = None, start = None, lim = None, output_type = None):
     """
@@ -425,7 +342,7 @@ def getArticleId(id = None, output_type = None):
     else:
         return ''  
 
-def getNews2(country = None,  indicator = None, start= None, limit = None, output_type = None, start_date=None, end_date=None):
+def getNews(country = None,  indicator = None, start= None, limit = None, output_type = None, start_date=None, end_date=None):
     """
     Return a list of all news, indicators by country, limit and start index or start_date
     and end_date.
@@ -521,7 +438,6 @@ def getNews2(country = None,  indicator = None, start= None, limit = None, outpu
     print(api_url_request)
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
 
-def getSearchTemp(category=None, search_term=None):
-    return fn.dataRequest(api_request='http://api.tradingeconomics.com/search/gold?c=guest:guest', output_type='raw')
+
 
 
