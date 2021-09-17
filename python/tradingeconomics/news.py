@@ -425,3 +425,103 @@ def getArticleId(id = None, output_type = None):
     else:
         return ''  
 
+def getNews2(country = None,  indicator = None, start= None, limit = None, output_type = None, start_date=None, end_date=None):
+    """
+    Return a list of all news, indicators by country, limit and start index or start_date
+    and end_date.
+    =================================================================================
+
+    Parameters:
+    -----------
+    country: string or list.
+             String for one country information. List of strings for 
+             several countrys, for example country = ['country_name', 'country_name'].
+    indicators: string or list.
+             String for one indicator. List of strings for several indicators, for example 
+             indicators = 'indicator_name' or 
+             indicators = ['indicator_name', 'indicator_name']
+    start: string.
+            start = '15'
+    limit: string
+            limit = '10'
+    start_date: string.
+            start_date = '2021-02-03'
+    end_date: string.
+            end_date = '2021-07-03'
+
+    output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+
+    Notes
+    -----
+    All parameters are optional. Without parameters a list of all news will be provided. 
+
+    Example
+    -------
+    getNews(output_type='df')
+    
+    getNews(start_date='2021-02-02', end_date='2021-03-03')
+
+    getNews(start='15', limit='15', output_type='df')
+
+    getNews(indicator='inflation rate', start_date='2021-02-02', end_date='2021-03-03')
+
+    getNews(indicator=['inflation rate', 'gdp'])
+
+    getNews(indicator=['Commodity', 'Stock Market'])
+
+    getNews(country=['brazil','canada'], indicator=['Housing Starts', 'Stock Market'], start_date='2021-02-02', end_date='2021-03-03')
+
+    getNews(country = 'United States', indicator = 'Imports', start = 10, limit = 20, output_type = 'df')
+
+    getNews(country = ['United States', 'Portugal'], indicator = ['Imports','Exports'])
+    
+    getNews(country=['brazil','canada'])
+    """  
+    
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/news',
+        'indicator': '',
+        'country': '',
+        'start':'',
+        'limit':'',
+        'start_date':'',
+        'end_date':'',
+
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    if start and start_date:
+        return 'Please, enter the pair "start" and "limit" or the pair "start_date" and "end_date"'
+
+    if start and limit:
+        d['start'] = f'&start={start}'
+        
+        d['limit'] = f'&limit={limit}'
+        
+    
+        
+    if start_date and end_date and not start and not limit:
+        d['start_date'] = f'&d1={fn.checkDates(start_date)}'
+        d['end_date'] = f'&d2={fn.checkDates(end_date)}'
+
+    if indicator:
+        d['indicator'] = f'/indicator/{(fn.stringOrList(indicator))}'
+    
+    if country:
+        d['country'] = f'/country/{(fn.stringOrList(country))}'
+
+    if country and indicator:
+        d['indicator'] = f'/{fn.stringOrList(indicator)}'
+
+
+    api_url_request = "%s%s%s%s%s%s%s%s" % (d['url_base'], d['country'],d['indicator'], d['key'],d['limit'],d['start'],d['start_date'],d['end_date']) 
+    print(api_url_request)
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+
+def getSearchTemp(category=None, search_term=None):
+    return fn.dataRequest(api_request='http://api.tradingeconomics.com/search/gold?c=guest:guest', output_type='raw')
+
+

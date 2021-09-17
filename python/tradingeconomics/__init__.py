@@ -18,7 +18,7 @@ if PY3: # Python 3+
     from .glob import login, subscribe
     from .stream import run
     from .earnings import getEarnings, getEarningsType
-    from .news import getNews, getArticles, getArticleId
+    from .news import getNews, getArticles, getArticleId 
     from .worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
     from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates, getCmtCountryByCategory, getTotalByType, getCmtCountryFilterByType
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
