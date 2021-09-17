@@ -13,17 +13,19 @@ global.id = null;
 global.start_date = null;
 global.end_date = null;
 global.utc = null;
+global.importance = null;
 
 //This function builds the path to get the API request:
 /***************************************************************************************************************  
      WITHOUT PARAMETERS A LIST OF ALL EVENTS WILL BE PROVIDED 
     parameters:
-        String or list: country, indicator, ticker, id 
+        String or list: country, indicator, ticker, id, importance 
         Date: start_date, end_date
         UTC: choose utc time zone
 
     example:
         getCalendar();
+        getCalendar(importance='1');
         getCalendar(utc='-60');
         getCalendar(start_date = '2016-02-01', end_date = '2016-02-10');
         getCalendar(start_date = '2016-02-01', end_date = '2016-02-10', utc='180');
@@ -50,7 +52,7 @@ function getCalendar(){
         url = '/calendar/country/' + country + '/' + start_date + '/' + end_date;    
     }
     if (indicator != null){      
-        url = '/calendar/indicator/' + indicator;    
+        url = '/calendar/indicator/' + indicator.toLowerCase();    
     }
     if (indicator != null && start_date != null && end_date != null){      
         url = '/calendar/indicator/' + indicator + '/' + start_date + '/' + end_date;    
@@ -59,10 +61,10 @@ function getCalendar(){
         url = '/calendar/country/All/' + start_date + '/' + end_date;    
     }
     if (country!= null && indicator != null){    
-        url = '/calendar/country/' + country + '/indicator/' + indicator;    
+        url = '/calendar/country/' + country + '/indicator/' + indicator.toLowerCase();    
     }
     if (country != null && indicator != null && start_date != null && end_date != null){    
-        url = '/calendar/country/' + country + '/indicator/' + indicator + '/' + start_date + '/' + end_date;    
+        url = '/calendar/country/' + country + '/indicator/' + indicator.toLowerCase() + '/' + start_date + '/' + end_date;    
     }
     if (ticker != null){     
         url = '/calendar/ticker/' + ticker;    
@@ -78,12 +80,16 @@ function getCalendar(){
     }
   
     date.checkDates(start_date, end_date); 
-    if(utc){
+    if(utc && !importance){
         Data = url_base + url + '?c=' + apikey.replace (' ','%20') + '&UTC=' + utc;
-    }else{
+    }else if(importance && !utc){
+        importance = importance.toString();
+        Data = url_base + url + '?c=' + apikey.replace (' ','%20') + '&importance=' + importance;
+    }
+    else{
         Data = url_base + url + '?c=' + apikey.replace (' ','%20');
     }
-   console.log(Data);
+   //console.log(Data);
 
     return fetch(Data)
     .then(func.handleErrors)   

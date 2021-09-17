@@ -22,7 +22,7 @@ global.category = null;
     if 'category' is None, returns total exports or imports with main category
 
    example:
-    getCmtCountryByCategory(country = 'Portugal', type = 'import', category = None);
+    getCmtCountryByCategory(country = 'Portugal', type = 'import');
     getCmtCountryByCategory(country = 'United States', type = 'export', category = 'live animals');
     getCmtCountryByCategory(country = 'Brazil', type = import, category = 'Swine, live');       
 

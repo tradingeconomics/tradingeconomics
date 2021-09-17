@@ -15,13 +15,12 @@ global.type = null;
     String: type (can be - 'import' or 'export')
 
    example:
-    getTotalByType(country = 'Portugal', type = 'import');
-    getTotalByType(country = 'United States', type = 'export');
-    getTotalByType(country = 'Brazil', type = 'import' );       
+    getComtradeTotalByType(country = 'Portugal', type = 'import');
+    getComtradeTotalByType(country = 'United States', type = 'export');     
    
 ***********************************************************************************/
 
-function getTotalByType(){
+function getComtradeTotalByType(){
 
     var Data = '';
     var url = '/comtrade';
@@ -52,7 +51,7 @@ function getTotalByType(){
    
 }
 
-module.exports.getTotalByType = getTotalByType;
+module.exports.getComtradeTotalByType = getComtradeTotalByType;
 
 
 

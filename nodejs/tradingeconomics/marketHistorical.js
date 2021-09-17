@@ -54,9 +54,9 @@ function getHistoricalMarkets(){
     }).catch(function (err) {
         return err.message;
     });
-   
+
+
     
-  
 }
 
 module.exports.getHistoricalMarkets = getHistoricalMarkets;

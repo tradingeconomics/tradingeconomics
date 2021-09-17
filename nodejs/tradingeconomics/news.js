@@ -9,19 +9,25 @@ global.country = null;
 global.indicator = null;
 global.limit = null;
 global.start = null;
+global.start_date = null;
+global.end_date = null;
 
 //This function builds the path to get the API request:
 /**********************************************************************
    WITHOUT PARAMETERS A LIST OF NEWS WILL BE PROVIDED
    parameters:
-    country, indicator, limit, start (list size and start index)
+    country, indicator, limit, start (list size and start index), start_date, end_date
  
    example:
-    getNews( ); 
-    getNews(country = 'portugal');
-    getNews(indicator = 'imports' );        
+    getNews();
+    getNews(start_date = '2021-02-02', end_date = '2021-03-03') 
+    getNews(country = 'united states');
+    getNews(country = 'united states', start_date = '2021-02-02', end_date = '2021-03-03');
+    getNews(indicator = 'inflation rate');        
+    getNews(indicator = 'inflation rate', start_date = '2021-02-02', end_date = '2021-03-03');        
     getNews(country = 'united states', indicator = 'inflation rate');         
-    getNews(limit = '4', start = '2');               
+    getNews(country = 'united states', indicator = 'inflation rate', start_date = '2021-02-02', end_date = '2021-03-03');         
+    getNews(limit = '15', start = '10');               
 
 ***********************************************************************/
 
@@ -49,7 +55,11 @@ function getNews(){
     if(url.includes('?')){
         Data = url_base + url + '&c='+ apikey.replace (' ','%20');
     }else{
-        Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+        if(start_date === null || end_date === null){
+            Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+        }else{
+            Data = url_base + url + '?c='+ apikey.replace (' ','%20')+ '&d1=' + start_date + '&d2=' + end_date;
+        }
     }
     
     return fetch(Data)

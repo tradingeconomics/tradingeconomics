@@ -12,22 +12,25 @@ global.county = null;
 global.state = null;
 global.URL = null;
 global.historical_symbol = null;
+global.start_date = null;
+global.end_date = null;
 
 //This function builds the path to get the API request:
 /****************************************************************************************************  
    parameters:
-    country, county, counties, states, symbol, URL, state, pike, historical(symbol)
+    country, county, counties, states, symbol, URL, state, pike, historical(symbol), start_date, end_date
 
    example:
     getFred();
-    getFred(counties = 'pike');
-    getFred(country ='united states');
-    getFred(country = 'united states' );       
-    getFred(symbol ='AGEXMAK2A647NCEN' );              
+    getFred(counties = 'arkansas');
+    getFred(country ='united states');      
+    getFred(symbol ='ALLMARGATTN');              
     getFred(URL ='/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' );              
     getFred(county ='pike' );              
     getFred(state ='tennessee' );                           
-    getFred(historical_symbol ='RACEDISPARITY005007' );              
+    getFred(historical_symbol ='RACEDISPARITY005007');
+    getFred(historical_symbol = 'RACEDISPARITY005007', start_date='2017-05-01')
+    getFred(historical_symbol = 'RACEDISPARITY005007', start_date='2017-05-01', end_date='2018-12-31')              
 
 ******************************************************************************************************/
 
@@ -46,7 +49,7 @@ function getFred(){
         url = '/fred/snapshot/symbol/' + symbol;    
     }
     if (URL != null){     
-        url = '/fred/snapshot/url' + '?url=' + URL;    
+        url = '/fred/snapshot/url?';    
     }
     if (country != null){     
         url = '/fred/snapshot/country/' + country;    
@@ -62,11 +65,25 @@ function getFred(){
     }
     
     if(url.includes('?')){
+        if(url.includes('url?')){
+            Data = url_base + url + 'c='+ apikey.replace (' ','%20')+'&url=' + URL;
+        }else{
         Data = url_base + url + '&c='+ apikey.replace (' ','%20');
+    }
+    }else{
+        if (url.includes('/historical/')){
+            if(start_date !== null && end_date == null){
+                Data = url_base + url + '?c='+ apikey.replace (' ','%20')+'&d1=' + start_date;
+            }else if(start_date !== null && end_date !== null){
+                Data = url_base + url + '?c='+ apikey.replace (' ','%20')+'&d1=' + start_date + '&d2=' + end_date;
+            }else{
+                Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+            }
     }else{
         Data = url_base + url + '?c='+ apikey.replace (' ','%20');
     }
- 
+}
+
     return fetch(Data)
     .then(func.handleErrors)   
     .then(function(response) {    
@@ -74,8 +91,6 @@ function getFred(){
     }).catch(function (err) {
         return err.message;
     });
-   
-
 }
 
 module.exports.getFred = getFred;

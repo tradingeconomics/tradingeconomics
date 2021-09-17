@@ -5,7 +5,8 @@ const func = require('./functions.js');
 const fetch = require('node-fetch');
 
 //setting global variables to be used outside this module
-//global.symbol = null;
+global.symbol = null;
+global.country = null;
 
 
 //This function builds the path to get the API request:
@@ -16,15 +17,14 @@ const fetch = require('node-fetch');
 
    example:
 
-        my_data = te.getFinancialsData(country = null, symbol = 'aapl:us').then(data => console.log(data)); 
-        my_data = te.getFinancialsData(country = null, symbol = ['aapl:us', 'ea:us']).then(data => console.log(data));
+        my_data = te.getFinancialsData(symbol = 'aapl:us').then(data => console.log(data)); 
+        my_data = te.getFinancialsData(symbol = ['aapl:us', 'ea:us']).then(data => console.log(data));
         my_data = te.getFinancialsData(country = 'china').then(data => console.log(data));
         my_data = te.getFinancialsData(country = ['china', 'united states']).then(data => console.log(data));
 
           
 ***********************************************************************************/
-function getFinancialsData(country = null, symbol = null){
-
+function getFinancialsData(){
     var data_url = '';
 
     // d is a dictionary used for create the api url
@@ -45,7 +45,7 @@ function getFinancialsData(country = null, symbol = null){
         d.country = '';
         d.symbol = `/symbol/${symbol}`;
     }
-    data_url = `${d.url_base}${d.symbol}${d.country}${d.key}`.replace (' ', '%20');
+    data_url = `${d.url_base}${d.symbol}${d.country}${d.key}`.replace (' ', '%20');    
     
     console.log('If both "country" and "symbols" are null or not null at the same time, a full companies list will be provided ')
 

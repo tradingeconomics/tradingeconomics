@@ -47,10 +47,9 @@ function getCmtCountryFilterByType(){
 
     Data = getLinkApi(country1, country2);
 
-    Data += `?c=${apikey}`;
+    Data += `?type=${type}&c=${apikey}`;
     Data = Data.replace (' ','%20');
-    Data += `&type=${type}` 
-  
+
     return fetch(Data)
     .then(func.handleErrors)   
     .then(function(response) {    
