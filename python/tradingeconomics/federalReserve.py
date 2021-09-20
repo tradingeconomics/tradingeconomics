@@ -320,7 +320,7 @@ def getFedRCounty(output_type = None):
 
 
 def getFedRHistorical(symbol = None, initDate=None,endDate=None, output_type = None):
-     """
+    """
     Get Historical data.
     =================================================================================
 
