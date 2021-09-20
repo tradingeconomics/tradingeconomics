@@ -315,4 +315,56 @@ def getHistoricalRatings(country = None, rating = None, initDate = None, endDate
         except ValueError:
             pass
     else:
-        return ''     
+        return ''    
+
+def getHistoricalByTicker(ticker=None, start_date=None, output_type=None):
+    """
+    Returns historical data by ticker.
+    =================================================================================
+    Parameters:
+    -----------
+        ticker: string.
+                ticker = 'USURTOT'
+        start_date: string.
+                start_date = '2015-03-01
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+    start_date is optional 
+    
+    Example
+    -------
+            getIndicatorByTicker(ticker = 'USURTOT', output_type = 'df')
+
+            getIndicatorByTicker(ticker = 'USURTOT', start_date = '2015-03-01, output_type = 'df')
+    """
+    
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/historical',
+        'country': '',
+        'ticker' : '',
+        'start_date': '',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+    if start_date :        
+        try: 
+            fn.validate(start_date)
+        except ValueError:
+            raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
+            
+
+    if ticker:
+        d['ticker']=f'/ticker/{fn.stringOrList(ticker)}'
+        d['start_date']=f'/{start_date}'
+        api_url_request = "%s%s%s%s" % (d['url_base'], d['ticker'],  d['start_date'],  d['key']) 
+        #print(api_url_request)
+        return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+        #return
+         
+
+    return 'Ticker is required'
+    

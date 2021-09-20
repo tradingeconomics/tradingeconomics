@@ -110,6 +110,7 @@ def getForecastData(country = None, indicator = None, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
+        print(linkAPI)
         response = urlopen(linkAPI)
         code = response.getcode()
         webResults = json.loads(response.read().decode('utf-8'))
@@ -154,5 +155,48 @@ def getForecastData(country = None, indicator = None, output_type = None):
     else:
         return ''
        
+
+
+def getForecastByTicker(ticker=None, output_type=None):
+    """
+    Returns a list of Forecast by specific ticker.
+    =================================================================================
+    Parameters:
+    -----------
+        ticker: string or list.
+                ticker = 'USURTOT'
+                ticker = ['WGDPCHIN', 'USURTOT']    
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+     
+    
+    Example
+    -------
+            getForecastByTicker(ticker = 'USURTOT', output_type = 'df')
+
+            getForecastByTicker(ticker = ['WGDPCHIN', 'USURTOT'], output_type = 'df')
+    """
+    
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/forecast',
+        'country': '',
+        'ticker' : '',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    if ticker:
+        d['ticker']=f'/ticker/{fn.stringOrList(ticker)}'
+        api_url_request = "%s%s%s" % (d['url_base'], d['ticker'],  d['key']) 
+        print(api_url_request)
+        return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+        return
+         
+
+    return 'Ticker is required'
         
 
