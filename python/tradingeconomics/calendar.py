@@ -61,118 +61,6 @@ def checkCalendarId(id):
         linkAPI += '/' + quote(",".join(id))
     return linkAPI
 
-
-
-def getCalendarData(country = None, category = None, initDate = None, endDate = None, output_type = None):
-    
-    """
-    Return calendar events.
-    ===========================================================
-
-    Parameters:
-    -----------
-    country: string or list.
-             String to get data for one country. List of strings to get data for
-             several countries. For example, country = ['United States', 'Australia'].
-    category:   string or list.
-             String  to get data for one category. List of strings to get data for several calendar events.
-             For example, category = 'GDP Growth Rate' or 
-             category = ['Exports', 'Imports']
-    initDate: string with format: YYYY-MM-DD.
-             For example: '2011-01-01' 
-    endDate: string with format: YYYY-MM-DD.
-    output_type: string.
-             'dict'(default) for dictionary format output, 'df' for data frame,
-             'raw' for list of dictionaries without any parsing. 
-
-
-    Notes
-    -----
-    All parameters are optional. When not supplying parameters, data for all countries and indicators will be provided. 
-
-    Example
-    -------
-    getCalendarData(country = 'United States', category = 'Imports', initDate = '2011-01-01', endDate = '2016-01-01')
-
-    getCalendarData(country = ['United States', 'India'], category = ['Imports','Exports'], initDate = '2011-01-01', endDate = '2016-01-01')
-    """
-    
-    
-    try:
-        _create_unverified_https_context = ssl._create_unverified_context
-    except AttributeError:
-        pass
-    else:
-        ssl._create_default_https_context = _create_unverified_https_context
-
-    if country == None and category == None:
-        linkAPI = 'https://api.tradingeconomics.com/calendar'
-    elif country == None and category != None:
-        country_all = 'all'
-        linkAPI = paramCheck(country_all, category)
-    elif type(country) is str and type(category) is str:
-        linkAPI = 'https://api.tradingeconomics.com/calendar/country/' + quote(country) + '/indicator/' + quote(category)
-    else:
-        linkAPI = paramCheck(country, category)
-    if  initDate == None and endDate == None:
-        linkAPI = linkAPI
-    else:
-        try: 
-            fn.validate(initDate)
-        except ValueError:
-            raise DateError ('Incorrect initial date format, should be YYYY-MM-DD ')
-        try: 
-            fn.validate(endDate)
-        except ValueError:
-            raise DateError ('Incorrect end date format, should be YYYY-MM-DD ')
-        try:        
-            fn.validatePeriod(initDate, endDate)
-        except ValueError:
-            raise DateError ('Invalid time period.') 
-        param=[initDate, endDate]
-        linkAPI = fn.finalLink(linkAPI, param)
-    try:
-        linkAPI += '?c=' + glob.apikey
-    except AttributeError:
-        raise LoginError('You need to do login before making any request')
-    try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-            if len(webResults) > 0:
-                names = ['calendarid', 'date', 'country', 'category', 'event', 'reference', 'source', 'actual', 'previous', 'forecast', 'teforecast', 'url', 'datespan',  'importance', 'lastupdate', 'revised', 'currency', 'unit', 'ocountry' 'ocategory', 'ticker', 'symbol']
-                names2 = ['CalendarId','Date', 'Country', 'Category', 'Event', 'Reference', 'Source', 'Actual', 'Previous', 'Forecast', 'TEForecast', 'URL', 'DateSpan',  'Importance', 'LastUpdate', 'Revised', 'Currency', 'Unit', 'Ticker','Symbol']
-                #maindf = pd.DataFrame()
-                maindf = pd.DataFrame(webResults, columns=names2)  
-                '''
-                for i in range(len(names)):
-                    names[i] =  [d[names2[i]] for d in webResults]
-                    maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
-                '''       
-            else:
-                    raise ParametersError ('No data available for the provided parameters.')  
-            if output_type == None or output_type =='dict':
-                output = fn.out_type(maindf)
-            elif output_type == 'df': 
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError ('output_type options : df for data frame, dict(default) for dictionary by country, raw for unparsed results.') 
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''
-
-
 def getCalendarId(id = None, output_type = None):
     
     """
@@ -251,3 +139,99 @@ def getCalendarId(id = None, output_type = None):
             pass
     else:
         return ''
+
+def getCalendarData(country = None, category = None, initDate = None, endDate = None, importance=None, ticker=None, output_type = None):
+    """
+    Returns Lastest Updates by country, by country and initial date, by initial date only.
+    =================================================================================
+    Parameters:
+    -----------
+        country: string or list.
+                country = 'united states'
+                country = ['united states', 'portugal']
+        category: string
+                category='inflation rate'
+        ticker: string or list.
+                ticker = 'IJCUSA'
+                ticker=['IJCUSA','SPAINFACORD','BAHRAININFNRATE']
+        importance: string.
+                importance = '2'
+        
+        initDate: string.
+                initDate = '2021-01-01'
+        endDate:string.
+                endDate = '2021-01-03'
+        
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+    all parameters are optional.
+    
+    Example
+    -------
+            getCalendarData(output_type='df')
+            getCalendarData(importance='2', output_type='df')
+            getCalendarData(country='all', initDate = '2011-01-01', endDate = '2016-01-01', output_type='df')
+            getCalendarData(initDate='2016-01-01', endDate='2016-01-01',importance='3', output_type='df')
+            getCalendarData(country='united states',  output_type='df')
+            getCalendarData(country = 'United States', initDate = '2011-01-01', endDate = '2016-01-01', output_type='df')
+            getCalendarData(country='united states',initDate='2016-01-01', endDate='2016-01-01',importance='3', output_type='df')
+            getCalendarData(category='inflation rate', output_type='df')
+            getCalendarData(category='inflation rate',importance='2', output_type='df')
+            getCalendarData(category='inflation rate',initDate='2016-03-01', endDate='2016-03-03', output_type='df')
+            getCalendarData(category='inflation rate',initDate='2016-03-01', endDate='2016-03-03',importance='2', output_type='df')
+            getCalendarData(country = ['United States','china'], output_type='df')
+            getCalendarData(country=['united states','china'], importance='2', output_type='df')
+            getCalendarData(country=['united states', 'china'], initDate = '2016-01-01', endDate = '2016-01-03', output_type='df')
+            getCalendarData(country=['united states', 'china'], initDate = '2016-01-01', endDate = '2016-01-03',importance=2, output_type='df')
+            getCalendarData(country = 'United States', category = 'initial jobless claims', output_type='df')
+            getCalendarData(country = 'United States', category = 'initial jobless claims',initDate = '2011-01-01', endDate = '2016-01-01', output_type='df')
+            getCalendarData(ticker=['IJCUSA','SPAINFACORD','BAHRAININFNRATE'], output_type='df')
+            getCalendarData(ticker=['IJCUSA','SPAINFACORD','BAHRAININFNRATE'], initDate = '2021-01-01', endDate = '2021-01-03',utput_type='df')
+    """
+            
+    
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/calendar',
+        'country': '',
+        'category' : '',
+        'init_date': '',
+        'end_date':'',
+        'importance':'',
+        'ticker':'',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+    if initDate and endDate :     
+
+        fn.validate(initDate)
+        fn.validate(endDate)
+        fn.validatePeriod(initDate, endDate)
+        d['init_date']=f'/{initDate}'
+        d['end_date']=f'/{endDate}'
+
+    if ticker:
+        d['ticker'] = f'/ticker/{fn.stringOrList(ticker)}'
+        api_url_request = "%s%s%s%s%s" % (d['url_base'],  d['ticker'],  d['init_date'],  d['end_date'],  d['key']) 
+        #print(api_url_request)
+        return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+
+    if country:
+        d['country']=f'/country/{fn.stringOrList(country)}'
+        
+    if category:
+        d['category'] = f'/indicator/{fn.stringOrList(category)}'
+    if importance:
+        d['importance'] = f'&importance={importance}'
+
+    if initDate and endDate and not country and not category:
+        d['country'] = f'/country/all'
+    
+
+    api_url_request = "%s%s%s%s%s%s%s" % (d['url_base'], d['country'], d['category'],  d['init_date'],  d['end_date'],  d['key'], d['importance']) 
+    #print(api_url_request)
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    #return
