@@ -26,6 +26,7 @@ if PY3: # Python 3+
     from .historicalEurostat import getHistoricalEurostat
     from .financials import getFinancialsData
     from .historicalFinancials import getHistoricalFinancials
+    from .search import getSearch
 
 
 else: # Python 2.X
@@ -47,6 +48,7 @@ else: # Python 2.X
     from historicalEurostat import getHistoricalEurostat
     from financials import getFinancialsData
     from historicalFinancials import getHistoricalFinancials
+    from search import getSearch
 
 
 
