@@ -101,7 +101,7 @@ getLatestNews <- function(country = NULL, indicator = NULL, limit = NULL, start 
 
 
 #'Return latest articles information from Trading Economics API
-#'export getLatestArticles
+
 #'param country string or list.
 #'String for one country information. List of strings for
 #'several countrys, for example country = c('country_name', 'country_name').

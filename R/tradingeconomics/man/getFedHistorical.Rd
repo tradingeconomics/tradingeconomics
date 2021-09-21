@@ -4,10 +4,20 @@
 \alias{getFedHistorical}
 \title{Get Federal Reserve values from Trading Economics API}
 \usage{
-getFedHistorical(symbol = NULL, outType = NULL)
+getFedHistorical(
+  symbol = NULL,
+  initDate = NULL,
+  endDate = NULL,
+  outType = NULL
+)
 }
 \arguments{
 \item{symbol}{string.}
+
+\item{initDate}{string with format: YYYY-MM-DD.
+For example: '2011-01-01'.}
+
+\item{endDate}{string with format: YYYY-MM-DD.}
 
 \item{outType}{string.
 'df' for data frame,
@@ -25,8 +35,10 @@ Without credentials only sample information will be provided. A symbol must be p
 }
 
 \examples{
-\dontrun{ getFedHistorical(c('RACEDISPARITY005007', 'AGEXMAK2A647NCEN'))
-getFedHistorical('RACEDISPARITY005007')
+\dontrun{ getFedHistorical('RACEDISPARITY005007', outType = 'df')
+getFedHistorical(c('RACEDISPARITY005007','2020RATIO002013'), outType = 'df')
+getFedHistorical(symbol='BAMLC0A1CAAAEY', initDate = '2018-05-01'  , outType = 'df')
+getFedHistorical(symbol='BAMLC0A1CAAAEY', initDate = '2018-05-01', endDate = '2019-01-01'  , outType = 'df'))
 }
 
 }
