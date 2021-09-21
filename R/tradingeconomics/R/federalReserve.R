@@ -35,7 +35,8 @@ getFedReserve <- function(indicator = NULL, category = NULL, outType = NULL){
   }
   apikey_local <- .GlobalEnv$apiKey
   url <- paste(url, '?c=', apikey_local, sep = '')
-
+  
+  print(url)
   url <- URLencode(url)
   request <- GET(url)
 
@@ -144,8 +145,11 @@ getFedReserveSnapshot <- function(symbol = NULL, state = NULL, county = NULL, co
 #'Get Federal Reserve values from Trading Economics API
 #'@export getFedHistorical
 #'
-#' @param symbol string.
-#' @param outType string.
+#'@param symbol string.
+#'@param initDate string with format: YYYY-MM-DD.
+#'For example: '2011-01-01'.
+#'@param endDate string with format: YYYY-MM-DD.
+#'@param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
 #'
@@ -154,12 +158,14 @@ getFedReserveSnapshot <- function(symbol = NULL, state = NULL, county = NULL, co
 #'Without credentials only sample information will be provided. A symbol must be provided.
 #'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 #'@examples
-#'\dontrun{ getFedHistorical(c('RACEDISPARITY005007', 'AGEXMAK2A647NCEN'))
-#'getFedHistorical('RACEDISPARITY005007')
+#'\dontrun{ getFedHistorical('RACEDISPARITY005007', outType = 'df')
+#'getFedHistorical(c('RACEDISPARITY005007','2020RATIO002013'), outType = 'df')
+#'getFedHistorical(symbol='BAMLC0A1CAAAEY', initDate = '2018-05-01'  , outType = 'df')
+#'getFedHistorical(symbol='BAMLC0A1CAAAEY', initDate = '2018-05-01', endDate = '2019-01-01'  , outType = 'df'))
 #'}
 #'
 
-getFedHistorical <- function(symbol = NULL, outType = NULL){
+getFedHistorical <- function(symbol = NULL, initDate = NULL, endDate = NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/fred/historical"
   df_final = data.frame()
   apikey_local <- .GlobalEnv$apiKey
@@ -170,6 +176,22 @@ getFedHistorical <- function(symbol = NULL, outType = NULL){
   }
 
   url <- paste(url, '?c=', apikey_local, sep = '')
+  
+  
+  if (!is.null(initDate) & !is.null(endDate)){
+    dateCheck(initDate)
+    dateCheck(endDate)
+    if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+    if (initDate > endDate) stop('Incorrect time period initDate - endDate!')
+    url <- paste(url, '&d1=' , paste(initDate, collapse = ','), sep = '')
+    url <- paste(url, '&d2=', paste(endDate, collapse = ','), sep = '' )
+  } 
+  else if (!is.null(initDate)){
+    dateCheck(initDate)
+    if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+    url <- paste(url, '&d1=' , paste(initDate, collapse = ','), sep = '' )
+  }
+ 
   url <- URLencode(url)
   request <- GET(url)
 
