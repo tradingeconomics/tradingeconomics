@@ -96,6 +96,9 @@ getCreditRatingHistorical <- function(country = NULL, outType = NULL, initDate= 
   base <-  "https://api.tradingeconomics.com/ratings/historical/"
   df_final = data.frame()
 
+  if (length(country) > 1){
+    country = paste(country, collapse = ',')
+  }
   if(!is.null(country)){
     url <- paste(country, sep = '/')
   }
