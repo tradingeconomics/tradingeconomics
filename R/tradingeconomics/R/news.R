@@ -34,6 +34,7 @@ getLatestNews <- function(identifier = NULL, category = NULL, limit = NULL, star
 
   url <- paste(base,sep ='')
   df_final = data.frame()
+print(identifier)
 
   if(!is.null(identifier)) #if indicator is something
   {
@@ -47,13 +48,14 @@ getLatestNews <- function(identifier = NULL, category = NULL, limit = NULL, star
   }
 
   apikey_local <- .GlobalEnv$apiKey
+  
   url <- paste(url, '?c=', apikey_local, sep ='')
 
   if(!is.null(limit) & !is.null(start)){
     url <- paste(url, '&limit=' , paste(limit, collapse = ','), sep = '', paste('&start=', paste(start, collapse = ','), sep = '' ))
 
   }
-
+  print(url)
   url <- URLencode(url)
   request <- GET(url)
 

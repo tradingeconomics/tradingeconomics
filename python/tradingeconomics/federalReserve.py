@@ -256,98 +256,6 @@ def getFedRSnaps(symbol = None, url = None, country = None, state = None, county
     else:      
         raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output
-  
-
-def getFedRHistorical(symbol = None, page_number = None, output_type = None):
-    """
-    Get Historical data.
-    =================================================================================
-
-    Parameters:
-    -----------
-    symbol:list.
-             List of strings by a specific symbol or symbols.
-             for example:
-                symbol = 'te_symbol'
-                symbol = ['te_symbol', 'te_symbol']        
-    output_type: string.
-             'dict'(default) for dictionary format output, 'df' for data frame,
-             'raw' for list of dictionaries directly from the web. 
-    page_number: string.
-              each page gives up to 200 results, as there are too many results we can get results per page
-              for example:
-                  page_number = '70' 
-    Notes
-    -----
-    A symbol is required. 
-
-    Example
-    -------
-    getFedRHistorical(symbol = 'racedisparity005007', output_type = None)
-
-    getFedRHistorical(symbol = ['racedisparity005007', '2020ratio002013'], output_type = None)
-
-    getFedRHistorical(symbol ='T10YFF', page_number = '70', output_type = 'df')
-    
-    """
-    try:
-        _create_unverified_https_context = ssl._create_unverified_context
-    except AttributeError:
-        pass
-    else:
-        ssl._create_default_https_context = _create_unverified_https_context
-    
-    linkAPI = 'https://api.tradingeconomics.com/fred/historical/' 
-    
-    if symbol == None:
-        return "A symbol is required!"
-    if symbol != None:
-        if type(symbol) == str:
-            linkAPI +=  quote(symbol)
-        else:    
-            linkAPI += quote(",".join(symbol))
-
-    if page_number != None:
-        linkAPI +=  "/" + page_number
-    
-    try:
-        linkAPI += '?c=' + glob.apikey
-     
-    except AttributeError:
-        raise LoginError('You need to do login before making any request')
-    try:
-        response = urlopen(linkAPI)
-        code = response.getcode()        
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-     
-    if code == 200:
-        try:
-            if len(webResults) > 0:
-                names = ['symbol', 'date', 'value']
-                names2 = ['symbol', 'date', 'value']    
-                maindf = pd.DataFrame(webResults, columns=names2)    
-            
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='dict':
-                output = webResults
-            elif output_type == 'df':        
-                output = maindf
-            elif output_type == 'raw':        
-                output = webResults
-            else:      
-                raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''    
-
 
 def getFedRCounty(output_type = None):
     """
@@ -409,3 +317,72 @@ def getFedRCounty(output_type = None):
     else:      
         raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
     return output     
+
+
+def getFedRHistorical(symbol = None, initDate=None,endDate=None, output_type = None):
+    """
+    Get Historical data.
+    =================================================================================
+
+    Parameters:
+    -----------
+    symbol:list.
+             List of strings by a specific symbol or symbols.
+             for example:
+                symbol = 'racedisparity005007'
+                symbol = ['racedisparity005007', '2020ratio002013']  
+    initDate: string.
+            initDate = '2018-05-01'
+    endDate: string.
+            endDate = '2018-06-01'    
+    output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    
+    Notes
+    -----
+    A symbol is required. 
+
+    Example
+    -------
+    getFedRHistorical(symbol = 'racedisparity005007', output_type = 'df')
+
+    getFedRHistorical(symbol = ['racedisparity005007', '2020ratio002013'], output_type = 'df')
+
+    getFedRHistorical(symbol=['racedisparity005007', '2020ratio002013'],initDate='2018-05-01',output_type='df')
+
+    getFedRHistorical(symbol=['racedisparity005007', '2020ratio002013'],initDate='2017-05-01', endDate='2019-01-01',output_type='df')
+
+    
+    """
+
+
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/fred/historical',
+        'symbol': '',
+        'initDate': '',
+        'endDate':'',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    if initDate:     
+        fn.validate(initDate)
+        d['initDate']=f'&d1={initDate}'
+        
+    if endDate:
+        fn.validate(endDate)
+        d['endDate']=f'&d2={endDate}'
+        fn.validatePeriod(initDate, endDate)
+        
+
+    if symbol:
+        d['symbol'] = f'/{fn.stringOrList(symbol)}'
+        
+    
+    api_url_request = "%s%s%s%s%s" % (d['url_base'], d['symbol'],  d['key'],d['initDate'],d['endDate']) 
+    # print(api_url_request)
+
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    # return

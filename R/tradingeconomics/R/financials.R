@@ -177,3 +177,4 @@ getFinancialsData <- function(country = NULL, symbol = NULL, outType = NULL){
 
   return(df_final)
 }
+

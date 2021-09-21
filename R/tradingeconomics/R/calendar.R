@@ -22,6 +22,7 @@ source("R/functions.R")
 #'@param endDate string with format: YYYY-MM-DD.
 #'@param id string with calendar id
 #'@param ticker string with ticker
+#'@param importance string with importance
 #'@param outType string.
 #''df' for data frame,
 #''lst'(default) for list.
@@ -47,7 +48,7 @@ source("R/functions.R")
 #'}
 #'
 
-getCalendarData <- function(country = NULL, indicator = NULL, id = NULL, ticker = NULL, initDate= NULL, endDate= NULL, outType = NULL){
+getCalendarData <- function(country = NULL, indicator = NULL, id = NULL, ticker = NULL, initDate= NULL, endDate= NULL, importance= NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/calendar/"
   df_final = data.frame()
 
@@ -101,6 +102,11 @@ getCalendarData <- function(country = NULL, indicator = NULL, id = NULL, ticker 
   apikey_local <- .GlobalEnv$apiKey
 
   url <- paste(base, url, '?c=', apikey_local, sep = '')
+  
+  if(!is.null(importance)){
+    url <- paste(url,'&importance=', importance, sep='')
+  }
+  
   url <- URLencode(url)
   request <- GET(url)
 

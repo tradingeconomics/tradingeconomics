@@ -52,7 +52,7 @@ getMarketsData <- function(marketsField = NULL, country = NULL, symbol = NULL, c
     url <- paste(base, url, '?c=', apikey_local, sep = '')
   }
   else {
-    url <- paste(base, url, sep = '')
+    url <- paste(base, url, '?c=', apikey_local, '&cross=',cross ,sep = '')
   }
 
   url <- URLencode(url)
@@ -205,17 +205,25 @@ getMarketsIntraday <- function (symbol = NULL, initDate = NULL, endDate = NULL, 
   }
 
   if(!is.null(initDate) & !is.null(endDate)){
-    dateCheck(initDate)
-    dateCheck(endDate)
-    if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
-    if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
-    if(initDate > endDate) stop('Incorrect time period initDate - endDate!')
-    url <- paste(url, paste(initDate, endDate, sep = '&d2='), sep = '&d1=')
+    if(!grepl(':', initDate, fixed = TRUE)){
+        dateCheck(initDate)
+        dateCheck(endDate)
+          if (initDate > Sys.Date()) stop('Incorrect time period initDate!')
+          if (endDate > Sys.Date()) stop('Incorrect time period endDate!')
+          if(initDate > endDate) stop('Incorrect time period initDate - endDate!')
+        url <- paste(url, paste(initDate, endDate, sep = '&d2='), sep = '&d1=')
+    }else{
+      url <- paste(url, paste(initDate, endDate, sep = '&d2='), sep = '&d1=')
+    }
   }
   else if(!is.null(initDate) & is.null(endDate)){
+    if(!grepl(':', initDate, fixed = TRUE)){
     dateCheck(initDate)
     if (initDate > Sys.Date())stop('Incorrect time period initDate!')
     url <- paste(url, paste(initDate, sep = ''), sep = '&d1=')
+    }else{
+      url <- paste(url, paste(initDate, sep = ''), sep = '&d1=')
+    }
   }
   
   if(!is.null(interval)){
@@ -349,7 +357,10 @@ getMarketsSearch <- function(country = NULL, category = NULL , outType = NULL){
     stop('Country name should be provided')
   }
   else if(!is.null(country) & !is.null(category)) {
-    url <- paste(base, '/', country, '?c=', apikey_local, '&category=', category,  sep = '')
+    if (length(category) > 1){
+      category = paste(category, collapse = ',')
+    }
+      url <- paste(base, '/', country, '?c=', apikey_local, '&category=', category,  sep = '')
   }
   else if(!is.null(country)) {
     url <- paste(base, country, paste('?c=', apikey_local, sep = ''), sep = '/')

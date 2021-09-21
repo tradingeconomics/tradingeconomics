@@ -547,4 +547,60 @@ def getMarketsForecasts(category=None, symbol=None,  output_type = None):
         output = webResults
     else:      
         raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output        
+    return output   
+
+
+def getMarketsIntradayByInterval(symbol = None, interval=None, initDate=None,endDate=None,output_type=None):
+    """
+    Returns Aggregate intraday prices by interval - allowed intervals: 1m, 5m, 10m, 15m, 30m, 1h, 2h, 4h.
+    =================================================================================
+    Parameters:
+    -----------
+        symbol: string.
+                symbol = 'CL1:COM'
+                symbol = ['CL1:COM','AAPL:US']
+        interval: string
+                interval='1m'
+        initDate: string.
+                initDate = '2021-01-01'
+        endDate:string.
+                endDate = '2021-01-10'
+        
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+    
+    
+    Example
+    -------
+            getMarketsIntradayByInterval(symbol='CL1:COM',interval='1m',initDate='2021-01-01',endDate='2021-12-01',output_type='df')
+            getMarketsIntradayByInterval(symbol=['CL1:COM','AAPL:US'],interval='1m',initDate='2021-01-01',endDate='2021-12-01',output_type='df')
+    """
+            
+    
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/markets/intraday',
+        'symbol': f'/{fn.stringOrList(symbol)}',
+        'interval' : f'?agr={fn.stringOrList(interval)}',
+        'init_date': '',
+        'end_date':'',
+        'key': f'&client={glob.apikey}',
+        'output_type' : ''
+    }
+    if initDate and endDate :     
+
+        fn.validate(initDate)
+        fn.validate(endDate)
+        fn.validatePeriod(initDate, endDate)
+        d['init_date']=f'&d1={initDate}'
+        d['end_date']=f'&d2={endDate}'
+
+    
+
+    api_url_request = "%s%s%s%s%s%s" % (d['url_base'], d['symbol'], d['interval'],  d['init_date'],  d['end_date'],  d['key']) 
+    # print(api_url_request)
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    # return     

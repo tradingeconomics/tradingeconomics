@@ -13,7 +13,7 @@ if PY3: # Python 3+
     from .calendar import getCalendarData, getCalendarId
     from .forecasts import getForecastData,getForecastByTicker
     from .indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator, getIndicatorByCategoryGroup, getIndicatorByTicker
-    from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross
+    from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross, getMarketsIntradayByInterval
     from .historicalMarkets import fetchMarkets
     from .glob import login, subscribe
     from .stream import run
@@ -22,7 +22,7 @@ if PY3: # Python 3+
     from .worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
     from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates, getCmtCountryByCategory, getTotalByType, getCmtCountryFilterByType
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
-    from .eurostat import getEurostatData
+    from .eurostat import getEurostatData,getEurostatCountries,getEurostatCategoryGroups
     from .historicalEurostat import getHistoricalEurostat
     from .financials import getFinancialsData
     from .historicalFinancials import getHistoricalFinancials
@@ -35,7 +35,7 @@ else: # Python 2.X
     from calendar import getCalendarData, getCalendarId
     from forecasts import getForecastData,getForecastByTicker
     from indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator, getIndicatorByCategoryGroup,getIndicatorByTicker
-    from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross
+    from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross, getMarketsIntradayByInterval
     from historicalMarkets import fetchMarkets
     from glob import login, subscribe
     from stream import run
@@ -44,7 +44,7 @@ else: # Python 2.X
     from worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
     from comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates, getCmtCountryByCategory, getTotalByType, getCmtCountryFilterByType
     from federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
-    from eurostat import getEurostatData
+    from eurostat import getEurostatData,getEurostatCountries,getEurostatCategoryGroups
     from historicalEurostat import getHistoricalEurostat
     from financials import getFinancialsData
     from historicalFinancials import getHistoricalFinancials

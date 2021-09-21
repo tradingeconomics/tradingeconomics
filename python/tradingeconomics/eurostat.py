@@ -194,5 +194,64 @@ def getEurostatData(country = None, category = None, category_group= None, lists
             pass
     else:
         return ''
-       
+
+
+
+def getEurostatCountries(output_type=None):
+    """
+    Returns List of List of countries available.
+    ==========================================================
+    Example
+    -------
+        te.getEurostatCountries(output_type='df')
+    """
+
+
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/eurostat/countries',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    
+
+    
+    api_url_request = "%s%s" % (d['url_base'],  d['key']) 
+
+    # print(api_url_request)
+    
+
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    # return
+
+
+def getEurostatCategoryGroups(output_type=None):
+    """
+    Returns List of categories and category groups available..
+    ==========================================================
+
+    Example
+    -------
+        getEurostatCategoryGroups(output_type='df')
+    """
+
+
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/eurostat/categories',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    
+
+    
+    api_url_request = "%s%s" % (d['url_base'],  d['key']) 
+
+    # print(api_url_request)
+    
+
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    # return
         

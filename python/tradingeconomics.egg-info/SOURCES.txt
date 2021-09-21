@@ -22,6 +22,7 @@ tradingeconomics/historicalMarkets.py
 tradingeconomics/indicators.py
 tradingeconomics/markets.py
 tradingeconomics/news.py
+tradingeconomics/search.py
 tradingeconomics/stream.py
 tradingeconomics/worldBank.py
 tradingeconomics.egg-info/PKG-INFO
