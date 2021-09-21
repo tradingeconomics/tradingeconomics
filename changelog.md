@@ -10,6 +10,7 @@
     + __Deprecated:__ Columns "OCountry" and "OCategory" were removed from regular calendar calls.
     + __Changed:__ calendar to get the new limits on rows by role for calendar translation.
     + __Added:__ New column "OEvent" when in translated calendar queries.
+    + __Added:__ Filter by dates on the /news endpoint.
 ---
 + 2021/07
 
@@ -68,9 +69,9 @@
 ### *Packages latest versions:*
 Package | Version
 :---: |:---:
-*Python* |`0.2.981` 
-*Node* | `1.0.8`
-*R* | `0.2.3`
+*Python* |`0.2.985` 
+*Node* | `1.0.10`
+*R* | `0.2.4`
 
 
 
