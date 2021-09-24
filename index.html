@@ -463,8 +463,27 @@ Using Headers auth:<br>
 <!-----------------------------Indicators Black Side------------------------------->
       
 <!--R indicators black side-->
-       
+<blockquote class="lang-specific r">
+    <p>To get a list of indicators available.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>       
+<blockquote class="lang-specific r">
+<p>To get a list of all indicators per country.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 
+        <span class="n">Output</span><span class="p">:</span>
+                    <span class="n">country</span>                      <span class="n">Category</span>   <span class="n">LatestValue</span>   
+<span class="mi">2</span>          <span class="n">United States</span>         <span class="n">ADP Employment Change</span>        <span class="mf">275.00</span>
+<span class="mi">21</span>        <span class="n"> United States</span>    <span class="n">API Crude Oil Stock Change</span>          <span class="mf">2.40</span>
+<span class="mi">3</span>          <span class="n">United States</span>           <span class="n">Asylum Applications</span>       <span class="mf">7267.00</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get a list of all indicators per country and group.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span>, <span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gdp'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>   
 <blockquote class="lang-specific r">
     <p>For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt </p>
 </blockquote>   
@@ -486,16 +505,10 @@ Using Headers auth:<br>
 <span class="mi">4</span>       <span class="n">United States</span>        <span class="n">Inflation Rate</span>            <span class="mf">2</span>
 </span></code></pre>
 <blockquote class="lang-specific r">
-<p>To get a list of all indicators per country.</p>
-</blockquote>   
-<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-
-        <span class="n">Output</span><span class="p">:</span>
-                 <span class="n">country</span>                      <span class="n">Category</span>   <span class="n">LatestValue</span>   
-<span class="mi">2</span>          <span class="n">United States</span>         <span class="n">ADP Employment Change</span>        <span class="mf">275.00</span>
-<span class="mi">21</span>        <span class="n"> United States</span>    <span class="n">API Crude Oil Stock Change</span>          <span class="mf">2.40</span>
-<span class="mi">3</span>          <span class="n">United States</span>           <span class="n">Asylum Applications</span>       <span class="mf">7267.00</span>
-</span></code></pre>
+    <p>To get indicator data by ticker or tickers.</p>
+    </blockquote>   
+    <pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'usurtot'</span><span class="p">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+ </span></code></pre>
 
        
 <!--Python Indicators black side-->
@@ -518,10 +531,10 @@ Using Headers auth:<br>
 <span class="mi">1</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">15</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 <span class="mi">2</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
 </code></pre>
-<!-- <blockquote class="lang-specific python"> ///////add when Tenessee updates the package
+<blockquote class="lang-specific python">
     <p>List of indicators by country and category group.</p>
 </blockquote> 
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span>, <span class="n">group</span><span class="o">=</span><span class="s">'imports'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span> -->
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorByCategoryGroup</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span>, <span class="n">category_group</span><span class="o">=</span><span class="s">'imports'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
 </code></pre>
 <blockquote class="lang-specific python">
@@ -539,10 +552,10 @@ Using Headers auth:<br>
 <span class="p">}</span>
 
 </code></pre>
-<!-- <blockquote class="lang-specific python">  ///////add when Tenessee updates the package
+<blockquote class="lang-specific python">  
     <p>To get data by specific ticker or tickers.</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">ticker</span><span class="o">=</span><span class="s">'usurtot'</span><span class="p">)</span> -->
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorByTicker</span><span class="p">(</span><span class="n">ticker</span><span class="o">=</span><span class="s">'usurtot'</span><span class="p">)</span>
 
 </code></pre>
 
@@ -565,6 +578,14 @@ Using Headers auth:<br>
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get a list of indicators by country and group.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">group</span> = <span class="s1">'housing'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
   <blockquote class="lang-specific javascript">
       <p>To get a list of all countries with a specific indicator.</p>
   </blockquote>
@@ -581,14 +602,7 @@ Using Headers auth:<br>
       </span><span class="s1">console</span>.log(<span class="na">data</span>)       
   });</span>
 </code></pre>
-<blockquote class="lang-specific javascript">
-    <p>To get a list of indicators by group.</p>
-</blockquote>
-</code></pre><pre class="highlight javascript"><code>
-  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">group</span> = <span class="s1">'housing'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-      </span><span class="s1">console</span>.log(<span class="na">data</span>)       
-  });</span>
-</code></pre>
+
      
 <!--c# black side-->
        
@@ -853,6 +867,24 @@ Using Headers auth:<br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span></span><span class="s1">'USURTOT'</span><span class="p">)</span>
 </span></code></pre>
+
+
+
+<blockquote class="lang-specific r">
+    <p>To get discontinued series.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getDiscontinuedIndicators</span><span class="p">(</span><span class="n">outType</span><span class="w"> </span><span class="o">=<span class="s1">'df'</span><span class="p">)</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get discontinued series by country.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getDiscontinuedIndicators</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">= <span class="s1">'united states'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=<span class="s1">'df'</span><span class="p">)</span>
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get discontinued series for multiple countries.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getDiscontinuedIndicators</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">= c(<span class="s1">'united states'</span>, <span class="s1">'china'</span>), <span class="p"></span><span class="n">outType</span><span class="w"> </span><span class="o">=<span class="s1">'df'</span><span class="p">)</span>
+</span></code></pre>
         
 <!--Python Historical black side-->
     
@@ -873,18 +905,30 @@ Using Headers auth:<br>
 
 </code></pre>
 <blockquote class="lang-specific python">
-<br><br>
+    <p>Get historical data by ticker and start date.</p>
+    </blockquote> 
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalByTicker</span><span class="p">(</span>ticker = <span class="s">'USURTOT'</span>, start_date = <span class="s">'2015-03-01'</span><span class="p">)</span>                       
+    </code></pre>
+<blockquote class="lang-specific python">
 <p>Getting historical data by ticker or TE symbol.</p>
 </blockquote> 
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'USURTOT'</span><span class="p">)</span>
-                    
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'USURTOT'</span><span class="p">)</span>                
 </code></pre>
 <blockquote class="lang-specific python">
- </blockquote>
- <pre class="highlight python"><code> 
-    <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/python/EXAMPLES/historical/bulkHistorical.py"><p><stong>                                  »»»» BULK DOWNLOAD EXAMPLE «««« </stong></p></a>
-</code></pre> 
-       
+<a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/python/EXAMPLES/historical/bulkHistorical.py"><p><stong>»»»»»»»»»»»»»»»»»»»»»»»»»» BULK DOWNLOAD EXAMPLE «««««««««««««««««««««««««</stong></p></a>
+ </blockquote> 
+ <!-- <pre class="highlight python"><code> 
+    <p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/python/EXAMPLES/historical/bulkHistorical.py"><p><stong>                                  »»»» BULK DOWNLOAD EXAMPLE «««« </stong></p></a>
+</p></code></pre>  -->
+<blockquote class="lang-specific python">
+<p>Get discontinued indicators.</p>
+</blockquote> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getDiscontinuedIndicator</span><span class="p">(</span><span class="p">)</span>                
+</code></pre>
+</blockquote>     
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getDiscontinuedIndicator</span><span class="p">(</span>country = <span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">], output_type = </span><span class="s">'df'</span>  )</span>                
+</code></pre>
+
 <!--javascript black side-->    
 
 <blockquote class="lang-specific javascript">
@@ -909,6 +953,28 @@ Using Headers auth:<br>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">ticker</span> = <span class="s1">'usurtot'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02' </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
+<!--javascript discontinued black side--> 
+<br>
+<br>
+<br>
+<blockquote class="lang-specific javascript">
+    <p>Get discontinued series.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getDiscontinuedIndicators</span>( ).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getDiscontinuedIndicators</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getDiscontinuedIndicators</span>(<span class="kd">country</span> = [<span class="s1">'united states'</span>, <span class="s1">'china'</span>] ).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -1089,6 +1155,7 @@ or you can specify a start date and end date<br>
 
 <br>
 <br>
+
 <!-----------------------------discontinued White Side------------------------------->      
 
 <p><span class="methods"></p>
@@ -1109,10 +1176,9 @@ or you can specify a start date and end date<br>
 <!--Forecasts R black side-->
 
 <blockquote class="lang-specific r">
-    <p>Next code will provide a list with forecasted values of all indicators of United States </p>
+    <p>Forecasted values of all indicators of United States.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'united states'</span><span class="p">)</span><span class="w">
-
         <span class="n">Output</span><span class="p">:</span>
                  <span class="n">country</span>                      <span class="n">Category</span>         <span class="n">Q1</span>         <span class="n">Q2</span>         <span class="n">Q3</span>        <span class="n">Q4</span>
 <span class="mi">2</span>          <span class="n">United States</span>         <span class="n">ADP Employment Change</span>     <span class="mf">190.00</span>     <span class="mf">160.00</span>     <span class="mf">145.00</span>    <span class="mf">180.00</span>   
@@ -1120,82 +1186,86 @@ or you can specify a start date and end date<br>
 <span class="mi">3</span>          <span class="n">United States</span>       <span class="n">Average Hourly Earnings</span>       <span class="mf">0.20</span>       <span class="mf">0.30</span>       <span class="mf">0.20</span>      <span class="mf">0.20</span> 
 </span></code></pre>
 <blockquote class="lang-specific r">
-    <p>To get forecast data by country and indicator.</p>
+    <p>Forecasted values of all indicators by more than one country.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'united states'</span>, <span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="s1">'imports'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-
-        <span class="n">Output</span><span class="p">:</span>
-                 <span class="n">country</span>        <span class="n">Category</span>         <span class="n">Q1</span>         <span class="n">Q2</span>         <span class="n">Q3</span>        <span class="n">Q4</span>
-<span class="mi">2</span>          <span class="n">United States</span>         <span class="n">Imports</span>     <span class="mf">262000</span>     <span class="mf">269000</span>     <span class="mf">258000</span>    <span class="mf">255000</span>   
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">= c(</span><span class="s1">'united states'</span>, <span class="s1">'united kingdom'</span>) <span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-    <p>To get data in data frame format type for several countries and indicators:</p>
+    <p>Forecasted values for a specific indicator.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="s1">'gdp'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>Forecasted values for more than one indicator.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">indicator</span><span class="w"> </span><span class="o">= c(</span><span class="s1">'gdp'</span>, <span class="s1">'population'</span>) <span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get forecast data by ticker.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="s1">'usurtot'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get forecast data by multiple tickers.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s1">'usurtot'</span><span class="p">,</span><span class="s1">'wgdpchin'</span><span class="p">), </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get data in data frame format type for one country and indicator.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'united states'</span><span class="p">, </span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gdp'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get data in data frame format type for several countries and indicators.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-
-        <span class="n">Output</span><span class="p">:</span>
-                 <span class="n">country</span>          <span class="n">Category</span>        <span class="n">Q1</span>         <span class="n">Q2</span>         <span class="n">Q3</span>       <span class="n">Q4</span>
-<span class="mi">2</span>                  <span class="n">China</span>               <span class="n">GDP</span>   <span class="mf">13200.0</span>    <span class="mf">13200.0</span>    <span class="mf">13200.0</span>    <span class="mf">13900</span>   
-<span class="mi">21</span>                <span class="n"> China</span>    <span class="n">Inflation Rate</span>       <span class="mf">1.8</span>        <span class="mf">1.9</span>        <span class="mf">1.9</span>        <span class="mf">2</span> 
-<span class="mi">3</span>          <span class="n">United States</span>               <span class="n">GDP</span>   <span class="mf">20220.0</span>    <span class="mf">20220.0</span>    <span class="mf">20220.0</span>  <span class="mf">20700.0</span> 
-<span class="mi">3</span>          <span class="n">United States</span>    <span class="n">Inflation Rate</span>       <span class="mf">1.8</span>        <span class="mf">1.7</span>        <span class="mf">1.9</span>      <span class="mf">1.8</span> 
 </span></code></pre>
 
 <!--Python Forecasts black side-->
 
 <blockquote class="lang-specific python">
-<br>
-<br>    
-    <p>Forecasted values for specific a country, in this case United States. </p>
-<br>
+   
+    <p>Forecasted values by country. </p>
+
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
-
-<!-- <span class="n">Output</span><span class="p">:</span>
-           <span class="n">Country</span>         <span class="o">...</span>                       <span class="n">q4_date</span>
-<span class="mi">0</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">1</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">2</span>    <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-               <span class="o">...</span>         <span class="o">...</span>                           <span class="o">...</span>
-<span class="mi">200</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">201</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">202</span>  <span class="n">United</span> <span class="n">States</span>         <span class="o">...</span>           <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> -->
 </code></pre>
 <blockquote class="lang-specific python">
-<br>
-<br>
+
     <p>Forecasted values for more than one country. </p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">= [</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span> ], <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
-<br>
-<br>    
+  
     <p>Forecasted values for a specific indicator. </p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">indicator</span><span class="o">= </span><span class="s">'gdp'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
-<br>
-<br>    
+   
     <p>Forecasted values for more than one indicator. </p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">indicator</span><span class="o">= [</span><span class="s">'gdp'</span>, <span class="s">'population'</span>], <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre> 
 <blockquote class="lang-specific python"> 
-<br>
-<br>    
+  
     <p>Forecasted values for several countries and indicators. </p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">indicator</span><span class="o">=</span><span class="p">[</span><span class="s">'gdp'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">],</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
-
-<!-- <span class="n">Output</span><span class="p">:</span>
-         <span class="n">Country</span>    <span class="n">Category</span>         <span class="o">...</span>                 <span class="n">q4</span>              <span class="n">q4_date</span>
-<span class="mi">0</span>          <span class="n">China</span>         <span class="n">GDP</span>         <span class="o">...</span>           <span class="mf">13100.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">1</span>          <span class="n">China</span>  <span class="n">Population</span>         <span class="o">...</span>            <span class="mf">1407.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">2</span>  <span class="n">United</span> <span class="n">States</span>         <span class="n">GDP</span>         <span class="o">...</span>           <span class="mf">20220.00</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">3</span>  <span class="n">United</span> <span class="n">States</span>  <span class="n">Population</span>         <span class="o">...</span>             <span class="mf">328.49</span>  <span class="mi">2019</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">31</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span> -->
 </code></pre>
+<blockquote class="lang-specific python">
+   
+    <p>Forecasted values by specific ticker. </p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastByTicker</span><span class="p">(</span><span class="n">ticker</span><span class="o">= </span><span class="s">'usurtot'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+   
+    <p>Forecasted values by multiple tickers. </p>
+</blockquote> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getForecastByTicker</span><span class="p">(</span><span class="n">ticker</span><span class="o">= [</span><span class="s">'usurtot'</span>, <span class="s">'wgdpchin'</span>], <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre> 
 <blockquote class="lang-specific python"> 
     <p>*Forecast response fields can be diferent from Html response fields.</p>
 </blockquote>
@@ -1584,7 +1654,7 @@ or you can specify a start date and end date<br>
        
 <blockquote class="lang-specific r">
     <p>To get the last ratings for all countries.</p>
-<br>
+
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="s1"></span><span class="p">)</span>  
 
@@ -1596,22 +1666,31 @@ or you can specify a start date and end date<br>
 </span></code></pre>
 <blockquote class="lang-specific r">
 <p>To get Credit Rating by country.</p>
-<br>
+
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="s1">'United States'</span><span class="p">)</span>            
 </span></code></pre> 
 <blockquote class="lang-specific r">
     <p>To get Credit Rating by several countries.</p>
-<br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span></span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">            
 </span></code></pre> 
 <blockquote class="lang-specific r">
     <p>To get Historical Credit Rating by country.</p>
-<br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="s1">'United States'</span><span class="w"> </span></span><span class="p">)</span>          
 </span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get Historical Credit Rating by country and a start date.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="n">country</span><span class="w"> </span>= <span class="s1">'United States'</span><span class="w"> </span>, <span class="n">initDate</span><span class="w"> </span>= <span class="s1">'2011-01-01'</span></span><span class="p">)</span>          
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get Historical Credit Rating by country and dates.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="n">country</span><span class="w"> </span>= <span class="s1">'United States'</span><span class="w"> </span>, <span class="n">initDate</span><span class="w"> </span>= <span class="s1">'2011-01-01'</span>, <span class="n">endDate</span><span class="w"> </span>= <span class="s1">'2012-01-01'</span></span><span class="p">)</span>          
+</span></code></pre>
+       
        
 <!--javascript black side-->
       
@@ -1908,38 +1987,6 @@ or you can specify a start date and end date<br>
 </tbody></table>
 
 
-<!--
-<h3 id="response-fields">Response Fields</h3>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Release time and date in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Agency</strong></td>
-<td style="text-align: left">Rating agency</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Rating</strong></td>
-<td style="text-align: left">Rating score</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Outlook</strong></td>
-<td style="text-align: left">Rating outlook</td>
-</tr>
-
-</tbody></table>-->
-
 <!-----------------------------latest updates white Side------------------------------->      
 
 <h2 id="latest-updates">Latest updates</h2>
@@ -1951,7 +1998,6 @@ or you can specify a start date and end date<br>
        
 <blockquote class="lang-specific python">
   <p>Without specifying the date a sample of the latest updates will be provided.</p> 
-  <br>
   <p>To get latest updates using a starting date.</p>
 </blockquote>    
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getLatestUpdates</span><span class="p">(</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2018-08-15'</span><span class="p">)</span>
@@ -1962,10 +2008,18 @@ or you can specify a start date and end date<br>
   <span class="mi">2</span>                  <span class="n">USASSRE</span>     <span class="mi">28-06-2016</span><span class="n">T</span><span class="mi">13:49:00</span>         
   <span class="mi">3</span>     <span class="n">MOZAMBIQUEGROFIXCAPF</span>     <span class="mi">22-04-2014</span><span class="n">T</span><span class="mi">15:15:00</span>           
   <span class="mi">4</span>         <span class="n">MOZAMBIQUECONSPE</span>     <span class="mi">21-03-2014</span><span class="n">T</span><span class="mi">15:16:00</span>          
-  <span class="mi">5</span>         <span class="n">MOZAMBIQUEGOVSPE</span>     <span class="mi">15-10-2013</span><span class="n">T</span><span class="mi">15:17:00</span>         
-      
+  <span class="mi">5</span>         <span class="n">MOZAMBIQUEGOVSPE</span>     <span class="mi">15-10-2013</span><span class="n">T</span><span class="mi">15:17:00</span>              
 </code></pre> 
-       
+<blockquote class="lang-specific python">
+    <p>To get latest updates by country.</p>
+  </blockquote>
+  <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getLatestUpdates</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'portugal'</span><span class="p">)</span>
+</code></pre> 
+  <blockquote class="lang-specific python">
+    <p>To get latest updates by country using a starting date.</p>
+  </blockquote>   
+  <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getLatestUpdates</span><span class="p">(</span>country</span><span class="o">=</span><span class="s">'portugal'</span>, <span class="n">initDate</span><span class="o">=</span><span class="s">'2018-08-15'</span><span class="p">)</span>
+  </code></pre>     
 <!--R Latest updates-->
        
 <blockquote class="lang-specific r">
@@ -1973,6 +2027,18 @@ or you can specify a start date and end date<br>
 <br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getLatestUpdates</span><span class="p">(</span><span class="w"> </span><span class="s1">'2018-02-22'</span><span class="p">)</span>           
+</code></pre> 
+<blockquote class="lang-specific r">
+    <p>To get the latest updates by country.</p>
+<br>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getLatestUpdates</span><span class="p">(</span><span class="w">country = </span><span class="s1">'united states'</span><span class="p">)</span>           
+</code></pre> 
+<blockquote class="lang-specific r">
+    <p>To get the latest updates by country and date.</p>
+<br>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getLatestUpdates</span><span class="p">(</span><span class="w">country = </span><span class="s1">'united states'</span>, initDate = <span class="s1">'2018-02-22'</span><span class="p">)</span>           
 </code></pre> 
        
 <!--javascript-->        
@@ -2110,7 +2176,7 @@ or you can specify a start date and end date<br>
 <h1 id="calendar">Economic Calendar</h1>
 <h2 id="events">Events</h2>
 
-<!-----------------------------latest updates Black Side------------------------------->      
+<!-----------------------------calendar Black Side------------------------------->      
 
 <!--R Latest updates-->
 
@@ -2119,18 +2185,26 @@ or you can specify a start date and end date<br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="p">)</span>           
 </code></pre> 
-
 <blockquote class="lang-specific r">
-    <p>To get information about calendar events for the United Kingdom</p>
+    <p>To get all calendar events by importance.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span>importance = <span class="s1">'2'</span><span class="p">)</span>           
+</code></pre> 
+<blockquote class="lang-specific r">
+    <p>Filter calendar events by dates and importance.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span>initDate = <span class="s1">'2021-01-01'</span>, endDate = <span class="s1">'2021-02-02'</span><span class="p">)</span>           
+</code></pre> 
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span>initDate = <span class="s1">'2021-01-01'</span>, endDate = <span class="s1">'2021-02-02'</span>, importance = <span class="s1">'2'</span><span class="p">)</span>           
+</code></pre>
+<blockquote class="lang-specific r">
+    <p>To get information about calendar events by country, dates and importance</p>
 </blockquote>       
 <pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-
-                  </span><span class="n">Date</span><span class="w">        </span><span class="n">Country</span><span class="w">               </span><span class="n">Category</span><span class="w">                                 </span><span class="n">Event</span><span class="w"> </span><span class="n">Reference</span><span class="w"> </span><span class="n">Unit</span><span class="w">                         </span><span class="n">Source</span><span class="w"> </span><span class="n">Actual</span><span class="w"> </span><span class="n">Previous</span><span class="w"> </span><span class="n">Forecast</span><span class="w"> </span><span class="n">TEForecast</span><span class="w">
-</span><span class="m">1</span><span class="w">  </span><span class="m">2016-11-23</span><span class="nb">T</span><span class="m">11</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">          </span><span class="n">Interest</span><span class="w"> </span><span class="n">Rate</span><span class="w">                     </span><span class="n">BoE</span><span class="w"> </span><span class="n">Forbes</span><span class="w"> </span><span class="n">Speech</span><span class="w">                               </span><span class="n">Bank</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">England</span><span class="w">                                    
-</span><span class="m">2</span><span class="w">  </span><span class="m">2016-11-23</span><span class="nb">T</span><span class="m">11</span><span class="o">:</span><span class="m">40</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">          </span><span class="n">Interest</span><span class="w"> </span><span class="n">Rate</span><span class="w">                       </span><span class="n">BoE</span><span class="w"> </span><span class="n">Rule</span><span class="w"> </span><span class="n">Speech</span><span class="w">                               </span><span class="n">Bank</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">England</span><span class="w">                                    
-</span><span class="m">3</span><span class="w">  </span><span class="m">2016-11-23</span><span class="nb">T</span><span class="m">12</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">               </span><span class="n">Calendar</span><span class="w"> </span><span class="n">Philip</span><span class="w"> </span><span class="n">Hammond</span><span class="w"> </span><span class="n">Makes</span><span class="w"> </span><span class="n">Autumn</span><span class="w"> </span><span class="n">Statement</span><span class="w">                                                                                  
-</span><span class="m">4</span><span class="w">  </span><span class="m">2016-11-24</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">               </span><span class="n">Calendar</span><span class="w">                </span><span class="n">BBA</span><span class="w"> </span><span class="n">Mortgage</span><span class="w"> </span><span class="n">Approvals</span><span class="w">       </span><span class="n">Oct</span><span class="w">                                               </span><span class="m">38.3</span><span class="n">K</span><span class="w">    </span><span class="m">38.8</span><span class="n">K</span><span class="w">      </span><span class="m">40.5</span><span class="n">K</span><span class="w">
-</span><span class="m">5</span><span class="w">  </span><span class="m">2016-11-25</span><span class="nb">T</span><span class="m">09</span><span class="o">:</span><span class="m">30</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">United</span><span class="w"> </span><span class="n">Kingdom</span><span class="w">        </span><span class="n">GDP</span><span class="w"> </span><span class="n">Growth</span><span class="w"> </span><span class="n">Rate</span><span class="w">           </span><span class="n">GDP</span><span class="w"> </span><span class="n">Growth</span><span class="w"> </span><span class="n">Rate</span><span class="w"> </span><span class="n">QoQ</span><span class="w"> </span><span class="m">2</span><span class="n">nd</span><span class="w"> </span><span class="n">Est</span><span class="w">        </span><span class="n">Q</span><span class="m">3</span><span class="w">      </span><span class="n">Office</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">National</span><span class="w"> </span><span class="n">Statistics</span><span class="w">            </span><span class="m">0.7</span><span class="o">%     0.5%</span><span class="w">       </span><span class="m">0.5</span><span class="o">%
+</span></code></pre>
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">, importance = <span class="s1">'2'</span>, </span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">, initDate = <span class="s1">'2021-02-02'</span>, endDate  = <span class="s1">'2021-03-03'</span>, </span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get information about calendar events for several countries and indicators</p>
@@ -2170,91 +2244,71 @@ or you can specify a start date and end date<br>
 <pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'IJCUSA'</span><span class="p">, </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w"></span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span>
 </span></code></pre>
 
-<!-----------------------------Calendar Black Side------------------------------->      
+    
 
 <!--Python Calendar black side-->
-
 <blockquote class="lang-specific python">
-    <p>To get calendar data for a specific country, in data frame format, run:</p>
+    <p>To get calendar data by importance. With no parameters passed you'll get a list of all calendar events available.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">importance</span><span class="o">=</span><span class="s">'1'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get calendar events for all countries by dates and importance.</p>
+</blockquote> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2016-02-01'</span><span class="p">, </span><span class="n">endDate</span><span class="o">=</span><span class="s">'2016-02-02'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2016-02-01'</span><span class="p">, </span><span class="n">endDate</span><span class="o">=</span><span class="s">'2016-02-02'</span><span class="p">, <span class="n">importance</span><span class="o">=</span><span class="s">'3'</span>, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get calendar data for a specific country, by dates and importance.</p>
 </blockquote>    
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'italy'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
-
-<span class="n">Output</span><span class="p">:</span>
-  <span class="n">CalendarId</span>                 <span class="n">Date</span>    <span class="o">...</span>     <span class="n">TEForecast</span> <span class="n">Importance</span>
-<span class="mi">0</span>     <span class="mi">160449</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">1.2</span><span class="o">%</span>          <span class="mi">1</span>
-<span class="mi">1</span>     <span class="mi">160450</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">0.4</span><span class="o">%</span>          <span class="mi">1</span>
-<span class="mi">2</span>     <span class="mi">160451</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">0.3</span><span class="o">%</span>          <span class="mi">2</span>
-<span class="mi">3</span>     <span class="mi">160452</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">1.2</span><span class="o">%</span>          <span class="mi">2</span>
-<span class="mi">4</span>     <span class="mi">160693</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">1</span>
-<span class="mi">5</span>     <span class="mi">160694</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T09</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">1</span>
-<span class="mi">6</span>     <span class="mi">160832</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">02</span><span class="n">T07</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">53.4</span>          <span class="mi">2</span>
-<span class="mi">7</span>     <span class="mi">160837</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">02</span><span class="n">T08</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="mf">10.8</span><span class="o">%</span>          <span class="mi">2</span>
-<span class="mi">8</span>     <span class="mi">160966</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">04</span><span class="n">T07</span><span class="p">:</span><span class="mi">45</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="mf">53.6</span>          <span class="mi">2</span>
-
+</code></pre> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'italy'</span><span class="p">, <span class="n">importance</span><span class="o">=</span><span class="s">'2'</span>, </span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span>, <span class="n">initDate</span><span class="o">=</span><span class="s">'2018-02-01'</span><span class="p">, </span><span class="n">endDate</span><span class="o">=</span><span class="s">'2018-02-02'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
-    <p>For several countries and indicators, in data frame format, run:</p>
+    <p>To get calendar data for a specific indicator, by dates and importance.</p>
+</blockquote>    
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s">'inflation rate'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s">'inflation rate'</span><span class="p">, <span class="n">importance</span><span class="o">=</span><span class="s">'2'</span>, </span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s">'inflation rate'</span>, <span class="n">initDate</span><span class="o">=</span><span class="s">'2018-02-01'</span><span class="p">, </span><span class="n">endDate</span><span class="o">=</span><span class="s">'2018-02-02'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>For several countries and indicators and dates.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s">'imports'</span><span class="p">,</span><span class="s">'exports'</span><span class="p">],</span>
-                   <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-06-07'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">,</span>
-                   <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
-
-<span class="n">Output</span><span class="p">:</span>
-   <span class="n">CalendarId</span>                 <span class="n">Date</span>    <span class="o">...</span>     <span class="n">TEForecast</span> <span class="n">Importance</span>
-<span class="mi">0</span>      <span class="mi">133104</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">1</span>      <span class="mi">133105</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">2</span>      <span class="mi">134636</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">06</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>        <span class="err">$</span><span class="mf">191.7</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">3</span>      <span class="mi">134637</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">06</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>        <span class="err">$</span><span class="mf">236.7</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">4</span>      <span class="mi">135063</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">13</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">5</span>      <span class="mi">135064</span>  <span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mi">13</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">6</span>      <span class="mi">136267</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mo">04</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">193</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">7</span>      <span class="mi">136268</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mo">04</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>        <span class="err">$</span><span class="mf">238.9</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">8</span>      <span class="mi">136307</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">9</span>      <span class="mi">136308</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">10</span>     <span class="mi">137694</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mo">06</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">195</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">11</span>     <span class="mi">137695</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mo">06</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>        <span class="err">$</span><span class="mf">239.2</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">12</span>     <span class="mi">137989</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">08</span><span class="n">T02</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">13</span>     <span class="mi">137990</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">08</span><span class="n">T02</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">14</span>     <span class="mi">139629</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">05</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">1</span>
-<span class="mi">15</span>     <span class="mi">139630</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mo">05</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">1</span>
-<span class="mi">16</span>     <span class="mi">140073</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">13</span><span class="n">T02</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">17</span>     <span class="mi">140075</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">13</span><span class="n">T02</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">18</span>     <span class="mi">141343</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">03</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">195</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">19</span>     <span class="mi">141344</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mo">03</span><span class="n">T12</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">239</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">20</span>     <span class="mi">141492</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">21</span>     <span class="mi">141493</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">22</span>     <span class="mi">143120</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">05</span><span class="n">T13</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">195</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">23</span>     <span class="mi">143121</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mo">05</span><span class="n">T13</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>          <span class="err">$</span><span class="mi">239</span><span class="n">B</span>          <span class="mi">1</span>
-<span class="mi">24</span>     <span class="mi">143323</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-<span class="mi">25</span>     <span class="mi">143324</span>  <span class="mi">2017</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span><span class="n">T03</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                         <span class="mi">3</span>
-
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s">'imports'</span><span class="p">,</span><span class="s">'exports'</span><span class="p">], </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s">'imports'</span><span class="p">,</span><span class="s">'exports'</span><span class="p">],</span><span class="n"> initDate</span><span class="o">=</span><span class="s">'2017-06-07'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>
-    Get Calendar events by a specific Id.
+    Get Calendar events by a specific Id or multiple Ids.
 </p>
 </blockquote>
 <pre class="highlight python"><code>
-<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="s"> 160025</span><span class="p">)</span>
-
-  <span class="n">CalendarId</span>                 <span class="n">Date</span>    <span class="o">...</span>                 <span class="n">Category</span>   <span class="n">Importance</span>
-<span class="mi">0</span>     <span class="mi">160025</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">21</span><span class="n">T07</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="n">Factory Orders</span>            <span class="mi">1</span>
-
+<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o"> =</span><span class="s"> 160025</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code>
+<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o"> = [</span><span class="s">160025</span>, <span class="s"> 174108</span>, <span class="s"> 160030</span>], <span class="n">output_type</span><span class="o">= </span><span class="s"> 'df'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>
-    Get Calendar events by multiple Ids.
+    Get Calendar events by a specific ticker or tickers and dates.
 </p>
 </blockquote>
 <pre class="highlight python"><code>
-<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o">= [</span><span class="s"> 160025</span>, <span class="s"> 174108</span>, <span class="s"> 160030</span>], <span class="n">output_type</span><span class="o">= </span><span class="s"> 'df'</span><span class="p">)</span>
-
-  <span class="n">CalendarId</span>                 <span class="n">Date</span>    <span class="o">...</span>                 <span class="n">Category</span>   <span class="n">Importance</span>
-<span class="mi">0</span>     <span class="mi">160025</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">21</span><span class="n">T07</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="n">Factory Orders</span>            <span class="mi">1</span>
-<span class="mi">1</span>     <span class="mi">160030</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">23</span><span class="n">T06</span><span class="p">:</span><span class="mo">15</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>           <span class="n">Inflation Rate</span>            <span class="mi">1</span>
-<span class="mi">2</span>     <span class="mi">174108</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">19</span><span class="n">T00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mo">00</span>    <span class="o">...</span>                 <span class="n">Holidays</span>            <span class="mi">1</span>
+<span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">(ticker</span><span class="o"> = </span><span class="s"> 'IJCUSA'</span>, <span class="n">output_type</span><span class="o"> = </span><span class="s"> 'df'</span><span class="p">)</span>
 </code></pre>
-
+<pre class="highlight python"><code>
+<span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="o"> = [</span><span class="s">'IJCUSA'</span>, <span class="s"> 'SPAINFACORD'</span>, <span class="s"> 'BAHRAININFNRATE'</span>], <span class="n">output_type</span><span class="o"> = </span><span class="s"> 'df'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code>
+<span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="o"> = [</span><span class="s">'IJCUSA'</span>, <span class="s"> 'SPAINFACORD'</span>, <span class="s"> 'BAHRAININFNRATE'</span>], <span class="n"> initDate</span><span class="o">=</span><span class="s">'2017-06-07'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">, </span><span class="n">output_type</span><span class="o"> = </span><span class="s"> 'df'</span><span class="p">)</span>
+</code></pre>
 <!--javascript black side-->
 
 <blockquote class="lang-specific javascript">
@@ -2262,8 +2316,16 @@ or you can specify a start date and end date<br>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
-    });</span>
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+});</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get all calendar events sorted by importance.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">importance</span> = <span class="s1">'1'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+});</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>To filter calendar events by a date (date format is yyyy-mm-dd).</p>
@@ -2917,7 +2979,7 @@ or you can specify a start date and end date<br>
 Click on any method below for a sample.
 <strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
 
-<!-----------------------------Markets White Side-------------------------------> 
+<!-----------------------------Markets Black Side-------------------------------> 
 
 <!--R black side-->
 
@@ -2932,11 +2994,7 @@ Click on any method below for a sample.
 <span class="mi">21</span>    <span class="n">BEEF</span><span class="p">:</span><span class="n">IND</span>   <span class="o">...</span>           <span class="n">Beef</span>     <span class="o">...</span>        <span class="mf">-0.0700</span>    <span class="o">...</span> 
 <span class="mi">3</span>      <span class="n">CHE</span><span class="p">:</span><span class="n">IND</span>   <span class="o">...</span>         <span class="n">Cheese</span>     <span class="o">...</span>        <span class="mf">-0.0010</span>    <span class="o">...</span>
 </span></code></pre>
-<blockquote class="lang-specific r">
-    <p> Index</p>
-</blockquote>   
-<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'index'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-</span></code></pre>
+
 <blockquote class="lang-specific r">
     <p>Currency</p>
 </blockquote>   
@@ -2950,43 +3008,81 @@ Click on any method below for a sample.
 <span class="mi">4</span>       <span class="n">USDCNY:CUR</span>       <span class="n">CNY</span>             <span class="n">china</span>    <span class="mf">6.93466</span>             
 </span></code></pre>
 <blockquote class="lang-specific r">
+    <p>Get currency crosses</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'currency'</span><span class="p">, cross = <span class="s1">'eur'</span>, </span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p> Index</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'index'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
     <p>Bond</p>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'bond'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-
+<blockquote class="lang-specific r">
+    <p>stock market by symbol or symbols.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'aapl:us'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="o">= c(</span><span class="w"> </span><span class="s1">'aapl:us'</span>, <span class="s1">'indu:ind'</span>)<span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>stock market by country.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
 <!--Python Markets Snapshots black side-->
 
 <blockquote class="lang-specific python">
-    <p>To get stock market index data:</p>
+    <p>To get commodities list.</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o">=</span><span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
-
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o"> = </span><span class="s">'commodity'</span><span class="p">,</span> <span class="n">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get currencies list.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o"> = </span><span class="s">'currency'</span><span class="p">,</span> <span class="n">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get currency crosses.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCurrencyCross</span><span class="p">(</span><span class="n">cross</span><span class="o"> = </span><span class="s">'EUR'</span><span class="p">,</span> <span class="n">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get list of indexes.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o"> = </span><span class="s">'index'</span><span class="p">,</span> <span class="n">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+    
 <span class="n">Output</span><span class="p">:</span>
-           <span class="n">Symbol</span>            <span class="n">Ticker</span>     <span class="o">...</span>          <span class="n">lastYear</span>    <span class="n">startYear</span>
+    <span class="n">Symbol</span>            <span class="n">Ticker</span>     <span class="o">...</span>          <span class="n">lastYear</span>    <span class="n">startYear</span>
 <span class="mi">1</span>     <span class="n">KWSEIDX</span><span class="p">:</span><span class="n">IND</span>   <span class="n">KuwwaitStoarket</span>     <span class="o">...</span>         <span class="mf">6762.8200</span>    <span class="mf">6312.5200</span>
 <span class="mi">2</span>    <span class="n">SECTMIND</span><span class="p">:</span><span class="n">IND</span>          <span class="n">SECTMIND</span>     <span class="o">...</span>          <span class="mf">399.3300</span>     <span class="mf">400.4300</span>
 <span class="mi">3</span>         <span class="n">BSX</span><span class="p">:</span><span class="n">IND</span>               <span class="n">BSX</span>     <span class="o">...</span>         <span class="mf">2021.9300</span>    <span class="mf">2202.1900</span>
-              <span class="o">...</span>               <span class="o">...</span>     <span class="o">...</span>               <span class="o">...</span>          <span class="o">...</span>
+       <span class="o">...</span>               <span class="o">...</span>     <span class="o">...</span>               <span class="o">...</span>          <span class="o">...</span>
 <span class="mi">128</span>       <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>               <span class="n">SPX</span>     <span class="o">...</span>         <span class="mf">2419.7000</span>    <span class="mf">2695.8100</span>
 <span class="mi">129</span>      <span class="n">SX5E</span><span class="p">:</span><span class="n">IND</span>              <span class="n">SX5E</span>     <span class="o">...</span>         <span class="mf">3471.3300</span>    <span class="mf">3490.1900</span>
 <span class="mi">130</span>       <span class="n">UKX</span><span class="p">:</span><span class="n">IND</span>               <span class="n">UKX</span>     <span class="o">...</span>         <span class="mf">7350.3200</span>    <span class="mf">7648.1000</span>
 </code></pre>
 <blockquote class="lang-specific python">
-    <p>To get stock market data filtered by symbol:</p>
+    <p>To get bonds list.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsData</span><span class="p">(</span><span class="n">marketsField</span><span class="o"> = </span><span class="s">'bond'</span><span class="p">,</span> <span class="n">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get stock market data filtered by instrument or multiple instruments.</p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsBySymbol</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">)</span>    
 
-<span class="n">Output</span><span class="p">:</span>    
+    <span class="n">Output</span><span class="p">:</span>    
      <span class="n">Symbol</span> <span class="n">Ticker</span>         <span class="o">...</span>           <span class="n">ISIN</span>           <span class="n">LastUpdate</span>
 <span class="mi">0</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>   <span class="n">INDU</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T14</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mo">00</span>
 </code></pre>
-<blockquote class="lang-specific python">
-    <p>To get stock market data filtered by symbols:</p>
-</blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsBySymbol</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'indu:ind'</span><span class="p">],</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'raw'</span><span class="p">)</span>   
 
-<span class="n">Output</span><span class="p">:</span>    
+    <span class="n">Output</span><span class="p">:</span>    
 <span class="p">[{</span><span class="s">'Symbol'</span><span class="p">:</span> <span class="s">'AAPL:US'</span><span class="p">,</span> <span class="s">'Ticker'</span><span class="p">:</span> <span class="s">'AAPL'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">:</span> <span class="s">'Apple'</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s">'LastUpdate'</span><span class="p">:</span> <span class="s">'2018-06-27T20:05:00'</span><span class="p">},</span> 
 <span class="p">{</span><span class="s">'Symbol'</span><span class="p">:</span> <span class="s">'INDU:IND'</span><span class="p">,</span> <span class="s">'Ticker'</span><span class="p">:</span> <span class="s">'INDU'</span><span class="p">,</span> <span class="s">'Name'</span><span class="p">:</span> <span class="s">'Dow Jones'</span><span class="p">,</span> <span class="s">'Type'</span><span class="p">:</span> <span class="s">'index'</span><span class="p">,</span> <span class="o">...</span> <span class="s">'LastUpdate'</span><span class="p">:</span> <span class="s">'2018-06-28T11:35:00'</span><span class="p">}]</span>
 
@@ -3007,6 +3103,14 @@ Click on any method below for a sample.
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">marketsField</span> = <span class="s1">'currency'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get currency crosses.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">cross</span> = <span class="s1">'eur'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -3086,7 +3190,7 @@ Click on any method below for a sample.
     <p>Get stock market searching for country.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">search_term</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'index'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">search_term</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'markets'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -3405,90 +3509,24 @@ Click on any method below for a sample.
     <!--<a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest&page=2">/markets/country/{country}&amp;page=2</a></p></li>-->
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest">/markets/country/{country}</a></p></li>
     </ul>
-    <!-- <h3 id="response-fields">Response Fields</h3>
-    <table><thead>
-        <tr>
-        <th style="text-align: left"></th>
-        <th style="text-align: left"></th>
-        </tr>
-        </thead><tbody>
-        <tr>
-        <td style="text-align: left"><strong>Symbol</strong></td>
-        <td style="text-align: left">Unique symbol used by Trading Economics</td>
-        </tr>
-        <tr>
-        <td style="text-align: left"><strong>Name</strong></td>
-        <td style="text-align: left">Indicator full name</td>
-        </tr>
-        <tr>
-        <td style="text-align: left"><strong>Country</strong></td>
-        <td style="text-align: left">Country name</td>
-        </tr>
-        <tr>
-        <td style="text-align: left"><strong>Type</strong></td>
-        <td style="text-align: left">Market type</td>
-        </tr>
-        <tr>
-        <td style="text-align: left"><strong>URL</strong></td>
-        <td style="text-align: left">Hyperlink at Trading Economics</td>
-        </tr>
-        <tr>
-        <td style="text-align: left"><strong>Frequency</strong></td>
-        <td style="text-align: left">Market frequency</td>
-        </tr>
-        </tbody></table>-->
     <ul> 
     <li><p>A snapshot of latest peers prices by market<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a></p></li>
     <li><p>Stock Market Index Components<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a></p></li>
     </ul>
-    
-    
-    
-    
     <p></span> </p>
-<!-- <h3 id="methods">Methods</h3>
 
-<p><span class="methods"></p>
-
-<ul>
-<li><p>Commodities<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a></p></li>
-<li><p>Major Currencies<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> </p></li>
-<li><p>Currency Crosses<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest&cross=EUR">/markets/currency?cross=eur</a></p></li>
-<li><p>Stock Market Indexes<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a></p></li>
-<li><p>Government Bonds<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/bond?c=guest:guest">/markets/bond</a></p></li>
-<li><p>Individual Market (stock, index, currency, commodity or bond)<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest">/markets/symbol/{symbol}</a></p></li>
-<li><p>Multiple Markets<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a></p></li>
-</ul>
-<p></span> </p> -->
 
 <!-----------------------------Markets Black Side-------------------------------> 
 
 <!--Python Market lists black side-->
 
 <blockquote class="lang-specific python">
-    <p>To get closely related items of a certain symbol:</p>
+    <p>To get closely related items of a certain symbol or  group of symbols</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
-
-<span class="n">Output</span><span class="p">:</span>
-     <span class="n">Symbol</span> <span class="n">Ticker</span>         <span class="o">...</span>           <span class="n">ISIN</span>           <span class="n">LastUpdate</span>
-<span class="mi">0</span>  <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>   <span class="n">INDU</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">1</span>   <span class="n">MID</span><span class="p">:</span><span class="n">IND</span>    <span class="n">MID</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">2</span>   <span class="n">NDX</span><span class="p">:</span><span class="n">IND</span>    <span class="n">NDX</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-<span class="mi">3</span>   <span class="n">SPX</span><span class="p">:</span><span class="n">IND</span>    <span class="n">SPX</span>         <span class="o">...</span>           <span class="bp">None</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
-</code></pre>
-<blockquote class="lang-specific python">
-    <p>To get closely related items of a certain group of symbols:</p>
-</blockquote>  
+</code></pre> 
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'indu:ind'</span><span class="p">])</span>
 
 <span class="n">Output</span><span class="p">:</span>
@@ -4041,16 +4079,19 @@ Click on any method below for a sample.
     <p>To get intraday market data for a specific symbol starting on certain date and time run:</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntraday</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'indu:ind'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2018-03-13 15:30'</span><span class="p">)</span>
-
+<!-- 
 <span class="n">Output</span><span class="p">:</span>
         <span class="n">Symbol</span>                 <span class="n">Date</span>     <span class="o">...</span>             <span class="n">Low</span>       <span class="n">Close</span>
 <span class="mi">0</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">13</span><span class="n">T15</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">25198.0606</span>  <span class="mf">25209.9609</span>
 <span class="mi">1</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">13</span><span class="n">T15</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">25201.9395</span>  <span class="mf">25206.9395</span>
 <span class="mi">2</span>     <span class="n">INDU</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2018</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mi">13</span><span class="n">T15</span><span class="p">:</span><span class="mi">32</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">25201.8809</span>  <span class="mf">25208.8809</span>
- <span class="o">...</span>       <span class="o">...</span>                  <span class="o">...</span>     <span class="o">...</span>             <span class="o">...</span>         <span class="o">...</span>
-
+ <span class="o">...</span>       <span class="o">...</span>                  <span class="o">...</span>     <span class="o">...</span>             <span class="o">...</span>         <span class="o">...</span> -->
 </code></pre>
-
+<blockquote class="lang-specific python">
+    <p>Aggregate intraday prices by interval.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntradayByInterval</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'CL1:COM'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s">'1m'</span>, <span class="n">initDate</span><span class="o">=</span><span class="s">'2021-03-13'</span>, <span class="n">endtDate</span><span class="o">=</span><span class="s">'2021-03-17'</span><span class="p">)</span>
+</code></pre>
 <!--javascript intraday black side-->
 
 <blockquote class="lang-specific javascript">
@@ -4099,7 +4140,11 @@ Click on any method below for a sample.
  <span class="mi">8</span>     <span class="n">AAPL:US</span>    <span class="n">2019-05-29T14:53:00</span>       <span class="mf">178.13</span>       <span class="mf">178.13</span>       <span class="mf">177.96</span>       <span class="mf">177.97</span>                
                  
  </span></code></pre>
-
+ <blockquote class="lang-specific r">
+    <p>To get markets intraday by symbol and date and interval.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getMarketsIntraday</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'AAPL:US'</span><span class="p">,</span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2019-02-01'</span><span class="p">,</span><span class="n">endDate</span> <span class="o">=</span><span class="s1">'2019-02-02'</span><span class="p">, interval = <span class="s1">'5m'</span>,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
 <!--php black side-->
 
 <blockquote class="lang-specific php">
@@ -4481,7 +4526,32 @@ Click on any method below for a sample.
 <span class="mi">1</span>     <span class="n">PSI20</span><span class="p">:</span><span class="n">IND</span>  <span class="mi">2020</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">30</span><span class="n">T00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mo">00</span>     <span class="o">...</span>      <span class="mf">5117.214378</span>   <span class="mf">5117.214378</span>    <span class="mf">5014.337428</span>
 
 </code></pre>
-
+<!--R Market forecasts black side-->
+<blockquote class="lang-specific r">
+    <p>Market forecasts for major stock market indexes.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getMarketsForecast</span><span class="p">(<span class="nf">category</span><span class="o">=</span><span class="s1">'index'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+   <blockquote class="lang-specific r">
+    <p>Market forecasts for currencies.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getMarketsForecast</span><span class="p">(<span class="nf">category</span><span class="o">=</span><span class="s1">'currency'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+   <blockquote class="lang-specific r">
+    <p>Market forecasts for commodities.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getMarketsForecast</span><span class="p">(<span class="nf">category</span><span class="o">=</span><span class="s1">'commodity'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+   <blockquote class="lang-specific r">
+    <p>Market forecasts for bonds.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getMarketsForecast</span><span class="p">(<span class="nf">category</span><span class="o">=</span><span class="s1">'bond'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+   <blockquote class="lang-specific r">
+    <p>Market forecasts by symbol.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getMarketsForecast</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'BULGARIAGOVB10Y:GOV'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
 <!--c# black side-->
 
 <blockquote class="lang-specific csharp">
@@ -4580,6 +4650,21 @@ Click on any method below for a sample.
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketsForecast</span>(<span class="kd">category</span> = <span class="s1">'index'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+            </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketsForecast</span>(<span class="kd">category</span> = <span class="s1">'currency'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+            </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketsForecast</span>(<span class="kd">category</span> = <span class="s1">'commodity'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+            </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketsForecast</span>(<span class="kd">category</span> = <span class="s1">'bond'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
             </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -4781,14 +4866,14 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 
-<blockquote class="lang-specific javascript">
+<!-- <blockquote class="lang-specific javascript">
     <p>Get earnings calendar by type. Type can be: earnings, ipo and dividends.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">type</span> = <span class="s1">'ipo'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
-</code></pre>
+</code></pre> -->
 
 <!--php black side-->
 
@@ -4999,9 +5084,110 @@ Click on any method below for a sample.
     <p>Here you can get stocks fundamental information.</br>
 <strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
 <br>
-<!-- <h3 id="methods">Methods</h3>
-
-<p><span class="methods"></p> -->
+<!-----------------------------Financials Black Side-------------------------------> 
+<blockquote class="lang-specific python">
+    <p>If no argument is provided, returns a list of all companies available.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFinancialsData</span><span class="p">(</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get financials data by country.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFinancialsData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get financials data by a Maximum of 5 countries.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFinancialsData</span><span class="p">(</span><span class="n">country</span> <span class="o">= [</span><span class="s">'united states'</span>, <span class="s">'china'</span>], <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get financials data by instrument symbol.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFinancialsData</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'aapl:us'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get financials data by multiple instrument symbols.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFinancialsData</span><span class="p">(</span><span class="n">symbol</span> <span class="o">= [</span><span class="s">'aapl:us'</span>, <span class="s">'msft:us'</span>], <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get historical financials data by instrument symbol.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalFinancials</span><span class="p">(</span><span class="s">'aapl:us'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get historical financials by multiple instrument symbols.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalFinancials</span><span class="p">(</span><span class="s">'aapl:us'</span>, <span class="s">'msft:us'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<!--R financials black side-->
+<blockquote class="lang-specific r">
+    <p>Get financials data.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getFinancialsData</span><span class="p">(<span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+   <blockquote class="lang-specific r">
+    <p>Financials data by country.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getFinancialsData</span><span class="p">(<span class="nf">country</span><span class="o">=</span><span class="s1">'united states'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+   <blockquote class="lang-specific r">
+    <p>Financials data by more than one country.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getFinancialsData</span><span class="p">(<span class="nf">country</span><span class="o">= c(</span><span class="s1">'united states'</span>, <span class="s1">'china'</span>), <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+   <blockquote class="lang-specific r">
+    <p>Financials data by symbol.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getFinancialsData</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'aapl:us'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+   <blockquote class="lang-specific r">
+    <p>Get historical financials data.</p>
+    </blockquote> 
+    <pre class="highlight r"><code><span class="n">getHistoricalFinancialsData</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'aapl:us'</span>, category = <span class="s1">'assets'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+   </span></code></pre>
+<!--Javascript financials black side-->
+<blockquote class="lang-specific javascript">
+    <p>Get financials data for one country.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsData</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get financials data for multiple countries.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsData</span>(<span class="kd">country</span> = [<span class="s1">'china'</span>, <span class="s1">'united states'</span>] ).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get financials data by instrument symbol.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsData</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get financials data by multiple instrument symbols.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsData</span>(<span class="kd">symbol</span> = [<span class="s1">'aapl:us'</span>, <span class="s1">'ea:us'</span>] ).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get financials historical data.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsHistoricalData</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">category</span> = <span class="s1">'assets'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<!-----------------------------Financials White Side-------------------------------> 
 <ul>
 <li><p>Financials companies list.<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?c=guest:guest">/financials/companies</a>    </p></li>
@@ -5014,27 +5200,6 @@ Click on any method below for a sample.
 <li><p>Financials companies list filtered by more than one country (MAX countries = 5).<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?country=spain,germany&c=guest:guest">/financials/companies?country={countries}</a>    </p></li>
 </ul>
-<!-- <h3 id="response-fields">Response Fields</h3> -->
-    
-<!-- <table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>Symbol</strong></td>
-<td style="text-align: left">Unique symbol used by Trading Economics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Name</strong></td>
-<td style="text-align: left">Name of the company</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Company Country</td>
-</tr>
-</tbody></table> -->
 
 <ul>
 <li><p>Financials data by stock symbol<br>
@@ -5140,44 +5305,6 @@ Click on any method below for a sample.
 </tr>
 </tbody></table>
 
-<!-- <ul>
-<li><p>Financials historical data<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest">/financials/historical/{symbol}</a>    </p></li>
-</ul> -->
-
-<!-- <h3 id="response-fields">Response Fields</h3> -->
-	
-<!-- <table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>Symbol</strong></td>
-<td style="text-align: left">Unique symbol used by Trading Economics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Category</strong></td>
-<td style="text-align: left">Financials category</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Trading Economics date time in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Value</strong></td>
-<td style="text-align: left">Close price value</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Report Date</strong></td>
-<td style="text-align: left">Reporting date</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Reference</strong></td>
-<td style="text-align: left">Fiscal reference date</td>
-</tr>
-</tbody></table> -->
 
 <!-----------------------------News Black Side-------------------------------> 
 
@@ -5192,9 +5319,6 @@ Click on any method below for a sample.
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
 </code></pre>
-<!-- <blockquote class="lang-specific python">
-    <p>To get news within a date range.</p>
-</blockquote>   -->
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">start_date</span> <span class="o">= <span class="s">'2021-02-02'</span><span class="n">, end_date</span> <span class="o">= <span class="s">'2021-03-03'</span><span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
 </code></pre>
 <blockquote class="lang-specific python">
@@ -5202,9 +5326,6 @@ Click on any method below for a sample.
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">= [<span class="s">'brazil'</span>,<span class="s">'canada'</span>]<span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
 </code></pre>
-<!-- <blockquote class="lang-specific python">
-    <p>To get news by country or countries and dates.</p>
-</blockquote>   -->
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">= <span class="s">'canada'</span><span class="n">, <span class="n">start_date</span> <span class="o">= <span class="s">'2021-02-02'</span><span class="n">, end_date</span> <span class="o">= <span class="s">'2021-03-03'</span><span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
 </code></pre>
 <blockquote class="lang-specific python">
@@ -5212,9 +5333,7 @@ Click on any method below for a sample.
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">indicator</span> <span class="o">= [<span class="s">'inflation rate'</span>,<span class="s">'gdp'</span>]<span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
 </code></pre>
-<!-- <blockquote class="lang-specific python">
-    <p>To get news by Indicator or indicators and dates.</p>
-</blockquote>   -->
+
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">indicator</span> <span class="o">= <span class="s">'inflation rate'</span><span class="n">, <span class="n">start_date</span> <span class="o">= <span class="s">'2021-02-02'</span><span class="n">, end_date</span> <span class="o">= <span class="s">'2021-03-03'</span><span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
 </code></pre>
 <blockquote class="lang-specific python">
@@ -5222,9 +5341,7 @@ Click on any method below for a sample.
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="p">[</span> <span class="s">'united states'</span><span class="p"></span>,<span class="s">'China'</span><span class="p">]<span class="p">,<span class="s">indicator</span><span class="o">=<span class="p">[</span><span class="s">'Imports'</span><span class="p">,<span class="s">'Exports'<span class="p">]<span class="p">)</span>  
 </code></pre>
-<!-- <blockquote class="lang-specific python">
-    <p>To get several countries and indicators by dates.</p>
-</blockquote>   -->
+
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="p">[</span> <span class="s">'united states'</span><span class="p"></span>,<span class="s">'China'</span><span class="p">]<span class="p">,<span class="s">indicator</span><span class="o">=<span class="p">[</span><span class="s">'Imports'</span><span class="p">,<span class="s">'Exports'<span class="p">]<span class="p">, <span class="n">start_date</span> <span class="o">= <span class="s">'2021-02-02'</span><span class="n">, end_date</span> <span class="o">= <span class="s">'2021-03-03'</span><span class="n">,)</span>  
 </code></pre>
 <blockquote class="lang-specific python">
@@ -5234,29 +5351,35 @@ Click on any method below for a sample.
 </code></pre>
 
 <!--R latest news black side-->
-
 <blockquote class="lang-specific r">
-    <p>To get the latest news by country, or countries.</p>
+    <p>To get the latest news.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(<span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'japan'</span><span class="p">)</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(outType = <span class="s1">'df'</span>)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-    <p>To get the latest news by category.</p>
+    <p>Filter news by date.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(<span class="nf">identifier</span><span class="o">=</span><span class="s1">'inflation rate'</span><span class="p">,</span><span class="n">category</span><span class="o"> =</span><span class="s1"> 'indicator'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(initDate = <span class="s1">'2020-01-01'</span>, endDate = <span class="s1">'2020-12-31'</span>outType = <span class="s1">'df'</span>)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get the latest news by country, or countries and dates.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(country = c(<span class="s1">'united states'</span><span class="p">,</span><span class="s1">'japan'</span><span class="p">)</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(country = <span class="s1">'united states'</span>, initDate = <span class="s1">'2020-01-01'</span>, endDate = <span class="s1">'2020-12-31'<span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get the latest news by indicator, or indicators and dates.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(indicator = <span class="s1">'gdp'</span><span class="p"><span class="p">)</span><span class="w">
+</span></code></pre>
+<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(indicator = <span class="s1">'gdp'</span>, initDate = <span class="s1">'2020-01-01'</span>, endDate = <span class="s1">'2020-12-31'<span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get the latest news by start index and news limit.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(<span class="nf">limit</span><span class="o">=</span><span class="s1">'2'</span><span class="p">,</span><span class="n">start</span><span class="o"> =</span><span class="s1"> '1'</span><span class="p">)</span><span class="w">
-
-        <span class="n">Output</span><span class="p">:</span> 
-                    <span class="n">Symbol</span>                                                 <span class="n">title</span>                        <span class="n">Date</span>             
- <span class="mi">1</span>                <span class="n">GCAN10YR</span>                 <span class="n">Canada 10Y Bond Yield Hits 9-week Low</span>     <span class="mf">2019-05-29T14:11:27.193</span>                    
- <span class="mi">2</span>                <span class="n">GNTH10YR</span>          <span class="n">Netherlands 10Y Bond Yield Hits 31-month Low</span>      <span class="mf">2019-05-29T14:28:18.69</span>                     
- <span class="mi">3</span>    <span class="n">UNITEDSTARICFEDMANIN</span>     <span class="n">US Fifth District Manufacturing Activity Index Up</span>         <span class="mf">2019-05-29T14:05:00</span>                    
-              
- </span></code></pre>
+</span></code></pre>
 
 <!--javascript black side-->
 
@@ -5269,23 +5392,33 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get news by country.</p>
+    <p>Get news by country and dates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">start_date</span> = <span class="s1">'2021-01-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2021-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
-    <p>Get news by indicator.</p>
+    <p>Get news by indicator and dates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">indicator</span> = <span class="s1">'imports'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">indicator</span> = <span class="s1">'imports'</span>, <span class="kd">start_date</span> = <span class="s1">'2021-01-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2021-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
-    <p>Get news by country and indicator.</p>
+    <p>Get news by country and indicator and dates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">indicator</span> = <span class="s1">'imports'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
@@ -5771,27 +5904,31 @@ javascript black side
 
 <!-----------------------------Search Black Side------------------------------->
 
+<!--Python Search black side-->
+<blockquote class="lang-specific python">
+<p>To get a list of categories available, search by term/keyword and category.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getSearch</span><span class="p">(</span><span class="s">output_type</span><span class="o"> = <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getSearch</span><span class="p">(</span><span class="n">term</span> <span class="o"> = </span><span class="s">'japan'</span><span class="p">, </span><span class="s">category</span><span class="o"> = </span><span class="s">'markets'</span><span class="p">, </span><span class="s">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getSearch</span><span class="p">(</span><span class="n">term</span> <span class="o"> = </span><span class="s">'gold'</span><span class="p">, </span><span class="s">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
 <!--javascript search black side-->
 
 <blockquote class="lang-specific javascript">
-    <p>Search for available categories.</p>
+    <p>Search for available categories, term and category.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getSearch</span>( ).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
-<blockquote class="lang-specific javascript">
-    <p>Search by term.</p>
-</blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getSearch</span>(<span class="kd">term</span> = <span class="s1">'gold'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
-<blockquote class="lang-specific javascript">
-    <p>Search by term and category.</p>
-</blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getSearch</span>(<span class="kd">term</span> = <span class="s1">'japan'</span>, <span class="kd">category</span> = <span class="s1">'markets'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
@@ -5838,7 +5975,53 @@ javascript black side
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">lists</span> <span class="o">=</span> <span class="s">'categories'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
     </code></pre>
+<!--R eurostat black side-->
+<blockquote class="lang-specific r">
+    <p>To get categories list.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(lists = <span class="s1">'categories'</span>)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get Eurostat data by category group.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(category_group = <span class="s1">'Poverty'</span>)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get Eurostat data by category.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(category = <span class="s1">'People at risk of income poverty after social transfers'</span>)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get Eurostat data by country.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(country = <span class="s1">'Denmark'</span>)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get Eurostat data by country and category.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(country = <span class="s1">'Denmark'</span>, category = <span class="s1">'People at risk of income poverty after social transfers'</span>)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get Eurostat data by country and category group.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(country = <span class="s1">'Denmark'</span>, category_group = <span class="s1">'Poverty'</span>)</span><span class="w">
+</span></code></pre>
 
+<blockquote class="lang-specific r">
+    <p>To get historical Eurostat data by ID.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get historical Eurostat data by ID and a start date.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>, start_date = <span class="s1">'2021-01-01'</span> )</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get historical Eurostat data by ID and dates.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>, start_date = <span class="s1">'2021-01-01'</span>, end_date = <span class="s1">'2021-05-10'</span>)</span><span class="w">
+</span></code></pre>
 <!--javascript Eurostat lists black side-->
 
 <blockquote class="lang-specific javascript">
@@ -7254,12 +7437,12 @@ javascript black side
 
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRStates</span><span class="p">(</span><span class="n">county</span> <span class="o">=</span> <span class="s">'arkansas'</span><span class="p">)</span>
-
+<!-- 
                    <span class="n">county</span>                             
 <span class="mi">0</span>     <span class="n">Arkansas County, AR</span>       
 <span class="mi">1</span>       <span class="n">Ashley County, AR</span>      
 <span class="mi">2</span>        <span class="n">Boone County, AR</span>              
-<span class="n">...</span>
+<span class="n">...</span> -->
 </code></pre>
  
 <!--R black side-->
@@ -7363,11 +7546,11 @@ javascript black side
 
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'AGEXMAK2A647NCEN'</span><span class="p">)</span>
-    
-                       <span class="n">symbol</span>   <span class="n">...</span>            <span class="n">lastUpdate</span>                          
-    <span class="mi">0</span>        <span class="n">AGEXMAK2A647NCEN</span>   <span class="n">...</span>   <span class="mi">20-02-2019</span><span class="n">T</span><span class="mi">13:47:00</span>       
-    
     </code></pre>
+                       <!-- <span class="n">symbol</span>   <span class="n">...</span>            <span class="n">lastUpdate</span>                          
+    <span class="mi">0</span>        <span class="n">AGEXMAK2A647NCEN</span>   <span class="n">...</span>   <span class="mi">20-02-2019</span><span class="n">T</span><span class="mi">13:47:00</span>        -->
+    
+    
     <blockquote class="lang-specific python">  
         <p>To get Federal Reserve snapshots by url.</p>
 
@@ -7391,13 +7574,13 @@ javascript black side
  
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s">'tennesse'</span>)</span>
-    
-             <span class="n">symbol</span>   <span class="n">...</span>                <span class="n">lastUpdate</span>                          
+    </code></pre>
+        <!-- <span class="n">symbol</span>   <span class="n">...</span>                <span class="n">lastUpdate</span>                          
     <span class="mi">0</span>        <span class="n">TNODIV</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.903</span> 
     <span class="mi">1</span>        <span class="n">TNOFAR</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.713</span> 
     <span class="mi">2</span>        <span class="n">TNOI96</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.217</span>       
-    <span class="n">...</span>
-    </code></pre>
+    <span class="n">...</span> -->
+     
     <blockquote class="lang-specific python">  
         <p>To get Federal Reserve snapshots on Pike County, AR.</p>
  
@@ -7616,9 +7799,13 @@ javascript black side
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'racedisparity005007:fred'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">  
-    <p>To get Federal Reserve historical data by more than one symbol.</p>  
+    <p>To get Federal Reserve historical data by more than one symbol and dates.</p>  
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">= [</span> <span class="s">'racedisparity005007', '2020ratio002013'</span><span class="p">] )</span>                     
+</code></pre>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">= [</span> <span class="s">'racedisparity005007', '2020ratio002013'</span><span class="p">], <span class="n">initDate</span> <span class="o"> = </span><span class="s">'2018-05-01'</span>)</span>                     
+</code></pre>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">= [</span> <span class="s">'racedisparity005007', '2020ratio002013'</span><span class="p">], <span class="n">initDate</span> <span class="o"> = </span><span class="s">'2018-05-01'</span>, <span class="n">endDate</span> <span class="o"> = </span><span class="s">'2019-01-01'</span>)</span>                     
 </code></pre>
 <!-- <blockquote class="lang-specific python">
     <p>To get Federal Reserve historical data by symbol.</p>
@@ -7649,10 +7836,20 @@ javascript black side
 <!--javascript black side-->
 
 <blockquote class="lang-specific javascript">
-    <p>Get historical data of Federal Reserve by symbol or symbols.</p>
+    <p>Get historical data of Federal Reserve by symbol or symbols and dates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">historical_symbol</span> = <span class="s1">'RACEDISPARITY005007'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">historical_symbol</span> = <span class="s1">'RACEDISPARITY005007'</span>, <span class="kd">start_date</span> = <span class="s1">'2017-05-01'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">historical_symbol</span> = <span class="s1">'RACEDISPARITY005007'</span>, <span class="kd">start_date</span> = <span class="s1">'2017-05-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2018-12-31'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
