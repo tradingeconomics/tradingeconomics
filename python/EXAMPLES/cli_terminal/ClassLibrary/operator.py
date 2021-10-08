@@ -13,8 +13,21 @@ class Operator:
     def __init__(self,key):
 
         def selectSection(self):
+            main_menu_dictionary={
+            '1': ' - Comtrade', 
+            '2' : ' - Economic Calendar', 
+            '3' : ' - EuroStat ',
+            '4' : ' - Federal Reserve ',
+            '5' : ' - Indicators ',
+            '6' : ' - Markets ',
+            '7' : ' - News ',
+            '8' : ' - Search ',
+            '9' : ' - World Bank ',
+            '10' : ' - EXIT' 
+            }
             print( '************** Trading Economics - MAIN MENU -  **************')
-            print('(1) - Comtrade \n(2) - Economic Calendar \n(3) - EuroStat \n(4) - Federal Reserve \n(5) - Indicators \n(6) - Markets \n(7) - News \n(8) - Search \n(9) - World Bank \n(10) - EXIT' )
+            for x,y in main_menu_dictionary.items():
+                print (x,y)
             selected_session = input('Choose a Section Number:')
             print('you have selected ' + selected_session)
 
@@ -26,6 +39,14 @@ class Operator:
 
             if selected_session == '2':
                 return cl.EconomicCalendar(self.key)
+
+            if selected_session == '3':
+                return cl.EuroStat(self.key)
+
+            if selected_session == '4':
+                return cl.FederalReserve(self.key)
+
+
 
             return selected_session
 

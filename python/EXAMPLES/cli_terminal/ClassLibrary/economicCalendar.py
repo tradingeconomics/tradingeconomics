@@ -15,9 +15,37 @@ class EconomicCalendar():
             section = Section()
             list_of_number = [item for item in range(1, 22)]
             number = ''
+            economic_calendar_function_dictionary={
+                    '1':' - All calendar events ',
+                    '2':' - All calendar events by importance (1-Low, 2-Medium, 3-High) ',
+                    '3':' - Filter calendar events by date  ',
+                    '4':' - Filter calendar events by date and importance',
+                    '5':' - Calendar events for specific country ',
+                    '6':' - Calendar events for specific by country and importance  ',
+                    '7':' - Calendar events for specific country and date and importance',
+                    '8':' - Calendar events for a specific indicator',
+                    '9':' - Historical data by ID and a start date ',
+                    '10':' - Historical data by ID and a date range ',
+                    '11':' - Calendar events for a specific indicator and by importance',
+                    '12':' - All calendar events for multiple countries',
+                    '13':' - All calendar events for multiple countries and importance',
+                    '14':' - All calendar events for multiple countries and by date',
+                    '15':' - All calendar events for multiple countries and importance and by date',
+                    '16':' - Calendar events for a specific country and specific indicator',
+                    '17':' - Calendar events for a specific country and specific indicator and date',
+                    '18':' - Filter calendar events by calendar ID',
+                    '19':' - Filter calendar events by ticker',
+                    '20':' - Filter calendar events by ticker and date',
+                    '21':' - Back to MAIN MENU'
+                    
+                    }
+
+            
                 
             print( '******* Trading Economics - Economic Calendar  ********')
-            print('(1) - All calendar events \n(2) - All calendar events by importance (1-Low, 2-Medium, 3-High) \n(3) - Filter calendar events by date \n(4) - Filter calendar events by date and importance \n(5) - Calendar events for specific country \n(6) - Calendar events for specific by country and importance \n(7) - Calendar events for specific country and date and importance \n(8) - Calendar events for a specific indicator \n(9) - Calendar events for a specific indicator and by importance \n(10) - Calendar events for a specific indicator and by date \n(11) - Calendar events for a specific indicator and by date and by importance \n(12) - All calendar events for multiple countries \n(13) - All calendar events for multiple countries and importance \n(14) - All calendar events for multiple countries and by date \n(15) - All calendar events for multiple countries and importance and by date \n(16) - Calendar events for a specific country and specific indicator \n(17) - Calendar events for a specific country and specific indicator and date \n(18) - Filter calendar events by calendar ID \n(19) - Filter calendar events by ticker \n(20) - Filter calendar events by ticker and date \n(21) - Back to MAIN MENU'  )
+            
+            for x,y in economic_calendar_function_dictionary.items():
+                print (x,y)
             number = input('Choose a Function Number:')
             print('you have selected ' + number)
 
@@ -53,43 +81,43 @@ class EconomicCalendar():
                     data_response=te.getCalendarData(initDate=selected_dates[0], endDate=selected_dates[1],importance=selected_importance, output_type=selected_output_type)
                 
                 if number == '5':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     data_response=te.getCalendarData(country=selected_country,  output_type=selected_output_type)
                 
                 if number == '6':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     selected_importance = section.selectImportance()
                     data_response=te.getCalendarData(country=selected_country,importance=selected_importance, output_type=selected_output_type)
 
                 if number == '7':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     selected_dates = section.selectDates()
                     data_response=te.getCalendarData(country = selected_country, initDate=selected_dates[0], endDate=selected_dates[1], output_type=selected_output_type)
                     
                 if number == '8':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     selected_dates = section.selectDates()
                     selected_importance = section.selectImportance()
                     data_response=te.getCalendarData(country=selected_country,initDate=selected_dates[0], endDate=selected_dates[1],importance=selected_importance, output_type=selected_output_type)
                     
                 if number == '9':
                     
-                    selected_indicator =section.selectIndicator()
+                    selected_indicator =section.select('indicator','Inflation Rate')
                     data_response=te.getCalendarData(category=selected_indicator, output_type=selected_output_type)
                 
                 if number == '10':
-                    selected_indicator =section.selectIndicator()
+                    selected_indicator =section.select('indicator','Inflation Rate')
                     selected_importance = section.selectImportance()
                     data_response=te.getCalendarData(category=selected_indicator,importance=selected_importance, output_type=selected_output_type)
         
                 if number == '11':
-                    selected_indicator =section.selectIndicator()
+                    selected_indicator =section.select('indicator','Inflation Rate')
                     selected_dates = section.selectDates()
 
                     data_response=te.getCalendarData(category=selected_indicator,initDate=selected_dates[0], endDate=selected_dates[1], output_type=selected_output_type)
                 
                 if number == '12':
-                    selected_indicator =section.selectIndicator()
+                    selected_indicator =section.select('indicator','Inflation Rate')
                     selected_dates = section.selectDates()
                     selected_importance = section.selectImportance()
                     data_response=te.getCalendarData(category=selected_indicator,initDate=selected_dates[0], endDate=selected_dates[1],importance=selected_importance, output_type=selected_output_type)
@@ -115,26 +143,26 @@ class EconomicCalendar():
                     data_response=te.getCalendarData(country=selected_countries, initDate=selected_dates[0], endDate=selected_dates[1],importance=selected_importance, output_type=selected_output_type)
                 
                 if number == '17':
-                    selected_country = section.selectCountry()
-                    selected_indicator =section.selectIndicator()
+                    selected_country = section.select('country','portugal')
+                    selected_indicator =section.select('indicator','Inflation Rate')
                     data_response=te.getCalendarData(country = selected_country, category = selected_indicator, output_type=selected_output_type)
                 
                 if number == '18':
-                    selected_country = section.selectCountry()
-                    selected_indicator =section.selectIndicator()
+                    selected_country = section.select('country','portugal')
+                    selected_indicator =section.select('indicator','Inflation Rate')
                     selected_dates = section.selectDates()
                     data_response=te.getCalendarData(country = selected_country, category = selected_indicator,initDate=selected_dates[0], endDate=selected_dates[1], output_type=selected_output_type)
                 
                 if number == '19':
-                    selected_id = section.selectId()
+                    selected_id = section.selectIdList()
                     data_response=te.getCalendarId(id=selected_id, output_type=selected_output_type)
                 
                 if number == '20':
-                    selected_ticker = section.selectTicker()
+                    selected_ticker = section.selectTickerList()
                     data_response=te.getCalendarData(ticker=selected_ticker, output_type=selected_output_type)
                 
                 if number == '21':
-                    selected_ticker = section.selectTicker()
+                    selected_ticker = section.selectTickerList()
                     selected_dates = section.selectDates()
                     data_response=te.getCalendarData(ticker=selected_ticker, initDate=selected_dates[0], endDate=selected_dates[1],output_type=selected_output_type)
                 

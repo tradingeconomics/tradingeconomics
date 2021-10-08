@@ -15,9 +15,28 @@ class Comtrade():
             section = Section()
             list_of_number = [item for item in range(1, 15)]
             number = ''
+            comtrade_functions_dictionary={
+             '1' : ' - Comtrade categories ',
+             '2' : ' - Total Imports by main category', 
+             '3' : '  - Total Exports by main category ',
+             '4' : '  - Imports by specific category ',
+             '5' : '  - Exports by specific category', 
+             '6' : '  - Get detailed information about Comtrade Countries', 
+             '7' : '  - Snapshot of data per country', 
+             '8' : '  - Snapshot of data per country filtered by type: import or export', 
+             '9' : '  - Snapshot of trade between two countries', 
+             '10' : '  - Snapshot of trade between two countries filtered by type: import or export', 
+             '11' : '  - Total Imports by country', 
+             '12' : '  - Total Exports by country ',
+             '13' : '  - Historical data', 
+             '14' : '  - Back to Main Menu ' 
+
+            }
                 
             print( '************** Trading Economics - COMTRADE  **************')
-            print('(1) - Comtrade categories \n(2) - Total Imports by main category \n(3) - Total Exports by main category \n(4) - Imports by specific category \n(5) - Exports by specific category \n(6) - Get detailed information about Comtrade Countries \n(7) - Snapshot of data per country \n(8) - Snapshot of data per country filtered by type: import or export \n(9) - Snapshot of trade between two countries \n(10) - Snapshot of trade between two countries filtered by type: import or export \n(11) - Total Imports by country \n(12) - Total Exports by country \n(13) - Historical data \n(14) - Back to Main Menu ' )
+            for x,y in comtrade_functions_dictionary.items():
+                print (x,y)
+            
             number = input('Choose a Function Number:')
             print('you have selected ' + number)
 
@@ -39,33 +58,33 @@ class Comtrade():
                     data_response=te.getCmtCategories(output_type=selected_output_type)
 
                 if number == '2':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     
                     data_response=te.getCmtCountryByCategory(country = selected_country, type = 'import',  output_type = selected_output_type )
                 
                 if number == '3':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     data_response=te.getCmtCountryByCategory(country = selected_country, type = 'export',  output_type = selected_output_type )
                 
                 if number == '4':
-                    selected_category = section.selectCategory(selected_output_type)
-                    selected_country = section.selectCountry()
+                    selected_category = section.select('category','Coffee, tea, mate and spices')
+                    selected_country = section.select('country','portugal')
                     data_response=te.getCmtCountryByCategory(country = selected_country, type = 'import', category = selected_category, output_type = selected_output_type )
                 
                 if number == '5':
-                    selected_category = section.selectCategory(selected_output_type)
-                    selected_country = section.selectCountry()
+                    selected_category = section.select('category','Coffee, tea, mate and spices')
+                    selected_country = section.select('country','portugal')
                     data_response=te.getCmtCountryByCategory(country = selected_country, type = 'export', category = selected_category, output_type = selected_output_type )
                 
                 if number == '6':
                     data_response=te.getCmtCountry(output_type=selected_output_type)
 
                 if number == '7':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     data_response=te.getCmtCountry(country = selected_country , output_type = selected_output_type)
                     
                 if number == '8':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     selected_import_export =section.selectImportExport()
                     data_response=te.getCmtCountryFilterByType(country1 = selected_country, type = selected_import_export, output_type=selected_output_type)
                     
@@ -79,15 +98,15 @@ class Comtrade():
                     data_response=te.getCmtCountryFilterByType(country1=selected_countries[0], country2=selected_countries[1],type=selected_import_export, output_type=selected_output_type)
         
                 if number == '11':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     data_response=te.getTotalByType(country = selected_country, type = 'import', output_type = selected_output_type )
                 
                 if number == '12':
-                    selected_country = section.selectCountry()
+                    selected_country = section.select('country','portugal')
                     data_response=te.getTotalByType(country = selected_country, type = 'export', output_type = selected_output_type )
                 
                 if number == '13':
-                    selected_symbol = section.selectSymbol()
+                    selected_symbol = section.select('symbols','PRTESP24031')
                     data_response=te.getCmtHistorical(symbol=selected_symbol, output_type=selected_output_type)
                     
                 if selected_output_type == 'df':
