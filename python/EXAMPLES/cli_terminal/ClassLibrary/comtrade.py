@@ -6,12 +6,9 @@ from .section import Section
 class Comtrade():
     def __init__(self, key):
         self.key=key
-    
-        def selectFunction(self):
-            section = Section()
-            list_of_number = [item for item in range(1, 15)]
-            number = ''
-            comtrade_functions_dictionary={
+        self.title = '******* Trading Economics - Comtrade  ********'
+        self.section_name = 'Comtrade'
+        self.dictionary={
              '1' : ' - Comtrade categories ',
              '2' : ' - Total Imports by main category', 
              '3' : '  - Total Exports by main category ',
@@ -28,15 +25,22 @@ class Comtrade():
              '14' : '  - Back to Main Menu ' 
 
             }
+    
+        def selectFunction(self):
+            section = Section()
+            te.login(self.key)
+            list_of_number = self.dictionary.keys()
+            number = ''
+            
                 
             print( '************** Trading Economics - COMTRADE  **************')
-            for x,y in comtrade_functions_dictionary.items():
+            for x,y in self.dictionary.items():
                 print (x,y)
             
             number = input('Choose a Function Number:')
             print('you have selected ' + number)
 
-            if int(number) not in list_of_number:
+            if number not in list_of_number:
                 print('**************************************************')
                 print(f'{number} is not a valid option. Try again.')
                 return True
@@ -45,8 +49,6 @@ class Comtrade():
                 return False
 
             selected_output_type = section.select_output_type()
-
-            
 
             try:
                 data_response = ''
@@ -125,7 +127,7 @@ class Comtrade():
                 return
             if function_selected == 'continue_or_back_to_main_menu':
                 print('**************************************************')
-                print ('(1) - new Comtrade Request \nor \n(2) - back to MAIN MENU')
+                print (f'(1) - new {self.section_name} Request \nor \n(2) - back to MAIN MENU')
                 if input('--> ') == '2':
                     return
                 
