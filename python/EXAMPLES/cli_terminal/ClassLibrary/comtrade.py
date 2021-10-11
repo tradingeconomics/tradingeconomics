@@ -4,10 +4,6 @@ import time
 from .section import Section
 
 class Comtrade():
-
-    
-        
-    
     def __init__(self, key):
         self.key=key
     
@@ -48,7 +44,7 @@ class Comtrade():
             if number == '14':
                 return False
 
-            selected_output_type = section.selectOutputType()
+            selected_output_type = section.select_output_type()
 
             
 
@@ -85,16 +81,16 @@ class Comtrade():
                     
                 if number == '8':
                     selected_country = section.select('country','portugal')
-                    selected_import_export =section.selectImportExport()
+                    selected_import_export =section.select_import_export()
                     data_response=te.getCmtCountryFilterByType(country1 = selected_country, type = selected_import_export, output_type=selected_output_type)
                     
                 if number == '9':
-                    selected_countries = section.selectTwoCountries()
+                    selected_countries = section.select_two_countries()
                     data_response=te.getCmtTwoCountries(country1 = selected_countries[0], country2 = selected_countries[1], output_type = selected_output_type)
                 
                 if number == '10':
-                    selected_countries = section.selectTwoCountries()
-                    selected_import_export =section.selectImportExport()
+                    selected_countries = section.select_two_countries()
+                    selected_import_export =section.select_import_export()
                     data_response=te.getCmtCountryFilterByType(country1=selected_countries[0], country2=selected_countries[1],type=selected_import_export, output_type=selected_output_type)
         
                 if number == '11':

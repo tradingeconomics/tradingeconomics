@@ -16,7 +16,9 @@ class Section:
             'id':f'Insert an ID  for you request: Example: "{example}" ',
             'county' : f'Insert a Conunty name for you request:Example: "{example}"  ',
             'url':f'Insert an url for you request:Example: "{example}"  ',
-            'state':f'Insert a state name for your request. Example: "{example}"'
+            'state':f'Insert a state name for your request. Example: "{example}"',
+            'ticker': f'Insert a ticker for your request. Example: "{example}"',
+            'interval':f'Insert a interval for your request. Example: "{example}"'
             
         }
         print('**************************************************')
@@ -24,7 +26,7 @@ class Section:
         selected_variable = input('--> ')
         return selected_variable
 
-    def selectOutputType(self):
+    def select_output_type(self):
         output_type_dict = {
             '1':'raw',
             '2': 'df',
@@ -44,20 +46,20 @@ class Section:
             except:
                 pass
                 
-    def selectCountry(self):
+    def select_country(self, example=None):
         print('**************************************************')
-        print('Insert a country name for you request: ')
+        print(f'Insert a country name for you request: Example "{example}"')
         selected_country = input('--> ')
         return selected_country
 
-    def selectCategory(self):
+    def select_category(self):
         print('**************************************************')
         
         print('Insert a category name for you request: ')
         selected_category = input('--> ')
         return selected_category
 
-    def selectImportExport(self):
+    def select_import_export(self):
         output_type_dict = {
             '1':'Import',
             '2': 'Export'
@@ -77,7 +79,7 @@ class Section:
             except:
                 pass
     
-    def selectTwoCountries(self):
+    def select_two_countries(self):
         countries_list = []
         print('**************************************************')
         print('Insert a country 1 for you request: ')
@@ -91,13 +93,13 @@ class Section:
 
         return countries_list
 
-    def selectSymbol(self):
+    def select_symbol(self):
         print('**************************************************')
         print('Insert a symbol for you request: ')
         selected_symbol = input('--> ')
         return selected_symbol
 
-    def selectImportance(self):
+    def select_importance(self):
         output_type_dict = {
             '1':'1',
             '2': '2',
@@ -118,7 +120,7 @@ class Section:
             except:
                 pass
 
-    def selectDates(self):
+    def select_dates(self):
         
         def validateDates(date):
             try:
@@ -157,49 +159,63 @@ class Section:
         
         return dates_list
 
-    def selectIndicator(self):
+    def select_indicator(self):
         print('**************************************************')
         print('Insert a indicator for you request: ')
         selected_indicator = input('--> ')
         return selected_indicator
 
-    def selectCategoryGroup(self):
+    def select_category_group(self):
         print('**************************************************')
         print('Insert a Category Group for you request: Example : "poverty"')
         selected_category_group = input('--> ')
         return selected_category_group
 
-    def selectIdList(self):
+    def select_id_list(self):
         print('**************************************************')
         print('Insert an ID or a list of IDs for you request: Examples "160025,160030,174108"')
         selected_id = input('--> ')
         id_list= selected_id.split(',')
         return id_list
 
-    def selectSymbolList(self, example):
+    def select_category_list(self, example):
+        print('**************************************************')
+        print(f'Insert an category or a list of categories for you request: Examples "{example}"')
+        selected_category = input('--> ')
+        category_list= selected_category.split(',')
+        return category_list
+
+    def select_indicators_list(self,example):
+        print('**************************************************')
+        print(f'Insert an list of indicators for you request: Examples "{example}"')
+        selected_id = input('--> ')
+        id_list= selected_id.split(',')
+        return id_list
+
+    def select_symbol_list(self, example):
         print('**************************************************')
         print(f'Insert a symbol or a list of symbols for you request: Examples "{example}" ')
         selected_symbols = input('--> ')
         symbol_list= selected_symbols.split(',')
         return symbol_list
 
-    def selectTickerList(self):
+    def select_ticker_list(self, example):
         print('**************************************************')
-        print('Insert a ticker or a list of tickers for you request: Examples "IJCUSA,SPAINFACORD,BAHRAININFNRATE"')
+        print(f'Insert a ticker or a list of tickers for you request: Examples "{example}"')
         selected_ticker = input('--> ')
         id_list= selected_ticker.split(',')
         return id_list
 
-    def selectCountries(self):
+    def select_countries(self, example=None):
         print('**************************************************')
-        print('Insert a list of countries for you request: Example: (united states,china,japan) ')
+        print(f'Insert a list of countries for you request: Example: "{example}" ')
         selected_indicator = input('--> ')
         countries_list= selected_indicator.split(',')
         return countries_list
 
-    def selectInitDate(self):
+    def select_init_date(self,example = None):
         
-        def validateDates(date):
+        def validate_dates(date):
             try:
                 try:
                     datetime.strptime(date, '%Y-%m-%d')
@@ -219,10 +235,10 @@ class Section:
         initial_date_status = True
         while initial_date_status:
             print('**************************************************')
-            print('Insert a Initial Date for you request. Format Example ("2020-12-30"): ')
+            print(f'Insert a Initial Date for you request. Format Example ("{example}"): ')
             selected_initial_date = input('--> ')
-            initial_date_status = validateDates(selected_initial_date)
+            initial_date_status = validate_dates(selected_initial_date)
         
-        return dates_list
+        return dates_list[0]
 
 

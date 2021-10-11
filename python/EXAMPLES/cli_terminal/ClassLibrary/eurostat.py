@@ -45,7 +45,7 @@ class EuroStat():
             if number == '11':
                 return False
 
-            selected_output_type = section.selectOutputType()
+            selected_output_type = section.select_output_type()
 
 
             try:
@@ -84,12 +84,12 @@ class EuroStat():
                     
                 if number == '9':
                     selected_id = section.select('id','24804')
-                    selected_init_date =section.selectInitDate()
+                    selected_init_date =section.select_init_date()
                     data_response=te.getHistoricalEurostat(ID=selected_id, initDate=selected_init_date[0], output_type=selected_output_type)
                 
                 if number == '10':
                     selected_id = section.select('id','24804')
-                    selected_dates = section.selectDates
+                    selected_dates = section.select_dates
                     data_response=te.getHistoricalEurostat(ID=selected_id, initDate=selected_dates[0], endDate=selected_dates[1], output_type=selected_output_type)
         
                 
