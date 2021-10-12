@@ -1,6 +1,4 @@
 import tradingeconomics as te
-import time
-
 from .section import Section
 
 class Markets():
@@ -53,21 +51,13 @@ class Markets():
             list_of_number = self.dictionary.keys()
             number = ''
                 
-            print(self.title)
-            
-            for x,y in self.dictionary.items():
-                print (x,y)
-            number = input('Choose a Function Number:')
-            print('you have selected ' + number)
-
-            if number not in list_of_number:
-                print('**************************************************')
-                print(f'{number} is not a valid option. Try again.')
-                return True
+            number = section.first_section(section_title=self.title,
+                                    section_dictionary=self.dictionary,
+                                    list_of_number = list_of_number)
             
             all_dict_values = list(self.dictionary.values())
             back_to_main_menu_index = all_dict_values.index(' - Back to Main Menu')
-            
+                
             if number == str(back_to_main_menu_index + 1):
                 return False
 
@@ -210,7 +200,7 @@ class Markets():
                     data_response=te.getFinancialsData(output_type=selected_output_type)
 
                 if number == '30':
-                    selected_country = section.select_country('united states')
+                    selected_country = section.select('country','united states')
                     data_response=te.getFinancialsData(country=selected_country,output_type=selected_output_type)
 
                 if number == '31':
@@ -242,18 +232,13 @@ class Markets():
             return str(number)
         
         function_selected = True
+        section = Section()
         while function_selected:
             function_selected=select_function(self)
-            if function_selected == False:
-                return
             if function_selected == 'continue_or_back_to_main_menu':
-                print('**************************************************')
-                print (f'(1) - new {self.section_name} Request \nor \n(2) - back to MAIN MENU')
-                if input('--> ') == '2':
-                    return
+                function_selected = section.new_request_or_back_to_menu(self.section_name)
     
-    def test(self):
-        print ('test')
+    
                 
 
 

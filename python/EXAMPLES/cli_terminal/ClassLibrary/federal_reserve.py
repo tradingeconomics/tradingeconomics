@@ -1,22 +1,13 @@
 import tradingeconomics as te
-import time
-
 from .section import Section
 
 class FederalReserve():
-
-    
-        
-    
     def __init__(self, key):
         self.key=key
-    
-        def selectFunction(self):
-            section = Section()
-            
-            list_of_number = [item for item in range(1, 13)]
-            number = ''
-            economic_calendar_function_dictionary={
+        self.title = '******* Trading Economics - Federal Reserve  ********'
+        self.section_name = 'Federal Reserve'
+
+        self.dictionary={
                     '1':' - List of all US states ',
                     '2':' - List of all counties per state',
                     '3':' - Data by Symbol',
@@ -28,27 +19,27 @@ class FederalReserve():
                     '9':' - Data Only accessed through symbol or list of symbols',
                     '10':' - Data By symbol and a date range',
                     '11':' - Data by symbol and a start date',
-                    '12':' - Back to MAIN MENU'
+                    '12':' - Back to Main Menu'
                     
                     }
-
-                
-            print( '******* Trading Economics - Economic Calendar  ********')
+    
+        def select_function(self):
+            section = Section()
+            te.login(self.key)
+            list_of_number = self.dictionary.keys()
+            number = ''
             
-            for x,y in economic_calendar_function_dictionary.items():
-                print (x,y)
 
-            number = input('Choose a Function Number:')
-            print('you have selected ' + number)
-
-            if int(number) not in list_of_number:
-                print('**************************************************')
-                print(f'{number} is not a valid option. Try again.')
-                return True
-
-            if number == '12':
+            number = section.first_section(section_title=self.title,
+                                    section_dictionary=self.dictionary,
+                                    list_of_number = list_of_number)
+            
+            all_dict_values = list(self.dictionary.values())
+            back_to_main_menu_index = all_dict_values.index(' - Back to Main Menu')
+                
+            if number == str(back_to_main_menu_index + 1):
                 return False
-
+            
             selected_output_type = section.select_output_type()
 
 
@@ -119,15 +110,11 @@ class FederalReserve():
             return str(number)
         
         function_selected = True
+        section = Section()
         while function_selected:
-            function_selected=selectFunction(self)
-            if function_selected == False:
-                return
+            function_selected=select_function(self)
             if function_selected == 'continue_or_back_to_main_menu':
-                print('**************************************************')
-                print ('(1) - new Economic Calendar Request \nor \n(2) - back to MAIN MENU')
-                if input('--> ') == '2':
-                    return
+                function_selected = section.new_request_or_back_to_menu(self.section_name)
                 
 
 

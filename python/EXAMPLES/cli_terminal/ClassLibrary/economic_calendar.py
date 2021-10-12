@@ -1,21 +1,12 @@
 import tradingeconomics as te
-import time
-
 from .section import Section
 
 class EconomicCalendar():
-
-    
-        
-    
     def __init__(self, key):
         self.key=key
-    
-        def selectFunction(self):
-            section = Section()
-            list_of_number = [item for item in range(1, 22)]
-            number = ''
-            economic_calendar_function_dictionary={
+        self.title = '******* Trading Economics - Economic calendar  ********'
+        self.section_name = 'Economic calendar'
+        self.dictionary={
                     '1':' - All calendar events ',
                     '2':' - All calendar events by importance (1-Low, 2-Medium, 3-High) ',
                     '3':' - Filter calendar events by date  ',
@@ -36,29 +27,27 @@ class EconomicCalendar():
                     '18':' - Filter calendar events by calendar ID',
                     '19':' - Filter calendar events by ticker',
                     '20':' - Filter calendar events by ticker and date',
-                    '21':' - Back to MAIN MENU'
+                    '21':' - Back to Main Menu'
                     
                     }
+    
+        def select_function(self):
+            section = Section()
+            te.login(self.key)
+            list_of_number = self.dictionary.keys()
+            number = ''
 
+            number = section.first_section(section_title=self.title,
+                                    section_dictionary=self.dictionary,
+                                    list_of_number = list_of_number)
             
+            all_dict_values = list(self.dictionary.values())
+            back_to_main_menu_index = all_dict_values.index(' - Back to Main Menu')
                 
-            print( '******* Trading Economics - Economic Calendar  ********')
-            
-            for x,y in economic_calendar_function_dictionary.items():
-                print (x,y)
-            number = input('Choose a Function Number:')
-            print('you have selected ' + number)
-
-            if int(number) not in list_of_number:
-                print('**************************************************')
-                print(f'{number} is not a valid option. Try again.')
-                return True
-
-            if number == '21':
+            if number == str(back_to_main_menu_index + 1):
                 return False
 
             selected_output_type = section.select_output_type()
-
 
             try:
                 data_response = ''
@@ -181,15 +170,11 @@ class EconomicCalendar():
             return str(number)
         
         function_selected = True
+        section = Section()
         while function_selected:
-            function_selected=selectFunction(self)
-            if function_selected == False:
-                return
+            function_selected=select_function(self)
             if function_selected == 'continue_or_back_to_main_menu':
-                print('**************************************************')
-                print ('(1) - new Economic Calendar Request \nor \n(2) - back to MAIN MENU')
-                if input('--> ') == '2':
-                    return
+                function_selected = section.new_request_or_back_to_menu(self.section_name)
                 
 
 

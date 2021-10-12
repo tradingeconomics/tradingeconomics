@@ -1,22 +1,13 @@
 import tradingeconomics as te
-import time
-
-
 from .section import Section
 
 class EuroStat():
-
-    
-        
-    
     def __init__(self, key):
         self.key=key
-    
-        def selectFunction(self):
-            section = Section()
-            list_of_number = [item for item in range(1, 12)]
-            number = ''
-            eurostat_function_dictionary={
+        self.title = '******* Trading Economics - Euro Stat  ********'
+        self.section_name = 'Euro Stat'
+
+        self.dictionary={
                 '1':'- List of countries available',
                 '2':'- List of categories and category groups available',
                 '3':'- Data by Category Group ',
@@ -27,24 +18,27 @@ class EuroStat():
                 '8':'- Historical data by ID ',
                 '9':'- Historical data by ID and a start date ',
                 '10':'- Historical data by ID and a date range ',
-                '11':'- Back to MAIN MENU'
+                '11':' - Back to Main Menu'
                 
-            }    
-            print( '******* Trading Economics - EuroStat  ********')
-            for x,y in eurostat_function_dictionary.items():
-                print (x,y)
-            
-            number = input('Choose a Function Number:')
-            print('you have selected ' + number)
+            }  
+    
+        def select_function(self):
+            section = Section()
+            te.login(self.key)
+            list_of_number = self.dictionary.keys()
+            number = ''
+              
 
-            if int(number) not in list_of_number:
-                print('**************************************************')
-                print(f'{number} is not a valid option. Try again.')
-                return True
+            number = section.first_section(section_title=self.title,
+                                    section_dictionary=self.dictionary,
+                                    list_of_number = list_of_number)
 
-            if number == '11':
+            all_dict_values = list(self.dictionary.values())
+            back_to_main_menu_index = all_dict_values.index(' - Back to Main Menu')
+                
+            if number == str(back_to_main_menu_index + 1):
                 return False
-
+            
             selected_output_type = section.select_output_type()
 
 
@@ -108,15 +102,11 @@ class EuroStat():
             return str(number)
         
         function_selected = True
+        section = Section()
         while function_selected:
-            function_selected=selectFunction(self)
-            if function_selected == False:
-                return
+            function_selected=select_function(self)
             if function_selected == 'continue_or_back_to_main_menu':
-                print('**************************************************')
-                print ('(1) - new EuroStat Request \nor \n(2) - back to MAIN MENU')
-                if input('--> ') == '2':
-                    return
+                function_selected = section.new_request_or_back_to_menu(self.section_name)
                 
 
 

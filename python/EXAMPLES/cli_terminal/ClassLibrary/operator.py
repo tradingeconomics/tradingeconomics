@@ -1,17 +1,12 @@
 import tradingeconomics as te
-import time
 import ClassLibrary as cl
-
-
-
-
+from .section import *
 
 class Operator:
-    
-    
-
     def __init__(self,key):
         self.key =key
+        self.title = '************** Trading Economics - MAIN MENU -  **************'
+        self.section_name = 'MAIN MENU'
         self.dictionary={
             '1': ' - Comtrade', 
             '2' : ' - Economic Calendar', 
@@ -25,20 +20,14 @@ class Operator:
             '10' : ' - EXIT' 
             }
 
-        def selectSection(self):
+        def select_section(self):
+            section = Section()
             list_of_number = self.dictionary.keys()
             selected_session = ''
             
-            print( '************** Trading Economics - MAIN MENU -  **************')
-            for x,y in self.dictionary.items():
-                print (x,y)
-            selected_session = input('Choose a Section Number:')
-            print('you have selected ' + selected_session)
-
-            if selected_session not in list_of_number:
-                print('**************************************************')
-                print(f'{selected_session} is not a valid option. Try again.')
-                return True
+            selected_session = section.first_section(section_title=self.title,
+                                    section_dictionary=self.dictionary,
+                                    list_of_number = list_of_number)
 
             if selected_session == '10':
                 return False    
@@ -61,16 +50,23 @@ class Operator:
             if selected_session == '6':
                 return cl.Markets(self.key)
 
+            if selected_session == '7':
+                return cl.News(self.key)
+            
+            if selected_session == '8':
+                return cl.Search(self.key)
+            
+            if selected_session == '9':
+                return cl.WorldBank(self.key)
+
 
 
             return selected_session
 
-        # self.key = key
-        # print(te.login(self.key))
-        # print('operator started')
+        
         selected_session = True
         while selected_session:
-            selected_session= selectSection(self)
+            selected_session= select_section(self)
             
            
 

@@ -5,27 +5,13 @@ from datetime import *
 class Section:
     def __init__(self) -> None:
         pass
-    
-    def select(self, variable, example):
-        select_dictionary = {
-            'country': f'Insert a country name for you request:Example: "{example}"  ',
-            'category': f'Insert a category name for you requestExample: "{example}" ',
-            'symbol':f'Insert a symbol for you request: Example: "{example}" ',
-            'indicator':f'Insert a indicator for you request:Example: "{example}"  ',
-            'category_group':f'Insert a Category Group for you request: Example: "{example}" ',
-            'id':f'Insert an ID  for you request: Example: "{example}" ',
-            'county' : f'Insert a Conunty name for you request:Example: "{example}"  ',
-            'url':f'Insert an url for you request:Example: "{example}"  ',
-            'state':f'Insert a state name for your request. Example: "{example}"',
-            'ticker': f'Insert a ticker for your request. Example: "{example}"',
-            'interval':f'Insert a interval for your request. Example: "{example}"'
-            
-        }
+
+    def select(self,variable, example):
         print('**************************************************')
-        print(select_dictionary[variable])
+        print(f'Insert "{variable}" for your request. Example: "{example}"')
         selected_variable = input('--> ')
         return selected_variable
-
+        
     def select_output_type(self):
         output_type_dict = {
             '1':'raw',
@@ -45,19 +31,6 @@ class Section:
                 
             except:
                 pass
-                
-    def select_country(self, example=None):
-        print('**************************************************')
-        print(f'Insert a country name for you request: Example "{example}"')
-        selected_country = input('--> ')
-        return selected_country
-
-    def select_category(self):
-        print('**************************************************')
-        
-        print('Insert a category name for you request: ')
-        selected_category = input('--> ')
-        return selected_category
 
     def select_import_export(self):
         output_type_dict = {
@@ -92,12 +65,6 @@ class Section:
         countries_list.append(selected_country2)
 
         return countries_list
-
-    def select_symbol(self):
-        print('**************************************************')
-        print('Insert a symbol for you request: ')
-        selected_symbol = input('--> ')
-        return selected_symbol
 
     def select_importance(self):
         output_type_dict = {
@@ -158,12 +125,6 @@ class Section:
         
         
         return dates_list
-
-    def select_indicator(self):
-        print('**************************************************')
-        print('Insert a indicator for you request: ')
-        selected_indicator = input('--> ')
-        return selected_indicator
 
     def select_category_group(self):
         print('**************************************************')
@@ -240,5 +201,48 @@ class Section:
             initial_date_status = validate_dates(selected_initial_date)
         
         return dates_list[0]
+
+    def first_section(self,section_title, section_dictionary, list_of_number):
+                    
+                    def number_selected():
+                        print(section_title)
+                        
+                        for x,y in section_dictionary.items():
+                            print (x,y)
+                        number = input('Choose a Function Number:')
+                        print('you have selected ' + number)
+
+                        if number not in list_of_number:
+                            print('**************************************************')
+                            print(f'{number} is not a valid option. Try again.')
+                            return True
+
+                        return (number,False)
+                    
+                    response = True
+                    while response:
+                        selected_number = number_selected()
+                        
+                        if selected_number is not True:
+                            response = selected_number[1]
+                        else:
+
+                            response = selected_number
+                    
+                    number = selected_number[0]
+                    return number
+
+    def new_request_or_back_to_menu(self, section_name):
+        number_selected = 0
+        while number_selected not in ['1','2']:
+            print('**************************************************')
+            print (f'(1) - new {section_name} Request \nor \n(2) - back to MAIN MENU')
+            number_selected = input('-->')
+        if number_selected == '1':
+            return True
+        return False
+        
+
+
 
 
