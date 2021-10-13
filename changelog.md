@@ -3,7 +3,10 @@
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
++ 2021/10
 
+    + __Added:__ Importance field on /earnings endpoint.
+---
 + 2021/09
 
     + __Fixed:__ Calls to calendar/country/indicator with no dates chosen were only getting the next 7 days, now it will go back the top limit rows by calendar role and also adds the 7 days forward, fixing the blank page with no data presented.
