@@ -1,12 +1,12 @@
 Package: tradingeconomics
 Type: Package
 Title: Library to Download Data from Trading Economics API
-Version: 0.2.4
-Author: Olexandr Baturin <olexandr.baturin@tradingeconomics.com>
-Maintainer: Trading Economics <olexandr.baturin@tradingeconomics.com>
+Version: 0.2.5
+Author: TradingEconomics
+Maintainer: Support <support@tradingeconomics.com>
 Description: "R version of Trading Economics API library."
 Depends: jsonlite, httr, stringr, utils
 License: GPL-2
 LazyData: TRUE
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Encoding: UTF-8

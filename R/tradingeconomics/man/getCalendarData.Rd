@@ -11,6 +11,7 @@ getCalendarData(
   ticker = NULL,
   initDate = NULL,
   endDate = NULL,
+  importance = NULL,
   outType = NULL
 )
 }
@@ -32,6 +33,8 @@ category = c('Exports', 'Imports').}
 For example: '2011-01-01'.}
 
 \item{endDate}{string with format: YYYY-MM-DD.}
+
+\item{importance}{string with importance}
 
 \item{outType}{string.
 'df' for data frame,
