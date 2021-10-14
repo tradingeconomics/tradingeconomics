@@ -1,22 +1,22 @@
 ## To run:
 
-#####1 - Clone Repository.
+Step 1 - Clone Repository.
 ```
-git clone https://github.com/ieconomics/open-api.git
-```
-
-#####2
-```
-cd open-api/stream/nodejs
+git clone https://github.com/tradingeconomics/tradingeconomics
 ```
 
-#####3
+Step 2
+```
+cd tradingeconomics/nodejs/Examples/Calendar/stream-nodejs
+```
+
+Step 3 - Install dependencies
 ```
 npm install
 ```
 
 
-#####4 - In app.js file, set-up your client key/secret
+Step 4 - In app.js file, set-up your client key/secret
 ```
 Client = new te_client({
 		url: 'ws://stream.tradingeconomics.com/',
@@ -26,7 +26,7 @@ Client = new te_client({
 	});
 ```
 
-#####5 - Run it!
+Step 5 - Run it!
 ```
 node app.js
 ```
