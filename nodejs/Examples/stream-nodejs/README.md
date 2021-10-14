@@ -7,7 +7,7 @@ git clone https://github.com/tradingeconomics/tradingeconomics
 
 Step 2
 ```
-cd tradingeconomics/nodejs/Examples/Calendar/stream-nodejs
+cd tradingeconomics/nodejs/Examples/stream-nodejs
 ```
 
 Step 3 - Install dependencies
