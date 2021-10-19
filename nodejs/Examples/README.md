@@ -31,7 +31,7 @@ te.login();
 ```
 or
 ```javascript
-te.login('thisIsAFakeKey:thisIsAFakeKey');
+te.login('Client Key Here');
 ```
 
 3. Use our methods to get data
