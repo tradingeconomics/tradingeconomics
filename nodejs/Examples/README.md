@@ -97,6 +97,6 @@ te.getEarnings(symbol = 'aapl:us', start_date = '2016-01-01', end_date = '2017-1
 
 
 ````
-#For more information about our methods and data, check our documentation, [here](https://docs.tradingeconomics.com/?javascript#introduction)
+## For more information about our methods and data, check our documentation [here](https://docs.tradingeconomics.com/?javascript#introduction)
 
 
