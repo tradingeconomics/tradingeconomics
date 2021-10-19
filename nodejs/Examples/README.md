@@ -6,9 +6,9 @@ This folder has examples on how you can get data about Markets, Historical data,
 
 
 ## Installation
-Make sure you have Nodejs installed, if not you can download here: https://nodejs.org/en/download/
+- Make sure you have Nodejs installed, if not you can download here: https://nodejs.org/en/download/
 
-You need to install the package:
+- You need to install the package:
 
 ```javascript
 npm install tradingeconomics
@@ -46,7 +46,7 @@ te.getEarnings(symbol = 'aapl:us', start_date = '2016-01-01', end_date = '2017-1
 ```
 
 
-- Output example: 
+4. Output example: 
 
  ```javascript
 [
