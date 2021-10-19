@@ -2184,8 +2184,10 @@ or you can specify a start date and end date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/updates?client=guest:guest">/updates</a></p></li>
 <li><p>Updates since a specific date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/updates/2018-01-01?client=guest:guest">/updates/{date}</a></p></li>
+<li><p>Updates since a specific date and time<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/updates/2021-10-18?client=guest:guest&time=15:20">/updates/{date}?time={hh:mm}</a></p></li>
 <li><p>Get the Latest Updates by country.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal?client=guest:guest">/updates/country/{country}</a></p></li>
+<a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal?client=guest:guest">/updates/country/{country}</a></p></li>
 <li><p>Get the Latest Updates by country since a specific date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal/2018-01-01?client=guest:guest">/updates/country/{country}/{date}</a></p></li>        
 </ul>
@@ -4393,7 +4395,7 @@ Click on any method below for a sample.
 <pre class="highlight javascript"><code><span class="nx">node</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs/stream-nodejs">Check here for the complete sample code.</a></p>
+    <p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/nodejs/Examples/stream-nodejs/app.js">Check here for the complete sample code.</a></p>
 </blockquote>
 
 <!--streaming markets c# black side-->
@@ -7009,7 +7011,6 @@ javascript black side
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
-<blockquote class="lang-specific javascript">
     <p>Get Comtrade latest updates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
@@ -7017,6 +7018,30 @@ javascript black side
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
+<blockquote class="lang-specific javascript"> 
+<p>Get Total Imports by main category.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtradeTotalByType</span>(<span class="kd">country</span> = <span class="s1">'Portugal'</span>, <span class="kd">type</span> = <span class="s1">'import'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+    <p>Get Total Exports by main category.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtradeTotalByType</span>(<span class="kd">country</span> = <span class="s1">'United States'</span>, <span class="kd">type</span> = <span class="s1">'export'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)      
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get Imports/Exports by specific category.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCmtCountryByCategory</span>(<span class="kd">country</span> = <span class="s1">'United States'</span>, <span class="kd">type</span> = <span class="s1">'export'</span>, <span class="kd">category</span> = <span class="s1">'live animals'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)      
+    });</span>
+</code></pre> 
+
 
 <!--php black side-->
 
@@ -7141,7 +7166,6 @@ javascript black side
 </span></code></pre>
  
 <!--javascript black side-->   
-
 <blockquote class="lang-specific javascript">
     <p>Get detailed information about Comtrade countries. </p>
 </blockquote>
@@ -7150,24 +7174,33 @@ javascript black side
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
+ 
 <blockquote class="lang-specific javascript">
-    <p>Get a snapshot of data per country.</p>
+    <p>Get a snapshot of data per country and type.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
- 
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCmtCountryFilterByType</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">type</span> = <span class="s1">'export'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <blockquote class="lang-specific javascript">
-    <p>Get a snapshot of trade between two countries.</p>
+    <p>Get a snapshot of trade between two countries and type.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">country1</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
-   
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCmtCountryFilterByType</span>(<span class="kd">country</span> = <span class="s1">'portugal'</span>, <span class="kd">country1</span> = <span class="s1">'spain'</span>, <span class="kd">type</span> = <span class="s1">'import'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>   
 <!--php black side-->
 
 <blockquote class="lang-specific php">
