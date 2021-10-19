@@ -22,7 +22,7 @@ const te = require('tradingeconomics');
 
  - Then you have to login, if you don't have a client key just live it blank and a sample of data will be provided.
 
-**Note:** If you don't have a client key leave it blank and a sample of data will be provided or you can get your free key here: http://developer.tradingeconomics.com 
+**Note:** You can get your free key here: http://developer.tradingeconomics.com 
 
 ```javascript
 te.login();
