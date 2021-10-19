@@ -1,6 +1,7 @@
 ## EXAMPLES
 
 This folder has examples on how you can get data about Markets, Historical data, Indicators, Calendar, World Bank, Federal Reserve, Comtrade, Forecasts and News, using nodejs.
+
 [Documentation](https://docs.tradingeconomics.com/?javascript#introduction)
 
 
@@ -22,7 +23,7 @@ const te = require('tradingeconomics');
 
 2. Login to get our data
 
-Note: If you don't have a client key leave it blank and a sample of data will be provided or you can get your free key here: http://developer.tradingeconomics.com 
+**Note:** If you don't have a client key leave it blank and a sample of data will be provided or you can get your free key here: http://developer.tradingeconomics.com 
 
 ```javascript
 te.login();
@@ -34,7 +35,7 @@ te.login('thisIsAFakeKey:thisIsAFakeKey');
 
 3. Use our methods to get data
 
-Note: For more information about our methods and data, check our documentation [here](https://docs.tradingeconomics.com/?javascript#introduction)
+**Note:** For more information about our methods and data, check our documentation [here](https://docs.tradingeconomics.com/?javascript#introduction)
 
 ```javascript
 te.getEarnings(symbol = 'aapl:us', start_date = '2016-01-01', end_date = '2017-12-31')
