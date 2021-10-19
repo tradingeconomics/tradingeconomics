@@ -97,7 +97,8 @@ te.getEarnings(symbol = 'aapl:us', start_date = '2016-01-01', end_date = '2017-1
     Importance: 3,
     Session: 21,
     LastUpdate: '2017-08-03T16:37:00'
-  },
+  }
+]
 
 
 ````
