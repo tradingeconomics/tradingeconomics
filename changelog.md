@@ -6,6 +6,7 @@
 + 2021/10
 
     + __Added:__ Importance field on /earnings endpoint.
+    + __Added:__ Filter updates by time on /updates endpoint.
 ---
 + 2021/09
 
