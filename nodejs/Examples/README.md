@@ -2,7 +2,8 @@
 
 This folder has examples on how you can get data about Markets, Historical data, Indicators, Calendar, World Bank, Federal Reserve, Comtrade, Forecasts and News, using nodejs.
 
-[Documentation](https://docs.tradingeconomics.com/?javascript#introduction)
+## Documentation
+https://docs.tradingeconomics.com/?javascript#introduction
 
 
 ## Installation
