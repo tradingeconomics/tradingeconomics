@@ -1,5 +1,7 @@
-'use strict'
+// DOCUMENTATION:
+// http://docs.tradingeconomics.com/?javascript#streaming
 
+'use strict'
 
 var te_client = require('./te_client'),
 	Client = new te_client({
