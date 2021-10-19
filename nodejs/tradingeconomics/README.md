@@ -29,7 +29,7 @@ te.login();
 ```
 or
 ```javascript
-te.login('thisIsAFakeKey:thisIsAFakeKey');
+te.login('Client Key Here');
 ```
 
  - Use the functions to get data from Markets, Indicators, Economic Calendar, Forecasts, World Bank, Comtrade, Federal Reserve, and even the latest news.
