@@ -94,7 +94,7 @@ getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL, t
 #'@export getLatestUpdates
 #'
 #'@param country string.
-#'
+#'@param time string.
 #'@param outType string.
 #''lst'(default) for lis format output, 'df' for data frame,
 #'@param initDate string
@@ -106,11 +106,13 @@ getIndicatorData <- function(country = NULL, indicator = NULL, outType = NULL, t
 #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
 #'@examples
 #'\dontrun{getLatestUpdates()
-#'getLatestUpdates('2018-02-22')
+#'getLatestUpdates(initDate = '2018-02-22')
+#'getLatestUpdates(country = 'united states')
+#'getLatestUpdates(initDate = '2021-10-22', time = '15:20')  
 #'}
 #'
 
-getLatestUpdates <- function(initDate= NULL, outType = NULL, country = NULL){
+getLatestUpdates <- function(initDate= NULL, outType = NULL, country = NULL, time = NULL){
   base <-  "https://api.tradingeconomics.com/updates/"
   df_final = data.frame()
   url = ''
@@ -130,6 +132,17 @@ getLatestUpdates <- function(initDate= NULL, outType = NULL, country = NULL){
   }
 
   url <- paste(base, url, '?c=', apikey_local, sep = '')
+  
+  if(is.null(country) & !is.null(initDate) & !is.null(time)){
+    if(is.na(hms::parse_hm(time))){
+      print('Insert a valid time')
+      stop()
+    }else{
+      url <- paste(url,'&time=',time,sep='')
+    } 
+  }
+
+  
   url <- URLencode(url)
   request <- GET(url)
 
