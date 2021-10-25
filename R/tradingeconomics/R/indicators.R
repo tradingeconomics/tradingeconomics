@@ -238,3 +238,70 @@ getDiscontinuedIndicators <- function(country = NULL, outType = NULL){
   return(df_final)
 }
 
+#'Return indicators peers information from Trading Economics API
+#'@export getPeers
+#'@param country string
+#'@param ticker string
+#'@param category string
+#'@param outType string.
+#''lst'(default) for lis format output, 'df' for data frame,
+#'
+#'@section Notes:
+#'Without credentials default information will be provided.
+#'
+#'@return Return a list or data frame of peers information for specific country, ticker or category.
+#'
+#'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getCalendarData}}
+#'@examples
+#'\dontrun{getPeers(ticker ='CPI YOY', outType = 'df')
+#'getPeers(country ='united states', outType = 'df')
+#'getPeers(country ='united states', category ='money', outType = 'df')}
+
+
+getPeers <- function(country = NULL, ticker = NULL, category = NULL, outType = NULL){
+  
+  base <- "https://api.tradingeconomics.com/peers/"
+  df_final = data.frame()
+  url = ''
+  
+  
+  if (!is.null(country) & is.null(ticker)){
+    if(is.null(category)){
+      url <- paste('country', country, sep = '/')
+    }
+    else{
+      url <- paste('country', country, category, sep = '/')
+    }
+  }
+  
+  if (is.null(country) & !is.null(ticker) & is.null(category)){
+    url <- paste(ticker, sep = '/')
+  }
+
+
+
+apikey_local <- .GlobalEnv$apiKey
+url <- paste(base, url, '?c=', apikey_local, sep = '')
+url <- URLencode(url)
+
+
+
+request <- GET(url)
+
+checkRequestStatus(http_status(request)$message)
+webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+df_final = rbind(df_final, webResults)
+Sys.sleep(0.5)
+
+
+if (is.null(outType)| identical(outType, 'lst')){
+  df_final <- split(df_final , f = paste(df_final$Country))
+} else if (identical(outType, 'df')){
+  df_final = df_final
+} else {
+  stop('output_type options : df for data frame, lst(default) for list by country ')
+}
+
+return(df_final)
+
+}
