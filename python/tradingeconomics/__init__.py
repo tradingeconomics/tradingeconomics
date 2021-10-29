@@ -12,7 +12,7 @@ if PY3: # Python 3+
     from .historical import getHistoricalData, getHistoricalRatings,getHistoricalByTicker
     from .calendar import getCalendarData, getCalendarId
     from .forecasts import getForecastData,getForecastByTicker
-    from .indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator, getIndicatorByCategoryGroup, getIndicatorByTicker
+    from .indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator, getIndicatorByCategoryGroup, getIndicatorByTicker, getPeers
     from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross, getMarketsIntradayByInterval
     from .historicalMarkets import fetchMarkets
     from .glob import login, subscribe
@@ -34,7 +34,7 @@ else: # Python 2.X
     from historical import getHistoricalData, getHistoricalRatings,getHistoricalByTicker
     from calendar import getCalendarData, getCalendarId
     from forecasts import getForecastData,getForecastByTicker
-    from indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator, getIndicatorByCategoryGroup,getIndicatorByTicker
+    from indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator, getIndicatorByCategoryGroup,getIndicatorByTicker, getPeers
     from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross, getMarketsIntradayByInterval
     from historicalMarkets import fetchMarkets
     from glob import login, subscribe

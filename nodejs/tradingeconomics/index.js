@@ -26,6 +26,6 @@ module.exports = Object.assign(
     require('./eurostat.js'),
     require('./eurostatHistorical.js'),
     require('./financials.js'),
-    require('./financialsHistorical.js')
-    
+    require('./financialsHistorical.js'),
+    require('./getPeers.js')
 );

@@ -509,11 +509,11 @@ def getTotalByType(country=None, type=None, output_type=None):
 
             Example
             -------
-            getCmtTotalType(country = 'Portugal', type = 'import', output_type = None )
+            getTotalByType(country = 'Portugal', type = 'import', output_type = None )
 
-            getCmtTotalType(country = 'United States', type = 'export', output_type = 'raw' )
+            getTotalByType(country = 'United States', type = 'export', output_type = 'raw' )
 
-            getCmtTotalType(country = 'Brazil', type = import, output_type = 'df' )
+            getTotalByType(country = 'Brazil', type = import, output_type = 'df' )
 
             """
 
@@ -602,9 +602,9 @@ def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_ty
 
         Example
         -------
-        getCmtType(country1 = 'Portugal', country2 = 'Spain' type = 'import' )
+        getCmtCountryFilterByType(country1 = 'Portugal', country2 = 'Spain' type = 'import' )
 
-        getCmtType(country1 = 'United States', type = 'export')
+        getCmtCountryFilterByType(country1 = 'United States', type = 'export')
 
 
         """

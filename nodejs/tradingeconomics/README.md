@@ -1,6 +1,9 @@
 ## Description
 Node package on how to access Trading Economics API data.
 
+## Documentation
+https://docs.tradingeconomics.com/?javascript#introduction
+
 ## QuickStart
 First install the package:
 
@@ -19,11 +22,20 @@ const te = require('tradingeconomics');
 
  - Then you have to login, if you don't have a client key just live it blank and a sample of data will be provided.
 
+**Note:** You can get your free key here: http://developer.tradingeconomics.com 
+
 ```javascript
 te.login();
 ```
+or
+```javascript
+te.login('Client Key Here');
+```
 
  - Use the functions to get data from Markets, Indicators, Economic Calendar, Forecasts, World Bank, Comtrade, Federal Reserve, and even the latest news.
+ 
+ **Note:** For more information about our methods and data, check our documentation [here](https://docs.tradingeconomics.com/?javascript#introduction)
+
  
 *Example of World Bank data on Education:* 
 

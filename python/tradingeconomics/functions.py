@@ -6,6 +6,7 @@ import urllib
 import sys
 import json
 import pandas as pd
+import time
 
 PY3 = sys.version_info[0] == 3
 
@@ -66,7 +67,14 @@ def validate(date_text):
 def validatePeriod(initDate, endDate):
     if  datetime.strptime(initDate, '%Y-%m-%d') > datetime.strptime(endDate, '%Y-%m-%d'):
         raise DateError ('Invalid time period, check the supplied date parameters.')
-        
+
+def timeValidate(clientTime):
+    try:
+        t = time.strptime(clientTime, '%H:%M')
+        time.strftime('%H:%M', t)
+    except ValueError:
+        print("Incorrect time format, should be HH:MM")
+
 def finalLink(link, prmtr):
     linkAPI  = link
     for i in range(len(prmtr)):

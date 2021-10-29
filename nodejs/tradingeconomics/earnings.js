@@ -72,4 +72,3 @@ function getEarnings(){
 }
 
 module.exports.getEarnings = getEarnings;
-

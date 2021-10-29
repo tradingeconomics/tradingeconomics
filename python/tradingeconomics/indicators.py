@@ -377,9 +377,9 @@ def getIndicatorByTicker(ticker=None, output_type=None):
     return 'Ticker is required'
 
     
-def getLatestUpdates(country=None, init_date=None, output_type=None):
+def getLatestUpdates(country=None, init_date=None, time=None, output_type=None):
     """
-    Returns Lastest Updates by country, by country and initial date, by initial date only.
+    Returns Lastest Updates by country, by country and initial date, by initial date only or initial date and time.
     =================================================================================
     Parameters:
     -----------
@@ -387,8 +387,12 @@ def getLatestUpdates(country=None, init_date=None, output_type=None):
                 country = 'united states'
                 country = ['united states', 'portugal']
 
-        init_date: string.
+        init_date: string format (yyyy-mm-dd).
                 init_date = '2021-06-01'
+
+         time: string format (hh:mm).
+                time = '15:20'
+
         output_type: string.
              'dict'(default) for dictionary format output, 'df' for data frame,
              'raw' for list of dictionaries directly from the web. 
@@ -401,6 +405,7 @@ def getLatestUpdates(country=None, init_date=None, output_type=None):
             getLatestUpdates(country = 'united states', output_type = 'df')
             getLatestUpdates(country = 'united states',init_date = '2021-06-01', output_type = 'df')
             getLatestUpdates(country = ['united states','portugal'],init_date = '2021-06-01', output_type = 'df')
+            getLatestUpdates(init_date = '2021-10-18', time='15:20', output_type = 'df')
     """
     
     # d is a dictionary used for create the api url
@@ -408,6 +413,7 @@ def getLatestUpdates(country=None, init_date=None, output_type=None):
         'url_base': 'https://api.tradingeconomics.com/updates',
         'country': '',
         'ticker' : '',
+        'time' : '',
         'init_date': '',
         'key': f'?c={glob.apikey}',
         'output_type' : ''
@@ -418,17 +424,67 @@ def getLatestUpdates(country=None, init_date=None, output_type=None):
             d['init_date']=f'/{init_date}'
         except ValueError:
             raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
-            
+        if time:
+            try:
+                fn.timeValidate(time)
+                d['time']=f'&time={time}'     
+            except ValueError:
+                raise DateError ('Incorrect time format, should be HH:MM.')
 
     if country:
         d['country']=f'/country/{fn.stringOrList(country)}'
+
         
     
-    api_url_request = "%s%s%s%s" % (d['url_base'], d['country'],  d['init_date'],  d['key']) 
-    #print(api_url_request)
+    api_url_request = "%s%s%s%s%s" % (d['url_base'], d['country'],  d['init_date'],  d['key'],  d['time']) 
+    print(api_url_request)
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
-    #return
+
          
+def getPeers(country=None, category=None, ticker=None, output_type=None):
+    """
+    Returns indicators peers by country, by category and ticker.
+    =================================================================================
+    Parameters:
+    -----------
+        country: string
+        category: string
+        ticker; stirng
+
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    
+    Example
+    -------
+            getPeers(ticker ='CPI YOY', output_type = 'df')
+            getPeers(country ='united states', output_type = 'df')
+            getPeers(country ='united states', category ='money', output_type = 'df')
+    """
+   
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/peers/',
+        'country': '',
+        'ticker' : '',
+        'category': '',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    if country:
+        country = country.replace(' ', '%20')
+        d['country']=f'country/{country}'
+        if not(category is None):
+            d['category']=f'/{category}'
+    
+    if ticker:
+       d['ticker']=ticker.replace(' ', '%20')
+        
+    
+    api_url_request = "%s%s%s%s%s" % (d['url_base'],d['ticker'], d['country'],  d['category'],  d['key']) 
+    print(api_url_request)
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
 
     
 

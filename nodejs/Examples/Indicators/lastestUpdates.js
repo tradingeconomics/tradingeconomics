@@ -39,3 +39,12 @@ te.getLatestUpdates(country = 'portugal', start_date = '2018-02-02')
   .catch((err) => console.log(err));  
 
 
+
+//===============================================================================================================
+//Get lastest updates by date (date format is yyyy/mm/dd) and time (hh:mm)
+
+te.getLatestUpdates(start_date = '2021-10-18', time='15:20')
+.then((data) => {
+  console.log("Latest updates by specific date and time:", "\n", data, "\n");
+})
+.catch((err) => console.log(err));   
