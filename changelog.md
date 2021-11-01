@@ -3,10 +3,16 @@
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
++ 2021/11
+
+    + __Added:__ Title field on /descriptions endpoint.
+  
+---
 + 2021/10
 
     + __Added:__ Importance field on /earnings endpoint.
     + __Added:__ Filter updates by time on /updates endpoint.
+    + __Added:__ Peers endpoint for indicators.
 ---
 + 2021/09
 
@@ -73,9 +79,9 @@
 ### *Packages latest versions:*
 Package | Version
 :---: |:---:
-*Python* |`0.2.985` 
-*Node* | `1.0.10`
-*R* | `0.2.4`
+*Python* |`0.2.986` 
+*Node* | `1.0.11`
+*R* | `0.2.6`
 
 
 
