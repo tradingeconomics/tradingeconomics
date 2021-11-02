@@ -555,6 +555,22 @@ Using Headers auth:<br>
     </blockquote>   
     <pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'usurtot'</span><span class="p">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
  </span></code></pre>
+ <blockquote class="lang-specific r">
+    <p>To get indicator peers data by ticker.</p>
+    </blockquote>   
+    <pre class="highlight r"><code><span class="n">getPeers</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'CPI YOY'</span><span class="p">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+ </span></code></pre>
+ <blockquote class="lang-specific r">
+    <p>To get indicator peers data by country.</p>
+    </blockquote>   
+    <pre class="highlight r"><code><span class="n">getPeers</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+ </span></code></pre>
+ <blockquote class="lang-specific r">
+    <p>To get indicator peers data by country and category.</p>
+    </blockquote>   
+    <pre class="highlight r"><code><span class="n">getPeers</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">, </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'money'</span><span class="p"></span>, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+ </span></code></pre>
+
 
        
 <!--Python Indicators black side-->
@@ -601,8 +617,22 @@ Using Headers auth:<br>
 <blockquote class="lang-specific python">  
     <p>To get data by specific ticker or tickers.</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorByTicker</span><span class="p">(</span><span class="n">ticker</span><span class="o">=</span><span class="s">'usurtot'</span><span class="p">)</span>
-
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorByTicker</span><span class="p">(</span><span class="n">ticker</span><span class="o">=</span><span class="s">'usurtot'</span><span class="p">, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span>)</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+    <p>To get data of indicator peers by specific ticker.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getPeers</span><span class="p">(</span><span class="n">ticker</span><span class="o">=</span><span class="s">'CPI YOY'</span><span class="p">, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span>)</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+    <p>To get data of indicator peers by specific country.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getPeers</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span>)</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+    <p>To get data of indicator peers by specific country and category.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getPeers</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">, <span class="n">category</span><span class="o">=</span><span class="s">'money'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span>)</span>
 </code></pre>
 
      
@@ -648,6 +678,31 @@ Using Headers auth:<br>
       </span><span class="s1">console</span>.log(<span class="na">data</span>)       
   });</span>
 </code></pre>
+<!--Javascript Peers Examples-->
+<blockquote class="lang-specific javascript">
+    <p>To get a list of indicator peers by ticker.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getPeers</span>(<span class="kd">ticker</span> = <span class="s1">'CPI YOY'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+      </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+  });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get a list of indicator peers by country.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getPeers</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+      </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+  });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get a list of indicator peers by country and category.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getPeers</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'money'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+  </code></pre>
 
      
 <!--c# black side-->
@@ -807,75 +862,95 @@ Using Headers auth:<br>
     <a target = '_blank' href="https://api.tradingeconomics.com//country/ticker/usurtot,wgdpchin?c=guest:guest">/country/ticker/{ticker,ticker}</a></p></li> -->
 </ul>
 <p></span></p>
+<br>
 
+<h3 id="indicator-peers">Peers</h3>
+<p><span class="methods"></p>
+    
+    <ul>
+    <li><p>List of indicator peers by ticker.<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/peers/CPI%20YOY?c=guest:guest">/peers/{ticker}</a></p></li>
+    <li><p>List of indicator peers by country.<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/united%20states?c=guest:guest">/peers/country/{country}</a></p></li>
+     <li><p>List of indicator peers by country and category.<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/united%20states/money?c=guest:guest">/peers/country/{country}/{category}</a></p></li>
+        </ul>
 <br>
 <h3 id="response-fields">Response Fields</h3>
 
 <table><thead>
 <tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
+    <th style="text-align: left"></th>
+    <th style="text-align: left"></th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country name</td>
+    <td style="text-align: left"><strong>Country</strong></td>
+    <td style="text-align: left">Country name</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Category</strong></td>
-<td style="text-align: left">Category name</td>
+    <td style="text-align: left"><strong>Category</strong></td>
+    <td style="text-align: left">Category name</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>CategoryGroup</strong></td>
-<td style="text-align: left">Category group name</td>
+    <td style="text-align: left"><strong>CategoryGroup</strong></td>
+    <td style="text-align: left">Category group name</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Title</strong></td>
-<td style="text-align: left">Combination of country/category</td>
+    <td style="text-align: left"><strong>Title</strong></td>
+    <td style="text-align: left">Combination of country/category</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>LatestValueDate</strong></td>
-<td style="text-align: left">Date of the last released value</td>
+    <td style="text-align: left"><strong>LatestValueDate</strong></td>
+    <td style="text-align: left">Date of the last released value</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>LatestValue</strong></td>
-<td style="text-align: left">Last released value</td>
+    <td style="text-align: left"><strong>LatestValue</strong></td>
+    <td style="text-align: left">Last released value</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Source</strong></td>
-<td style="text-align: left">Source of data</td>
+    <td style="text-align: left"><strong>Source</strong></td>
+    <td style="text-align: left">Source of data</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Unit</strong></td>
-<td style="text-align: left">Unit of the value</td>
+    <td style="text-align: left"><strong>Unit</strong></td>
+    <td style="text-align: left">Unit of the value</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>URL</strong></td>
-<td style="text-align: left">Hyperlink at Trading Economics</td>
+    <td style="text-align: left"><strong>URL</strong></td>
+    <td style="text-align: left">Hyperlink at Trading Economics</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Adjustment</strong></td>
-<td style="text-align: left">Data description, for example: base period, price adjustement, seasonality</td>
+    <td style="text-align: left"><strong>Adjustment</strong></td>
+    <td style="text-align: left">Data description, for example: base period, price adjustement, seasonality</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>Frequency</strong></td>
-<td style="text-align: left">Frequency of the indicator</td>
+    <td style="text-align: left"><strong>Frequency</strong></td>
+    <td style="text-align: left">Frequency of the indicator</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>HistoricalDataSymbol</strong></td>
-<td style="text-align: left">Unique symbol used by Trading Economics</td>
+    <td style="text-align: left"><strong>HistoricalDataSymbol</strong></td>
+    <td style="text-align: left">Unique symbol used by Trading Economics</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>CreateDate</strong></td>
-<td style="text-align: left">Time when an indicator was inserted</td>
+    <td style="text-align: left"><strong>CreateDate</strong></td>
+    <td style="text-align: left">Time when an indicator was inserted</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>PreviousValue</strong></td>
-<td style="text-align: left">Previously released value</td>
+    <td style="text-align: left"><strong>PreviousValue</strong></td>
+    <td style="text-align: left">Previously released value</td>
 </tr>
 <tr>
-<td style="text-align: left"><strong>PreviousValueDate</strong></td>
-<td style="text-align: left">Date of the previously released value</td>
+    <td style="text-align: left"><strong>PreviousValueDate</strong></td>
+    <td style="text-align: left">Date of the previously released value</td>
+</tr>
+<tr>
+    <td style="text-align: left"><strong>Peer</strong></td>
+    <td style="text-align: left">Related ticker</td>
+</tr>
+<tr>
+    <td style="text-align: left"><strong>Relationship</strong></td>
+    <td style="text-align: left">0 - related, 1 - component, 2 - parent, 3 - derivative</td>
 </tr>
 </tbody></table>
 
@@ -2064,8 +2139,13 @@ or you can specify a start date and end date<br>
   <blockquote class="lang-specific python">
     <p>To get latest updates by country using a starting date.</p>
   </blockquote>   
-  <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getLatestUpdates</span><span class="p">(</span>country</span><span class="o">=</span><span class="s">'portugal'</span>, <span class="n">initDate</span><span class="o">=</span><span class="s">'2018-08-15'</span><span class="p">)</span>
+  <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getLatestUpdates</span><span class="p">(</span>country</span><span class="o">=</span><span class="s">'portugal'</span>, <span class="n">init_date</span><span class="o">=</span><span class="s">'2018-08-15'</span><span class="p">)</span>
   </code></pre>     
+  <blockquote class="lang-specific python">
+    <p>To get latest updates by date (yyyy-mm-dd) and time (hh:mm).</p>
+  </blockquote>   
+  <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getLatestUpdates</span><span class="p">(</span>init_date</span><span class="o">=</span><span class="s">'2021-10-18'</span>, <span class="n">time</span><span class="o">=</span><span class="s">'15:20'</span><span class="p">)</span>
+  </code></pre>  
 <!--R Latest updates-->
        
 <blockquote class="lang-specific r">
@@ -2085,7 +2165,13 @@ or you can specify a start date and end date<br>
 <br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getLatestUpdates</span><span class="p">(</span><span class="w">country = </span><span class="s1">'united states'</span>, initDate = <span class="s1">'2018-02-22'</span><span class="p">)</span>           
-</code></pre> 
+</code></pre>
+<blockquote class="lang-specific r">
+    <p>To get the latest updates by date and time.</p>
+<br>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getLatestUpdates</span><span class="p">(</span><span class="w">initDate = </span><span class="s1">'2021-10-18'</span>, time = <span class="s1">'21:20'</span><span class="p">)</span>           
+</code></pre>  
        
 <!--javascript-->        
 
@@ -2118,6 +2204,14 @@ or you can specify a start date and end date<br>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
   <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getLatestUpdates</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02', </span><span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+      </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+  });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>To get updates from a starting date (date format is yyyy-mm-dd) and time (hh:mm).</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getLatestUpdates</span>(<span class="kd">start_date</span> = <span class="s1">'2021-10-18', </span><span class="kd">time</span> = <span class="s1">'15:20'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
       </span><span class="s1">console</span>.log(<span class="na">data</span>)       
   });</span>
 </code></pre>
@@ -2857,7 +2951,7 @@ or you can specify a start date and end date<br>
 <pre class="highlight javascript"><code><span class="nx">node</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-<p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs/stream-nodejs">Check here for the complete sample code.</a></p>
+<p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/nodejs/Examples/stream-nodejs/app.js">Check here for the complete sample code.</a></p>
 </blockquote>
 
 <!--streaming calendar c# black side-->
@@ -2899,7 +2993,7 @@ or you can specify a start date and end date<br>
 
 </code></pre>
 <blockquote class="lang-specific csharp">
-    <p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs/stream-nodejs">Check here for the complete sample code.</a> </p>
+    <p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Streamer.cs">Check here for the complete sample code.</a> </p>
 </blockquote>
 
 <blockquote class="lang-specific java">
