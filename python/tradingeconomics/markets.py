@@ -604,3 +604,62 @@ def getMarketsIntradayByInterval(symbol = None, interval=None, initDate=None,end
     # print(api_url_request)
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
     # return     
+
+
+def getMarketsStockDescriptions(symbol = None,country = None, output_type=None):
+    """
+    Returns Markets Descriptions
+    =================================================================================
+    Parameters:
+    -----------
+        symbol: string or list.
+                symbol = 'AAPL:US'
+                symbol = ['AAPL:US','FB:US']
+        
+        country: string or list
+                country = 'france'
+                countr = ['france','portugal']
+        
+        
+        output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+    
+    
+    Example
+    -------
+            getMarketsStockDescriptions(symbol='AAPL:US',output_type='df')
+            getMarketsStockDescriptions(symbol=['AAPL:US','FB:US'],output_type='df')
+            getMarketsStockDescriptions(country='france',output_type='df')
+            getMarketsStockDescriptions(country=['france','portugal'],output_type='df')
+    """
+            
+    # url example: 'https://api.tradingeconomics.com/markets/stockdescriptions/symbol/aapl:us,fb:us?c=guest:guest'
+    # https://api.tradingeconomics.com/markets/stockdescriptions/country/france,portugal?c=guest:guest
+
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/markets/stockdescriptions',
+        'symbol': '',
+        'country': '',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    if symbol:
+        d['symbol'] = f'/symbol/{(fn.stringOrList(symbol))}'
+    
+    if country:
+        d['country'] = f'/country/{(fn.stringOrList(country))}'
+
+    if country and symbol or country is None and symbol is None:
+        return 'You have to pass country or symbol'
+    
+    
+
+    api_url_request = "%s%s%s%s" % (d['url_base'], d['symbol'],d['country'],  d['key']) 
+    # print(api_url_request)
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    # return    

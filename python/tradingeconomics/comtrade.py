@@ -483,7 +483,7 @@ def getCmtCountryByCategory(country=None, type=None, category=None, output_type=
     else:
         return ''
 
-def getTotalByType(country=None, type=None, output_type=None):
+def getCmtTotalByType(country=None, type=None, output_type=None):
     """
             Get detailed information about Comtrade Country Total by Import or Exports
             =================================================================================
