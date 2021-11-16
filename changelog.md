@@ -6,6 +6,8 @@
 + 2021/11
 
     + __Added:__ Title field on /descriptions endpoint.
+    + __Added:__ markets/stockdescriptions endpoint.
+    + __Added:__ unit column to markets/symbol endpoint.
   
 ---
 + 2021/10
