@@ -225,7 +225,7 @@ getMarketsIntraday <- function (symbol = NULL, initDate = NULL, endDate = NULL, 
       url <- paste(url, paste(initDate, sep = ''), sep = '&d1=')
     }
   }
-  
+
   if(!is.null(interval)){
     url <- paste(base, url, '&c=', apikey_local, sep = '')
   }
@@ -332,7 +332,7 @@ getMarketsList <- function(marketsField, symbol = NULL, outType = NULL){
 #'
 #' @param category string.
 #' @param country string.
-#' 
+#'
 #' @param outType string.
 #''df' for data frame,
 #''raw'(default) for list of unparsed data.
@@ -445,3 +445,89 @@ getMarketsForecast <- function(symbol = NULL, category = NULL , outType = NULL){
 
   return(df_final)
 }
+
+
+
+#'Returns Markets Descriptions
+#'@export getMarketsStockDescriptions
+#'
+#' @param symbol string or list.
+#' @param country string or list.
+#' @param outType string.
+#''df' for data frame,
+#''raw'(default) for list of unparsed data.
+#'
+#'@return Returns a list or data frame of Markets descriptions by country or symbol.
+#'@section Notes:
+#'A country or a symbol must be provided.
+#'@seealso \code{\link{getCalendarData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
+#'@examples
+#'\dontrun{ getMarketsStockDescriptions(symbol='AAPL:US',outType='df')
+#'getMarketsStockDescriptions(symbol=c('AAPL:US,FB:US'),outType='df')
+#'getMarketsStockDescriptions(country='france',outType='df')
+#'getMarketsStockDescriptions(country=c('france,portugal'),outType='df')
+#'}
+
+getMarketsStockDescriptions <- function(symbol = NULL, country = NULL , outType = NULL){
+
+  df_final = data.frame()
+
+
+  #  d is a dictionary used for create the api url
+
+  d <- c(
+    "url_base"="https://api.tradingeconomics.com/markets/stockdescriptions",
+    "symbol"= "",
+    "country"= "",
+    "key"= .GlobalEnv$apiKey,
+    "output_type"= outType
+
+  )
+
+  if (length(symbol) > 1){
+    d['symbol'] = paste("/symbol",paste(symbol, collapse = ','),sep = '/')
+  }
+
+  if (length(country) > 1){
+    d['country'] = paste("/country",paste(country, collapse = ','),sep = '/')
+  }
+
+
+  if (!is.null(symbol)){
+    d['symbol'] <- paste('/symbol', symbol, sep = '/' )
+  }
+
+
+  if(!is.null(country)) {
+    d['country'] <- paste('/country', country, sep='/')
+  }
+  if(is.null(country) && is.null(symbol) ) {
+    stop('Please enter a symbol or country')
+  }
+
+  api_url_request <- paste(d['url_base'], d['symbol'],d['country'],'?c=', d['key'], sep = '')
+
+  print(api_url_request)
+
+
+  api_url_request <- URLencode(api_url_request)
+  request <- GET(api_url_request )
+
+  checkRequestStatus(http_status(request)$message)
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
+
+
+  if (is.null(outType)| identical(outType, 'lst')){
+    df_final <- split(df_final , f = paste(df_final$Country))
+  } else if (identical(outType, 'df')){
+    df_final = df_final
+  } else {
+    stop('output_type options : df for data frame, lst(default) for list by country ')
+  }
+
+  return(df_final)
+}
+
+

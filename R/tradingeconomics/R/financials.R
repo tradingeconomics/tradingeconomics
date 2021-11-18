@@ -141,7 +141,7 @@ getFinancialsData <- function(country = NULL, symbol = NULL, outType = NULL){
     symbol_tag <- paste("/symbol/",symbol, sep = '')
   }
 
-  print("Attetion: If both 'country' and 'symbols' are null or not null at the same time, a full companies list will be provided ")
+  print("Attention: If both 'country' and 'symbols' are null or not null at the same time, a full companies list will be provided ")
 
   data_request_url <- paste(url_base_tag,symbol_tag,country_tag,key_tag, sep = '')
   print(data_request_url)
