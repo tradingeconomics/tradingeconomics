@@ -3289,6 +3289,14 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
+    <p>Get stock market by country.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">country</span> = <span class="s1">'japan'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
     <p>Get a snapshot of the latest peers prices by market.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
@@ -3304,14 +3312,24 @@ Click on any method below for a sample.
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
+
 <blockquote class="lang-specific javascript">
-    <p>Get stock market by country.</p>
+    <p>Get stock descriptions by company symbol.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">country</span> = <span class="s1">'japan'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketStockDescriptions</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get stock descriptions by country.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketStockDescriptions</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+
 <blockquote class="lang-specific javascript">
     <p>Get stock market searching for country.</p>
 </blockquote>
@@ -3719,6 +3737,21 @@ Click on any method below for a sample.
 
 </code></pre>
 
+<blockquote class="lang-specific python">
+    <p>To get Stock descriptions by company symbol:</p>
+</blockquote>  
+
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsStockDescriptions</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'aapl:us'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span>)</span>
+</code></pre>
+
+<blockquote class="lang-specific python">
+    <p>To get Stock descriptions by country:</p>
+</blockquote>  
+
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsStockDescriptions</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'japan'</span>, <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span>)</span>
+</code></pre>
+
+
 <!--R Markets lists black side-->
 
 <blockquote class="lang-specific r">
@@ -3737,6 +3770,16 @@ Click on any method below for a sample.
     <p>To get markets lists by peers.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getMarketsList</span><span class="p">(<span class="nf">marketsField</span><span class="o">=</span><span class="s1">'peers'</span><span class="p">,</span><span class="s1">'aapl:us'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get stock markets descriptions by company symbol.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsStockDescriptions</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'aapl:us'</span><span class="p">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get stock markets descriptions by country.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getMarketsStockDescriptions</span><span class="p">(<span class="nf">country</span><span class="o">=</span><span class="s1">'china'</span><span class="p">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 
 <h3 id="search">Search</h3>
