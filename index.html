@@ -401,7 +401,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states,china/indicator/gdp,population?c=guest:guest&f=json">historical/country/united%20states,china/indicator/gdp,population</a> </p>
 </blockquote>
 <br>
 <blockquote class="lang-specific csharp">
@@ -432,7 +432,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states,china/indicator/gdp,population?c=guest:guest&f=json">historical/country/united%20states,china/indicator/gdp,population</a> </p>
 
 </blockquote>
       
@@ -448,7 +448,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/portugal,brazil,russia/indicator/gdp,currency?c=guest:guest&f=json">historical/country/portugal,brazil,russia/indicator/gdp,currency</a> </p>
 </blockquote>
    
 <!-----------------------------Authentication white Side------------------------------->
@@ -471,11 +471,11 @@ Using Headers auth:<br>
 <p>You can request data in several formats:<br></p>     
     <ul>
     <li><p>json<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=json">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;format=json</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&f=json">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;f=json</a></p></li>
     <li><p>xml<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=xml">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;format=xml</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&f=xml">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;f=xml</a></p></li>
     <li><p>csv<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&format=csv">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;format=csv</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&f=csv">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;f=csv</a></p></li>
     </ul>
 
 <h3 id="Error-codes">Status codes</h3>
@@ -846,18 +846,18 @@ Using Headers auth:<br>
 
 <ul>
 <li><p>List of all indicators.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest">/indicators</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/indicators?c=guest:guest&f=json">/indicators</a></p></li>
 </ul>
 
 <ul>
 <li><p>List of indicators by country.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest">/country/{country}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest&f=json">/country/{country}</a></p></li>
 <li><p>List of indicators by country and group( you can check groups in the "categoryGroup" field of /indicators)<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/country/united%20states?c=guest:guest&group=gdp">/country/{country}?c=guest:guest&group={group}</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/country/united%20states?c=guest:guest&group=gdp&f=json">/country/{country}?c=guest:guest&group={group}</a></p></li>
 <li><p>Specific indicator for all countries.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest">/country/all/{indicator}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest&f=json">/country/all/{indicator}</a></p></li>
 <li><p>Specific indicator by ticker or tickers.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/ticker/usurtot?c=guest:guest">/country/ticker/{ticker}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/ticker/usurtot?c=guest:guest&f=json">/country/ticker/{ticker}</a></p></li>
 <!-- <li><p>Multiple indicators by ticker<br>
     <a target = '_blank' href="https://api.tradingeconomics.com//country/ticker/usurtot,wgdpchin?c=guest:guest">/country/ticker/{ticker,ticker}</a></p></li> -->
 </ul>
@@ -869,11 +869,11 @@ Using Headers auth:<br>
     
     <ul>
     <li><p>List of indicator peers by ticker.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/peers/CPI%20YOY?c=guest:guest">/peers/{ticker}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/peers/CPI%20YOY?c=guest:guest&f=json">/peers/{ticker}</a></p></li>
     <li><p>List of indicator peers by country.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/united%20states?c=guest:guest">/peers/country/{country}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/united%20states?c=guest:guest&f=json">/peers/country/{country}</a></p></li>
      <li><p>List of indicator peers by country and category.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/united%20states/money?c=guest:guest">/peers/country/{country}/{category}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/united%20states/money?c=guest:guest&f=json">/peers/country/{country}/{category}</a></p></li>
         </ul>
 <br>
 <h3 id="response-fields">Response Fields</h3>
@@ -1215,19 +1215,19 @@ Using Headers auth:<br>
 
 <ul>
 <li><p>Specific country and indicator<br>
-    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a><br>
+    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a><br>
 You can specify only a start date for your historical data<br>
-    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2013-01-01?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
+    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2013-01-01?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
 or you can specify a start date and end date<br>
-    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
+    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
 <li><p>Multiple indicators for specific country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
 <li><p>Specific indicator for multiple countries<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
 <li><p>Multiple indicators for multiple countries<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
 <li><p>Get historical data by ticker<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/historical/ticker/USURTOT/2015-03-01?c=guest:guest">/historical/ticker/{ticker}/{yyyy-mm-dd}</a>  </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/historical/ticker/USURTOT/2015-03-01?c=guest:guest&f=json">/historical/ticker/{ticker}/{yyyy-mm-dd}</a>  </p></li>
 </ul>
 
 <p></span> </p>
@@ -1284,11 +1284,11 @@ or you can specify a start date and end date<br>
 
 <ul>
 <li><p>List of discontinued series for all countries.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/all/discontinued?c=guest:guest">/country/all/discontinued</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/all/discontinued?c=guest:guest&f=json">/country/all/discontinued</a></p></li>
 <li><p>List of discontinued series by country.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/united%20states/discontinued?c=guest:guest">/country/{country}/discontinued</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/united%20states/discontinued?c=guest:guest&f=json">/country/{country}/discontinued</a></p></li>
 <li><p>List of discontinued series with multiple countries.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/united%20states,china/discontinued?c=guest:guest">/country/{countries}/discontinued</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/united%20states,china/discontinued?c=guest:guest&f=json">/country/{countries}/discontinued</a></p></li>
 </ul>
 <p><span></p>
 <!-----------------------------Forecasts Black Side------------------------------->  
@@ -1619,21 +1619,21 @@ or you can specify a start date and end date<br>
 
 <ul>
 <li><p>Specific country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states?c=guest:guest">/forecast/country/{country}</a>   </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states?c=guest:guest&f=json">/forecast/country/{country}</a>   </p></li>
 <li><p>Multiple countries<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states,china?c=guest:guest">/forecast/country/{countries}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states,china?c=guest:guest&f=json">/forecast/country/{countries}</a></p></li>
 <li><p>Specific indicator<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp?c=guest:guest">/forecast/indicator/{indicator}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp?c=guest:guest&f=json">/forecast/indicator/{indicator}</a>    </p></li>
 <li><p>Multiple indicators<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp,population?c=guest:guest">/forecast/indicator/{indicators}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/indicator/gdp,population?c=guest:guest&f=json">/forecast/indicator/{indicators}</a></p></li>
 <li><p>Forecast by specific ticker<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com//forecast/ticker/usurtot?c=guest:guest">/forecast/ticker/{ticker}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com//forecast/ticker/usurtot?c=guest:guest&f=json">/forecast/ticker/{ticker}</a>    </p></li>
 <li><p>Forecasts by multiple tickers<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com//forecast/ticker/usurtot,wgdpchin?c=guest:guest">/forecast/ticker/{tickers}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com//forecast/ticker/usurtot,wgdpchin?c=guest:guest&f=json">/forecast/ticker/{tickers}</a>    </p></li>
 <li><p>Specific country and indicator<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states/indicator/gdp?c=guest:guest">/forecast/country/{country}/indicator/{indicator}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states/indicator/gdp?c=guest:guest&f=json">/forecast/country/{country}/indicator/{indicator}</a>    </p></li>
 <li><p>Multiple countries and indicators<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states,china/indicator/gdp,population?c=guest:guest">/forecast/country/{countries}/indicator/{indicators}</a>  </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/forecast/country/united states,china/indicator/gdp,population?c=guest:guest&f=json">/forecast/country/{countries}/indicator/{indicators}</a>  </p></li>
 </ul>
 
 <p></span> </p>
@@ -2015,25 +2015,25 @@ or you can specify a start date and end date<br>
 
 <ul>
 <li><p>Latest Credit Ratings.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/ratings?c=guest:guest">/ratings</a>    </p>    
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings?c=guest:guest&f=json">/ratings</a>    </p>    
 <li><p>Credit Rating of the specific country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest">/ratings/{country}</a>    </p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states?c=guest:guest&f=json">/ratings/{country}</a>    </p>
 <li><p>Credit Rating for multiple countries<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states,portugal?c=guest:guest">/ratings/{countries}</a>    </p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/united%20states,portugal?c=guest:guest&f=json">/ratings/{countries}</a>    </p>
 </li>
 </ul>
 <ul>
     <li><p>Historical credit rating for one country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest">/ratings/historical/{country}</a><br> </p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states?c=guest:guest&f=json">/ratings/historical/{country}</a><br> </p>
     
     <li><p>Historical credit rating for multiple countries<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest">/ratings/historical/{countries}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states,portugal?c=guest:guest&f=json">/ratings/historical/{countries}</a><br>
     
     <li><p>Historical credit rating by start and end date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01/2012-01-01?c=guest:guest&f=json">/ratings/historical/{country}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
     
     <li><p>You can specify only a start date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01?c=guest:guest">/ratings/historical/{country}/{yyyy-mm-dd}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/ratings/historical/united%20states/2011-01-01?c=guest:guest&f=json">/ratings/historical/{country}/{yyyy-mm-dd}</a><br>
     </li>
     </ul>
 <br>    
@@ -2276,15 +2276,15 @@ or you can specify a start date and end date<br>
 
 <ul>
 <li><p>Latest updates<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/updates?client=guest:guest">/updates</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/updates?client=guest:guest&f=json">/updates</a></p></li>
 <li><p>Updates since a specific date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/updates/2018-01-01?client=guest:guest">/updates/{date}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/updates/2018-01-01?client=guest:guest&f=json">/updates/{date}</a></p></li>
 <li><p>Updates since a specific date and time<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/updates/2021-10-18?client=guest:guest&time=15:20">/updates/{date}?time={hh:mm}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/updates/2021-10-18?client=guest:guest&time=15:20&f=json">/updates/{date}?time={hh:mm}</a></p></li>
 <li><p>Get the Latest Updates by country.<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal?client=guest:guest">/updates/country/{country}</a></p></li>
+<a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal?client=guest:guest&f=json">/updates/country/{country}</a></p></li>
 <li><p>Get the Latest Updates by country since a specific date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal/2018-01-01?client=guest:guest">/updates/country/{country}/{date}</a></p></li>        
+    <a target = '_blank' href="https://api.tradingeconomics.com/updates/country/portugal/2018-01-01?client=guest:guest&f=json">/updates/country/{country}/{date}</a></p></li>        
 </ul>
 
 <p></span></p>
@@ -2748,43 +2748,43 @@ or you can specify a start date and end date<br>
 
 <ul>
 <li><p>All calendar events<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest">/calendar</a></p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest&f=json">/calendar</a></p>
 </li>
 <li><p>All calendar events by importance (1-Low, 2-Medium, 3-High)<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest&importance=2">/calendar?importance=2</a></p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar?c=guest:guest&importance=2&f=json">/calendar?importance=2</a></p>
 </li>
 <li><p>Filter calendar events by date or by date and importance<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-02/2016-12-03?c=guest:guest">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a></br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-02/2016-12-03?c=guest:guest&importance=3">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}?importance=3</a></p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-02/2016-12-03?c=guest:guest&f=json">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}</a></br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/All/2016-12-02/2016-12-03?c=guest:guest&importance=3&f=json">/calendar/country/All/{yyyy-mm-dd}/{yyyy-mm-dd}?importance=3</a></p>
 </li>
 <li><p>Calendar events for specific country or by country and importance<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states?c=guest:guest">/calendar/country/{countries}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states?c=guest:guest&importance=3">/calendar/country/{countries}?importance=3</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/2016-02-01/2016-02-10?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/2016-02-01/2016-02-10?c=guest:guest&importance=3">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}?importance=3</a></p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states?c=guest:guest&f=json">/calendar/country/{countries}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states?c=guest:guest&importance=3&f=json">/calendar/country/{countries}?importance=3</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/2016-02-01/2016-02-10?c=guest:guest&f=json">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/2016-02-01/2016-02-10?c=guest:guest&importance=3&f=json">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}?importance=3</a></p>
 </li>
 <li><p>Calendar events for a specific indicator or by indicator and importance<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate?c=guest:guest">/calendar/indicator/{indicators}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate?c=guest:guest&importance=2">/calendar/indicator/{indicators}?importance=2</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate/2016-03-01/2016-03-03?c=guest:guest">/calendar/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate/2016-03-01/2016-03-03?c=guest:guest&importance=2">/calendar/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}?importance=2</a></p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate?c=guest:guest&f=json">/calendar/indicator/{indicators}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate?c=guest:guest&importance=2&f=json">/calendar/indicator/{indicators}?importance=2</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate/2016-03-01/2016-03-03?c=guest:guest&f=json">/calendar/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/indicator/inflation rate/2016-03-01/2016-03-03?c=guest:guest&importance=2&f=json">/calendar/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}?importance=2</a></p>
 </li>
 <li><p>All calendar events for multiple countries or by countries and importance<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china?c=guest:guest">/calendar/country/{countries}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china?c=guest:guest&importance=2">/calendar/country/{countries}?importance=2</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china/2016-02-10/2016-02-11?c=guest:guest">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china/2016-02-10/2016-02-11?c=guest:guest&importance=2">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}?importance=2</a> </p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china?c=guest:guest&f=json">/calendar/country/{countries}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china?c=guest:guest&importance=2&f=json">/calendar/country/{countries}?importance=2</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china/2016-02-10/2016-02-11?c=guest:guest&f=json">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states,china/2016-02-10/2016-02-11?c=guest:guest&importance=2&f=json">/calendar/country/{countries}/{yyyy-mm-dd}/{yyyy-mm-dd}?importance=2</a> </p>
 </li>
 <li><p>Calendar events for a specific country and specific indicator<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims?c=guest:guest&f=json">/calendar/country/{countries}/indicator/{indicators}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest&f=json">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p>
 </li>
 <li><p>Filter calendar events by calendar ID<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/calendarid/174108,160025,160030?c=guest:guest">/calendar/calendarid/{calendarids}?c=guest:guest</a></p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/calendarid/174108,160025,160030?c=guest:guest&f=json">/calendar/calendarid/{calendarids}?c=guest:guest</a></p>
 </li>
 <li><p>Filter calendar events by ticker and date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/ticker/IJCUSA,SPAINFACORD,BAHRAININFNRATE?c=guest:guest">/calendar/ticker/{ticker}?c=guest:guest</a><br>  
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/ticker/IJCUSA,SPAINFACORD,BAHRAININFNRATE/2018-01-01/2018-03-01?c=guest:guest">/calendar/ticker/{ticker}/{yyyy-mm-dd}/{yyyy-mm-dd}?c=guest:guest</a></p>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/ticker/IJCUSA,SPAINFACORD,BAHRAININFNRATE?c=guest:guest&f=json">/calendar/ticker/{ticker}?c=guest:guest</a><br>  
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/ticker/IJCUSA,SPAINFACORD,BAHRAININFNRATE/2018-01-01/2018-03-01?c=guest:guest&f=json">/calendar/ticker/{ticker}/{yyyy-mm-dd}/{yyyy-mm-dd}?c=guest:guest</a></p>
 </li> 
 </ul>
 
@@ -3649,37 +3649,37 @@ Click on any method below for a sample.
     
     <ul>
     <li><p>Commodities<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest">/markets/commodities</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/commodities?c=guest:guest&f=json">/markets/commodities</a></p></li>
     <li><p>Major Currencies<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest">/markets/currency</a> </p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest&f=json">/markets/currency</a> </p></li>
     <li><p>Currency Crosses<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest&cross=EUR">/markets/currency?cross=eur</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/currency?c=guest:guest&cross=EUR&f=json">/markets/currency?cross=eur</a></p></li>
     <li><p>Stock Market Indexes<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest">/markets/index</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/index?c=guest:guest&f=json">/markets/index</a></p></li>
     <li><p>Government Bonds<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/markets/bond?c=guest:guest">/markets/bond</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/bond?c=guest:guest&f=json">/markets/bond</a></p></li>
     <li><p>Individual Market (stock, index, currency, commodity or bond)<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest">/markets/symbol/{symbol}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us?c=guest:guest&f=json">/markets/symbol/{symbol}</a></p></li>
     <li><p>Multiple Markets<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest">/markets/symbol/{symbols}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbol/aapl:us,indu:ind?c=guest:guest&f=json">/markets/symbol/{symbols}</a></p></li>
     </ul>
     <p></span> </p>
     <ul>
     <li><p>List of stocks by country<br>
     <!--<a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest&page=2">/markets/country/{country}&amp;page=2</a></p></li>-->
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest">/markets/country/{country}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/country/united%20states?client=guest:guest&f=json">/markets/country/{country}</a></p></li>
     </ul>
     <ul> 
     <li><p>A snapshot of latest peers prices by market<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest">/markets/peers/{symbol}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/peers/aapl:us?c=guest:guest&f=json">/markets/peers/{symbol}</a></p></li>
     <li><p>Stock Market Index Components<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest">/markets/components/{symbol}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/components/psi20:ind?c=guest:guest&f=json">/markets/components/{symbol}</a></p></li>
     </ul>
     <ul> 
     <li><p>Stock descriptions by company symbols<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/stockdescriptions/symbol/aapl:us,fb:us?c=guest:guest">/markets/stockdescriptions/symbol/{symbols}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/stockdescriptions/symbol/aapl:us,fb:us?c=guest:guest&f=json">/markets/stockdescriptions/symbol/{symbols}</a></p></li>
     <li><p>Stock descriptions by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/stockdescriptions/country/france?c=guest:guest">/markets/stockdescriptions/country/{country}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/stockdescriptions/country/france?c=guest:guest&f=json">/markets/stockdescriptions/country/{country}</a></p></li>
     </ul>
     <p></span> </p>
 
@@ -3840,14 +3840,14 @@ Click on any method below for a sample.
 
 <ul>
 <li>Search method<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest">/markets/search/{term}</a></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest&f=json">/markets/search/{term}</a></li>
 </ul>
 
 <p>By Default, the search will look into the categories: Indexes, markets(stocks), bonds, and commodities.</p>
 
  <ul>
 <li>Filtering by Category<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest&category=index,markets">/markets/search/{term}?category={category}</a></li>
+<a target = '_blank' href="https://api.tradingeconomics.com/markets/search/united%20states?c=guest:guest&category=index,markets&f=json">/markets/search/{term}?category={category}</a></li>
 </ul>
 
  <p>Categories available: index, markets, forex, bond and commodity.</p>
@@ -4203,13 +4203,13 @@ Click on any method below for a sample.
 
 <ul>
 <li><p>Historical Data for 1 instrument<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest">/markets/historical/{symbol}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&f=json">/markets/historical/{symbol}</a></p></li>
 <li><p>Historical Data for multiple instruments<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us,indu:ind?c=guest:guest">/markets/historical/{symbols}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us,indu:ind?c=guest:guest&f=json">/markets/historical/{symbols}</a></p></li>
 <!-- <li><p>Filter historical markets data by date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01">/markets/historical/{symbol}?d1=yyyy-mm-dd</a></p></li> -->
 <li><p>Filter historical data by date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/historical/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/historical/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08&f=json">/markets/historical/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a></p></li>
 </ul>
 
 <p></span> </p>
@@ -4427,13 +4427,13 @@ Click on any method below for a sample.
 
 <ul>
 <li><p>Intraday prices for a single instrument<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest">/markets/intraday/{symbol}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&f=json">/markets/intraday/{symbol}</a></p></li>
 <li><p>Filter intraday prices by date and hour<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-10%2015:30">/markets/intraday/{symbol}?d1=yyyy-mm-dd hh:mm</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-10%2015:30&f=json">/markets/intraday/{symbol}?d1=yyyy-mm-dd hh:mm</a></p></li>
 <li><p>Filter intraday prices by date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08">/markets/intraday/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>   </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/intraday/aapl:us?c=guest:guest&d1=2017-08-01&d2=2017-08-08&f=json">/markets/intraday/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>   </p></li>
 <li><p>Aggregate intraday prices by interval - allowed intervals: 1m, 5m, 10m, 15m, 30m, 1h, 2h, 4h<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/markets/intraday/CL1:COM?agr=5d&d1=2020-01-01%2000:00&d2=2020-12-01%2015:30&client=guest:guest">/markets/intraday/{symbol}?agr={interval}&d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>   </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/intraday/CL1:COM?agr=5d&d1=2020-01-01%2000:00&d2=2020-12-01%2015:30&client=guest:guest&f=json">/markets/intraday/{symbol}?agr={interval}&d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>   </p></li>
 </ul>
 
 <p></span> </p>
@@ -4881,15 +4881,15 @@ Click on any method below for a sample.
 
     <ul>
     <li><p>Market forecasts for major stock market indexes<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/index?c=guest:guest">/markets/forecasts/index</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/index?c=guest:guest&f=json">/markets/forecasts/index</a></p></li>
     <li><p>Market forecasts for major exchange rates<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/currency?c=guest:guest">/markets/forecasts/currency</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/currency?c=guest:guest&f=json">/markets/forecasts/currency</a></p></li>
     <li><p>Market forecasts for major commodities<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/commodity?c=guest:guest">/markets/forecasts/commodity</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/commodity?c=guest:guest&f=json">/markets/forecasts/commodity</a></p></li>
     <li><p>Market forecasts for major bonds<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/bond?c=guest:guest">/markets/forecasts/bond</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/bond?c=guest:guest&f=json">/markets/forecasts/bond</a></p></li>
     <li><p>Get major market forecasts by symbol<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/symbol/BULGARIAGOVB10Y:GOV,LITHUANIAGOVBON10Y:GOV,GBGB10YR:GOV?c=guest:guest">/markets/forecasts/symbol/{symbols}</a> </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/markets/forecasts/symbol/BULGARIAGOVB10Y:GOV,LITHUANIAGOVBON10Y:GOV,GBGB10YR:GOV?c=guest:guest&f=json">/markets/forecasts/symbol/{symbols}</a> </p></li>
     </ul>
     <p></span> </p>
     <br>
@@ -5192,14 +5192,14 @@ Click on any method below for a sample.
 <p><span class="methods"></p>
 <ul>
 <li><p>Default earnings calendar<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest">/earnings</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&f=json">/earnings</a>    </p></li>
 <li><p>Filter earnings calendar by date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01">/earnings?d1=yyyy-mm-dd</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01&f=json">/earnings?d1=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings calendar by instrument and date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings calendar by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest">/earnings/country/{country}</a> </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest&f=json">/earnings/country/{country}</a> </p></li>
 <!-- <li><p>Filter earnings by type: earnings, ipo, dividends.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li> -->
 </ul>
@@ -5385,24 +5385,24 @@ Click on any method below for a sample.
 <!-----------------------------Financials White Side-------------------------------> 
 <ul>
 <li><p>Financials companies list.<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?c=guest:guest">/financials/companies</a>    </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?c=guest:guest&f=json">/financials/companies</a>    </p></li>
 </ul>
 <ul>
 <li><p>Financials companies list filtered by country.<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?country=united states&c=guest:guest">/financials/companies?country={country}</a>    </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?country=united states&c=guest:guest&f=json">/financials/companies?country={country}</a>    </p></li>
 </ul>
 <ul>
 <li><p>Financials companies list filtered by more than one country (MAX countries = 5).<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?country=spain,germany&c=guest:guest">/financials/companies?country={countries}</a>    </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?country=spain,germany&c=guest:guest&f=json">/financials/companies?country={countries}</a>    </p></li>
 </ul>
 
 <ul>
 <li><p>Financials data by stock symbol<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/symbol/aapl:us?c=guest:guest">/financials/symbol/{symbol}</a>    </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/financials/symbol/aapl:us?c=guest:guest&f=json">/financials/symbol/{symbol}</a>    </p></li>
 </ul>
 <ul>
 <li><p>Financials historical data<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest">/financials/historical/{symbol}</a>    </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest&f=json">/financials/historical/{symbol}</a>    </p></li>
 </ul>
 <p></span> </p>
 <br>
@@ -5756,27 +5756,27 @@ Click on any method below for a sample.
 <br>
 <ul>
 <li><p>Get latest news.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest">/news</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest&f=json">/news</a></p></li>
 <li><p>Get news within a date range.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest&d1=2021-02-02&d2=2021-03-03">/news?c=guest:guest&amp;d1={date}&amp;d2={date}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest&d1=2021-02-02&d2=2021-03-03&f=json">/news?c=guest:guest&amp;d1={date}&amp;d2={date}</a></p></li>
 <li><p>Get news by country.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest">/news/country/{countries}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest&f=json">/news/country/{countries}</a></p></li>
 <li><p>Get news by country and dates.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest&d1=2021-02-02&d2=2021-03-03">/news/country/{countries}?c=guest:guest&amp;d1={date}&amp;d2={date}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states?c=guest:guest&d1=2021-02-02&d2=2021-03-03&f=json">/news/country/{countries}?c=guest:guest&amp;d1={date}&amp;d2={date}</a></p></li>
 
     <li><p>Get news by indicator.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest">/news/indicator/{indicators}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest&f=json">/news/indicator/{indicators}</a></p></li>
 
     <li><p>Get news by indicator and dates.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest&d1=2021-02-02&d2=2021-03-03">/news/indicator/{indicators}?c=guest:guest&amp;d1={date}&amp;d2={date}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/news/indicator/inflation%20rate?c=guest:guest&d1=2021-02-02&d2=2021-03-03&f=json">/news/indicator/{indicators}?c=guest:guest&amp;d1={date}&amp;d2={date}</a></p></li>
     
     <li><p>Get news by country and indicator.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest">/news/country/{countries}/{indicators}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest&f=json">/news/country/{countries}/{indicators}</a></p></li>
     <li><p>Get news by country and indicator and dates.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest&d1=2021-02-02&d2=2021-03-03">/news/country/{countries}/{indicators}?c=guest:guest&amp;d1={date}&amp;d2={date}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/news/country/united%20states/inflation%20rate?c=guest:guest&d1=2021-02-02&d2=2021-03-03&f=json">/news/country/{countries}/{indicators}?c=guest:guest&amp;d1={date}&amp;d2={date}</a></p></li>
     
     <li><p>Paginate news list by specifying start index and list size.<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/news?c=guest:guest&limit=15&start=10">/news?c=guest:guest&amp;limit={list_size}&amp;start={start_index}</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/news?c=guest:guest&limit=15&start=10&f=json">/news?c=guest:guest&amp;limit={list_size}&amp;start={start_index}</a></p></li>
 </ul>
 
 <p></span> </p>
@@ -6139,16 +6139,16 @@ javascript black side
 
 <ul>
 <li><p>List of categories available.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/search/categories?c=guest:guest">/search/categories</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/search/categories?c=guest:guest&f=json">/search/categories</a></p></li>
 </ul>
 
 <ul>
 <li><p>Search for term/keyword by category.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/search/japan?category=markets&c=guest:guest">/search/{term}?category={category}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/search/japan?category=markets&c=guest:guest&f=json">/search/{term}?category={category}</a></p></li>
 </ul>
 <ul>
 <li><p>Search for term/keyword in all categories available.<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/search/gold?c=guest:guest">/search/{term}</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/search/gold?c=guest:guest&f=json">/search/{term}</a></p></li>
 </ul>
 
 <!-----------------------------Eurostat Black Side-------------------------------> 
@@ -6370,48 +6370,48 @@ javascript black side
 <p><span class="methods"></p> 
     <ul>
         <li><p>List of countries available.<br>
-            <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/countries?c=guest:guest">/eurostat/countries</a></p></li>
+            <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/countries?c=guest:guest&f=json">/eurostat/countries</a></p></li>
         </ul>
         
         <ul>
         <li><p>List of categories and category groups available.<br>
-            <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/categories?c=guest:guest">/eurostat/categories</a></p></li>
+            <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/categories?c=guest:guest&f=json">/eurostat/categories</a></p></li>
         </ul>
 <ul>
 <li><p>Get Eurostat data by Category Group.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat?category_group=Poverty&c=guest:guest">/eurostat?category_goup={category_group}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat?category_group=Poverty&c=guest:guest&f=json">/eurostat?category_goup={category_group}</a></p></li>
 </ul>
 
 <ul>
 <li><p>Get Eurostat data by Category.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat?category=People at risk of income poverty after social transfers&c=guest:guest">/eurostat?category={category}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat?category=People at risk of income poverty after social transfers&c=guest:guest&f=json">/eurostat?category={category}</a></p></li>
 </ul>
 
 <ul>
     <li><p>Get Eurostat data by Country.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/country/Denmark?c=guest:guest">/eurostat/country/{country}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/country/Denmark?c=guest:guest&f=json">/eurostat/country/{country}</a></p></li>
 </ul>
 
 <ul>
     <li><p>Get Eurostat data by Country and category.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/country/European Union?category=Harmonised unemployment rate: Females&c=guest:guest">/eurostat/country/{country}?category={category}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/country/European Union?category=Harmonised unemployment rate: Females&c=guest:guest&f=json">/eurostat/country/{country}?category={category}</a></p></li>
 </ul>
 
 <ul>
     <li><p>Get Eurostat data by Country and category group.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/country/Denmark?category_group=Interest rates&c=guest:guest">/eurostat/country/{country}?category_group={category_group}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/country/Denmark?category_group=Interest rates&c=guest:guest&f=json">/eurostat/country/{country}?category_group={category_group}</a></p></li>
 </ul>
 <ul>
     <li><p>Get historical data by ID.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?c=guest:guest">/eurostat/historical/{id}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?c=guest:guest&f=json">/eurostat/historical/{id}</a></p></li>
     </ul>
     <ul>
     <li><p>Get historical data by ID and a start date.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?d1=2015-01-01&c=guest:guest">/eurostat/historical/{id}?d1={yyyy-mm-dd}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?d1=2015-01-01&c=guest:guest&f=json">/eurostat/historical/{id}?d1={yyyy-mm-dd}</a></p></li>
     </ul>
     <ul>
     <li><p>Get historical data by ID and a date range.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?d1=2016-01-01&d2=2020-01-01&c=guest:guest">/eurostat/historical/{id}?d1={yyyy-mm-dd}&d2={yyyy-mm-dd}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?d1=2016-01-01&d2=2020-01-01&c=guest:guest&f=json">/eurostat/historical/{id}?d1={yyyy-mm-dd}&d2={yyyy-mm-dd}</a></p></li>
     </ul>
 <br>
 <h3 id="response-fields">Response Fields</h3>
@@ -6976,28 +6976,28 @@ javascript black side
 <br>
 <ul>
 <li><p>Main categories<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/categories?c=guest:guest">/worldBank/categories</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/categories?c=guest:guest&f=json">/worldBank/categories</a></p></li>
 </ul>
 <ul>
 <li><p>Filtering by the main categories<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest">/worldBank/category/{category}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education?c=guest:guest&f=json">/worldBank/category/{category}</a><br>
 <!--Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/category/Education/2?c=guest:guest">/worldBank/category/{category}/{page_number}</a></p></li>-->
 </ul>
 <ul>
 <li><p>Detailed information about specific indicator for all countries using a series code from the previous method<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr">/worldBank/indicator?c=guest:guest&amp;s={series}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=fr.inr.rinr&f=json">/worldBank/indicator?c=guest:guest&amp;s={series}</a></p></li>
 <li><p>List of indicators available for a specific country<br>
 <!--<a target = '_blank' href="https://api.tradingeconomics.com/worldBank/country/portugal/2?c=guest:guest">/worldBank/country/{country}/{page_number}</a></p></li>-->
-    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/country/portugal?c=guest:guest">/worldBank/country/{country}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/country/portugal?c=guest:guest&f=json">/worldBank/country/{country}</a></p></li>
 <li><p>Detailed  information just for a specific indicator and country by using series code or url<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr">/worldBank/indicator?c=guest:guest&amp;s={series_code}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html">/worldBank/indicator?c=guest:guest&amp;url={url1}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&s=usa.fr.inr.rinr&f=json">/worldBank/indicator?c=guest:guest&amp;s={series_code}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html&f=json">/worldBank/indicator?c=guest:guest&amp;url={url1}</a></p></li>
 </ul>
 
 <ul>
 <li>Historical data for a specific indicator<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr">/worldBank/historical?c=guest:guest&amp;s={series_code}</a></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr&f=json">/worldBank/historical?c=guest:guest&amp;s={series_code}</a></li>
 </ul>
 <p></span></p>
 <br>
@@ -7518,56 +7518,56 @@ javascript black side
 <br>
 <ul>
 <li>Get detailed information about Comtrade categories<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest">/comtrade/categories</a></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest&f=json">/comtrade/categories</a></li>
 </ul>
 <ul>
 <li>Get the latest updated indicators<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/updates?c=guest:guest">/comtrade/updates</a></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/updates?c=guest:guest&f=json">/comtrade/updates</a></li>
 </ul>
 <ul>
     <li>Get total Imports by main category<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/india?c=guest:guest">/comtrade/import/{country}</a></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/india?c=guest:guest&f=json">/comtrade/import/{country}</a></li>
 </ul>
 <ul>
 <li>Total Exports by main category<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/united states?c=guest:guest">/comtrade/export/{country}</a></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/united states?c=guest:guest&f=json">/comtrade/export/{country}</a></li>
 </ul>
 <ul><li>Imports by specific category<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united kingdom/Coffee, tea, mate and spices?c=guest:guest">/comtrade/import/{country}/{category}</a></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united kingdom/Coffee, tea, mate and spices?c=guest:guest&f=json">/comtrade/import/{country}/{category}</a></li>
     </ul>
     <ul><li>Exports by specific category<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/live animals?c=guest:guest">/comtrade/export/{country}/{category}</a></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/live animals?c=guest:guest&f=json">/comtrade/export/{country}/{category}</a></li>
     
     </ul>
 <ul>
     <li><p>Get detailed information about Comtrade countries<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/countries?c=guest:guest">/comtrade/countries</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/countries?c=guest:guest&f=json">/comtrade/countries</a></p></li>
     </ul>
     
 <ul>
 <li><p>Snapshot of data per country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest">/comtrade/country/{country}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest&f=json">/comtrade/country/{country}</a><br>
 
 <li><p>Snapshot of data per country filtered by type: import or export<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?type=export&c=guest:guest">/comtrade/country/{country}?type={type}</a><br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?type=export&c=guest:guest&f=json">/comtrade/country/{country}?type={type}</a><br>
 
     <!--Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">/comtrade/country/{country}/{page_number}</a></p></li>-->
 <li><p>Snapshot of trade between two countries<br>
     <!--<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">/comtrade/country/{country_1}/{country_2}/{page_number}</a></p></li>-->
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?c=guest:guest">/comtrade/country/{country_1}/{country_2}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?c=guest:guest&f=json">/comtrade/country/{country_1}/{country_2}</a></p></li>
 <li><p>Snapshot of trade between two countries filtered by type: import or export<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?type=import&c=guest:guest">/comtrade/country/{country_1}/{country_2}?type={type}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?type=import&c=guest:guest&f=json">/comtrade/country/{country_1}/{country_2}?type={type}</a></p></li>
 
 <li><p>Total Imports by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united states/totals?c=guest:guest">/comtrade/import/{country}/totals</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united states/totals?c=guest:guest&f=json">/comtrade/import/{country}/totals</a></p></li>
 <li><p>Total Exports by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/totals?c=guest:guest">/comtrade/export/{country}/totals</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/totals?c=guest:guest&f=json">/comtrade/export/{country}/totals</a></p></li>
             
 </ul>
 <ul>
 <li>Historical data<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest">/comtrade/historical/{symbol}</a></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest&f=json">/comtrade/historical/{symbol}</a></li>
 </ul>
 <br>    
 <h3 id="response-fields">Response Fields</h3>
@@ -8130,37 +8130,37 @@ javascript black side
 
 <ul>
 <li><p>List of all US states<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/states?c=guest:guest">/fred/states</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/states?c=guest:guest&f=json">/fred/states</a>    </p></li>
 <li><p>List of all counties per state<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/counties/arkansas?c=guest:guest">/fred/counties/{state}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/counties/arkansas?c=guest:guest&f=json">/fred/counties/{state}</a>    </p></li>
 </ul>
 
 <ul>
 <li><p>Symbol<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/symbol/ALLMARGATTN?c=guest:guest">/fred/snapshot/symbol/{symbol}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/symbol/ALLMARGATTN?c=guest:guest&f=json">/fred/snapshot/symbol/{symbol}</a>    </p></li>
 <li><p>URL<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/url?c=guest:guest&url=/united-states/all-marginally-attached-workers-for-tennessee-fed-data.html">/fred/snapshot/url?c=guest:guest&amp;url={url}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/url?c=guest:guest&url=/united-states/all-marginally-attached-workers-for-tennessee-fed-data.html&f=json">/fred/snapshot/url?c=guest:guest&amp;url={url}</a></p></li>
 <li><p>Country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/?c=guest:guest">/fred/snapshot/country/{country}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/?c=guest:guest&f=json">/fred/snapshot/country/{country}</a>    </p></li>
 <li><p>State<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/state/tennessee?c=guest:guest">/fred/snapshot/state/{state}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/state/tennessee?c=guest:guest&f=json">/fred/snapshot/state/{state}</a>    </p></li>
 <li><p>County<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/arkansas?c=guest:guest">/fred/snapshot/county/{county}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/arkansas?c=guest:guest&f=json">/fred/snapshot/county/{county}</a><br>
 or<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest">/fred/snapshot/county/Pike%20County,%20AR</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest&f=json">/fred/snapshot/county/Pike%20County,%20AR</a></p></li>
 <!--<li><p>Pagination<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/2?c=guest:guest">/fred/snapshot/country/{country}/{page}</a>    </p></li>-->
 </ul>
 
 <ul>
 <li><p>Only accessed through symbol<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007?c=guest:guest">/fred/historical/{symbol}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007?c=guest:guest&f=json">/fred/historical/{symbol}</a>    </p></li>
 <li><p>Multiple symbols<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007,2020RATIO002013?c=guest:guest">/fred/historical/{symbols}</a>    </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007,2020RATIO002013?c=guest:guest&f=json">/fred/historical/{symbols}</a>    </p></li>
 <li><p>By symbol and a date range<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/fred/historical/BAMLC0A1CAAAEY?c=guest:guest&d1=2017-05-01&d2=2019-01-01">/fred/historical/{symbols}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>    </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/fred/historical/BAMLC0A1CAAAEY?c=guest:guest&d1=2017-05-01&d2=2019-01-01&f=json">/fred/historical/{symbols}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>    </p></li>
 <li><p>By symbol and a start date<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/fred/historical/BAMLC0A1CAAAEY?c=guest:guest&d1=2018-05-01">/fred/historical/{symbols}?d1=yyyy-mm-dd</a>    </p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/fred/historical/BAMLC0A1CAAAEY?c=guest:guest&d1=2018-05-01&f=json">/fred/historical/{symbols}?d1=yyyy-mm-dd</a>    </p></li>
     
 </ul>
 <br>    
