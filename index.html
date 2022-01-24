@@ -2884,6 +2884,7 @@ or you can specify a start date and end date<br>
 </tr>
 </tbody></table>
 <p>*Response fields only used on translated calendar queries.</p>
+
 <h2 id="streaming">Streaming</h2>
 
 <!-----------------------------Calendar Black Side------------------------------->      
@@ -5822,6 +5823,202 @@ Click on any method below for a sample.
 <td style="text-align: left">Hyperlink at Trading Economics</td>
 </tr>
 </tbody></table>
+
+<h2 id="streaming">Streaming</h2>
+
+<!-----------------------------News Streaming Black Side------------------------------->      
+<!--streaming News python black side-->
+<blockquote class="lang-specific python">    
+    <p>
+    Copy this code and execute<br><br>
+    Subscribe to one symbol
+    </p>
+</blockquote>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">tradingeconomics</span> <span class="kn">as</span> <span class="nn">te</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">te</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'guest:guest'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+  <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+<span class="n">te</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">'news'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">on_message</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">
+<br><br><br><br><br>
+    <p>This is the returned output:</p>
+</blockquote>
+<pre class="highlight python"><code>
+<span class="n">{ </span></span><span class="s">'title' </span><span class="n">: 'Latvia Producer Inflation Hits Fresh Record', </span></span><span class="s">'description' </span><span class="n">: 'Producer prices in Latvia climbed to an all-time high of 25.1 percent year-on-year </span></span>
+<span class="n">in December of 2021 from 23.4 percent in the previous month, driven by prices of domestically sold goods (31.4 percent vs 26.7 percent in November).</span>
+<span class="n">On the other hand, charges for Latvian exports went up at a slower rate (19.6 percent vs 20.5 percent). Across different industries,</span></span>
+<span class="n">prices of utilities jumped (62.9 percent vs 49.8 percent) and those of mining and quarrying rose slightly (13.8 percent vs 13.1 percent).</span></span> 
+<span class="n">Meanwhile, inflation slowed for manufacturing (18.7 percent vs 19 percent); and water supply, sewerage, and waste management (18.5 percent vs 18.7 percent).</span></span> 
+<span class="n">On a monthly basis, producer prices surged 1.6 percent, accelerating from a 1.2 percent rise in November.'</span></span>
+<span class="s">'country' </span><span class="n">: 'Latvia', </span></span><span class="s">'category' </span><span class="n">: 'Producer Prices Change', </span></span><span class="s">'url' </span><span class="n">: '/latvia/producer-prices-change', </span></span><span class="s">'topic' </span><span class="n">: stream  </span></span><span class="n">} </span></span>
+</code></pre>
+
+<!--streaming News javascript black side-->
+
+<blockquote class="lang-specific javascript">
+    <p>In Windows Command Prompt or Linux bash execute next steps: <br>  
+    Step 1 - Clone repository</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">git</span> <span class="nx">clone</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/tradingeconomics/tradingeconomics</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Step 2</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">cd</span> <span class="nx">tradingeconomics</span><span class="o">/</span><span class="nx">nodejs</span><span class="o">/</span><span class="nx">Examples/stream-nodejs</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Step 3 - Install dependencies</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">npm</span> <span class="nx">install</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Step 4 - In app.js file, set-up your client key/secret</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">te_client</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'ws://stream.tradingeconomics.com/'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'API_CLIENT_KEY'</span><span class="p">,</span> <span class="c1">// &lt;--</span>
+  <span class="na">secret</span><span class="p">:</span> <span class="s1">'API_CLIENT_SECRET'</span> <span class="c1">// &lt;--</span>
+  <span class="c1">//reconnect: true</span>
+<span class="p">});</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Step 5 - Run it</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">node</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/nodejs/Examples/stream-nodejs/app.js">Check here for the complete sample code.</a></p>
+</blockquote>
+
+<!--streaming News c# black side-->
+
+<blockquote class="lang-specific csharp">
+    <p>Only a single news topic "news" can be subscribed using guest:guest.<br>
+    For other markets topic "key:secret" is required.  
+    </p>  
+</blockquote>
+<pre class="highlight csharp"><code>   
+<span class="k">try</span> 
+{
+    <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket</span>())
+    {    
+        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
+        
+        <span class="k">if</span> (cws.<span class="k">State</span> == <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(Encoding.<span class="k">UTF8</span>.GetBytes(<span class="s">@"{""topic"": ""subscribe"", ""to"": """</span> + subscribeTo + <span class="s">@""" }"</span>));
+            <span class="k">await</span> result = <span class="k">await</span> cws.<span class="kt">SendAsync</span>(buffer, <span class="kt">WebSocketMessageType</span>.Binary, <span class="s">true</span>, <span class="kt">CancellationToken</span>.None);
+        }
+        <span class="k">await</span> Task.<span class="kt">Delay</span>(<span class="s">1024</span>);
+        <span class="k">while</span> (cws.<span class="k">State</span>== <span class="kt">WebSocketState</span>.Open)
+        {
+            <span class="k">var</span> buffer = <span class="k">new</span> <span class="kt">ArraySegment</span>< byte >(<span class="k">new byte</span>[<span class="s">1024</span>]);
+            <span class="k">var</span> result = <span class="k">await</span> cws.<span class="kt">ReceiveAsync</span>(buffer,<span class="kt"> CancellationToken</span>.None);   
+            <span class="k">if</span> (result.<span class="k">MessageType </span>== <span class="kt">WebSocketMessageType</span>.Close)
+            {
+                <span class="k">await</span> cws.<span class="kt">CloseAsync</span>(WebSocketCloseStatus.<span class="s">NormalClosure</span>, string.<span class="k">Empty</span>, <span class="kt"> CancellationToken</span>.None);
+            }
+            <span class="k">Console</span>.WriteLine(<span class="s">$"Receiving:</span> {Encoding.<span class="k">UTF8</span>.<span class="kt">GetString</span>(buffer.Array, <span class="s">0</span>, result.<span class="kt">Count</span>).Trim()}<span class="s">"</span>);
+        }
+    }
+}
+<span class="k">catch</span> (<span class="kt">Exception</span> e)
+}
+    <span class="k">Console</span>.WriteLine(<span class="s">$"Error with message: </span>{e.Message}<span class="s">"</span>);
+} 
+
+</code></pre>
+<blockquote class="lang-specific csharp">
+    <p><a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/C%23/Streamer.cs">Check here for the complete sample code.</a> </p>
+</blockquote>
+
+<!--streaming News java black side-->
+
+<blockquote class="lang-specific java">
+    <p>Two Libraries are require to run this example<br>
+        <strong> - javax.websocket-client-api.1.1.jar</strong><br>
+        <strong> - tyrus-standalone-client-1.9.jar</strong></p>
+</blockquote>
+<pre class="highlight java"><code><span class="k">public</span> <span class="k">class</span> <span class="na">Streaming</span><span class="o"> {</span> 
+    <span class="k">public</span> <span class="k">static</span> <span class="na">void</span> <span class="n">main</span><span class="o">(</span><span class="na">String</span><span class="o">[] </span><span class="na">args</span><span class="o">)</span><span class="o"> {</span>
+        <span class="na">try</span><span class="o"> {</span>
+            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
+            <span class="na">client</span><span class="o">.</span><span class="n">addMessageHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">WebsocketClient</span><span class="o">.</span><span class="na">MessageHandler</span><span class="o">() {</span>
+                <span class="k">public</span> <span class="na">void</span> <span class="n">handleMessage</span><span class="o">(</span><span class="na">String</span> <span class="s">message</span><span class="o">) {</span>
+                    <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Receiving: "</span><span class="n"> + message</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+            <span class="na">Scanner</span> <span class="n">scan</span> <span class="o">=</span><span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="k">System</span><span class="o">.</span><span class="k">in</span><span class="o">);</span>
+            <span class="c1">//It will ask you to subscribe to the topic on the terminal.</span>
+            <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Enter topic for subscription: "</span><span class="o">);</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">scan</span><span class="o">.</span><span class="na">hasNext</span><span class="o">))</span><span class="o"> {</span>
+                <span class="c1">////input on the terminal will be "news"</span>
+                <span class="na">String</span><span class="n"> to</span> <span class="o">=</span> <span class="k"> scan</span><span class="o">.</span><span class="na">nextLine</span><span class="o">();</span>
+                <span class="na">String</span><span class="n"> subs</span> <span class="o">=</span> <span class="s"> "{\"topic\": \"subscribe\", \"to\": \""</span> <span class="n">+ to +</span><span class="s"> "\" }"</span><span class="o">;</span>
+                <span class="k">client</span><span class="o">.</span><span class="na">sendMessage</span><span class="n">(subs);</span>
+            <span class="o">}</span>
+            <span class="na">Thread</span><span class="o">.</span><span class="k">sleep</span><span class="o">(</span><span class="s">30000</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="na">InterruptedException</span> <span class="n">ex</span><span class="o">) {</span>   
+            <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"InterruptedException exception: "</span><span class="n"> + </span><span class="na">ex</span><span class="o">.</span><span class="n">getMessage()</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="na">URISyntaxException</span> <span class="n">ex</span><span class="o">) {</span> 
+            <span class="n">System.</span><span class="na">err</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"URISyntaxException exception: "</span><span class="n"> + </span><span class="na">ex</span><span class="o">.</span><span class="n">getMessage()</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>    
+<span class="o">}</span>
+</code></pre>
+
+    
+<!-----------------------------streaming Calendar White Side------------------------------->      
+
+
+<p>The streaming service uses websockets (WebSockets provide a bidirectional, full-duplex communications channel that operates over HTTP through a single TCP/IP socket connection). At its core, the WebSocket protocol facilitates message passing between a client and server.
+    You can connect to our streaming service using the examples listed on the black pane. 
+    You need to subscribe to one or more instruments.</p>
+<br>
+    <p><strong>Response fields for the News subscription:</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>title</strong></td>
+<td style="text-align: left">Title</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>description</strong></td>
+<td style="text-align: left">description</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>country</strong></td>
+<td style="text-align: left">country</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>category</strong></td>
+<td style="text-align: left">category</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>url</strong></td>
+<td style="text-align: left">url</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>topic</strong></td>
+<td style="text-align: left">topic</td>
+</tr>
+
+</tbody></table>
+
+<p>Here you can see a <a target = '_blank' href="https://tradingeconomics.com/analytics/markets.aspx">list</a> of available live data, or you can <a target = '_blank' href="https://tradingeconomics.com/contact.aspx?subject=Stream%20list">contact us</a></p>
+
+
 <!--
 <h2 id="latest-articles">Latest articles</h2>
 Python Latest Articles black side
@@ -5924,7 +6121,7 @@ javascript black side
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
-<!--php black side
+php black side
 <blockquote class="lang-specific php">
     <p>To get the latest articles. <br>Remember, without a client key only a sample of data will be provided.</p>
 </blockquote>
@@ -6090,6 +6287,8 @@ javascript black side
 </tr>
 </tbody></table>
 -----------------------------------------------------------End of Articles----------------------------------------------------------->
+
+
 <!-----------------------------Search White Side------------------------------->
        
 <!--Search white side-->
