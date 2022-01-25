@@ -222,7 +222,7 @@
     <div id="toc">
 </div>
       <div class="page-wrapper">
-      <div class="dark-box"></div>
+      <!--<div class="dark-box"></div>-->
       <div class="content">
 
       
@@ -4017,7 +4017,7 @@ Click on any method below for a sample.
 
 <!-----------------------------Markets Historical Black Side-------------------------------> 
 
-<h2 id="historical">Historical</h2>
+<h2 id="historical-market">Historical</h2>
 
 <!--Python Historical Markets black side-->
 
@@ -4475,7 +4475,7 @@ Click on any method below for a sample.
 </tbody></table>
 
 <!-----------------------------Markets Streaming Black Side-------------------------------> 
-<h2 id="streaming">Streaming</h2>
+<h2 id="streaming-market">Streaming</h2>
 
 <!--streaming markets python black side-->
 
@@ -5824,7 +5824,7 @@ Click on any method below for a sample.
 </tr>
 </tbody></table>
 
-<h2 id="streaming">Streaming</h2>
+<h2 id="streaming-news">Streaming</h2>
 
 <!-----------------------------News Streaming Black Side------------------------------->      
 <!--streaming News python black side-->
@@ -8469,4 +8469,11 @@ or<br>
     <link rel="stylesheet" href="stylesheets/custom.css">
 
   </body>
+  <script>
+    $( document ).ready(function() {
+        $("h2#historical-market").attr('id', 'historical-market11');
+        $("h2#streaming-market").attr('id', 'streaming-market13');
+        $("h2#streaming-news").attr('id', 'streaming-news18');
+    });
+</script>
 </html>
