@@ -13,12 +13,19 @@ def login(userkey = None):
 _event = []
 
 def subscribe(ev):
+    def upperCaseList(list):
+        finalList = []
+        while len(list) > 0:
+          oneSymbol = list.pop()
+          finalList.append(oneSymbol.upper())
+        return finalList
     
     global _event 
     if type(ev) is list:
+        ev = upperCaseList(ev)
         _event += ev
     else:
-        _event.append(ev)
+        _event.append(ev.upper())
 
     print('You are subscribed to:' + str(_event))
 
