@@ -26,6 +26,11 @@ Client = new te_client({
 	});
 ```
 
+NOTE: When subscribing to multiple symbols, you can pass it as String or an Array. Examples:
+	
+	1. String - ('EURUSD:CUR, DAX:IND') 
+	2. Array -  ['EURUSD:CUR', 'DAX:IND']
+
 Step 5 - Run it!
 ```
 node app.js
