@@ -19,7 +19,7 @@ npm install
 Step 4 - In app.js file, set-up your client key/secret
 ```
 Client = new te_client({
-		url: 'ws://stream.tradingeconomics.com/',
+		url: 'wss://stream.tradingeconomics.com/',
 		key: 'API_CLIENT_KEY', // <--
 		secret: 'API_CLIENT_SECRET' // <--
 		//reconnect: true
