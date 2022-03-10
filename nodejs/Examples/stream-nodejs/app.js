@@ -5,7 +5,7 @@
 
 var te_client = require('./te_client'),
 	Client = new te_client({
-		url: 'ws://stream.tradingeconomics.com/',
+		url: 'wss://stream.tradingeconomics.com/',
 		key: 'guest', //API_CLIENT_KEY
 		secret: 'guest' //API_CLIENT_SECRET
 		//reconnect: true
