@@ -10,8 +10,14 @@ var te_client = require('./te_client'),
 		secret: 'guest' //API_CLIENT_SECRET
 		//reconnect: true
 	});
-		
-Client.subscribe('EURUSD:CUR');
+
+
+/*
+Examples for multiple symbols:
+	1. 'INDU:IND, AAPL:US'
+	2. ['INDU:IND', 'DAX:IND']
+*/
+Client.subscribe('EURUSD:CUR,INDU:IND');
 
 Client.on('message', function(msg){
 	console.log('\n Data from TradingEconomics stream: ', msg.topic);

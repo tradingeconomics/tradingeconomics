@@ -5,7 +5,7 @@ var events = require("events");
 
 var WebSocket = require('ws'),
 	defaultOptions = {
-		url: 'ws://stream.tradingeconomics.com/', 
+		url: 'wss://stream.tradingeconomics.com/', 
 		
 		key: 'guest',
 		secret: 'guest',
@@ -35,12 +35,10 @@ TEClient.prototype.init = function(){
 
 	_this.options = merge(defaultOptions, _this.userOptions);
 	_this.subArr = []; // ["calendar"]
-
 	_this.connect.apply(this);
 
 	return _this;
 };
-
 
 
 
@@ -105,8 +103,15 @@ TEClient.prototype.connect = function(){
 TEClient.prototype.subscribe = function(to){
 	var _this = this;
 
-	if(_this.subArr.indexOf(to)<0){
-		_this.subArr.push(to);
+	if(typeof(to) == 'string'){
+		to = to.toUpperCase().replace(/ /g,'');
+		_this.subArr = to.split(',')
+	}else if (typeof(to) == 'object'){
+		console.log(`INFO: You can use symbol list as a string separated by comma. Eg. 'INDU:IND, AAPL:US'`)
+		_this.subArr = to.map(element => { return element.toUpperCase().replace(/ /g,'');});
+	}else{
+		console.log(`ERROR: Please use String, if multiple separate it by ",". Example:('INDU:IND,DAX:IND'), or an Array Object. Example: ['INDU:IND', 'DAX:IND']`)
+		return;
 	}
 
 	if(!_this.ws || _this.ws.readyState != WebSocket.OPEN){ 
@@ -114,20 +119,10 @@ TEClient.prototype.subscribe = function(to){
 		return _this;
 	}
 
-
-	
 	_this.ws.send('{"topic": "subscribe", "to": "'+to+'"}');
-
 
 	return _this;
 };
-
-
-
-
-
-
-
 
 
 module.exports = TEClient;
