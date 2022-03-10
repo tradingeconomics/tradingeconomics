@@ -2940,7 +2940,7 @@ or you can specify a start date and end date<br>
     <p>Step 4 - In app.js file, set-up your client key/secret</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="nx">Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">te_client</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'ws://stream.tradingeconomics.com/'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'wss://stream.tradingeconomics.com/'</span><span class="p">,</span>
   <span class="na">key</span><span class="p">:</span> <span class="s1">'API_CLIENT_KEY'</span><span class="p">,</span> <span class="c1">// &lt;--</span>
   <span class="na">secret</span><span class="p">:</span> <span class="s1">'API_CLIENT_SECRET'</span> <span class="c1">// &lt;--</span>
   <span class="c1">//reconnect: true</span>
@@ -2967,7 +2967,7 @@ or you can specify a start date and end date<br>
 {
     <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket</span>())
     {    
-        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
+        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"wss://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
         
         <span class="k">if</span> (cws.<span class="k">State</span> == <span class="kt">WebSocketState</span>.Open)
         {
@@ -3005,7 +3005,7 @@ or you can specify a start date and end date<br>
 <pre class="highlight java"><code><span class="k">public</span> <span class="k">class</span> <span class="na">Streaming</span><span class="o"> {</span> 
     <span class="k">public</span> <span class="k">static</span> <span class="na">void</span> <span class="n">main</span><span class="o">(</span><span class="na">String</span><span class="o">[] </span><span class="na">args</span><span class="o">)</span><span class="o"> {</span>
         <span class="na">try</span><span class="o"> {</span>
-            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
+            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"wss://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
             <span class="na">client</span><span class="o">.</span><span class="n">addMessageHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">WebsocketClient</span><span class="o">.</span><span class="na">MessageHandler</span><span class="o">() {</span>
                 <span class="k">public</span> <span class="na">void</span> <span class="n">handleMessage</span><span class="o">(</span><span class="na">String</span> <span class="s">message</span><span class="o">) {</span>
                     <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Receiving: "</span><span class="n"> + message</span><span class="o">);</span>
@@ -4528,7 +4528,7 @@ Click on any method below for a sample.
     <p>Step 4 - In app.js file, set-up your client key/secret</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="nx">Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">te_client</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'ws://stream.tradingeconomics.com/'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'wss://stream.tradingeconomics.com/'</span><span class="p">,</span>
   <span class="na">key</span><span class="p">:</span> <span class="s1">'API_CLIENT_KEY'</span><span class="p">,</span> <span class="c1">// &lt;--</span>
   <span class="na">secret</span><span class="p">:</span> <span class="s1">'API_CLIENT_SECRET'</span> <span class="c1">// &lt;--</span>
   <span class="c1">//reconnect: true</span>
@@ -4555,7 +4555,7 @@ Click on any method below for a sample.
 {
     <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket</span>())
     {    
-        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
+        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"wss://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
         
         <span class="k">if</span> (cws.<span class="k">State</span> == <span class="kt">WebSocketState</span>.Open)
         {
@@ -4595,7 +4595,7 @@ Click on any method below for a sample.
 <pre class="highlight java"><code><span class="k">public</span> <span class="k">class</span> <span class="na">Streaming</span><span class="o"> {</span> 
     <span class="k">public</span> <span class="k">static</span> <span class="na">void</span> <span class="n">main</span><span class="o">(</span><span class="na">String</span><span class="o">[] </span><span class="na">args</span><span class="o">)</span><span class="o"> {</span>
         <span class="na">try</span><span class="o"> {</span>
-            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
+            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"wss://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
             <span class="na">client</span><span class="o">.</span><span class="n">addMessageHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">WebsocketClient</span><span class="o">.</span><span class="na">MessageHandler</span><span class="o">() {</span>
                 <span class="k">public</span> <span class="na">void</span> <span class="n">handleMessage</span><span class="o">(</span><span class="na">String</span> <span class="s">message</span><span class="o">) {</span>
                     <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Receiving: "</span><span class="n"> + message</span><span class="o">);</span>
@@ -5881,7 +5881,7 @@ Click on any method below for a sample.
     <p>Step 4 - In app.js file, set-up your client key/secret</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="nx">Client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">te_client</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'ws://stream.tradingeconomics.com/'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'wss://stream.tradingeconomics.com/'</span><span class="p">,</span>
   <span class="na">key</span><span class="p">:</span> <span class="s1">'API_CLIENT_KEY'</span><span class="p">,</span> <span class="c1">// &lt;--</span>
   <span class="na">secret</span><span class="p">:</span> <span class="s1">'API_CLIENT_SECRET'</span> <span class="c1">// &lt;--</span>
   <span class="c1">//reconnect: true</span>
@@ -5908,7 +5908,7 @@ Click on any method below for a sample.
 {
     <span class="k">using</span> (<span class="k">var</span> cws = <span class="k">new</span> <span class="kt">ClientWebSocket</span>())
     {    
-        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"ws://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
+        <span class="k">await</span> cws.<span class="kt">ConnectAsync</span>(<span class="k">new</span> Uri(<span class="s">$"wss://stream.tradingeconomics.com/?client=</span>{_clientKey}<span class="s">"</span>), <span class="kt">CancellationToken</span>.None);
         
         <span class="k">if</span> (cws.<span class="k">State</span> == <span class="kt">WebSocketState</span>.Open)
         {
@@ -5948,7 +5948,7 @@ Click on any method below for a sample.
 <pre class="highlight java"><code><span class="k">public</span> <span class="k">class</span> <span class="na">Streaming</span><span class="o"> {</span> 
     <span class="k">public</span> <span class="k">static</span> <span class="na">void</span> <span class="n">main</span><span class="o">(</span><span class="na">String</span><span class="o">[] </span><span class="na">args</span><span class="o">)</span><span class="o"> {</span>
         <span class="na">try</span><span class="o"> {</span>
-            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"ws://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
+            <span class="k">final</span><span class="n"> WebsocketClient</span> <span class="na">client</span> <span class="o">=</span> <span class="k"> new</span><span class="n"> WebsocketClient</span><span class="o">(</span><span class="k">new</span><span class="n"> URI</span><span class="o">(</span><span class="s">"wss://stream.tradingeconomics.com/?client=guest:guest"</span><span class="o">));</span>
             <span class="na">client</span><span class="o">.</span><span class="n">addMessageHandler</span><span class="o">(</span><span class="k">new</span> <span class="n">WebsocketClient</span><span class="o">.</span><span class="na">MessageHandler</span><span class="o">() {</span>
                 <span class="k">public</span> <span class="na">void</span> <span class="n">handleMessage</span><span class="o">(</span><span class="na">String</span> <span class="s">message</span><span class="o">) {</span>
                     <span class="n">System.</span><span class="na">out</span><span class="o">.</span><span class="k">println</span><span class="o">(</span><span class="s">"Receiving: "</span><span class="n"> + message</span><span class="o">);</span>
