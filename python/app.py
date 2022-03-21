@@ -17,12 +17,20 @@ app = Dash(
 table_header = [html.Thead(html.Tr([html.Th("First Name"), html.Th("Last Name")]))]
 
 
-def get_table_data(country="United States"):
+def get_gdp_data(country="United States"):
     """TODO(aziot)"""
     if not country:
         return None
     return te.getHistoricalData(
-        country=country, indicator="gdp", initDate="2000-01-01", output_type="df"
+        country=country, indicator="gdp", output_type="df"
+    ).sort_values(by=["DateTime"], ascending=[False])[["DateTime", "Value"]]
+
+
+def get_rating_data(country="United States"):
+    if not country:
+        return None
+    return te.getHistoricalRatings(country=country, output_type="df").sort_values(
+        by=["Date"], ascending=[False]
     )
 
 
@@ -45,13 +53,24 @@ app.layout = html.Div(
         html.Div(
             [
                 dbc.Table.from_dataframe(
-                    get_table_data(),
+                    get_gdp_data(),
                     striped=True,
                     bordered=True,
                     hover=True,
                 )
             ],
             id="gdp-table",
+        ),
+        html.Div(
+            [
+                dbc.Table.from_dataframe(
+                    get_rating_data(),
+                    striped=True,
+                    bordered=True,
+                    hover=True,
+                )
+            ],
+            id="rating-table",
         ),
     ],
     id="master",
@@ -87,7 +106,40 @@ def update_output_div(n1, n2, n3):
     button_id = ctx.triggered[0]["prop_id"].split(".")[0]
     country = id_lookup[button_id]
 
-    df = get_table_data(country)
+    df = get_gdp_data(country)
+    return dbc.Table.from_dataframe(df, striped=True, bordered=True, hover=True)
+
+
+@app.callback(
+    Output(component_id="rating-table", component_property="children"),
+    [
+        Input(component_id="dropdown-button-1", component_property="n_clicks"),
+        Input(component_id="dropdown-button-2", component_property="n_clicks"),
+        Input(component_id="dropdown-button-3", component_property="n_clicks"),
+    ],
+)
+def update_output_div(n1, n2, n3):
+    app.logger.info("{} {} {}".format(n1, n2, n3))
+
+    # use a dictionary to map ids back to the desired label
+    # makes more sense when there are lots of possible labels
+    id_lookup = {
+        "dropdown-button-1": "United States",
+        "dropdown-button-2": "United Kingdom",
+        "dropdown-button-3": "China",
+    }
+
+    ctx = dash.callback_context
+
+    if (n1 is None and n2 is None and n3 is None) or not ctx.triggered:
+        # if neither button has been clicked, return "Not selected"
+        return no_update
+
+    # this gets the id of the button that triggered the callback
+    button_id = ctx.triggered[0]["prop_id"].split(".")[0]
+    country = id_lookup[button_id]
+
+    df = get_rating_data(country)
     return dbc.Table.from_dataframe(df, striped=True, bordered=True, hover=True)
 
 
