@@ -80,7 +80,7 @@ app.layout = html.Div(
             ],
             id="rating-table",
         ),
-        html.Div(id="gdp-vs-rating-graph"),
+        dcc.Graph(id="gdp-vs-rating-graph"),
     ],
     id="master",
 )
@@ -153,7 +153,7 @@ def update_output_div(n1, n2, n3):
 
 
 @app.callback(
-    Output(component_id="gdp-vs-rating-graph", component_property="children"),
+    Output(component_id="gdp-vs-rating-graph", component_property="figure"),
     [
         Input(component_id="dropdown-button-1", component_property="n_clicks"),
         Input(component_id="dropdown-button-2", component_property="n_clicks"),
@@ -184,7 +184,7 @@ def update_output_div(n1, n2, n3):
     df = get_rating_data(country)
 
     agencies = set(df["Agency"].tolist())
-    return html.Div(
+    html.Div(
         [
             dcc.Graph(
                 figure=dict(
@@ -213,6 +213,14 @@ def update_output_div(n1, n2, n3):
                 style={"height": 300},
             )
         ]
+    )
+    return px.scatter(
+        df,
+        x="Year",
+        y="Rating",
+        hover_name="Agency",
+        log_x=True,
+        size_max=55,
     )
 
 
