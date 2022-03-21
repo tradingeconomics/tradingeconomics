@@ -1,3 +1,5 @@
+import random
+
 import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
@@ -78,7 +80,7 @@ app.layout = html.Div(
             ],
             id="rating-table",
         ),
-        dcc.Graph(id="graph-with-slider"),
+        html.Div(id="gdp-vs-rating-graph"),
     ],
     id="master",
 )
@@ -148,6 +150,70 @@ def update_output_div(n1, n2, n3):
 
     df = get_rating_data(country)
     return dbc.Table.from_dataframe(df, striped=True, bordered=True, hover=True)
+
+
+@app.callback(
+    Output(component_id="gdp-vs-rating-graph", component_property="children"),
+    [
+        Input(component_id="dropdown-button-1", component_property="n_clicks"),
+        Input(component_id="dropdown-button-2", component_property="n_clicks"),
+        Input(component_id="dropdown-button-3", component_property="n_clicks"),
+    ],
+)
+def update_output_div(n1, n2, n3):
+    app.logger.info("{} {} {}".format(n1, n2, n3))
+
+    # use a dictionary to map ids back to the desired label
+    # makes more sense when there are lots of possible labels
+    id_lookup = {
+        "dropdown-button-1": "United States",
+        "dropdown-button-2": "United Kingdom",
+        "dropdown-button-3": "China",
+    }
+
+    ctx = dash.callback_context
+
+    if (n1 is None and n2 is None and n3 is None) or not ctx.triggered:
+        # if neither button has been clicked, return "Not selected"
+        return no_update
+
+    # this gets the id of the button that triggered the callback
+    button_id = ctx.triggered[0]["prop_id"].split(".")[0]
+    country = id_lookup[button_id]
+
+    df = get_rating_data(country)
+
+    agencies = set(df["Agency"].tolist())
+    return html.Div(
+        [
+            dcc.Graph(
+                figure=dict(
+                    data=[
+                        dict(
+                            x=df[df["Agency"] == agency][["Year"]],
+                            y=df[df["Agency"] == agency][["Rating"]],
+                            name=agency,
+                            marker=dict(
+                                color="rgb({}, {}, {})".format(
+                                    random.randint(0, 255),
+                                    random.randint(0, 255),
+                                    random.randint(0, 255),
+                                )
+                            ),
+                        )
+                        for agency in agencies
+                    ],
+                    layout=dict(
+                        title="{} GDP vs Credit Rating".format(country),
+                        showlegend=True,
+                        legend=dict(x=0, y=1.0),
+                        margin=dict(l=40, r=0, t=40, b=30),
+                    ),
+                ),
+                style={"height": 300},
+            )
+        ]
+    )
 
 
 if __name__ == "__main__":
