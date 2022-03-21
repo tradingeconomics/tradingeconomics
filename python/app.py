@@ -10,7 +10,7 @@ te.login()
 
 app = Dash(
     __name__,
-    title="Country vs GDP",
+    title="Credit rating vs. GDP",
     suppress_callback_exceptions=True,
     external_stylesheets=[dbc.themes.BOOTSTRAP],
     serve_locally=False,
@@ -25,7 +25,8 @@ def get_gdp_data(country="United States"):
         return None
     df = te.getHistoricalData(country=country, indicator="gdp", output_type="df")
     df["DateTime"] = df["DateTime"].astype("datetime64")
-    return df.sort_values(by=["DateTime"], ascending=[False])[["DateTime", "Value"]]
+    df["Year"] = df["DateTime"].transform([lambda dt: dt.year])
+    return df.sort_values(by=["Year"], ascending=[False])[["Year", "Value"]]
 
 
 def get_rating_data(country="United States"):
@@ -33,12 +34,15 @@ def get_rating_data(country="United States"):
         return None
     df = te.getHistoricalRatings(country=country, output_type="df")
     df["Date"] = df["Date"].astype("datetime64")
-    return df.sort_values(by=["Date"], ascending=[False])
+    df["Year"] = df["Date"].transform([lambda dt: dt.year])
+    return df.sort_values(by=["Year"], ascending=[False])[
+        ["Year", "Agency", "Rating", "Outlook"]
+    ]
 
 
 app.layout = html.Div(
     [
-        html.H2("Country vs. GDP"),
+        html.H2("Study the effect of a country's credit rating to its GDP."),
         html.Br(),
         html.Hr(),
         html.Br(),
