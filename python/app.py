@@ -4,7 +4,9 @@ import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 from dash import Dash, Input, Output, callback, dcc, html, no_update
+from plotly.subplots import make_subplots
 
 import tradingeconomics as te
 
@@ -28,7 +30,7 @@ def get_gdp_data(country="United States"):
     df = te.getHistoricalData(country=country, indicator="gdp", output_type="df")
     df["DateTime"] = df["DateTime"].astype("datetime64")
     df["Year"] = df["DateTime"].transform([lambda dt: dt.year])
-    return df.sort_values(by=["Year"], ascending=[False])[["Year", "Value"]]
+    return df.sort_values(by=["Year"], ascending=[True])[["Year", "Value"]]
 
 
 def get_rating_data(country="United States"):
@@ -181,17 +183,18 @@ def update_output_div(n1, n2, n3):
     button_id = ctx.triggered[0]["prop_id"].split(".")[0]
     country = id_lookup[button_id]
 
-    df = get_rating_data(country)
+    ratings = get_rating_data(country)
+    gdp = get_gdp_data(country)
 
-    agencies = set(df["Agency"].tolist())
+    agencies = set(ratings["Agency"].tolist())
     html.Div(
         [
             dcc.Graph(
                 figure=dict(
                     data=[
                         dict(
-                            x=df[df["Agency"] == agency][["Year"]],
-                            y=df[df["Agency"] == agency][["Rating"]],
+                            x=ratings[ratings["Agency"] == agency][["Year"]],
+                            y=ratings[ratings["Agency"] == agency][["Rating"]],
                             name=agency,
                             marker=dict(
                                 color="rgb({}, {}, {})".format(
@@ -214,12 +217,38 @@ def update_output_div(n1, n2, n3):
             )
         ]
     )
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    # Add traces
+    fig.add_trace(
+        go.Scatter(x=gdp["Year"].tolist(), y=gdp["Value"].tolist(), name="GDP"),
+        secondary_y=False,
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            x=ratings["Year"].tolist(), y=ratings["Rating"].tolist(), name="Rating"
+        ),
+        secondary_y=True,
+    )
+
+    # Add figure title
+    fig.update_layout(title_text="GDP vs Credit Rating")
+
+    # Set x-axis title
+    fig.update_xaxes(title_text="Year")
+
+    # Set y-axes titles
+    fig.update_yaxes(title_text="<b>GDP</b>", secondary_y=False)
+    fig.update_yaxes(title_text="<b>Rating</b>", secondary_y=True)
+
+    return fig
+
     return px.scatter(
-        df,
+        ratings,
         x="Year",
         y="Rating",
         hover_name="Agency",
-        log_x=True,
         size_max=55,
     )
 
