@@ -1,5 +1,7 @@
 import dash
 import dash_bootstrap_components as dbc
+import pandas as pd
+import plotly.express as px
 from dash import Dash, Input, Output, callback, dcc, html, no_update
 
 import tradingeconomics as te
@@ -21,17 +23,17 @@ def get_gdp_data(country="United States"):
     """TODO(aziot)"""
     if not country:
         return None
-    return te.getHistoricalData(
-        country=country, indicator="gdp", output_type="df"
-    ).sort_values(by=["DateTime"], ascending=[False])[["DateTime", "Value"]]
+    df = te.getHistoricalData(country=country, indicator="gdp", output_type="df")
+    df["DateTime"] = df["DateTime"].astype("datetime64")
+    return df.sort_values(by=["DateTime"], ascending=[False])[["DateTime", "Value"]]
 
 
 def get_rating_data(country="United States"):
     if not country:
         return None
-    return te.getHistoricalRatings(country=country, output_type="df").sort_values(
-        by=["Date"], ascending=[False]
-    )
+    df = te.getHistoricalRatings(country=country, output_type="df")
+    df["Date"] = df["Date"].astype("datetime64")
+    return df.sort_values(by=["Date"], ascending=[False])
 
 
 app.layout = html.Div(
@@ -72,6 +74,7 @@ app.layout = html.Div(
             ],
             id="rating-table",
         ),
+        dcc.Graph(id="graph-with-slider"),
     ],
     id="master",
 )
