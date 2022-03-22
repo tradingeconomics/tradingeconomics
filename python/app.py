@@ -67,7 +67,10 @@ app.layout = html.Div(
         html.Div(
             [
                 dcc.Dropdown(
-                    COUNTRIES, id="country-dropdown", style={"min-width": "10%"}
+                    COUNTRIES,
+                    id="country-dropdown",
+                    style={"min-width": "15%", "margin-right": "3%"},
+                    value="United States",
                 ),
                 dbc.RadioItems(
                     id="radios",
@@ -123,21 +126,30 @@ def update_output_div(country, radio_choice):
         ]
     else:
         agencies = set(ratings["Agency"].tolist())
-        fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-        # Add traces
-        fig.add_trace(
-            go.Scatter(x=gdp["Year"].tolist(), y=gdp["GDP"].tolist(), name="GDP"),
-            secondary_y=False,
+        fig = make_subplots(
+            rows=len(agencies),
+            cols=1,
+            specs=[[{"secondary_y": True}] for _ in agencies],
         )
 
-        for agency in agencies:
+        # Add traces
+        for index, agency in enumerate(agencies):
+            fig.add_trace(
+                go.Scatter(x=gdp["Year"].tolist(), y=gdp["GDP"].tolist(), name="GDP"),
+                row=index + 1,
+                col=1,
+                secondary_y=False,
+            )
+
             fig.add_trace(
                 go.Scatter(
                     x=(ratings[ratings["Agency"] == agency])["Year"].tolist(),
                     y=(ratings[ratings["Agency"] == agency])["Rating"].tolist(),
                     name="{} rating".format(agency),
                 ),
+                row=index + 1,
+                col=1,
                 secondary_y=True,
             )
 
