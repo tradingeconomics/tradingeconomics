@@ -1,4 +1,3 @@
-import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
@@ -38,7 +37,12 @@ app = Dash(
 
 # Utility functions
 def get_gdp_data(country="United States"):
-    """TODO(aziot)"""
+    """Fetch and transform GDP data for a country.
+    Args:
+        country: For which country to fetch GDP data
+
+    Returns:
+        A pandas dataframe with the columns Year and GDP"""
     if not country:
         return None
     df = te.getHistoricalData(country=country, indicator="gdp", output_type="df")
@@ -49,17 +53,22 @@ def get_gdp_data(country="United States"):
 
 
 def get_rating_data(country="United States"):
-    """TODO(aziot)"""
+    """Fetch and transform agency rating data for a country.
+    Args:
+        country: For which country to fetch rating data
+
+    Returns:
+        A pandas dataframe with the columns Year, Agency, Rating.
+    """
     if not country:
         return None
     df = te.getHistoricalRatings(country=country, output_type="df")
     df["Date"] = df["Date"].astype("datetime64")
     df["Year"] = df["Date"].transform([lambda dt: dt.year])
-    return df.sort_values(by=["Year"], ascending=[False])[
-        ["Year", "Agency", "Rating", "Outlook"]
-    ]
+    return df.sort_values(by=["Year"], ascending=[False])[["Year", "Agency", "Rating"]]
 
 
+# Layout
 app.layout = html.Div(
     [
         html.H2("Study the effect of a country's credit rating to its GDP."),
@@ -74,10 +83,6 @@ app.layout = html.Div(
                 ),
                 dbc.RadioItems(
                     id="radios",
-                    # className="btn-group",
-                    # inputClassName="btn-check",
-                    # labelClassName="btn btn-outline-primary",
-                    # labelCheckedClassName="active",
                     options=[
                         {"label": "Tabular", "value": 1},
                         {"label": "Graphical", "value": 2},
@@ -109,6 +114,8 @@ app.layout = html.Div(
     ],
     id="master",
 )
+
+# Callback
 
 
 @app.callback(
