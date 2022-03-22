@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
@@ -36,6 +38,7 @@ app = Dash(
 
 
 # Utility functions
+@lru_cache(maxsize=len(COUNTRIES))
 def get_gdp_data(country="United States"):
     """Fetch and transform GDP data for a country.
     Args:
@@ -52,6 +55,7 @@ def get_gdp_data(country="United States"):
     return df.sort_values(by=["Year"], ascending=[False])[["Year", "GDP"]]
 
 
+@lru_cache(maxsize=len(COUNTRIES))
 def get_rating_data(country="United States"):
     """Fetch and transform agency rating data for a country.
     Args:
