@@ -64,17 +64,20 @@ app.layout = html.Div(
     [
         html.H2("Study the effect of a country's credit rating to its GDP."),
         html.Br(),
-        html.Hr(),
-        html.Br(),
-        dbc.DropdownMenu(
-            label="Country",
-            children=[
-                dbc.DropdownMenuItem(country, id="dropdown-button-{}".format(index))
-                for index, country in enumerate(COUNTRIES)
+        dcc.Dropdown(COUNTRIES, id="country-dropdown"),
+        dbc.RadioItems(
+            id="radios",
+            # className="btn-group",
+            # inputClassName="btn-check",
+            # labelClassName="btn btn-outline-primary",
+            # labelCheckedClassName="active",
+            options=[
+                {"label": "Tabular", "value": 1},
+                {"label": "Graphical", "value": 2},
             ],
-            id="country-selector",
-            color="info",
+            value=1,
         ),
+        html.Br(),
         html.Div(
             [
                 dbc.Table.from_dataframe(
@@ -90,113 +93,57 @@ app.layout = html.Div(
                     hover=True,
                 ),
             ],
-            id="data-tables",
+            id="output-div",
         ),
-        dcc.Graph(id="gdp-vs-rating-graph"),
     ],
     id="master",
 )
 
 
 @app.callback(
-    Output(component_id="data-tables", component_property="children"),
-    [
-        Input(
-            component_id="dropdown-button-{}".format(index),
-            component_property="n_clicks",
-        )
-        for index, _ in enumerate(COUNTRIES)
-    ],
+    Output(component_id="output-div", component_property="children"),
+    [Input("country-dropdown", "value"), Input("radios", "value")],
 )
-def update_output_div(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12):
-    id_lookup = {
-        "dropdown-button-{}".format(index): country
-        for index, country in enumerate(COUNTRIES)
-    }
-
-    ctx = dash.callback_context
-
-    if (
-        not (any([n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12]))
-        or not ctx.triggered
-    ):
-        # if neither button has been clicked, return "Not selected"
-        return no_update
-
-    # this gets the id of the button that triggered the callback
-    button_id = ctx.triggered[0]["prop_id"].split(".")[0]
-    country = id_lookup[button_id]
-
+def update_output_div(country, radio_choice):
     gdp = get_gdp_data(country)
     ratings = get_rating_data(country)
-    return [
-        dbc.Table.from_dataframe(gdp, striped=True, bordered=True, hover=True),
-        dbc.Table.from_dataframe(ratings, striped=True, bordered=True, hover=True),
-    ]
 
+    if radio_choice == 1:
+        return [
+            dbc.Table.from_dataframe(gdp, striped=True, bordered=True, hover=True),
+            dbc.Table.from_dataframe(ratings, striped=True, bordered=True, hover=True),
+        ]
+    else:
+        agencies = set(ratings["Agency"].tolist())
+        fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-@app.callback(
-    Output(component_id="gdp-vs-rating-graph", component_property="figure"),
-    [
-        Input(
-            component_id="dropdown-button-{}".format(index),
-            component_property="n_clicks",
-        )
-        for index, _ in enumerate(COUNTRIES)
-    ],
-)
-def update_output_div(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12):
-    id_lookup = {
-        "dropdown-button-{}".format(index): country
-        for index, country in enumerate(COUNTRIES)
-    }
-
-    ctx = dash.callback_context
-
-    if (
-        not (any([n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12]))
-        or not ctx.triggered
-    ):
-        # if neither button has been clicked, return "Not selected"
-        return no_update
-
-    # this gets the id of the button that triggered the callback
-    button_id = ctx.triggered[0]["prop_id"].split(".")[0]
-    country = id_lookup[button_id]
-
-    ratings = get_rating_data(country)
-    gdp = get_gdp_data(country)
-
-    agencies = set(ratings["Agency"].tolist())
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
-
-    # Add traces
-    fig.add_trace(
-        go.Scatter(x=gdp["Year"].tolist(), y=gdp["GDP"].tolist(), name="GDP"),
-        secondary_y=False,
-    )
-
-    for agency in agencies:
+        # Add traces
         fig.add_trace(
-            go.Scatter(
-                x=(ratings[ratings["Agency"] == agency])["Year"].tolist(),
-                y=(ratings[ratings["Agency"] == agency])["Rating"].tolist(),
-                name="{} rating".format(agency),
-            ),
-            secondary_y=True,
+            go.Scatter(x=gdp["Year"].tolist(), y=gdp["GDP"].tolist(), name="GDP"),
+            secondary_y=False,
         )
 
-    # Add figure title
-    fig.update_layout(title_text="GDP vs Credit Rating")
+        for agency in agencies:
+            fig.add_trace(
+                go.Scatter(
+                    x=(ratings[ratings["Agency"] == agency])["Year"].tolist(),
+                    y=(ratings[ratings["Agency"] == agency])["Rating"].tolist(),
+                    name="{} rating".format(agency),
+                ),
+                secondary_y=True,
+            )
 
-    # Set x-axis title
-    fig.update_xaxes(title_text="Year")
+        # Add figure title
+        fig.update_layout(title_text="GDP vs Credit Rating")
 
-    # Set y-axes titles
-    fig.update_yaxes(title_text="<b>GDP</b>", secondary_y=False)
-    fig.update_yaxes(title_text="<b>Rating</b>", secondary_y=True)
+        # Set x-axis title
+        fig.update_xaxes(title_text="Year")
 
-    return fig
+        # Set y-axes titles
+        fig.update_yaxes(title_text="<b>GDP</b>", secondary_y=False)
+        fig.update_yaxes(title_text="<b>Rating</b>", secondary_y=True)
+
+        return [dcc.Graph(id="gdp-vs-rating-graph", figure=fig)]
 
 
 if __name__ == "__main__":
