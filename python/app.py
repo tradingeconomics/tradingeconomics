@@ -64,18 +64,26 @@ app.layout = html.Div(
     [
         html.H2("Study the effect of a country's credit rating to its GDP."),
         html.Br(),
-        dcc.Dropdown(COUNTRIES, id="country-dropdown"),
-        dbc.RadioItems(
-            id="radios",
-            # className="btn-group",
-            # inputClassName="btn-check",
-            # labelClassName="btn btn-outline-primary",
-            # labelCheckedClassName="active",
-            options=[
-                {"label": "Tabular", "value": 1},
-                {"label": "Graphical", "value": 2},
+        html.Div(
+            [
+                dcc.Dropdown(
+                    COUNTRIES, id="country-dropdown", style={"min-width": "10%"}
+                ),
+                dbc.RadioItems(
+                    id="radios",
+                    # className="btn-group",
+                    # inputClassName="btn-check",
+                    # labelClassName="btn btn-outline-primary",
+                    # labelCheckedClassName="active",
+                    options=[
+                        {"label": "Tabular", "value": 1},
+                        {"label": "Graphical", "value": 2},
+                    ],
+                    value=1,
+                ),
             ],
-            value=1,
+            id="input-div",
+            style={"display": "flex", "flex-direction": "row"},
         ),
         html.Br(),
         html.Div(
