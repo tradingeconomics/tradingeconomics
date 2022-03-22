@@ -11,15 +11,26 @@ import tradingeconomics as te
 
 # Constants
 COUNTRIES = [
+    "Argentina",
+    "Australia",
     "Brazil",
     "China",
+    "Egypt",
     "France",
     "Germany",
     "Greece",
     "India",
+    "Iran",
+    "Iraq",
+    "Italy",
     "Nigeria",
+    "Norway",
+    "Poland",
+    "Romania" "Russia",
+    "Saudi Arabia",
     "South Africa",
     "South Korea",
+    "Sweden",
     "Switzerland",
     "United Kingdom",
     "United States",
@@ -150,7 +161,7 @@ def update_output_div(country, radio_choice):
                 go.Scatter(x=gdp["Year"].tolist(), y=gdp["GDP"].tolist(), name="GDP"),
                 row=index + 1,
                 col=1,
-                secondary_y=False,
+                secondary_y=True,
             )
 
             fig.add_trace(
@@ -161,7 +172,7 @@ def update_output_div(country, radio_choice):
                 ),
                 row=index + 1,
                 col=1,
-                secondary_y=True,
+                secondary_y=False,
             )
 
         # Add figure title
@@ -171,8 +182,8 @@ def update_output_div(country, radio_choice):
         fig.update_xaxes(title_text="Year")
 
         # Set y-axes titles
-        fig.update_yaxes(title_text="<b>GDP</b>", secondary_y=False)
-        fig.update_yaxes(title_text="<b>Rating</b>", secondary_y=True)
+        fig.update_yaxes(title_text="<b>GDP</b>", secondary_y=True)
+        fig.update_yaxes(title_text="<b>Rating</b>", secondary_y=False)
 
         return [dcc.Graph(id="gdp-vs-rating-graph", figure=fig)]
 
