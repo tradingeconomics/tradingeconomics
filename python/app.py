@@ -175,23 +175,22 @@ def update_output_div(country, radio_choice):
                 col=1,
                 secondary_y=False,
             )
+            # Set y-axes titles
+            fig.update_yaxes(
+                title_text="<b>GDP</b>",
+                secondary_y=True,
+                type="category",
+                categoryorder="category descending",
+            )
+            fig.update_yaxes(
+                title_text="<b>Rating</b>",
+                secondary_y=False,
+                type="category",
+                categoryorder="category descending",
+            )
 
         # Set x-axis title
         fig.update_xaxes(title_text="Year")
-
-        # Set y-axes titles
-        fig.update_yaxes(
-            title_text="<b>GDP</b>",
-            secondary_y=True,
-            type="category",
-            categoryorder="category descending",
-        )
-        fig.update_yaxes(
-            title_text="<b>Rating</b>",
-            secondary_y=False,
-            type="category",
-            categoryorder="category descending",
-        )
 
         return [dcc.Graph(id="gdp-vs-rating-graph", figure=fig)]
 
