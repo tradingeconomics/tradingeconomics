@@ -11,29 +11,18 @@ import tradingeconomics as te
 
 # Constants
 COUNTRIES = [
-    "Argentina",
     "Australia",
-    "Brazil",
-    "China",
-    "Egypt",
-    "France",
     "Germany",
-    "Greece",
-    "India",
     "Iran",
     "Iraq",
-    "Italy",
     "Nigeria",
     "Norway",
-    "Poland",
-    "Romania",
     "Russia",
     "Saudi Arabia",
     "South Africa",
     "South Korea",
     "Sweden",
     "Switzerland",
-    "United Kingdom",
     "United States",
 ]
 
@@ -94,8 +83,10 @@ app.layout = html.Div(
                 dcc.Dropdown(
                     COUNTRIES,
                     id="country-dropdown",
-                    style={"min-width": "15%", "margin-right": "3%"},
+                    style={"min-width": "13%", "margin-right": "3%"},
                     value="United States",
+                    clearable=False,
+                    searchable=False,
                 ),
                 dbc.RadioItems(
                     id="radios",
@@ -175,6 +166,7 @@ def update_output_div(country, radio_choice):
                 col=1,
                 secondary_y=False,
             )
+            fig.update_traces(line_dash="dash", selector=dict(type="scatter"))
             # Set y-axes titles
             fig.update_yaxes(
                 title_text="<b>GDP</b>",
