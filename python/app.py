@@ -20,8 +20,6 @@ app = Dash(
     serve_locally=False,
 )
 
-table_header = [html.Thead(html.Tr([html.Th("First Name"), html.Th("Last Name")]))]
-
 
 def get_gdp_data(country="United States"):
     """TODO(aziot)"""
@@ -30,10 +28,12 @@ def get_gdp_data(country="United States"):
     df = te.getHistoricalData(country=country, indicator="gdp", output_type="df")
     df["DateTime"] = df["DateTime"].astype("datetime64")
     df["Year"] = df["DateTime"].transform([lambda dt: dt.year])
-    return df.sort_values(by=["Year"], ascending=[True])[["Year", "Value"]]
+    df = df.rename(columns={"Value": "GDP"})
+    return df.sort_values(by=["Year"], ascending=[False])[["Year", "GDP"]]
 
 
 def get_rating_data(country="United States"):
+    """TODO(aziot)"""
     if not country:
         return None
     df = te.getHistoricalRatings(country=country, output_type="df")
@@ -221,16 +221,19 @@ def update_output_div(n1, n2, n3):
 
     # Add traces
     fig.add_trace(
-        go.Scatter(x=gdp["Year"].tolist(), y=gdp["Value"].tolist(), name="GDP"),
+        go.Scatter(x=gdp["Year"].tolist(), y=gdp["GDP"].tolist(), name="GDP"),
         secondary_y=False,
     )
 
-    fig.add_trace(
-        go.Scatter(
-            x=ratings["Year"].tolist(), y=ratings["Rating"].tolist(), name="Rating"
-        ),
-        secondary_y=True,
-    )
+    for agency in agencies:
+        fig.add_trace(
+            go.Scatter(
+                x=(ratings[ratings["Agency"] == agency])["Year"].tolist(),
+                y=(ratings[ratings["Agency"] == agency])["Rating"].tolist(),
+                name="{} rating".format(agency),
+            ),
+            secondary_y=True,
+        )
 
     # Add figure title
     fig.update_layout(title_text="GDP vs Credit Rating")
