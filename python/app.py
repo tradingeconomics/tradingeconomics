@@ -1,5 +1,3 @@
-import random
-
 import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
@@ -10,6 +8,23 @@ from plotly.subplots import make_subplots
 
 import tradingeconomics as te
 
+# Constants
+COUNTRIES = [
+    "Brazil",
+    "China",
+    "France",
+    "Germany",
+    "Greece",
+    "India",
+    "Nigeria",
+    "South Africa",
+    "South Korea",
+    "Switzerland",
+    "United Kingdom",
+    "United States",
+]
+
+# Initialization
 te.login()
 
 app = Dash(
@@ -21,6 +36,7 @@ app = Dash(
 )
 
 
+# Utility functions
 def get_gdp_data(country="United States"):
     """TODO(aziot)"""
     if not country:
@@ -53,9 +69,8 @@ app.layout = html.Div(
         dbc.DropdownMenu(
             label="Country",
             children=[
-                dbc.DropdownMenuItem("United States", id="dropdown-button-1"),
-                dbc.DropdownMenuItem("United Kingdom", id="dropdown-button-2"),
-                dbc.DropdownMenuItem("China", id="dropdown-button-3"),
+                dbc.DropdownMenuItem(country, id="dropdown-button-{}".format(index))
+                for index, country in enumerate(COUNTRIES)
             ],
             id="country-selector",
             color="info",
@@ -91,25 +106,25 @@ app.layout = html.Div(
 @app.callback(
     Output(component_id="gdp-table", component_property="children"),
     [
-        Input(component_id="dropdown-button-1", component_property="n_clicks"),
-        Input(component_id="dropdown-button-2", component_property="n_clicks"),
-        Input(component_id="dropdown-button-3", component_property="n_clicks"),
+        Input(
+            component_id="dropdown-button-{}".format(index),
+            component_property="n_clicks",
+        )
+        for index, _ in enumerate(COUNTRIES)
     ],
 )
-def update_output_div(n1, n2, n3):
-    app.logger.info("{} {} {}".format(n1, n2, n3))
-
-    # use a dictionary to map ids back to the desired label
-    # makes more sense when there are lots of possible labels
+def update_output_div(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12):
     id_lookup = {
-        "dropdown-button-1": "United States",
-        "dropdown-button-2": "United Kingdom",
-        "dropdown-button-3": "China",
+        "dropdown-button-{}".format(index): country
+        for index, country in enumerate(COUNTRIES)
     }
 
     ctx = dash.callback_context
 
-    if (n1 is None and n2 is None and n3 is None) or not ctx.triggered:
+    if (
+        not (any([n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12]))
+        or not ctx.triggered
+    ):
         # if neither button has been clicked, return "Not selected"
         return no_update
 
@@ -124,25 +139,25 @@ def update_output_div(n1, n2, n3):
 @app.callback(
     Output(component_id="rating-table", component_property="children"),
     [
-        Input(component_id="dropdown-button-1", component_property="n_clicks"),
-        Input(component_id="dropdown-button-2", component_property="n_clicks"),
-        Input(component_id="dropdown-button-3", component_property="n_clicks"),
+        Input(
+            component_id="dropdown-button-{}".format(index),
+            component_property="n_clicks",
+        )
+        for index, _ in enumerate(COUNTRIES)
     ],
 )
-def update_output_div(n1, n2, n3):
-    app.logger.info("{} {} {}".format(n1, n2, n3))
-
-    # use a dictionary to map ids back to the desired label
-    # makes more sense when there are lots of possible labels
+def update_output_div(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12):
     id_lookup = {
-        "dropdown-button-1": "United States",
-        "dropdown-button-2": "United Kingdom",
-        "dropdown-button-3": "China",
+        "dropdown-button-{}".format(index): country
+        for index, country in enumerate(COUNTRIES)
     }
 
     ctx = dash.callback_context
 
-    if (n1 is None and n2 is None and n3 is None) or not ctx.triggered:
+    if (
+        not (any([n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12]))
+        or not ctx.triggered
+    ):
         # if neither button has been clicked, return "Not selected"
         return no_update
 
@@ -157,25 +172,25 @@ def update_output_div(n1, n2, n3):
 @app.callback(
     Output(component_id="gdp-vs-rating-graph", component_property="figure"),
     [
-        Input(component_id="dropdown-button-1", component_property="n_clicks"),
-        Input(component_id="dropdown-button-2", component_property="n_clicks"),
-        Input(component_id="dropdown-button-3", component_property="n_clicks"),
+        Input(
+            component_id="dropdown-button-{}".format(index),
+            component_property="n_clicks",
+        )
+        for index, _ in enumerate(COUNTRIES)
     ],
 )
-def update_output_div(n1, n2, n3):
-    app.logger.info("{} {} {}".format(n1, n2, n3))
-
-    # use a dictionary to map ids back to the desired label
-    # makes more sense when there are lots of possible labels
+def update_output_div(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12):
     id_lookup = {
-        "dropdown-button-1": "United States",
-        "dropdown-button-2": "United Kingdom",
-        "dropdown-button-3": "China",
+        "dropdown-button-{}".format(index): country
+        for index, country in enumerate(COUNTRIES)
     }
 
     ctx = dash.callback_context
 
-    if (n1 is None and n2 is None and n3 is None) or not ctx.triggered:
+    if (
+        not (any([n1, n2, n3, n4, n5, n6, n7, n8, n9, n10, n11, n12]))
+        or not ctx.triggered
+    ):
         # if neither button has been clicked, return "Not selected"
         return no_update
 
@@ -187,36 +202,6 @@ def update_output_div(n1, n2, n3):
     gdp = get_gdp_data(country)
 
     agencies = set(ratings["Agency"].tolist())
-    html.Div(
-        [
-            dcc.Graph(
-                figure=dict(
-                    data=[
-                        dict(
-                            x=ratings[ratings["Agency"] == agency][["Year"]],
-                            y=ratings[ratings["Agency"] == agency][["Rating"]],
-                            name=agency,
-                            marker=dict(
-                                color="rgb({}, {}, {})".format(
-                                    random.randint(0, 255),
-                                    random.randint(0, 255),
-                                    random.randint(0, 255),
-                                )
-                            ),
-                        )
-                        for agency in agencies
-                    ],
-                    layout=dict(
-                        title="{} GDP vs Credit Rating".format(country),
-                        showlegend=True,
-                        legend=dict(x=0, y=1.0),
-                        margin=dict(l=40, r=0, t=40, b=30),
-                    ),
-                ),
-                style={"height": 300},
-            )
-        ]
-    )
     fig = make_subplots(specs=[[{"secondary_y": True}]])
 
     # Add traces
@@ -246,14 +231,6 @@ def update_output_div(n1, n2, n3):
     fig.update_yaxes(title_text="<b>Rating</b>", secondary_y=True)
 
     return fig
-
-    return px.scatter(
-        ratings,
-        x="Year",
-        y="Rating",
-        hover_name="Agency",
-        size_max=55,
-    )
 
 
 if __name__ == "__main__":
