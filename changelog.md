@@ -4,7 +4,7 @@
 ### *Latest changes, improvements and bug fixes on the API:*
 + 2022/03
 
-    + __Added:__ markets/crypto endpoint.
+    + __Added:__ /markets/crypto endpoint.
     + __Added:__ /markets/forecasts/crypto endpoint.
   
 ---
