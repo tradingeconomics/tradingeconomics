@@ -24,7 +24,7 @@ trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
 getMarketsData <- function(marketsField = NULL, country = NULL, symbol = NULL, cross=NULL, outType = NULL){
   base <- "https://api.tradingeconomics.com/markets/"
-  fields <- c('commodities', 'currency', 'index', 'bond')
+  fields <- c('commodities', 'currency', 'index', 'bond','crypto')
   apikey_local <- .GlobalEnv$apiKey
   if (length(symbol) > 1){
       symbol = paste(symbol, collapse = ',')
