@@ -71,9 +71,9 @@ def getMarketsData(marketsField, output_type=None):
     else:
         ssl._create_default_https_context = _create_unverified_https_context
         
-    fields =['commodities', 'currency', 'index', 'bond']
+    fields =['commodities', 'currency', 'index', 'bond', 'crypto']
     if marketsField not in fields:
-        raise ParametersError ('Accepted values for marketsField are \'commodities\', \'currency\', \'index\' or \'bond\'.')
+        raise ParametersError ('Accepted values for marketsField are \'commodities\', \'currency\', \'index\', \'crypto\' or \'bond\'.')
     linkAPI = 'https://api.tradingeconomics.com/markets/' + quote(marketsField, safe='') 
     try:
         linkAPI += '?c=' + glob.apikey

@@ -1,7 +1,7 @@
 import tradingeconomics as te
 from .section import Section
 
-class Comtrade():
+class Comtrade:
     def __init__(self, key):
         self.key=key
         self.title = '******* Trading Economics - Comtrade  ********'
