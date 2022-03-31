@@ -1,6 +1,5 @@
 {
   "_from": "tradingeconomics",
-  "_id": "tradingeconomics@1.0.11",
   "_inBundle": false,
   "_integrity": "sha512-CMN//DlpbDhrfdt0wLwzcL2Z3Z/0tb2UcXBrLTZmbqfqWtklP4t9QaqfQeees9RmILLkmMGsTs2qgfMihXZRHQ==",
   "_location": "/tradingeconomics",
@@ -46,5 +45,5 @@
   "scripts": {
     "start": "./index.js"
   },
-  "version": "1.0.12"
+  "version": "1.0.13"
 }
