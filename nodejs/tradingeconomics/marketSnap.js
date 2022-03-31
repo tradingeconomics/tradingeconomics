@@ -21,7 +21,7 @@ global.cross = null;
    parameters:
     country, symbol, peers_symbol, components_symbol, search_term, category, marketsField
     -> MarketsField can be:
-        commodities, index, currency and bond
+        commodities, index, currency, bond and crypto
     -> Search_term: search by country
         By Default, the search will look into the categories:Indexes, markets, bonds, and commodities.
 
@@ -55,6 +55,9 @@ function getMarketSnap(){
     }  
     if (marketsField === 'bond'){     
         url = '/markets/bond';
+    }
+    if (marketsField === 'crypto'){     
+        url = '/markets/crypto';
     }
     if(symbol != null){
         url = '/markets/symbol/' + symbol;
