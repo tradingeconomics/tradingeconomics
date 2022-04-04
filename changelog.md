@@ -86,9 +86,9 @@
 ### *Packages latest versions:*
 Package | Version
 :---: |:---:
-*Python* |`0.2.988` 
-*Node* | `1.0.12`
-*R* | `0.2.7`
+*Python* |`0.2.990` 
+*Node* | `1.0.13`
+*R* | `0.2.8`
 
 
 
