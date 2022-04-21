@@ -851,9 +851,9 @@ Using Headers auth:<br>
 
 <ul>
 <li><p>List of indicators by country.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/country/united states?c=guest:guest&f=json">/country/{country}</a></p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/country/mexico?c=guest:guest&f=json">/country/{country}</a></p></li>
 <li><p>List of indicators by country and group( you can check groups in the "categoryGroup" field of /indicators)<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/country/united%20states?c=guest:guest&group=gdp&f=json">/country/{country}?c=guest:guest&group={group}</a></p></li>
+    <a target = '_blank' href="http://api.tradingeconomics.com/country/mexico?c=guest:guest&group=gdp&f=json">/country/{country}?c=guest:guest&group={group}</a></p></li>
 <li><p>Specific indicator for all countries.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/country/all/gdp?c=guest:guest&f=json">/country/all/{indicator}</a></p></li>
 <li><p>Specific indicator by ticker or tickers.<br>
@@ -871,9 +871,9 @@ Using Headers auth:<br>
     <li><p>List of indicator peers by ticker.<br>
         <a target = '_blank' href="https://api.tradingeconomics.com/peers/CPI%20YOY?c=guest:guest&f=json">/peers/{ticker}</a></p></li>
     <li><p>List of indicator peers by country.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/united%20states?c=guest:guest&f=json">/peers/country/{country}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/mexico?c=guest:guest&f=json">/peers/country/{country}</a></p></li>
      <li><p>List of indicator peers by country and category.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/united%20states/money?c=guest:guest&f=json">/peers/country/{country}/{category}</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/peers/country/mexico/money?c=guest:guest&f=json">/peers/country/{country}/{category}</a></p></li>
         </ul>
 <br>
 <h3 id="response-fields">Response Fields</h3>
@@ -1215,17 +1215,17 @@ Using Headers auth:<br>
 
 <ul>
 <li><p>Specific country and indicator<br>
-    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a><br>
+    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a><br>
 You can specify only a start date for your historical data<br>
-    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2013-01-01?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
+    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp/2013-01-01?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}</a><br>
 or you can specify a start date and end date<br>
-    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
+    <a target = '_blank'  href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p></li>
 <li><p>Multiple indicators for specific country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states/indicator/gdp,population?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp,population?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
 <li><p>Specific indicator for multiple countries<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico,sweden/indicator/gdp?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
 <li><p>Multiple indicators for multiple countries<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united states,china/indicator/gdp,population?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico,sweden/indicator/gdp,population?c=guest:guest&f=json">/historical/country/{countries}/indicator/{indicators}</a>    </p></li>
 <li><p>Get historical data by ticker<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/historical/ticker/USURTOT/2015-03-01?c=guest:guest&f=json">/historical/ticker/{ticker}/{yyyy-mm-dd}</a>  </p></li>
 </ul>
