@@ -35,7 +35,7 @@ namespace CSharpExamples
 
             // Filtering by symbol
             Console.WriteLine("**********Get federal reserve data by symbol**********");
-            var getFredSymbol = GetFredSymbol("AGEXMAK2A647NCEN").Result;
+            var getFredSymbol = GetFredSymbol("2020RATIO002013").Result;
             Console.WriteLine(getFredSymbol);
 
             // Filtering by url
