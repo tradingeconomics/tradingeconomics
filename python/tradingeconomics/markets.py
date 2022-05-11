@@ -663,3 +663,68 @@ def getMarketsStockDescriptions(symbol = None,country = None, output_type=None):
     # print(api_url_request)
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
     # return    
+
+def getMarketsSymbology(symbol = None,ticker = None, isin=None,output_type=None):
+    """
+    Returns Markets Descriptions
+    =================================================================================
+    Parameters:
+    -----------
+        symbol: string 
+                symbol = 'AAPL:US'
+                
+        
+        ticker: string 
+                ticker = 'aapl'
+                
+        
+        
+        output_type: string.
+            'dict'(default) for dictionary format output, 'df' for data frame,
+            'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+    
+    
+    Example
+    -------
+            getMarketsSymbology(symbol='AAPL:US',output_type='df')
+            getMarketsSymbology(ticker='aapl',output_type='df')
+            getMarketsSymbology(isin='US0378331005',output_type='df')
+            
+    """
+    #validateParameters
+    parametersList = []
+    (lambda x : parametersList.append(x) if x != None else None )(symbol) 
+    (lambda x : parametersList.append(x) if x != None else None )(ticker) 
+    (lambda x : parametersList.append(x) if x != None else None )(isin) 
+
+    if len(parametersList) > 1:
+      print('Only one argument must be provided for each request')
+      return 
+          
+
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/markets/symbology',
+        'symbol': '',
+        'ticker': '',
+        'isin': '',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+
+    if symbol:
+        d['symbol'] = f'/symbol/{(fn.stringOrList(symbol))}'
+    
+    if ticker:
+        d['ticker'] = f'/ticker/{(fn.stringOrList(ticker))}'
+    
+    if isin:
+        d['isin'] = f'/isin/{(fn.stringOrList(isin))}'
+
+    api_url_request = "%s%s%s%s%s" % (d['url_base'], d['symbol'],d['ticker'],  d['isin'],d['key']) 
+    print(api_url_request)
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    # return    
