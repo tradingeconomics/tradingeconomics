@@ -3339,10 +3339,20 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get stock market searching for country.</p>
+    <p>Get stocks symbology by symbol, ticker or ISIN.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">search_term</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'markets'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getSymbology</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getSymbology</span>(<span class="kd">ticker</span> = <span class="s1">'aapl'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getSymbology</span>(<span class="kd">isin</span> = <span class="s1">'US0378331005'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -3674,6 +3684,12 @@ Click on any method below for a sample.
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/stockdescriptions/symbol/aapl:us,fb:us?c=guest:guest&f=json">/markets/stockdescriptions/symbol/{symbols}</a></p></li>
     <li><p>Stock descriptions by country<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/markets/stockdescriptions/country/france?c=guest:guest&f=json">/markets/stockdescriptions/country/{country}</a></p></li>
+    <li><p>Stock symbologies by symbol<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbology/symbol/aapl:us?c=guest:guest&f=json">/markets/symbology/symbol/{symbol}</a></p></li>
+    <li><p>Stock symbologies by ticker<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbology/ticker/aapl?c=guest:guest&f=json">/markets/symbology/ticker/{ticker}</a></p></li>
+    <li><p>Stock symbologies by ISIN<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/markets/symbology/isin/US0378331005?c=guest:guest&f=json">/markets/symbology/isin/{isin}</a></p></li>            
     </ul>
     <p></span> </p>
 
@@ -3795,6 +3811,19 @@ Click on any method below for a sample.
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsSearch</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'japan'</span>, <span class="n">category</span> = [<span class="s">'index'</span>, <span class="s">'markets'</span>])</span>
 </code></pre>
+<blockquote class="lang-specific python">
+    <p>To get stocks symbology.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsSymbology</span><span class="p">(</span><span class="n">symbol</span><span class="o"> = </span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="n">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsSymbology</span><span class="p">(</span><span class="n">ticker</span><span class="o"> = </span><span class="s">'aapl'</span><span class="p">,</span> <span class="n">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+        <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsSymbology</span><span class="p">(</span><span class="n">isin</span><span class="o"> = </span><span class="s">'US0378331005'</span><span class="p">,</span> <span class="n">output_type</span><span class="o"> = </span><span class="s">'df'</span><span class="p">)</span>
+   
+<span class="n">Output</span><span class="p">:</span>
+    <span class="n">Symbol</span>            <span class="n">Ticker</span>     <span class="n">ISIN</span>          <span class="n">Name</span>    <span class="n">Country</span>
+    <span class="n">AAPL:US</span>           <span class="n">AAPL</span>       <span class="n">US0378331005</span>  <span class="n">Apple</span>   <span class="n">United States</span>    
+</code></pre>
 
 <!--R Markets Search black side-->
 
@@ -3827,6 +3856,22 @@ Click on any method below for a sample.
 <span class="mi">5</span>   <span class="n">CCMP:IND</span>       <span class="n">Index</span>      <span class="n">United States</span>     <span class="mf">7607.351</span>                
 <span class="mi">6</span>     <span class="n">COT:US</span>      <span class="n">stocks</span>      <span class="n">United States</span>       <span class="mf">13.090</span>                
 </span></code></pre>
+
+
+<blockquote class="lang-specific r">
+    <p>To get stocks symbology by symbol, ticker or ISIN.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getSymbology</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'aapl:us'</span><span class="p"><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</code></pre>
+<pre class="highlight r"><code><span class="n">getSymbology</span><span class="p">(<span class="nf">ticker</span><span class="o">=</span><span class="s1">'aapl'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</code></pre>
+<pre class="highlight r"><code><span class="n">getSymbology</span><span class="p">(<span class="nf">isin</span><span class="o">=</span><span class="s1">'US0378331005'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+
+    <span class="n">Output</span><span class="p">:</span>
+      <span class="n">Symbol</span>        <span class="n">Ticker</span>            <span class="n">ISIN</span>         <span class="n">Name</span>         <span class="n">Country</span>       
+<span class="mi">1</span>     <span class="n">AAPL:US</span>       <span class="n">AAPL</span>          <span class="n">US0378331005</span>     <span class="n">Apple</span>        <span class="n">United States</span>        
+</span></code></pre>
+
 
 <!-----------------------------Markets White Side-------------------------------> 
 
@@ -4054,9 +4099,6 @@ Click on any method below for a sample.
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
-<blockquote class="lang-specific javascript">
-    <p>Get markets historical data by market symbol or symbols and dates.</p>
-</blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalMarkets</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>,
     <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
