@@ -54,13 +54,13 @@ Without credentials, only sample data is returned.
 
 \examples{
 \dontrun{getCalendarData()
-getCalendarData(id= c('174108','160025','160030'), outType = 'df') 
+getCalendarData(id= c('174108','160025','160030'), outType = 'df')
 getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'))
 getCalendarData(country = 'spain', indicator = 'Bankruptcies',initDate = '2016-12-01',
 endDate = '2017-02-25')
-getCalendarData(country = c('portugal', 'India'),indicator = c('Composite Pmi', 'Bankruptcies'), 
+getCalendarData(country = c('portugal', 'India'),indicator = c('Composite Pmi', 'Bankruptcies'),
 initDate = '2011-01-01', endDate = '2016-01-01')
-getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'), initDate = '2018-01-01', 
+getCalendarData(ticker= c('IJCUSA','SPAINFACORD','BAHRAININFNRATE'), initDate = '2018-01-01',
 endDate = '2018-03-01')
 getCalendarData(country = 'United States', indicator = 'initial jobless claims')
 getCalendarData(country = 'United States')
@@ -69,5 +69,5 @@ getCalendarData(indicator = 'initial jobless claims')
 
 }
 \seealso{
-\code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
+\code{\link{getMarketsData}}, \code{\link{getCalendarUpdates}}, \code{\link{getHistoricalData}} and \code{\link{getIndicatorData}}
 }
