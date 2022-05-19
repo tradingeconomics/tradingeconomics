@@ -9,6 +9,7 @@ module.exports = Object.assign(
     require('./indicators.js'),
     require('./articles.js'),
     require('./calendar.js'),
+    require('./calendarUpdates.js'),
     require('./comtrade.js'),
     require('./comtradeCountryByCategory.js'),
     require('./comtradeCountryFilterByType.js'),

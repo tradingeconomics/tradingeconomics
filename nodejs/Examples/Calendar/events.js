@@ -83,3 +83,13 @@ te.getCalendar(ticker = ['IJCUSA','SPAINFACORD','BAHRAININFNRATE']).then(functio
   console.log("Events for a specific ticker:", "\n", data, "\n");
   })
   .catch((err) => console.log(err));
+
+
+//===============================================================================================================
+//Get all calendar updates 
+
+
+te.getCalendarUpdates().then(function(data){
+  console.log("Last calendar updates:", "\n", data, "\n");
+  })
+  .catch((err) => console.log(err));
