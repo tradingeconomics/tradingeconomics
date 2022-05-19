@@ -10,7 +10,7 @@ PY3 = sys.version_info[0] == 3
 if PY3: # Python 3+
     from .historicalDB import getHistorical
     from .historical import getHistoricalData, getHistoricalRatings,getHistoricalByTicker
-    from .calendar import getCalendarData, getCalendarId
+    from .calendar import getCalendarData, getCalendarId,getCalendarUpdates
     from .forecasts import getForecastData,getForecastByTicker
     from .indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator, getIndicatorByCategoryGroup, getIndicatorByTicker, getPeers
     from .markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross, getMarketsIntradayByInterval, getMarketsStockDescriptions,getMarketsSymbology
@@ -32,7 +32,7 @@ if PY3: # Python 3+
 else: # Python 2.X
     from historicalDB import getHistorical
     from historical import getHistoricalData, getHistoricalRatings,getHistoricalByTicker
-    from calendar import getCalendarData, getCalendarId
+    from calendar import getCalendarData, getCalendarId, getCalendarUpdates
     from forecasts import getForecastData,getForecastByTicker
     from indicators import getIndicatorData, getRatings, getLatestUpdates, getDiscontinuedIndicator, getIndicatorByCategoryGroup,getIndicatorByTicker, getPeers
     from markets import getMarketsData, getMarketsBySymbol, getMarketsIntraday, getMarketsPeers, getMarketsComponents, getMarketsSearch, getMarketsForecasts, getCurrencyCross, getMarketsIntradayByInterval, getMarketsStockDescriptions
