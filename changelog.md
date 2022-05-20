@@ -2,6 +2,14 @@
 
 
 ### *Latest changes, improvements and bug fixes on the API:*
++ 2022/05
+
+    + __Added:__ /markets/symbology endpoint for stocks.
+    + __Added:__ /calendar/updates endpoint.
+    + __Added:__ /historical/updates endpoint.
+  
+---
+
 + 2022/03
 
     + __Added:__ /markets/crypto endpoint.
