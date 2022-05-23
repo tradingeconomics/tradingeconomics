@@ -104,8 +104,34 @@ function getDiscontinuedIndicators(country=null) {
     });
 }
 
+/****************************************************************  
+   Example:
+
+        my_data = getHistoricalUpdates();
+
+*******************************************************************/
+
+function getHistoricalUpdates() {
+    
+    var url = '/historical/updates';
+    var Data = '';
+
+        Data = url_base + url + '?c=' + apikey.replace (' ','%20');
+
+    return fetch(Data)
+    .then(func.handleErrors)   
+    .then(function(response) {    
+        return response.json(); // process it inside the `then` when calling the function       
+    }).catch(function (err) {
+        return err.message;
+    });
+     
+}
+
+
 module.exports.getIndicatorData = getIndicatorData;
 module.exports.getDiscontinuedIndicators = getDiscontinuedIndicators
+module.exports.getHistoricalUpdates = getHistoricalUpdates
 
 
 
