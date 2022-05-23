@@ -988,7 +988,17 @@ Using Headers auth:<br>
 </blockquote>  
 <pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span></span><span class="s1">'USURTOT'</span><span class="p">)</span>
 </span></code></pre>
-
+<blockquote class="lang-specific r">
+    <p>To get historical updates.</p>
+</blockquote>  
+<pre class="highlight r"><code><span class="n">getHistoricalUpdates</span><span class="p">(<span class="n">outType</span><span class="w"> </span><span class="o">=<span class="s1">'df'</span>)
+</span>
+        <span class="n">Output</span><span class="p">:</span>
+<span class="n">Country</span>            <span class="n">Category</span>                             <span class="n">HistoricalDataSymbol</span>        <span class="n">LastUpdate</span>  
+<span class="n">Costa Rica</span>         <span class="n">Wages</span>                                <span class="n">COSTARICAWAG</span>                <span class="n">2022-05-23T16:32:00</span>
+<span class="n">Costa Rica</span>         <span class="n">Leading Economic Index</span>               <span class="n">COSTARICALEAECOIND</span>          <span class="n">2022-05-23T16:32:00</span>
+<span class="n">Costa Rica</span>         <span class="n">Labor Force Participation Rate</span>       <span class="n">COSTARICALFPR</span>               <span class="n">2022-05-23T16:32:00</span>
+</span></code></pre>
 
 
 <blockquote class="lang-specific r">
@@ -1035,6 +1045,22 @@ Using Headers auth:<br>
 </blockquote> 
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'USURTOT'</span><span class="p">)</span>                
 </code></pre>
+
+<blockquote class="lang-specific python">
+    <p>Getting historical data by ticker or TE symbol.</p>
+</blockquote> 
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalUpdates</span><span class="p">()</span>                
+
+
+<span class="n">Output</span><span class="p">:</span>
+<span class="p">{
+</span><span class="s">'Country'</span><span class="p">:</span> <span class="s">'Costa Rica'</span>,
+</span><span class="s">'Category'</span><span class="p">:</span> <span class="s">'Wages'</span>,
+</span><span class="s">'HistoricalDataSymbol'</span><span class="p">:</span> <span class="s">'COSTARICAWAG'</span>,
+</span><span class="s">'LastUpdate'</span><span class="p">:</span> <span class="s">'2022-05-23T16:32:00'</span>
+<span class="p">}</span>
+</code></pre>
+
 <blockquote class="lang-specific python">
 <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/python/EXAMPLES/historical/bulkHistorical.py"><p><stong>»»»»»»»»»»»»»»»»»»»»»»»»»» BULK DOWNLOAD EXAMPLE «««««««««««««««««««««««««</stong></p></a>
  </blockquote> 
@@ -1077,6 +1103,15 @@ Using Headers auth:<br>
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get historical latest updates</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalUpdates</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+</code></pre>
+
 <!--javascript discontinued black side--> 
 <br>
 <br>
