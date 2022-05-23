@@ -52,7 +52,7 @@ initDate = '2011-01-01', endDate = '2016-01-01')
 getHistoricalData(country = c('United States', 'United Kingdom'),
 indicator = c('Imports','Exports'),initDate = '2011-01-01', endDate = '2016-01-01')
 getHistoricalData(ticker = 'USURTOT', initDate = '2015-03-01')
-getHistoricalData(country = c('United States', 'United Kingdom'), 
+getHistoricalData(country = c('United States', 'United Kingdom'),
 indicator = c('Imports','Exports'))
 getHistoricalData(country = 'United States', indicator = 'Imports')
 
