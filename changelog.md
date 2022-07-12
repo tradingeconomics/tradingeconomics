@@ -2,6 +2,13 @@
 
 
 ### *Latest changes, improvements and bug fixes on the API:*
+
++ 2022/06
+
+    + __Added:__ StartDate column on markets/category endpoints.
+
+---
+
 + 2022/05
 
     + __Added:__ /markets/symbology endpoint for stocks.
