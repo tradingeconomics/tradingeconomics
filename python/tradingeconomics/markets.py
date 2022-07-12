@@ -87,8 +87,8 @@ def getMarketsData(marketsField, output_type=None):
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
   																							
-        names = ['symbol','ticker','name', 'country','Date', 'Last', 'Close', 'CloseDate', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear','decimals', 'unit', 'frequency', 'lastupdate']    
-        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Last', 'Close', 'CloseDate', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear','decimals', 'unit', 'frequency', 'LastUpdate']    
+        names = ['symbol','ticker','name', 'country','Date','State', 'Last', 'Close', 'CloseDate', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','day_high','day_low','yesterday','lastWeek','lastMonth','lastYear','startYear','decimals', 'unit', 'frequency', 'StartDate','lastupdate']    
+        names2 = ['Symbol','Ticker','Name', 'Country', 'Date','State', 'Last', 'Close', 'CloseDate', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','day_high','day_low','yesterday','lastWeek','lastMonth','lastYear','startYear','decimals', 'unit', 'frequency','StartDate', 'LastUpdate']    
         maindf = pd.DataFrame()     
         for i in range(len(names)):
             names[i] =  [d[names2[i]] for d in webResults]

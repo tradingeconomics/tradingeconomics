@@ -54,3 +54,14 @@ te.getIndicatorData((ticker = "usurtot"))
     console.log("List of indicators by ticker", "\n", ticker, "\n");
   })
   .catch((err) => console.log(err));
+
+//===============================================================================================================
+// Get a list of indicators by ticker
+
+te.  getHistoricalUpdates()()
+  .then((all) => {
+    console.log("List of historical updates", "\n", all, "\n");
+  })
+  .catch((err) => console.log(err));
+
+
