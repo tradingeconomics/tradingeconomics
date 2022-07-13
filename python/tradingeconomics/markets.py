@@ -86,15 +86,11 @@ def getMarketsData(marketsField, output_type=None):
     except ValueError:
         raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
     if len(webResults) > 0:
-  																							
-        names = ['symbol','ticker','name', 'country','Date','State', 'Last', 'Close', 'CloseDate', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','day_high','day_low','yesterday','lastWeek','lastMonth','lastYear','startYear','decimals', 'unit', 'frequency', 'StartDate','lastupdate']    
-        names2 = ['Symbol','Ticker','Name', 'Country', 'Date','State', 'Last', 'Close', 'CloseDate', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','day_high','day_low','yesterday','lastWeek','lastMonth','lastYear','startYear','decimals', 'unit', 'frequency','StartDate', 'LastUpdate']    
-        maindf = pd.DataFrame()     
-        for i in range(len(names)):
-            names[i] =  [d[names2[i]] for d in webResults]
-            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
+
+            maindf = pd.DataFrame.from_records(webResults)
     else:
         raise ParametersError ('No data available for the provided parameters.')
+    
     if output_type == None or output_type =='dict':
         output = webResults
     elif output_type == 'df':          
