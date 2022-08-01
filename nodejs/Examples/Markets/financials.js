@@ -41,7 +41,7 @@ te.getFinancialsData(symbol = 'aapl:us')
 //===============================================================================================================
 // Get financials historical data by symbol and category
 
-te.getFinancialsHistoricalData(symbol = 'aapl:us', category = 'assets' )
+te.getFinancialsHistorical(symbol = 'aapl:us', category = 'assets' )
   .then((data) => {
     console.log("Financials historical", "\n", data, "\n");
   })
