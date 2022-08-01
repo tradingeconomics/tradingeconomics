@@ -401,7 +401,7 @@ See below how to install a package that’s sitting on GitHub.</p>
    <br> 
    Here is a practical example:
    <br>
-   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/united%20states,china/indicator/gdp,population?c=guest:guest&f=json">historical/country/united%20states,china/indicator/gdp,population</a> </p>
+   <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico,sweden/indicator/gdp,population?c=guest:guest&f=json">historical/country/united%20states,china/indicator/gdp,population</a> </p>
 </blockquote>
 <br>
 <blockquote class="lang-specific csharp">
@@ -471,11 +471,11 @@ Using Headers auth:<br>
 <p>You can request data in several formats:<br></p>     
     <ul>
     <li><p>json<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&f=json">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;f=json</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&f=json">https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&amp;f=json</a></p></li>
     <li><p>xml<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&f=xml">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;f=xml</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&f=xml">https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&amp;f=xml</a></p></li>
     <li><p>csv<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&f=csv">https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp?c=guest:guest&amp;f=csv</a></p></li>
+        <a target = '_blank' href="https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&f=csv">https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&amp;f=csv</a></p></li>
     </ul>
 
 <h3 id="Error-codes">Status codes</h3>
@@ -650,7 +650,7 @@ Using Headers auth:<br>
       <p>To get a list of indicators by country or countries.</p>
   </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">country</span> = [<span class="s1">'china', 'portugal'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">country</span> = [<span class="s1">'mexico'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -658,7 +658,7 @@ Using Headers auth:<br>
     <p>To get a list of indicators by country and group.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">group</span> = <span class="s1">'housing'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getIndicatorData</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>, <span class="kd">group</span> = <span class="s1">'gdp'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -691,7 +691,7 @@ Using Headers auth:<br>
     <p>To get a list of indicator peers by country.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getPeers</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getPeers</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
       </span><span class="s1">console</span>.log(<span class="na">data</span>)       
   });</span>
 </code></pre>
@@ -699,7 +699,7 @@ Using Headers auth:<br>
     <p>To get a list of indicator peers by country and category.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getPeers</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'money'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getPeers</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>, <span class="kd">category</span> = <span class="s1">'money'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
   </code></pre>
@@ -1077,12 +1077,17 @@ Using Headers auth:<br>
 </code></pre>
 
 <!--javascript black side-->    
-
 <blockquote class="lang-specific javascript">
     <p>To get a list of Historical data for specific country or countries and indicator.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">country</span> = [<span class="s1">'china'</span><span class="o">,</span><span class="s1">'portugal'</span> </span>], <span class="kd">indicator</span> = <span class="s1">'gdp'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>, <span class="kd">indicator</span> = <span class="s1">'gdp'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+    });</span>
+  </code></pre>
+
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">country</span> = [<span class="s1">'mexico'</span>,<span class="s1">'sweden'</span>], <span class="kd">indicator</span> = [<span class="s1">'gdp'</span>,<span class="s1">'population'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
   </code></pre>
@@ -1090,8 +1095,8 @@ Using Headers auth:<br>
     <p>You can specify a start date, or even start and end date (date format is yyyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">country</span> = [<span class="s1">'china'</span><span class="o">,</span><span class="s1">'portugal'</span> </span>], <span class="kd">indicator</span> = <span class="s1">'gdp'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>, 
-    <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){ 
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>, <span class="kd">indicator</span> = <span class="s1">'gdp'</span>, <span class="kd">start_date</span> = <span class="s1">'2015-01-01'</span>, 
+    <span class="kd">end_date</span> = <span class="s1">'2015-12-31'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){ 
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
   </code></pre>
@@ -1099,7 +1104,7 @@ Using Headers auth:<br>
     <p>You can specify a ticker, and a start date (date format is yyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">ticker</span> = <span class="s1">'usurtot'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02' </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getHistoricalData</span>(<span class="kd">ticker</span> = <span class="s1">'usurtot'</span>, <span class="kd">start_date</span> = <span class="s1">'2015-03-01' </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -1120,7 +1125,7 @@ Using Headers auth:<br>
     <p>Get discontinued series.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getDiscontinuedIndicators</span>( ).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getDiscontinuedIndicators</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -1445,7 +1450,7 @@ or you can specify a start date and end date<br>
     <p>Get forecasts by country. </p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -1453,7 +1458,7 @@ or you can specify a start date and end date<br>
     <p>Get forecasts for multiple countries. </p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = [<span class="s1">'china'</span>,<span class="s1">'united states'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = [<span class="s1">'mexico'</span>,<span class="s1">'sweden'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -1474,10 +1479,15 @@ or you can specify a start date and end date<br>
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get forecasts by ticker.</p>
+    <p>Get forecasts by ticker or tickers.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">ticker</span> = <span class="s1">'usurtot'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">ticker</span> = [<span class="s1">'usurtot'</span>,<span class="s1">'wgdpchin'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -1485,7 +1495,12 @@ or you can specify a start date and end date<br>
     <p>Get forecasts by country and indicator.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">indicator</span> = <span class="s1">'interest rate'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>, <span class="kd">indicator</span> = <span class="s1">'gdp'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getForecasts</span>(<span class="kd">country</span> = [<span class="s1">'mexico'</span>,<span class="s1">'sweden'</span>], <span class="kd">indicator</span> = [<span class="s1">'gdp'</span>,<span class="s1">'population'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -1865,7 +1880,7 @@ or you can specify a start date and end date<br>
     <p>To get credit rating for specific country. </p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -1873,7 +1888,7 @@ or you can specify a start date and end date<br>
     <p>To get credit ratings for multiple countries. </p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">country</span> = [<span class="s1">'china'</span>, <span class="s1">'portugal'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">country</span> = [<span class="s1">'mexico'</span>, <span class="s1">'sweden'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -1881,7 +1896,7 @@ or you can specify a start date and end date<br>
     <p>To get historical ratings.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = <span class="s1">'mexico'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -1889,7 +1904,7 @@ or you can specify a start date and end date<br>
     <p>To get historical ratings giving a start date.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = <span class="s1">'united states', </span><span class="kd">start_date</span> = <span class="s1">'2011-01-01'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = <span class="s1">'mexico', </span><span class="kd">start_date</span> = <span class="s1">'2011-01-01'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -1897,7 +1912,7 @@ or you can specify a start date and end date<br>
     <p>To get historical ratings by specifying a start and an end dates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = <span class="s1">'united states', </span><span class="kd">start_date</span> = <span class="s1">'2011-01-01', </span><span class="kd">end_date</span> = <span class="s1">'2012-01-01'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getRatings</span>(<span class="kd">historical</span> = <span class="s1">'mexico', </span><span class="kd">start_date</span> = <span class="s1">'2011-01-01', </span><span class="kd">end_date</span> = <span class="s1">'2015-01-01'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
@@ -2232,7 +2247,7 @@ or you can specify a start date and end date<br>
     <p>To get latest updates by country.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getLatestUpdates</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getLatestUpdates</span>(<span class="kd">country</span> = <span class="s1">'sweden'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
       </span><span class="s1">console</span>.log(<span class="na">data</span>)       
   });</span>
 </code></pre>
@@ -2240,7 +2255,7 @@ or you can specify a start date and end date<br>
     <p>To get updates from a starting date (date format is yyyy-mm-dd) and country.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getLatestUpdates</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02', </span><span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getLatestUpdates</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02', </span><span class="kd">country</span> = <span class="s1">'sweden'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
       </span><span class="s1">console</span>.log(<span class="na">data</span>)       
   });</span>
 </code></pre>
@@ -2508,7 +2523,7 @@ or you can specify a start date and end date<br>
     <p>To get all calendar events, no parameters are required.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
     </span><span class="s1">console</span>.log(<span class="na">data</span>)       
 });</span>
 </code></pre>
@@ -2516,7 +2531,7 @@ or you can specify a start date and end date<br>
     <p>To get all calendar events sorted by importance.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">importance</span> = <span class="s1">'1'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">importance</span> = <span class="s1">'1'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
     </span><span class="s1">console</span>.log(<span class="na">data</span>)       
 });</span>
 </code></pre>
@@ -2524,67 +2539,67 @@ or you can specify a start date and end date<br>
     <p>To filter calendar events by a date (date format is yyyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2016-02-10'  </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2016-02-10'  </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+});</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>To get calendar events by country.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+});</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>To get calendar events by country and date (date format is yyyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2016-02-10'  </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2016-02-10'  </span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+});</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>To get calendar events by indicator.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">indicator</span> = <span class="s1">'interest rate'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">indicator</span> = <span class="s1">'inflation rate'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+});</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>To get calendar events by indicator and date (date format is yyyy-mm-dd).</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">indicator</span> = <span class="s1">'inflation rate'</span>, <span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>,
-    <span class="kd">end_date</span> = <span class="s1">'2016-02-10'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">indicator</span> = <span class="s1">'inflation rate'</span>, <span class="kd">start_date</span> = <span class="s1">'2016-02-01'</span>,<span class="kd">end_date</span> = <span class="s1">'2016-02-10'</span>)
+.then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
+});</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Filter calendar events by calendar ID.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">id</span> = [<span class="s1">'174108'</span>,<span class="s1">'160025'</span>,<span class="s1">'160030'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">id</span> = [<span class="s1">'174108'</span>,<span class="s1">'160025'</span>,<span class="s1">'160030'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+});</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
     <p>Filter calendar events by ticker.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">ticker</span> = [<span class="s1">'SPAINFACORD'</span>,<span class="s1">'BAHRAININFNRATE'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendar</span>(<span class="kd">ticker</span> = [<span class="s1">'IJCUSA'</span>,<span class="s1">'SPAINFACORD'</span>,<span class="s1">'BAHRAININFNRATE'</span>]).then(<span class="na">function</span>(<span class="kd">data</span>){
+     </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+});</span>
 </code></pre>
 
 <blockquote class="lang-specific javascript">
     <p>To get calendar updates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendarUpdates</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
+<span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendarUpdates</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+    </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+});</span>
 </code></pre>
 
 <!--c# black side-->
@@ -3389,7 +3404,7 @@ Click on any method below for a sample.
     <p>Get stock market searching for country.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">search_term</span> = <span class="s1">'united states'</span>, <span class="kd">category</span> = <span class="s1">'index'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getMarketSnap</span>(<span class="kd">search_term</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -5474,18 +5489,10 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get financials data by multiple instrument symbols.</p>
-</blockquote>
-</code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsData</span>(<span class="kd">symbol</span> = [<span class="s1">'aapl:us'</span>, <span class="s1">'ea:us'</span>] ).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
-</code></pre>
-<blockquote class="lang-specific javascript">
     <p>Get financials historical data.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsHistoricalData</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">category</span> = <span class="s1">'assets'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsHistorical</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">category</span> = <span class="s1">'assets'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -5697,12 +5704,12 @@ Click on any method below for a sample.
     <p>Get news by country and dates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'china'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">start_date</span> = <span class="s1">'2021-01-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2021-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>, <span class="kd">start_date</span> = <span class="s1">'2021-02-02'</span>, <span class="kd">end_date</span> = <span class="s1">'2021-03-03'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
@@ -5723,7 +5730,7 @@ Click on any method below for a sample.
     <p>Get news by country and indicator and dates.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'china'</span>, <span class="kd">indicator</span> = <span class="s1">'imports'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getNews</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>, <span class="kd">indicator</span> = <span class="s1">'inflation rate'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
@@ -6420,7 +6427,7 @@ php black side
     <p>Search for available categories, term and category.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getSearch</span>( ).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getSearch</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -7633,7 +7640,7 @@ php black side
     });</span>
 </code></pre> 
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCmtCountryFilterByType</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>, <span class="kd">type</span> = <span class="s1">'export'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCmtCountryFilterByType</span>(<span class="kd">country1</span> = <span class="s1">'united states'</span>, <span class="kd">type</span> = <span class="s1">'export'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre> 
@@ -8076,7 +8083,7 @@ php black side
         <p>To get Federal Reserve snapshots by symbol.</p>
 
     </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'AGEXMAK2A647NCEN'</span><span class="p">)</span>
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'ALLMARGATTN'</span><span class="p">)</span>
     </code></pre>
                        <!-- <span class="n">symbol</span>   <span class="n">...</span>            <span class="n">lastUpdate</span>                          
     <span class="mi">0</span>        <span class="n">AGEXMAK2A647NCEN</span>   <span class="n">...</span>   <span class="mi">20-02-2019</span><span class="n">T</span><span class="mi">13:47:00</span>        -->
@@ -8124,11 +8131,11 @@ php black side
     <blockquote class="lang-specific r">
         <p>Get a snapshot of Federal Reserve by symbol.</p>
     </blockquote>   
-    <pre class="highlight r"><code><span class="n">getFedReserveSnapshot</span><span class="p">(</span><span class="s1">'AGEXMAK2A647NCEN'</span><span class="p">)</span><span class="w">
+    <pre class="highlight r"><code><span class="n">getFedReserveSnapshot</span><span class="p">(</span><span class="s1">'ALLMARGATTN'</span><span class="p">)</span><span class="w">
     
         <span class="n">Output</span><span class="p">:</span>
                        <span class="n">symbol</span>  <span class="n">Country</span>                                       <span class="n">Category</span>             
-    <span class="mi">1</span>        <span class="n">AGEXMAK2A647NCEN</span>   <span class="n">Alaska</span>      <span class="n">Age 65 and Over Tax Exemptions for Alaska</span>
+    <span class="mi">1</span>        <span class="n">ALLMARGATTN</span>   <span class="n">Tennessee</span>      <span class="n">All Marginally Attached Workers for Tennessee</span>
             
     </span></code></pre>
     <blockquote class="lang-specific r">
@@ -8169,7 +8176,7 @@ php black side
         <p>Get a snapshot of Federal Reserve data by symbol. </p>
     </blockquote>
     </code></pre><pre class="highlight javascript"><code>
-        <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">symbol</span> = <span class="s1">'AGEXMAK2A647NCEN'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFred</span>(<span class="kd">symbol</span> = <span class="s1">'ALLMARGATTN'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
             </span><span class="s1">console</span>.log(<span class="na">data</span>)     
         });</span>
     </code></pre> 
@@ -8297,7 +8304,7 @@ php black side
     <span class="n">public static void</span> <span class="k">getFredSymbol</span><span class="o">()</span> <span class="na">throws</span> IOException
     <span class="n">{</span>
         <span class="c1">//put symbol   name here</span>
-        <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"AGEXMAK2A647NCEN"</span>;
+        <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"ALLMARGATTN"</span>;
         <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
         <span class="c1">//set the path</span>
         <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/fred/snapshot/symbol"</span> + <span class="s">"/"</span> + <span class="na">params</span>;   
