@@ -517,38 +517,30 @@ Using Headers auth:<br>
 <blockquote class="lang-specific r">
 <p>To get a list of all indicators per country.</p>
 </blockquote>   
-<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="s1">'mexico'</span><span class="p">,</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 
-        <span class="n">Output</span><span class="p">:</span>
-                    <span class="n">country</span>                      <span class="n">Category</span>   <span class="n">LatestValue</span>   
-<span class="mi">2</span>          <span class="n">United States</span>         <span class="n">ADP Employment Change</span>        <span class="mf">275.00</span>
-<span class="mi">21</span>        <span class="n"> United States</span>    <span class="n">API Crude Oil Stock Change</span>          <span class="mf">2.40</span>
-<span class="mi">3</span>          <span class="n">United States</span>           <span class="n">Asylum Applications</span>       <span class="mf">7267.00</span>
+<span class="n">Output</span><span class="p">:</span>
+        <span class="n">country</span>                      <span class="n">Category</span>     <span class="n">Title</span>                         <span class="n">LatestValue</span>              
+<span class="mi">2</span>          <span class="n">Mexico</span>         <span class="n">Auto Exports</span>            <span class="n">Mexico Auto Exports</span>          <span class="mf">275.00</span>  ...
+<span class="mi">21</span>         <span class="n">Mexico</span>         <span class="n">Balance of Trade</span>        <span class="n">Mexico Balance of Trade</span>      <span class="mf">2.40</span>    ...
+<span class="mi">3</span>          <span class="n">Mexico</span>         <span class="n">Banks Balance Sheet</span>     <span class="n">Mexico Banks Balance Sheet</span>   <span class="mf">7267.00</span> ...
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get a list of all indicators per country and group.</p>
 </blockquote>   
-<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span>, <span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gdp'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mexico'</span>, <span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'money'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>   
-<blockquote class="lang-specific r">
-    <p>For example, next code will provide information in data frame format about a number of companies in Italy that got bankrupt </p>
-</blockquote>   
-<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'italy'</span><span class="p">,</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'bankruptcies'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 
-    </span><span class="n">Country</span><span class="w">     </span><span class="n">Category</span><span class="w">              </span><span class="n">Title</span><span class="w"> </span><span class="n">LatestValue</span><span class="w">     </span><span class="n">LatestValueDate</span><span class="w"> </span><span class="n">Source</span><span class="w">      </span><span class="n">Unit</span><span class="w">                 </span><span class="n">URL</span><span class="w"> </span><span class="n">CategoryGroup</span><span class="w"> </span><span class="n">Frequency</span><span class="w"> </span><span class="n">HistoricalDataSymbol</span><span class="w"> </span><span class="n">PreviousValue</span><span class="w">   </span><span class="n">PreviousValueDate</span><span class="w">
-  </span><span class="m">1</span><span class="w">   </span><span class="n">Italy</span><span class="w"> </span><span class="n">Bankruptcies</span><span class="w"> </span><span class="n">Italy</span><span class="w"> </span><span class="n">Bankruptcies</span><span class="w">        </span><span class="m">3600</span><span class="w"> </span><span class="m">2016-03-31</span><span class="nb">T</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="w"> </span><span class="n">Cerved</span><span class="w"> </span><span class="n">Companies</span><span class="w"> </span><span class="o">/</span><span class="n">italy</span><span class="o">/</span><span class="n">bankruptcies</span><span class="w">      </span><span class="n">Business</span><span class="w"> </span><span class="n">Quarterly</span><span class="w">             </span><span class="n">ITALYBAN</span><span class="w">          </span><span class="m">4100</span><span class="w"> </span><span class="m">2015-12-31</span><span class="nb">T</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="o">:</span><span class="m">00</span><span class="w">
-</span></code></pre>
 <blockquote class="lang-specific r">
 <p>To get several countries and indicators </p>
 </blockquote>   
-<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'mexico'</span><span class="p">,</span><span class="s1">'sweden'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gdp'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 
         <span class="n">Output</span><span class="p">:</span>
-              <span class="n">country</span>              <span class="n">Category</span>  <span class="n">LatestValue</span>   
-<span class="mi">2</span>               <span class="n">China</span>                   <span class="n">GDP</span>       <span class="mf">275.00</span>
-<span class="mi">21</span>              <span class="n">China</span>        <span class="n">Inflation Rate</span>          <span class="mf">2.5</span>
-<span class="mi">3</span>       <span class="n">United States</span>                   <span class="n">GDP</span>      <span class="mf">19390.6</span>
-<span class="mi">4</span>       <span class="n">United States</span>        <span class="n">Inflation Rate</span>            <span class="mf">2</span>
+              <span class="n">country</span>              <span class="n">Category</span>    ...    <span class="n">LatestValue</span>   
+<span class="mi">2</span>               <span class="n">Mexico</span>                   <span class="n">GDP</span>   ...    <span class="mf">275.00</span>
+<span class="mi">21</span>              <span class="n">Sweden</span>        <span class="n">Inflation Rate</span>   ...       <span class="mf">2.5</span>
+
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get indicator data by ticker or tickers.</p>
@@ -563,12 +555,12 @@ Using Headers auth:<br>
  <blockquote class="lang-specific r">
     <p>To get indicator peers data by country.</p>
     </blockquote>   
-    <pre class="highlight r"><code><span class="n">getPeers</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+    <pre class="highlight r"><code><span class="n">getPeers</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mexico'</span><span class="p">, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
  </span></code></pre>
  <blockquote class="lang-specific r">
     <p>To get indicator peers data by country and category.</p>
     </blockquote>   
-    <pre class="highlight r"><code><span class="n">getPeers</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">, </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'money'</span><span class="p"></span>, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+    <pre class="highlight r"><code><span class="n">getPeers</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mexico'</span><span class="p">, </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'money'</span><span class="p"></span>, </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
  </span></code></pre>
 
 
@@ -961,20 +953,20 @@ Using Headers auth:<br>
 <!--Historical data R black side-->
        
 <blockquote class="lang-specific r">
-    <p>To get historical data of imports in United Kingdom type.</p>
+    <p>To get historical data of GDP in Mexico.</p>
 </blockquote>  
-<pre class="highlight r"><code><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">,</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'imports'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mexico'</span><span class="p">,</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gdp'</span><span class="p">)</span><span class="w">
 
         <span class="n">Output</span><span class="p">:</span>
-                  <span class="n">country</span>        <span class="n">Category</span>     <span class="n">Frequency</span>   
-<span class="mi">2</span>          <span class="n">United Kingdom</span>         <span class="n">Imports</span>       <span class="n">Monthly</span>
-<span class="mi">21</span>        <span class="n"> United Kingdom</span>         <span class="n">Imports</span>       <span class="n">Monthly</span>
-<span class="mi">3</span>          <span class="n">United Kingdom</span>         <span class="n">Imports</span>       <span class="n">Monthly</span>
+        <span class="n">country</span>        <span class="n">Category</span>     <span class="n">Frequency</span>     <span class="n">Value</span>         ...
+<span class="mi">2</span>          <span class="n">Mexico</span>         <span class="n">GDP</span>       <span class="n">Monthly</span>       <span class="n">1269.40</span>       ...
+<span class="mi">21</span>         <span class="n">Mexico</span>         <span class="n">GDP</span>       <span class="n">Monthly</span>       <span class="n">1087.12</span>       ...
+<span class="mi">3</span>          <span class="n">Mexico</span>         <span class="n">GDP</span>       <span class="n">Monthly</span>       <span class="n">1293.04</span>       ...
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get historical data for several countries and indicators.</p>
 </blockquote>  
-<pre class="highlight r"><code><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'population'</span><span class="p">),</span><span class="w">
+<pre class="highlight r"><code><span class="n">getHistoricalData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'mexico'</span><span class="p">,</span><span class="s1">'sweden'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'population'</span><span class="p">),</span><span class="w">
                   </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span>,
                   </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
@@ -1339,19 +1331,19 @@ or you can specify a start date and end date<br>
 <!--Forecasts R black side-->
 
 <blockquote class="lang-specific r">
-    <p>Forecasted values of all indicators of United States.</p>
+    <p>Forecasted values of all indicators of Mexico.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'united states'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'mexico'</span><span class="p">)</span><span class="w">
         <span class="n">Output</span><span class="p">:</span>
-                 <span class="n">country</span>                      <span class="n">Category</span>         <span class="n">Q1</span>         <span class="n">Q2</span>         <span class="n">Q3</span>        <span class="n">Q4</span>
-<span class="mi">2</span>          <span class="n">United States</span>         <span class="n">ADP Employment Change</span>     <span class="mf">190.00</span>     <span class="mf">160.00</span>     <span class="mf">145.00</span>    <span class="mf">180.00</span>   
-<span class="mi">21</span>        <span class="n"> United States</span>    <span class="n">API Crude Oil Stock Change</span>      <span class="mf">-3.20</span>       <span class="mf">5.20</span>      <span class="mf">-3.20</span>     <span class="mf">-3.20</span> 
-<span class="mi">3</span>          <span class="n">United States</span>       <span class="n">Average Hourly Earnings</span>       <span class="mf">0.20</span>       <span class="mf">0.30</span>       <span class="mf">0.20</span>      <span class="mf">0.20</span> 
+         <span class="n">country</span>     <span class="n">Category</span>             ...   <span class="n">Q1</span>        <span class="n">Q2</span>         <span class="n">Q3</span>        <span class="n">Q4</span>
+<span class="mi">2</span>          <span class="n">Mexico</span>    <span class="n">Auto Exports</span>         ...   <span class="mf">240</span>       <span class="mf">242</span>       <span class="mf">243</span>        <span class="mf">245</span>   
+<span class="mi">21</span>         <span class="n">Mexico</span>    <span class="n">Balance of Trade</span>     ...   <span class="mf">198</span>       <span class="mf">197</span>       <span class="mf">196</span>        <span class="mf">194</span> 
+<span class="mi">3</span>          <span class="n">Mexico</span>    <span class="n">Banks Balance Sheet</span>  ...   <span class="mf">9622670</span>   <span class="mf">9728631</span>   <span class="mf">9834592</span>    <span class="mf">9940553</span> 
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>Forecasted values of all indicators by more than one country.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">= c(</span><span class="s1">'united states'</span>, <span class="s1">'united kingdom'</span>) <span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">= c(</span><span class="s1">'mexico'</span>, <span class="s1">'sweden'</span>) <span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>Forecasted values for a specific indicator.</p>
@@ -1376,12 +1368,12 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific r">
     <p>To get data in data frame format type for one country and indicator.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'united states'</span><span class="p">, </span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gdp'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="s1">'mexico'</span><span class="p">, </span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'gdp'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get data in data frame format type for several countries and indicators.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getForecastData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s1">'mexico'</span><span class="p">,</span><span class="s1">'sweden</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp'</span><span class="p">,</span><span class="s1">'population'</span><span class="p">),</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 
 <!--Python Forecasts black side-->
@@ -1839,27 +1831,27 @@ or you can specify a start date and end date<br>
 <p>To get Credit Rating by country.</p>
 
 </blockquote>  
-<pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="s1">'United States'</span><span class="p">)</span>            
+<pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="s1">'mexico'</span><span class="p">)</span>            
 </span></code></pre> 
 <blockquote class="lang-specific r">
     <p>To get Credit Rating by several countries.</p>
 </blockquote>  
-<pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span></span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">            
+<pre class="highlight r"><code><span class="n">getCreditRating</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'mexico'</span><span class="p">,</span><span class="s1">'sweden'</span><span class="p">),</span></span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">            
 </span></code></pre> 
 <blockquote class="lang-specific r">
     <p>To get Historical Credit Rating by country.</p>
 </blockquote>  
-<pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="s1">'United States'</span><span class="w"> </span></span><span class="p">)</span>          
+<pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="s1">'mexico'</span><span class="w"> </span></span><span class="p">)</span>          
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get Historical Credit Rating by country and a start date.</p>
 </blockquote>  
-<pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="n">country</span><span class="w"> </span>= <span class="s1">'United States'</span><span class="w"> </span>, <span class="n">initDate</span><span class="w"> </span>= <span class="s1">'2011-01-01'</span></span><span class="p">)</span>          
+<pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="n">country</span><span class="w"> </span>= <span class="s1">'mexico'</span><span class="w"> </span>, <span class="n">initDate</span><span class="w"> </span>= <span class="s1">'2011-01-01'</span></span><span class="p">)</span>          
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get Historical Credit Rating by country and dates.</p>
 </blockquote>  
-<pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="n">country</span><span class="w"> </span>= <span class="s1">'United States'</span><span class="w"> </span>, <span class="n">initDate</span><span class="w"> </span>= <span class="s1">'2011-01-01'</span>, <span class="n">endDate</span><span class="w"> </span>= <span class="s1">'2012-01-01'</span></span><span class="p">)</span>          
+<pre class="highlight r"><code><span class="n">getCreditRatingHistorical</span><span class="p">(</span><span class="n">country</span><span class="w"> </span>= <span class="s1">'mexico'</span><span class="w"> </span>, <span class="n">initDate</span><span class="w"> </span>= <span class="s1">'2011-01-01'</span>, <span class="n">endDate</span><span class="w"> </span>= <span class="s1">'2012-01-01'</span></span><span class="p">)</span>          
 </span></code></pre>
        
        
@@ -2392,28 +2384,28 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific r">
     <p>To get information about calendar events by country, dates and importance</p>
 </blockquote>       
-<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">, importance = <span class="s1">'2'</span>, </span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">, importance = <span class="s1">'2'</span>, </span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united kingdom'</span><span class="p">, initDate = <span class="s1">'2021-02-02'</span>, endDate  = <span class="s1">'2021-03-03'</span>, </span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">, initDate = <span class="s1">'2021-02-02'</span>, endDate  = <span class="s1">'2021-03-03'</span>, </span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get information about calendar events for several countries and indicators</p>
 </blockquote>       
-<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'united states'</span><span class="p">,</span><span class="s1">'china'</span><span class="p">),</span><span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'gdp growth rate'</span><span class="p">,</span><span class="s1">'inflation rate'</span><span class="p">),</span><span class="w">
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span>,<span class="w"> </span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'initial jobless claims'</span>,<span class="w">
                 </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w">
                 </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get information about calendar events for specific indicator.</p>
 </blockquote>       
-<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'initial jobless claims'</span><span class="p"><span class="p">)</span>
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'inflation rate'</span><span class="p"><span class="p">)</span>
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get information about calendar events for specific indicator within a date interval.</p>
 </blockquote>       
-<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'initial jobless claims'</span><span class="p">, </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w"></span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span>
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'inflation rate'</span><span class="p">, </span><span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2006-01-01'</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-12-31'</span><span class="p">,</span><span class="w"></span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span>
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get calendar events by specific id.</p>
@@ -2428,7 +2420,7 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific r">
     <p>To get calendar events for specific ticker.</p>
 </blockquote>       
-<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="w"> c(</span><span class="s1">'IJCUSA'</span>, <span class="s1">'SPAINFACORD'</span><span class="p">)</span><span class="p">)</span>
+<pre class="highlight r"><code><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="w"> </span><span class="o">=</span><span class="s1"> 'IJCUSA'</span><span class="p">)</span>
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get calendar events for specific ticker within a date interval.</p>
@@ -5085,18 +5077,7 @@ Click on any method below for a sample.
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">indicator</span><span class="o">=</span><span class="s1">'aapl:us'</span><span class="p">,<span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'symbol'</span><span class="p">,</span><span class="n">initDate</span><span class="o">=</span><span class="s1">'2017-01-01'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-<blockquote class="lang-specific r">
-    <p>To get earnings by type. Type can be: earnings, dividends, ipo.</p>
-</blockquote> 
-<pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">type</span><span class="o">=</span><span class="s1">'dividends'</span><span class="p">)</span><span class="w">
 
-        <span class="n">Output</span><span class="p">:</span> 
-          <span class="n">Symbol</span>                   <span class="n">Date</span>   <span class="n">Actual</span>    <span class="n">Country</span>           
- <span class="mi">1</span>     <span class="n">600309:CH</span>    <span class="n">2019-05-27T00:00:00</span>       <span class="mf">2</span>       <span class="n">China</span>              
- <span class="mi">2</span>       <span class="n">AMRT:IJ</span>    <span class="n">2019-05-27T00:00:00</span>    <span class="mf">6.24</span>   <span class="n">Indonesia</span>                      
- <span class="mi">3</span>       <span class="n">BMRI:IJ</span>    <span class="n">2019-05-27T00:00:00</span>  <span class="mf">241.22</span>   <span class="n">Indonesia</span>                     
-              
- </span></code></pre>
 
 <!--python earnings black side-->
 
@@ -5656,14 +5637,12 @@ Click on any method below for a sample.
 <blockquote class="lang-specific r">
     <p>Filter news by date.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(initDate = <span class="s1">'2020-01-01'</span>, endDate = <span class="s1">'2020-12-31'</span>outType = <span class="s1">'df'</span>)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(initDate = <span class="s1">'2020-01-01'</span>, endDate = <span class="s1">'2020-12-31'</span>,outType = <span class="s1">'df'</span>)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get the latest news by country, or countries and dates.</p>
 </blockquote> 
-<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(country = c(<span class="s1">'united states'</span><span class="p">,</span><span class="s1">'japan'</span><span class="p">)</span><span class="p">)</span><span class="w">
-</span></code></pre>
-<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(country = <span class="s1">'united states'</span>, initDate = <span class="s1">'2020-01-01'</span>, endDate = <span class="s1">'2020-12-31'<span class="p">)</span><span class="w">
+<pre class="highlight r"><code><span class="n">getLatestNews</span><span class="p">(country = <span class="s1">'mexico'</span>, initDate = <span class="s1">'2020-01-01'</span>, endDate = <span class="s1">'2020-12-31'<span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
     <p>To get the latest news by indicator, or indicators and dates.</p>
