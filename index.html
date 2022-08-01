@@ -2480,7 +2480,7 @@ or you can specify a start date and end date<br>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">'initial jobless claims'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'united states'</span><span class="p">,</span> <span class="s">'china'</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="p">[</span><span class="s">'imports'</span><span class="p">,</span><span class="s">'exports'</span><span class="p">],</span><span class="n"> initDate</span><span class="o">=</span><span class="s">'2017-06-07'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s">'initial jobless claims'</span><span class="p"><span class="p">,</span><span class="n"> initDate</span><span class="o">=</span><span class="s">'2017-06-07'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>
@@ -2488,10 +2488,10 @@ or you can specify a start date and end date<br>
 </p>
 </blockquote>
 <pre class="highlight python"><code>
-<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o"> =</span><span class="s"> 160025</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o"> =</span><span class="s"> '174108'</span><span class="p">)</span>
 </code></pre>
 <pre class="highlight python"><code>
-<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o"> = [</span><span class="s">160025</span>, <span class="s"> 174108</span>, <span class="s"> 160030</span>], <span class="n">output_type</span><span class="o">= </span><span class="s"> 'df'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">getCalendarId</span><span class="p">(</span><span class="n">id</span><span class="o"> = [</span><span class="s">'160025'</span>, <span class="s"> '174108'</span>, <span class="s"> '160030'</span>], <span class="n">output_type</span><span class="o">= </span><span class="s"> 'df'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
 <p>
@@ -2499,7 +2499,7 @@ or you can specify a start date and end date<br>
 </p>
 </blockquote>
 <pre class="highlight python"><code>
-<span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">(ticker</span><span class="o"> = </span><span class="s"> 'IJCUSA'</span>, <span class="n">output_type</span><span class="o"> = </span><span class="s"> 'df'</span><span class="p">)</span>
+<span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="o"> = </span><span class="s"> 'IJCUSA'</span>, <span class="n">output_type</span><span class="o"> = </span><span class="s"> 'df'</span><span class="p">)</span>
 </code></pre>
 <pre class="highlight python"><code>
 <span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">ticker</span><span class="o"> = [</span><span class="s">'IJCUSA'</span>, <span class="s"> 'SPAINFACORD'</span>, <span class="s"> 'BAHRAININFNRATE'</span>], <span class="n">output_type</span><span class="o"> = </span><span class="s"> 'df'</span><span class="p">)</span>
@@ -3779,8 +3779,6 @@ Click on any method below for a sample.
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre> 
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsPeers</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'aapl:us'</span><span class="p">])</span>
-
 <span class="n">Output</span><span class="p">:</span>
       <span class="n">Symbol</span>         <span class="o">...</span>                    <span class="n">LastUpdate</span>
 <span class="mi">0</span>    <span class="n">AAPL</span><span class="p">:</span><span class="n">US</span>         <span class="o">...</span>           <span class="mi">2018</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">28</span><span class="n">T13</span><span class="p">:</span><span class="mi">49</span><span class="p">:</span><span class="mo">00</span>
@@ -4143,14 +4141,14 @@ Click on any method below for a sample.
 <blockquote class="lang-specific python">
     <p>To get historical market data for specific symbol and time range:</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-06-15'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-06-15'</span><span class="p">)</span>
 </code></pre>
 <blockquote class="lang-specific python">
     <p>To get historical market data for multiple symbols and specific time range:</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'gac:com'</span><span class="p">],</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-06-15'</span><span class="p">)</span>
+<pre class="highlight python"><code> <span class="n">te</span><span class="o">.</span><span class="n">fetchMarkets</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="p">[</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="s">'gac:com'</span><span class="p">],</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2017-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-06-15'</span><span class="p">)</span>
 
-<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> 
+
               <span class="n">symbol</span>        <span class="nb">open</span>        <span class="n">high</span>         <span class="n">low</span>       <span class="n">close</span>
 <span class="mi">2022</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">08</span>   <span class="n">AAPL</span><span class="p">:</span><span class="n">US</span>     <span class="mf">171.78</span>     <span class="mf">171.78</span>     <span class="mf">169.32001</span>     <span class="mf">169.72</span>
 <span class="mi">2022</span><span class="o">-</span><span class="mo">04</span><span class="o">-</span><span class="mo">07</span>   <span class="n">GAC</span><span class="p">:</span><span class="n">COM</span>     <span class="mf">2605</span>     <span class="mf">2605</span>     <span class="mf">2605</span>     <span class="mf">2605</span>
@@ -4393,7 +4391,7 @@ Click on any method below for a sample.
 <blockquote class="lang-specific python">
     <p>Aggregate intraday prices by interval.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntradayByInterval</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s">'1m'</span>, <span class="n">initDate</span><span class="o">=</span><span class="s">'2021-03-13'</span>, <span class="n">endtDate</span><span class="o">=</span><span class="s">'2021-03-17'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntradayByInterval</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="s">'1m'</span>, <span class="n">initDate</span><span class="o">=</span><span class="s">'2021-03-13'</span>, <span class="n">endDate</span><span class="o">=</span><span class="s">'2021-03-17'</span><span class="p">)</span>
 </code></pre>
 <!--javascript intraday black side-->
 
@@ -5420,21 +5418,13 @@ Click on any method below for a sample.
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFinancialsData</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'aapl:us'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
 </code></pre>
-<blockquote class="lang-specific python">
-    <p>To get financials data by multiple instrument symbols.</p>
-</blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFinancialsData</span><span class="p">(</span><span class="n">symbol</span> <span class="o">= [</span><span class="s">'aapl:us'</span>, <span class="s">'msft:us'</span>], <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-</code></pre>
+
 <blockquote class="lang-specific python">
     <p>To get historical financials data by instrument symbol.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalFinancials</span><span class="p">(</span><span class="s">'aapl:us'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
 </code></pre>
-<blockquote class="lang-specific python">
-    <p>To get historical financials by multiple instrument symbols.</p>
-</blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalFinancials</span><span class="p">(</span><span class="s">'aapl:us'</span>, <span class="s">'msft:us'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-</code></pre>
+
 <!--R financials black side-->
 <blockquote class="lang-specific r">
     <p>Get financials data.</p>
@@ -5631,9 +5621,9 @@ Click on any method below for a sample.
 <blockquote class="lang-specific python">
     <p>To get news by country or countries.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">= [<span class="s">'brazil'</span>,<span class="s">'canada'</span>]<span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country = </span><span class="s">'mexico'</span><span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
 </code></pre>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">= <span class="s">'canada'</span><span class="n">, <span class="n">start_date</span> <span class="o">= <span class="s">'2021-02-02'</span><span class="n">, end_date</span> <span class="o">= <span class="s">'2021-03-03'</span><span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">= <span class="s">'mexico'</span><span class="n">, <span class="n">start_date</span> <span class="o">= <span class="s">'2021-02-02'</span><span class="n">, end_date</span> <span class="o">= <span class="s">'2021-03-03'</span><span class="n">, output_type</span> <span class="o">= <span class="s">'df'</span>)</span>
 </code></pre>
 <blockquote class="lang-specific python">
     <p>To get news by Indicator or indicators.</p>
@@ -5646,15 +5636,15 @@ Click on any method below for a sample.
 <blockquote class="lang-specific python">
     <p>To get several countries and indicators.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="p">[</span> <span class="s">'united states'</span><span class="p"></span>,<span class="s">'China'</span><span class="p">]<span class="p">,<span class="s">indicator</span><span class="o">=<span class="p">[</span><span class="s">'Imports'</span><span class="p">,<span class="s">'Exports'<span class="p">]<span class="p">)</span>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="s">'mexico'</span><span class="p"></span><span class="p">,<span class="s">indicator</span><span class="o">=<span class="s">'inflation rate'</span><span class="p">)</span>  
 </code></pre>
 
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="p">[</span> <span class="s">'united states'</span><span class="p"></span>,<span class="s">'China'</span><span class="p">]<span class="p">,<span class="s">indicator</span><span class="o">=<span class="p">[</span><span class="s">'Imports'</span><span class="p">,<span class="s">'Exports'<span class="p">]<span class="p">, <span class="n">start_date</span> <span class="o">= <span class="s">'2021-02-02'</span><span class="n">, end_date</span> <span class="o">= <span class="s">'2021-03-03'</span><span class="n">,)</span>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">=<span class="s">'mexico'</span><span class="p">,<span class="s">indicator</span><span class="o">=<span class="s">'inflation rate'</span><span class="p">, <span class="n">start_date</span> <span class="o">= <span class="s">'2021-02-02'</span><span class="n">, end_date</span> <span class="o">= <span class="s">'2021-03-03'</span><span class="n">)</span>  
 </code></pre>
 <blockquote class="lang-specific python">
 <p>It is possible to limit the amount of news by a start index and a limited number of news to get.</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="s">'united states'</span><span class="p">,</span><span class="s">indicator</span><span class="o">=</span><span class="s">'Imports'</span><span class="p">,</span><span class="s">start</span><span class="o">=</span><span class="s">10</span><span class="p">,</span><span class="s">limit</span><span class="o">=<span class="s">5</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getNews</span><span class="p">(</span><span class="s">start</span><span class="o">=</span><span class="s">10</span><span class="p">,</span><span class="s">limit</span><span class="o">=<span class="s">5</span><span class="p">)</span>
 </code></pre>
 
 <!--R latest news black side-->
@@ -8105,12 +8095,7 @@ php black side
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s">'tennessee'</span><span class="p">)</span>                     
     </code></pre>
-    <blockquote class="lang-specific python"> 
-        <p>To get Federal Reserve snapshots by county or state.</p>
- 
-    </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRSnaps</span><span class="p">(</span><span class="n">state</span> <span class="o">=</span> <span class="s">'tennesse'</span>)</span>
-    </code></pre>
+
         <!-- <span class="n">symbol</span>   <span class="n">...</span>                <span class="n">lastUpdate</span>                          
     <span class="mi">0</span>        <span class="n">TNODIV</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.903</span> 
     <span class="mi">1</span>        <span class="n">TNOFAR</span>   <span class="n">...</span>   <span class="mi">2019-03-03</span><span class="n">T</span><span class="mi">19:57:18.713</span> 
