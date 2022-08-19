@@ -493,11 +493,11 @@ def getAllCountries(output_type=None):
     =================================================================================
     Parameters:
     -----------
-    None
-
+    output_type parameter can be 'df' or 'raw'
     Example
     -------
     getAllCountries()
+    getAllCountries(out_type='df')
     """
     try:
         _create_unverified_https_context = ssl._create_unverified_context
@@ -527,16 +527,17 @@ def getAllCountries(output_type=None):
 
             countries = [c['Country'] for c in webResults]
             df = pd.DataFrame(countries, columns=['Country'])
-            # return pd.DataFrame(countries)
 
             if output_type == 'df': 
                 output = df
             elif output_type == 'raw' or output_type == None:
                 output = countries
             else:
+                # TODO: ParametersError method is not implemented.
                 raise ParametersError ('output_type options : df for data frame, raw for list of countries')
             return output
         except ValueError:
             pass
     else:
-        return 'tat' 
+        # TODO: Return appropriate error message.
+        return ''
