@@ -525,13 +525,12 @@ def getAllCountries(output_type=None):
     if code == 200:
         try:
 
-            countries = [c['Country'] for c in webResults]
-            df = pd.DataFrame(countries, columns=['Country'])
+            df = pd.DataFrame(webResults)
 
             if output_type == 'df': 
                 output = df
             elif output_type == 'raw' or output_type == None:
-                output = countries
+                output = webResults
             else:
                 # TODO: ParametersError method is not implemented.
                 raise ParametersError ('output_type options : df for data frame, raw for list of countries')
