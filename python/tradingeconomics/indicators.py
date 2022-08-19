@@ -487,12 +487,56 @@ def getPeers(country=None, category=None, ticker=None, output_type=None):
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
 
     
+def getAllCountries(output_type=None):
+    """
+    Return a list of countries.
+    =================================================================================
+    Parameters:
+    -----------
+    None
 
+    Example
+    -------
+    getAllCountries()
+    """
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    
+    linkAPI = 'https://api.tradingeconomics.com/country/'
 
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
 
+    try:
+        response = urlopen(linkAPI)
+        code = response.getcode()
+        webResults = json.loads(response.read().decode('utf-8'))
+    except ValueError:
+        if code != 200:
+            print(urlopen(linkAPI).read().decode('utf-8'))
+        else: 
+            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
+    if code == 200:
+        try:
 
+            countries = [c['Country'] for c in webResults]
+            df = pd.DataFrame(countries, columns=['Country'])
+            # return pd.DataFrame(countries)
 
-
-
-
-     
+            if output_type == 'df': 
+                output = df
+            elif output_type == 'raw' or output_type == None:
+                output = countries
+            else:
+                raise ParametersError ('output_type options : df for data frame, raw for list of countries')
+            return output
+        except ValueError:
+            pass
+    else:
+        return 'tat' 
