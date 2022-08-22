@@ -128,18 +128,33 @@ function getHistoricalUpdates() {
      
 }
 
+/****************************************************************  
+   A LIST OF ALL COUNTRIES WILL BE PROVIDED
+   parameters:
+    
+   example:
 
+        countries = getAllCountries();
+                    
+*******************************************************************/
+function getAllCountries() {
+    
+    var url_base = 'https://api.tradingeconomics.com/country';
+    
+    
+    var url = url_base + '?c=' + apikey.replace (' ','%20');
+  
+    return fetch(url)
+    .then(func.handleErrors)   
+    .then(function(response) {    
+        return response.json(); // process it inside the `then` when calling the function       
+    }).catch(function (err) {
+        return err.message;
+    });
+     
+}
+
+module.exports.getAllCountries = getAllCountries;
 module.exports.getIndicatorData = getIndicatorData;
 module.exports.getDiscontinuedIndicators = getDiscontinuedIndicators
 module.exports.getHistoricalUpdates = getHistoricalUpdates
-
-
-
-
-
-
-
-
-
-
-
