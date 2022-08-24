@@ -194,44 +194,11 @@ def getHistoricalData(country = None, indicator = None, initDate= None, endDate=
         raise LoginError('You need to do login before making any request')
     
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-          
-            if len(webResults) > int(0):
-                results = {'dates': [d['DateTime'] for d in webResults],
-                            'values': [d[u'Value'] for d in webResults],
-                            }
-                          
-                          
-                if (type(country)== str and type(indicator) == str):
-                    results = parseData(results)
-                else:
-                    results = multiParams(webResults)
-                   
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            
-            if output_type == None or output_type =='dict':
-                output = results
-            elif output_type == 'df': 
-                output= results = pd.DataFrame(webResults) 
-            elif output_type == 'raw':        
-                output = webResults
-            else:       
-                raise ParametersError ('output_type options : dict for dictionary or raw for unparsed results.')
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''   
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)  
+        
 
 def getHistoricalRatings(country = None, rating = None, initDate = None, endDate=None, output_type = None):
     """
@@ -286,36 +253,10 @@ def getHistoricalRatings(country = None, rating = None, initDate = None, endDate
         raise LoginError('You need to do login before making any request')
    
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:            
-            if len(webResults) > 0:
-                names = ['country','date', 'agency', 'rating', 'outlook']
-                names2 = ['Country','Date', 'Agency', 'Rating', 'Outlook']    
-                maindf = pd.DataFrame(webResults, columns=names2)    
-            
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='dict':
-                output = webResults
-            elif output_type == 'df':        
-                output = maindf     
-            elif output_type == 'raw':        
-                output = webResults
-            else:      
-                raise ParametersError ('output_type options : df(default) for data frame or raw for unparsed results.') 
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''    
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)   
 
 def getHistoricalByTicker(ticker=None, start_date=None, output_type=None):
     """

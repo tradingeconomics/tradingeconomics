@@ -241,36 +241,10 @@ def getArticles(country = None, indicator = None, initDate = None, endDate = Non
     linkAPI = checkIndex(linkAPI, start)
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-            if len(webResults) > int(0):
-                    names = ['id', 'title', 'date', 'description', 'country', 'category', 'symbol', 'url']
-                    names2 = ['id', 'title', 'date', 'description', 'country', 'category', 'symbol', 'url']
-                    maindf = pd.DataFrame(webResults, columns=names2)    
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-
-            if output_type == None or output_type =='dict':
-                output = maindf
-            elif output_type == 'df': 
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError ('output_type options : df for data frame, dict(default) for dictionary by country, raw for results directly from web.')      
-            return output    
-        except ValueError:
-            pass
-    else:
-        return ''         
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)         
 
 def getArticleId(id = None, output_type = None):
     """
@@ -309,38 +283,10 @@ def getArticleId(id = None, output_type = None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try: 
-
-            if len(webResults) > 0:
-                    names = ['id', 'title', 'date', 'description', 'content', 'country', 'category', 'symbol', 'url']
-                    names2 = ['id', 'title', 'date', 'description', 'content', 'country', 'category', 'symbol', 'url']
-                    maindf = pd.DataFrame(webResults, columns=names2)    
-            
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-
-            if output_type == None or output_type =='dict':
-                output = maindf
-            elif output_type == 'df': 
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError ('output_type options : df for data frame, dict(default) for dictionary by country, raw for results directly from web.')      
-            return output    
-        except ValueError:
-            pass
-    else:
-        return ''  
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e) 
 
 def getNews(country = None,  indicator = None, start= None, limit = None, output_type = None, start_date=None, end_date=None):
     """

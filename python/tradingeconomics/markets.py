@@ -79,27 +79,14 @@ def getMarketsData(marketsField, output_type=None):
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
 
-            maindf = pd.DataFrame.from_records(webResults)
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
+    try:
+      output = fn.dataRequest(linkAPI, output_type)
+      return output
+    except ValueError:
+      raise WebRequestError ('Something went wrong.')  
     
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':          
-        output = maindf#.dropna()
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output
+    
 
 def getCurrencyCross(cross, output_type=None):
     """
@@ -134,31 +121,14 @@ def getCurrencyCross(cross, output_type=None):
         linkAPI += '&c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
+    
+    try:
+      output = fn.dataRequest(linkAPI, output_type)
+      return output
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
-  																							
-        names = ['symbol','ticker','name', 'country','Date', 'Last', 'Close', 'CloseDate', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear','decimals', 'unit', 'frequency', 'lastupdate']    
-        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Last', 'Close', 'CloseDate', 'Group','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear','decimals', 'unit', 'frequency', 'LastUpdate']    
-        maindf = pd.DataFrame()     
-        for i in range(len(names)):
-            names[i] =  [d[names2[i]] for d in webResults]
-            maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':          
-        output = maindf#.dropna()
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output
+      raise WebRequestError ('Something went wrong.')  
+    
+    
 
 
 def getMarketsBySymbol(symbols, output_type=None):
@@ -195,28 +165,13 @@ def getMarketsBySymbol(symbols, output_type=None):
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
+    
+    try:
+      output = fn.dataRequest(linkAPI, output_type)
+      return output
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
-        names = ['symbol','ticker','name', 'country', 'date', 'type', 'decimals', 'last', 'close', 'closedate','marketcap','URL','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','YTDchange','YTDpercentualchange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'frequency', 'lastupdate']    
-        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Type', 'decimals', 'Last', 'Close', 'CloseDate','MarketCap','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'frequency', 'LastUpdate']    
-        maindf = pd.DataFrame(webResults, columns=names2)     
+      raise WebRequestError ('Something went wrong.')  
 
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':         
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output
 
 def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
     """
@@ -238,7 +193,7 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
     -------
     getMarketsIntraday(symbols = 'indu:ind')
     getMarketsIntraday(symbols = 'indu:ind', initDate='2018-03-13 15:30')
-    getMarketsIntraday(symbols = ['aapl:us', 'indu:ind'], initDate='2018-03-13', endDate='2018-04-01', output_type = 'raw')
+    getMarketsIntraday(symbols = ['aapl:us', 'indu:ind'], initDate='2022-01-01', endDate='2022-12-31', output_type = 'raw')
     """
     try:
         _create_unverified_https_context = ssl._create_unverified_context
@@ -260,28 +215,11 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
     
 
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
+    try:
+      output = fn.dataRequest(linkAPI, output_type)
+      return output
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
-        names = ['symbol', 'date', 'open', 'high', 'low', 'close']
-        names2 = ['Symbol', 'Date', 'Open', 'High', 'Low', 'Close']    
-        maindf = pd.DataFrame(webResults, columns=names2)     
-
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':          
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output
+      raise WebRequestError ('Something went wrong.')  
 
 def getMarketsPeers(symbols, output_type = None):
     """
@@ -317,28 +255,11 @@ def getMarketsPeers(symbols, output_type = None):
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
+    try:
+      output = fn.dataRequest(linkAPI, output_type)
+      return output
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
-        names = ['symbol','ticker','name', 'country', 'date', 'type', 'decimals', 'last', 'close', 'closedate','marketcap','URL','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','YTDchange','YTDpercentualchange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'frequency', 'lastupdate']    
-        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Type', 'decimals', 'Last', 'Close', 'CloseDate','MarketCap','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'frequency', 'LastUpdate']    
-        maindf = pd.DataFrame(webResults, columns=names2)     
-
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':          
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output
+      raise WebRequestError ('Something went wrong.')  
 
 def getMarketsComponents(symbols, output_type = None):
     """
@@ -374,28 +295,11 @@ def getMarketsComponents(symbols, output_type = None):
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
+    try:
+      output = fn.dataRequest(linkAPI, output_type)
+      return output
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
-        names = ['symbol','ticker','name', 'country', 'date', 'type', 'decimals', 'last', 'close', 'closedate','marketcap','URL','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','YTDchange','YTDpercentualchange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'frequency', 'lastupdate']    
-        names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Type', 'decimals', 'Last', 'Close', 'CloseDate','MarketCap','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'frequency', 'LastUpdate']    
-        maindf = pd.DataFrame(webResults, columns=names2)     
-
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':          
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output
+      raise WebRequestError ('Something went wrong.')  
 
 def getMarketsSearch(country=None, category = None, page = None, output_type = None):    
     """
@@ -441,41 +345,11 @@ def getMarketsSearch(country=None, category = None, page = None, output_type = N
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     
-   
-    
-    
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
+    try:
+      output = fn.dataRequest(linkAPI, output_type)
+      return output
     except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:  
-            if len(webResults) > 0:
-                																								                                                                                                              			
-                names = ['symbol','ticker','name', 'country', 'date', 'type', 'decimals', 'last', 'close', 'closedate','marketcap','URL','importance','dailychange','dailypercentualchange','weeklychange','weeklypercentualchange','monthlychange','monthlypercentualchange','yearlychange','yearlypercentualchange','YTDchange','YTDpercentualchange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'frequency', 'lastupdate']    
-                names2 = ['Symbol','Ticker','Name', 'Country', 'Date', 'Type', 'decimals', 'Last', 'Close', 'CloseDate','MarketCap','URL','Importance','DailyChange','DailyPercentualChange','WeeklyChange','WeeklyPercentualChange','MonthlyChange','MonthlyPercentualChange','YearlyChange','YearlyPercentualChange','YTDChange','YTDPercentualChange','yesterday','lastWeek','lastMonth','lastYear','startYear', 'ISIN', 'frequency', 'LastUpdate']    
-                maindf = pd.DataFrame(webResults, columns=names2)     
-
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='dict':
-                output = webResults
-            elif output_type == 'df':         
-                output = maindf
-            elif output_type == 'raw':        
-                output = webResults
-            else:      
-                raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''
+      raise WebRequestError ('Something went wrong.')  
 
 
 def getMarketsForecasts(category=None, symbol=None,  output_type = None):
@@ -522,28 +396,12 @@ def getMarketsForecasts(category=None, symbol=None,  output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
+    try:
+    #   output = fn.makeRequestAndParse(linkAPI, output_type)
+      output = fn.dataRequest(linkAPI, output_type)
+      return output
     except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    if len(webResults) > 0:
-        names = ['symbol','country', 'date', 'type','last', 'url','importance','forecast1','forecast2','forecast3','forecast4']
-        names2 = ['Symbol','Country', 'Date', 'Type','Last', 'Url','Importance','Forecast1','Forecast2','Forecast3','Forecast4']   
-        maindf = pd.DataFrame(webResults, columns=names2)     
-
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output   
+      raise WebRequestError ('Something went wrong.')   
 
 
 def getMarketsIntradayByInterval(symbol = None, interval=None, initDate=None,endDate=None,output_type=None):
@@ -571,8 +429,8 @@ def getMarketsIntradayByInterval(symbol = None, interval=None, initDate=None,end
     
     Example
     -------
-            getMarketsIntradayByInterval(symbol='CL1:COM',interval='1m',initDate='2021-01-01',endDate='2021-12-01',output_type='df')
-            getMarketsIntradayByInterval(symbol=['CL1:COM','AAPL:US'],interval='1m',initDate='2021-01-01',endDate='2021-12-01',output_type='df')
+            getMarketsIntradayByInterval(symbol='CL1:COM',interval='1m',initDate='2022-01-01',endDate='2023-12-01',output_type='df')
+            getMarketsIntradayByInterval(symbol=['CL1:COM','AAPL:US'],interval='1m',initDate='2022-01-01',endDate='2022-12-01',output_type='df')
     """
             
     
@@ -597,9 +455,13 @@ def getMarketsIntradayByInterval(symbol = None, interval=None, initDate=None,end
     
 
     api_url_request = "%s%s%s%s%s%s" % (d['url_base'], d['symbol'], d['interval'],  d['init_date'],  d['end_date'],  d['key']) 
-    # print(api_url_request)
-    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
-    # return     
+
+    try:
+      output = fn.dataRequest(api_url_request, output_type)
+      return output
+    except ValueError:
+      raise WebRequestError ('Something went wrong.')   
+    
 
 
 def getMarketsStockDescriptions(symbol = None,country = None, output_type=None):
@@ -656,9 +518,11 @@ def getMarketsStockDescriptions(symbol = None,country = None, output_type=None):
     
 
     api_url_request = "%s%s%s%s" % (d['url_base'], d['symbol'],d['country'],  d['key']) 
-    # print(api_url_request)
-    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
-    # return    
+    try:
+      output = fn.dataRequest(api_url_request, output_type)
+      return output
+    except ValueError:
+      raise WebRequestError ('Something went wrong.')   
 
 def getMarketsSymbology(symbol = None,ticker = None, isin=None,output_type=None):
     """
@@ -721,6 +585,8 @@ def getMarketsSymbology(symbol = None,ticker = None, isin=None,output_type=None)
         d['isin'] = f'/isin/{(fn.stringOrList(isin))}'
 
     api_url_request = "%s%s%s%s%s" % (d['url_base'], d['symbol'],d['ticker'],  d['isin'],d['key']) 
-    print(api_url_request)
-    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
-    # return    
+    try:
+      output = fn.dataRequest(api_url_request, output_type)
+      return output
+    except ValueError:
+      raise WebRequestError ('Something went wrong.')   

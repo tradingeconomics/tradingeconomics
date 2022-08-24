@@ -91,38 +91,11 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
         
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
     #print(linkAPI)
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try: 
-    
-            if len(webResults) > 0:
-                names = ['date', 'symbol', 'name', 'type', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency',  'session', 'lastupdate']
-                names2 = ['Date', 'Symbol', 'Name', 'Type', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'Session', 'LastUpdate']    
-                maindf = pd.DataFrame(webResults, columns=names2)     
-                
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='dict':
-                output = webResults
-            elif output_type == 'df':        
-                output = maindf#.dropna()
-            elif output_type == 'raw':        
-                output = webResults
-            else:      
-                raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''
+    try:
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 def getEarningsType(type=None, output_type=None):
@@ -161,35 +134,8 @@ def getEarningsType(type=None, output_type=None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     print(linkAPI) 
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-            if len(webResults) > 0:
-                names = ['date', 'symbol', 'type', 'name', 'actual', 'forecast', 'fiscaltag', 'fiscalreference', 'calendarreference', 'country', 'currency', 'lastupdate']
-                names2 = ['Date', 'Symbol', 'Type', 'Name', 'Actual', 'Forecast', 'FiscalTag', 'FiscalReference', 'CalendarReference', 'Country', 'Currency', 'LastUpdate']    
-                maindf = pd.DataFrame(webResults, columns=names2)     
-                
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='dict':
-                output = webResults
-            elif output_type == 'df':          
-                output = maindf#.dropna()
-            elif output_type == 'raw':        
-                output = webResults
-            else:      
-                raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-            return output
-        
-        except ValueError:
-            pass
-    else:
-        return ''
+    try:
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)

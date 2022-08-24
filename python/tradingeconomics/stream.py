@@ -1,7 +1,6 @@
 import websocket
 import ssl
-import time
-import sys
+
 import json
 from pprint import pprint
 from time import sleep

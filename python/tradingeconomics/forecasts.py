@@ -111,49 +111,9 @@ def getForecastData(country = None, indicator = None, output_type = None):
         raise LoginError('You need to do login before making any request')
     try:
         print(linkAPI)
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-            
-    if code == 200:
-        try:
-            isCommodity = False
-            if (country != None and country == 'commodity') or (indicator != None and indicator == 'commodity'):
-                    isCommodity = True
-            if len(webResults) > 0:
-                if isCommodity:
-                    names = ['title', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date', 'frequency', 'historicalDataSymbol']
-                    names2 = ['Title', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date', 'Frequency', 'HistoricalDataSymbol']
-                else:    
-                    names = ['country', 'category', 'latestvalue', 'latestvaluedate',  'yearend', 'yearend2', 'yearend3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date', 'frequency', 'historicalDataSymbol']
-                    names2 = ['Country', 'Category', 'LatestValue', 'LatestValueDate',  'YearEnd', 'YearEnd2', 'YearEnd3', 'q1', 'q1_date', 'q2', 'q2_date', 'q3', 'q3_date', 'q4', 'q4_date', 'Frequency', 'HistoricalDataSymbol']
-                maindf = pd.DataFrame()  
-                for i in range(len(names)):
-                    names[i] =  [d[names2[i]] for d in webResults]
-                    maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1) 
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='dict':
-                if isCommodity:
-                    output = fn.out_type(maindf, True)
-                else:
-                    output = fn.out_type(maindf)
-            elif output_type == 'df':  
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError ('output_type options : df for data frame, dict(default) for dictionary by country, raw for unparsed results')
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
        
 
 
@@ -194,7 +154,7 @@ def getForecastByTicker(ticker=None, output_type=None):
         api_url_request = "%s%s%s" % (d['url_base'], d['ticker'],  d['key']) 
         print(api_url_request)
         return fn.dataRequest(api_request=api_url_request, output_type=output_type)
-        return
+        
          
 
     return 'Ticker is required'

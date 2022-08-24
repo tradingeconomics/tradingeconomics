@@ -87,29 +87,12 @@ def getCmtUpdates(output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError('Something went wrong. Error code = ' + str(code))
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
+        
 
-    if len(webResults) > 0:
-
-        names = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title', 'lastupdate']
-        names2 = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title', 'lastupdate']
-        maindf = pd.DataFrame(webResults, columns=names2)
-
-    else:
-        raise ParametersError('No data available for the provided parameters.')
-    if output_type == None or output_type == 'dict':
-        output = webResults
-    elif output_type == 'df':
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError('output_type options : dict(default), df for data frame or raw for unparsed results.')
-    return output
 
 
 def getCmtCategories(category=None, output_type=None):
@@ -152,28 +135,10 @@ def getCmtCategories(category=None, output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError('Something went wrong. Error code = ' + str(code))
-
-    if len(webResults) > 0:
-        names = ['Id', 'name', 'parent_Id', 'pretty_Name']
-        names2 = ['id', 'name', 'parentId', 'pretty_name']
-        maindf = pd.DataFrame(webResults, columns=names2)
-
-    else:
-        raise ParametersError('No data available for the provided parameters.')
-    if output_type == None or output_type == 'dict':
-        output = webResults
-    elif output_type == 'df':
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError('output_type options : dict(defoult), df for data frame or raw for unparsed results.')
-    return output
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 def getCmtCountry(country=None, page_number=None, output_type=None):
@@ -227,31 +192,10 @@ def getCmtCountry(country=None, page_number=None, output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError('Something went wrong. Error code = ' + str(code))
-
-    if len(webResults) > 0:
-        if country == None:
-            names2 = ['id', 'name', 'region', 'subregion', 'iso', 'year']
-        else:
-            names = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title', 'lastupdate']
-            names2 = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title', 'lastupdate']
-        maindf = pd.DataFrame(webResults, columns=names2)
-
-    else:
-        raise ParametersError('No data available for the provided parameters.')
-    if output_type == None or output_type == 'dict':
-        output = webResults
-    elif output_type == 'df':
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError('output_type options : dict(default), df for data frame or raw for unparsed results.')
-    return output
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 def getCmtHistorical(symbol=None, output_type=None):
@@ -298,28 +242,10 @@ def getCmtHistorical(symbol=None, output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError('Something went wrong. Error code = ' + str(code))
-
-    if len(webResults) > 0:
-        names = ['symbol', 'date', 'value']
-        names2 = ['symbol', 'date', 'value']
-        maindf = pd.DataFrame(webResults, columns=names2)
-
-    else:
-        raise ParametersError('No data available for the provided parameters.')
-    if output_type == None or output_type == 'dict':
-        output = webResults
-    elif output_type == 'df':
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError('output_type options : dict(default), df  for data frame or raw for unparsed results.')
-    return output
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 def getCmtTwoCountries(country1=None, country2=None, page_number=None, output_type=None):
@@ -364,31 +290,10 @@ def getCmtTwoCountries(country1=None, country2=None, page_number=None, output_ty
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError('Something went wrong. Error code = ' + str(code))
-
-    if len(webResults) > 0:
-        if country1 and country2 == None:
-            names2 = ['id', 'name', 'parentId', 'pretty_name']
-        else:
-            names = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title']
-            names2 = ['symbol', 'country1', 'country2', 'type', 'category', 'url', 'title']
-        maindf = pd.DataFrame(webResults, columns=names2)
-
-    else:
-        raise ParametersError('No data available for the provided parameters.')
-    if output_type == None or output_type == 'dict':
-        output = webResults
-    elif output_type == 'df':
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError('output_type options : dict(default), df for data frame or raw for unparsed results.')
-    return output
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 def getCmtCountryByCategory(country=None, type=None, category=None, output_type=None):
@@ -452,36 +357,11 @@ def getCmtCountryByCategory(country=None, type=None, category=None, output_type=
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(link_api)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(link_api).read().decode('utf-8'))
-        else:
-            raise WebRequestError('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-            if len(webResults) > 0:
-
-                maindf = pd.DataFrame(webResults)
-
-            else:
-                raise ParametersError('No data available for the provided parameters.')
-            if output_type is None or output_type == 'dict':
-                output = webResults
-            elif output_type == 'df':
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError(
-                    'output_type options : df for data frame, dict(default) for dictionary by country, raw for unparsed results.')
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''
+        print(link_api)
+        return fn.dataRequest(api_request=link_api, output_type=output_type)
+    except Exception as e:
+        print(e)
+        
 
 def getCmtTotalByType(country=None, type=None, output_type=None):
     """
@@ -532,41 +412,10 @@ def getCmtTotalByType(country=None, type=None, output_type=None):
     link_api = getLinkApi(country, type)
 
     try:
-        link_api += '?c=' + glob.apikey
-    except AttributeError:
-        raise LoginError('You need to do login before making any request')
-
-    try:
-        response = urlopen(link_api)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(link_api).read().decode('utf-8'))
-        else:
-            raise WebRequestError('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-            if len(webResults) > 0:
-
-                maindf = pd.DataFrame(webResults)
-
-            else:
-                raise ParametersError('No data available for the provided parameters.')
-            if output_type is None or output_type == 'dict':
-                output = webResults
-            elif output_type == 'df':
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError(
-                    'output_type options : df for data frame, dict(default) for dictionary by country, raw for unparsed results.')
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''
+        print(link_api)
+        return fn.dataRequest(api_request=link_api, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_type=None):
     """
@@ -635,36 +484,10 @@ def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_ty
         raise TypeError('type is missing. Choose "import" or "export"')
 
     try:
-        response = urlopen(link_api)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(link_api).read().decode('utf-8'))
-        else:
-            raise WebRequestError('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-            if len(webResults) > 0:
-
-                maindf = pd.DataFrame(webResults)
-
-            else:
-                raise ParametersError('No data available for the provided parameters.')
-            if output_type is None or output_type == 'dict':
-                output = webResults
-            elif output_type == 'df':
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError(
-                    'output_type options : df for data frame, dict(default) for dictionary by country, raw for unparsed results.')
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''
+        print(link_api)
+        return fn.dataRequest(api_request=link_api, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 

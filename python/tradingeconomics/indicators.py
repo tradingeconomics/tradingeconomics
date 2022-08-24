@@ -131,41 +131,10 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-
-            if len(webResults) > 0:
-                if country == None:
-                    print ('Without country indication only a list of available indicators will be returned...')
-                    output = {'Category': [d['Category'] for d in webResults], 
-                                'CategoryGroup': [d['CategoryGroup'] for d in webResults]}
-                    return pd.DataFrame(output)
-                else:
-                    maindf = getResults(webResults, country)  
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-
-            if output_type == None or output_type =='dict':
-                output = fn.out_type(maindf)
-            elif output_type == 'df': 
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError ('output_type options : df for data frame, dict(defoult) for dictionary by country, raw for results directly from web.')      
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''   
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)  
  
 def getRatings(country=None, rating = None, output_type='df'):
     """
@@ -205,40 +174,10 @@ def getRatings(country=None, rating = None, output_type='df'):
         raise LoginError('You need to do login before making any request')
   
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-            if len(webResults) > 0: 
-            
-            
-                names = ['country', 'te', 'te_outlook', 'sp', 'sp_outlook', 'moodys', 'moodys_outlook', 'fitch', 'fitch_outlook', 'outlook', "dbrs", "dbrs_outlook"]
-                names2 = ['Country','TE', 'TE_Outlook', 'SP', 'SP_Outlook', 'Moodys', 'Moodys_Outlook', 'Fitch', 'Fitch_Outlook', 'Outlook', "DBRS", "DBRS_Outlook"]    
-                maindf = pd.DataFrame(webResults, columns=names2) 
-                
-                
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='dict':
-                output = fn.out_type(maindf)
-            elif output_type == 'df':       
-                output = maindf
-            elif output_type == 'raw':        
-                output = webResults
-            else:      
-                raise ParametersError ('output_type options : df(defoult) for data frame or raw for unparsed results.') 
-            return output
-    
-        except ValueError:
-            pass
-    else:
-        return ''
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 
@@ -514,29 +453,7 @@ def getAllCountries(output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-    if code == 200:
-        try:
-
-            df = pd.DataFrame(webResults)
-
-            if output_type == 'df': 
-                output = df
-            elif output_type == 'raw' or output_type == None:
-                output = webResults
-            else:
-                # TODO: ParametersError method is not implemented.
-                raise ParametersError ('output_type options : df for data frame, raw for list of countries')
-            return output
-        except ValueError:
-            pass
-    else:
-        # TODO: Return appropriate error message.
-        return ''
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)

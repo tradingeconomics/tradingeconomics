@@ -130,32 +130,10 @@ def getFedRStates(county = None, output_type = None):
 
    
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
-    
-    if len(webResults) > 0:
-        if county:
-            names = ['county']
-            names2 = ['county']
-        else: 
-            names = ['name']
-            names2 = ['name']          
-        maindf = pd.DataFrame(webResults, columns=names2)    
-      
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(defoult), df for data frame or raw for unparsed results.') 
-    return output  
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 def getFedRSnaps(symbol = None, url = None, country = None, state = None, county = None, page_number = None, output_type = None):
@@ -234,28 +212,11 @@ def getFedRSnaps(symbol = None, url = None, country = None, state = None, county
     else:  
         linkAPI += '?c=' + glob.apikey
     
-    try:       
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code))  
-    
-    if len(webResults) > int(0):
-        names = ['symbol', 'country', 'category', 'last', 'date', 'previous', 'previousDate', 'frequency', 'popularity', 'start', 'unit', 'adjustment', 'url', 'lastUpdate' ]
-        names2 = ['symbol', 'Country', 'Category', 'Last', 'Date', 'Previous', 'PreviousDate', 'Frequency', 'popularity', 'Start', 'Unit', 'Adjustment', 'URL', 'lastUpdate']
-        maindf = pd.DataFrame(webResults, columns=names2)     
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':        
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output
+    try:
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 def getFedRCounty(output_type = None):
     """
@@ -297,26 +258,10 @@ def getFedRCounty(output_type = None):
 
     
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError ('Something went wrong. Error code = ' + str(code)) 
-    
-    if len(webResults) > 0:            
-        maindf = pd.DataFrame(webResults)    
-      
-    else:
-        raise ParametersError ('No data available for the provided parameters.')
-    if output_type == None or output_type =='dict':
-        output = webResults
-    elif output_type == 'df':       
-        output = maindf
-    elif output_type == 'raw':        
-        output = webResults
-    else:      
-        raise ParametersError ('output_type options : dict(default), df for data frame or raw for unparsed results.') 
-    return output     
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)     
 
 
 def getFedRHistorical(symbol = None, initDate=None,endDate=None, output_type = None):

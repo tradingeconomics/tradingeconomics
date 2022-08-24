@@ -152,48 +152,10 @@ def getEurostatData(country = None, category = None, category_group= None, lists
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        if code != 200:
-            print(urlopen(linkAPI).read().decode('utf-8'))
-        else: 
-            raise WebRequestError ('Something went wrong. Error code = ' + str(code))
-            
-    if code == 200:
-        try:
-            if len(webResults) > 0:
-                if lists == 'countries':
-                    names = ['Country']
-                    names2 = ['Country']
-                    maindf = pd.DataFrame()
-                elif lists == 'categories':
-                    names = ['Category', 'CategoryGroup']
-                    names2 = ['Category', 'CategoryGroup']
-                    maindf = pd.DataFrame()
-                else:    
-                    names = ['ID', 'Country', 'Category', 'CategoryGroup',	'URL',	'Unit',	'Frequency', 'LatestValue',	'LatestValueDate',	'PreviousValue'	,'PreviousValueDate',	'FirstValue',	'FirstValueDate',	'HighestValue',	'HighestValueDate',	'LowestValue',	'LowestValueDate',	'LastUpdate']
-                    names2 = ['ID', 'Country', 'Category', 'CategoryGroup',	'URL',	'Unit',	'Frequency', 'LatestValue',	'LatestValueDate',	'PreviousValue'	,'PreviousValueDate',	'FirstValue',	'FirstValueDate',	'HighestValue',	'HighestValueDate',	'LowestValue',	'LowestValueDate',	'LastUpdate']
-                    maindf = pd.DataFrame()  
-                for i in range(len(names)):
-                    names[i] =  [d[names2[i]] for d in webResults]
-                    maindf = pd.concat([maindf, pd.DataFrame(names[i], columns = [names2[i]])], axis = 1)
-            else:
-                raise ParametersError ('No data available for the provided parameters.')
-            if output_type == None or output_type =='dict':
-                output = fn.out_type(maindf)
-            elif output_type == 'df':  
-                output = maindf
-            elif output_type == 'raw':
-                output = webResults
-            else:
-                raise ParametersError ('output_type options : df for data frame, dict(default) for dictionary, raw for unparsed results')
-            return output
-        except ValueError:
-            pass
-    else:
-        return ''
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
 
 
 

@@ -77,23 +77,7 @@ def getHistoricalFinancials(symbol=None, category=None, output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        response = urlopen(linkAPI)
-        code = response.getcode()
-        webResults = json.loads(response.read().decode('utf-8'))
-    except ValueError:
-        raise WebRequestError('Something went wrong. Error code = ' + str(code))
-    if len(webResults) > 0:
-
-        maindf = pd.DataFrame(webResults)  # columns=names2
-
-    else:
-        raise ParametersError('No data available for the provided parameters.')
-    if output_type == None or output_type == 'dict':
-        output = webResults
-    elif output_type == 'df':
-        output = maindf
-    elif output_type == 'raw':
-        output = webResults
-    else:
-        raise ParametersError('output_type options : dict(default), df for data frame or raw for unparsed results.')
-    return output
+        print(linkAPI)
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)
