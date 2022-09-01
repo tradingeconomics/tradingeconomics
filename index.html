@@ -514,6 +514,13 @@ Using Headers auth:<br>
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>       
+
+<blockquote class="lang-specific r">
+    <p>To get a list of all countries.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getAllCountries</span><span class="p">(</span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+
 <blockquote class="lang-specific r">
 <p>To get a list of all indicators per country.</p>
 </blockquote>   
@@ -569,13 +576,19 @@ Using Headers auth:<br>
       
 
 <blockquote class="lang-specific python">
-    <p>To get List of all indicators available.</p>
+    <p>To get a list of all indicators available.</p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span>output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
-
 </code></pre>
+
 <blockquote class="lang-specific python">
-    <p>To get List of Indicators by country.</p>
+    <p>To get a list of all countries.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getAllCountries</span><span class="p">(</span>output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+
+<blockquote class="lang-specific python">
+    <p>To get a list of Indicators by country.</p>
 </blockquote>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getIndicatorData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="p">[</span><span class="s">'mexico'</span><span class="p">,</span> <span class="s">'sweden'</span><span class="p">],</span> <span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 
@@ -638,6 +651,16 @@ Using Headers auth:<br>
         </span><span class="s1">console</span>.log(<span class="na">data</span>)       
     });</span>
 </code></pre>
+
+<blockquote class="lang-specific javascript">
+    <p>To get a list of all countries.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+  <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getAllCountries</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+      </span><span class="s1">console</span>.log(<span class="na">data</span>)       
+  });</span>
+</code></pre>
+
   <blockquote class="lang-specific javascript">
       <p>To get a list of indicators by country or countries.</p>
   </blockquote>
