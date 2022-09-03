@@ -37,7 +37,7 @@ class DateError(ValueError):
 class WebRequestError(ValueError):
     pass
 
-def getHistoricalFinancials(symbol=None, category=None, output_type=None):
+def getHistoricalFinancials(symbol, category, output_type=None):
     """
     Returns stocks fundamental information for specific symbols and categories.
     ================================================================================
@@ -63,6 +63,7 @@ def getHistoricalFinancials(symbol=None, category=None, output_type=None):
         pass
     else:
         ssl._create_default_https_context = _create_unverified_https_context
+
 
     if symbol is not None and category is not None:
         if category.__contains__(' '):
