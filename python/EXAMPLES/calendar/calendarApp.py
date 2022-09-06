@@ -5,7 +5,7 @@ import tablib
 import os
 
 import tradingeconomics as te
-te.login('19a0d3bcde35488:ud42bfwrynpi4oz')
+te.login('guest:guest')
 
 mydata = te.getCalendarData(country = 'United States', category = 'Imports', initDate = '2018-03-12', endDate = '2019-03-12', output_type= 'df') 
 df = pd.DataFrame(mydata)
