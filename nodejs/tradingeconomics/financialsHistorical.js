@@ -15,30 +15,34 @@ global.category = null;
     String: category
 
    example:
-    getFinancialsHistoricalData(symbol = 'aapl:us', category = 'assets').then(data => console.log(data));
+    getFinancialsHistorical(symbol = 'aapl:us', category = 'assets');
              
 
 ***********************************************************************************/
 
 function getFinancialsHistorical(){
 
-    var Data = '';
-    var url = '';
-
+    try {
+        var Data = '';
+        var url = '';
     
-    if (symbol != null && category != null){     
-        url = '/financials/historical/' + symbol + ':' + category;    
+        
+        if (symbol != null && category != null){     
+            url = '/financials/historical/' + symbol + ':' + category;    
+        }
+        
+        Data = url_base + url + '?c=' + apikey.replace (' ','%20');
+        return func.makeTheRequest(Data)
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+    } catch (error) {
+        throw error
     }
-    
-    Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-  
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
    
 }
 

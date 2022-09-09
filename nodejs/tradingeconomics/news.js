@@ -33,43 +33,48 @@ global.end_date = null;
 
 function getNews(){
 
-    var Data = ''; 
-    var url = ''; 
-   
-    if (country != null){    
-        url = '/news/country/' + country;    
-    }
-    if (indicator != null){      
-        url = '/news/indicator/' + indicator;    
-    }
-    if (country != null && indicator != null){     
-        url = '/news/country/' + country + '/' + indicator;    
-    }  
-    if (limit != null && start != null){     
-        url =  '/news' + '?limit=' + limit + '&start=' + start;
-    }
-    if(country === null && indicator === null && limit === null && start === null){
-        url = '/news'; 
-    }
-
-    if(url.includes('?')){
-        Data = url_base + url + '&c='+ apikey.replace (' ','%20');
-    }else{
-        if(start_date === null || end_date === null){
-            Data = url_base + url + '?c='+ apikey.replace (' ','%20');
-        }else{
-            Data = url_base + url + '?c='+ apikey.replace (' ','%20')+ '&d1=' + start_date + '&d2=' + end_date;
+    try {
+        var Data = ''; 
+        var url = ''; 
+       
+        if (country != null){    
+            url = '/news/country/' + country;    
         }
-    }
+        if (indicator != null){      
+            url = '/news/indicator/' + indicator;    
+        }
+        if (country != null && indicator != null){     
+            url = '/news/country/' + country + '/' + indicator;    
+        }  
+        if (limit != null && start != null){     
+            url =  '/news' + '?limit=' + limit + '&start=' + start;
+        }
+        if(country === null && indicator === null && limit === null && start === null){
+            url = '/news'; 
+        }
     
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {
-        return response.json(); // process it inside the `then` when calling the function   
-    }).catch(function (err) {
-        return err.message;
-
-    });
+        if(url.includes('?')){
+            Data = url_base + url + '&c='+ apikey.replace (' ','%20');
+        }else{
+            if(start_date === null || end_date === null){
+                Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+            }else{
+                Data = url_base + url + '?c='+ apikey.replace (' ','%20')+ '&d1=' + start_date + '&d2=' + end_date;
+            }
+        }
+        return func.makeTheRequest(Data)
+        
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {
+        //     return response.json(); // process it inside the `then` when calling the function   
+        // }).catch(function (err) {
+        //     return err.message;
+    
+        // });
+    } catch (error) {
+        throw error
+    }
    
     
 }

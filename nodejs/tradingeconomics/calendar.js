@@ -42,63 +42,68 @@ global.importance = null;
 
 function getCalendar(){
 
-    var Data = '';
-    var url = '';
-
-    if (country != null){    
-        url = '/calendar/country/' + country;    
+    try {
+        var Data = '';
+        var url = '';
+    
+        if (country != null){    
+            url = '/calendar/country/' + country;    
+        }
+        if (country != null && start_date != null && end_date != null){    
+            url = '/calendar/country/' + country + '/' + start_date + '/' + end_date;    
+        }
+        if (indicator != null){      
+            url = '/calendar/indicator/' + indicator.toLowerCase();    
+        }
+        if (indicator != null && start_date != null && end_date != null){      
+            url = '/calendar/indicator/' + indicator + '/' + start_date + '/' + end_date;    
+        }
+        if (start_date != null && end_date != null && country === null && indicator === null && ticker === null && id === null){      
+            url = '/calendar/country/All/' + start_date + '/' + end_date;    
+        }
+        if (country!= null && indicator != null){    
+            url = '/calendar/country/' + country + '/indicator/' + indicator.toLowerCase();    
+        }
+        if (country != null && indicator != null && start_date != null && end_date != null){    
+            url = '/calendar/country/' + country + '/indicator/' + indicator.toLowerCase() + '/' + start_date + '/' + end_date;    
+        }
+        if (ticker != null){     
+            url = '/calendar/ticker/' + ticker;    
+        }
+        if (ticker != null && start_date != null && end_date != null){     
+            url = '/calendar/ticker/' + ticker + '/' + start_date + '/' + end_date;    
+        }
+        if(id != null){
+            url = '/calendar/calendarid/' + id;
+        }  
+        if(country === null && indicator === null && start_date === null && end_date === null && ticker === null && id === null){
+            url = '/calendar';
+        }
+      
+        date.checkDates(start_date, end_date); 
+        if(utc && !importance){
+            Data = url_base + url + '?c=' + apikey.replace (' ','%20') + '&UTC=' + utc;
+        }else if(importance && !utc){
+            importance = importance.toString();
+            Data = url_base + url + '?c=' + apikey.replace (' ','%20') + '&importance=' + importance;
+        }
+        else{
+            Data = url_base + url + '?c=' + apikey.replace (' ','%20');
+        }
+    //    console.log(Data);
+    
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {      
+        //     return response.json(); // process it inside the `then` when calling the function
+                 
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+        return func.makeTheRequest(Data)
+    } catch (error) {
+       throw error 
     }
-    if (country != null && start_date != null && end_date != null){    
-        url = '/calendar/country/' + country + '/' + start_date + '/' + end_date;    
-    }
-    if (indicator != null){      
-        url = '/calendar/indicator/' + indicator.toLowerCase();    
-    }
-    if (indicator != null && start_date != null && end_date != null){      
-        url = '/calendar/indicator/' + indicator + '/' + start_date + '/' + end_date;    
-    }
-    if (start_date != null && end_date != null && country === null && indicator === null && ticker === null && id === null){      
-        url = '/calendar/country/All/' + start_date + '/' + end_date;    
-    }
-    if (country!= null && indicator != null){    
-        url = '/calendar/country/' + country + '/indicator/' + indicator.toLowerCase();    
-    }
-    if (country != null && indicator != null && start_date != null && end_date != null){    
-        url = '/calendar/country/' + country + '/indicator/' + indicator.toLowerCase() + '/' + start_date + '/' + end_date;    
-    }
-    if (ticker != null){     
-        url = '/calendar/ticker/' + ticker;    
-    }
-    if (ticker != null && start_date != null && end_date != null){     
-        url = '/calendar/ticker/' + ticker + '/' + start_date + '/' + end_date;    
-    }
-    if(id != null){
-        url = '/calendar/calendarid/' + id;
-    }  
-    if(country === null && indicator === null && start_date === null && end_date === null && ticker === null && id === null){
-        url = '/calendar';
-    }
-  
-    date.checkDates(start_date, end_date); 
-    if(utc && !importance){
-        Data = url_base + url + '?c=' + apikey.replace (' ','%20') + '&UTC=' + utc;
-    }else if(importance && !utc){
-        importance = importance.toString();
-        Data = url_base + url + '?c=' + apikey.replace (' ','%20') + '&importance=' + importance;
-    }
-    else{
-        Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-    }
-   //console.log(Data);
-
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {      
-        return response.json(); // process it inside the `then` when calling the function
-             
-    }).catch(function (err) {
-        return err.message;
-    });
    
 } 
 

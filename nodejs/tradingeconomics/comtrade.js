@@ -27,37 +27,41 @@ global.symbol = null;
 
 function getComtrade(){
 
-    var Data = '';
-    var url = '';
-
-    if (category === 'categories'){    
-        url =  '/comtrade/categories'; 
-    }
-    if (category === 'updates'){     
-        url = '/comtrade/updates';   
-    }
-    if (category === 'countries'){      
-        url = '/comtrade/countries';    
-    }
-    if (country != null){     
-        url = '/comtrade/country/' + country;    
-    }
-    if (country != null && country1 != null){     
-        url = '/comtrade/country/' + country + '/' + country1;    
-    }
-    if (symbol != null){     
-        url = '/comtrade/historical/' + symbol;    
-    }
+    try {
+        var Data = '';
+        var url = '';
     
-    Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-  
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
+        if (category === 'categories'){    
+            url =  '/comtrade/categories'; 
+        }
+        if (category === 'updates'){     
+            url = '/comtrade/updates';   
+        }
+        if (category === 'countries'){      
+            url = '/comtrade/countries';    
+        }
+        if (country != null){     
+            url = '/comtrade/country/' + country;    
+        }
+        if (country != null && country1 != null){     
+            url = '/comtrade/country/' + country + '/' + country1;    
+        }
+        if (symbol != null){     
+            url = '/comtrade/historical/' + symbol;    
+        }
+        
+        Data = url_base + url + '?c=' + apikey.replace (' ','%20');
+        return func.makeTheRequest(Data)
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+    } catch (error) {
+        throw error
+    }
    
 }
 

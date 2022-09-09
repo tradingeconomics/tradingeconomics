@@ -25,31 +25,36 @@ global.isin = null;
 
 function getSymbology(){
 
-    var Data = '';
-    var url = '';
-    if(arguments.length !== 1){
-      console.log("Please only 1 argument is accepted (ex:symbol, ticker or isin)")
-      return null
-    }else{
-
-      if (symbol !== null){    
-        url = '/markets/symbology/symbol/' + symbol.toLowerCase();    
-    }
-    if (ticker !== null){      
-        url = '/markets/symbology/ticker/' + ticker.toLowerCase();    
-    }
-    if (isin !== null){     
-        url = '/markets/symbology/isin/' + isin.toLowerCase();    
-    }  
-
-    Data = url_base + url + '?c='+ apikey.replace (' ','%20');
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
+    try {
+        var Data = '';
+        var url = '';
+        if(arguments.length !== 1){
+          console.log("Please only 1 argument is accepted (ex:symbol, ticker or isin)")
+          return null
+        }else{
+    
+          if (symbol !== null){    
+            url = '/markets/symbology/symbol/' + symbol.toLowerCase();    
+        }
+        if (ticker !== null){      
+            url = '/markets/symbology/ticker/' + ticker.toLowerCase();    
+        }
+        if (isin !== null){     
+            url = '/markets/symbology/isin/' + isin.toLowerCase();    
+        }  
+    
+        Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+        return func.makeTheRequest(Data)
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+        }
+    } catch (error) {
+        throw error
     }
 }
 

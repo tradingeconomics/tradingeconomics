@@ -18,22 +18,26 @@ global.series_code = null;
 
 var getWorldBankHistorical = function(){
    
-    var url = '';
-    var Data = '';
-
-    if (series_code){    
-        url = '/worldBank/historical' + '?s=' + series_code;    
+    try {
+	var url = '';
+	    var Data = '';
+	
+	    if (series_code){    
+	        url = '/worldBank/historical' + '?s=' + series_code;    
+	    }
+	    
+	    Data = url_base + url + '&c=' + apikey.replace (' ','%20');
+	    return func.makeTheRequest(Data)
+	    // return fetch(Data)
+	    // .then(func.handleErrors)   
+	    // .then(function(response) {    
+	    //     return response.json(); // process it inside the `then` when calling the function       
+	    // }).catch(function (err) {
+	    //     return err.message;
+	    // });
+    } catch (error) {
+        throw error
     }
-    
-    Data = url_base + url + '&c=' + apikey.replace (' ','%20');
-    
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
    
     
 

@@ -22,32 +22,36 @@ global.type = null;
 
 function getComtradeTotalByType(){
 
-    var Data = '';
-    var url = '/comtrade';
-
-    if (country == null){
-        console.log('country is missing');
+    try {
+        var Data = '';
+        var url = '/comtrade';
+    
+        if (country == null){
+            console.log('country is missing');
+        }
+        if (type == null){
+            console.log('type is missing. Choose "import" or "export"');
+        }
+    
+        function getLinkApi(country, type) {
+            return `${url_base}${url}/${type}/${country}/totals`;
+        }
+    
+        Data = getLinkApi(country, type);
+    
+        Data += `?c=${apikey}`;
+        Data = Data.replace (' ','%20');
+        return func.makeTheRequest(Data)
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+    } catch (error) {
+        throw error
     }
-    if (type == null){
-        console.log('type is missing. Choose "import" or "export"');
-    }
-
-    function getLinkApi(country, type) {
-        return `${url_base}${url}/${type}/${country}/totals`;
-    }
-
-    Data = getLinkApi(country, type);
-
-    Data += `?c=${apikey}`;
-    Data = Data.replace (' ','%20');
-  
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
    
 }
 

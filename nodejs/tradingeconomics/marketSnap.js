@@ -41,60 +41,64 @@ global.cross = null;
 
 function getMarketSnap(){
 
-    var Data = '';
-    var url = '';
-   
-    if (marketsField === 'commodities'){    
-        url = '/markets/commodities';    
+    try {
+        var Data = '';
+        var url = '';
+       
+        if (marketsField === 'commodities'){    
+            url = '/markets/commodities';    
+        }
+        if (marketsField === 'currency'){      
+            url = '/markets/currency';    
+        }
+        if (marketsField === 'index'){     
+            url = '/markets/index';    
+        }  
+        if (marketsField === 'bond'){     
+            url = '/markets/bond';
+        }
+        if (marketsField === 'crypto'){     
+            url = '/markets/crypto';
+        }
+        if(symbol != null){
+            url = '/markets/symbol/' + symbol;
+        }
+        if(cross != null){
+            url = '/markets/currency/' + '?c=' + apikey + '&cross=' + cross;
+        }
+        if (peers_symbol != null){
+            url = '/markets/peers/' + peers_symbol;
+        }
+        if(components_symbol != null){
+            url = '/markets/components/' + components_symbol;
+        }
+        if(country != null){
+            url = '/markets/country/' + country;
+        }
+    
+        if(search_term != null){
+            url = '/markets/search/' + search_term;   
+        }
+        if(category != null){
+            url = '/markets/search/' + search_term + '?c=' + apikey + '&category=' + category ;
+        }
+            
+        if (url.includes(category || cross)){
+            Data = url_base + url .replace (' ','%20');
+        }else{
+            Data = url_base + url + '?c=' + apikey.replace (' ','%20');
+        }
+        return func.makeTheRequest(Data)
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+    } catch (error) {
+        throw error
     }
-    if (marketsField === 'currency'){      
-        url = '/markets/currency';    
-    }
-    if (marketsField === 'index'){     
-        url = '/markets/index';    
-    }  
-    if (marketsField === 'bond'){     
-        url = '/markets/bond';
-    }
-    if (marketsField === 'crypto'){     
-        url = '/markets/crypto';
-    }
-    if(symbol != null){
-        url = '/markets/symbol/' + symbol;
-    }
-    if(cross != null){
-        url = '/markets/currency/' + '?c=' + apikey + '&cross=' + cross;
-    }
-    if (peers_symbol != null){
-        url = '/markets/peers/' + peers_symbol;
-    }
-    if(components_symbol != null){
-        url = '/markets/components/' + components_symbol;
-    }
-    if(country != null){
-        url = '/markets/country/' + country;
-    }
-
-    if(search_term != null){
-        url = '/markets/search/' + search_term;   
-    }
-    if(category != null){
-        url = '/markets/search/' + search_term + '?c=' + apikey + '&category=' + category ;
-    }
-        
-    if (url.includes(category || cross)){
-        Data = url_base + url .replace (' ','%20');
-    }else{
-        Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-    }
-
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
    
 }
 

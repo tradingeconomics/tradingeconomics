@@ -24,43 +24,47 @@ global.category = null;
    example:
     getCmtCountryByCategory(country = 'Portugal', type = 'import');
     getCmtCountryByCategory(country = 'United States', type = 'export', category = 'live animals');
-    getCmtCountryByCategory(country = 'Brazil', type = import, category = 'Swine, live');       
+    getCmtCountryByCategory(country = 'Brazil', type = 'import', category = 'Swine, live');       
 
    
 ***********************************************************************************/
 
 function getCmtCountryByCategory(){
 
-    var Data = '';
-    var url = '/comtrade';
-
-    if (country == null){
-        console.log('country is missing') ;
-    }
-    if (type == null){
-        console.log('type is missing. Choose "import" or "export"') ;
-    }
-
-    function getLinkApi(country, type, category) {
-        
-        if(category == null){
-            return `${url_base}${url}/${type}/${country}`;
+    try {
+        var Data = '';
+        var url = '/comtrade';
+    
+        if (country == null){
+            console.log('country is missing') ;
         }
-        return `${url_base}${url}/${type}/${country}/${category}`;
+        if (type == null){
+            console.log('type is missing. Choose "import" or "export"') ;
+        }
+    
+        function getLinkApi(country, type, category) {
+            
+            if(category == null){
+                return `${url_base}${url}/${type}/${country}`;
+            }
+            return `${url_base}${url}/${type}/${country}/${category}`;
+        }
+    
+        Data = getLinkApi(country, type, category);
+    
+        Data += `?c=${apikey}`;
+        Data = Data.replace (' ','%20');
+        return func.makeTheRequest(Data)
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+    } catch (error) {
+        throw error
     }
-
-    Data = getLinkApi(country, type, category);
-
-    Data += `?c=${apikey}`;
-    Data = Data.replace (' ','%20');
-  
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
    
 }
 

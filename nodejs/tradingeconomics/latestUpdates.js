@@ -26,46 +26,51 @@ global.time = null;
 
 function getLatestUpdates(){
 
-  var Data = '';
-  var url = '';
+  try {
+    var Data = '';
+    var url = '';
+    
+    if(start_date === null && country === null && time !== null){
+       console.error('Insert valid date');
+       process.exit()
+    }
+    if (start_date != null && country === null){              
+        url = '/updates/' + start_date;    
+    }
+    if(country != null){
+        url = '/updates/country/' + country;
+    } 
+    if(start_date != null && country != null){
+        url = '/updates/country/' + country + '/' + start_date
+    } 
+    if(start_date === null && country === null){
+        url = '/updates'
+    }
+    
+    date.checkDates(start_date); 
+    Data = url_base + url + '?c=' + apikey.replace (' ','%20');
   
-  if(start_date === null && country === null && time !== null){
-     console.error('Insert valid date');
-     process.exit()
-  }
-  if (start_date != null && country === null){              
-      url = '/updates/' + start_date;    
-  }
-  if(country != null){
-      url = '/updates/country/' + country;
-  } 
-  if(start_date != null && country != null){
-      url = '/updates/country/' + country + '/' + start_date
-  } 
-  if(start_date === null && country === null){
-      url = '/updates'
-  }
+   if(start_date != null && time != null){
+       var truth = func.checkTime(time)
+       if(truth){
+           Data += '&time=' + time
+       }else{
+           console.error('Invalid time, use hh:mm format')
+           process.exit()
+       }
+    }
+    return func.makeTheRequest(Data)
   
-  date.checkDates(start_date); 
-  Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-
- if(start_date != null && time != null){
-     var truth = func.checkTime(time)
-     if(truth){
-         Data += '&time=' + time
-     }else{
-         console.error('Invalid time, use hh:mm format')
-         process.exit()
-     }
+    // return fetch(Data)
+    // .then(func.handleErrors)   
+    // .then(function(response) {    
+    //     return response.json(); // process it inside the `then` when calling the function       
+    // }).catch(function (err) {
+    //     return err.message;
+    // });
+  } catch (error) {
+    throw error
   }
-
-  return fetch(Data)
-  .then(func.handleErrors)   
-  .then(function(response) {    
-      return response.json(); // process it inside the `then` when calling the function       
-  }).catch(function (err) {
-      return err.message;
-  });
  
 }
 

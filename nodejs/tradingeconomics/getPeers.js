@@ -25,29 +25,33 @@ global.category = null;
 
 function getPeers(){
 
-  var Data = '';
-  var url = '';
-  
-  if(ticker !== null && country === null && category === null){
-    url = '/peers/' + ticker.replace(' ','%20');
+  try {
+    var Data = '';
+    var url = '';
+    
+    if(ticker !== null && country === null && category === null){
+      url = '/peers/' + ticker.replace(' ','%20');
+    }
+    if (ticker === null && country !== null && category === null){              
+        url = '/peers/country/' + country.replace(' ','%20');    
+    }
+    if(ticker === null && country !== null && category !== null){
+        url = '/peers/country/' + country.replace(' ','%20') + '/' + category.replace(' ','%20');
+    } 
+    
+    // console.log(url)
+    Data = url_base + url + '?c=' + apikey.replace (' ','%20');
+    return func.makeTheRequest(Data)
+    // return fetch(Data)
+    // .then(func.handleErrors)   
+    // .then(function(response) {    
+    //     return response.json();      
+    // }).catch(function (err) {
+    //     return err.message;
+    // });
+  } catch (error) {
+    throw error
   }
-  if (ticker === null && country !== null && category === null){              
-      url = '/peers/country/' + country.replace(' ','%20');    
-  }
-  if(ticker === null && country !== null && category !== null){
-      url = '/peers/country/' + country.replace(' ','%20') + '/' + category.replace(' ','%20');
-  } 
-  
-console.log(url)
-  Data = url_base + url + '?c=' + apikey.replace (' ','%20');
-
-  return fetch(Data)
-  .then(func.handleErrors)   
-  .then(function(response) {    
-      return response.json();      
-  }).catch(function (err) {
-      return err.message;
-  });
  
 }
 

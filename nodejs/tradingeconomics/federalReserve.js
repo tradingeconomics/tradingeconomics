@@ -25,72 +25,77 @@ global.end_date = null;
     getFred(counties = 'arkansas');
     getFred(country ='united states');      
     getFred(symbol ='ALLMARGATTN');              
-    getFred(URL ='/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' );              
+    getFred(url ='/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html' );              
     getFred(county ='pike' );              
     getFred(state ='tennessee' );                           
     getFred(historical_symbol ='RACEDISPARITY005007');
     getFred(historical_symbol = 'RACEDISPARITY005007', start_date='2017-05-01')
-    getFred(historical_symbol = 'RACEDISPARITY005007', start_date='2017-05-01', end_date='2018-12-31')              
+    getFred(historical_symbol = 'RACEDISPARITY005007', start_date='2017-05-01', end_date='2025-12-31')              
 
 ******************************************************************************************************/
 
 function getFred(){
 
-    var Data = '';
-    var url = '';
-
-    if ((counties, country, county, symbol, URL, state, historical_symbol) === null){    
-        url =  '/fred/states'; 
-    }
-    if (counties != null){      
-        url = '/fred/counties/' + counties;    
-    }
-    if (symbol != null){     
-        url = '/fred/snapshot/symbol/' + symbol;    
-    }
-    if (URL != null){     
-        url = '/fred/snapshot/url?';    
-    }
-    if (country != null){     
-        url = '/fred/snapshot/country/' + country;    
-    }
-    if(state != null){
-        url = '/fred/snapshot/state/' + state;
-    }
-    if(county != null){
-        url = '/fred/snapshot/county/' + county;
-    }
-    if(historical_symbol != null){
-        url = '/fred/historical/' + historical_symbol;
-    }
+    try {
+        var Data = '';
+        var url = '';
     
-    if(url.includes('?')){
-        if(url.includes('url?')){
-            Data = url_base + url + 'c='+ apikey.replace (' ','%20')+'&url=' + URL;
-        }else{
-        Data = url_base + url + '&c='+ apikey.replace (' ','%20');
-    }
-    }else{
-        if (url.includes('/historical/')){
-            if(start_date !== null && end_date == null){
-                Data = url_base + url + '?c='+ apikey.replace (' ','%20')+'&d1=' + start_date;
-            }else if(start_date !== null && end_date !== null){
-                Data = url_base + url + '?c='+ apikey.replace (' ','%20')+'&d1=' + start_date + '&d2=' + end_date;
+        if ((counties, country, county, symbol, URL, state, historical_symbol) === null){    
+            url =  '/fred/states'; 
+        }
+        if (counties != null){      
+            url = '/fred/counties/' + counties;    
+        }
+        if (symbol != null){     
+            url = '/fred/snapshot/symbol/' + symbol;    
+        }
+        if (URL != null){     
+            url = '/fred/snapshot/url?';    
+        }
+        if (country != null){     
+            url = '/fred/snapshot/country/' + country;    
+        }
+        if(state != null){
+            url = '/fred/snapshot/state/' + state;
+        }
+        if(county != null){
+            url = '/fred/snapshot/county/' + county;
+        }
+        if(historical_symbol != null){
+            url = '/fred/historical/' + historical_symbol;
+        }
+        
+        if(url.includes('?')){
+            if(url.includes('url?')){
+                Data = url_base + url + 'c='+ apikey.replace (' ','%20')+'&url=' + URL;
             }else{
-                Data = url_base + url + '?c='+ apikey.replace (' ','%20');
-            }
-    }else{
-        Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+            Data = url_base + url + '&c='+ apikey.replace (' ','%20');
+        }
+        }else{
+            if (url.includes('/historical/')){
+                if(start_date !== null && end_date == null){
+                    Data = url_base + url + '?c='+ apikey.replace (' ','%20')+'&d1=' + start_date;
+                }else if(start_date !== null && end_date !== null){
+                    Data = url_base + url + '?c='+ apikey.replace (' ','%20')+'&d1=' + start_date + '&d2=' + end_date;
+                }else{
+                    Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+                }
+        }else{
+            Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+        }
+        }
+        return func.makeTheRequest(Data)
+    
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+    } catch (error) {
+        throw error
     }
-}
-
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
 }
 
 module.exports.getFred = getFred;

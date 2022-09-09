@@ -27,38 +27,42 @@ global.URL = null;
 
 function getWorldBank(){
 
-    var Data = '';
-    var url = '';
-   
-    if (category != null){    
-        url = '/worldBank/category/' + category;    
-    }
-    if (country != null){     
-        url = '/worldBank/country/' + country;    
-    }
-    if (series_code != null){     
-        url = '/worldBank/indicator' + '?s=' + series_code;    
-    }
-    if (URL != null){     
-        url = '/worldBank/indicator' + '?url=' + URL;    
-    }    
-    if(category === null && country === null && series_code === null && URL === null){     
-        url = '/worldBank/categories';
-    }
-
-    if(url.includes('?')){
-        Data = url_base + url + '&c='+ apikey.replace (' ','%20');
-    }else{
-        Data = url_base + url + '?c='+ apikey.replace (' ','%20');
-    }
+    try {
+        var Data = '';
+        var url = '';
+       
+        if (category != null){    
+            url = '/worldBank/category/' + category;    
+        }
+        if (country != null){     
+            url = '/worldBank/country/' + country;    
+        }
+        if (series_code != null){     
+            url = '/worldBank/indicator' + '?s=' + series_code;    
+        }
+        if (URL != null){     
+            url = '/worldBank/indicator' + '?url=' + URL;    
+        }    
+        if(category === null && country === null && series_code === null && URL === null){     
+            url = '/worldBank/categories';
+        }
     
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
+        if(url.includes('?')){
+            Data = url_base + url + '&c='+ apikey.replace (' ','%20');
+        }else{
+            Data = url_base + url + '?c='+ apikey.replace (' ','%20');
+        }
+        return func.makeTheRequest(Data)
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+    } catch (error) {
+        throw error
+    }
    
 
 }

@@ -24,31 +24,35 @@ global.ticker = null;
 
 function getForecasts(){
 
-    var Data = '';
-    var url = '';
-   
-    if (country != null){    
-        url = '/forecast/country/' + country;    
+    try {
+        var Data = '';
+        var url = '';
+       
+        if (country != null){    
+            url = '/forecast/country/' + country;    
+        }
+        if (indicator != null){      
+            url = '/forecast/indicator/' + indicator;    
+        }
+        if (ticker != null){     
+            url = '/forecast/ticker/' + ticker;    
+        }  
+        if (country != null && indicator != null){     
+            url = '/forecast/country/' + country + '/indicator/' + indicator;
+        }
+        
+        Data = url_base + url + '?c=' + apikey.replace(' ','%20');
+        return func.makeTheRequest(Data)
+        // return fetch(Data)
+        // .then(func.handleErrors)   
+        // .then(function(response) {    
+        //     return response.json(); // process it inside the `then` when calling the function       
+        // }).catch(function (err) {
+        //     return err.message;
+        // });
+    } catch (error) {
+        throw error
     }
-    if (indicator != null){      
-        url = '/forecast/indicator/' + indicator;    
-    }
-    if (ticker != null){     
-        url = '/forecast/ticker/' + ticker;    
-    }  
-    if (country != null && indicator != null){     
-        url = '/forecast/country/' + country + '/indicator/' + indicator;
-    }
-    
-    Data = url_base + url + '?c=' + apikey.replace(' ','%20');
-    
-    return fetch(Data)
-    .then(func.handleErrors)   
-    .then(function(response) {    
-        return response.json(); // process it inside the `then` when calling the function       
-    }).catch(function (err) {
-        return err.message;
-    });
    
   
 }
