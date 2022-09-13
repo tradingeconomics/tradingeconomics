@@ -365,49 +365,49 @@ def getCmtCountryByCategory(country=None, type=None, category=None, output_type=
 
 def getCmtTotalByType(country=None, type=None, output_type=None):
     """
-            Get detailed information about Comtrade Country Total by Import or Exports
-            =================================================================================
+        Get detailed information about Comtrade Country Total by Import or Exports
+        =================================================================================
 
-            Parameters:
-            -----------
-            country:string.
-                     for example:
-                        country = 'country_name' ,
-
-            type: string.
+        Parameters:
+        -----------
+        country:string.
                     for example:
-                        type = 'import'
-                        type = 'export'
+                    country = 'country_name' ,
 
-            output_type: string.
-                     'dict'(default) for dictionary format output, 'df' for data frame,
-                     'raw' for list of dictionaries directly from the web.
+        type: string.
+                for example:
+                    type = 'import'
+                    type = 'export'
 
-            Notes
-            -----
-            country and type parameters are not optional.
+        output_type: string.
+                    'dict'(default) for dictionary format output, 'df' for data frame,
+                    'raw' for list of dictionaries directly from the web.
 
-            Example
-            -------
-            getTotalByType(country = 'Portugal', type = 'import', output_type = None )
+        Notes
+        -----
+        country and type parameters are not optional.
 
-            getTotalByType(country = 'United States', type = 'export', output_type = 'raw' )
+        Example
+        -------
+        getCmtTotalByType(country = 'Portugal', type = 'import', output_type = None )
 
-            getTotalByType(country = 'Brazil', type = import, output_type = 'df' )
+        getCmtTotalByType(country = 'United States', type = 'export', output_type = 'raw' )
 
-            """
+        getCmtTotalByType(country = 'Brazil', type = import, output_type = 'df' )
+
+        """
 
 
     if country is None:
         return f'country is missing'
 
     if type is None:
-        return f"type is missing. Choose 'imports' or 'exports'"
+        return f"type is missing. Choose 'import' or 'export'"
 
     def getLinkApi(country, type):
         api_url_base = "https://api.tradingeconomics.com/comtrade"
 
-        return f'{api_url_base}/{type}/{quote(country)}/totals'
+        return f'{api_url_base}/{type}/{quote(country)}/totals/?c={glob.apikey}'
 
     link_api = getLinkApi(country, type)
 
@@ -451,7 +451,7 @@ def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_ty
 
         Example
         -------
-        getCmtCountryFilterByType(country1 = 'Portugal', country2 = 'Spain' type = 'import' )
+        getCmtCountryFilterByType(country1 = 'Portugal', country2 = 'Spain', type = 'import' )
 
         getCmtCountryFilterByType(country1 = 'United States', type = 'export')
 

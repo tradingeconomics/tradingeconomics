@@ -173,7 +173,7 @@ def getFedRSnaps(symbol = None, url = None, country = None, state = None, county
 
     Example
     -------
-    getFedRSnaps(symbol = 'AGEXMAK2A647NCEN', url = None, country = None, state = None, county = None, output_type = None)
+    getFedRSnaps(symbol = 'ALLMARGATTN', url = None, country = None, state = None, county = None, output_type = None)
 
     getFedRSnaps(symbol = None, url = 'united states''/united-states/white-to-non-white-racial-dissimilarity-index-for-benton-county-ar-fed-data.html', country = None, state = None, county = None, page_number = None, output_type = None)
   
@@ -218,7 +218,7 @@ def getFedRSnaps(symbol = None, url = None, country = None, state = None, county
     except Exception as e:
         print(e)
 
-def getFedRCounty(output_type = None):
+def getFedRCountyOld(state=None,county=None, output_type = None):
     """
     List of Pike County, AR.
     =================================================================================
@@ -262,6 +262,58 @@ def getFedRCounty(output_type = None):
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)     
+
+def getFedRCounty(state=None,county=None, output_type = None):
+    """
+    List of state's counties or list of counties indicators
+    =================================================================================
+
+    Parameters:
+    -----------
+
+    state:string.
+            string with state name (example: "Nevada" ).
+    county:string.
+            string with county name (example: "Pike County, AR" ).
+            
+    output_type: string.
+            'dict'(default) for dictionary format output, 'df' for data frame,
+            'raw' for list of dictionaries directly from the web. 
+    Notes:
+    ------
+    
+
+    Example
+    -------
+    getFedRCounty(state='nevada',output_type = None)
+    getFedRCounty(county='Pike County, AR',output_type = None)
+
+    """
+            
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+    
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/fred/snapshot/county/',
+        'state': '',
+        'county' : '',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    if state:
+        d['state'] = quote(state)
+    if county:
+        d['county'] = quote(county)
+
+    api_url_request = "%s%s%s%s" % (d['url_base'], d['state'], d['county'],  d['key'])
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+       
 
 
 def getFedRHistorical(symbol = None, initDate=None,endDate=None, output_type = None):
@@ -328,6 +380,6 @@ def getFedRHistorical(symbol = None, initDate=None,endDate=None, output_type = N
     
     api_url_request = "%s%s%s%s%s" % (d['url_base'], d['symbol'],  d['key'],d['initDate'],d['endDate']) 
     # print(api_url_request)
-
-    return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    response = fn.dataRequest(api_request=api_url_request, output_type=output_type)
+    return response
     # return

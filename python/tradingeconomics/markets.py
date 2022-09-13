@@ -590,3 +590,52 @@ def getMarketsSymbology(symbol = None,ticker = None, isin=None,output_type=None)
       return output
     except ValueError:
       raise WebRequestError ('Something went wrong.')   
+
+def getStocksByCountry (country:str,output_type=None):
+    """
+    Returns Stocks List to a specific country
+    =================================================================================
+    Parameters:
+    -----------
+        country: string 
+                symbol = 'United States'
+                
+        output_type: string.
+            'dict'(default) for dictionary format output, 'df' for data frame,
+            'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+    
+    
+    Example
+    -------
+            getStocksByCountry(country='United States',output_type='df')
+            
+    """
+    
+          
+
+    # d is a dictionary used for create the api url
+    d = {
+        'url_base': 'https://api.tradingeconomics.com/markets/country/',
+        'country': '',
+        'key': f'?c={glob.apikey}',
+        'output_type' : ''
+    }
+
+    try:
+        if type(country) == str:
+            d['country'] = f'{quote(country)}'
+        else:
+          raise AttributeError ('country must be a string')
+    except Exception as e:
+      raise e
+    
+    
+
+    api_url_request = "%s%s%s" % (d['url_base'], d['country'],d['key']) 
+    try:
+      output = fn.dataRequest(api_url_request, output_type)
+      return output
+    except ValueError:
+      raise WebRequestError ('Something went wrong.') 

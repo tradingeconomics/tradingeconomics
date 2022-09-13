@@ -100,13 +100,19 @@ def dataRequest(api_request, output_type):
                     oneDict[oneTrimmedItem[0]] = oneTrimmedItem[1]
                 finalResultsList.append(oneDict)
             return finalResultsList
+    def outputTypeCheck(outputType):
+        if outputType not in (None, 'raw', 'dict','df'):
+            raise ParametersError ('invalid output_type')
     class ParametersError(ValueError):
         pass
+    
 
     class WebRequestError(ValueError):
         pass
 
 
+    outputTypeCheck(output_type)
+    
     try:
         response = urlopen(api_request)
         code = response.getcode()
