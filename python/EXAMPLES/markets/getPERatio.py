@@ -1,8 +1,7 @@
 import tradingeconomics as te
 import pandas as pd
 from datetime import datetime, timedelta
-
-from getEarningsPerShareTTM import getEarningsPerShareTTM
+from dateutil.relativedelta import relativedelta
 
 te.login('guest:guest')
 
@@ -12,6 +11,20 @@ te.login('guest:guest')
 ## Use output_type='df' to display in pandas dataframe. 
 
 # To get intraday P/E Ratio. Empty date returns the last P/E Ratio.
+def getEarningsPerShareTTM(symbols=None, date=None, output_type=None):
+    if date == None:
+        date = str((datetime.now()).date())
+
+    initDate = datetime.strptime(str(date), '%Y-%m-%d')
+    initDate = str((initDate - relativedelta(years=1)).date())
+
+    data = te.getEarnings(symbols=symbols, initDate=initDate, endDate=date, output_type='df')
+
+    eps = data['Actual'].astype(float)
+    eps = eps.sum()
+
+    return round(eps, 2)
+
 def getPERatio(symbols=None, date=None, output_type=None):
     if date == None:
         date = str((datetime.now()).date())
