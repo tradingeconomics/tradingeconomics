@@ -1,0 +1,4 @@
+symbol|category|date|value|reportDate|reference
+aapl:us|assets|2010-06-30T00:00:00|64725.0|2010-06-26T00:00:00|FY2010Q3
+aapl:us|assets|2010-03-31T00:00:00|57057.0|2010-03-27T00:00:00|FY2010Q2
+aapl:us|assets|2009-12-31T00:00:00|53926.0|2009-12-26T00:00:00|FY2010Q1

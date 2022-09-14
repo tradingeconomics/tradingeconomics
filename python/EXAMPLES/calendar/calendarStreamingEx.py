@@ -3,13 +3,10 @@ import json
 
 te.login('guest:guest')
 
-te.subscribe('EURUSD:CUR')
-
 
 def on_message(ws, message):
-    data = json.loads(message)
-    print (data)
+    print(json.loads(message))
 
 
-
+te.subscribe('calendar')
 te.run(on_message)
