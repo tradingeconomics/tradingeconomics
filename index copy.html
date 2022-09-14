@@ -7787,6 +7787,20 @@ php black side
 <span class="mi">25</span>    <span class="n">CHNPRT41091</span>   <span class="n">...</span>      <span class="n"> China Imports from Portugal of Patent and pate...</span>        
 <span class="n">...</span>
 </code></pre>
+
+<blockquote class="lang-specific python">  
+    <p>To get Snapshot of data per country filtered by type: import or export.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtSnapshotByType</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="s">'Portugal'</span><span class="p">,<span class="o">type=<span class="s">'export'</span><span class="p">,</span><span class="o">output_type=</span><span class="s">'df'</span><span class="p">)</span>
+
+</code></pre>
+
+<blockquote class="lang-specific python">  
+    <p>To get Snapshot of trade between two countries filtered by type: import or export.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountryFilterByType</span><span class="p">(</span><span class="n">country1</span> <span class="o">=</span><span class="s">'portugal'<span class="p">,<span class="n">country2</span> <span class="o">=</span><span class="s">'spain'</span><span class="p">,<span class="o">type=<span class="s">import</span><span class="p">,</span><span class="o">output_type=</span><span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+
 <blockquote class="lang-specific python">  
     <p>To get Comtrade between two countries.</p>
 </blockquote>  
@@ -8185,6 +8199,15 @@ php black side
 <p> With no county specified, a list of all states will be provided.</p>
 
 </blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRStates</span><span class="p">(</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    <!-- 
+                       <span class="n">county</span>                             
+    <span class="mi">0</span>     <span class="n">Arkansas County, AR</span>       
+    <span class="mi">1</span>       <span class="n">Ashley County, AR</span>      
+    <span class="mi">2</span>        <span class="n">Boone County, AR</span>              
+    <span class="n">...</span> -->
+    </code></pre>
+
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRStates</span><span class="p">(</span><span class="n">county</span> <span class="o">=</span> <span class="s">'arkansas'</span><span class="p">)</span>
 <!-- 
                    <span class="n">county</span>                             
@@ -8326,10 +8349,17 @@ php black side
     <span class="n">...</span> -->
      
     <blockquote class="lang-specific python">  
-        <p>To get Federal Reserve snapshots on Pike County, AR.</p>
+        <p>to get a list of Counties of a state.</p>
  
     </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRCounty</span><span class="p">(</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">None</span><span class="p">)</span>                     
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRCounty</span><span class="p">(</span><span class="o">state=</span><span class="s">'arkansas'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">None</span><span class="p">)</span>                     
+    </code></pre>
+
+    <blockquote class="lang-specific python">  
+        <p>To get a list of indicators of a county.</p>
+ 
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFedRCounty</span><span class="p">(</span><span class="o">county=</span><span class="s">'Pike County, AR'</span><span class="p">,</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">None</span><span class="p">)</span>                     
     </code></pre>
     
     <!--R black side-->  
@@ -8662,10 +8692,11 @@ php black side
     <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/?c=guest:guest&f=json">/fred/snapshot/country/{country}</a>    </p></li>
 <li><p>State<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/state/tennessee?c=guest:guest&f=json">/fred/snapshot/state/{state}</a>    </p></li>
-<li><p>County<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/arkansas?c=guest:guest&f=json">/fred/snapshot/county/{county}</a><br>
-or<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest&f=json">/fred/snapshot/county/Pike%20County,%20AR</a></p></li>
+<li><p>Get a list of Counties of a state<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/arkansas?c=guest:guest&f=json">/fred/snapshot/county/{state}</a><br>
+</li>
+<li><p>Get a list of indicators of a county<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest&f=json">/fred/snapshot/county/{county}</a>    </p></li>
 <!--<li><p>Pagination<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/2?c=guest:guest">/fred/snapshot/country/{country}/{page}</a>    </p></li>-->
 </ul>
