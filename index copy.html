@@ -7732,7 +7732,39 @@ php black side
 </code></pre>
 
 <blockquote class="lang-specific python">  
-    <p>To get Comtrade by country.</p>
+    <p>Get total Imports by main category.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtTotalByTypeAndMainCategory</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'India'</span><span class="o">,</span> <span class="o">type=</span><span class="s">'import'</span><span class="o">,</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+
+<blockquote class="lang-specific python">  
+    <p>Total Exports by main category.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtTotalByTypeAndMainCategory</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'United States'</span><span class="o">,</span> <span class="o">type=</span><span class="s">'export'</span><span class="o">,</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+
+<blockquote class="lang-specific python">  
+    <p>Get total Imports by specific category.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtTotalByTypeAndMainCategory</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'United kingdom</span><span class="o">,</span> <span class="o">type=</span><span class="s">'import'</span><span class="o">,</span><span class="o">category=</span><span class="s">'Coffee, tea, mate and spices'</span><span class="o">,</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+
+<blockquote class="lang-specific python">  
+    <p>Get total Imports by specific category.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtTotalByTypeAndMainCategory</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'India'</span><span class="o">,</span> <span class="o">type=</span><span class="s">'import'</span><span class="o">,</span><span class="o">category=</span><span class="s">'Live animals'</span><span class="o">,</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+
+
+<blockquote class="lang-specific python">  
+    <p>To get detailed information about Comtrade countries.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+
+</code></pre>
+
+<blockquote class="lang-specific python">  
+    <p>To get detailed information for one country.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'China'</span><span class="p">)</span>
 
@@ -7744,7 +7776,7 @@ php black side
 </code></pre>
       
 <blockquote class="lang-specific python">  
-    <p>To get Comtrade by countries.</p>
+    <p>To get detailed information for multiple countries.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtCountry</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span><span class="p">[</span><span class="s">'China'<span class="p">,</span><span class="s">'Portugal'</span><span class="p">]</span>)</span>
 
@@ -8031,7 +8063,7 @@ php black side
     
     </ul>
 <ul>
-    <li><p>Get detailed information about Comtrade countries<br>
+    <li><p>Get detailed information about Comtrade countries, one country, or multiple countries <br>
         <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/countries?c=guest:guest&f=json">/comtrade/countries</a></p></li>
     </ul>
     
