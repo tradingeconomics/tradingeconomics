@@ -546,4 +546,56 @@ def getCmtTotalByTypeAndMainCategory(country=None, type=None, output_type=None):
     except Exception as e:
         print(e)
 
+def getCmtSnapshotByType(country=None, type=None, output_type=None):
+    """
+        Get Snapshot of data per country filtered by type: import or export
+        =================================================================================
 
+        Parameters:
+        -----------
+        country:string.
+                    for example:
+                    country = 'country_name' ,
+
+        type: string.
+                for example:
+                    type = 'import'
+                    type = 'export'
+
+        output_type: string.
+                    'dict'(default) for dictionary format output, 'df' for data frame,
+                    'raw' for list of dictionaries directly from the web.
+
+        Notes
+        -----
+        country and type parameters are not optional.
+
+        Example
+        -------
+        getCmtSnapshotByType(country = 'Portugal', type = 'import', output_type = None )
+
+        getCmtSnapshotByType(country = 'United States', type = 'export', output_type = 'raw' )
+
+        getCmtSnapshotByType(country = 'Brazil', type = import, output_type = 'df' )
+
+        """
+
+
+    if country is None:
+        raise ParametersError (f'country is missing')
+
+    if type is None:
+        raise ParametersError (f"type is missing. Choose 'import' or 'export'")
+
+    def getLinkApi(country, type):
+        api_url_base = "https://api.tradingeconomics.com/comtrade/country"
+
+        return f'{api_url_base}/{quote(country)}?type={type}&c={glob.apikey}'
+
+    link_api = getLinkApi(country, type)
+
+    try:
+        print(link_api)
+        return fn.dataRequest(api_request=link_api, output_type=output_type)
+    except Exception as e:
+        print(e)
