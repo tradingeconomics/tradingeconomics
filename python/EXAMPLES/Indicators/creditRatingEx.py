@@ -9,56 +9,46 @@ te.login('guest:guest')
 ## EXE: country=['mexico', 'sweden']
 
 ## With no output_type defined, the result will be of the dictionary type.
-## Use output_type='df' to display in pandas dataframe. 
+## Use output_type='df' to display in pandas dataframe.
 
-# To get the list of all indicators.
-mydata = te.getIndicatorData(output_type='df')
+# To get the list of Credit Ratings by country.
+mydata = te.getRatings(output_type='df')
 print(mydata)
 print("===============================================================================================================")
 
-# To get the list of all countries.
-mydata = te.getAllCountries(output_type='df')
+# To get the credit rating data by specific country
+mydata = te.getRatings(country='mexico', output_type='df')
 print(mydata)
 print("===============================================================================================================")
 
-# To get the list of indicators by country.
-mydata = te.getIndicatorData(country='mexico', output_type='df')
+# To get the credit rating data by multiple countries
+mydata = te.getRatings(country=['mexico', 'sweden'], output_type='df')
 print(mydata)
 print("===============================================================================================================")
 
-# To get the list of indicators by country and group(you can check groups in the "categoryGroup" field of /indicators)
-mydata = te.getIndicatorByCategoryGroup(country='mexico', category_group='gdp', output_type='df')
+# To get the historical credit rating data for specific country
+mydata = te.getHistoricalRatings(country='mexico', output_type='df')
 print(mydata)
 print("===============================================================================================================")
 
-# To get the indicator data by specific indicator for all countries.
-mydata = te.getIndicatorData(country='all', indicators='gdp', output_type='df')
+# To get the historical credit rating data for multiple countries
+mydata = te.getHistoricalRatings(country=['mexico', 'sweden'], output_type='df')
 print(mydata)
 print("===============================================================================================================")
 
-# To get indicator data by specific ticker or tickers
-mydata = te.getIndicatorByTicker(ticker='usurtot', output_type='df')
+# To get the historical credit rating data for specific country by start date
+mydata = te.getHistoricalRatings(country='mexico', initDate='2010-08-01', output_type='df')
 print(mydata)
 print("===============================================================================================================")
 
-# To get the list of indicator peers by ticker.
-mydata = te.getPeers(ticker='CPI YOY', output_type='df')
-print(mydata)
-print("===============================================================================================================")
-
-# To get the list of indicator peers by country.
-mydata = te.getPeers(country='mexico', output_type='df')
-print(mydata)
-print("===============================================================================================================")
-
-# To get the list of indicator peers by country and category.
-mydata = te.getPeers(country='mexico', category='money', output_type='df')
+# To get the historical credit rating data specific country by start and end date
+mydata = te.getHistoricalRatings(country='mexico', initDate='2010-08-01', endDate='2012-01-01', output_type='df')
 print(mydata)
 print("===============================================================================================================")
 
 # To get your data into a csv file
 df = pd.DataFrame(mydata)
-path = r'python\EXAMPLES\Indicators\indicators.csv'
+path = r'python\EXAMPLES\Indicators\creditRating.csv'
 df.to_csv(path, index=False, header=True, sep='|')
 
 # If you want the code into an html table format, you can use the example below in your html projects
