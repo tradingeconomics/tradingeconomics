@@ -23,23 +23,21 @@ def getEarningsPerShareTTM(symbols=None, date=None, output_type=None):
     eps = data['Actual'].astype(float)
     eps = eps.sum()
 
-    return round(eps, 2)
+    return eps
 
-def getPERatio(symbols=None, date=None, output_type=None):
-    if date == None:
-        date = str((datetime.now()).date())
+def getPERatio(symbols=None, date=None, endDate = None, output_type=None):
+    if date != None:
+        endDate = date
 
-    endDate = datetime.strptime(str(date), '%Y-%m-%d')
-    endDate = str((endDate + timedelta(days=1)).date())
-
-    data = pd.DataFrame(te.getMarketsIntraday(symbols=symbols, initDate=date, endDate=endDate, output_type='raw'))
+    data = pd.DataFrame(te.fetchMarkets(symbol=symbols, initDate=date, endDate=endDate, output_type='raw'))
 
     stockPriceLastRow = data.iloc[-1]
+    
     eps = getEarningsPerShareTTM(symbols=symbols, date=date, output_type='df')
 
     peRatio = round(stockPriceLastRow['Close']/eps, 2)
 
     return peRatio
 
-mydata = getPERatio(symbols='aapl:us', date='2022-09-12', output_type='df')
+mydata = getPERatio(symbols='aapl:us', output_type='df')
 print(mydata)
