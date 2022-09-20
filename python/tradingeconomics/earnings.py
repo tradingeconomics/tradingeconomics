@@ -92,7 +92,7 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
     #print(linkAPI)
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
@@ -133,9 +133,9 @@ def getEarningsType(type=None, output_type=None):
       
     except AttributeError:
         raise LoginError('You need to do login before making any request')
-    print(linkAPI) 
+    #print(linkAPI) 
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)

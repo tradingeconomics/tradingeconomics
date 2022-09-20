@@ -381,7 +381,7 @@ def getNews(country = None,  indicator = None, start= None, limit = None, output
 
 
     api_url_request = "%s%s%s%s%s%s%s%s" % (d['url_base'], d['country'],d['indicator'], d['key'],d['limit'],d['start'],d['start_date'],d['end_date']) 
-    print(api_url_request)
+    # print(api_url_request)
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
 
 

@@ -87,7 +87,7 @@ def getCmtUpdates(output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        print(linkAPI)
+        # print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
@@ -135,7 +135,7 @@ def getCmtCategories(category=None, output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        print(linkAPI)
+        # print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
@@ -192,7 +192,7 @@ def getCmtCountry(country=None, page_number=None, output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
@@ -242,7 +242,7 @@ def getCmtHistorical(symbol=None, output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
@@ -290,7 +290,7 @@ def getCmtTwoCountries(country1=None, country2=None, page_number=None, output_ty
         raise LoginError('You need to do login before making any request')
 
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
