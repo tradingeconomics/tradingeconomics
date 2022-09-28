@@ -5,8 +5,8 @@ var events = require("events");
 
 var WebSocket = require('ws'),
 	defaultOptions = {
-		url: 'wss://stream.tradingeconomics.com/', 
-		
+		// url: 'wss://stream.tradingeconomics.com/', 
+		url: 'ws://stream.tradingeconomics.com/', 
 		key: 'guest',
 		secret: 'guest',
 		reconnect: true, //reconnect on error/disconnect 
@@ -102,13 +102,20 @@ TEClient.prototype.connect = function(){
 
 TEClient.prototype.subscribe = function(to){
 	var _this = this;
-
+	
+	
 	if(typeof(to) == 'string'){
-		to = to.toUpperCase().replace(/ /g,'');
-		_this.subArr = to.split(',')
+		// to = to.includes(':')? to.toUpperCase().replace(/ /g,''):to.toLowerCase().replace(/ /g,'');
+		to = to.replace(/ /g,'')
+		let preArray = to.split(',')
+		while (preArray.length >0) {
+			let oneElement = preArray.shift();
+			oneElement = oneElement.includes(':')?oneElement.toUpperCase():oneElement.toLowerCase();
+			_this.subArr.push(oneElement);		
+		}
 	}else if (typeof(to) == 'object'){
 		console.log(`INFO: You can use symbol list as a string separated by comma. Eg. 'INDU:IND, AAPL:US'`)
-		_this.subArr = to.map(element => { return element.toUpperCase().replace(/ /g,'');});
+		_this.subArr = to.map(element => { return element.includes(':')? element.toUpperCase().replace(/ /g,''):element.toLowerCase().replace(/ /g,'');});
 	}else{
 		console.log(`ERROR: Please use String, if multiple separate it by ",". Example:('INDU:IND,DAX:IND'), or an Array Object. Example: ['INDU:IND', 'DAX:IND']`)
 		return;
@@ -118,7 +125,7 @@ TEClient.prototype.subscribe = function(to){
 		// #todo -> emit error
 		return _this;
 	}
-
+	
 	_this.ws.send('{"topic": "subscribe", "to": "'+to+'"}');
 
 	return _this;
