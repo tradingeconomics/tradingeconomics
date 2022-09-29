@@ -31,12 +31,13 @@ Examples for multiple symbols:
 // Client.subscribe('commodities')
 // Client.subscribe('commodities,indu:ind')
 // Client.subscribe('commodities')
+// Client.subscribe('COMMODITIES')
 // Client.subscribe('EURUSD:CUR')
 // Client.subscribe('EURUSD:CUR,USDJPY:CUR')
 // Client.subscribe('calendar,commodities')
-// Client.subscribe(['CURRENCIES', 'commodities'])
+Client.subscribe(['CURRENCIES', 'commodities'])
 // Client.subscribe(['EURUSD:CUR','USDJPY:CUR'])
-Client.subscribe(['eurusd:cur','usdjpy:cur'])
+// Client.subscribe(['eurusd:cur','usdjpy:cur'])
 
 
 //For Economic calendar events: Client.subscribe('calendar')

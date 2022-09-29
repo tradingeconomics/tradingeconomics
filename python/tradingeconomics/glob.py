@@ -16,10 +16,12 @@ def subscribe(ev):
     def upperCaseList(list):
         finalList = []
         while len(list) > 0:
-          oneSymbol = list.pop()
-          if ':' in oneSymbol:
-            oneSymbol = oneSymbol.upper()
-          finalList.append(oneSymbol)
+            oneSymbol = list.pop()
+            if ':' in oneSymbol:
+                oneSymbol = oneSymbol.upper()
+            else:
+                oneSymbol = oneSymbol.lower()
+            finalList.append(oneSymbol)
         return finalList
     
     global _event 
@@ -32,8 +34,12 @@ def subscribe(ev):
             evList = upperCaseList(evList)
             _event += evList
             return 
+        
         if ':' in ev:
-          ev=ev.upper()
+            ev=ev.upper()
+        else:
+            ev=ev.lower()
+
         _event.append(ev)
 
     print('You are subscribed to:' + str(_event))
