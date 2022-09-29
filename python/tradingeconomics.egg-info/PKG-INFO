@@ -1,38 +1,12 @@
 Metadata-Version: 2.1
 Name: tradingeconomics
-Version: 0.3.1
+Version: 0.3.2
 Summary: Library to download data from Trading Economics API
 Home-page: https://github.com/ieconomics/open-api
 Author: Trading Economics
 Author-email: olexandr.baturin@tradingeconomics.com
 License: MIT
-Download-URL: https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.3.1.zip
-Description: =====================
-        Trading Economics API
-        =====================
-        
-        Install Python
-        ===============
-        If you don’t have a copy of Python installed on your computer, you can get it from:
-        
-         - https://www.python.org/downloads/ 
-        
-        
-        Install pip
-        ============
-        
-        You can find all information in: 
-        
-         - https://packaging.python.org/installing/ 
-        
-        Check our docs on how to use the package 
-        ----------------------------------------
-        
-        
-         - https://docs.tradingeconomics.com/#introduction 
-        
-         - https://github.com/ieconomics/open-api/tree/master/python 
-        
+Download-URL: https://github.com/ieconomics/open-api/raw/master/python/dist/tradingeconomics-0.3.2.zip
 Keywords: tradingeconomics,data
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
@@ -41,3 +15,32 @@ Classifier: Programming Language :: Python :: 3.3
 Classifier: Programming Language :: Python :: 3.4
 Classifier: Programming Language :: Python :: 3.8
 Description-Content-Type: text/x-rst
+License-File: LICENSE.txt
+
+=====================
+Trading Economics API
+=====================
+
+Install Python
+===============
+If you don’t have a copy of Python installed on your computer, you can get it from:
+
+ - https://www.python.org/downloads/ 
+
+
+Install pip
+============
+
+You can find all information in: 
+
+ - https://packaging.python.org/installing/ 
+
+Check our docs on how to use the package 
+----------------------------------------
+
+
+ - https://docs.tradingeconomics.com/#introduction 
+
+ - https://github.com/ieconomics/open-api/tree/master/python 
+
+
