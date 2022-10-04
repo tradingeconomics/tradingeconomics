@@ -11,7 +11,7 @@ te.login();
 //===============================================================================================================
 //Get peers by ticker
 
-getPeers(ticker ='CPI YOY')
+te.getPeers(ticker ='CPI YOY')
   .then((data) => {
     console.log("Peers by ticker:", "\n", data, "\n");
   })
@@ -22,7 +22,7 @@ getPeers(ticker ='CPI YOY')
 //===============================================================================================================
 //Get peers by country
 
-getPeers(country ='united states')
+te.getPeers(country ='united states')
   .then((data) => {
     console.log("Peers by country:", "\n", data, "\n");
   })
@@ -33,7 +33,7 @@ getPeers(country ='united states')
 //===============================================================================================================
 //Get peers by country and category
 
-getPeers(country ='united states', category ='money')
+te.getPeers(country ='united states', category ='money')
 .then((data) => {
   console.log("Peers by country and category:", "\n", data, "\n");
 })
