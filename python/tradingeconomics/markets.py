@@ -404,7 +404,7 @@ def getMarketsForecasts(category=None, symbol=None,  output_type = None):
       raise WebRequestError ('Something went wrong.')   
 
 
-def getMarketsIntradayByInterval(symbol = None, interval=None, initDate=None,endDate=None,output_type=None):
+def getMarketsIntradayByInterval(symbol = None, interval='1m', initDate=None,endDate=None,output_type=None):
     """
     Returns Aggregate intraday prices by interval - allowed intervals: 1m, 5m, 10m, 15m, 30m, 1h, 2h, 4h.
     =================================================================================
@@ -449,6 +449,8 @@ def getMarketsIntradayByInterval(symbol = None, interval=None, initDate=None,end
         fn.validate(initDate)
         fn.validate(endDate)
         fn.validatePeriod(initDate, endDate)
+        #it will parse endDate when initDate and endData are the same. 
+        endDate = (lambda x, y : f"{endDate[0:8]}{(int(endDate[8:])+1)}" if x==y else endDate)(initDate,endDate)
         d['init_date']=f'&d1={initDate}'
         d['end_date']=f'&d2={endDate}'
 
