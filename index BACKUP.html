@@ -4,8 +4,6 @@
         <meta charset="utf-8">
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-        <link rel="icon" href="/images/favicon.ico">
         <title>Trading Economics - API Docs - v20190218</title>
 
         <style>
@@ -508,9 +506,6 @@ Using Headers auth:<br>
 <h1 id="indicators">Indicators</h1>
 
 <p>Trading Economics National Statistical database includes more than 15,000 dataseries that come directly from official sources like central banks, national statistical agencies. It is a comprehensive database covering the most important macroeconomic data for each country from GDP growth rates to tax rates and population.</p>
-
-<h2 id="snaps">Snaps</h2>
-
 <!-----------------------------Indicators Black Side------------------------------->
       
 <!--R indicators black side-->
@@ -3342,8 +3337,6 @@ or you can specify a start date and end date<br>
 Click on any method below for a sample.
 <strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
 
-<h2 id="snaps">Snaps</h2>
-
 <!-----------------------------Markets Black Side-------------------------------> 
 
 <!--R black side-->
@@ -4561,7 +4554,7 @@ Click on any method below for a sample.
 <blockquote class="lang-specific python">
     <p>To get intraday market data for a specific symbol and by init date and end date</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntraday</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2021-03-13'</span>, <span class="n">endDate</span><span class="o">=</span><span class="s">'2021-03-17'</span><span class="o">,</span><span class="o">output_type=</span><span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntradayByInterval</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2021-03-13'</span>, <span class="n">endDate</span><span class="o">=</span><span class="s">'2021-03-17'</span><span class="o">,</span><span class="o">output_type=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 
 <blockquote class="lang-specific python">
@@ -4668,14 +4661,6 @@ Click on any method below for a sample.
     <span class="c1">// replace guest:guest with your key</span>
     <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
     <span class="kt">"https://api.tradingeconomics.com/markets/intraday/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&d2=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
-</code></pre>
-<blockquote class="lang-specific csharp">
-    <p>Get intraday prices by interval.</p>
-</blockquote>
-<pre class="highlight csharp"><code>
-    <span class="c1">// replace guest:guest with your key</span>
-    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
-    <span class="kt">"https://api.tradingeconomics.com/markets/intraday/</span>{put symbol name here}<span class="kt">?agr=</span>{put interval here}<span class="kt">&d1=</span>{put date here}<span class="kt">&d2=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
 </code></pre>
 
 <!--java black side-->
@@ -6032,6 +6017,7 @@ Click on any method below for a sample.
 
 <!-----------------------------News White Side-------------------------------> 
 
+
 <p>News are short summaries, usually three to five sentences covering a specific release/event related to the data, providing an explanation of what was behind growth/contraction, increase/decrease in the specific dataseries.</p>
 <br>
 <ul>
@@ -6850,6 +6836,7 @@ php black side
 </code></pre> 
 <!-----------------------------Eurostat White Side-------------------------------> 
 <p>The Eurostat database contains more than 46,000  time series divided into 2500 categories for Euro Area, European Union and its 27 member states. Eurostat is a Directorate-General of the European Commission located in Luxembourg. Its main responsibilities are to provide statistical information to the institutions of the European Union (EU) and to promote the harmonisation of statistical methods across its member states and candidates for accession as well as EFTA countries.</p>
+<br>
 
 <!-- <h2 id="eurostat">Categories and Countries</h2> -->
 
@@ -7464,9 +7451,7 @@ php black side
 <!-----------------------------WorldBank White Side-------------------------------> 
 <p> The World Bank Database is a collection of around 300,000 development indicators, compiled from officially-recognized international sources. It presents the most current and accurate global development data available.</p>
 
-<ul>
-    <h2 id="snaps-worldBank">Snaps</h2>
-</ul>
+<br>
 <h3 id="Indicators_countries">Indicators and Countries</h3>
 <br>
 <ul>
@@ -7491,9 +7476,6 @@ php black side
 </ul>
 
 <ul>
-
-<h2 id="historical-worldBank">Historical</h2>
-
 <li>Historical data for a specific indicator<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr&f=json">/worldBank/historical?c=guest:guest&amp;s={series_code}</a></li>
 </ul>
@@ -8074,7 +8056,7 @@ php black side
 <!-----------------------------Comtrade White Side-------------------------------> 
 
 <p>UN Comtrade Database consists of around 19 million data series with detailed harmonized global trade data divided into categories and countries.</p>
-
+<br>
 <ul>
 <li>Get detailed information about Comtrade categories<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest&f=json">/comtrade/categories</a></li>
