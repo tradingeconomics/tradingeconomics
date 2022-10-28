@@ -509,7 +509,7 @@ Using Headers auth:<br>
 
 <p>Trading Economics National Statistical database includes more than 15,000 dataseries that come directly from official sources like central banks, national statistical agencies. It is a comprehensive database covering the most important macroeconomic data for each country from GDP growth rates to tax rates and population.</p>
 
-<h2 id="snaps">Snaps</h2>
+<h2 id="snapshots-indicators">Snapshots</h2>
 
 <!-----------------------------Indicators Black Side------------------------------->
       
@@ -3342,7 +3342,7 @@ or you can specify a start date and end date<br>
 Click on any method below for a sample.
 <strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
 
-<h2 id="snaps">Snaps</h2>
+<h2 id="snapshots-markets">Snapshots</h2>
 
 <!-----------------------------Markets Black Side-------------------------------> 
 
@@ -6035,6 +6035,9 @@ Click on any method below for a sample.
 <p>News are short summaries, usually three to five sentences covering a specific release/event related to the data, providing an explanation of what was behind growth/contraction, increase/decrease in the specific dataseries.</p>
 <br>
 <ul>
+
+    <h2 id="get-news">Get News</h2>
+
 <li><p>Get latest news.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest&f=json">/news</a></p></li>
 <li><p>Get news within a date range.<br>
@@ -6856,6 +6859,8 @@ php black side
 <h3 id="Categories_countries">Categories and Countries</h3>
 <p><span class="methods"></p> 
     <ul>
+        <h2 id="snapshots-eurostat">Snapshots</h2>
+
         <li><p>List of countries available.<br>
             <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/countries?c=guest:guest&f=json">/eurostat/countries</a></p></li>
         </ul>
@@ -6889,6 +6894,9 @@ php black side
     <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/country/Denmark?category_group=Interest rates&c=guest:guest&f=json">/eurostat/country/{country}?category_group={category_group}</a></p></li>
 </ul>
 <ul>
+
+    <h2 id="historical-eurostat">Historical</h2>
+
     <li><p>Get historical data by ID.<br>
         <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?c=guest:guest&f=json">/eurostat/historical/{id}</a></p></li>
     </ul>
@@ -7465,7 +7473,7 @@ php black side
 <p> The World Bank Database is a collection of around 300,000 development indicators, compiled from officially-recognized international sources. It presents the most current and accurate global development data available.</p>
 
 <ul>
-    <h2 id="snaps-worldBank">Snaps</h2>
+    <h2 id="snapshots-worldBank">Snapshots</h2>
 </ul>
 <h3 id="Indicators_countries">Indicators and Countries</h3>
 <br>
@@ -8076,6 +8084,9 @@ php black side
 <p>UN Comtrade Database consists of around 19 million data series with detailed harmonized global trade data divided into categories and countries.</p>
 
 <ul>
+
+    <h2 id="snapshots-comtrade">Snapshots</h2>
+
 <li>Get detailed information about Comtrade categories<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest&f=json">/comtrade/categories</a></li>
 </ul>
@@ -8125,6 +8136,8 @@ php black side
             
 </ul>
 <ul>
+    <h2 id="historical-comtrade">Historical</h2>
+
 <li>Historical data<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest&f=json">/comtrade/historical/{symbol}</a></li>
 </ul>
@@ -8699,6 +8712,9 @@ php black side
 <p><span class="methods">  </p>
 
 <ul>
+
+    <h2 id="snapshots-federalReserve">Snapshots</h2>
+
 <li><p>List of all US states<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/fred/states?c=guest:guest&f=json">/fred/states</a>    </p></li>
 <li><p>List of all counties per state<br>
@@ -8724,6 +8740,9 @@ php black side
 </ul>
 
 <ul>
+
+    <h2 id="historical-federalReserve">Historical</h2>
+
 <li><p>Only accessed through symbol<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007?c=guest:guest&f=json">/fred/historical/{symbol}</a>    </p></li>
 <li><p>Multiple symbols<br>
