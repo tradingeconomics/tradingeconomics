@@ -509,7 +509,7 @@ Using Headers auth:<br>
 
 <p>Trading Economics National Statistical database includes more than 15,000 dataseries that come directly from official sources like central banks, national statistical agencies. It is a comprehensive database covering the most important macroeconomic data for each country from GDP growth rates to tax rates and population.</p>
 
-<h2 id="snapshot-indicators">Snapshot</h2>
+<h2 id="snapshots-indicators">Snapshots</h2>
 
 <!-----------------------------Indicators Black Side------------------------------->
       
@@ -3342,7 +3342,7 @@ or you can specify a start date and end date<br>
 Click on any method below for a sample.
 <strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
 
-<h2 id="snapshot-markets">Snapshot</h2>
+<h2 id="snapshots-markets">Snapshots</h2>
 
 <!-----------------------------Markets Black Side-------------------------------> 
 
@@ -3388,7 +3388,7 @@ Click on any method below for a sample.
 </blockquote>   
 <pre class="highlight r"><code><span class="n">getMarketsData</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'united states'</span><span class="p">,</span><span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
-<!--Python Markets Snapshot black side-->
+<!--Python Markets Snapshots black side-->
 
 <blockquote class="lang-specific python">
     <p>To get markets list:</p>
@@ -5774,9 +5774,6 @@ Click on any method below for a sample.
 
 
 <h1 id="news">News</h1>
-
-<h2 id="get-news">Get News</h2>
-
 <!-- <h2 id="latest-news">Latest news</h2> -->
 
 <!--Python Latest News black side-->
@@ -6024,6 +6021,9 @@ Click on any method below for a sample.
 <p>News are short summaries, usually three to five sentences covering a specific release/event related to the data, providing an explanation of what was behind growth/contraction, increase/decrease in the specific dataseries.</p>
 <br>
 <ul>
+
+    <h2 id="get-news">Get News</h2>
+
 <li><p>Get latest news.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/news?c=guest:guest&f=json">/news</a></p></li>
 <li><p>Get news within a date range.<br>
@@ -6627,163 +6627,226 @@ php black side
 <li><p>Search for term/keyword in all categories available.<br>
     <a target = '_blank' href="http://api.tradingeconomics.com/search/gold?c=guest:guest&f=json">/search/{term}</a></p></li>
 </ul>
- 
-<!-----------------------------Eurostat White Side-------------------------------> 
-<h1 id="eurostat">Eurostat</h1>
-
-<p>The Eurostat database contains more than 46,000  time series divided into 2500 categories for Euro Area, European Union and its 27 member states. Eurostat is a Directorate-General of the European Commission located in Luxembourg. Its main responsibilities are to provide statistical information to the institutions of the European Union (EU) and to promote the harmonisation of statistical methods across its member states and candidates for accession as well as EFTA countries.</p>
-
-<!-- <h2 id="eurostat">Categories and Countries</h2> -->
-
-<!-- <h3 id="Categories_countries">Categories and Countries</h3> -->
-
-<h2 id="snapshot-eurostat">Snapshot</h2>
 
 <!-----------------------------Eurostat Black Side-------------------------------> 
 
-<!--Python Eurostat black side-->
-   <blockquote class="lang-specific python">  
-   <br>
-       <p>To get lists of countries available.</p>
-   </blockquote>  
-   <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">lists</span> <span class="o">=</span> <span class="s">'countries'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-   </code></pre>
-   <blockquote class="lang-specific python">  
-   <br>
-       <p>To get lists of categories available.</p>
-   </blockquote>  
-   <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">lists</span> <span class="o">=</span> <span class="s">'categories'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
-   </code></pre>
+<h1 id="eurostat">Eurostat</h1>
+
+ <!--Python Eurostat black side-->
+
+
+    <blockquote class="lang-specific python">  
+    <br>
+        <p>To get lists of countries available.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">lists</span> <span class="o">=</span> <span class="s">'countries'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+    <blockquote class="lang-specific python">  
+    <br>
+        <p>To get lists of categories available.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">lists</span> <span class="o">=</span> <span class="s">'categories'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
+    </code></pre>
 <!--R eurostat black side-->
 <blockquote class="lang-specific r">
-   <p>To get categories list.</p>
+    <p>To get categories list.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(lists = <span class="s1">'categories'</span>)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-   <p>To get Eurostat data by category group.</p>
+    <p>To get Eurostat data by category group.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(category_group = <span class="s1">'Poverty'</span>)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-   <p>To get Eurostat data by category.</p>
+    <p>To get Eurostat data by category.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(category = <span class="s1">'People at risk of income poverty after social transfers'</span>)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-   <p>To get Eurostat data by country.</p>
+    <p>To get Eurostat data by country.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(country = <span class="s1">'Denmark'</span>)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-   <p>To get Eurostat data by country and category.</p>
+    <p>To get Eurostat data by country and category.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(country = <span class="s1">'Denmark'</span>, category = <span class="s1">'People at risk of income poverty after social transfers'</span>)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-   <p>To get Eurostat data by country and category group.</p>
+    <p>To get Eurostat data by country and category group.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEurostatData</span><span class="p">(country = <span class="s1">'Denmark'</span>, category_group = <span class="s1">'Poverty'</span>)</span><span class="w">
 </span></code></pre>
 
+<blockquote class="lang-specific r">
+    <p>To get historical Eurostat data by ID.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get historical Eurostat data by ID and a start date.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>, start_date = <span class="s1">'2018-01-01'</span> )</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get historical Eurostat data by ID and dates.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>, start_date = <span class="s1">'2018-01-01'</span>, end_date = <span class="s1">'2021-05-10'</span>)</span><span class="w">
+</span></code></pre>
 <!--javascript Eurostat lists black side-->
 
 <blockquote class="lang-specific javascript">
-   <p>Get Eurostat available countries.</p>
+    <p>Get Eurostat available countries.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-   <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">lists</span> = <span class="s1">'countries'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-       </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-   });</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">lists</span> = <span class="s1">'countries'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <blockquote class="lang-specific javascript">
-   <p>Get Eurostat available categories.</p>
+    <p>Get Eurostat available categories.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-   <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">lists</span> = <span class="s1">'categories'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-       </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-   });</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">lists</span> = <span class="s1">'categories'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <!-----Python Eurostat black side---->
 
 <blockquote class="lang-specific python">  
- 
-       <p>Get Eurostat data by category group.</p>
-   </blockquote>  
-   <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">category_group</span> <span class="o">=</span> <span class="s">'Poverty'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-   </code></pre>
-   <blockquote class="lang-specific python">  
-
-       <p>Get Eurostat data by specific category.</p>
-   </blockquote>  
-   <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">'People at risk of income poverty after social transfers'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
-   </code></pre>
-<blockquote class="lang-specific python">  
   
-       <p>Get Eurostat data by country.</p>
-   </blockquote>  
-   <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-   </code></pre>
-   <blockquote class="lang-specific python">  
+        <p>Get Eurostat data by category group.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">category_group</span> <span class="o">=</span> <span class="s">'Poverty'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+    <blockquote class="lang-specific python">  
+
+        <p>Get Eurostat data by specific category.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="s">'People at risk of income poverty after social transfers'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
+    </code></pre>
+<blockquote class="lang-specific python">  
    
-       <p>Get Eurostat data by country and category.</p>
-   </blockquote>  
-   <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, category</span> <span class="o">=</span> <span class="s">'People at risk of income poverty after social transfers'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
-   </code></pre>
-   <blockquote class="lang-specific python">  
-   
-       <p>Get Eurostat data by country and category group.</p>
-   </blockquote>  
-   <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, category_group</span> <span class="o">=</span> <span class="s">'Poverty'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
-   </code></pre>
+        <p>Get Eurostat data by country.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+    <blockquote class="lang-specific python">  
+    
+        <p>Get Eurostat data by country and category.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, category</span> <span class="o">=</span> <span class="s">'People at risk of income poverty after social transfers'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
+    </code></pre>
+    <blockquote class="lang-specific python">  
+    
+        <p>Get Eurostat data by country and category group.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEurostatData</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'Denmark'</span><span class="p"><span class="n">, category_group</span> <span class="o">=</span> <span class="s">'Poverty'</span><span class="p"></span><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>      
+    </code></pre>
 
 <!--javascript Eurostat black side-->
 
 <blockquote class="lang-specific javascript">
-   <p>Get Eurostat data by country.</p>
+    <p>Get Eurostat data by country.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-   <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-       </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-   });</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <blockquote class="lang-specific javascript">
-   <p>Get Eurostat data by category.</p>
+    <p>Get Eurostat data by category.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-   <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">category</span> = <span class="s1">'People at risk of income poverty after social transfers'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-       </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-   });</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">category</span> = <span class="s1">'People at risk of income poverty after social transfers'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-   <p>Get Eurostat data by category group.</p>
+    <p>Get Eurostat data by category group.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-   <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">category_group</span> = <span class="s1">'Poverty'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-       </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-   });</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">category_group</span> = <span class="s1">'Poverty'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre> 
 <blockquote class="lang-specific javascript">
-   <p>Get Eurostat data by country and category.</p>
+    <p>Get Eurostat data by country and category.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-   <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>, <span class="kd">category</span> = <span class="s1">'People at risk of income poverty after social transfers'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-       </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-   });</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>, <span class="kd">category</span> = <span class="s1">'People at risk of income poverty after social transfers'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-   <p>Get Eurostat data by country and category group.</p>
+    <p>Get Eurostat data by country and category group.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-   <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>, <span class="kd">category_group</span> = <span class="s1">'Poverty'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-       </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-   });</span>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatData</span>(<span class="kd">country</span> = <span class="s1">'Denmark'</span>, <span class="kd">category_group</span> = <span class="s1">'Poverty'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
 </code></pre>
 
+<!-- <h2 id="eurostat">Historical</h2> -->
+
+<!-----Python Eurostat historical black side---->
+
+<blockquote class="lang-specific python">  
+    <br>
+        <p>Get historical Eurostat data by ID.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>
+<blockquote class="lang-specific python">  
+    <br>
+        <p>Get historical Eurostat data by ID and a start date.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n"><span class="n">, initDate</span> <span class="o">=</span> <span class="s">'2015-01-01'</span>, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre>   
+<blockquote class="lang-specific python">  
+    <br>
+        <p>Get historical Eurostat data by ID and a date range.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n"><span class="n">, initDate</span> <span class="o">=</span> <span class="s">'2015-01-01'</span><span class="n">, endDate</span> <span class="o">=</span> <span class="s">'2020-01-01'</span>, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+    </code></pre> 
+
+<!--javascript Eurostat historical black side-->
+
+<blockquote class="lang-specific javascript">
+    <p>Get historical data by ID.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get historical data by ID and a start date.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>, <span class="kd">start_date</span> = <span class="s1">'2017-01-01'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+<blockquote class="lang-specific javascript">
+    <p>Get historical data by ID between a date range.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>, <span class="kd">start_date</span> = <span class="s1">'2017-01-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2020-05-05'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
 <!-----------------------------Eurostat White Side-------------------------------> 
+<p>The Eurostat database contains more than 46,000  time series divided into 2500 categories for Euro Area, European Union and its 27 member states. Eurostat is a Directorate-General of the European Commission located in Luxembourg. Its main responsibilities are to provide statistical information to the institutions of the European Union (EU) and to promote the harmonisation of statistical methods across its member states and candidates for accession as well as EFTA countries.</p>
 
+<!-- <h2 id="eurostat">Categories and Countries</h2> -->
+
+<h3 id="Categories_countries">Categories and Countries</h3>
 <p><span class="methods"></p> 
     <ul>
+        <h2 id="snapshots-eurostat">Snapshots</h2>
+
         <li><p>List of countries available.<br>
             <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/countries?c=guest:guest&f=json">/eurostat/countries</a></p></li>
         </ul>
@@ -6816,95 +6879,22 @@ php black side
     <li><p>Get Eurostat data by Country and category group.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/country/Denmark?category_group=Interest rates&c=guest:guest&f=json">/eurostat/country/{country}?category_group={category_group}</a></p></li>
 </ul>
-<br>
-
-<!-----------------------------Eurostat Historical Black Side-------------------------------> 
-
-<h2 id="historical-eurostat">Historical</h2>
-
-<!-----Python Eurostat historical black side---->
-
-<blockquote class="lang-specific python">  
-    <br>
-        <p>Get historical Eurostat data by ID.</p>
-    </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n">, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-    </code></pre>
- <blockquote class="lang-specific python">  
-    <br>
-        <p>Get historical Eurostat data by ID and a start date.</p>
-    </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n"><span class="n">, initDate</span> <span class="o">=</span> <span class="s">'2015-01-01'</span>, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-    </code></pre>   
- <blockquote class="lang-specific python">  
-    <br>
-        <p>Get historical Eurostat data by ID and a date range.</p>
-    </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalEurostat</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="s">'24804'</span><span class="p"><span class="n"><span class="n">, initDate</span> <span class="o">=</span> <span class="s">'2015-01-01'</span><span class="n">, endDate</span> <span class="o">=</span> <span class="s">'2020-01-01'</span>, output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-    </code></pre> 
- 
- <!--javascript Eurostat historical black side-->
- 
- <blockquote class="lang-specific javascript">
-    <p>Get historical data by ID.</p>
- </blockquote>
- </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
- </code></pre> 
- <blockquote class="lang-specific javascript">
-    <p>Get historical data by ID and a start date.</p>
- </blockquote>
- </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>, <span class="kd">start_date</span> = <span class="s1">'2017-01-01'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
- </code></pre> 
- <blockquote class="lang-specific javascript">
-    <p>Get historical data by ID between a date range.</p>
- </blockquote>
- </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEurostatHistorical</span>(<span class="kd">id</span> = <span class="s1">'24804'</span>, <span class="kd">start_date</span> = <span class="s1">'2017-01-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2020-05-05'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
- </code></pre>
-
- <!-- R Eurostat historical black side -->
- <blockquote class="lang-specific r">
-    <p>To get historical Eurostat data by ID.</p>
- </blockquote> 
- <pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>)</span><span class="w">
- </span></code></pre>
- <blockquote class="lang-specific r">
-    <p>To get historical Eurostat data by ID and a start date.</p>
- </blockquote> 
- <pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>, start_date = <span class="s1">'2018-01-01'</span> )</span><span class="w">
- </span></code></pre>
- <blockquote class="lang-specific r">
-    <p>To get historical Eurostat data by ID and dates.</p>
- </blockquote> 
- <pre class="highlight r"><code><span class="n">getEurostatHistorical</span><span class="p">(id = <span class="s1">'24804'</span>, start_date = <span class="s1">'2018-01-01'</span>, end_date = <span class="s1">'2021-05-10'</span>)</span><span class="w">
- </span></code></pre>
-
- <!-----------------------------Eurostat Historical White Side-------------------------------> 
-
 <ul>
+
+    <h2 id="historical-eurostat">Historical</h2>
+
     <li><p>Get historical data by ID.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?c=guest:guest&f=json">/eurostat/historical/{id}</a></p>
-    </li>
-</ul>
-<ul>
+        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?c=guest:guest&f=json">/eurostat/historical/{id}</a></p></li>
+    </ul>
+    <ul>
     <li><p>Get historical data by ID and a start date.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?d1=2015-01-01&c=guest:guest&f=json">/eurostat/historical/{id}?d1={yyyy-mm-dd}</a></p>
-    </li>
-</ul>
-<ul>
+    <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?d1=2015-01-01&c=guest:guest&f=json">/eurostat/historical/{id}?d1={yyyy-mm-dd}</a></p></li>
+    </ul>
+    <ul>
     <li><p>Get historical data by ID and a date range.<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?d1=2016-01-01&d2=2020-01-01&c=guest:guest&f=json">/eurostat/historical/{id}?d1={yyyy-mm-dd}&d2={yyyy-mm-dd}</a></p>
-    </li>
-</ul>
-
+        <a target = '_blank' href="https://api.tradingeconomics.com/eurostat/historical/24804?d1=2016-01-01&d2=2020-01-01&c=guest:guest&f=json">/eurostat/historical/{id}?d1={yyyy-mm-dd}&d2={yyyy-mm-dd}</a></p></li>
+    </ul>
+<br>
 <h3 id="response-fields">Response Fields</h3>
 <table><thead>
 <tr>
@@ -6993,11 +6983,12 @@ php black side
 <td style="text-align: left">Value</td>
 </tr>
 </tbody></table>
+
+
+
 <!-----------------------------WorldBank Black Side-------------------------------> 
 
 <h1 id="world-bank">World Bank</h1>
-
-<h2 id="snapshot-worldBank">Snapshot</h2>
 
 <!--Python WB Categories black side-->
 
@@ -7386,9 +7377,90 @@ php black side
 }
 </code></pre>
 
+<!--Python WB historical black side-->
+
+<blockquote class="lang-specific python">  
+<br>
+    <p>To get World Bank historical data by using symbol.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(<span class="s">'usa.fr.inr.rinr:worldbank'</span><span class="p">)</span>
+</code></pre>
+<blockquote class="lang-specific python">  
+<br>
+    <p>To get World Bank historical data by specific indicator.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBHistorical</span><span class="p">(</span><span class="n">series_code</span> <span class="o">=</span> <span class="s">'usa.fr.inr.rinr'</span><span class="p">)</span>
+</code></pre>
+<!--R black side-->
+<blockquote class="lang-specific r">
+    <p>To get World Bank historical data using TE symbol.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span><span class="s">'usa.fr.inr.rinr:worldbank'</span><span class="p">)</span>
+
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get World Bank historical data by series code.</p>
+</blockquote>   
+<pre class="highlight r"><code><span class="n">getWorldBankHistorical</span><span class="p">(</span><span class="w"> </span><span class="w"> </span><span class="s1">'usa.fr.inr.rinr'</span><span class="p">)</span><span class="w">
+
+</span></code></pre>
+
+<!--php black side-->
+
+<blockquote class="lang-specific php">
+    <p>To get world bank  historical data for a specific indicator.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/historical?s={put series_code here}'</span><span class="p">;</span>
+</code></pre>  
+
+<!--c# black side-->
+
+<blockquote class="lang-specific csharp">
+    <p>Historical data for a specific indicator.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=</span>{put series_code here}<span class="kt">"</span>);
+</code></pre> 
+
+<!--java black side-->
+
+<blockquote class="lang-specific java">
+    <p>Get world bank historical data by specific series code.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getWBHistorical</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put series code here</span>
+    <span class="n">String </span><span class="na">series_code</span> <span class="o">=</span> <span class="s">"usa.fr.inr.rinr"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/historical"</span> + <span class="s">"?s="</span> + <span class="na">series_code</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank historical data by specific series code"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+
+<!--javascript black side-->
+
+<blockquote class="lang-specific javascript">
+    <p>Get World Bank historical data.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBankHistorical</span>(<span class="kd">series_code</span> = <span class="s1">'usa.fr.inr.rinr'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> 
+
+
 <!-----------------------------WorldBank White Side-------------------------------> 
 <p> The World Bank Database is a collection of around 300,000 development indicators, compiled from officially-recognized international sources. It presents the most current and accurate global development data available.</p>
 
+<ul>
+    <h2 id="snapshots-worldBank">Snapshots</h2>
+</ul>
 <h3 id="Indicators_countries">Indicators and Countries</h3>
 <br>
 <ul>
@@ -7412,91 +7484,12 @@ php black side
     <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/indicator?c=guest:guest&url=/united-states/real-interest-rate-percent-wb-data.html&f=json">/worldBank/indicator?c=guest:guest&amp;url={url1}</a></p></li>
 </ul>
 
-<!-----------------------------WB Historical Black Side-------------------------------> 
+<ul>
 
 <h2 id="historical-worldBank">Historical</h2>
 
-<!--Python WB historical black side-->
-
-<blockquote class="lang-specific python">  
-    <br>
-        <p>To get World Bank historical data by using symbol.</p>
-    </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(<span class="s">'usa.fr.inr.rinr:worldbank'</span><span class="p">)</span>
-    </code></pre>
-    <blockquote class="lang-specific python">  
-    <br>
-        <p>To get World Bank historical data by specific indicator.</p>
-    </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBHistorical</span><span class="p">(</span><span class="n">series_code</span> <span class="o">=</span> <span class="s">'usa.fr.inr.rinr'</span><span class="p">)</span>
-    </code></pre>
-    <!--R black side-->
-    <blockquote class="lang-specific r">
-        <p>To get World Bank historical data using TE symbol.</p>
-    </blockquote>   
-    <pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span><span class="s">'usa.fr.inr.rinr:worldbank'</span><span class="p">)</span>
-    
-    </span></code></pre>
-    <blockquote class="lang-specific r">
-        <p>To get World Bank historical data by series code.</p>
-    </blockquote>   
-    <pre class="highlight r"><code><span class="n">getWorldBankHistorical</span><span class="p">(</span><span class="w"> </span><span class="w"> </span><span class="s1">'usa.fr.inr.rinr'</span><span class="p">)</span><span class="w">
-    
-    </span></code></pre>
-    
-    <!--php black side-->
-    
-    <blockquote class="lang-specific php">
-        <p>To get world bank  historical data for a specific indicator.</p>
-    </blockquote>
-    <pre class="highlight php"><code>
-    <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/historical?s={put series_code here}'</span><span class="p">;</span>
-    </code></pre>  
-    
-    <!--c# black side-->
-    
-    <blockquote class="lang-specific csharp">
-        <p>Historical data for a specific indicator.</p>
-    </blockquote>
-    <pre class="highlight csharp"><code>
-        <span class="c1">// replace guest:guest with your key</span>
-        <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
-        <span class="kt">"https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=</span>{put series_code here}<span class="kt">"</span>);
-    </code></pre> 
-    
-    <!--java black side-->
-    
-    <blockquote class="lang-specific java">
-        <p>Get world bank historical data by specific series code.</p>
-    </blockquote>
-    <pre class="highlight java"><code>
-    <span class="n">public static void</span> <span class="k">getWBHistorical</span><span class="o">()</span> <span class="na">throws</span> IOException
-    <span class="n">{</span>
-        <span class="c1">//put series code here</span>
-        <span class="n">String </span><span class="na">series_code</span> <span class="o">=</span> <span class="s">"usa.fr.inr.rinr"</span>;
-        <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
-        <span class="c1">//set the path</span>
-        <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/historical"</span> + <span class="s">"?s="</span> + <span class="na">series_code</span>;   
-        <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank historical data by specific series code"</span>);
-        <span class="k">constructUrl</span> (<span class="na">path</span>);
-    }
-    </code></pre>
-    
-    <!--javascript black side-->
-    
-    <blockquote class="lang-specific javascript">
-        <p>Get World Bank historical data.</p>
-    </blockquote>
-    </code></pre><pre class="highlight javascript"><code>
-        <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBankHistorical</span>(<span class="kd">series_code</span> = <span class="s1">'usa.fr.inr.rinr'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
-            </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-        });</span>
-    </code></pre> 
-
-<!-----------------------------WB Historical White Side-------------------------------> 
-<ul>
-    <li>Historical data for a specific indicator<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr&f=json">/worldBank/historical?c=guest:guest&amp;s={series_code}</a></li>
+<li>Historical data for a specific indicator<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr&f=json">/worldBank/historical?c=guest:guest&amp;s={series_code}</a></li>
 </ul>
 <p></span></p>
 <br>
@@ -7613,8 +7606,6 @@ php black side
 <!-----------------------------Comtrade Black Side-------------------------------> 
 
 <h1 id="comtrade">Comtrade</h1>
-
-<h2 id="snapshot-comtrade">Snapshot</h2>
 
 <!--Python Comtrade black side-->
 
@@ -7989,65 +7980,7 @@ php black side
     <span class="k">constructUrl</span> (<span class="na">path</span>);
 }
 </code></pre>
-    
-<!-----------------------------Comtrade White Side-------------------------------> 
-
-<p>UN Comtrade Database consists of around 19 million data series with detailed harmonized global trade data divided into categories and countries.</p>
-
-<ul>
-<li>Get detailed information about Comtrade categories<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest&f=json">/comtrade/categories</a></li>
-</ul>
-<ul>
-<li>Get the latest updated indicators<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/updates?c=guest:guest&f=json">/comtrade/updates</a></li>
-</ul>
-<ul>
-    <li>Get total Imports by main category<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/india?c=guest:guest&f=json">/comtrade/import/{country}</a></li>
-</ul>
-<ul>
-<li>Total Exports by main category<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/united states?c=guest:guest&f=json">/comtrade/export/{country}</a></li>
-</ul>
-<ul><li>Imports by specific category<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united kingdom/Coffee, tea, mate and spices?c=guest:guest&f=json">/comtrade/import/{country}/{category}</a></li>
-    </ul>
-    <ul><li>Exports by specific category<br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/live animals?c=guest:guest&f=json">/comtrade/export/{country}/{category}</a></li>
-    
-    </ul>
-<ul>
-    <li><p>Get detailed information about Comtrade countries, one country, or multiple countries <br>
-        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/countries?c=guest:guest&f=json">/comtrade/countries</a></p></li>
-    </ul>
-    
-<ul>
-<li><p>Snapshot of data per country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest&f=json">/comtrade/country/{country}</a><br>
-
-<li><p>Snapshot of data per country filtered by type: import or export<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?type=export&c=guest:guest&f=json">/comtrade/country/{country}?type={type}</a><br>
-
-    <!--Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">/comtrade/country/{country}/{page_number}</a></p></li>-->
-<li><p>Snapshot of trade between two countries<br>
-    <!--<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">/comtrade/country/{country_1}/{country_2}/{page_number}</a></p></li>-->
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?c=guest:guest&f=json">/comtrade/country/{country_1}/{country_2}</a></p></li>
-<li><p>Snapshot of trade between two countries filtered by type: import or export<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?type=import&c=guest:guest&f=json">/comtrade/country/{country_1}/{country_2}?type={type}</a></p></li>
-
-<li><p>Total Imports by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united states/totals?c=guest:guest&f=json">/comtrade/import/{country}/totals</a></p></li>
-<li><p>Total Exports by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/totals?c=guest:guest&f=json">/comtrade/export/{country}/totals</a></p></li>
-            
-</ul>
-
-<!-----------------------------Comtrade Historical Black Side-------------------------------> 
-
-<h2 id="historical-comtrade">Historical</h2>
-
+  
 <!--Python Comtrade Historical black side-->  
 
 <blockquote class="lang-specific python">  
@@ -8131,16 +8064,72 @@ php black side
         <span class="k">constructUrl</span> (<span class="na">path</span>);
     }
     </code></pre>
+    
+<!-----------------------------Comtrade White Side-------------------------------> 
+
+<p>UN Comtrade Database consists of around 19 million data series with detailed harmonized global trade data divided into categories and countries.</p>
+
 <ul>
 
-<!-----------------------------Comtrade Historical White Side-------------------------------> 
+    <h2 id="snapshots-comtrade">Snapshots</h2>
+
+<li>Get detailed information about Comtrade categories<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/categories?c=guest:guest&f=json">/comtrade/categories</a></li>
+</ul>
+<ul>
+<li>Get the latest updated indicators<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/updates?c=guest:guest&f=json">/comtrade/updates</a></li>
+</ul>
+<ul>
+    <li>Get total Imports by main category<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/india?c=guest:guest&f=json">/comtrade/import/{country}</a></li>
+</ul>
+<ul>
+<li>Total Exports by main category<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/united states?c=guest:guest&f=json">/comtrade/export/{country}</a></li>
+</ul>
+<ul><li>Imports by specific category<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united kingdom/Coffee, tea, mate and spices?c=guest:guest&f=json">/comtrade/import/{country}/{category}</a></li>
+    </ul>
+    <ul><li>Exports by specific category<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/live animals?c=guest:guest&f=json">/comtrade/export/{country}/{category}</a></li>
+    
+    </ul>
+<ul>
+    <li><p>Get detailed information about Comtrade countries, one country, or multiple countries <br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/countries?c=guest:guest&f=json">/comtrade/countries</a></p></li>
+    </ul>
+    
+<ul>
+<li><p>Snapshot of data per country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?c=guest:guest&f=json">/comtrade/country/{country}</a><br>
+
+<li><p>Snapshot of data per country filtered by type: import or export<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal?type=export&c=guest:guest&f=json">/comtrade/country/{country}?type={type}</a><br>
+
+    <!--Because there are too many results, this method has pagination. Each page is limited to 200 results, you can request each page separately<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/2?c=guest:guest">/comtrade/country/{country}/{page_number}</a></p></li>-->
+<li><p>Snapshot of trade between two countries<br>
+    <!--<a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain/2?c=guest:guest">/comtrade/country/{country_1}/{country_2}/{page_number}</a></p></li>-->
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?c=guest:guest&f=json">/comtrade/country/{country_1}/{country_2}</a></p></li>
+<li><p>Snapshot of trade between two countries filtered by type: import or export<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/country/portugal/spain?type=import&c=guest:guest&f=json">/comtrade/country/{country_1}/{country_2}?type={type}</a></p></li>
+
+<li><p>Total Imports by country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/import/united states/totals?c=guest:guest&f=json">/comtrade/import/{country}/totals</a></p></li>
+<li><p>Total Exports by country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/export/india/totals?c=guest:guest&f=json">/comtrade/export/{country}/totals</a></p></li>
+            
+</ul>
+<ul>
+    <h2 id="historical-comtrade">Historical</h2>
 
 <li>Historical data<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest&f=json">/comtrade/historical/{symbol}</a></li>
 </ul>
-<br>  
- 
+<br>    
 <h3 id="response-fields">Response Fields</h3>
+
 
 <table><thead>
 <tr>
@@ -8222,8 +8211,7 @@ php black side
 
 <h1 id="federal-reserve">Federal Reserve</h1>
 
-<h2 id="snapshot-federalReserve">Snapshot</h2>
-
+ 
 <!--Python Ferderal reserve states black side--> 
 
 <blockquote class="lang-specific python">  
@@ -8596,40 +8584,7 @@ php black side
         <span class="k">constructUrl</span> (<span class="na">path</span>);
     }
     </code></pre>
-<!-----------------------------FRED White Side-------------------------------> 
-
-<p><span class="methods">  </p>
-
-<ul>
-
-<li><p>List of all US states<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/states?c=guest:guest&f=json">/fred/states</a>    </p></li>
-<li><p>List of all counties per state<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/counties/arkansas?c=guest:guest&f=json">/fred/counties/{state}</a>    </p></li>
-</ul>
-
-<ul>
-<li><p>Symbol<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/symbol/ALLMARGATTN?c=guest:guest&f=json">/fred/snapshot/symbol/{symbol}</a>    </p></li>
-<li><p>URL<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/url?c=guest:guest&url=/united-states/all-marginally-attached-workers-for-tennessee-fed-data.html&f=json">/fred/snapshot/url?c=guest:guest&amp;url={url}</a></p></li>
-<li><p>Country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/?c=guest:guest&f=json">/fred/snapshot/country/{country}</a>    </p></li>
-<li><p>State<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/state/tennessee?c=guest:guest&f=json">/fred/snapshot/state/{state}</a>    </p></li>
-<li><p>Get a list of Counties of a state<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/arkansas?c=guest:guest&f=json">/fred/snapshot/county/{state}</a><br>
-</li>
-<li><p>Get a list of indicators of a county<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest&f=json">/fred/snapshot/county/{county}</a>    </p></li>
-<!--<li><p>Pagination<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/2?c=guest:guest">/fred/snapshot/country/{country}/{page}</a>    </p></li>-->
-</ul>
-
-<!-----------------------------FRED Historical Black Side-------------------------------> 
-
-<h2 id="historical-federalReserve">Historical</h2>
-
+ 
 <!--Python Federal Reserve historical black side-->
 
 <blockquote class="lang-specific python">
@@ -8737,10 +8692,42 @@ php black side
     <span class="k">constructUrl</span> (<span class="na">path</span>);
 }
 </code></pre>
+<!-----------------------------FRED White Side-------------------------------> 
 
-<!-----------------------------FRED Historical White Side-------------------------------> 
+
+<p><span class="methods">  </p>
 
 <ul>
+
+    <h2 id="snapshots-federalReserve">Snapshots</h2>
+
+<li><p>List of all US states<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/states?c=guest:guest&f=json">/fred/states</a>    </p></li>
+<li><p>List of all counties per state<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/counties/arkansas?c=guest:guest&f=json">/fred/counties/{state}</a>    </p></li>
+</ul>
+
+<ul>
+<li><p>Symbol<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/symbol/ALLMARGATTN?c=guest:guest&f=json">/fred/snapshot/symbol/{symbol}</a>    </p></li>
+<li><p>URL<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/url?c=guest:guest&url=/united-states/all-marginally-attached-workers-for-tennessee-fed-data.html&f=json">/fred/snapshot/url?c=guest:guest&amp;url={url}</a></p></li>
+<li><p>Country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/?c=guest:guest&f=json">/fred/snapshot/country/{country}</a>    </p></li>
+<li><p>State<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/state/tennessee?c=guest:guest&f=json">/fred/snapshot/state/{state}</a>    </p></li>
+<li><p>Get a list of Counties of a state<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/arkansas?c=guest:guest&f=json">/fred/snapshot/county/{state}</a><br>
+</li>
+<li><p>Get a list of indicators of a county<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest&f=json">/fred/snapshot/county/{county}</a>    </p></li>
+<!--<li><p>Pagination<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/2?c=guest:guest">/fred/snapshot/country/{country}/{page}</a>    </p></li>-->
+</ul>
+
+<ul>
+
+    <h2 id="historical-federalReserve">Historical</h2>
 
 <li><p>Only accessed through symbol<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/fred/historical/RACEDISPARITY005007?c=guest:guest&f=json">/fred/historical/{symbol}</a>    </p></li>
@@ -8826,7 +8813,10 @@ php black side
 </tr>
 </tbody></table>
 
+
 </p>
+
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
