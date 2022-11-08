@@ -7417,57 +7417,60 @@ php black side
 <h2 id="historical-worldBank">Historical</h2>
 
 <!--Python WB historical black side-->
-
-<blockquote class="lang-specific python">  
-    <br>
-        <p>To get World Bank historical data by using symbol.</p>
-    </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(<span class="s">'usa.fr.inr.rinr:worldbank'</span><span class="p">)</span>
-    </code></pre>
     <blockquote class="lang-specific python">  
     <br>
-        <p>To get World Bank historical data by specific indicator.</p>
+    <p>To get World Bank historical data for a symbol.</p>
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBHistorical</span><span class="p">(</span><span class="n">series_code</span> <span class="o">=</span> <span class="s">'usa.fr.inr.rinr'</span><span class="p">)</span>
     </code></pre>
+
+    <blockquote class="lang-specific python">  
+    <br>
+    <p>To get World Bank historical data for multiple symbols.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getWBHistorical</span><span class="p">(</span><span class="n">series_code</span> <span class="o">=</span> <span class="s">'usa.fr.inr.rinr, prt.ag.con.fert.pt.zs'</span><span class="p">)</span>
+    </code></pre>
+
+
     <!--R black side-->
-    <blockquote class="lang-specific r">
-        <p>To get World Bank historical data using TE symbol.</p>
-    </blockquote>   
-    <pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span><span class="s">'usa.fr.inr.rinr:worldbank'</span><span class="p">)</span>
-    
     </span></code></pre>
     <blockquote class="lang-specific r">
-        <p>To get World Bank historical data by series code.</p>
+        <p>To get World Bank historical data for a symbol.</p>
     </blockquote>   
-    <pre class="highlight r"><code><span class="n">getWorldBankHistorical</span><span class="p">(</span><span class="w"> </span><span class="w"> </span><span class="s1">'usa.fr.inr.rinr'</span><span class="p">)</span><span class="w">
+    <pre class="highlight r"><code><span class="n">getWorldBankHistorical</span><span class="p">(</span><span class="w"></span><span class="w"></span><span class="s1">'usa.fr.inr.rinr'</span><span class="p">)</span><span class="w">
     
     </span></code></pre>
     
+    <blockquote class="lang-specific r">
+        <p>To get World Bank historical data for multiple symbols.</p>
+    </blockquote>   
+    <pre class="highlight r"><code><span class="n">getWorldBankHistorical</span><span class="p">(</span><span class="w"></span><span class="w"></span><span class="s1">'usa.fr.inr.rinr, prt.ag.con.fert.pt.zs</span><span class="p">)</span><span class="w">
+    
+    </span></code></pre>
     <!--php black side-->
     
     <blockquote class="lang-specific php">
-        <p>To get world bank  historical data for a specific indicator.</p>
+        <p>To get World Bank historical data for a specific or multiple symbols.</p>
     </blockquote>
     <pre class="highlight php"><code>
-    <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/historical?s={put series_code here}'</span><span class="p">;</span>
+    <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/worldBank/historical?s={put symbol here}'</span><span class="p">;</span>
     </code></pre>  
     
     <!--c# black side-->
     
     <blockquote class="lang-specific csharp">
-        <p>Historical data for a specific indicator.</p>
+        <p>To get World Bank historical data for a specific or multiple symbols.</p>
     </blockquote>
     <pre class="highlight csharp"><code>
         <span class="c1">// replace guest:guest with your key</span>
         <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
-        <span class="kt">"https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=</span>{put series_code here}<span class="kt">"</span>);
+        <span class="kt">"https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=</span>{put symbol here}<span class="kt">"</span>);
     </code></pre> 
     
     <!--java black side-->
     
     <blockquote class="lang-specific java">
-        <p>Get world bank historical data by specific series code.</p>
+        <p>To get World Bank historical data for a specific or multiple symbols.</p>
     </blockquote>
     <pre class="highlight java"><code>
     <span class="n">public static void</span> <span class="k">getWBHistorical</span><span class="o">()</span> <span class="na">throws</span> IOException
@@ -7476,7 +7479,7 @@ php black side
         <span class="n">String </span><span class="na">series_code</span> <span class="o">=</span> <span class="s">"usa.fr.inr.rinr"</span>;
         <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
         <span class="c1">//set the path</span>
-        <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/historical"</span> + <span class="s">"?s="</span> + <span class="na">series_code</span>;   
+        <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/worldBank/historical"</span> + <span class="s">"?s="</span> + <span class="na">symbol</span>;   
         <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get world bank historical data by specific series code"</span>);
         <span class="k">constructUrl</span> (<span class="na">path</span>);
     }
@@ -7485,18 +7488,30 @@ php black side
     <!--javascript black side-->
     
     <blockquote class="lang-specific javascript">
-        <p>Get World Bank historical data.</p>
+        <p>To get World Bank historical data for a symbol.</p>
     </blockquote>
     </code></pre><pre class="highlight javascript"><code>
         <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBankHistorical</span>(<span class="kd">series_code</span> = <span class="s1">'usa.fr.inr.rinr'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
             </span><span class="s1">console</span>.log(<span class="na">data</span>)     
         });</span>
     </code></pre> 
+    <blockquote class="lang-specific javascript">
+        <p>To get World Bank historical data for multiple symbols.</p>
+    </blockquote>
+    </code></pre><pre class="highlight javascript"><code>
+        <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getWorldBankHistorical</span>(<span class="kd">series_code</span> = <span class="s1">'usa.fr.inr.rinr, prt.ag.con.fert.pt.zs'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+            </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+        });</span>
+    </code></pre> 
 
 <!-----------------------------WB Historical White Side-------------------------------> 
 <ul>
-    <li>Historical data for a specific indicator<br>
+    <li>Historical data for a symbol<br>
         <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr&f=json">/worldBank/historical?c=guest:guest&amp;s={series_code}</a></li>
+</ul>
+<ul>
+    <li>Historical data for multiple symbols<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/worldBank/historical?c=guest:guest&s=usa.fr.inr.rinr,%20prt.ag.con.fert.pt.zs&f=json">/worldBank/historical?c=guest:guest&amp;s={series_codes}</a></li>
 </ul>
 <p></span></p>
 <br>
@@ -8050,46 +8065,67 @@ php black side
 
 <!--Python Comtrade Historical black side-->  
 
-<blockquote class="lang-specific python">  
-    <br>
-        <p>To get Comtrade historical data using TE symbol.</p>
-    </blockquote>  
-    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistorical</span><span class="p">(</span><span class="s">'PRTESP24031:comtrade'</span><span class="p">)</span>
-    </code></pre>
     <blockquote class="lang-specific python">  
     <br>
-        <p>To get Comtrade historical data by specific symbol.</p>
+        <p>To get Comtrade historical data for a symbol.</p>
     </blockquote>  
     <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'PRTESP24031'</span><span class="p">)</span>
     
-                 <span class="n">symbol</span>                      <span class="n">date</span>    <span class="n">value</span>           
-    <span class="mi">0</span>       <span class="n">PRTESP24031</span>       <span class="mi">1997-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">707.0</span>
-    <span class="mi">1</span>       <span class="n">PRTESP24031</span>       <span class="mi">1998-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n"> 7020.0</span>
-    <span class="mi">2</span>       <span class="n">PRTESP24031</span>       <span class="mi">2000-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n">54310.0</span>        
+                 <span class="n">symbol</span>                      <span class="n">date</span>      <span class="n">value</span>           
+    <span class="mi">0</span>       <span class="n">PRTESP24031</span>       <span class="mi">2021-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">91268.0</span>
+    <span class="mi">1</span>       <span class="n">PRTESP24031</span>       <span class="mi">2020-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>   <span class="n"> 80070.0</span>
+    <span class="mi">2</span>       <span class="n">PRTESP24031</span>       <span class="mi">2019-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n">3479548.0</span>          
     <span class="n">...</span>
+    </code></pre>
+
+    <blockquote class="lang-specific python">  
+    <br>
+        <p>To get Comtrade historical data for multiple symbols.</p>
+    </blockquote>  
+    <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCmtHistorical</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'PRTESP24031, NORZWEXX991'</span><span class="p">)</span>
+    
+                 <span class="n">symbol</span>                      <span class="n">date</span>      <span class="n">value</span>           
+    <span class="mi">0</span>       <span class="n">PRTESP24031</span>       <span class="mi">2021-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n">91268.0</span>
+    <span class="mi">1</span>       <span class="n">PRTESP24031</span>       <span class="mi">2020-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>   <span class="n"> 80070.0</span>
+    <span class="mi">2</span>       <span class="n">PRTESP24031</span>       <span class="mi">2019-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>  <span class="n">3479548.0</span>        
+    <span class="n">...</span>
+    <span class="mi">22</span>      <span class="n">NORZWEXX991</span>       <span class="mi">2003-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>      <span class="n">627.0</span>
+    <span class="mi">23</span>      <span class="n">NORZWEXX991</span>       <span class="mi">2001-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>    <span class="n"> 3039.0</span>
+    <span class="mi">24</span>      <span class="n">NORZWEXX991</span>       <span class="mi">1995-12-31</span><span class="n">T</span><span class="mi">00:00:00</span>     <span class="n">3161.0</span>        
     </code></pre>
     
     <!--R black side--> 
     
     <blockquote class="lang-specific r">
-        <p>Get detailed information about Comtrade historical data using TE symbol.</p>
-        </blockquote>   
-        <pre class="highlight r"><code><span class="n">getHistorical</span><span class="p">(</span><span class="s1">'PRTESP24031:comtrade'</span><span class="p">)</span><span class="w">
-        
-        </span></code></pre>
-    <blockquote class="lang-specific r">
-        <p>Get detailed information about Comtrade historical data by symbol.</p>
+        <p>To get Comtrade historical data for a symbol.</p>
     </blockquote>   
     <pre class="highlight r"><code><span class="n">getComtradeHistorical</span><span class="p">(</span><span class="s1">'PRTESP24031'</span><span class="p">)</span><span class="w">
     
     </span></code></pre> 
+
+    <blockquote class="lang-specific r">
+        <p>To get Comtrade historical data for multiple symbols.</p>
+    </blockquote>   
+    <pre class="highlight r"><code><span class="n">getComtradeHistorical</span><span class="p">(</span><span class="s1">'PRTESP24031, NORZWEXX991'</span><span class="p">)</span><span class="w">
+    
+    </span></code></pre> 
+
     <!--javascript black side-->
     
     <blockquote class="lang-specific javascript">
-        <p>Get Comtrade historical data by symbol.</p>
+        <p>To get Comtrade historical data for a symbol.</p>
     </blockquote>
     </code></pre><pre class="highlight javascript"><code>
         <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">symbol</span> = <span class="s1">'PRTESP24031'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+            </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+        });</span>
+    </code></pre> 
+
+    <blockquote class="lang-specific javascript">
+        <p>To get Comtrade historical data for multiple symbols.</p>
+    </blockquote>
+    </code></pre><pre class="highlight javascript"><code>
+        <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getComtrade</span>(<span class="kd">symbol</span> = <span class="s1">'PRTESP24031, NORZWEXX991'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
             </span><span class="s1">console</span>.log(<span class="na">data</span>)     
         });</span>
     </code></pre> 
@@ -8097,7 +8133,7 @@ php black side
     <!--php black side-->
     
     <blockquote class="lang-specific php">
-        <p>To get comtrade historical data.</p>
+        <p>To get Comtrade historical data for a specific or multiple symbols.</p>
     </blockquote>
     <pre class="highlight php"><code>
     <span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/comtrade/historical/{put symbol name here}'</span><span class="p">;</span>
@@ -8106,7 +8142,7 @@ php black side
     <!--c# black side--> 
     
     <blockquote class="lang-specific csharp">
-        <p>Get comtrade historical data by symbol.</p>
+        <p>To get Comtrade historical data for a specific or multiple symbols.</p>
     </blockquote>
     <pre class="highlight csharp"><code>
         <span class="c1">// replace guest:guest with your key</span>
@@ -8117,7 +8153,7 @@ php black side
     <!--java black side--> 
     
     <blockquote class="lang-specific java">
-        <p>Get comtrade historical data by symbol.</p>
+        <p>To get Comtrade historical data for a specific or multiple symbols.</p>
     </blockquote>
     <pre class="highlight java"><code>
     <span class="n">public static void</span> <span class="k">getComtradeHistorical</span><span class="o">()</span> <span class="na">throws</span> IOException
@@ -8131,12 +8167,16 @@ php black side
         <span class="k">constructUrl</span> (<span class="na">path</span>);
     }
     </code></pre>
-<ul>
 
 <!-----------------------------Comtrade Historical White Side-------------------------------> 
 
-<li>Historical data<br>
+<ul>
+<li>Historical data for a symbol<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/historical/PRTESP24031?c=guest:guest&f=json">/comtrade/historical/{symbol}</a></li>
+</ul>
+<ul>
+<li>Historical data for multiple symbols<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/comtrade/historical/PRTESP24031,NORZWEXX991?c=guest:guest&f=json">/comtrade/historical/{symbols}</a></li>
 </ul>
 <br>  
  
