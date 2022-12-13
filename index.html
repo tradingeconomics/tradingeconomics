@@ -206,6 +206,7 @@
     </div>
             <ul class="toc-footer">
             <li><a target = '_blank' href=" https://github.com/tradingeconomics/tradingeconomics">GitHub</a></li>
+            <li><a target = '_blank' href="https://pypi.org/project/tradingeconomics/">Pypi</a></li>
             <li><a target = '_blank' href=" excel/index.html">Excel</a></li>
             <li><a target = '_blank' href="https://www.npmjs.com/package/tradingeconomics">npm</a></li>
             <li><a target = '_blank' href=" tableau/index.html">Tableau</a></li>
@@ -973,6 +974,10 @@ Using Headers auth:<br>
 <tr>
     <td style="text-align: left"><strong>CreateDate</strong></td>
     <td style="text-align: left">Time when an indicator was inserted</td>
+</tr>
+<tr>
+    <td style="text-align: left"><strong>FirstValueDate</strong></td>
+    <td style="text-align: left">Date of the first value in the historical series</td>
 </tr>
 <tr>
     <td style="text-align: left"><strong>PreviousValue</strong></td>
@@ -4117,7 +4122,7 @@ Click on any method below for a sample.
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings calendar by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/united%20states?c=guest:guest&f=json">/earnings/country/{country}</a> </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/mexico?c=guest:guest&f=json">/earnings/country/{country}</a> </p></li>
 <!-- <li><p>Filter earnings by type: earnings, ipo, dividends.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li> -->
 </ul>
@@ -4134,7 +4139,7 @@ Click on any method below for a sample.
 </thead><tbody>
 <tr>
 <td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Release time and date in UTC</td>
+<td style="text-align: left">Release date in UTC</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Symbol</strong></td>
@@ -4142,7 +4147,7 @@ Click on any method below for a sample.
 </tr>
 <tr>
 <td style="text-align: left"><strong>Type</strong></td>
-<td style="text-align: left">Earnings type: earnings, ipo, dividends</td>
+<td style="text-align: left">Earnings type: earnings, revenues</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Name</strong></td>
@@ -4157,12 +4162,16 @@ Click on any method below for a sample.
 <td style="text-align: left">Average forecast among a representative group of analysts</td>
 </tr>
 <tr>
+<td style="text-align: left"><strong>Previous</strong></td>
+<td style="text-align: left">Previously released value</td>
+</tr>
+<tr>
 <td style="text-align: left"><strong>FiscalTag</strong></td>
-<td style="text-align: left">Fiscal year and quarter</td>
+<td style="text-align: left">Fiscal year and quarter. E.g. "FY2022Q4"</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>FiscalReference</strong></td>
-<td style="text-align: left">Fiscal year and quarter in different format</td>
+<td style="text-align: left">Fiscal year and quarter in different format. E.g. "Q3"</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>CalendarReference</strong></td>
@@ -4178,7 +4187,7 @@ Click on any method below for a sample.
 </tr>
 <tr>
 <td style="text-align: left"><strong>Session</strong></td>
-<td style="text-align: left">Expected earnings release time</td>
+<td style="text-align: left">Expected earnings release hour</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Importance</strong></td>
@@ -4195,7 +4204,6 @@ Click on any method below for a sample.
 
 <h2 id="financials">Financials</h2>
     <p>Here you can get stocks fundamental information.</br>
-<strong>Please consider that all market-related methods are beta and under heavy development.</strong></p>
 <br>
 <!-----------------------------Financials Black Side-------------------------------> 
 <blockquote class="lang-specific python">
@@ -4287,24 +4295,31 @@ Click on any method below for a sample.
 <!-----------------------------Financials White Side-------------------------------> 
 <ul>
 <li><p>Financials companies list.<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?c=guest:guest&f=json">/financials/companies</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/companies?c=guest:guest&f=json">/financials/companies</a>    </p></li>
 </ul>
 <ul>
 <li><p>Financials companies list filtered by country.<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?country=united states&c=guest:guest&f=json">/financials/companies?country={country}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/companies?country=united states&c=guest:guest&f=json">/financials/companies?country={country}</a>    </p></li>
 </ul>
 <ul>
 <li><p>Financials companies list filtered by more than one country (MAX countries = 5).<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/companies?country=spain,germany&c=guest:guest&f=json">/financials/companies?country={countries}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/companies?country=spain,germany&c=guest:guest&f=json">/financials/companies?country={countries}</a>    </p></li>
 </ul>
-
+<ul>
+<li><p>Financials category list<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/categories?c=guest:guest&f=json">/financials/categories</a>    </p></li>
+</ul>
+<ul>
+<li><p>Financials data by category<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/category/assets?c=guest:guest&f=json">/financials/category/{category}</a>    </p></li>
+</ul>
 <ul>
 <li><p>Financials data by stock symbol<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/symbol/aapl:us?c=guest:guest&f=json">/financials/symbol/{symbol}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/symbol/aapl:us?c=guest:guest&f=json">/financials/symbol/{symbol}</a>    </p></li>
 </ul>
 <ul>
 <li><p>Financials historical data by financial symbol<br>
-    <a target = '_blank' href="http://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest&f=json">/financials/historical/{symbol}</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest&f=json">/financials/historical/{symbol}</a>    </p></li>
 </ul>
 <p></span> </p>
 <br>
@@ -4375,6 +4390,10 @@ Click on any method below for a sample.
 <tr>
 <td style="text-align: left"><strong>Currency</strong></td>
 <td style="text-align: left">Currency</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Frequency</strong></td>
+<td style="text-align: left">Frequency of the financial</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Stock</strong></td>
@@ -5433,6 +5452,10 @@ Click on any method below for a sample.
 <tr>
 <td style="text-align: left"><strong>Url</strong></td>
 <td style="text-align: left">Hyperlink at Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Importance</strong></td>
+<td style="text-align: left">Lowest 0 to 3 highest</td>
 </tr>
 </tbody></table>
 
