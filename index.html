@@ -4110,101 +4110,15 @@ Click on any method below for a sample.
 
 <!-----------------------------Earnings White Side-------------------------------> 
 
-<!-- <h3 id="methods">Methods</h3> -->
+<h1 id="earnings">Financials</h1>
 
-<p><span class="methods"></p>
-<ul>
-<li><p>Default earnings calendar<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&f=json">/earnings</a>    </p></li>
-<li><p>Filter earnings calendar by date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01&f=json">/earnings?d1=yyyy-mm-dd</a>    </p></li>
-<li><p>Filter earnings calendar by instrument and date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
-<li><p>Filter earnings calendar by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/mexico?c=guest:guest&f=json">/earnings/country/{country}</a> </p></li>
-<!-- <li><p>Filter earnings by type: earnings, ipo, dividends.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li> -->
-</ul>
-
-<p></span> </p>
-<br>
-<h3 id="response-fields">Response Fields</h3>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left"></th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><strong>Date</strong></td>
-<td style="text-align: left">Release date in UTC</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Symbol</strong></td>
-<td style="text-align: left">Unique symbol used by Trading Economics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Type</strong></td>
-<td style="text-align: left">Earnings type: earnings, revenues</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Name</strong></td>
-<td style="text-align: left">Company name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Actual</strong></td>
-<td style="text-align: left">Earnings per share</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Forecast</strong></td>
-<td style="text-align: left">Average forecast among a representative group of analysts</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Previous</strong></td>
-<td style="text-align: left">Previously released value</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>FiscalTag</strong></td>
-<td style="text-align: left">Fiscal year and quarter. E.g. "FY2022Q4"</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>FiscalReference</strong></td>
-<td style="text-align: left">Fiscal year and quarter in different format. E.g. "Q3"</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>CalendarReference</strong></td>
-<td style="text-align: left">Calendar quarter for the release</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Country</strong></td>
-<td style="text-align: left">Country name</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Currency</strong></td>
-<td style="text-align: left">Currency</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Session</strong></td>
-<td style="text-align: left">Expected earnings release hour</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Importance</strong></td>
-<td style="text-align: left">Importance being 3 the highest.</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>LastUpdate</strong></td>
-<td style="text-align: left">Time when new data was inserted or changed</td>
-</tr>
-</tbody></table>
+<p>Here you can get stocks earnings and fundamental information.
 
 <!-----------------------------Financials White Side-------------------------------> 
 
-
-<h2 id="financials">Financials</h2>
-    <p>Here you can get stocks fundamental information.</br>
+<h2 id="earnings-financials">Financials</h2>
 <br>
+
 <!-----------------------------Financials Black Side-------------------------------> 
 <blockquote class="lang-specific python">
     <p>If no argument is provided, returns a list of all companies available.</p>
@@ -4418,6 +4332,332 @@ Click on any method below for a sample.
 <tr>
 <td style="text-align: left"><strong>Reference</strong></td>
 <td style="text-align: left">Fiscal reference date</td>
+</tr>
+</tbody></table>
+
+<!-----------------------------Earnings Black Side-------------------------------> 
+<h2 id="earnings-earnings">Earnings</h2>
+
+<!--R earnings black side-->
+
+<blockquote class="lang-specific r">
+    <p>To get earnings by country.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="s1">'united states'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get earnings by date.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">initDate</span><span class="o">=</span><span class="s1">'2017-01-01'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+<blockquote class="lang-specific r">
+    <p>To get earnings by category.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">indicator</span><span class="o">=</span><span class="s1">'aapl:us'</span><span class="p">,<span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'symbol'</span><span class="p">,</span><span class="n">initDate</span><span class="o">=</span><span class="s1">'2017-01-01'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+
+
+<!--python earnings black side-->
+
+<blockquote class="lang-specific python">
+    <p>To get default earnings calendar:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">()</span>
+
+<span class="n">Output</span><span class="p">:</span>
+        <span class="n">Symbol</span>                            <span class="n">Name</span>     <span class="n">Actual</span>  <span class="o">...</span>
+<span class="mi">0</span>         <span class="n">A</span><span class="p">:</span><span class="n">US</span>                         <span class="n">Agilent</span>      <span class="mf">0.149</span>  <span class="o">...</span>
+<span class="mi">1</span>     <span class="n">ASLAN</span><span class="p">:</span><span class="n">TI</span>                   <span class="n">Aslan</span> <span class="n">Cimento</span>       <span class="mf">0.55</span>  <span class="o">...</span>
+<span class="mi">2</span>      <span class="mi">2459</span><span class="p">:</span><span class="n">TT</span>                           <span class="n">Audix</span>          <span class="mi">3</span>  <span class="o">...</span>
+<span class="mi">3</span>       <span class="n">AXW</span><span class="p">:</span><span class="n">FP</span>                  <span class="n">AXWAY</span> <span class="n">SOFTWARE</span>        <span class="mf">0.2</span>  <span class="o">...</span>
+
+</code></pre>
+
+<blockquote class="lang-specific python">
+    <p>To get earnings calendar filtered by date:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2016-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">)</span>
+</code></pre>
+
+
+<blockquote class="lang-specific python">
+    <p>To get earnings calendar filtered by symbol and date:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">symbols</span> <span class="o">=</span> <span class="s">'msft:us'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2016-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+    <span class="n">Symbol</span>       <span class="n">Name</span> <span class="n">Actual</span>  <span class="o">...</span>
+<span class="mi">0</span>  <span class="n">MSFT</span><span class="p">:</span><span class="n">US</span>  <span class="n">Microsoft</span>   <span class="mf">0.78</span>  <span class="o">...</span>
+<span class="mi">1</span>  <span class="n">MSFT</span><span class="p">:</span><span class="n">US</span>  <span class="n">Microsoft</span>   <span class="mf">0.62</span>  <span class="o">...</span>
+<span class="mi">2</span>  <span class="n">MSFT</span><span class="p">:</span><span class="n">US</span>  <span class="n">Microsoft</span>   <span class="mf">0.69</span>  <span class="o">...</span>
+<span class="mi">3</span>  <span class="n">MSFT</span><span class="p">:</span><span class="n">US</span>  <span class="n">Microsoft</span>   <span class="mf">0.76</span>  <span class="o">...</span>
+
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get earnings calendar by country:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span><span class="p">)</span>
+
+<span class="n">Output</span><span class="p">:</span>
+       <span class="n">Symbol</span>                                  <span class="n">Name</span>  <span class="n">Actual</span>  <span class="o">...</span>
+<span class="mi">0</span>        <span class="n">A</span><span class="p">:</span><span class="n">US</span>                               <span class="n">Agilent</span>   <span class="mf">0.149</span>  <span class="o">...</span>
+<span class="mi">1</span>    <span class="n">CMCSA</span><span class="p">:</span><span class="n">US</span>                               <span class="n">Comcast</span>    <span class="mf">0.19</span>  <span class="o">...</span>
+<span class="mi">2</span>      <span class="n">DDR</span><span class="p">:</span><span class="n">US</span>                                   <span class="n">DDR</span>    <span class="mf">0.38</span>  <span class="o">...</span>
+<span class="mi">3</span>      <span class="n">CUZ</span><span class="p">:</span><span class="n">US</span>                    <span class="n">Cousins</span> <span class="n">Properties</span>   <span class="mf">0.065</span>  <span class="o">...</span>
+
+</code></pre>
+
+<!--javascript black side-->
+
+<blockquote class="lang-specific javascript">
+    <p>Get earnings default calendar, no parameters are required.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get earnings calendar by date.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get earnings calendar by symbol and date.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">symbol</span> = <span class="s1">'CMCSA:US'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+<blockquote class="lang-specific javascript">
+    <p>Get earnings calendar by country.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+
+<!-- <blockquote class="lang-specific javascript">
+    <p>Get earnings calendar by type. Type can be: earnings, ipo and dividends.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">type</span> = <span class="s1">'ipo'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre> -->
+
+<!--php black side-->
+
+<blockquote class="lang-specific php">
+    <p>To get earnings. <br>Remember, without a client key only a sample of data will be provided.</p>
+</blockquote>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings'</span><span class="p">;</span>
+<span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
+    <span class="s2">"Authorization: Client guest:guest"</span>
+<span class="p">);</span>
+<span class="nv">$handle</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span> 
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$headers</span><span class="p">);</span>
+    <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$handle</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+    <span class="nv">$data</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$handle</span><span class="p">);</span>
+<span class="c1">//parse your data to satisfy your needs....
+<span class="c1">//showing result
+<span class="p">echo</span><span class="p">(</span><span class="p">$data</span><span class="p">);</span>
+</span><span class="cp">?&gt;</span>
+</code></pre>
+<blockquote class="lang-specific php">
+    <p>To filter earnings calendar by date. Date format - yyyy-mm-dd.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings?d1={put date here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To filter earnings calendar by market and date.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings/symbol/{put symbol name here}?d1={put date here}&d2={put date here}'</span><span class="p">;</span>
+</code></pre> 
+<blockquote class="lang-specific php">
+    <p>To filter earnings calendar by country.</p>
+</blockquote>
+<pre class="highlight php"><code>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings/country/{put country name here}'</span><span class="p">;</span>
+</code></pre>
+
+<!--c# black side-->
+
+<blockquote class="lang-specific csharp">
+    <p>To get default earnings calendar.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings?c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get earnings calendar by market and date.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings/symbol/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Get earnings calendar by market in a date range (date format: YYYY-MM-DD).</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings/symbol/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&d2=</span>{put date here}<span class="kt"></span><span class="kt">&c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Filter earnings by country.</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
+</code></pre> 
+<blockquote class="lang-specific csharp">
+    <p>Filter earnings by type (type can be: earnings, ipo, dividends).</p>
+</blockquote>
+<pre class="highlight csharp"><code>
+    <span class="c1">// replace guest:guest with your key</span>
+    <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
+    <span class="kt">"https://api.tradingeconomics.com/earnings?c=guest:guest&type=</span>{put type here}<span class="kt">"</span>);
+</code></pre>
+
+<!--java black side-->
+
+<blockquote class="lang-specific java">
+    <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Earnings.java">Check here for the complete sample code.</a></p>
+<br><p>To get default earnings calendar.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getEarnings</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/earnings"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Default earnings calendar"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+<blockquote class="lang-specific java">
+    <p>Get earnings by symbol within a date interval.</p>
+</blockquote>
+<pre class="highlight java"><code>
+<span class="n">public static void</span> <span class="k">getEarningsBetweenDates</span><span class="o">()</span> <span class="na">throws</span> IOException
+<span class="n">{</span>
+    <span class="c1">//put symbol name here</span>
+    <span class="n">String </span><span class="na">params</span> <span class="o">=</span> <span class="s">"msft:us"</span>;
+    <span class="n">params = </span><span class="na">params</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//put date here (date format yyyy-mm-dd)</span>
+    <span class="n">String </span><span class="na">date</span> <span class="o">=</span> <span class="s">"2016-01-01"</span> + <span class="s">"&d2="</span> + <span class="s">"2017-12-31"</span>;
+    <span class="n">date = </span><span class="na">date</span>.replaceAll(<span class="s">"\\s","%20""</span>);
+    <span class="c1">//set the path</span>
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/earnings/symbol"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"?d1="</span> + <span class="na">date</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get earnings by symbol within a date interval"</span>);
+    <span class="k">constructUrl</span> (<span class="na">path</span>);
+}
+</code></pre>
+
+<!-----------------------------Earnings White Side-------------------------------> 
+
+<!-- <h3 id="methods">Methods</h3> -->
+
+<p><span class="methods"></p>
+<ul>
+<li><p>Default earnings calendar<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&f=json">/earnings</a>    </p></li>
+<li><p>Filter earnings calendar by date<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01&f=json">/earnings?d1=yyyy-mm-dd</a>    </p></li>
+<li><p>Filter earnings calendar by instrument and date<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
+<li><p>Filter earnings calendar by country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/mexico?c=guest:guest&f=json">/earnings/country/{country}</a> </p></li>
+<!-- <li><p>Filter earnings by type: earnings, ipo, dividends.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li> -->
+</ul>
+
+<p></span> </p>
+<br>
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><strong>Date</strong></td>
+<td style="text-align: left">Release date in UTC</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Symbol</strong></td>
+<td style="text-align: left">Unique symbol used by Trading Economics</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Type</strong></td>
+<td style="text-align: left">Earnings type: earnings, revenues</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Name</strong></td>
+<td style="text-align: left">Company name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Actual</strong></td>
+<td style="text-align: left">Earnings per share</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Forecast</strong></td>
+<td style="text-align: left">Average forecast among a representative group of analysts</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Previous</strong></td>
+<td style="text-align: left">Previously released value</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>FiscalTag</strong></td>
+<td style="text-align: left">Fiscal year and quarter. E.g. "FY2022Q4"</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>FiscalReference</strong></td>
+<td style="text-align: left">Fiscal year and quarter in different format. E.g. "Q3"</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>CalendarReference</strong></td>
+<td style="text-align: left">Calendar quarter for the release</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Country</strong></td>
+<td style="text-align: left">Country name</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Currency</strong></td>
+<td style="text-align: left">Currency</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Session</strong></td>
+<td style="text-align: left">Expected earnings release hour</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>Importance</strong></td>
+<td style="text-align: left">Importance being 3 the highest.</td>
+</tr>
+<tr>
+<td style="text-align: left"><strong>LastUpdate</strong></td>
+<td style="text-align: left">Time when new data was inserted or changed</td>
 </tr>
 </tbody></table>
 
