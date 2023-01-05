@@ -42,7 +42,7 @@ npx ts-node app.ts
 
 
 
-## Acknowledgements
+**Acknowledgements** 
 
 
 Jonas Hals
@@ -51,7 +51,7 @@ Jonas Hals
 https://github.com/boxhock/tradingeconomics-nodejs-stream
 
 
-## More examples in Javascript
+**More examples in Javascript**
 
 
 https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs
