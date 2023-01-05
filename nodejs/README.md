@@ -1,6 +1,6 @@
 ## Trading Economics Javascript for NodeJS
 
-This folder has the source code for the tradingeconomics NPM package plus examples on how you can get data about Markets, Historical data, Indicators, Calendar, World Bank, Federal Reserve, Comtrade, Forecasts and News, using javascript and nodejs.
+This folder has the source code for the official tradingeconomics NPM package plus examples on how you can get data about Markets, Historical data, Indicators, Calendar, World Bank, Federal Reserve, Comtrade, Forecasts and News, using javascript and nodejs.
 
 ## Documentation
 https://docs.tradingeconomics.com/?javascript#introduction
