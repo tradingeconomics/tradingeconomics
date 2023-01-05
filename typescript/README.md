@@ -40,7 +40,7 @@ npx ts-node app.ts
 
 
 
-# Author
+Many thanks to the author of this code
 
 Jonas Hals
 
