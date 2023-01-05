@@ -1,6 +1,7 @@
-# TradingEconomics stream
+# TradingEconomics - Market Data Stream
 
-Connect to the TradingEconomics WS stream
+Trading Economics provides its users with real time quotes, delayed feeds and historical data for currencies, commodities, stock indexes, share prices and bond yields. 
+
 
 ## Installation
 
@@ -10,7 +11,7 @@ yarn add tradingeconomics-stream
 
 ## Usage
 
-Create a app.ts file with the contents:
+Create an app.ts file with the contents:
 
 
 ```typescript
@@ -39,8 +40,12 @@ npx ts-node app.ts
 
 
 
-# Author
+
+
+## Acknowledgements
+
 
 Jonas Hals
+
 
 https://github.com/boxhock/tradingeconomics-nodejs-stream
