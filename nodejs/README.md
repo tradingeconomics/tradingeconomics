@@ -7,7 +7,7 @@ https://docs.tradingeconomics.com/?javascript#introduction
 
 
 ## Installation
-- Make sure you have Nodejs installed, if not you can download here: https://nodejs.org/en/download/
+- Make sure you have Nodejs installed, if not you can download it here: https://nodejs.org/en/download/
 
 - You need to install the package:
 
