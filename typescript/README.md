@@ -34,7 +34,7 @@ subscribe('UKX:IND')
 ```
 
 
-## Running it
+**Running it**
 
 npx ts-node app.ts
 
