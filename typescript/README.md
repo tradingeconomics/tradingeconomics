@@ -1,4 +1,4 @@
-# Trading Economics - Market Data Stream
+# Trading Economics - Typescript - Market Data Stream
 
 Trading Economics provides its users with real time quotes, delayed feeds and historical data for currencies, commodities, stock indexes, share prices and bond yields. 
 
