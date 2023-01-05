@@ -1,4 +1,4 @@
-# TradingEconomics - Market Data Stream
+# Trading Economics - Market Data Stream
 
 Trading Economics provides its users with real time quotes, delayed feeds and historical data for currencies, commodities, stock indexes, share prices and bond yields. 
 
@@ -49,3 +49,10 @@ Jonas Hals
 
 
 https://github.com/boxhock/tradingeconomics-nodejs-stream
+
+
+## More examples in Javascript
+
+
+https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs
+
