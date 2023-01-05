@@ -40,8 +40,12 @@ npx ts-node app.ts
 
 
 
-## Author
+
+
+## Acknowledgements
+
 
 Jonas Hals
+
 
 https://github.com/boxhock/tradingeconomics-nodejs-stream
