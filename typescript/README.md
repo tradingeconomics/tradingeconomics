@@ -39,7 +39,14 @@ subscribe('UKX:IND')
 npx ts-node app.ts
 
 
+##
 
+**More examples in Javascript**
+
+
+https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs
+
+##
 
 
 **Acknowledgements** 
@@ -51,8 +58,4 @@ Jonas Hals
 https://github.com/boxhock/tradingeconomics-nodejs-stream
 
 
-**More examples in Javascript**
-
-
-https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs
 
