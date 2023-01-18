@@ -3,6 +3,41 @@
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
++ 2023/01
+
+    + __Added:__ /calendar/group endpoints.
+    + __Fixed:__ /forecasts by country and indicator changing orders.
+
+---
+
++ 2022/12
+
+    + __Added:__ /financials/historical endpoint now supports multiple symbols.
+    + __Added:__ d1 to d2 capability for /financials/historical endpoint.
+    + __Fixed:__ /eurostat/historical in csv format not showing column names.
+
+---
+
++ 2022/11
+
+    + __Added:__ /earnings-revenues endpoints.
+    + __Added:__ FirstValueDate column to Indicators endpoints.
+    + __Added:__ Frequency column to Financials snapshot.
+    + __Added:__ /financials/categories and /financials/category/{category} endpoints.
+
+---
+
++ 2022/10
+
+    + __Fixed:__ /markets/crypto not showing all cryptos.
+
+---
+
++ 2022/09
+
+    + __Fixed:__ List of States on Fred showing null and duplicate record.
+
+---
 + 2022/06
 
     + __Added:__ StartDate column on markets/category endpoints.
