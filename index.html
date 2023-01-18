@@ -2563,6 +2563,19 @@ or you can specify a start date and end date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims?c=guest:guest&f=json">/calendar/country/{countries}/indicator/{indicators}</a><br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest&f=json">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p>
 </li>
+
+<li><p>Calendar events for a specific group.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/group/bonds">/calendar/group/{group}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/group/inflation/2016-03-01/2018-03-03">/calendar/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>
+</li>
+
+<li><p>Calendar events for country and a specific group.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states/group/interest%20rate">/calendar/country/{country}/group/{group}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states/group/inflation/2016-03-01/2018-03-03">/calendar/country/{country}/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>
+    <!--<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states,brazil/group/interest%20rate">/calendar/country/{country},{country}/group/{group}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states,brazil/group/inflation/2016-03-01/2018-03-03">/calendar/country/{country},{country}/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>-->
+</li>
+
 <li><p>Filter calendar events by calendar ID or multiple ids<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/calendarid/174108,160025,160030?c=guest:guest&f=json">/calendar/calendarid/{calendarids}?c=guest:guest</a></p>
 </li>
@@ -4110,18 +4123,17 @@ Click on any method below for a sample.
 </tr>
 </tbody></table>
 
-<!-----------------------------Earnings White Side-------------------------------> 
+<!-----------------------------Financials-------------------------------> 
 
 <h1 id="financials">Financials</h1>
 
 <p>Here you can get stocks earnings and fundamental information.
 
-<!-----------------------------Financials White Side-------------------------------> 
-
-<h2 id="financials-financials">Financials</h2>
+<h2 id="snapshot-financials">Snapshot</h2>
 <br>
 
 <!-----------------------------Financials Black Side-------------------------------> 
+<!--Python financials black side-->
 <blockquote class="lang-specific python">
     <p>If no argument is provided, returns a list of all companies available.</p>
 </blockquote>  
@@ -4141,12 +4153,6 @@ Click on any method below for a sample.
     <p>To get financials data by instrument symbol.</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getFinancialsData</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'aapl:us'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
-</code></pre>
-
-<blockquote class="lang-specific python">
-    <p>To get historical financials data by instrument symbol.</p>
-</blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalFinancials</span><span class="p">(</span><span class="s">'aapl:us'</span>, </span><span class="n">category</span>, <span class="o">=</span> <span class="s">'assets'</span> <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 
 <!--R financials black side-->
@@ -4170,11 +4176,7 @@ Click on any method below for a sample.
     </blockquote> 
     <pre class="highlight r"><code><span class="n">getFinancialsData</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'aapl:us'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
    </span></code></pre>
-   <blockquote class="lang-specific r">
-    <p>Get historical financials data.</p>
-    </blockquote> 
-    <pre class="highlight r"><code><span class="n">getHistoricalFinancialsData</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'aapl:us'</span>, category = <span class="s1">'assets'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
-   </span></code></pre>
+
 <!--Javascript financials black side-->
 <blockquote class="lang-specific javascript">
     <p>Get financials data for one country.</p>
@@ -4200,14 +4202,7 @@ Click on any method below for a sample.
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
-<blockquote class="lang-specific javascript">
-    <p>Get financials historical data.</p>
-</blockquote>
-</code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsHistorical</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">category</span> = <span class="s1">'assets'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
-        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
-    });</span>
-</code></pre>
+
 <!-----------------------------Financials White Side-------------------------------> 
 <ul>
 <li><p>Financials companies list.<br>
@@ -4226,16 +4221,12 @@ Click on any method below for a sample.
     <a target = '_blank' href="https://api.tradingeconomics.com/financials/categories?c=guest:guest&f=json">/financials/categories</a>    </p></li>
 </ul>
 <ul>
-<li><p>Financials data by category<br>
+<li><p>Financials data by category.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/financials/category/assets?c=guest:guest&f=json">/financials/category/{category}</a>    </p></li>
 </ul>
 <ul>
-<li><p>Financials data by stock symbol<br>
+<li><p>Financials data by stock symbol.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/financials/symbol/aapl:us?c=guest:guest&f=json">/financials/symbol/{symbol}</a>    </p></li>
-</ul>
-<ul>
-<li><p>Financials historical data by financial symbol<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest&f=json">/financials/historical/{symbol}</a>    </p></li>
 </ul>
 <p></span> </p>
 <br>
@@ -4337,32 +4328,155 @@ Click on any method below for a sample.
 </tr>
 </tbody></table>
 
-<!-----------------------------Earnings Black Side-------------------------------> 
-<h2 id="financials-earnings">Earnings</h2>
+<!-----------------------------Financials Historical Black Side-------------------------------> 
 
-<!--R earnings black side-->
+<h2 id="historical-financials">Historical</h2>
+
+<!-----------------------------Financials Historical Black Side------------------------------->
+
+<!-----------------------------Python Financials Historical------------------------------->
+<blockquote class="lang-specific python">
+    <p>To get historical financials data by instrument symbol.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalFinancials</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'aapl:us'</span>, </span><span class="n">category</span> <span class="o">=</span> <span class="s">'assets'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>
+
+<!--<blockquote class="lang-specific python">
+    <p>To get historical financials data by multiple instrument symbol.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalFinancials</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> [<span class="s">'aapl:us', 'race:im'</span>], </span><span class="n">category</span> <span class="o">=</span> <span class="s">'assets'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>-->
+
+<!--<blockquote class="lang-specific python">
+    <p>To get historical financials data by instrument symbol and date interval.</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getHistoricalFinancials</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s">'aapl:us'</span>, </span><span class="n">category</span> <span class="o">=</span> <span class="s">'assets'</span>, <span class="n">d1</span> <span class="o">=</span> <span class="s">'2022-01-01'</span>, <span class="n">d2</span> <span class="o">=</span> <span class="s">'2023-01-01'</span>, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span>
+</code></pre>--> 
+
+<!-----------------------------R Financials Historical------------------------------->
+<blockquote class="lang-specific r">
+<p>Get historical financials data by instrument symbol.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getHistoricalFinancialsData</span><span class="p">(<span class="nf">symbol</span><span class="o">=</span><span class="s1">'aapl:us'</span>, category = <span class="s1">'assets'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>
+
+<!--<blockquote class="lang-specific r">
+<p>Get historical financials data by multiple instrument symbol.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getHistoricalFinancialsData</span><span class="p">(<span class="nf">symbol</span><span class="o">= [</span><span class="s1">'aapl:us', race:im</span>], category = <span class="s1">'assets'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>-->
+
+<!--<blockquote class="lang-specific r">
+<p>Get historical financials data by instrument symbol and date interval.</p>
+</blockquote> 
+<pre class="highlight r"><code><span class="n">getHistoricalFinancialsData</span><span class="p">(<span class="nf">symbol</span><span class="o">= </span><span class="s1">'aapl:us'</span>, category = <span class="s1">'assets'</span>, <span class="n">d1</span> <span class="o">=</span> <span class="s">'2022-01-01'</span>, <span class="n">d2</span> <span class="o">=</span> <span class="s">'2023-01-01'</span>, <span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
+</span></code></pre>-->
+
+<!-----------------------------Javascript Financials Historical------------------------------->
+<blockquote class="lang-specific javascript">
+    <p>Get financials historical data by instrument symbol.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsHistorical</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">category</span> = <span class="s1">'assets'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+
+<!--<blockquote class="lang-specific javascript">
+    <p>Get financials historical data by multiple instrument symbol.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsHistorical</span>(<span class="kd">symbol</span> = [<span class="s1">'aapl:us', 'race:im'</span>], <span class="kd">category</span> = <span class="s1">'assets'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>-->
+
+<!--<blockquote class="lang-specific javascript">
+    <p>Get financials historical data by instrument symbol and date interval.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getFinancialsHistorical</span>(<span class="kd">symbol</span> = <span class="s1">'aapl:us'</span>, <span class="kd">category</span> = <span class="s1">'assets'</span>, <span class="kd">d1</span> <span class="o">=</span> <span class="s">'2022-01-01'</span>, <span class="kd">d2</span> <span class="o">=</span> <span class="s">'2023-01-01'</span> ).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>-->
+
+<!-----------------------------Financials Historical White Side-------------------------------> 
+<ul>
+<li><p>Financials historical data by financial symbol.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/historical/aapl:us:assets?c=guest:guest&f=json">/financials/historical/{symbol:category}</a>    </p></li>
+</ul>
+<ul>
+<li><p>Financials historical data by multiple financial symbol.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/historical/aapl:us:assets,msft:us:assets?c=guest:guest&f=json">/financials/historical/{symbol:category,symbol:category}</a>    </p></li>
+</ul>
+
+<ul>
+<li><p>Financials historical data by financial symbol and date interval.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/financials/historical/aapl:us:assets?f=json&d1=2022-01-01&d2=2023-01-01">/financials/historical/{symbol:category}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a>    </p></li>
+</ul>
+
+<br>
+
+<h3 id="response-fields">Response Fields</h3>
+
+<table><thead>
+    <tr>
+    <th style="text-align: left"></th>
+    <th style="text-align: left"></th>
+    </tr>
+    </thead><tbody>
+    <tr>
+    <td style="text-align: left"><strong>Symbol</strong></td>
+    <td style="text-align: left">Unique symbol used by Trading Economics</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Category</strong></td>
+    <td style="text-align: left">Financials historical category</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Date</strong></td>
+    <td style="text-align: left">Trading Economics date time in UTC</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Value</strong></td>
+    <td style="text-align: left">Value of the historial date</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Report Date</strong></td>
+    <td style="text-align: left">Reporting date</td>
+    </tr>
+    <tr>
+    <td style="text-align: left"><strong>Reference</strong></td>
+    <td style="text-align: left">Fiscal reference date</td>
+    </tr>
+    </tbody></table>
+
+<!-----------------------------Earnings Revenues Black Side-------------------------------> 
+<h2 id="financials-earnings-revenues">Earnings Revenues</h2>
+
+<!--R earnings revenues black side-->
 
 <blockquote class="lang-specific r">
-    <p>To get earnings by country.</p>
+    <p>To get earnings revenues by country.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="s1">'united states'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-    <p>To get earnings by date.</p>
+    <p>To get earnings revenues by date.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">initDate</span><span class="o">=</span><span class="s1">'2017-01-01'</span><span class="p">,<span class="w"> </span><span class="n">outType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'df'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 <blockquote class="lang-specific r">
-    <p>To get earnings by category.</p>
+    <p>To get earnings revenues by category.</p>
 </blockquote> 
 <pre class="highlight r"><code><span class="n">getEarnings</span><span class="p">(<span class="n">indicator</span><span class="o">=</span><span class="s1">'aapl:us'</span><span class="p">,<span class="w"> </span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'symbol'</span><span class="p">,</span><span class="n">initDate</span><span class="o">=</span><span class="s1">'2017-01-01'</span><span class="p">)</span><span class="w">
 </span></code></pre>
 
 
-<!--python earnings black side-->
+<!--python earnings revenues black side-->
 
 <blockquote class="lang-specific python">
-    <p>To get default earnings calendar:</p>
+    <p>To get default earnings revenues calendar:</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">()</span>
 
@@ -4376,14 +4490,14 @@ Click on any method below for a sample.
 </code></pre>
 
 <blockquote class="lang-specific python">
-    <p>To get earnings calendar filtered by date:</p>
+    <p>To get earnings revenues calendar filtered by date:</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2016-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">)</span>
 </code></pre>
 
 
 <blockquote class="lang-specific python">
-    <p>To get earnings calendar filtered by symbol and date:</p>
+    <p>To get earnings revenues calendar filtered by symbol and date:</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">symbols</span> <span class="o">=</span> <span class="s">'msft:us'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2016-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">)</span>
 
@@ -4396,7 +4510,7 @@ Click on any method below for a sample.
 
 </code></pre>
 <blockquote class="lang-specific python">
-    <p>To get earnings calendar by country:</p>
+    <p>To get earnings revenues calendar by country:</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'united states'</span><span class="p">)</span>
 
@@ -4412,7 +4526,7 @@ Click on any method below for a sample.
 <!--javascript black side-->
 
 <blockquote class="lang-specific javascript">
-    <p>Get earnings default calendar, no parameters are required.</p>
+    <p>Get earnings revenues default calendar, no parameters are required.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>().then(<span class="na">function</span>(<span class="kd">data</span>){
@@ -4420,7 +4534,7 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get earnings calendar by date.</p>
+    <p>Get earnings revenues calendar by date.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
@@ -4428,7 +4542,7 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get earnings calendar by symbol and date.</p>
+    <p>Get earnings revenues calendar by symbol and date.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">symbol</span> = <span class="s1">'CMCSA:US'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
@@ -4436,7 +4550,7 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get earnings calendar by country.</p>
+    <p>Get earnings revenues calendar by country.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
@@ -4445,7 +4559,7 @@ Click on any method below for a sample.
 </code></pre>
 
 <!-- <blockquote class="lang-specific javascript">
-    <p>Get earnings calendar by type. Type can be: earnings, ipo and dividends.</p>
+    <p>Get earnings revenues calendar by type. Type can be: earnings revenues, ipo and dividends.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">type</span> = <span class="s1">'ipo'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
@@ -4456,10 +4570,10 @@ Click on any method below for a sample.
 <!--php black side-->
 
 <blockquote class="lang-specific php">
-    <p>To get earnings. <br>Remember, without a client key only a sample of data will be provided.</p>
+    <p>To get earnings revenues. <br>Remember, without a client key only a sample of data will be provided.</p>
 </blockquote>
 <pre class="highlight php"><code><span class="cp">&lt;?php</span>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings'</span><span class="p">;</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings-revenues'</span><span class="p">;</span>
 <span class="nv">$headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s2">"Accept: application/xml"</span><span class="p">,</span>
     <span class="s2">"Authorization: Client guest:guest"</span>
@@ -4477,84 +4591,84 @@ Click on any method below for a sample.
 </span><span class="cp">?&gt;</span>
 </code></pre>
 <blockquote class="lang-specific php">
-    <p>To filter earnings calendar by date. Date format - yyyy-mm-dd.</p>
+    <p>To filter earnings revenues revenues calendar by date. Date format - yyyy-mm-dd.</p>
 </blockquote>
 <pre class="highlight php"><code>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings?d1={put date here}'</span><span class="p">;</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings-revenues?d1={put date here}'</span><span class="p">;</span>
 </code></pre> 
 <blockquote class="lang-specific php">
-    <p>To filter earnings calendar by market and date.</p>
+    <p>To filter earnings revenues calendar by market and date.</p>
 </blockquote>
 <pre class="highlight php"><code>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings/symbol/{put symbol name here}?d1={put date here}&d2={put date here}'</span><span class="p">;</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings-revenues/symbol/{put symbol name here}?d1={put date here}&d2={put date here}'</span><span class="p">;</span>
 </code></pre> 
 <blockquote class="lang-specific php">
-    <p>To filter earnings calendar by country.</p>
+    <p>To filter earnings revenues calendar by country.</p>
 </blockquote>
 <pre class="highlight php"><code>
-<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings/country/{put country name here}'</span><span class="p">;</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">'https://api.tradingeconomics.com/earnings-revenues/country/{put country name here}'</span><span class="p">;</span>
 </code></pre>
 
 <!--c# black side-->
 
 <blockquote class="lang-specific csharp">
-    <p>To get default earnings calendar.</p>
+    <p>To get default earnings revenues calendar.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
     <span class="c1">// replace guest:guest with your key</span>
     <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
-    <span class="kt">"https://api.tradingeconomics.com/earnings?c=guest:guest"</span>);
+    <span class="kt">"https://api.tradingeconomics.com/earnings-revenues?c=guest:guest"</span>);
 </code></pre> 
 <blockquote class="lang-specific csharp">
-    <p>Get earnings calendar by market and date.</p>
+    <p>Get earnings revenues calendar by market and date.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
     <span class="c1">// replace guest:guest with your key</span>
     <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
-    <span class="kt">"https://api.tradingeconomics.com/earnings/symbol/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
+    <span class="kt">"https://api.tradingeconomics.com/earnings-revenues/symbol/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&c=guest:guest"</span>);
 </code></pre> 
 <blockquote class="lang-specific csharp">
-    <p>Get earnings calendar by market in a date range (date format: YYYY-MM-DD).</p>
+    <p>Get earnings revenues calendar by market in a date range (date format: YYYY-MM-DD).</p>
 </blockquote>
 <pre class="highlight csharp"><code>
     <span class="c1">// replace guest:guest with your key</span>
     <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
-    <span class="kt">"https://api.tradingeconomics.com/earnings/symbol/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&d2=</span>{put date here}<span class="kt"></span><span class="kt">&c=guest:guest"</span>);
+    <span class="kt">"https://api.tradingeconomics.com/earnings-revenues/symbol/</span>{put symbol name here}<span class="kt">?d1=</span>{put date here}<span class="kt">&d2=</span>{put date here}<span class="kt"></span><span class="kt">&c=guest:guest"</span>);
 </code></pre> 
 <blockquote class="lang-specific csharp">
-    <p>Filter earnings by country.</p>
+    <p>Filter earnings revenues by country.</p>
 </blockquote>
 <pre class="highlight csharp"><code>
     <span class="c1">// replace guest:guest with your key</span>
     <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
-    <span class="kt">"https://api.tradingeconomics.com/earnings/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
+    <span class="kt">"https://api.tradingeconomics.com/earnings-revenues/country/</span>{put country name here}<span class="kt">?c=guest:guest"</span>);
 </code></pre> 
 <blockquote class="lang-specific csharp">
-    <p>Filter earnings by type (type can be: earnings, ipo, dividends).</p>
+    <p>Filter earnings revenues by type (type can be: earnings revenues, ipo, dividends).</p>
 </blockquote>
 <pre class="highlight csharp"><code>
     <span class="c1">// replace guest:guest with your key</span>
     <span class="s">WebRequest</span> <span class="k">request</span> = <span class="k">WebRequest</span>.Create(
-    <span class="kt">"https://api.tradingeconomics.com/earnings?c=guest:guest&type=</span>{put type here}<span class="kt">"</span>);
+    <span class="kt">"https://api.tradingeconomics.com/earnings-revenues?c=guest:guest&type=</span>{put type here}<span class="kt">"</span>);
 </code></pre>
 
 <!--java black side-->
 
 <blockquote class="lang-specific java">
     <p>This is only a small sample of the code. <a target = '_blank' href="https://github.com/tradingeconomics/tradingeconomics/blob/master/java/JavaEg/src/com/examples/Earnings.java">Check here for the complete sample code.</a></p>
-<br><p>To get default earnings calendar.</p>
+<br><p>To get default earnings revenues calendar.</p>
 </blockquote>
 <pre class="highlight java"><code>
 <span class="n">public static void</span> <span class="k">getEarnings</span><span class="o">()</span> <span class="na">throws</span> IOException
 <span class="n">{</span>
     <span class="c1">//set the path</span>
-    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/earnings"</span>;   
-    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Default earnings calendar"</span>);
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/earnings-revenues"</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Default earnings revenues calendar"</span>);
     <span class="k">constructUrl</span> (<span class="na">path</span>);
 }
 </code></pre>
 <blockquote class="lang-specific java">
-    <p>Get earnings by symbol within a date interval.</p>
+    <p>Get earnings revenues by symbol within a date interval.</p>
 </blockquote>
 <pre class="highlight java"><code>
 <span class="n">public static void</span> <span class="k">getEarningsBetweenDates</span><span class="o">()</span> <span class="na">throws</span> IOException
@@ -4566,8 +4680,8 @@ Click on any method below for a sample.
     <span class="n">String </span><span class="na">date</span> <span class="o">=</span> <span class="s">"2016-01-01"</span> + <span class="s">"&d2="</span> + <span class="s">"2017-12-31"</span>;
     <span class="n">date = </span><span class="na">date</span>.replaceAll(<span class="s">"\\s","%20""</span>);
     <span class="c1">//set the path</span>
-    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/earnings/symbol"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"?d1="</span> + <span class="na">date</span>;   
-    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get earnings by symbol within a date interval"</span>);
+    <span class="n">String </span><span class="na">path</span> <span class="o">=</span> <span class="s">"/earnings-revenues/symbol"</span> + <span class="s">"/"</span> + <span class="na">params</span> + <span class="s">"?d1="</span> + <span class="na">date</span>;   
+    <span class="na">System</span>.out.<span class="k">println</span>(<span class="s">"Get earnings revenues by symbol within a date interval"</span>);
     <span class="k">constructUrl</span> (<span class="na">path</span>);
 }
 </code></pre>
@@ -4578,17 +4692,17 @@ Click on any method below for a sample.
 
 <p><span class="methods"></p>
 <ul>
-<li><p>Default earnings calendar<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&f=json">/earnings</a>    </p></li>
-<li><p>Filter earnings calendar by date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&d1=2017-01-01&f=json">/earnings?d1=yyyy-mm-dd</a>    </p></li>
-<li><p>Filter earnings calendar by instrument and date<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/aapl:us?c=guest:guest&d1=2017-01-01&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
-<li><p>Filter earnings calendar by country<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings/country/mexico?c=guest:guest&f=json">/earnings/country/{country}</a> </p></li>
-<!-- <li><p>Filter earnings by type: earnings, ipo, dividends.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings?c=guest:guest&type=earnings">/earnings?c=guest:guest&type=earnings</a>    </p></li> -->
+<li><p>Default earnings revenues calendar<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues?c=guest:guest&f=json">/earnings-revenues</a>    </p></li>
+<li><p>Filter earnings revenues calendar by date<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues?c=guest:guest&d1=2017-01-01&f=json">/earnings-revenues?d1=yyyy-mm-dd</a>    </p></li>
+<li><p>Filter earnings revenues calendar by instrument and date<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/symbol/aapl:us?c=guest:guest&d1=2017-01-01&f=json">/earnings-revenues/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings-revenues/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
+<li><p>Filter earnings revenues calendar by country<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/country/mexico?c=guest:guest&f=json">/earnings-revenues/country/{country}</a> </p></li>
+<!-- <li><p>Filter earnings revenues by type: earnings revenues, ipo, dividends.<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues?c=guest:guest&type=earnings-revenues">/earnings-revenues?c=guest:guest&type=earnings-revenues</a>    </p></li> -->
 </ul>
 
 <p></span> </p>
@@ -4608,10 +4722,6 @@ Click on any method below for a sample.
 <tr>
 <td style="text-align: left"><strong>Symbol</strong></td>
 <td style="text-align: left">Unique symbol used by Trading Economics</td>
-</tr>
-<tr>
-<td style="text-align: left"><strong>Type</strong></td>
-<td style="text-align: left">Earnings type: earnings, revenues</td>
 </tr>
 <tr>
 <td style="text-align: left"><strong>Name</strong></td>
@@ -4660,6 +4770,12 @@ Click on any method below for a sample.
 <tr>
 <td style="text-align: left"><strong>LastUpdate</strong></td>
 <td style="text-align: left">Time when new data was inserted or changed</td>
+</tr>
+<td style="text-align: left"><strong>marketRelease</strong></td>
+<td style="text-align: left">Release type: after_close, before_open, by_day_end</td>
+</tr>
+<td style="text-align: left"><strong>MarketCapUSD</strong></td>
+<td style="text-align: left">Market cap in US dollar</td>
 </tr>
 </tbody></table>
 
