@@ -67,7 +67,8 @@ def validate(date_text):
 def validatePeriod(initDate, endDate):
     if  datetime.strptime(initDate, '%Y-%m-%d') > datetime.strptime(endDate, '%Y-%m-%d'):
         raise DateError ('Invalid time period, check the supplied date parameters.')
-
+    if datetime.strptime(initDate, '%Y-%m-%d') == datetime.strptime(endDate, '%Y-%m-%d'):
+        raise DateError ('Invalid time period, initDate and endDate cannot be the same.')
 def timeValidate(clientTime):
     try:
         t = time.strptime(clientTime, '%H:%M')

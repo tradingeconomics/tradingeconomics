@@ -78,7 +78,7 @@ def getHistoricalFinancials(symbol, category, output_type=None):
         raise LoginError('You need to do login before making any request')
 
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)

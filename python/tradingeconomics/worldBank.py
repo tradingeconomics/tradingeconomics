@@ -122,7 +122,7 @@ def getWBCategories(category = None, page_number = None, output_type = None):
         raise LoginError('You need to do login before making any request')
     
     try:
-        print(linkAPI)
+        # print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e) 
@@ -177,7 +177,7 @@ def getWBIndicator(series_code = None, url = None, output_type = None):
          
    
     try:
-        print(linkAPI)
+        # print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e) 
@@ -230,7 +230,7 @@ def getWBCountry(country = None, page_number = None, output_type = None):
         raise LoginError('You need to do login before making any request')
     
     try:
-        print(linkAPI)
+        # print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e) 
@@ -276,7 +276,7 @@ def getWBHistorical(series_code = None, output_type = None):
         linkAPI += '?c=' + glob.apikey + '&s=' + quote(str(series_code))   
     
     try:
-        print(linkAPI)
+        # print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e) 

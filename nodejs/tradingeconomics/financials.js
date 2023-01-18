@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 //setting global variables to be used outside this module
 global.symbol = null;
 global.country = null;
+global.category = null;
 
 
 //This function builds the path to get the API request:
@@ -63,14 +64,79 @@ function getFinancialsData(){
    
 }
 
+/***********************************************************************************  
+    Returns a json object with all financial categories.
+
+   example:
+
+        getFinancialsCategoryList(); 
+          
+***********************************************************************************/
+function getFinancialsCategoryList(){
+    try {
+        var data_url = '';
+    
+        // d is a dictionary used for create the api url
+        var d = {
+            'url_base': 'https://api.tradingeconomics.com/financials/categories',
+            'key': `?c=${apikey}`,
+            'output_type' : ''
+        }
+
+ 
+        data_url = `${d.url_base}${d.key}`.replace (' ', '%20');    
+        
+        return func.makeTheRequest(data_url)
+
+    } catch (error) {
+        throw error
+    }
+}
+
+/***********************************************************************************  
+Returns a json object with financial data of the category parameter passed.   
+
+parameters:
+    String: category
+
+   example:
+
+        getFinancialsDataByCategory(category = 'debt'); 
+        getFinancialsData(symbol = [category, 'assets']);
+
+          
+***********************************************************************************/
+function getFinancialsDataByCategory(){
+    try {
+        var data_url = '';
+    
+        // d is a dictionary used for create the api url
+        var d = {
+            'url_base': 'https://api.tradingeconomics.com/financials/category',
+            'category': '',
+            'key': `?c=${apikey}`,
+            'output_type' : ''
+        }
+        
+        if (category != null){
+            //the 'key' value has to be changed due to url enpoint use of '?' or '&' characters. 
+            d.category = `/${category}`;
+        }
+        else{
+            return 'No category supplied'
+        }
+
+        data_url = `${d.url_base}${d.category}${d.key}`.replace (' ', '%20');
+        console.log(data_url);
+        
+        return func.makeTheRequest(data_url)
+
+    } catch (error) {
+        throw error
+    }
+   
+}
+
 module.exports.getFinancialsData = getFinancialsData;
-
-
-
-
-
-
-
-
-
-
+module.exports.getFinancialsCategoryList = getFinancialsCategoryList;
+module.exports.getFinancialsDataByCategory = getFinancialsDataByCategory;

@@ -178,3 +178,142 @@ getFinancialsData <- function(country = NULL, symbol = NULL, outType = NULL){
   return(df_final)
 }
 
+
+#'Return list of fcategories of financials data
+#'@export getFinancialsCategoryList
+#'
+#'@param outType string.
+#''df' for data frame,
+#''lst'(default) for list.
+#'
+#'@return Return a list or data frame of Financials categories data.
+#'@section Notes:
+#'Without credentials only sample data will be provided.
+#'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
+#'@examples
+#'\dontrun{ getFinancialsCategoryList(outType = 'df')
+#'}
+#'
+
+getFinancialsCategoryList <- function(outType = NULL){
+  # Final string for the request data
+  data_request_url <- ""
+
+  #to get global 'apikey' to local function
+  apikey_local <- .GlobalEnv$apiKey
+
+  # Variables used to create the final string url
+  url_base_tag <- "https://api.tradingeconomics.com/financials/categories"
+  key_tag <- paste('?c=',apikey_local, sep = '')
+
+  df_final = data.frame()
+
+  data_request_url <- paste(url_base_tag, key_tag, sep = '')
+  print(data_request_url)
+
+  data_request_url <- URLencode(data_request_url)
+
+  request <- GET(data_request_url)
+
+  checkRequestStatus(http_status(request)$message)
+
+
+  webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
+  df_final = rbind(df_final, webResults)
+  Sys.sleep(0.5)
+
+  if (is.null(outType)| identical(outType, 'lst')){
+    df_final <- split(df_final , f =  paste(df_final))
+
+
+  } else if (identical(outType, 'df')){
+    if (length(df_final) == 0){
+      print ("No data provided for selected parameters")
+
+    }else{
+      return(df_final)
+
+    }
+  } else {
+    stop('output_type options : df for data frame, lst(default)')
+  }
+
+
+  return(df_final)
+}
+
+
+
+  #'Return Financials data by category from Trading Economics API
+  #'@export getFinancialsDataByCategory
+  #'
+  #'@param category string string
+  #'String to get data for one category
+  #'@param outType string.
+  #''df' for data frame,
+  #''lst'(default) for list.
+  #'
+  #'@return Return a list or data frame of Financials data by category.
+  #'@section Notes:
+  #'Without credentials only sample data will be provided.
+  #'@seealso \code{\link{getMarketsData}}, \code{\link{getForecastData}}, \code{\link{getCalendarData}} and \code{\link{getIndicatorData}}
+  #'@examples
+  #'\dontrun{ getFinancialsDataByCategory(category = assets, outType = 'df')
+  #'getFinancialsDataByCategory(catrgory = debt, outType = 'df')
+  #'}
+  #'
+
+
+  getFinancialsDataByCategory <- function(category = NULL, outType = NULL){
+    # Final string for the request data
+    data_request_url <- ""
+
+    #to get global 'apikey' to local function
+    apikey_local <- .GlobalEnv$apiKey
+
+    # Variables used to create the final string url
+    url_base_tag <- "https://api.tradingeconomics.com/financials/category/"
+    key_tag <- paste('?c=',apikey_local, sep = '')
+
+    df_final = data.frame()
+
+    if(is.null(category)){
+      print("Please provide category parameter")
+      return()
+    }
+
+    data_request_url <- paste(url_base_tag,category,key_tag, sep = '')
+    print(data_request_url)
+
+    data_request_url <- URLencode(data_request_url)
+
+    request <- GET(data_request_url)
+
+    checkRequestStatus(http_status(request)$message)
+
+
+    webResults <- do.call(rbind.data.frame, checkForNull(content(request)))
+
+    df_final = rbind(df_final, webResults)
+    Sys.sleep(0.5)
+
+    if (is.null(outType)| identical(outType, 'lst')){
+      df_final <- split(df_final , f =  paste(df_final$Symbol))
+
+
+    } else if (identical(outType, 'df')){
+      if (length(df_final) == 0){
+        print ("No data provided for selected parameters")
+
+      }else{
+        return(df_final)
+
+      }
+    } else {
+      stop('output_type options : df for data frame, lst(default) for category')
+    }
+
+
+    return(df_final)
+  }

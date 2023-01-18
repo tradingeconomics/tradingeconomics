@@ -120,7 +120,7 @@ def fetchMarkets(symbol = None, initDate=None, endDate=None, output_type=None):
         linkAPI += '&d1=' + initDate + '&d2=' + endDate   
     
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e) 

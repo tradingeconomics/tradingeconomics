@@ -47,7 +47,7 @@ te.getComtrade((country = 'united states'), (country1 = 'china'))
 //===============================================================================================================
 // Get information about one country or between two countries with a specific type of trade
 
-getCmtCountryFilterByType(
+te.getCmtCountryFilterByType(
   (country1 = 'Portugal'),
   (country2 = 'Spain'),
   (type = 'import')
@@ -62,7 +62,7 @@ getCmtCountryFilterByType(
   })
   .catch((err) => console.log(err))
 
-getCmtCountryFilterByType((country1 = 'United States'), (type = 'export'))
+te.getCmtCountryFilterByType((country1 = 'United States'), (type = 'export'))
   .then((data) => {
     console.log(
       'Get information about one country and a specific trade type',
@@ -76,7 +76,7 @@ getCmtCountryFilterByType((country1 = 'United States'), (type = 'export'))
 //===============================================================================================================
 // Get information about one country or between two countries with a specific type of trade
 
-getCmtCountryByCategory(
+te.getCmtCountryByCategory(
   (country = 'United States'),
   (type = 'export'),
   (category = 'live animals')
@@ -91,7 +91,7 @@ getCmtCountryByCategory(
   })
   .catch((err) => console.log(err))
 
-getCmtCountryByCategory(
+  te.getCmtCountryByCategory(
   (country = 'Brazil'),
   (type = 'import'),
   (category = 'Swine, live')
@@ -109,7 +109,7 @@ getCmtCountryByCategory(
 //===============================================================================================================
 // Get Total trade information by type and country. Type cna be Import or Export
 
-getComtradeTotalByType((country = 'Portugal'), (type = 'import'))
+te.getComtradeTotalByType((country = 'Portugal'), (type = 'import'))
   .then((data) => {
     console.log('Get Totals', '\n', data, '\n')
   })

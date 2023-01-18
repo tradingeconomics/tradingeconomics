@@ -130,7 +130,7 @@ def getFedRStates(county = None, output_type = None):
 
    
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
@@ -213,7 +213,7 @@ def getFedRSnaps(symbol = None, url = None, country = None, state = None, county
         linkAPI += '?c=' + glob.apikey
     
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
@@ -258,7 +258,7 @@ def getFedRCountyOld(state=None,county=None, output_type = None):
 
     
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)     

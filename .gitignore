@@ -257,3 +257,9 @@ python/**/*.pyc
 
 *.idea
 *.exe
+
+nodejs/test.js
+
+python/tradingeconomics.egg-info/
+python/dist/
+R/tradingeconomics/.RData

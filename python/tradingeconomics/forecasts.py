@@ -110,7 +110,7 @@ def getForecastData(country = None, indicator = None, output_type = None):
     except AttributeError:
         raise LoginError('You need to do login before making any request')
     try:
-        print(linkAPI)
+        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
@@ -152,7 +152,7 @@ def getForecastByTicker(ticker=None, output_type=None):
     if ticker:
         d['ticker']=f'/ticker/{fn.stringOrList(ticker)}'
         api_url_request = "%s%s%s" % (d['url_base'], d['ticker'],  d['key']) 
-        print(api_url_request)
+        # print(api_url_request)
         return fn.dataRequest(api_request=api_url_request, output_type=output_type)
         
          
