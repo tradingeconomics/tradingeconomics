@@ -7,6 +7,7 @@
 
     + __Added:__ /calendar/group endpoints.
     + __Fixed:__ /forecasts by country and indicator changing orders.
+    + __Added:__ StartDate column to /comtrade snapshot endpoints.
 
 ---
 
@@ -38,6 +39,7 @@
     + __Fixed:__ List of States on Fred showing null and duplicate record.
 
 ---
+
 + 2022/06
 
     + __Added:__ StartDate column on markets/category endpoints.
