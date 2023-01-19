@@ -2565,13 +2565,13 @@ or you can specify a start date and end date<br>
 </li>
 
 <li><p>Calendar events for a specific group.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/group/bonds">/calendar/group/{group}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/group/inflation/2016-03-01/2018-03-03">/calendar/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/group/bonds?c=guest:guest&f=json">/calendar/group/{group}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/group/bonds/2016-03-01/2018-03-03?c=guest:guest&f=json">/calendar/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>
 </li>
 
 <li><p>Calendar events for country and a specific group.<br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states/group/interest%20rate">/calendar/country/{country}/group/{group}</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states/group/inflation/2016-03-01/2018-03-03">/calendar/country/{country}/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states/group/bonds?c=guest:guest&f=json">/calendar/country/{country}/group/{group}</a><br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states/group/bonds/2016-03-01/2018-03-03?c=guest:guest&f=json">/calendar/country/{country}/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>
     <!--<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states,brazil/group/interest%20rate">/calendar/country/{country},{country}/group/{group}</a><br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states,brazil/group/inflation/2016-03-01/2018-03-03">/calendar/country/{country},{country}/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>-->
 </li>
@@ -8390,6 +8390,10 @@ php black side
 <td style="text-align: left"><strong>Title</strong></td>
 <td style="text-align: left">Title</td>
 </tr>
+<tr>
+    <td style="text-align: left"><strong>StartDate</strong></td>
+    <td style="text-align: left">Start Year of the data series</td>
+    </tr>
 <tr>
 <td style="text-align: left"><strong>Region</strong></td>
 <td style="text-align: left">Region</td>
