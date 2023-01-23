@@ -79,17 +79,21 @@ def getFinancialsData(symbol = None, country = None, output_type=None):
     except AttributeError:
         return "You are not logged in. Run te.login('guest:guest') to login"
 
+    if country and symbol:
+        return 'Cannot pass country and symbol arguments at the same time.'
+
     if country:
         #the 'key' value has to be changed due to url enpoint use of '?' or '&' characters. 
         d['key']=f'&c={glob.apikey}'
         d['country'] = f'/companies?country={fn.stringOrList(country)}'
-    if symbol:
+    elif symbol:
+        d['key']=f'&c={glob.apikey}'
         d['country'] = ''
-        d['symbol'] = f'/symbol/{fn.stringOrList(symbol)}'
+        d['symbol'] = f'/symbol/{fn.stringOrList(symbol)}?'
 
     
     api_url_request = "%s%s%s%s" % (d['url_base'], d['symbol'],d['country'],  d['key']) 
-    
+    print(api_url_request)
 
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
 
