@@ -1,6 +1,16 @@
 # R version of Trading Economics API library.
 
+![version](https://img.shields.io/badge/version-0.2.12-green.svg)
+
 This package provides to Trading Economics API users easiest way to extract different kind of data.
+
+#
+
+## Documentation
+https://docs.tradingeconomics.com/?r#introduction
+
+#
+
 
 ## Installation
 
@@ -24,21 +34,23 @@ library(stringr)
 install_github("tradingeconomics/tradingeconomics/R/tradingeconomics")
 ```
 
-##How to use ?
-In R Console type
+## How to use ?
+* In R Console type
 ```r
 library(tradingeconomics)
 ```
-than type
+* than type
 ```r
 login('users APIkey')
 ```
-If you don't have APIkey just type
+* If you don't have APIkey just type
 ```
 login()
 ```
-**Note:** Without APIkey  data sets will default to returning sample data.
-##Examples
+
+**Note:** If you don't have a client key leave it blank and a sample of data will be provided or you can get your free key here: http://developer.tradingeconomics.com 
+
+## Examples:
 * getForecastData(country, indicator, outType) - Return forecast values by country, by indicator, by country and indicator.    
    Parameters:  
 	 - country - string or list. String to get data for one country. List of strings to get data for
@@ -126,3 +138,13 @@ getCalendarData(country = 'united kingdom', outType = 'df')
 12 2016-11-29T09:30:00 United Kingdom        Consumer Credit                   BoE Consumer Credit       Oct                     Bank of England          £1405M             £ 1800M
 13 2016-11-29T09:30:00 United Kingdom     Mortgage Approvals                    Mortgage Approvals       Oct                     Bank of England          62.93K              61.23K
 ```
+
+## More examples
+
+https://github.com/tradingeconomics/tradingeconomics/tree/master/R/EXAMPLES
+
+#
+
+## Learn More
+
+https://tradingeconomics.com/analytics/api.aspx
