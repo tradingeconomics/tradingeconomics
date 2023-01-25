@@ -74,7 +74,8 @@ def getHistoricalFinancials(symbol=None, category=None, initDate=None, endDate=N
             category = category.replace(' ', '-')
         linkAPI = f"http://api.tradingeconomics.com/financials/historical/{fn.stringOrListWithAppend(symbol, category)}"
     else:
-        print("symbol and category arguments are required")
+        return "symbol and category arguments are required"
+        
 
     try:
         linkAPI += '?c=' + glob.apikey

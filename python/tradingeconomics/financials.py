@@ -148,7 +148,7 @@ def getFinancialsDataByCategory(category=None, output_type=None):
     Example
     -------
     Get data by financial categories:
-            getFinancialsDataCategory(category='assets', output_type='df')
+            getFinancialsDataByCategory(category='assets', output_type='df')
             
             or
             
