@@ -18,7 +18,7 @@ namespace Examples.Controllers
          {
                    
             WebRequest REQUEST = WebRequest.CREATE(
-                "  "https://api.tradingeconomics.com/historical/mexico&china/gdp/20220101/20221231?c=guest:guest"); ");
+                "https://api.tradingeconomics.com/historical/country/mexico,sweden/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest&f=json"); ");
             WebResponse response = REQUEST.GetResponse(); 
             Console.WriteLine(((HttpWebResponse)response).StatusDescription);    
 
