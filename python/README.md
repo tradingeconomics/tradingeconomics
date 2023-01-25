@@ -57,6 +57,13 @@ https://docs.tradingeconomics.com/?python
 
 #
 
+## Docker
+```bash
+docker run -it --name te-python tradingeconomics/python:latest
+```
+
+#
+
 ## Learn More
 
 https://tradingeconomics.com/analytics/api.aspx
