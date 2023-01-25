@@ -93,7 +93,6 @@ def getFinancialsData(symbol = None, country = None, output_type=None):
 
     
     api_url_request = "%s%s%s%s" % (d['url_base'], d['symbol'],d['country'],  d['key']) 
-    print(api_url_request)
 
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
 
@@ -132,7 +131,7 @@ def getFinancialsCategoryList(output_type=None):
 
 
 
-def getFinancialsDataByCategory(category = None, output_type=None):
+def getFinancialsDataByCategory(category=None, output_type=None):
     """
     Returns financial data by categories.
     ==========================================================
@@ -148,9 +147,7 @@ def getFinancialsDataByCategory(category = None, output_type=None):
 
     Example
     -------
-    If no argument is provided, returns nothing.
-            getFinancialsDataCategory()
-    To categories financial data by category:
+    Get data by financial categories:
             getFinancialsDataCategory(category='assets', output_type='df')
             
             or
@@ -158,29 +155,23 @@ def getFinancialsDataByCategory(category = None, output_type=None):
             getFinancialsDataCategory(symbol=['assets','debt'], output_type='df')
     """
 
-    try:
-        # d is a dictionary used for create the api url
-        d = {
-            'url_base': 'https://api.tradingeconomics.com/financials/category',
-            'category': '',
-            'key': f'?c={glob.apikey}',
-            'output_type' : ''
-        }
-    except AttributeError:
-        return "You are not logged in. Run te.login('guest:guest') to login"
-
     if category:
         #the 'key' value has to be changed due to url enpoint use of '?' or '&' characters. 
         d['category'] = f'/{category}'
     else:
         return 'No category supplied'
 
-    # try:
-    #     api_url_request = "%s%s%s" % (d['url_base'], d['category'], d['key'])
+    try:
+        # d is a dictionary used for create the api url
+        d = {
+            'url_base': 'https://api.tradingeconomics.com/financials/category',
+            'symbol': f'/{category}',
+            'key': f'?c={glob.apikey}',
+            'output_type' : ''
+        }
+    except AttributeError:
+        return "You are not logged in. Run te.login('guest:guest') to login"
 
-    #     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
-    # except urllib.error.URLError as e:
-    #     return 'Error: Incorrect category ' + e
 
     api_url_request = "%s%s%s" % (d['url_base'], d['category'], d['key'])
 

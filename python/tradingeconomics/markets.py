@@ -213,7 +213,6 @@ def getMarketsIntraday(symbols, initDate=None, endDate=None, output_type=None):
         raise LoginError('You need to do login before making any request')
     
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
-    
 
     try:
       output = fn.dataRequest(linkAPI, output_type)

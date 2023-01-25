@@ -88,6 +88,21 @@ def stringOrList(string_or_list):
         return quote(",".join(string_or_list))
     return quote(string_or_list)
 
+def stringOrListWithAppend(string_or_list_1, string_or_list_2):
+    if type(string_or_list_1) is list:
+        _list_1 = [s for s in string_or_list_1]
+    elif type(string_or_list_1) is str:
+        _list_1 = [string_or_list_1]
+    
+    if type(string_or_list_2) is list:
+        _list_2 = [s for s in string_or_list_2]
+    elif type(string_or_list_2) is str:
+        _list_2 = [string_or_list_2]
+
+    combinations = list(itertools.product(_list_1,_list_2))
+    comb = [':'.join(c) for c in combinations]
+    return quote(f','.join(comb))
+
 def dataRequest(api_request, output_type):
     def trimTheResponse(webResultsRaw):
             finalResultsList = []
