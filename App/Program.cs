@@ -22,6 +22,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Weather}/{action=Index}/{id?}");
+    pattern: "{controller=Examples}/{action=Index}/{id?}");
 
 app.Run();
