@@ -1,22 +1,36 @@
-## Trading Economics Javascript for NodeJS
+## Trading Economics for NodeJS
 
-This folder has the source code for the official tradingeconomics NPM package plus examples on how you can get data about Markets, Historical data, Indicators, Calendar, World Bank, Federal Reserve, Comtrade, Forecasts and News, using javascript and nodejs.
+![version](https://img.shields.io/badge/version-2.1.0-green.svg)
+
+The Trading Economics NPM package provides direct access to our data. It allows you to request millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
+
+#
 
 ## Documentation
 https://docs.tradingeconomics.com/?javascript#introduction
 
+#
 
 ## Installation
-- Make sure you have Nodejs installed, if not you can download it here: https://nodejs.org/en/download/
+* Make sure you have Nodejs installed, if not you can download it here: https://nodejs.org/en/download/
+* Clone our repo and install dependencies
 
-- You need to install the package:
+```bash
 
-```javascript
-npm install tradingeconomics
+git clone https://github.com/tradingeconomics/tradingeconomics.git
+cd tradingeconomics/nodejs
+npm i
+
 ```
 
+#
+
 ## Usage
-1. Import the package on your node project
+1. Install and Import the package on your node project
+
+```bash
+npm install tradingeconomics
+```
 
 ```javascript
 const te = require('tradingeconomics');
@@ -103,6 +117,18 @@ te.getEarnings(symbol = 'aapl:us', start_date = '2016-01-01', end_date = '2017-1
 
 
 ````
+
+#
+
+## More examples
+
+https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs/Examples
+
+#
+
+## Learn More
+
+https://tradingeconomics.com/analytics/api.aspx
 
 
 
