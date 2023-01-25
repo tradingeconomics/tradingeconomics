@@ -51,16 +51,19 @@ https://github.com/tradingeconomics/tradingeconomics/tree/master/python/examples
 
 #
 
+## Docker
+
+Try our python interface in a container without installing anything
+
+```bash
+docker run -it --name te-python tradingeconomics/python:latest
+```
+#
+
 ## Documentation
 
 https://docs.tradingeconomics.com/?python
 
-#
-
-## Docker
-```bash
-docker run -it --name te-python tradingeconomics/python:latest
-```
 
 #
 
