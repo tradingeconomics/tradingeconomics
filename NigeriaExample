@@ -18,193 +18,23 @@ namespace CSharpExamples
             // set the client key
             _clientKey = ConfigurationManager.AppSettings["clientkey"]; ;
 
-            // get  calendar events
-            Console.WriteLine("About to get calendar events");
-            var getCalendarResult = GetCalendarEvents().Result;
-            Console.WriteLine(getCalendarResult);
-
-            // get calendar events between two dates
-            Console.WriteLine("About to get all calendar events between dates");
-            var getCalendarBetweenDatesResult = GetCalendarEventsByDate(new DateTime(2016, 12, 02), new DateTime(2016, 12, 03)).Result;
-            Console.WriteLine(getCalendarBetweenDatesResult);
+  
 
             // get  calendar events for a specific country
             Console.WriteLine("About to get calendar events for a specific country");
-            var getCalendarForCountryResult = GetCalendarEventsByCountries("united states").Result;
+            var getCalendarForCountryResult = GetCalendarEventsByCountries("Nigera").Result;
             Console.WriteLine(getCalendarForCountryResult);
 
-            // get calendar events for a set of countries
-            Console.WriteLine("About to get calendar events for a set of countries");
-            var getCalendarForCountriesResult = GetCalendarEventsByCountries("Nigeria", "china").Result;
-            Console.WriteLine(getCalendarForCountriesResult);
-
-            // get calendar events by country/countries and dates
-            Console.WriteLine("About to get calendar events by date and countries");
-            var getCalendarForCountriesAndDatesResult = GetCalendarEventsByCountriesAndDates(new DateTime(2016, 02, 01), new DateTime(2016, 02, 10), "Nigeria", "china").Result;
-            Console.WriteLine(getCalendarForCountriesAndDatesResult);
-
-            // get calendar events by indicator
-            Console.WriteLine("About to get calendar events by economics indicator");
-            var getCalendarForIndicatorResult = GetCalendarEventsByIndicator("inflation rate").Result;
-            Console.WriteLine(getCalendarForIndicatorResult);
-
-            // get calendar events by indicator and dates
-            Console.WriteLine("About to get calendar events by economics indicator and dates");
-            var getCalendarForIndicatorAndDatesResult = GetCalendarEventsByIndicatorAndDates(new DateTime(2016, 03, 01), new DateTime(2016, 03, 03), "inflation rate").Result;
-            Console.WriteLine(getCalendarForIndicatorAndDatesResult);
-
-            // get calendar events by indicator, countries and dates
-            Console.WriteLine("About to get calendar events by economics indicator, countries and dates");
-            var getCalendarForIndicatorCountriesAndDatesResult = GetCalendarEventsByIndicatorCountriesAndDates(new DateTime(2016, 12, 01), new DateTime(2017, 02, 25), new string[] { "united states" }, "inflation rate").Result;
-            Console.WriteLine(getCalendarForIndicatorCountriesAndDatesResult);
-
-            // get calendar events by id
-            Console.WriteLine("About to get calendar events by id");
-            var getCalendarByIdResult = GetCalendarEventsById(174108, 160025, 160030).Result;
-            Console.WriteLine(getCalendarByIdResult);
-
+         
             Console.ReadLine();
         }
 
-        /// <summary>
-        /// Get all calendar events without filters
-        /// </summary>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetCalendarEvents()
-        {
-            return await HttpRequester("/calendar");
-        }
+       
 
-        /// <summary>
-        /// Get all calendar events between dates
-        /// </summary>
-        /// <param name="startDate">Begining of the period</param>
-        /// <param name="endDate">End of the period</param>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetCalendarEventsByDate(DateTime startDate, DateTime endDate)
-        {
-            if (startDate == DateTime.MinValue || startDate == DateTime.MaxValue ||
-                endDate == DateTime.MinValue || endDate == DateTime.MaxValue)
-                return "Dates aren't properly defined";
 
-            string textStartDate = startDate.ToString("yyyy-MM-dd");
-            string textEndDate = endDate.ToString("yyyy-MM-dd");
 
-            return await HttpRequester($"/calendar/country/all/{textStartDate}/{textEndDate}");
-        }
 
-        /// <summary>
-        /// Get calendar events for multiple countries
-        /// </summary>
-        /// <param name="countries">Array with the names of the requested countries</param>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetCalendarEventsByCountries(params string[] countries)
-        {
-            foreach (var country in countries)
-                if (string.IsNullOrWhiteSpace(country))
-                    return "Countries aren't properly defined";
-
-            return await HttpRequester($"/calendar/country/{string.Join(",", countries)}");
-        }
-
-        /// <summary>
-        /// Get calendar events between dates given a set of countries
-        /// </summary>
-        /// <param name="startDate">Begining of the period</param>
-        /// <param name="endDate">End of the period</param>
-        /// <param name="countries">Array with the names of the requested countries</param>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetCalendarEventsByCountriesAndDates(DateTime startDate, DateTime endDate, params string[] countries)
-        {
-            if (startDate == DateTime.MinValue || startDate == DateTime.MaxValue ||
-                endDate == DateTime.MinValue || endDate == DateTime.MaxValue)
-                return "Dates aren't properly defined";
-
-            string textStartDate = startDate.ToString("yyyy-MM-dd");
-            string textEndDate = endDate.ToString("yyyy-MM-dd");
-
-            foreach (var country in countries)
-                if (string.IsNullOrWhiteSpace(country))
-                    return "Countries aren't properly defined";
-
-            return await HttpRequester($"/calendar/country/{string.Join(",", countries)}/{textStartDate}/{textEndDate}");
-        }
-
-        /// <summary>
-        /// Get calendar events for multiple indicators
-        /// </summary>
-        /// <param name="indicators">Array with the names of the requested indicators</param>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetCalendarEventsByIndicator(params string[] indicators)
-        {
-            foreach (var indicator in indicators)
-                if (string.IsNullOrWhiteSpace(indicator))
-                    return "Indicatores aren't properly defined";
-
-            return await HttpRequester($"/calendar/indicator/{string.Join(",", indicators)}");
-        }
-
-        /// <summary>
-        /// Get calendar events for multiple indicators between dates
-        /// </summary>
-        /// <param name="startDate">Begining of the period</param>
-        /// <param name="endDate">End of the period</param>
-        /// <param name="indicators">Array with the names of the requested indicators</param>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetCalendarEventsByIndicatorAndDates(DateTime startDate, DateTime endDate, params string[] indicators)
-        {
-            if (startDate == DateTime.MinValue || startDate == DateTime.MaxValue ||
-                endDate == DateTime.MinValue || endDate == DateTime.MaxValue)
-                return "Dates aren't properly defined";
-
-            string textStartDate = startDate.ToString("yyyy-MM-dd");
-            string textEndDate = endDate.ToString("yyyy-MM-dd");
-
-            foreach (var indicator in indicators)
-                if (string.IsNullOrWhiteSpace(indicator))
-                    return "Indicatores aren't properly defined";
-
-            return await HttpRequester($"/calendar/indicator/{string.Join(",", indicators)}/{textStartDate}/{textEndDate}");
-        }
-
-        /// <summary>
-        /// Get calendar events for multiple countries and indicators between dates
-        /// </summary>
-        /// <param name="startDate">Begining of the period</param>
-        /// <param name="endDate">End of the period</param>
-        /// <param name="countries">Array with the names of the requested countries</param>
-        /// <param name="indicators">Array with the names of the requested indicators</param>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetCalendarEventsByIndicatorCountriesAndDates(DateTime startDate, DateTime endDate, string[] countries, params string[] indicators)
-        {
-            if (startDate == DateTime.MinValue || startDate == DateTime.MaxValue ||
-                endDate == DateTime.MinValue || endDate == DateTime.MaxValue)
-                return "Dates aren't properly defined";
-
-            string textStartDate = startDate.ToString("yyyy-MM-dd");
-            string textEndDate = endDate.ToString("yyyy-MM-dd");
-
-            foreach (var indicator in indicators)
-                if (string.IsNullOrWhiteSpace(indicator))
-                    return "Indicatores aren't properly defined";
-
-            foreach (var country in countries)
-                if (string.IsNullOrWhiteSpace(country))
-                    return "Countries aren't properly defined";
-
-            return await HttpRequester($"/calendar/country/{string.Join(",", countries)}/indicator/{string.Join(",", indicators)}/{textStartDate}/{textEndDate}");
-        }
-
-        /// <summary>
-        /// Get calendar events given the calendar ID
-        /// </summary>
-        /// <param name="ids">Array with the requested ids</param>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetCalendarEventsById(params int[] ids)
-        {
-            return await HttpRequester($"/calendar/calendarid/{string.Join(",", ids)}");
-        }
-
+ 
         /// <summary>
         /// Method to make HTTP calls to TradingEconomics API
         /// </summary>
