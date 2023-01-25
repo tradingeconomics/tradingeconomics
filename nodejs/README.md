@@ -96,22 +96,6 @@ te.getEarnings(symbol = 'aapl:us', start_date = '2016-01-01', end_date = '2017-1
     Importance: 3,
     Session: 21,
     LastUpdate: '2017-08-03T21:02:00'
-  },
-  {
-    Date: '2016-07-26T00:00:00',
-    Symbol: 'AAPL:US',
-    Type: 'Earnings',
-    Name: 'Apple',
-    Actual: '1.42',
-    Forecast: null,
-    FiscalTag: 'FY2016Q3',
-    FiscalReference: 'Q3/16',
-    CalendarReference: '2016/6',
-    Country: 'United States',
-    Currency: 'USD',
-    Importance: 3,
-    Session: 21,
-    LastUpdate: '2017-08-03T16:37:00'
   }
 ]
 
