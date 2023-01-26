@@ -2,7 +2,7 @@
 
 ![version](https://img.shields.io/badge/version-0.2.12-green.svg)
 
-This package provides to Trading Economics API users easiest way to extract different kind of data.
+This package provides to Trading Economics API users an easiest way to extract different kind of economic data.
 
 #
 
@@ -15,10 +15,6 @@ https://docs.tradingeconomics.com/?r#introduction
 ## Installation
 
 You can get R from official website: https://cran.r-project.org/
-
-Then you need to install the tradingeconomics package. At this moment our package available to download from GitHub repository. 
-
-How to install a package that’s sitting on GitHub?
 
 **Step 1.**   Install the devtools package. You can do this from CRAN. Invoke R and then type
 ```r
@@ -34,12 +30,16 @@ library(stringr)
 install_github("tradingeconomics/tradingeconomics/R/tradingeconomics")
 ```
 
+#
+
+
 ## How to use ?
-* In R Console type
+* Require the tradingeconomics package on R Console:
 ```r
 library(tradingeconomics)
 ```
-* than type
+* then do the loggin with your apikey or leave it blank 
+* **Note:** If you don't have a client key leave it blank and a sample of data will be provided or you can get your free key here: http://developer.tradingeconomics.com 
 ```r
 login('users APIkey')
 ```
@@ -47,8 +47,9 @@ login('users APIkey')
 ```
 login()
 ```
+* After this steps you are now able to request economic data using our methods, check the example bellow.
 
-**Note:** If you don't have a client key leave it blank and a sample of data will be provided or you can get your free key here: http://developer.tradingeconomics.com 
+#
 
 ## Examples:
 * getForecastData(country, indicator, outType) - Return forecast values by country, by indicator, by country and indicator.    
