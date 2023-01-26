@@ -1,8 +1,11 @@
 from . import functions as fn
+import os
 
 def login(userkey = None):
     global apikey
     if userkey == None:
+        if 'apikey' in os.environ:
+            apikey = os.environ["apikey"]
         apikey = 'guest:guest'
     else:
         apikey = userkey
