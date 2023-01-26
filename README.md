@@ -5,11 +5,6 @@ The Trading Economics API provides you with direct access to 300.000 economic in
 
 
 
-**Learn More**
-
-https://tradingeconomics.com/api/
-
-
 **Documentation**
 
 http://docs.tradingeconomics.com/
