@@ -26,10 +26,9 @@ https://github.com/tradingeconomics/notebooks
 https://hub.docker.com/u/tradingeconomics
 
 
-**About us**
+**Learn More**
 
-Trading Economics provides its users with accurate information for 196 countries including historical data for more than 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. Our data is based on official sources, not third party data providers, and our facts are regularly checked for inconsistencies. TradingEconomics.com has received more than 1 billion page views from around the world.
-
+https://tradingeconomics.com/api/
 
 
 
