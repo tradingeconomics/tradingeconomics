@@ -6,12 +6,13 @@ def login(userkey = None):
     if userkey == None:
         if 'apikey' in os.environ:
             apikey = os.environ["apikey"]
-        apikey = 'guest:guest'
+        else:
+            apikey = 'guest:guest'
     else:
         apikey = userkey
     if apikey != 'guest:guest':
         fn.credCheck(apikey)
-    return 'You are logged in as a ' + apikey
+    return 'Logged with ' + apikey.split(",")[0]
 
 _event = []
 
