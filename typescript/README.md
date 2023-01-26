@@ -61,6 +61,8 @@ node app.js
 
 **Docker**
 
+Please pass your keys as environmental variables
+
 ```bash
 docker run --rm -it --init --name te-typescript -e key=guest -e secret=guest tradingeconomics/typescript:latest
 ```
