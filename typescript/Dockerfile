@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:alpine
 WORKDIR /tradingeconomics
 COPY . .
 RUN npm install --production

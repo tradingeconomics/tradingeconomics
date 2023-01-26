@@ -50,12 +50,23 @@ tsc app.ts
 
 **Run the app**
 
+Please change the keys to yours to remove guest limitations
+
 ```bash
 export key=guest
 export secret=guest 
 node app.js
 ```
 #
+
+**Docker**
+
+```bash
+docker run --rm -it --init --name te-typescript -e key=guest -e secret=guest tradingeconomics/typescript:latest
+```
+#
+
+
 
 ##
 
