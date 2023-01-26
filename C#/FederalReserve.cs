@@ -24,53 +24,53 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get fred categories
-            Console.WriteLine("**********Get federal reserve states**********");
+            Console.WriteLine("\n**********Get federal reserve states**********");
             var getFredStates = GetFredStates().Result;
             Console.WriteLine(getFredStates);
 
             // get fred per state
-            Console.WriteLine("**********Get federal reserve data per state**********");
+            Console.WriteLine("\n**********Get federal reserve data per state**********");
             var getFredCounty = GetFredCounty("arkansas").Result;
             Console.WriteLine(getFredCounty);
 
             // Filtering by symbol
-            Console.WriteLine("**********Get federal reserve data by symbol**********");
-            var getFredSymbol = GetFredSymbol("AGEXMAK2A647NCEN").Result;
+            Console.WriteLine("\n**********Get federal reserve data by symbol**********");
+            var getFredSymbol = GetFredSymbol("ALLMARGATTN").Result;
             Console.WriteLine(getFredSymbol);
 
             // Filtering by url
-            Console.WriteLine("**********Get federal reserve data by url**********");
+            Console.WriteLine("\n**********Get federal reserve data by url**********");
             var getFredUrl = GetFredUrl("/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html").Result;
             Console.WriteLine(getFredUrl);
 
             // Get fred data by country
-            Console.WriteLine("**********Get federal reserve country**********");
+            Console.WriteLine("\n**********Get federal reserve country**********");
             var getFredSnapCountry = GetFredSnapCountry("united states").Result;
             Console.WriteLine(getFredSnapCountry);
 
             // Get fred data by state
-            Console.WriteLine("**********Get federal reserve by state**********");
+            Console.WriteLine("\n**********Get federal reserve by state**********");
             var getFredSnapState = GetFredSnapState("tennessee").Result;
             Console.WriteLine(getFredSnapState);
 
 
             // Get fred data by county
-            Console.WriteLine("**********Get federal reserve by county**********");
+            Console.WriteLine("\n**********Get federal reserve by county**********");
             var getFredSnapCounty = GetFredSnapCounty("arkansas").Result;
             Console.WriteLine(getFredSnapCounty);
 
             // Get fred data by country and page
-            Console.WriteLine("**********Get federal reserve by country and page**********");
+            Console.WriteLine("\n**********Get federal reserve by country and page**********");
             var getFredSnapCountryPage = GetFredSnapCountryPage("united states", 2).Result;
             Console.WriteLine(getFredSnapCountryPage);
 
             // Get fred historical by symbol 
-            Console.WriteLine("**********Get federal reserve historical by symbol**********");
+            Console.WriteLine("\n**********Get federal reserve historical by symbol**********");
             var getFredHistorical = GetFredHistorical( "RACEDISPARITY005007").Result;
             Console.WriteLine(getFredHistorical);
 
             // Get fred historical by symbols 
-            Console.WriteLine("**********Get federal reserve historical by symbols**********");
+            Console.WriteLine("\n**********Get federal reserve historical by symbols**********");
             var getFredHistoricalSymbols = GetFredHistoricalSymbols(new string[] { "RACEDISPARITY005007", "2020RATIO002013" }).Result;
             Console.WriteLine(getFredHistoricalSymbols);
 

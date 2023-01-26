@@ -24,17 +24,17 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get Intraday prices for a single market
-            Console.WriteLine("**********Get Intraday prices for a single market**********");
+            Console.WriteLine("\n**********Get Intraday prices for a single market**********");
             var getIntradaySymbol = GetIntradaySymbol("aapl:us").Result;
             Console.WriteLine(getIntradaySymbol);
 
             // Filter intraday prices by date and hour
-            Console.WriteLine("**********Get intraday prices by date and hour**********");
-            var getIntradayDateHour = GetIntradayDateHour("indu:ind", new DateTime(2015, 01, 01, 15, 00, 0)).Result;
+            Console.WriteLine("\n**********Get intraday prices by date and hour**********");
+            var getIntradayDateHour = GetIntradayDateHour("aapl:us", new DateTime(2017, 08, 10, 15, 30, 0)).Result;
             Console.WriteLine(getIntradayDateHour);
 
             // Filter intraday prices by date
-            Console.WriteLine("**********Get intraday data by symbol between dates**********");
+            Console.WriteLine("\n**********Get intraday data by symbol between dates**********");
             var getIntradaySymbolDates = GetIntradaySymbolDates("aapl:us", new DateTime(2015, 03, 01), new DateTime(2015, 12, 31)).Result;
             Console.WriteLine(getIntradaySymbolDates);
 

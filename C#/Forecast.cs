@@ -24,33 +24,33 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get forecasts for a specific country
-            Console.WriteLine("***********Get forecasts for a specific country***********");
-            var getForecastByCountry = GetForecastByCountry("united states").Result;
+            Console.WriteLine("\n***********Get forecasts for a specific country***********");
+            var getForecastByCountry = GetForecastByCountry("mexico").Result;
             Console.WriteLine(getForecastByCountry);
 
             // get forecasts for multiple countries 
-            Console.WriteLine("***********Get forecasts for multiple countries***********");
-            var getForecastsByCountries = GetForecastsByCountries(new string[] { "united states" }).Result;
+            Console.WriteLine("\n***********Get forecasts for multiple countries***********");
+            var getForecastsByCountries = GetForecastsByCountries(new string[] { "mexico","sweden" }).Result;
             Console.WriteLine(getForecastsByCountries);
 
             // get forecasts for a specific indicator
-            Console.WriteLine("***********Get forecasts for a specific indicator***********");
+            Console.WriteLine("\n***********Get forecasts for a specific indicator***********");
             var getForecastsByIndicator = GetForecastsByIndicator("gdp").Result;
             Console.WriteLine(getForecastsByIndicator);
 
             // get forecasts for multiple indicators
-            Console.WriteLine("***********Get forecasts for multiple indicators***********");
+            Console.WriteLine("\n***********Get forecasts for multiple indicators***********");
             var getForecastsMultiIndicator = GetForecastsMultiIndicator(new string[] { "gdp", "population" }).Result;
             Console.WriteLine(getForecastsMultiIndicator);
         
             // get forecasts by country and indicator
-            Console.WriteLine("***********Get forecasts for country and indicator***********");
-            var getForecastsByCountryIndicator = GetForecastsByCountryIndicator( "united states" ,  "gdp" ).Result;
+            Console.WriteLine("\n***********Get forecasts for country and indicator***********");
+            var getForecastsByCountryIndicator = GetForecastsByCountryIndicator( "mexico" ,  "gdp" ).Result;
             Console.WriteLine(getForecastsByCountryIndicator);
 
             //get forecasts by countries and indicators
-            Console.WriteLine("***********Get forecasts for countries and indicators********");
-            var getForecastsByCountriesIndicators = GetForecastsByCountriesIndicators(new string[] { "united states", "china" }, new string[] { "gdp", "population" }).Result;
+            Console.WriteLine("\n***********Get forecasts for countries and indicators********");
+            var getForecastsByCountriesIndicators = GetForecastsByCountriesIndicators(new string[] { "mexico", "sweden" }, new string[] { "gdp", "population" }).Result;
             Console.WriteLine(getForecastsByCountriesIndicators);
 
             Console.ReadLine();

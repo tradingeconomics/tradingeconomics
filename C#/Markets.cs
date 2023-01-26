@@ -24,53 +24,53 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get markets commodities
-            Console.WriteLine("***********Get commodities***********");
+            Console.WriteLine("\n***********Get commodities***********");
             var getCommodities = GetCommodities().Result;
             Console.WriteLine(getCommodities);
 
             // get markets currency
-            Console.WriteLine("***********Get currency***********");
+            Console.WriteLine("\n***********Get currency***********");
             var getCurrency = GetCurrency().Result;
             Console.WriteLine(getCurrency);
 
             // get currency crosses
-            Console.WriteLine("***********Get currency crosses***********");
+            Console.WriteLine("\n***********Get currency crosses***********");
             var getCurrencyCrosses = GetCurrencyCrosses().Result;
             Console.WriteLine(getCurrencyCrosses);
 
             // get markets indexes
-            Console.WriteLine("***********Get markets indexes***********");
+            Console.WriteLine("\n***********Get markets indexes***********");
             var getMarketsBonds = GetMarketsBonds().Result;
             Console.WriteLine(getMarketsBonds);
 
 
             // get markets bond
-            Console.WriteLine("***********Get markets indexes***********");
+            Console.WriteLine("\n***********Get markets indexes***********");
             var getMarketIndex = GetMarketIndex().Result;
             Console.WriteLine(getMarketIndex);
 
             // get markets for multiple symbols 
-            Console.WriteLine("***********Get markets for multiple symbols***********");
-            var getMarketSymbols = GetMarketSymbols(new string[] { "aapl:us","indu:ind" }).Result;
+            Console.WriteLine("\n***********Get markets for multiple symbols***********");
+            var getMarketSymbols = GetMarketSymbols(new string[] { "aapl:us", "gac:com" }).Result;
             Console.WriteLine(getMarketSymbols);
 
             // get markets for a specific symbol
-            Console.WriteLine("***********Get markets for a specific symbol***********");
+            Console.WriteLine("\n***********Get markets for a specific symbol***********");
             var getMarketSymbol = GetMarketSymbol("aapl:us").Result;
             Console.WriteLine(getMarketSymbol);
 
             // get markets peers 
-            Console.WriteLine("***********Get markets peers***********");
+            Console.WriteLine("\n***********Get markets peers***********");
             var getMarketsPeers = GetMarketsPeers("aapl:us").Result;
             Console.WriteLine(getMarketsPeers);
 
             // get stock market index components
-            Console.WriteLine("***********Get stock market index components***********");
+            Console.WriteLine("\n***********Get stock market index components***********");
             var getMarketsComponents = GetMarketsComponents("psi20:ind").Result;
             Console.WriteLine(getMarketsComponents);
 
             //get stock market by country and page number
-            Console.WriteLine("***********Get stock market by country and page number********");
+            Console.WriteLine("\n***********Get stock market by country and page number********");
             var getMarketsByCountryPage = GetMarketsByCountryPage( "united states").Result;
             Console.WriteLine(getMarketsByCountryPage);
 

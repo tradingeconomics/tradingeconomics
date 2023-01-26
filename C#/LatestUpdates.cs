@@ -25,12 +25,12 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get a list of the lastest updates
-            Console.WriteLine("***********Get the latest updates***********");
+            Console.WriteLine("\n***********Get the latest updates***********");
             var getLatestUpdates = GetLatestUpdates().Result;
             Console.WriteLine(getLatestUpdates);
 
             // get latest updates since a specific date
-            Console.WriteLine("***********About to get latest updates by a specific date***********");
+            Console.WriteLine("\n***********About to get latest updates by a specific date***********");
             var getLatestUpdatesByDate = GetLatestUpdatesByDate(new DateTime(2015, 03, 01)).Result;
             Console.WriteLine(getLatestUpdatesByDate);
 

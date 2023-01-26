@@ -25,27 +25,27 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get lastest news
-            Console.WriteLine("**********Get lastest news**********");
+            Console.WriteLine("\n**********Get lastest news**********");
             var getNews = GetNews().Result;
             Console.WriteLine(getNews);
 
             // get lastest news by country, or countries
-            Console.WriteLine("**********Get lastest news by country**********");
-            var getNewsByCountry = GetNewsByCountry(new string[] { "united states" }).Result;
+            Console.WriteLine("\n**********Get lastest news by country**********");
+            var getNewsByCountry = GetNewsByCountry(new string[] { "mexico" }).Result;
             Console.WriteLine(getNewsByCountry);
 
             // Get latest news by indicator, or indicators
-            Console.WriteLine("**********Get latest news by indicator**********");
+            Console.WriteLine("\n**********Get latest news by indicator**********");
             var getNewsByIndicator = GetNewsByIndicator(new string[] { "inflation rate" }).Result;
             Console.WriteLine(getNewsByIndicator);
 
             // Get news by country and indicator, or countries and indicators
-            Console.WriteLine("**********Get news by country and indicator**********");
-            var getNewsCountryIndicator = GetNewsCountryIndicator(new string[] { "united states" }, new string[] { "inflation rate" }).Result;
+            Console.WriteLine("\n**********Get news by country and indicator**********");
+            var getNewsCountryIndicator = GetNewsCountryIndicator(new string[] { "mexico" }, new string[] { "inflation rate" }).Result;
             Console.WriteLine(getNewsCountryIndicator);
 
             // Paginate news list by specifying start index and list size
-            Console.WriteLine("**********Get start index and list size**********");
+            Console.WriteLine("\n**********Get start index and list size**********");
             var getNewsList = GetNewsList(4, 2).Result;
             Console.WriteLine(getNewsList);
 

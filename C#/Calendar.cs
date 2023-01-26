@@ -15,53 +15,54 @@ namespace CSharpExamples
         static void Main(string[] args)
         {
             // set the client key
-            Console.WriteLine("Provide a API key; otherwise, press ENTER to use the default test key...");
+            Console.WriteLine("\nProvide a API key; otherwise, press ENTER to use the default test key...");
+
             string k = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(k))
                 _clientKey = k;
 
             // get  calendar events
-            Console.WriteLine("About to get calendar events");
+            Console.WriteLine("\nAbout to get calendar events");
             var getCalendarResult = GetCalendarEvents().Result;
             Console.WriteLine(getCalendarResult);
 
             // get calendar events between two dates
-            Console.WriteLine("About to get all calendar events between dates");
+            Console.WriteLine("\nAbout to get all calendar events between dates");
             var getCalendarBetweenDatesResult = GetCalendarEventsByDate(new DateTime(2016, 12, 02), new DateTime(2016, 12, 03)).Result;
             Console.WriteLine(getCalendarBetweenDatesResult);
 
             // get  calendar events for a specific country
-            Console.WriteLine("About to get calendar events for a specific country");
+            Console.WriteLine("\nAbout to get calendar events for a specific country");
             var getCalendarForCountryResult = GetCalendarEventsByCountries("united states").Result;
             Console.WriteLine(getCalendarForCountryResult);
 
             // get calendar events for a set of countries
-            Console.WriteLine("About to get calendar events for a set of countries");
+            Console.WriteLine("\nAbout to get calendar events for a set of countries");
             var getCalendarForCountriesResult = GetCalendarEventsByCountries("united states", "china").Result;
             Console.WriteLine(getCalendarForCountriesResult);
 
             // get calendar events by country/countries and dates
-            Console.WriteLine("About to get calendar events by date and countries");
+            Console.WriteLine("\nAbout to get calendar events by date and countries");
             var getCalendarForCountriesAndDatesResult = GetCalendarEventsByCountriesAndDates(new DateTime(2016, 02, 01), new DateTime(2016, 02, 10), "united states", "china").Result;
             Console.WriteLine(getCalendarForCountriesAndDatesResult);
 
             // get calendar events by indicator
-            Console.WriteLine("About to get calendar events by economics indicator");
+            Console.WriteLine("\nAbout to get calendar events by economics indicator");
             var getCalendarForIndicatorResult = GetCalendarEventsByIndicator("inflation rate").Result;
             Console.WriteLine(getCalendarForIndicatorResult);
 
             // get calendar events by indicator and dates
-            Console.WriteLine("About to get calendar events by economics indicator and dates");
+            Console.WriteLine("\nAbout to get calendar events by economics indicator and dates");
             var getCalendarForIndicatorAndDatesResult = GetCalendarEventsByIndicatorAndDates(new DateTime(2016, 03, 01), new DateTime(2016, 03, 03), "inflation rate").Result;
             Console.WriteLine(getCalendarForIndicatorAndDatesResult);
 
             // get calendar events by indicator, countries and dates
-            Console.WriteLine("About to get calendar events by economics indicator, countries and dates");
-            var getCalendarForIndicatorCountriesAndDatesResult = GetCalendarEventsByIndicatorCountriesAndDates(new DateTime(2016, 12, 01), new DateTime(2017, 02, 25), new string[] { "united states" }, "inflation rate").Result;
+            Console.WriteLine("\nAbout to get calendar events by economics indicator, countries and dates");
+            var getCalendarForIndicatorCountriesAndDatesResult = GetCalendarEventsByIndicatorCountriesAndDates(new DateTime(2016, 12, 01), new DateTime(2017, 02, 25), new string[] { "united states" }, "initial jobless claims").Result;
             Console.WriteLine(getCalendarForIndicatorCountriesAndDatesResult);
 
             // get calendar events by id
-            Console.WriteLine("About to get calendar events by id");
+            Console.WriteLine("\nAbout to get calendar events by id");
             var getCalendarByIdResult = GetCalendarEventsById(174108, 160025, 160030).Result;
             Console.WriteLine(getCalendarByIdResult);
 

@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>CSharpExamples.FederalReserve</StartupObject>
+    <StartupObject>CSharpExamples.WBIndCoun</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,7 +63,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Articles.cs" />
     <Compile Include="Calendar.cs" />
     <Compile Include="Comtrade.cs" />
     <Compile Include="Earnings.cs" />
