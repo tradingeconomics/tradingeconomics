@@ -1,7 +1,7 @@
 
 # Trading Economics - Python
 
-![version](https://img.shields.io/badge/version-3.6-green.svg)
+![version](https://img.shields.io/badge/version-3.8-green.svg)
 
 The Trading Economics Application Python package provides direct access to our data. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
 
