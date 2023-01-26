@@ -18,33 +18,33 @@ namespace CSharpExamples
         static void Main(string[] args)
         {
             // set the client key
-            Console.WriteLine("Provide a API key; otherwise, press ENTER to use the default test key...");
+            Console.WriteLine("\nProvide a API key; otherwise, press ENTER to use the default test key...");
             string k = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(k))
                 _clientKey = k;
 
             // get comtrade categories
-            Console.WriteLine("**********Get comtrade categories**********");
+            Console.WriteLine("\n**********Get comtrade categories**********");
             var getComCategories = GetComCategories().Result;
             Console.WriteLine(getComCategories);
 
             // get comtrade countries 
-            Console.WriteLine("**********Get comtrade countries **********");
+            Console.WriteLine("\n**********Get comtrade countries **********");
             var getComCountries = GetComCountries().Result;
             Console.WriteLine(getComCountries);
 
             // Filtering by the country and page number
-            Console.WriteLine("**********Get comtrade by country and page number**********");
+            Console.WriteLine("\n**********Get comtrade by country and page number**********");
             var getComCountryPage = GetComCountryPage("portugal", 4).Result;
             Console.WriteLine(getComCountryPage);
 
             // get comtrade between two countries and page number
-            Console.WriteLine("**********Get comtrade countries and page number**********");
+            Console.WriteLine("\n**********Get comtrade countries and page number**********");
             var getComBetweenCountries = GetComBetweenCountries("portugal", "spain", 2).Result;
             Console.WriteLine(getComBetweenCountries);
 
             // Get comtrade historical data by symbol
-            Console.WriteLine("**********Get comtrade historical data by symbol**********");
+            Console.WriteLine("\n**********Get comtrade historical data by symbol**********");
             var getComHistorical = GetComHistorical("PRTESP24031").Result;
             Console.WriteLine(getComHistorical);
 

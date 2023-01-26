@@ -24,17 +24,17 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get world bank categories
-            Console.WriteLine("**********Get world bank categories**********");
+            Console.WriteLine("\n**********Get world bank categories**********");
             var getWB = GetWB().Result;
             Console.WriteLine(getWB);
 
             // Filtering by category
-            Console.WriteLine("**********Get WB by category**********");
+            Console.WriteLine("\n**********Get WB by category**********");
             var getWBCategory = GetWBCategory( "Education" ).Result;
             Console.WriteLine(getWBCategory);
 
             // Filtering by the category and page number
-            Console.WriteLine("**********Get WB by category and page number**********");
+            Console.WriteLine("\n**********Get WB by category and page number**********");
             var getWBCategoryPage = GetWBCategoryPage("Education", 4).Result;
             Console.WriteLine(getWBCategoryPage);
        

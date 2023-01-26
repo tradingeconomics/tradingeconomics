@@ -24,7 +24,7 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // Historical data for a specific indicator
-            Console.WriteLine("**********Get historical data for a specific indicator**********");
+            Console.WriteLine("\n**********Get historical data for a specific indicator**********");
             var getWBHistorical = GetWBHistorical(new string[] { "usa.fr.inr.rinr" }).Result;
             Console.WriteLine(getWBHistorical);
 

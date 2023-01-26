@@ -24,22 +24,17 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get historical markets data by market
-            Console.WriteLine("**********Get historical markets data by symbol**********");
+            Console.WriteLine("\n**********Get historical markets data by symbol**********");
             var getHistoricalBySymbol = GetHistoricalBySymbol("aapl:us").Result;
             Console.WriteLine(getHistoricalBySymbol);
 
             // get historical markets data by multiple markets
-            Console.WriteLine("**********Get historical markets data by multiple symbols**********");
-            var getHistoricalBySymbols = GetHistoricalBySymbols(new string[] { "aapl:us", "indu:ind" }).Result;
+            Console.WriteLine("\n**********Get historical markets data by multiple symbols**********");
+            var getHistoricalBySymbols = GetHistoricalBySymbols(new string[] { "aapl:us", "gac:com" }).Result;
             Console.WriteLine(getHistoricalBySymbols);
 
-            // get historical markets data by date
-            Console.WriteLine("**********Get historical markets data by date**********");
-            var getHistoricalSymbolDate = GetHistoricalSymbolDate( "indu:ind" , new DateTime(2015, 01, 01)).Result;
-            Console.WriteLine(getHistoricalSymbolDate);
-
             // get historical markets data within a date interval
-            Console.WriteLine("**********Get historical markets data between dates**********");
+            Console.WriteLine("\n**********Get historical markets data between dates**********");
             var getHistoricalSymbolBetweenDates = GetHistoricalSymbolBetweenDates("aapl:us", new DateTime(2015, 03, 01), new DateTime(2015, 12, 31)).Result;
             Console.WriteLine(getHistoricalSymbolBetweenDates);
 
@@ -64,19 +59,6 @@ namespace CSharpExamples
         public async static Task<string> GetHistoricalBySymbols(string[] symbols)
         {
             return await HttpRequester($"/markets/historical/{string.Join(",", symbols)}");
-        }
-
-        /// <summary>
-        /// Get historical data by symbol and start date
-        /// </summary>
-        /// <param name="symbol">symbol</param>
-        /// <param name="startDate">Start date if needed</param>
-        /// <returns>A task that will be resolved in a string with the request result</returns>
-        public async static Task<string> GetHistoricalSymbolDate(string symbol, DateTime? startDate)
-        {
-         
-            return await HttpRequester($"/markets/historical/{symbol}?{startDate.Value.ToString("yyyy-MM-dd")}");
-
         }
 
 

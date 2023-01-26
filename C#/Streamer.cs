@@ -50,7 +50,7 @@ namespace CSharpExamples
             {
                 using (var cws = new ClientWebSocket())
                 {
-                    await cws.ConnectAsync(new Uri($"ws://stream.tradingeconomics.com/?client={_clientKey}"), CancellationToken.None);
+                    await cws.ConnectAsync(new Uri($"wss://stream.tradingeconomics.com/?client={_clientKey}"), CancellationToken.None);
 
                     if (cws.State == WebSocketState.Open)
                     {

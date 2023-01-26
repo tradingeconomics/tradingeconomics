@@ -24,23 +24,23 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get a list of credit ratings
-            Console.WriteLine("***********Get all ratings***********");
+            Console.WriteLine("\n***********Get all ratings***********");
             var getRatings = GetRatings().Result;
             Console.WriteLine(getRatings);
 
             // get a list of ratings from a country
-            Console.WriteLine("***********Get a list of ratings of a country***********");
-            var getRatingsByCountry = GetRatingsByCountry("united states").Result;
+            Console.WriteLine("\n***********Get a list of ratings of a country***********");
+            var getRatingsByCountry = GetRatingsByCountry("mexico").Result;
             Console.WriteLine(getRatingsByCountry);
 
             // get ratings given countries 
-            Console.WriteLine("***********Get a list of ratings for multiple countries***********");
-            var getRatingsByCountries = GetRatingsByCountries(new string[] { "united states", "portugal" }).Result;
+            Console.WriteLine("\n***********Get a list of ratings for multiple countries***********");
+            var getRatingsByCountries = GetRatingsByCountries(new string[] { "mexico", "sweden" }).Result;
             Console.WriteLine(getRatingsByCountries);
 
             // get historical ratings for multiple countries 
-            Console.WriteLine("***********Get historical data of ratings for multiple countries***********");
-            var getHistoricalRatings = GetHistoricalRatings(new string[] { "united states", "portugal" }).Result;
+            Console.WriteLine("\n***********Get historical data of ratings for multiple countries***********");
+            var getHistoricalRatings = GetHistoricalRatings(new string[] { "mexico", "sweden" }).Result;
             Console.WriteLine(getHistoricalRatings);
 
             Console.ReadLine();
