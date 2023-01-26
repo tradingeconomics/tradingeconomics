@@ -1,0 +1,25 @@
+{
+  "name": "tradingeconomics",
+  "version": "1.0.0",
+  "description": "Sample Typescript App for the Trading Economics API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tradingeconomics/tradingeconomics.git"
+  },
+  "author": "Trading Economics",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tradingeconomics/tradingeconomics/issues"
+  },
+  "homepage": "https://github.com/tradingeconomics/tradingeconomics#readme",
+  "dependencies": {
+    "tradingeconomics-stream": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18"
+  }
+}

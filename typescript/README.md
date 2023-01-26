@@ -1,15 +1,9 @@
 # Trading Economics - Typescript - Market Data Stream
 
-Trading Economics provides its users with real time quotes, delayed feeds and historical data for currencies, commodities, stock indexes, share prices and bond yields. 
+Trading Economics provides its users with economic indicators and quotes, delayed feeds and historical data for currencies, commodities, stock indexes, share prices and bond yields. 
 
-
-## Installation
-
-```bash
-yarn add tradingeconomics-stream
-```
-
-## Usage
+#
+## Example
 
 Create an app.ts file with the contents:
 
@@ -17,10 +11,14 @@ Create an app.ts file with the contents:
 ```typescript
 import { TEClient} from 'tradingeconomics-stream'
 
+const key = process.env.key;
+const secret = process.env.secret;
+console.log("Using credentials", key, secret)
+
 const subscribe = (asset: string) => {
   const client = new TEClient({
-    key: 'your-key',
-    secret: 'your-secret',
+    key: key,
+    secret: secret,
   })
 
   client.subscribe(asset)
@@ -30,14 +28,34 @@ const subscribe = (asset: string) => {
   })
 }
 
-subscribe('UKX:IND')
+subscribe('EURUSD:CUR')
+```
+
+#
+**Install Packages**
+
+```bash
+npm install 'tradingeconomics-stream'
+npm install -g typescript
+npm i --save-dev @types/node
 ```
 
 
-**Running it**
+#
+**Compile Typescript**
 
-npx ts-node app.ts
+```bash
+tsc app.ts
+```
 
+**Run the app**
+
+```bash
+export key=guest
+export secret=guest 
+node app.js
+```
+#
 
 ##
 
@@ -48,6 +66,7 @@ https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs
 
 ##
 
+#
 
 **Acknowledgements** 
 

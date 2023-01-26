@@ -1,9 +1,13 @@
 import { TEClient} from 'tradingeconomics-stream'
 
+const key = process.env.key;
+const secret = process.env.secret;
+console.log("Using credentials", key, secret)
+
 const subscribe = (asset: string) => {
   const client = new TEClient({
-    key: 'your-key',
-    secret: 'your-secret',
+    key: key,
+    secret: secret,
   })
 
   client.subscribe(asset)
@@ -13,4 +17,4 @@ const subscribe = (asset: string) => {
   })
 }
 
-subscribe('UKX:IND')
+subscribe('EURUSD:CUR')
