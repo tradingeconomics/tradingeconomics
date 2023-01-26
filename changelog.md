@@ -138,9 +138,9 @@
 ### *Packages latest versions:*
 Package | Version
 :---: |:---:
-*Python* |`0.2.990` 
-*Node* | `1.0.13`
-*R* | `0.2.8`
+*Python* |`3.6` 
+*Node* | `2.1.0`
+*R* | `0.2.12`
 
 
 
