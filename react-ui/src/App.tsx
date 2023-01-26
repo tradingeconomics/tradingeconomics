@@ -63,8 +63,13 @@ function App() {
     <NextUIProvider theme={lightTheme}>
       {!events.length && <ProgressBar></ProgressBar>}
       <Container>
-        <Text>
-          Choose Country<Countries country_list={countries} selectedCountry={selectedCountry} setSelectedCountry={setCountry} /></Text>
+        <Text h5>
+          Choose Country
+        </Text>
+        <Countries country_list={countries} selectedCountry={selectedCountry} setSelectedCountry={setCountry} />
+        <Text h3 style={{'textAlign':'center'}}>
+          Events Calendar
+        </Text>
         <Events events={events}/>
       </Container>
     </NextUIProvider>
