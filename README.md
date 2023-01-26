@@ -9,6 +9,9 @@ The Trading Economics API provides you with direct access to 300.000 economic in
 
 http://docs.tradingeconomics.com/
 
+**GitHub Examples**
+
+https://github.com/tradingeconomics/tradingeconomics
 
 
 **Python Jupyter Notebooks**
