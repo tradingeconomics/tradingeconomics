@@ -3,9 +3,8 @@ WORKDIR /tradingeconomics
 COPY . .
 RUN npm install --production
 
-# Please change this to your keys
-ENV key=guest
-ENV secret=guest
+# Please change this to your API Credentials
+ENV apikey='guest:guest'
 
 CMD ["node", "app.js"]
 
@@ -15,7 +14,7 @@ CMD ["node", "app.js"]
 # docker build -t tradingeconomics/typescript:latest  .
 
 # Run
-# docker run --rm -it --init --name te-typescript -e key=guest -e secret=guest tradingeconomics/typescript:latest
+# docker run --rm -it --init --name te-typescript -e apikey='guest:guest' tradingeconomics/typescript:latest
 
 # Push
 # docker push tradingeconomics/typescript:latest
