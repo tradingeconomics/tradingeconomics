@@ -17,7 +17,7 @@ function login(apikey = null) {
   }
   
   global.apikey = apikey;
-  return console.log("you are logged in as " + apikey);
+  return console.log("You are logged in as " + apikey);
 }
 
 module.exports.login = login;
