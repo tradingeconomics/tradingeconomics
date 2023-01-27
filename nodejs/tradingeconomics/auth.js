@@ -5,8 +5,8 @@ global.apikey;
 
 function login(apikey = null) {
   if (apikey == null) {
-    if (process.env.APIKEY) {
-      apikey = process.env.APIKEY;
+    if (process.env.apikey) {
+      apikey = process.env.apikey;
     } else {
       apikey = "guest:guest";
     }
