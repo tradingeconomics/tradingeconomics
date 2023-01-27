@@ -138,8 +138,8 @@
 ### *Packages latest versions:*
 Package | Version
 :---: |:---:
-*Python* |`3.8` 
-*Node* | `2.2.0`
+*Python* |`3.9` 
+*Node* | `2.2.1`
 *R* | `0.2.12`
 
 

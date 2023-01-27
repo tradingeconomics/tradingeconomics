@@ -1,8 +1,12 @@
 ## Description
-Node package on how to access Trading Economics API data.
+The Trading Economics NPM package provides direct access to our data. It allows you to request millions of rows of economic historical data, to query our real-time economic calendar and to subscribe to updates. 
+
+#
 
 ## Documentation
 https://docs.tradingeconomics.com/?javascript#introduction
+
+#
 
 ## QuickStart
 First install the package:
@@ -11,28 +15,40 @@ First install the package:
 npm install tradingeconomics
 ```
 
+#
+
 ## Usage
   
-
- - First import the package and start using it. 
+ - ### Import the package. 
 
 ```javascript
 const te = require('tradingeconomics');
 ```
-
- - Login if you have a client key or leave it blank and sample of data will be provided.
-
-**Note:** You can get your key here: http://developer.tradingeconomics.com 
+ -  ### Authentication
+    - Login if you have a client key or leave it blank and a sample of data will be provided.
+    - Note: Get your key here: http://developer.tradingeconomics.com 
 
 ```javascript
 te.login();
 ```
 or
 ```javascript
-te.login('Client Key Here');
+te.login('key:secret');
 ```
 
- - Use the functions to get data from Markets, Indicators, Economic Calendar, Forecasts, World Bank, Comtrade, Federal Reserve, and even the latest news.
+  - ### Authentication using environment variable
+```javascript
+apikey="key:secret" node app.js
+```
+ - ### Request data
+    - Use the functions to get data from Markets, Indicators, Economic Calendar, Forecasts, World Bank, Comtrade, Federal Reserve, and even the latest news.
+    - Know more about other methods on our [docs](https://docs.tradingeconomics.com/?javascript#introduction)
+```javascript
+te.getCalendar().then((data) => console.log(data));
+```
 
+#
 
-### Know more about other methods on our [docs](https://docs.tradingeconomics.com/?javascript#introduction)
+## Examples
+
+https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs/Examples

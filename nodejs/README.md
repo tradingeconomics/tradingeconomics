@@ -1,8 +1,8 @@
 ## Trading Economics for NodeJS
 
-![version](https://img.shields.io/badge/version-2.2.0-green.svg)
+![version](https://img.shields.io/badge/version-2.2.1-green.svg)
 
-The Trading Economics NPM package provides direct access to our data. It allows you to request millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. 
+The Trading Economics NPM package provides direct access to our data. It allows you to request millions of rows of economic historical data, to query our real-time economic calendar and to subscribe to updates. 
 
 
 #
@@ -41,6 +41,13 @@ const te = require('tradingeconomics');
 te.login('guest:guest'); # replace with your key
 ```
 
+- Authentication with Environment Variable
+
+```javascript
+apikey="key:secret" node app.js
+```
+
+#
 
 ## Examples
 
