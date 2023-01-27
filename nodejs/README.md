@@ -36,15 +36,16 @@ const te = require('tradingeconomics');
 
 ## Authentication
 
-
-```javascript
-te.login('guest:guest'); # replace with your key
-```
-
-- Authentication with Environment Variable
+Authentication using Environment Variable (more secure)
 
 ```javascript
 apikey="key:secret" node app.js
+```
+
+Authentication using inline code
+
+```javascript
+te.login('guest:guest'); # replace with your key
 ```
 
 #
@@ -53,8 +54,8 @@ apikey="key:secret" node app.js
 
 ```javascript
 te.getHistoricalData(country = 'mexico', indicator = 'gdp').then(function(data){
-        console.log(data)       
-    });
+  console.log(data)       
+});
 ```
 
 ```javascript
@@ -81,8 +82,10 @@ https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs/Examples
 
 ## Docker
 
+Please set apikey with your credetials
+
 ```javascript
-docker run --rm -it --init --name te-nodejs tradingeconomics/nodejs:latest sh
+docker run --rm -it --init --name te-nodejs -e apikey='guest:guest' tradingeconomics/nodejs:latest sh
 ```
 
 ```javascript

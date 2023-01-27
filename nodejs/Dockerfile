@@ -8,7 +8,7 @@ RUN npm install --save tradingeconomics
 # docker build -t tradingeconomics/nodejs:latest  .
 
 # Run
-# docker run --rm -it --init --name te-nodejs tradingeconomics/nodejs:latest sh
+# docker run --rm -it --init --name te-nodejs -e apikey='guest:guest' tradingeconomics/nodejs:latest sh
 
 # Inside the container
 # ls
