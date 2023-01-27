@@ -12,7 +12,7 @@ def login(userkey = None):
         apikey = userkey
     if apikey != 'guest:guest':
         fn.credCheck(apikey)
-    return 'Logged with ' + apikey.split(",")[0]
+    return 'Logged with ' + apikey.split(":")[0]
 
 _event = []
 

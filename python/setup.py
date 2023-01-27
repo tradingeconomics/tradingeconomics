@@ -10,7 +10,7 @@ def readme():
 setup(
   name = 'tradingeconomics',
   packages = find_packages(exclude=['tests*']),  
-  version = '3.8',
+  version = '3.9',
   description = 'Trading Economics API',
   long_description =readme(),
   long_description_content_type='text/x-rst',
@@ -18,7 +18,7 @@ setup(
   author_email = 'support@tradingeconomics.com',
   license = 'MIT',
   url = 'https://github.com/tradingeconomics/tradingeconomics/python', 
-  download_url = 'https://github.com/tradingeconomics/tradingeconomics/raw/master/python/dist/tradingeconomics-3.8.zip',
+  download_url = 'https://github.com/tradingeconomics/tradingeconomics/raw/master/python/dist/tradingeconomics-3.9.zip',
   keywords = ['tradingeconomics', 'data'], 
   classifiers = [ 'Programming Language :: Python :: 3',
                 'Programming Language :: Python :: 3.2',
