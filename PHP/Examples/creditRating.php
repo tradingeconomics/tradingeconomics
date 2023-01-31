@@ -4,9 +4,9 @@ $urls = array(
     //To get a list of all credit ratings
     'https://api.tradingeconomics.com/ratings',
     //To get ratings by country or countries
-    'https://api.tradingeconomics.com/ratings/united%20states',
+    'https://api.tradingeconomics.com/ratings/mexico',
     //To get a historical ratings by country or countries
-    'https://api.tradingeconomics.com/ratings/historical/united%20states,portugal'
+    'https://api.tradingeconomics.com/ratings/historical/mexico,sweden'
 ); 
 $headers = array(
     "Accept: application/xml",

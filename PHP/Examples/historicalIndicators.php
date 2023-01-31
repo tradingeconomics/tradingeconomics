@@ -2,15 +2,15 @@
  
 $urls = array(
     //To get a specific country and indicator
-    'https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp',
+    'https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp',
     //To get only a start date for your historical data
-    'https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp/2013-01-01',
+    'https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp/2013-01-01',
     //To get a start date and end date
-    'https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp/2015-01-01/2015-12-31',
+    'https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp/2015-01-01/2015-12-31',
     //To get multiple indicators for specific country
-    'https://api.tradingeconomics.com/historical/country/united%20states/indicator/gdp,population',
+    'https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp,population',
     //To get specific indicator for multiple countries
-    'https://api.tradingeconomics.com/historical/country/united%20states,china/indicator/gdp',
+    'https://api.tradingeconomics.com/historical/country/mexico,sweden/indicator/gdp',
     //To get historical data by ticker
     'https://api.tradingeconomics.com/historical/ticker/USURTOT/2015-03-01',
 ); 
