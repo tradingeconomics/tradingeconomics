@@ -4,38 +4,22 @@
 // Pacakge Installation: npm install tradingeconomics
 const te = require('tradingeconomics')
 
-// Login with client key or leave it blank, you can get your free key here: http://developer.tradingeconomics.com
-// Note: without a client key only a small sample of data will be given.
-te.login()
-
-//===============================================================================================================
-//Get Historical data from markets by symbol, you can pass dates parameters to get a specific data (start_date / end_date with date format yyyy/mm/dd)
-
-te.getHistoricalMarkets((symbol = 'aapl:us'))
-  .then((data) => {
-    console.log('Historical by symbol:', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-te.getHistoricalMarkets(
-  (symbol = 'aapl:us'),
-  (start_date = '2018-02-02'),
-  (end_date = '2019-02-02')
-)
-  .then((data) => {
-    console.log('Historical by symbol and dates', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//Get historical data by multiple symbols
-
-async function getHistDataBySymbol(...symbols) {
+const MarketsHistExample = async () => {
   try {
-    const data = await te.getHistoricalMarkets((symbol = symbols))
-    console.log('Historical data by symbol:', '\n', data)
-  } catch (error) {
-    console.log(error)
+    // Login with client key or leave it blank and a sample of data will be provided, you can get your free key here: http://developer.tradingeconomics.com
+    await te.login();
+
+    //Get Historical data from markets by symbol, you can pass dates parameters to get a specific data (start_date / end_date with date format yyyy/mm/dd)
+    const data = await te.getHistoricalMarkets(symbol = ['aapl:us','gac:com'])
+    const data1 = await te.getHistoricalMarkets(symbol = 'aapl:us',start_date = '2017-08-01',end_date = '2017-08-08')
+    
+
+    console.log(data); //Place one of the variables to test
+  } catch (e) {
+    console.log(`Error: ${e}`);
   }
-}
-getHistDataBySymbol('fb:us', 'tsla:us')
+};
+
+MarketsHistExample();
+
+

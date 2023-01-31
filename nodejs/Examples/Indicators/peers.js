@@ -1,40 +1,24 @@
-// DOCUMENTATION:
-// Coming Soon
-
 // Pacakge Installation: npm install tradingeconomics
 const te = require("tradingeconomics");
 
-// Login with client key or leave it blank, you can get your free key here: http://developer.tradingeconomics.com
-// Note: without a client key only a small sample of data will be given.
-te.login();
+const IndicatorsExample = async () => {
+  try {
+    // Login with client key or leave it blank and a sample of data will be provided, you can get your free key here: http://developer.tradingeconomics.com
+    await te.login();
 
-//===============================================================================================================
-//Get peers by ticker
+    //Get peers by ticker
+    const data = await te.getPeers(ticker ='CPI YOY')
 
-te.getPeers(ticker ='CPI YOY')
-  .then((data) => {
-    console.log("Peers by ticker:", "\n", data, "\n");
-  })
-  .catch((err) => console.log(err));
+    //Get peers by country
+    const data1 = await te.getPeers(country ='mexico')
 
+    //Get peers by country and category
+    const data2 = await te.getPeers(country ='mexico', category ='money')
 
+    console.log(data); //Place one of the variables to test
+  } catch (e) {
+    console.log(`Error: ${e}`);
+  }
+};
 
-//===============================================================================================================
-//Get peers by country
-
-te.getPeers(country ='united states')
-  .then((data) => {
-    console.log("Peers by country:", "\n", data, "\n");
-  })
-  .catch((err) => console.log(err));
-
-
-
-//===============================================================================================================
-//Get peers by country and category
-
-te.getPeers(country ='united states', category ='money')
-.then((data) => {
-  console.log("Peers by country and category:", "\n", data, "\n");
-})
-.catch((err) => console.log(err));   
+IndicatorsExample();

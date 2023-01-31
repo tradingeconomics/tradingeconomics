@@ -4,85 +4,31 @@
 // Pacakge Installation: npm install tradingeconomics
 const te = require('tradingeconomics')
 
-// Login with client key or leave it blank, you can get your free key here: http://developer.tradingeconomics.com
-// Note: without a client key only a small sample of data will be given.
-te.login()
-
-//===============================================================================================================
-// To get a list of Historical data for specific country/countries and indicator, or you can specify a start date, or even start and end date (date format is yyyy-mm-dd).
-
-te.getHistoricalData((country = 'united states'), (indicator = 'gdp'))
-  .then((result) => {
-    console.log(
-      'List of Historical by country and indicator',
-      '\n',
-      result,
-      '\n'
-    )
-  })
-  .catch((err) => console.log(err))
-
-te.getHistoricalData(
-  (country = 'united states'),
-  (indicator = 'gdp'),
-  (start_date = '2013-01-01'),
-  (end_date = '2019-02-02')
-)
-  .then((data) => {
-    console.log(
-      'List of Historical by country, indicator and dates',
-      '\n',
-      data,
-      '\n'
-    )
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//You can specify a ticker, and a start date (date format is yyy-mm-dd).
-
-te.getHistoricalData((ticker = 'usurtot'), (start_date = '2018-02-02'))
-  .then((data) => {
-    console.log('List of Historical by ticker', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get historical latest updates
-
-te.getHistoricalUpdates()
-  .then((all) => {
-    console.log('List of historical updates', '\n', all, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//Get all discontinued series or pass country parameter to get discontinued series by country/countries
-
-te.getDiscontinuedIndicators()
-  .then((data) => {
-    console.log('List of all discontinued series', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-te.getDiscontinuedIndicators((country = ['united states', 'china']))
-  .then((data) => {
-    console.log('List of discontinued series by country', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//Get multiple indicators for a specific country
-
-async function getMultipleIndicators(targetCountry, ...indicators) {
+const IndicatorsExample = async () => {
   try {
-    const data = await te.getHistoricalData(
-      (country = targetCountry),
-      (indicator = indicators)
-    )
-    console.log('List of indicators:', '\n', data)
-  } catch (error) {
-    console.log(error)
+    // Login with client key or leave it blank and a sample of data will be provided, you can get your free key here: http://developer.tradingeconomics.com
+    await te.login();
+
+   // To get a list of Historical data for specific country/countries and indicator, or you can specify a start date, or even start and end date (date format is yyyy-mm-dd).
+    const data = await te.getHistoricalData(country = 'mexico', indicator = 'gdp')
+
+    //You can specify a ticker, and a start date (date format is yyy-mm-dd).
+    const data1 = await te.getHistoricalData(ticker = 'usurtot', start_date = '2018-02-02')
+
+    // Get historical latest updates
+    const data2 = await te.getHistoricalUpdates()
+
+    //Get all discontinued series or pass country parameter to get discontinued series by country/countries
+    const data3 = await te.getDiscontinuedIndicators()
+    const data4 = await te.getDiscontinuedIndicators(country = ['mexico', 'sweden'])
+
+    //Get multiple indicators for a specific country
+    const data5 = await te.getHistoricalData(country = ['mexico', 'sweden'],indicator = ['gdp', 'population'])
+
+    console.log(data); //Place one of the variables to test
+  } catch (e) {
+    console.log(`Error: ${e}`);
   }
-}
-getMultipleIndicators('mongolia', 'gdp', 'population', 'balance of trade')
+};
+
+IndicatorsExample();
