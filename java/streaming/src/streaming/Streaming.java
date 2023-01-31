@@ -23,7 +23,7 @@ public class Streaming {
         
         try {
             // open websocket
-            final WebsocketClient client = new WebsocketClient(new URI("ws://stream.tradingeconomics.com/?client=yu06vzmlllju1qz:mtvmbg847pwz3jn"));
+            final WebsocketClient client = new WebsocketClient(new URI("wss://stream.tradingeconomics.com/?client=guest:guest"));
             
             // add listener
             client.addMessageHandler(new WebsocketClient.MessageHandler() {

@@ -55,7 +55,7 @@ public class Ratings
     public static void getRatingsCountry() throws IOException {
 
         //put country or countries name here
-        String params = "united states";
+        String params = "mexico";
         params = params.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/ratings" + "/" + params;
@@ -68,7 +68,7 @@ public class Ratings
     public static void getRatingsHistoricalCountry() throws IOException {
 
         //put country or countries name here
-        String params = "united states, portugal";
+        String params = "mexico,sweden";
         params = params.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/ratings/historical" + "/" + params;

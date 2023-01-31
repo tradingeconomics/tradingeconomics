@@ -58,7 +58,7 @@ public class Indicators
     public static void getIndicatorsByCountry() throws IOException {
 
         //put country name here
-        String params = "united states";
+        String params = "mexico";
         params = params.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/country" + "/" + params;
@@ -83,7 +83,7 @@ public class Indicators
     public static void getHistoricalCountryIndicator() throws IOException {
 
         //put country or countries name here
-        String params = "united states" + "/";
+        String params = "mexico" + "/";
         params = params.replaceAll("\\s","%20");
         //put indicator name here
         String params1 = "gdp";
@@ -98,7 +98,7 @@ public class Indicators
     public static void getHistoricalCountryIndicatorDate() throws IOException {
 
         //put country or countries name here
-        String params = "united states" + "/";
+        String params = "mexico" + "/";
         params = params.replaceAll("\\s","%20");
         //put indicator name here
         String params1 = "gdp";
@@ -115,7 +115,7 @@ public class Indicators
     public static void getHistoricalCountryIndicatorBetweenDates() throws IOException {
 
         //put country or countries name here
-        String params = "united states" + "/";
+        String params = "mexico" + "/";
         params = params.replaceAll("\\s","%20");
         //put indicator name here
         String params1 = "gdp";
@@ -132,7 +132,7 @@ public class Indicators
     public static void getHistoricalMultiCountryIndicator() throws IOException {
 
         //put country or countries name here
-        String params = "united states, china" + "/";
+        String params = "mexico" + "/";
         params = params.replaceAll("\\s","%20");
         //put indicator name here
         String params1 = "gdp,population";
