@@ -2,38 +2,33 @@ let installationLi = document.getElementById('installationLi');
 let loginLi = document.getElementById('loginLi');
 let apiKeyLi = document.getElementById('apiKeyLi');
 let searchLi = document.getElementById('searchLi');
-//let methodsLi = document.getElementById('methodsLi');
-let indicators_latestLi = document.getElementById('IndicatorsLi');
-//let indicators_historicalLi = document.getElementById('indicators-historicalLi');
+let methodsLi = document.getElementById('methodsLi');
+let indicators_latestLi = document.getElementById('indicators-latestLi');
+let indicators_historicalLi = document.getElementById('indicators-historicalLi');
 let calendarLi = document.getElementById('calendarLi');
 let marketsLi = document.getElementById('marketsLi');
 let forecastsLi = document.getElementById('forecastsLi');
-let historyLi = document.getElementById('historyLi');
 let ratingsLi = document.getElementById('ratingsLi');
-//let updatesLi = document.getElementById('updatesLi');
+let updatesLi = document.getElementById('updatesLi');
 let refreshLi = document.getElementById('refreshLi');
-let helpLi = document.getElementById('helpLi');
-
 
 let marBtm;
-//setVideoHeight();
+setVideoHeight();
 
 //Go to the Categorie Selected in Web Page
 installationLi.onclick = () => { window.location = 'index.html#installation'; }
 loginLi.onclick = () => { window.location = 'index.html#login'; }
 apiKeyLi.onclick = () => { window.location = 'index.html#apiKey'; }
 searchLi.onclick = () => { window.location = 'index.html#search'; }
-//methodsLi.onclick = () => { window.location = 'index.html#methods'; }
+methodsLi.onclick = () => { window.location = 'index.html#methods'; }
 indicators_latestLi.onclick = () => { window.location = 'index.html#indicators-latest'; }
-//indicators_historicalLi.onclick = () => { window.location = 'index.html#indicators-historical'; }
+indicators_historicalLi.onclick = () => { window.location = 'index.html#indicators-historical'; }
 calendarLi.onclick = () => { window.location = 'index.html#calendar'; }
 marketsLi.onclick = () => { window.location = 'index.html#markets'; }
 forecastsLi.onclick = () => { window.location = 'index.html#forecasts'; }
-historyLi.onclick = () => { window.location = 'index.html#history'; }
 ratingsLi.onclick = () => { window.location = 'index.html#ratings'; }
-//updatesLi.onclick = () => { window.location = 'index.html#updates'; }
+updatesLi.onclick = () => { window.location = 'index.html#updates'; }
 refreshLi.onclick = () => { window.location = 'index.html#refresh'; }
-helpLi.onclick = () => { window.location = 'index.html#help'; }
 
 let colorBlue = '#185aa9';
     
@@ -42,90 +37,79 @@ function clearAllLiColors() {
     loginLi.style.backgroundColor = 'transparent';
     apiKeyLi.style.backgroundColor = 'transparent';
     searchLi.style.backgroundColor = 'transparent';
-    //methodsLi.style.backgroundColor = 'transparent';
+    methodsLi.style.backgroundColor = 'transparent';
     indicators_latestLi.style.backgroundColor = 'transparent';
-    //indicators_historicalLi.style.backgroundColor = 'transparent';
+    indicators_historicalLi.style.backgroundColor = 'transparent';
     calendarLi.style.backgroundColor = 'transparent';
     marketsLi.style.backgroundColor = 'transparent';
     forecastsLi.style.backgroundColor = 'transparent';
     ratingsLi.style.backgroundColor = 'transparent';
-    historyLi.style.backgroundColor = 'transparent';
-    //updatesLi.style.backgroundColor = 'transparent';
+    updatesLi.style.backgroundColor = 'transparent';
     refreshLi.style.backgroundColor = 'transparent';
-    helpLi.style.backgroundColor = 'transparent';
 }
 
 //On scroll checks which categorie should be highlighted in the #mainMenu
 $('#contentContainer').scroll(() => { 
     clearAllLiColors()
-    if($('#installation').position().top <= 30) {
+    if($('#installation').position().top <= 0) {
         clearAllLiColors()
         installationLi.style.backgroundColor = colorBlue;
     }
-    if($('#login').position().top <= 30) {
+    if($('#login').position().top <= 0) {
         clearAllLiColors()
         loginLi.style.backgroundColor = colorBlue;
     }
-    if($('#apiKey').position().top <= 30) {
+    if($('#apiKey').position().top <= 0) {
         clearAllLiColors()
         apiKeyLi.style.backgroundColor = colorBlue;
     }
-    if($('#search').position().top <= 30) {
+    if($('#search').position().top <= 0) {
         clearAllLiColors()
         searchLi.style.backgroundColor = colorBlue;
     }
-    /*if($('#methods').position().top <= 0) {
+    if($('#methods').position().top <= 0) {
         clearAllLiColors()
         methodsLi.style.backgroundColor = colorBlue;
-    }*/
-    if($('#indicators-latest').position().top <= 30) {
+    }
+    if($('#indicators-latest').position().top <= 0) {
         clearAllLiColors()
         indicators_latestLi.style.backgroundColor = colorBlue;
     }
-    /*if($('#indicators-historical').position().top <= 0) {
+    if($('#indicators-historical').position().top <= 0) {
         clearAllLiColors()
         indicators_historicalLi.style.backgroundColor = colorBlue;
-    }*/
-    /*if($('#updates').position().top <= 0) {
+    }
+    if($('#updates').position().top <= 0) {
         clearAllLiColors()
         updatesLi.style.backgroundColor = colorBlue;
-    }*/
-    if($('#calendar').position().top <= 30) {
+    }
+    if($('#calendar').position().top <= 0) {
         clearAllLiColors()
         calendarLi.style.backgroundColor = colorBlue;
     }
-    if($('#markets').position().top <= 30) {
+    if($('#markets').position().top <= 0) {
         clearAllLiColors()
         marketsLi.style.backgroundColor = colorBlue;
     }
-    if($('#forecasts').position().top <= 30) {
+    if($('#forecasts').position().top <= 0) {
         clearAllLiColors()
         forecastsLi.style.backgroundColor = colorBlue;
     }
-
-    if($('#ratings').position().top <= 30) {
+    if($('#ratings').position().top <= 0) {
         clearAllLiColors()
         ratingsLi.style.backgroundColor = colorBlue;
     }
-    if($('#history').position().top <= 30) {
-        clearAllLiColors()
-        historyLi.style.backgroundColor = colorBlue;
-    }
-    if($('#refresh').position().top <= 30) {
+    if($('#refresh').position().top <= 0) {
         clearAllLiColors()
         refreshLi.style.backgroundColor = colorBlue;
     }
-    if($('#help').position().top <= 30) {
-        clearAllLiColors()
-        helpLi.style.backgroundColor = colorBlue;
-    }
     //Setting sub categories of #methods visibility
-    /*if($('#methods').position().top <= 0 && $('#refresh').position().top >= 0) {
+    if($('#methods').position().top <= 0 && $('#refresh').position().top >= 0) {
         $('#mainMenu ul ul').css('height','202px');
     }
     else {
         $('#mainMenu ul ul').css('height','0px');
-    }*/
+    }
 })
 //Hiding border
     /*
@@ -172,14 +156,14 @@ window.onresize = () => {
         $('#mainMenu').css('visibility','hidden');
     }
 
-    //setVideoHeight();
+    setVideoHeight();
 }
 
 //Making the height of the video responsive
-/*function setVideoHeight() {
+function setVideoHeight() {
     marBtm = $('.iframeContainer').css('width').replace('px', '') / 1.8;
     $('.iframeContainer').css('padding-bottom', marBtm);
-}*/
+}
 
 //Google Analytics to track from where the user got to TE Excel Add In v1 download
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -189,6 +173,6 @@ window.onresize = () => {
 
 $('downloadLink').click(() => {
     ga('send', 'event', 'Data Request', 'Excel-Download');
-    window.location = 'https://github.com/tradingeconomics/tradingeconomics/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi';
+    window.location = 'https://github.com/ieconomics/open-api/raw/master/Excel/All_Releases/ExcelAddInDeploy_latest.msi';
     return;
 });

@@ -77,6 +77,10 @@ hr {
 	margin-bottom: 15px;
 }
 
+.imgDefault{
+	width: 35vw;
+}
+
 #mainMenu {
 	z-index: 1;
 	width: 200px;
@@ -112,10 +116,14 @@ hr {
 #mainMenu ul ul {
 	background-color: #222;
 	background-image: linear-gradient(#111, #222, #111);
-	border-top: 1px solid #000;
-	border-bottom: 1px solid #666;
+	/*border-top: 1px solid #000;
+	border-bottom: 1px solid #666;*/
 	transition: height 0.2s linear;
 	overflow: hidden;
+}
+
+.mainImage{
+	width: 50vw;
 }
 
 #mainMenu ul ul li {

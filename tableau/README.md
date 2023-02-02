@@ -6,7 +6,7 @@ Open Command Prompt
     > git clone https://github.com/tableau/webdataconnector.git
 
     Then git clone the TE API Connector:
-    > git clone https://github.com/ieconomics/open-api.git
+    > git clone https://github.com/tradingeconomics/tradingeconomics.git
 
 (Outside Command Prompt)
 The folder "tableauConnector" should be copied to directory "webdataconnector" (from the first git clone), example: C:\git\webdataconnector
