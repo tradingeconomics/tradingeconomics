@@ -20,21 +20,21 @@ cd tradingeconomics/Go
 3. Run the examples 
     - Run directly from tradingeconomics go folder
         ```bash
-          go run src/calendar/calendar.go
+          go run src/calendar.go
         ``` 
     - Run from GOPATH
         - Copy the examples to:  C:\Go
-        - go run src/calendar/calendar.go
+        - go run src/calendar.go
 
 4. Build example:
     ```go
-      C:\Go\src\calendar>go build
+      C:\Go\src>go build calendar.go
     ```
 
       Then you just need to type
 
       ```go
-      C:\Go\src\calendar> calendar
+      C:\Go\src> calendar
       ```
       It will run the calendar.go file
 
