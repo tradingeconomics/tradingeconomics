@@ -34,7 +34,7 @@ function getFinancialsHistorical(){
             const category_array  = typeof(category) === 'object' ? category : [category];
 
             const symbols_category = symbols_array.flatMap(symbol => category_array.map(category => `${symbol}:${category}`));
-            console.log(symbols_category);
+
             url = `/financials/historical/${symbols_category}`;    
         }
         else return new Promise((resolve, reject) => reject('No arguments supplied.'));

@@ -37,7 +37,7 @@ class DateError(ValueError):
 class WebRequestError(ValueError):
     pass
 
-def getHistoricalFinancials(symbol=None, category=None, initDate=None, endDate=None, output_type=None):
+def getFinancialsHistorical(symbol=None, category=None, initDate=None, endDate=None, output_type=None):
     """
     Returns stocks fundamental information for specific symbols, category and dates.
     ================================================================================
@@ -58,7 +58,8 @@ def getHistoricalFinancials(symbol=None, category=None, initDate=None, endDate=N
              'raw' for list of unparsed data.
     Example
     -------
-    getHistoricalFinancials('aapl:us', 'assets', output_type='df')
+    getFinancialsHistorical('aapl:us', 'assets', output_type='df')
+    getFinancialsHistorical(symbol=['aapl:us', 'tsla:us'], category=['assets', 'debt'], output_type='df')
 
     """
     try:

@@ -106,9 +106,6 @@ function getCalendarEventsByGroup(){
         func.checkDates(start_date, end_date);
 
         if (start_date != null && end_date != null) url += `/${start_date}/${end_date}`;
-        else if ((start_date === null || end_date === null) && country != null){
-            return new Promise((resolve, reject) => reject('Group cannot be empty.'));
-        }
         else if (start_date === null || end_date === null) url += `/${[start_date, end_date].filter(Boolean).join()}`;  
 
         Data = url_base + url + '?c=' + apikey.replace(' ','%20');

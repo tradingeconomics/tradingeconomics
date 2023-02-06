@@ -231,13 +231,9 @@ def getCalendarUpdates(output_type = None):
         'key': f'?c={glob.apikey}',
         'output_type' : ''
     }
-    
-    
-    
-    
 
     api_url_request = "%s%s" % (d['url_base'], d['key']) 
-    #print(api_url_request)
+
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
     #return
 
@@ -291,8 +287,6 @@ def getCalendarEventsByGroup(group: str, country: str=None, initDate = None, end
 
     if initDate and endDate:
         fn.validatePeriod(initDate, endDate)
-    else:
-        return 'Enter initDate and endDate'
     
     if initDate:
         fn.validate(initDate)
@@ -301,8 +295,7 @@ def getCalendarEventsByGroup(group: str, country: str=None, initDate = None, end
     if endDate:
         fn.validate(endDate)
         api_url_request += f'/{endDate}'
-        print(api_url_request)
     
     api_url_request += f"{d['key']}"
-
+    
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)

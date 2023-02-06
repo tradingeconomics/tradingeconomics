@@ -25,7 +25,7 @@ if PY3: # Python 3+
     from .eurostat import getEurostatData,getEurostatCountries,getEurostatCategoryGroups
     from .historicalEurostat import getHistoricalEurostat
     from .financials import getFinancialsData, getFinancialsCategoryList, getFinancialsDataByCategory
-    from .historicalFinancials import getHistoricalFinancials
+    from .historicalFinancials import getFinancialsHistorical
     from .search import getSearch
 
 
@@ -47,7 +47,7 @@ else: # Python 2.X
     from eurostat import getEurostatData,getEurostatCountries,getEurostatCategoryGroups
     from historicalEurostat import getHistoricalEurostat
     from financials import getFinancialsData, getFinancialsCategoryList, getFinancialsDataByCategory
-    from historicalFinancials import getHistoricalFinancials
+    from historicalFinancials import getFinancialsHistorical
     from search import getSearch
 
 
