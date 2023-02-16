@@ -2182,7 +2182,7 @@ or you can specify a start date and end date<br>
 </code></pre>
 
 <blockquote class="lang-specific python">
-<p>Calendar events for a specific group.</p>
+<p>Calendar events for a specific group.*</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarEventsByGroup</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s">'bonds'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
@@ -2191,13 +2191,17 @@ or you can specify a start date and end date<br>
 </code></pre>
 
 <blockquote class="lang-specific python">
-<p>Calendar events for country and a specific group.</p>
+<p>Calendar events for country and a specific group.*</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarEventsByGroup</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">, </span></span><span class="n">group</span><span class="o">=</span><span class="s">'inflation'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 <br>
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarEventsByGroup</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s">'united states'</span><span class="p">, </span><span class="n">group</span><span class="o">=</span><span class="s">'inflation'</span><span class="p">, <span class="n"> initDate</span><span class="o">=</span><span class="s">'2023-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2023-02-01'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
+    
+<blockquote class="lang-specific python">
+<p><i>Available groups are: interest rate, inflation, bonds, consumer, gdp, government, housing, labour, markets, money, prices, trade, business.</i> <br><br></p>
+</blockquote> 
 
 <blockquote class="lang-specific python">
 <p>
@@ -2308,7 +2312,7 @@ or you can specify a start date and end date<br>
 </code></pre>
 
 <blockquote class="lang-specific javascript">
-    <p>To get calendar events by specific group.</p>
+    <p>To get calendar events by specific group.*</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
 <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendarEventsByGroup</span>(<span class="kd">group</span> = <span class="s1">'bonds'</span>)
@@ -2323,7 +2327,7 @@ or you can specify a start date and end date<br>
 </code></pre>
 
 <blockquote class="lang-specific javascript">
-    <p>To get calendar events by specific country and group.</p>
+    <p>To get calendar events by specific country and group.*</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
 <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getCalendarEventsByGroup</span>(<span class="kd">group</span> = <span class="s1">'inflation'</span>, <span class="kd">country</span> = <span class="s1">'china'</span>)
@@ -2336,6 +2340,10 @@ or you can specify a start date and end date<br>
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
 });</span>
 </code></pre>
+
+<blockquote class="lang-specific javascript">
+    <p><i>*Available groups are: interest rate, inflation, bonds, consumer, gdp, government, housing, labour, markets, money, prices, trade, business.</i> <br><br></p>
+</blockquote>
 
 <blockquote class="lang-specific javascript">
     <p>Filter calendar events by calendar ID or multiple ids.</p>
@@ -2614,17 +2622,18 @@ or you can specify a start date and end date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united states/indicator/initial jobless claims/2016-12-01/2017-02-25?c=guest:guest&f=json">/calendar/country/{countries}/indicator/{indicators}/{yyyy-mm-dd}/{yyyy-mm-dd}</a></p>
 </li>
 
-<li><p>Calendar events for a specific group.<br>
+<li><p>Calendar events for a specific group.* <br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/group/bonds?c=guest:guest&f=json">/calendar/group/{group}</a><br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/group/bonds/2016-03-01/2018-03-03?c=guest:guest&f=json">/calendar/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>
 </li>
 
-<li><p>Calendar events for country and a specific group.<br>
+<li><p>Calendar events for country and a specific group.*<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states/group/bonds?c=guest:guest&f=json">/calendar/country/{country}/group/{group}</a><br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states/group/bonds/2016-03-01/2018-03-03?c=guest:guest&f=json">/calendar/country/{country}/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>
     <!--<a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states,brazil/group/interest%20rate">/calendar/country/{country},{country}/group/{group}</a><br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/country/united%20states,brazil/group/inflation/2016-03-01/2018-03-03">/calendar/country/{country},{country}/group/{group}/{yyy-mm-dd}/{yyy-mm-dd}</a><br>-->
 </li>
+<i>*Available groups are: interest rate, inflation, bonds, consumer, gdp, government, housing, labour, markets, money, prices, trade, business.</i> <br><br>
 
 <li><p>Filter calendar events by calendar ID or multiple ids<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/calendar/calendarid/174108,160025,160030?c=guest:guest&f=json">/calendar/calendarid/{calendarids}?c=guest:guest</a></p>
@@ -8886,9 +8895,9 @@ php black side
 </li>
 <li><p>Get a list of indicators of a county<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest&f=json">/fred/snapshot/county/{county}</a>    </p></li>
-<!--<li><p>Pagination<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states/2?c=guest:guest">/fred/snapshot/country/{country}/{page}</a>    </p></li>-->
-</ul>
+<!--<li><p>Get the pagination number<br>
+<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states?info=pagination&client=guest:guest&f=json">/fred/snapshot/country/{country}/info=pagination</a>    </p></li>
+</ul>--> 
 
 <!-----------------------------FRED Historical Black Side-------------------------------> 
 
