@@ -3,6 +3,12 @@
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
++ 2023/02
+
+    + __Added:__ Unit column to /forecast for indicators endpoints.
+
+---
+
 + 2023/01
 
     + __Added:__ /calendar/group endpoints.
