@@ -2135,25 +2135,25 @@ or you can specify a start date and end date<br>
 <blockquote class="lang-specific python">
     <p>For multiple countries.</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="o">[</span><span class="s">'united states'</span><span class="s">,</span><span class="s">'united kingdom'</span><span class="o">]</span><span class="p">,</span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="o">[</span><span class="s">'united states'</span>, <span class="s">'united kingdom'</span><span class="o">]</span><span class="p">,</span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 
 <blockquote class="lang-specific python">
     <p>For multiple countries and importance.</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="o">[</span><span class="s">'united states'</span><span class="s">,</span><span class="s">'united kingdom'</span><span class="o">]</span><span class="p">,</span> <span class="n">importance</span><span class="o">=</span><span class="s">'1'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="o">[</span><span class="s">'united states'</span>, <span class="s">'united kingdom'</span><span class="o">]</span><span class="p">,</span> <span class="n">importance</span><span class="o">=</span><span class="s">'1'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 
 <blockquote class="lang-specific python">
     <p>For multiple countries and by dates.</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="o">[</span><span class="s">'united states'</span><span class="s">,</span><span class="s">'united kingdom'</span><span class="o">]</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2022-02-10'</span><span class="p">, </span><span class="n">endDate</span><span class="o">=</span><span class="s">'2022-03-15'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="o">[</span><span class="s">'united states'</span>, <span class="s">'united kingdom'</span><span class="o">]</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2022-02-10'</span><span class="p">, </span><span class="n">endDate</span><span class="o">=</span><span class="s">'2022-03-15'</span><span class="p">, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 
 <blockquote class="lang-specific python">
     <p>For multiple countries by dates and importance.</p>
 </blockquote>
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="o">[</span><span class="s">'united states'</span><span class="s">,</span><span class="s">'united kingdom'</span><span class="o">]</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2022-02-10'</span><span class="p">, </span><span class="n">endDate</span><span class="o">=</span><span class="s">'2022-03-15'</span><span class="p">,<span class="p">, </span><span class="n">importance</span><span class="o">=</span><span class="s">'1'</span> </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getCalendarData</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="o">[</span><span class="s">'united states'</span>, <span class="s">'united kingdom'</span><span class="o">]</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2022-02-10'</span><span class="p">, </span><span class="n">endDate</span><span class="o">=</span><span class="s">'2022-03-15'</span><span class="p">, <span class="p"></span><span class="n">importance</span><span class="o">=</span><span class="s">'1'</span>, </span><span class="n">output_type</span><span class="o">=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 
 <blockquote class="lang-specific python">
@@ -3960,7 +3960,7 @@ Click on any method below for a sample.
 <blockquote class="lang-specific python">
     <p>To get intraday market data for a specific symbol and by init date and end date</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntraday</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2021-03-13'</span>, <span class="n">endDate</span><span class="o">=</span><span class="s">'2021-03-17'</span><span class="o">,</span><span class="o">output_type=</span><span class="s">'df'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getMarketsIntraday</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="s">'aapl:us'</span><span class="p">,</span><span class="n">initDate</span><span class="o">=</span><span class="s">'2021-03-13'</span>, <span class="n">endDate</span><span class="o">=</span><span class="s">'2021-03-17'</span><span class="o">,</span><span class="o">output_type=</span><span class="s">'df'</span><span class="p">)</span>
 </code></pre>
 
 <blockquote class="lang-specific python">
