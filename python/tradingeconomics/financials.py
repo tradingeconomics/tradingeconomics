@@ -155,12 +155,6 @@ def getFinancialsDataByCategory(category=None, output_type=None):
             getFinancialsDataCategory(symbol=['assets','debt'], output_type='df')
     """
 
-    if category:
-        #the 'key' value has to be changed due to url enpoint use of '?' or '&' characters. 
-        d['category'] = f'/{category}'
-    else:
-        return 'No category supplied'
-
     try:
         # d is a dictionary used for create the api url
         d = {
@@ -171,6 +165,12 @@ def getFinancialsDataByCategory(category=None, output_type=None):
         }
     except AttributeError:
         return "You are not logged in. Run te.login('guest:guest') to login"
+    
+    if category:
+        #the 'key' value has to be changed due to url enpoint use of '?' or '&' characters. 
+        d['category'] = f'/{category}'
+    else:
+        return 'No category supplied'
 
 
     api_url_request = "%s%s%s" % (d['url_base'], d['category'], d['key'])
