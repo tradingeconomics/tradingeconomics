@@ -35,9 +35,6 @@ function getEarnings(){
         var Data = '';
         var url = '';
           
-        if (start_date != null){    
-            url =  '/earnings' + '?d1=' + start_date;   
-        }
         if (symbol != null){                   
             url =  '/earnings/symbol/' + symbol + '?d1=' + start_date;      
         }
@@ -45,8 +42,15 @@ function getEarnings(){
             url = '/earnings/country/' + country;
         }
         if (start_date != null && end_date != null){                 
-            url =  '/earnings/symbol/' + symbol + '?d1=' + start_date + '&d2=' + end_date;      
+            url += '?d1=' + start_date + '&d2=' + end_date;      
         }
+        else if (start_date != null && end_date === null){
+            url += '?d1=' + start_date;   
+        }
+        else if (start_date === null && end_date != null){
+            url += '?d2=' + end_date;
+        }
+
         if(country === null && symbol === null && start_date === null && end_date === null){
             url =  '/earnings';
         }
@@ -61,6 +65,7 @@ function getEarnings(){
         }else{
             Data = url_base + url + '?c='+ apikey.replace (' ','%20');
         }
+        console.log(Data);
         return func.makeTheRequest(Data)
         // return fetch(Data)
         // .then(func.handleErrors)   
