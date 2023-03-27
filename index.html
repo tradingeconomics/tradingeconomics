@@ -4636,10 +4636,10 @@ Click on any method below for a sample.
     });</span>
 </code></pre>
 <blockquote class="lang-specific javascript">
-    <p>Get earnings revenues calendar by date.</p>
+    <p>Get earnings revenues calendar by date. <!--You can set only a start date.--></p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>, <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span><!--, <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>-->).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -8520,11 +8520,13 @@ php black side
 
 <p>*Country2 is not used for total imports/exports by country.</p>
 
-<!-----------------------------FRED Black Side-------------------------------> 
+<!-----------------------------FRED-------------------------------> 
 
 <h1 id="federal-reserve">Federal Reserve</h1>
 
 <h2 id="snapshot-federalReserve">Snapshot</h2>
+
+<!-----------------------------FRED Black Side-------------------------------> 
 
 <!--Python Ferderal reserve states black side--> 
 
@@ -8927,10 +8929,12 @@ php black side
 <!--<li><p>Get the pagination number<br>
 <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states?info=pagination&client=guest:guest&f=json">/fred/snapshot/country/{country}/info=pagination</a>    </p></li>
 </ul>--> 
-
-<!-----------------------------FRED Historical Black Side-------------------------------> 
+</ul>
+<!-----------------------------FRED Historical------------------------------> 
 
 <h2 id="historical-federalReserve">Historical</h2>
+
+<!-----------------------------FRED Historical Black Side-------------------------------> 
 
 <!--Python Federal Reserve historical black side-->
 
