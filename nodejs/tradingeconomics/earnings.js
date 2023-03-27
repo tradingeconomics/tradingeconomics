@@ -42,13 +42,13 @@ function getEarnings(){
             url = '/earnings/country/' + country;
         }
         if (start_date != null && end_date != null){                 
-            url += '/earnings?d1=' + start_date + '&d2=' + end_date;      
+            url = '/earnings?d1=' + start_date + '&d2=' + end_date;      
         }
         else if (start_date != null && end_date === null){
-            url += '/earnings?d1=' + start_date;   
+            url = '/earnings?d1=' + start_date;   
         }
         else if (start_date === null && end_date != null){
-            url += '/earnings?d2=' + end_date;
+            url = '/earnings?d2=' + end_date;
         }
 
         if(country === null && symbol === null && start_date === null && end_date === null){
