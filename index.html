@@ -4599,7 +4599,7 @@ Click on any method below for a sample.
 
 
 <blockquote class="lang-specific python">
-    <p>To get earnings revenues calendar filtered by symbol and date:</p>
+    <p>To get earnings revenues calendar filtered by symbol and date. You can set only a start date:</p>
 </blockquote>  
 <pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">symbols</span> <span class="o">=</span> <span class="s">'msft:us'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2016-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">)</span>
 
@@ -4639,7 +4639,7 @@ Click on any method below for a sample.
     <p>Get earnings revenues calendar by date.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>, <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
