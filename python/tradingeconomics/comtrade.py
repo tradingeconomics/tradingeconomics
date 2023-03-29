@@ -492,7 +492,7 @@ def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_ty
 
 
 
-def getCmtTotalByTypeAndMainCategory(country=None, type=None, output_type=None):
+def getCmtTotalByTypeAndMainCategory(country=None, type=None, category=None, output_type=None):
     """
         Get detailed information about Comtrade Country Total by Import or Exports and main category
         =================================================================================
@@ -526,6 +526,7 @@ def getCmtTotalByTypeAndMainCategory(country=None, type=None, output_type=None):
 
         """
 
+    api_url_base = "https://api.tradingeconomics.com/comtrade"
 
     if country is None:
         return f'country is missing'
@@ -533,15 +534,13 @@ def getCmtTotalByTypeAndMainCategory(country=None, type=None, output_type=None):
     if type is None:
         return f"type is missing. Choose 'import' or 'export'"
 
-    def getLinkApi(country, type):
-        api_url_base = "https://api.tradingeconomics.com/comtrade"
+    link_api = f'{api_url_base}/{type}/{quote(country)}?c={glob.apikey}'
 
-        return f'{api_url_base}/{type}/{quote(country)}?c={glob.apikey}'
-
-    link_api = getLinkApi(country, type)
+    if category is not None:
+        link_api = f'{api_url_base}/{type}/{quote(country)}/{quote(category)}?c={glob.apikey}'
 
     try:
-        print(link_api)
+        # print(link_api)
         return fn.dataRequest(api_request=link_api, output_type=output_type)
     except Exception as e:
         print(e)
