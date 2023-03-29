@@ -1,6 +1,6 @@
 ## Trading Economics for NodeJS
 
-![version](https://img.shields.io/badge/version-2.2.2-green.svg)
+![version](https://img.shields.io/badge/version-2.2.3-green.svg)
 
 The Trading Economics NPM package provides direct access to our data. It allows you to request millions of rows of economic historical data, to query our real-time economic calendar and to subscribe to updates. 
 
