@@ -144,8 +144,8 @@
 ### *Packages latest versions:*
 Package | Version
 :---: |:---:
-*Python* |`3.9` 
-*Node* | `2.2.1`
+*Python* |`4.2.2` 
+*Node* | `2.2.3`
 *R* | `0.2.12`
 
 
