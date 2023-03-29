@@ -1,7 +1,7 @@
 
 # Trading Economics - Python
 
-![version](https://img.shields.io/badge/version-3.6-green.svg)
+![version](https://img.shields.io/badge/version-4.2.2-green.svg)
 
 The Trading Economics Application Python package provides direct access to millions of time series with economic data, financial markets quotes, commodity prices, crypto currencies data and much more. It also allows you to query Trading Economics  real-time economic calendar and to subscribe to updates. 
 
