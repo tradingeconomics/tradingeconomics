@@ -357,7 +357,7 @@ def getCmtCountryByCategory(country=None, type=None, category=None, output_type=
         raise LoginError('You need to do login before making any request')
 
     try:
-        print(link_api)
+        # print(link_api)
         return fn.dataRequest(api_request=link_api, output_type=output_type)
     except Exception as e:
         print(e)
@@ -412,7 +412,7 @@ def getCmtTotalByType(country=None, type=None, output_type=None):
     link_api = getLinkApi(country, type)
 
     try:
-        print(link_api)
+        # print(link_api)
         return fn.dataRequest(api_request=link_api, output_type=output_type)
     except Exception as e:
         print(e)
@@ -484,7 +484,7 @@ def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_ty
         raise TypeError('type is missing. Choose "import" or "export"')
 
     try:
-        print(link_api)
+        # print(link_api)
         return fn.dataRequest(api_request=link_api, output_type=output_type)
     except Exception as e:
         print(e)
@@ -539,7 +539,7 @@ def getCmtSnapshotByType(country=None, type=None, output_type=None):
     link_api = getLinkApi(country, type)
 
     try:
-        print(link_api)
+        # print(link_api)
         return fn.dataRequest(api_request=link_api, output_type=output_type)
     except Exception as e:
         print(e)

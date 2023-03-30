@@ -19,5 +19,11 @@ class TestgetCmtCountryByCategory(unittest.TestCase):
         a = te.getCmtCountryByCategory(country = 'India', type='import', category='Coffee, tea, mate and spices', output_type = 'df')
         self.assertCountEqual(a.columns, ['symbol', 'country1', 'country2', 'value', 'date', 'type', 'category', 'url', 'title', 'StartDate', 'lastupdate'])
 
+class TestgetCmtSnapshotByType(unittest.TestCase):
+    
+    def test_getCmtSnapshotByType(self):
+        a = te.getCmtSnapshotByType(country = 'Portugal', type='import',output_type = 'df')
+        self.assertEqual(a['country1'][0], 'Portugal')
+   
 if __name__ == "__main__":
     unittest.main()
