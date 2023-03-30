@@ -20,7 +20,7 @@ if PY3: # Python 3+
     from .earnings import getEarnings, getEarningsType
     from .news import getNews, getArticles, getArticleId 
     from .worldBank import getWBCategories, getWBIndicator, getWBCountry, getWBHistorical
-    from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates, getCmtCountryByCategory, getCmtTotalByType, getCmtCountryFilterByType,getCmtTotalByTypeAndMainCategory
+    from .comtrade import getCmtCategories, getCmtCountry, getCmtHistorical, getCmtTwoCountries, getCmtUpdates, getCmtCountryByCategory, getCmtTotalByType, getCmtCountryFilterByType
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
     from .eurostat import getEurostatData,getEurostatCountries,getEurostatCategoryGroups
     from .historicalEurostat import getHistoricalEurostat

@@ -490,61 +490,6 @@ def getCmtCountryFilterByType(country1=None, country2=None, type=None, output_ty
         print(e)
 
 
-
-
-def getCmtTotalByTypeAndMainCategory(country=None, type=None, category=None, output_type=None):
-    """
-        Get detailed information about Comtrade Country Total by Import or Exports and main category
-        =================================================================================
-
-        Parameters:
-        -----------
-        country:string.
-                    for example:
-                    country = 'country_name' ,
-
-        type: string.
-                for example:
-                    type = 'import'
-                    type = 'export'
-
-        output_type: string.
-                    'dict'(default) for dictionary format output, 'df' for data frame,
-                    'raw' for list of dictionaries directly from the web.
-
-        Notes
-        -----
-        country and type parameters are not optional.
-
-        Example
-        -------
-        getCmtTotalByType(country = 'Portugal', type = 'import', output_type = None )
-
-        getCmtTotalByType(country = 'United States', type = 'export', output_type = 'raw' )
-
-        getCmtTotalByType(country = 'Brazil', type = import, output_type = 'df' )
-
-        """
-
-    api_url_base = "https://api.tradingeconomics.com/comtrade"
-
-    if country is None:
-        return f'country is missing'
-
-    if type is None:
-        return f"type is missing. Choose 'import' or 'export'"
-
-    link_api = f'{api_url_base}/{type}/{quote(country)}?c={glob.apikey}'
-
-    if category is not None:
-        link_api = f'{api_url_base}/{type}/{quote(country)}/{quote(category)}?c={glob.apikey}'
-
-    try:
-        # print(link_api)
-        return fn.dataRequest(api_request=link_api, output_type=output_type)
-    except Exception as e:
-        print(e)
-
 def getCmtSnapshotByType(country=None, type=None, output_type=None):
     """
         Get Snapshot of data per country filtered by type: import or export
