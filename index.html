@@ -8922,10 +8922,15 @@ php black side
 </li>
 <li><p>Get a list of indicators of a county<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/county/Pike%20County,%20AR?c=guest:guest&f=json">/fred/snapshot/county/{county}</a>    </p></li>
-<!--<li><p>Get the pagination number<br>
-<a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states?info=pagination&client=guest:guest&f=json">/fred/snapshot/country/{country}/info=pagination</a>    </p></li>
-</ul>--> 
+<li><p>Get a list of indicators of a country by page (max 10000 rows per page).* **<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states?c=guest:guest&p=0">/fred/snapshot/country/{country}/p={page number}</a></p></li>
+<li><p>Get the number of pages of data for a specific country (max 10000 rows per page).*<br>
+    <a target = '_blank' href="https://api.tradingeconomics.com/fred/snapshot/country/united%20states?info=pagination&client=guest:guest&f=json">/fred/snapshot/country/{country}/info=pagination</a></p></li> 
 </ul>
+</ul>
+
+<p>*United States only.<br>
+<p>**Pages parameter starts at 0; Only used on endpoints where it is not possible to use start and end dates and exceeds the limits of rows.<br>
 <!-----------------------------FRED Historical------------------------------> 
 
 <h2 id="historical-federalReserve">Historical</h2>
