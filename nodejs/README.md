@@ -1,42 +1,68 @@
-## Trading Economics Javascript for NodeJS
+## Trading Economics for NodeJS
 
-This folder has the source code for the official tradingeconomics NPM package plus examples on how you can get data about Markets, Historical data, Indicators, Calendar, World Bank, Federal Reserve, Comtrade, Forecasts and News, using javascript and nodejs.
+![version](https://img.shields.io/badge/version-2.2.3-green.svg)
 
-## Documentation
-https://docs.tradingeconomics.com/?javascript#introduction
+The Trading Economics NPM package provides direct access to our data. It allows you to request millions of rows of economic historical data, to query our real-time economic calendar and to subscribe to updates. 
 
+
+#
 
 ## Installation
-- Make sure you have Nodejs installed, if not you can download it here: https://nodejs.org/en/download/
 
-- You need to install the package:
+Using NPM
 
-```javascript
-npm install tradingeconomics
+```bash
+npm install -g tradingeconomics
 ```
 
-## Usage
-1. Import the package on your node project
+Using GitHub
+
+```bash
+
+git clone https://github.com/tradingeconomics/tradingeconomics.git
+cd tradingeconomics/nodejs
+npm i
+```
+
+#
+
+## Requirements
 
 ```javascript
 const te = require('tradingeconomics');
 ```
 
-2. Login to get our data
+#
 
-**Note:** If you don't have a client key leave it blank and a sample of data will be provided or you can get your free key here: http://developer.tradingeconomics.com 
+## Authentication
+
+Authentication using Environment Variable (more secure)
 
 ```javascript
-te.login();
+apikey="key:secret" node app.js
 ```
-or
+
+Authentication using inline code
+
 ```javascript
-te.login('Client Key Here');
+te.login('guest:guest'); # replace with your key
 ```
 
-3. Use our methods to get data
+#
 
-**Note:** For more information about our methods and data, check our documentation [here](https://docs.tradingeconomics.com/?javascript#introduction)
+## Examples
+
+```javascript
+te.getHistoricalData(country = 'mexico', indicator = 'gdp').then(function(data){
+  console.log(data)       
+});
+```
+
+```javascript
+te.getCalendar().then(function(data){
+    console.log(data)       
+});
+```
 
 ```javascript
 te.getEarnings(symbol = 'aapl:us', start_date = '2016-01-01', end_date = '2017-12-31')
@@ -46,63 +72,38 @@ te.getEarnings(symbol = 'aapl:us', start_date = '2016-01-01', end_date = '2017-1
   .catch((err) => console.log(err));
 ```
 
+#
 
-4. Output example: 
+## More examples
 
- ```javascript
-[
-  {
-    Date: '2016-01-26T00:00:00',
-    Symbol: 'AAPL:US',
-    Type: 'Earnings',
-    Name: 'Apple',
-    Actual: '3.28',
-    Forecast: null,
-    FiscalTag: 'FY2016Q1',
-    FiscalReference: 'Q1/16',
-    CalendarReference: '2015/12',
-    Country: 'United States',
-    Currency: 'USD',
-    Importance: 3,
-    Session: 21,
-    LastUpdate: '2017-08-03T21:30:00'
-  },
-  {
-    Date: '2016-04-26T00:00:00',
-    Symbol: 'AAPL:US',
-    Type: 'Earnings',
-    Name: 'Apple',
-    Actual: '1.9',
-    Forecast: null,
-    FiscalTag: 'FY2016Q2',
-    FiscalReference: 'Q2/16',
-    CalendarReference: '2016/3',
-    Country: 'United States',
-    Currency: 'USD',
-    Importance: 3,
-    Session: 21,
-    LastUpdate: '2017-08-03T21:02:00'
-  },
-  {
-    Date: '2016-07-26T00:00:00',
-    Symbol: 'AAPL:US',
-    Type: 'Earnings',
-    Name: 'Apple',
-    Actual: '1.42',
-    Forecast: null,
-    FiscalTag: 'FY2016Q3',
-    FiscalReference: 'Q3/16',
-    CalendarReference: '2016/6',
-    Country: 'United States',
-    Currency: 'USD',
-    Importance: 3,
-    Session: 21,
-    LastUpdate: '2017-08-03T16:37:00'
-  }
-]
+https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs/Examples
 
+#
 
-````
+## Docker
+
+Please set apikey with your credetials
+
+```javascript
+docker run --rm -it --init --name te-nodejs -e apikey='guest:guest' tradingeconomics/nodejs:latest sh
+```
+
+```javascript
+node Calendar/events.js
+node Indicators/historical.js
+node Markets/marketForecast.js
+ls # to view for more examples
+```
+#
+
+## Documentation
+https://docs.tradingeconomics.com/?javascript#introduction
+
+#
+
+## Learn More
+
+https://tradingeconomics.com/analytics/api.aspx
 
 
 

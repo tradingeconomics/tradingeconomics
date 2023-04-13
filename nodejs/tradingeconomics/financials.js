@@ -127,7 +127,7 @@ function getFinancialsDataByCategory(){
         }
 
         data_url = `${d.url_base}${d.category}${d.key}`.replace (' ', '%20');
-        console.log(data_url);
+        // console.log(data_url);
         
         return func.makeTheRequest(data_url)
 

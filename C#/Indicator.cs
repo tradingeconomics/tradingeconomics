@@ -24,32 +24,32 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get a list of indicators
-            Console.WriteLine("About to get all indicators");
+            Console.WriteLine("\nAbout to get all indicators");
             var getIndicatorsResult = GetIndicators().Result;
             Console.WriteLine(getIndicatorsResult);
 
             // get a list of indicators from a country
-            Console.WriteLine("About to get a list of indicators of a country");
-            var getIndicatorsByCountry = GetIndicatorsByCountry("united states").Result;
+            Console.WriteLine("\nAbout to get a list of indicators of a country");
+            var getIndicatorsByCountry = GetIndicatorsByCountry("mexico").Result;
             Console.WriteLine(getIndicatorsByCountry);
 
             // get an indicators from all countries
-            Console.WriteLine("About to get a indicator for all country");
+            Console.WriteLine("\nAbout to get a indicator for all country");
             var getIndicatorsAllCountries = GetIndicatorsAllCountries("gdp").Result;
             Console.WriteLine(getIndicatorsAllCountries);
 
             // get historical indicators given countries and indicators
-            Console.WriteLine("About to get a list of indicator for multiple countries");
-            var getHistoricalIndicatorsByCountries = GetHistoricalIndicatorsByCountries(new string[] { "united states" }, new string[] { "gdp" }).Result;
+            Console.WriteLine("\nAbout to get a list of indicator for multiple countries");
+            var getHistoricalIndicatorsByCountries = GetHistoricalIndicatorsByCountries(new string[] { "mexico" }, new string[] { "gdp" }).Result;
             Console.WriteLine(getHistoricalIndicatorsByCountries);
 
             // get historical indicators given countries and indicators between start and end dates
-            Console.WriteLine("About to get a historical list of indicator for multiple countries between start and end dates");
-            var getHistoricalIndicatorsByCountriesDates = GetHistoricalIndicatorsByCountries(new string[] { "united states" }, new string[] { "gdp" }, new DateTime(2015, 01, 01), new DateTime(2015, 12, 31)).Result;
+            Console.WriteLine("\nAbout to get a historical list of indicator for multiple countries between start and end dates");
+            var getHistoricalIndicatorsByCountriesDates = GetHistoricalIndicatorsByCountries(new string[] { "mexico" }, new string[] { "gdp" }, new DateTime(2015, 01, 01), new DateTime(2015, 12, 31)).Result;
             Console.WriteLine(getHistoricalIndicatorsByCountriesDates);
 
             // get historical data given a ticker
-            Console.WriteLine("About to get historical data given a ticker");
+            Console.WriteLine("\nAbout to get historical data given a ticker");
             var getHistoricalByTicker = GetHistorycalByTicker("USURTOT", new DateTime(2015, 03, 01)).Result;
             Console.WriteLine(getHistoricalByTicker);
 

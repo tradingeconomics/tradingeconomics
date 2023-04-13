@@ -4,161 +4,45 @@
 // Pacakge Installation: npm install tradingeconomics
 const te = require('tradingeconomics')
 
-// Login with client key or leave it blank, you can get your free key here: http://developer.tradingeconomics.com
-// Note: without a client key only a small sample of data will be given.
-te.login()
-
-//===============================================================================================================
-// Get detailed information about Comtrade categories, updates and countries
-
-te.getComtrade((category = 'categories'))
-  .then((data) => {
-    console.log('Comtrade categories', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-te.getComtrade((category = 'updates'))
-  .then((data) => {
-    console.log('Comtrade updates', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-te.getComtrade((category = 'countries'))
-  .then((data) => {
-    console.log('Comtrade countries', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get data about trading of one country or between two countries
-
-te.getComtrade((country = 'china'))
-  .then((data) => {
-    console.log('Get trade information for one country', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-te.getComtrade((country = 'united states'), (country1 = 'china'))
-  .then((data) => {
-    console.log('Get trade information between two countries', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get information about one country or between two countries with a specific type of trade
-
-te.getCmtCountryFilterByType(
-  (country1 = 'Portugal'),
-  (country2 = 'Spain'),
-  (type = 'import')
-)
-  .then((data) => {
-    console.log(
-      'Get information between two countries and a specific trade type',
-      '\n',
-      data,
-      '\n'
-    )
-  })
-  .catch((err) => console.log(err))
-
-te.getCmtCountryFilterByType((country1 = 'United States'), (type = 'export'))
-  .then((data) => {
-    console.log(
-      'Get information about one country and a specific trade type',
-      '\n',
-      data,
-      '\n'
-    )
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get information about one country or between two countries with a specific type of trade
-
-te.getCmtCountryByCategory(
-  (country = 'United States'),
-  (type = 'export'),
-  (category = 'live animals')
-)
-  .then((data) => {
-    console.log(
-      'Get information between two countries and a specific trade type',
-      '\n',
-      data,
-      '\n'
-    )
-  })
-  .catch((err) => console.log(err))
-
-  te.getCmtCountryByCategory(
-  (country = 'Brazil'),
-  (type = 'import'),
-  (category = 'Swine, live')
-)
-  .then((data) => {
-    console.log(
-      'Get information between two countries and a specific trade type',
-      '\n',
-      data,
-      '\n'
-    )
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get Total trade information by type and country. Type cna be Import or Export
-
-te.getComtradeTotalByType((country = 'Portugal'), (type = 'import'))
-  .then((data) => {
-    console.log('Get Totals', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get historical data by symbol
-
-te.getComtrade((symbol = 'PRTESP24031'))
-  .then((data) => {
-    console.log('Get historical data by symbol', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//Get total imports by category
-
-async function getTotalImportsByCategory(targetCountry) {
+const ComtradeExample = async () => {
   try {
-    const totalImportsByCategory = await te.getCmtCountryByCategory(
-      (country = targetCountry),
-      (type = 'import')
-    )
-    console.log('Total imports by category:', '\n', totalImportsByCategory)
-  } catch (error) {
-    console.log(error)
+    // Login with client key or leave it blank and a sample of data will be provided, you can get your free key here: http://developer.tradingeconomics.com
+    await te.login();
+
+    // Get detailed information about Comtrade. Can be: categories, updates or countries
+    const data = await te.getComtrade(category = 'categories')
+
+    // Get data about trading of one country or between two countries
+    const data1 = await te.getComtrade(country = 'china')
+    const data2 = await te.getComtrade(country = 'united states', country1 = 'china')
+
+    // Get information about one country or between two countries with a specific type of trade
+    const data3 = await te.getCmtCountryFilterByType(country1 = 'Portugal', country2 = 'Spain', type = 'import')
+    const data4 = await te.getCmtCountryFilterByType(country1 = 'United States', type = 'export')
+
+    // Get information about one country or between two countries with a specific type of trade
+    const data5 = await te.getCmtCountryByCategory(country = 'United States', type = 'export', category = 'live animals')
+
+    // Get Total trade information by type and country. Type cna be Import or Export
+    const data6 = await te.getComtradeTotalByType(country = 'Portugal', type = 'import')
+
+   // Get historical data by symbol
+   const data7 = await te.getComtrade(symbol = 'PRTESP24031')
+
+  //Get total imports by category
+  const data8 = await te.getComtradeTotalByType(country = 'Portugal', type = 'import')
+
+    console.log(data); //Place one of the variables to test
+  } catch (e) {
+    console.log(`Error: ${e}`);
   }
-}
-getTotalImportsByCategory('Qatar')
+};
+
+ComtradeExample();
 
 //===============================================================================================================
-//Get total exports by category
-
-async function getTotalExportsByCategory(targetCountry) {
-  try {
-    const totalExportsByCategory = await te.getCmtCountryByCategory(
-      (country = targetCountry),
-      (type = 'export')
-    )
-    console.log('Total exports by category:', '\n', totalExportsByCategory)
-  } catch (error) {
-    console.log(error)
-  }
-}
-getTotalExportsByCategory('New Zealand')
-
-//===============================================================================================================
-//Get top export markets and import sources
-
+//Example that uses some of the methods to get top export markets and import sources
+/*
 async function getTopTradingPartners(targetCountry) {
   try {
     //Get exports
@@ -191,4 +75,4 @@ async function getTopTradingPartners(targetCountry) {
     console.log(error)
   }
 }
-getTopTradingPartners('peru')
+getTopTradingPartners('peru')*/

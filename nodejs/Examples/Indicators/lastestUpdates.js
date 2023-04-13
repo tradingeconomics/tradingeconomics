@@ -4,47 +4,26 @@
 // Pacakge Installation: npm install tradingeconomics
 const te = require("tradingeconomics");
 
-// Login with client key or leave it blank, you can get your free key here: http://developer.tradingeconomics.com
-// Note: without a client key only a small sample of data will be given.
-te.login();
+const IndicatorsExample = async () => {
+  try {
+    // Login with client key or leave it blank and a sample of data will be provided, you can get your free key here: http://developer.tradingeconomics.com
+    await te.login();
 
-//===============================================================================================================
-//Get latest updates
+    //Get latest updates
+    const data = await te.getLatestUpdates()
 
-te.getLatestUpdates()
-  .then((data) => {
-    console.log("Latest updates:", "\n", data, "\n");
-  })
-  .catch((err) => console.log(err));
+    //Get lastest updates by country or starting date (date format is yyyy/mm/dd)
+    const data1 = await te.getLatestUpdates(start_date = '2018-01-01')
+    const data2 = await te.getLatestUpdates(country = 'portugal')
+    const data3 = await te.getLatestUpdates(country = 'portugal', start_date = '2018-01-01')
 
-//===============================================================================================================
-//Get lastest updates by country or starting date (date format is yyyy/mm/dd)
+    //Get lastest updates by date (date format is yyyy/mm/dd) and time (hh:mm)
+    const data4 = await te.getLatestUpdates(start_date = '2021-10-18', time='15:20')
 
-te.getLatestUpdates(start_date = '2018-02-02')
-  .then((data) => {
-    console.log("Latest updates with starting date:", "\n", data, "\n");
-  })
-  .catch((err) => console.log(err));
+    console.log(data); //Place one of the variables to test
+  } catch (e) {
+    console.log(`Error: ${e}`);
+  }
+};
 
-te.getLatestUpdates(country = 'portugal')
-  .then((data) => {
-    console.log("Latest updates by specific country:", "\n", data, "\n");
-  })
-  .catch((err) => console.log(err));  
-
-te.getLatestUpdates(country = 'portugal', start_date = '2018-02-02')
-  .then((data) => {
-    console.log("Latest updates by specific country and starting date:", "\n", data, "\n");
-  })
-  .catch((err) => console.log(err));  
-
-
-
-//===============================================================================================================
-//Get lastest updates by date (date format is yyyy/mm/dd) and time (hh:mm)
-
-te.getLatestUpdates(start_date = '2021-10-18', time='15:20')
-.then((data) => {
-  console.log("Latest updates by specific date and time:", "\n", data, "\n");
-})
-.catch((err) => console.log(err));   
+IndicatorsExample();

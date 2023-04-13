@@ -59,7 +59,7 @@ public class News
     public static void getNewsByCountry() throws IOException {
 
         //put country or countries here
-        String params = "united states";
+        String params = "mexico";
         params = params.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/news/country" + "/" + params ;
@@ -84,7 +84,7 @@ public class News
     public static void getNewsByCountryIndicator() throws IOException {
 
         //put country or countries name here
-        String params = "united states";
+        String params = "mexico";
         params = params.replaceAll("\\s","%20");
         //put indicator or indicators name here
         String params1 = "inflation rate";

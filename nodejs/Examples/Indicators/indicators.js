@@ -4,68 +4,42 @@
 // Pacakge Installation: npm install tradingeconomics
 const te = require('tradingeconomics')
 
-// Login with client key or leave it blank, you can get your free key here: http://developer.tradingeconomics.com
-// Note: without a client key only a small sample of data will be given.
-te.login()
-
-//===============================================================================================================
-// Get a list of all indicators
-
-te.getIndicatorData()
-  .then((all) => {
-    console.log('List of all Indicators', '\n', all, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get an indicators list by country/countries, you can pass group to get more specific data
-
-te.getIndicatorData((country = ['united states', 'china']))
-  .then((country) => {
-    console.log('List of indicators by country', '\n', country, '\n')
-  })
-  .catch((err) => console.log(err))
-
-te.getIndicatorData((country = 'china'), (group = 'housing'))
-  .then((countryGroup) => {
-    console.log('List of indicators by country', '\n', countryGroup, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get specific indicator for all countries
-
-te.getIndicatorData((indicator = 'gdp'))
-  .then((indicator) => {
-    console.log('List of a specific indicator', '\n', indicator, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-// Get a list of indicators by ticker
-
-te.getIndicatorData((ticker = 'usurtot'))
-  .then((ticker) => {
-    console.log('List of indicators by ticker', '\n', ticker, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//Get a list of all countries
-
-async function getAllCountries() {
+const IndicatorsExample = async () => {
   try {
-    const countries = await te.getAllCountries()
-    console.log('List of all countries', '\n', countries)
-  } catch (error) {
-    console.log(error)
+    // Login with client key or leave it blank and a sample of data will be provided, you can get your free key here: http://developer.tradingeconomics.com
+    await te.login();
+
+    
+    //Get a list of all countries
+    const data = await te.getAllCountries()
+
+    // Get a list of all indicators
+    const data1 = await te.getIndicatorData()
+
+    // Get an indicators list by country/countries, you can pass group to get more specific data
+    const data2 = await te.getIndicatorData(country = ['mexico', 'sweden'])
+    const data3 = await te.getIndicatorData(country = 'mexico', group = 'gdp')
+
+    // Get specific indicator for all countries
+    const data4 = await te.getIndicatorData(indicator = 'gdp')
+
+    // Get a list of indicators by ticker
+    const data5 = await te.getIndicatorData(ticker = 'usurtot')
+
+    console.log(data); //Place one of the variables to test
+  } catch (e) {
+    console.log(`Error: ${e}`);
   }
-}
-getAllCountries()
+};
+
+IndicatorsExample();
+
+
+
 
 //===============================================================================================================
-//Combine methods to get data by country and group
-
+//Example combining methods to get data by country and group
+/*
 async function getCountryGroupData(targetCountry, targetIndicator) {
   try {
     const allIndicators = await te.getIndicatorData()
@@ -89,4 +63,4 @@ async function getCountryGroupData(targetCountry, targetIndicator) {
     console.log(error)
   }
 }
-getCountryGroupData('Belgium', 'Credit Rating')
+getCountryGroupData('Belgium', 'Credit Rating')*/

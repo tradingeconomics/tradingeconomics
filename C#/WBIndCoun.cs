@@ -24,17 +24,17 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get world bank information by indicators series code
-            Console.WriteLine("**********Get world bank by indicators series code**********");
+            Console.WriteLine("\n**********Get world bank by indicators series code**********");
             var getWBSeries = GetWBSeries(new string [] { "fr.inr.rinr"}).Result;
             Console.WriteLine(getWBSeries);
 
             // Filtering by url 
-            Console.WriteLine("**********Get WB by url**********");
-            var getWBUrl = GetWBUrl("united-states/real-interest-rate-percent-wb-data.html").Result;
+            Console.WriteLine("\n**********Get WB by url**********");
+            var getWBUrl = GetWBUrl("/united-states/real-interest-rate-percent-wb-data.html").Result;
             Console.WriteLine(getWBUrl);
 
             // Filtering by the country and page number
-            Console.WriteLine("**********Get WB by country and page number**********");
+            Console.WriteLine("\n**********Get WB by country and page number**********");
             var getWBCountryPage = GetWBCountryPage("united states", 4).Result;
             Console.WriteLine(getWBCountryPage);
 

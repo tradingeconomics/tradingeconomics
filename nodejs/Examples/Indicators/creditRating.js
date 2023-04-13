@@ -4,68 +4,25 @@
 // Pacakge Installation: npm install tradingeconomics
 const te = require('tradingeconomics')
 
-// Login with client key or leave it blank, you can get your free key here: http://developer.tradingeconomics.com
-// Note: without a client key only a small sample of data will be given.
-te.login()
-
-//===============================================================================================================
-//Get credit ratings for all countries
-
-te.getRatings()
-  .then((data) => {
-    console.log('Credit ratings list:', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//Get credit ratings for a specific country/countries
-
-te.getRatings((country = ['united states', 'portugal']))
-  .then((data) => {
-    console.log('Credit ratings:', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//Get all historical ratings by country/countries, you can pass dates parameters to get a specific data (start_date / end_date with date format yyyy/mm/dd)
-
-te.getRatings((historical = ['united states', 'portugal']))
-  .then((data) => {
-    console.log('Historical rating for a country/countries', '\n', data, '\n')
-  })
-  .catch((err) => console.log(err))
-
-te.getRatings(
-  (historical = 'united states'),
-  (start_date = '2011-01-01'),
-  (end_date = '2012-01-01')
-)
-  .then((data) => {
-    console.log(
-      'Historical rating for a country with date parameters',
-      '\n',
-      data,
-      '\n'
-    )
-  })
-  .catch((err) => console.log(err))
-
-//===============================================================================================================
-//Compare multiple countries
-
-async function compareCountriesByCreditRating(...countries) {
+const IndicatorsExample = async () => {
   try {
-    const ratings = await te.getRatings((country = countries))
-    console.log('Credit ratings for the selected countries:', '\n', ratings)
-  } catch (error) {
-    console.log(error)
+    // Login with client key or leave it blank and a sample of data will be provided, you can get your free key here: http://developer.tradingeconomics.com
+    await te.login();
+
+    //Get credit ratings for all countries
+    const data = await te.getRatings()
+
+    //Get credit ratings for a specific country/countries
+    const data1 = await te.getRatings(country = ['mexico', 'sweden'])
+
+    //Get all historical ratings by country/countries, you can pass dates parameters to get a specific data (start_date / end_date with date format yyyy/mm/dd)
+    const data2 = await te.getRatings(historical = ['mexico', 'sweden'])
+    const data3 = await te.getRatings(historical = 'mexico',start_date = '2013-01-01',end_date = '2014-01-01')
+
+    console.log(data); //Place one of the variables to test
+  } catch (e) {
+    console.log(`Error: ${e}`);
   }
-}
-compareCountriesByCreditRating(
-  'france',
-  'italy',
-  'spain',
-  'gabon',
-  'vietnam',
-  'bolivia'
-)
+};
+
+IndicatorsExample();

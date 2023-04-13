@@ -2,24 +2,20 @@
 Trading Economics API
 =====================
 
-Install Python
-===============
-If you don’t have a copy of Python installed on your computer, you can get it from:
+The Trading Economics Python package provides you with direct access to 300.000 economic indicators, exchange rates, stock market indexes, government bond yields and commodity prices. Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. The API can be used to feed a custom developed application, a public website or just off-the-shelf software.
 
- - https://www.python.org/downloads/ 
+- pip install tradingeconomics
 
 
-Install pip
-============
-
-You can find all information in: 
-
- - https://packaging.python.org/installing/ 
-
-Check our docs on how to use the package 
+GitHub Examples
 ----------------------------------------
 
+ - https://github.com/tradingeconomics/tradingeconomics/tree/master/python
 
- - https://docs.tradingeconomics.com/#introduction 
 
- - https://github.com/ieconomics/open-api/tree/master/python 
+Documentation
+----------------------------------------
+
+ - https://docs.tradingeconomics.com
+
+

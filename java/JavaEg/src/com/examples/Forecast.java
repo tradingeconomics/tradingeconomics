@@ -46,7 +46,7 @@ public class Forecast
     public static  void getForecastByCountry() throws IOException
     {
         //put country name here
-        String params = "united states";
+        String params = "mexico";
         params = params.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/forecast/country" + "/" + params;
@@ -59,7 +59,7 @@ public class Forecast
     public static void getForecastMultiCountry() throws IOException {
 
         //put countries name here
-        String params = "united states,china";
+        String params = "mexico,sweden";
         params = params.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/forecast/country" + "/" + params;
@@ -95,7 +95,7 @@ public class Forecast
     public static void getForecastCountryIndicator() throws IOException {
 
         //put country or countries name here
-        String params = "united states" + "/";
+        String params = "mexico" + "/";
         params = params.replaceAll("\\s","%20");
         //put indicator name here
         String params1 = "gdp";
@@ -110,7 +110,7 @@ public class Forecast
     public static void getForecastMultiCountryIndicator() throws IOException {
 
         //put countries name here
-        String params = "united states,china" + "/";
+        String params = "mexico,sweden" + "/";
         params = params.replaceAll("\\s","%20");
         //put indicators name here
         String params1 = "gdp,population";

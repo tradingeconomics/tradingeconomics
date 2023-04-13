@@ -25,33 +25,33 @@ namespace CSharpExamples
                 _clientKey = k;
 
             // get default earnings calendar
-            Console.WriteLine("**********Get earnings calendar**********");
+            Console.WriteLine("\n**********Get earnings calendar**********");
             var getEarnings = GetEarnings().Result;
             Console.WriteLine(getEarnings);
 
             // Filter earnings calendar by date
-            Console.WriteLine("**********Get earnings calendar by date**********");
+            Console.WriteLine("\n**********Get earnings calendar by date**********");
             var getEarningsByDate = GetEarningsByDate( new DateTime(2015, 01, 01)).Result;
             Console.WriteLine(getEarningsByDate);
 
             // Get earnings calendar by market and date
-            Console.WriteLine("**********Get earnings calendar by market and date**********");
+            Console.WriteLine("\n**********Get earnings calendar by market and date**********");
             var getEarningsByMarketDate = GetEarningsByMarketDate("aapl:us", new DateTime(2015, 03, 01)).Result;
             Console.WriteLine(getEarningsByMarketDate);
          
             // Get earnings calendar by market and date range
-            Console.WriteLine("**********Get earnings calendar by market and date range**********");
+            Console.WriteLine("\n**********Get earnings calendar by market and date range**********");
             var getEarningsMarketBetweenDates = GetEarningsMarketBetweenDates("aapl:us", new DateTime(2015, 03, 01), new DateTime(2015, 12, 31)).Result;
             Console.WriteLine(getEarningsMarketBetweenDates);
 
             // get default earnings calendar by country
-            Console.WriteLine("**********Get earnings calendar by country**********");
+            Console.WriteLine("\n**********Get earnings calendar by country**********");
             var getEarningsByCountry = GetEarningsByCountry("united states").Result;
             Console.WriteLine(getEarningsByCountry);
 
             // Filter earnings by type
             // Type can be:earnings, ipo, dividends
-            Console.WriteLine("**********Get earnings by type**********");
+            Console.WriteLine("\n**********Get earnings by type**********");
             var getEarningsByType = GetEarningsByType("earnings").Result;
             Console.WriteLine(getEarningsByType);
 

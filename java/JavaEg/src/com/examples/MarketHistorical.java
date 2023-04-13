@@ -61,7 +61,7 @@ public class MarketHistorical
     public static void getHistoricalMultiSymbol() throws IOException {
 
         //put symbols here
-        String params = "aapl:us,indu:ind";
+        String params = "aapl:us,gac:com";
         params = params.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/markets/historical" + "/" + params;

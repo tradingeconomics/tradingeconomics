@@ -1,14 +1,18 @@
 from . import functions as fn
+import os
 
 def login(userkey = None):
     global apikey
     if userkey == None:
-        apikey = 'guest:guest'
+        if 'apikey' in os.environ:
+            apikey = os.environ["apikey"]
+        else:
+            apikey = 'guest:guest'
     else:
         apikey = userkey
     if apikey != 'guest:guest':
         fn.credCheck(apikey)
-    return 'You are logged in as a ' + apikey
+    return 'Logged with ' + apikey.split(":")[0]
 
 _event = []
 

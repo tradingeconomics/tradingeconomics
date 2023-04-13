@@ -117,14 +117,19 @@ def getIndicatorData(country = None, indicators = None, output_type = None):
         ssl._create_default_https_context = _create_unverified_https_context
     
     if country == None:
-        linkAPI = 'https://api.tradingeconomics.com/indicators/'
+         linkAPI = 'https://api.tradingeconomics.com/indicators/'
     else:
-        linkAPI = checkCountry(country)
+         linkAPI = checkCountry(country)
     
     if indicators == None:
-        linkAPI = linkAPI
+         linkAPI = linkAPI
     else:
+         linkAPI = checkIndic(indicators, linkAPI)
+
+    if indicators and country is None:
+        linkAPI = 'https://api.tradingeconomics.com/country/all'
         linkAPI = checkIndic(indicators, linkAPI)
+
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:

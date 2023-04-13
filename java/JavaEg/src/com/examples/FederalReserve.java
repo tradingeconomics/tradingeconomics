@@ -77,7 +77,7 @@ public class FederalReserve
     public static void getFredSymbol() throws IOException {
 
         //put symbol name here
-        String params = "AGEXMAK2A647NCEN";
+        String params = "ALLMARGATTN";
         params = params.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/fred/snapshot/symbol" + "/" + params;
@@ -91,7 +91,7 @@ public class FederalReserve
     public static void getFredUrl() throws IOException {
 
         //put country name here
-        String url = "/united-states/income-inequality-in-aleutians-east-borough-ak-fed-data.html";
+        String url = "/united-states/all-marginally-attached-workers-for-tennessee-fed-data.html";
         url = url.replaceAll("\\s","%20");
         //set the path for the query
         String path = "/fred/snapshot/url" + "?url=" + url;

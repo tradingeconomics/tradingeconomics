@@ -1,6 +1,3 @@
-import json 
-import urllib 
-import pandas as pd
 import sys
 from datetime import *
 from . import functions as fn
@@ -11,10 +8,8 @@ import ssl
 PY3 = sys.version_info[0] == 3
 
 if PY3: # Python 3+
-    from urllib.request import urlopen
     from urllib.parse import quote
 else: # Python 2.X
-    from urllib import urlopen
     from urllib import quote
 
 
@@ -204,9 +199,8 @@ def getCalendarData(country = None, category = None, initDate = None, endDate = 
     
 
     api_url_request = "%s%s%s%s%s%s%s" % (d['url_base'], d['country'], d['category'],  d['init_date'],  d['end_date'],  d['key'], d['importance']) 
-    #print(api_url_request)
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
-    #return
+
 
 def getCalendarUpdates(output_type = None):
     """
@@ -237,15 +231,71 @@ def getCalendarUpdates(output_type = None):
         'key': f'?c={glob.apikey}',
         'output_type' : ''
     }
-    
-    
-    
-    
 
     api_url_request = "%s%s" % (d['url_base'], d['key']) 
-    #print(api_url_request)
+
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
     #return
 
 
 
+def getCalendarEventsByGroup(group: str, country: str=None, initDate = None, endDate = None, output_type = None):
+    """
+    Returns calendar events of the specified group
+    =================================================================================
+    Parameters:
+    -----------
+        group: string
+            bonds, inflation
+
+        country: string, optional
+            'united states'
+            'china'
+        
+        
+        output_type: string.
+             'dict'(default) for dictionary format output, 
+             'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    Notes
+    -----
+    
+    
+    Example
+    -------
+            getCalendarEventsByGroup(output_type='df')
+            getCalendarEventsByGroup(country='china', group='inflation', endDate='2023-02-01', output_type='df')
+            getCalendarEventsByGroup('inflation', initDate='2023-01-01', endDate='2023-02-01', output_type='dict')
+            
+    """
+
+    d = {
+            'url_base': 'https://api.tradingeconomics.com/calendar',
+            'key': f'?c={glob.apikey}',
+            'output_type' : ''
+        }
+
+    api_url_request = f"{d['url_base']}"
+
+    if country:
+        api_url_request += f"/country/{fn.stringOrList(country)}"
+    
+    if group:
+        api_url_request += f'/group/{fn.stringOrList(group)}'
+    else:
+        return 'Group cannot be empty'
+
+    if initDate and endDate:
+        fn.validatePeriod(initDate, endDate)
+    
+    if initDate:
+        fn.validate(initDate)
+        api_url_request += f"/{initDate}"
+    
+    if endDate:
+        fn.validate(endDate)
+        api_url_request += f'/{endDate}'
+    
+    api_url_request += f"{d['key']}"
+    
+    return fn.dataRequest(api_request=api_url_request, output_type=output_type)

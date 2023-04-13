@@ -3,6 +3,12 @@
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
++ 2023/02
+
+    + __Added:__ Unit column to /forecast for indicators endpoints.
+
+---
+
 + 2023/01
 
     + __Added:__ /calendar/group endpoints.
@@ -138,9 +144,9 @@
 ### *Packages latest versions:*
 Package | Version
 :---: |:---:
-*Python* |`0.2.990` 
-*Node* | `1.0.13`
-*R* | `0.2.8`
+*Python* |`4.2.2` 
+*Node* | `2.2.3`
+*R* | `0.2.12`
 
 
 
