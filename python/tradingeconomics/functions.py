@@ -210,8 +210,8 @@ def checkDates(baseLink, initDate=None, endDate=None):
             validate(initDate)
         except ValueError:
             raise DateError ('Incorrect initDate format, should be YYYY-MM-DD or MM-DD-YYYY.')
-            if initDate > str(date.today()):
-                raise DateError ('Initial date out of range.')
+        # if initDate > str(date.today()):
+        #     raise DateError ('Initial date out of range.')
         baseLink += '&d1=' + quote(initDate)
 
     if (initDate is not None) and (endDate is not None) :
