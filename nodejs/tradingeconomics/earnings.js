@@ -6,12 +6,7 @@ const func = require('./functions.js');
 const fetch = require('node-fetch');
 const https = require('https');
 
-//setting global variables to be used outside this module
-global.symbol = null;
-global.country = null;
-global.type = null;
-global.start_date = null;
-global.end_date = null;
+
 
 //This function builds the path to get the API request:
 /******************************************************************************************* 
@@ -165,10 +160,17 @@ function makeRequest(url) {
         });
     });
 }
+
+//setting global variables to be used outside this module
+global.symbol = null;
+global.country = null;
+global.type = null;
+global.start_date = null;
+global.end_date = null;
   
 
-function getEarnings(symbol = undefined, country=undefined, start_date=undefined, end_date=undefined){
-
+// function getEarnings(symbol = null, country=null, start_date=null, end_date=null){
+function getEarnings(){
     try {
 
         let linkAPI = 'https://api.tradingeconomics.com/earnings-revenues';
