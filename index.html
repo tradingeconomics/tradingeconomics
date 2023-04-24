@@ -4625,6 +4625,14 @@ Click on any method below for a sample.
 
 </code></pre>
 
+</code></pre>
+<blockquote class="lang-specific python">
+    <p>To get earnings revenues calendar by country and date:</p>
+</blockquote>  
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">country</span> <span class="o">=</span> <span class="s">'mexico'</span>, <span class="n">initDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'2016-01-01'</span><span class="p">,</span><span class="n"> endDate</span> <span class="o">=</span><span class="s1">'2023-12-01'</span><span class="p">, <span class="n">output_type</span> <span class="o">=</span> <span class="s">'df'</span><span class="p">)</span><span class="p"></span>
+
+</code></pre>
+
 <!--javascript black side-->
 
 <blockquote class="lang-specific javascript">
@@ -4656,6 +4664,15 @@ Click on any method below for a sample.
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
     <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">country</span> = <span class="s1">'united states'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+        </span><span class="s1">console</span>.log(<span class="na">data</span>)     
+    });</span>
+</code></pre>
+
+<blockquote class="lang-specific javascript">
+    <p>Get earnings revenues calendar by country and date.</p>
+</blockquote>
+</code></pre><pre class="highlight javascript"><code>
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">country</span> = <span class="s1">'mexico'</span>, <span class="kd">start_date</span> = <span class="s1">'2016-01-01'</span>, <span class="kd">end_date</span> = <span class="s1">'2023-12-31'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -4803,6 +4820,8 @@ Click on any method below for a sample.
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings-revenues/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings revenues calendar by country<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/country/mexico?c=guest:guest&f=json">/earnings-revenues/country/{country}</a> </p></li>
+    <li><p>Filter earnings revenues calendar by country and date<br>
+        <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/country/mexico?d1=2016-01-01&d2=2023-12-31&c=guest:guest&f=json">/earnings-revenues/country/{country}?d1=yyyy-mm-dd&d2=yyyy-mm-dd</a> </p></li>
 <!-- <li><p>Filter earnings revenues by type: earnings revenues, ipo, dividends.<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues?c=guest:guest&type=earnings-revenues">/earnings-revenues?c=guest:guest&type=earnings-revenues</a>    </p></li> -->
 </ul>
