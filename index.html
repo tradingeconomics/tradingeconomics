@@ -4601,7 +4601,7 @@ Click on any method below for a sample.
 <blockquote class="lang-specific python">
     <p>To get earnings revenues calendar filtered by symbol and date. You can set only a start date:</p>
 </blockquote>  
-<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">symbols</span> <span class="o">=</span> <span class="s">'msft:us'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2016-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">)</span>
+<pre class="highlight python"><code><span class="n">te</span><span class="o">.</span><span class="n">getEarnings</span><span class="p">(</span><span class="n">symbols</span> <span class="o">=</span> <span class="s">'aapl:us'</span><span class="p">,</span> <span class="n">initDate</span><span class="o">=</span><span class="s">'2016-01-01'</span><span class="p">,</span> <span class="n">endDate</span><span class="o">=</span><span class="s">'2017-12-31'</span><span class="p">)</span>
 
 <span class="n">Output</span><span class="p">:</span>
     <span class="n">Symbol</span>       <span class="n">Name</span> <span class="n">Actual</span>  <span class="o">...</span>
@@ -4655,7 +4655,7 @@ Click on any method below for a sample.
     <p>Get earnings revenues calendar by symbol and date. You can set only a start date.</p>
 </blockquote>
 </code></pre><pre class="highlight javascript"><code>
-    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">symbol</span> = <span class="s1">'CMCSA:US'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>, <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
+    <span class="na">data</span> = <span class="o">te</span>.<span class="s1">getEarnings</span>(<span class="kd">symbol</span> = <span class="s1">'AAPL:US'</span>, <span class="kd">start_date</span> = <span class="s1">'2018-02-02'</span>, <span class="kd">end_date</span> = <span class="s1">'2019-02-02'</span>).then(<span class="na">function</span>(<span class="kd">data</span>){
         </span><span class="s1">console</span>.log(<span class="na">data</span>)     
     });</span>
 </code></pre>
@@ -4817,7 +4817,7 @@ Click on any method below for a sample.
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues?c=guest:guest&d1=2017-01-01&f=json">/earnings-revenues?d1=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings revenues calendar by instrument and date<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/symbol/aapl:us?c=guest:guest&d1=2017-01-01&f=json">/earnings-revenues/symbol/{symbol}?d1=yyyy-mm-dd</a><br>
-    <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/symbol/msft:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings-revenues/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
+    <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/symbol/aapl:us?c=guest:guest&d1=2016-01-01&d2=2017-12-31&f=json">/earnings-revenues/symbol/{symbol}?d1=yyyy-mm-dd&amp;d2=yyyy-mm-dd</a>    </p></li>
 <li><p>Filter earnings revenues calendar by country<br>
     <a target = '_blank' href="https://api.tradingeconomics.com/earnings-revenues/country/mexico?c=guest:guest&f=json">/earnings-revenues/country/{country}</a> </p></li>
     <li><p>Filter earnings revenues calendar by country and date<br>
