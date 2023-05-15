@@ -981,7 +981,7 @@ Using Headers auth:<br>
 </tr>
 <tr>
     <td style="text-align: left"><strong>Relationship</strong></td>
-    <td style="text-align: left">0 - related, 1 - component, 2 - parent, 3 - derivative</td>
+    <td style="text-align: left">-1 itself, 0 related, 1 component, 2 parent, 3 derivative</td>
 </tr>
 </tbody></table>
 
@@ -3660,6 +3660,9 @@ Click on any method below for a sample.
 <td style="text-align: left"><strong>Frequency</strong></td>
 <td style="text-align: left">Market frequency</td>
 </tr>
+<td style="text-align: left"><strong>Relationship*</strong></td>
+<td style="text-align: left">0 - component, 1 - peer</td>
+</tr>
 </tbody></table>
 <h3 id="json-csv-xml"></h3>
 <br>
@@ -3668,6 +3671,8 @@ Click on any method below for a sample.
 <p>/markets/commodities, /markets/index, /markets/currency, /markets/bond and  /markets/currency?cross=eur.</p>
 <p><strong>Type* and MarketCap* not in :</strong>  
 <p>/markets/commodities, /markets/index, /markets/currency, /markets/bond and  /markets/currency?cross=eur.</p>
+<p><strong>Relationship* only in :</strong>  
+<p>/markets/peers/{symbol}, /markets/components/{symbol}.</p>
 <br>
 <p><strong>For all methods listed above, you can get data in:</strong></p>
 
