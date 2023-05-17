@@ -7,7 +7,7 @@ The Trading Economics API provides you with direct access to 300.000 economic in
 
 **Documentation**
 
-http://docs.tradingeconomics.com/
+http://documentation.tradingeconomics.com/
 
 **GitHub Examples**
 
