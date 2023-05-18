@@ -1,5 +1,8 @@
-#  Trading Economics API Change Log
+# **Change Log will be migrated to the new documentation**
 
+https://documentation.tradingeconomics.com/docs/change_log/
+
+#  Trading Economics API Change Log
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
