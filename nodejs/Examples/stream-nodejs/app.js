@@ -14,8 +14,8 @@ let secret = keySecretArray[1]
 var te_client = require('./te_client'),
   Client = new te_client({
     url: 'wss://stream.tradingeconomics.com/',
-    key: key, //API_CLIENT_KEY
-    secret: secret, //API_CLIENT_SECRET
+    key: 'guest', //API_CLIENT_KEY
+    secret: 'guest', //API_CLIENT_SECRET
     
     //reconnect: true
   })
