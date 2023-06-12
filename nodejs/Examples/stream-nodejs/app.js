@@ -14,9 +14,8 @@ let secret = keySecretArray[1]
 var te_client = require('./te_client'),
   Client = new te_client({
     url: 'wss://stream.tradingeconomics.com/',
-    key: 'guest', //API_CLIENT_KEY
-    secret: 'guest', //API_CLIENT_SECRET
-    
+    key: key, //API_CLIENT_KEY
+    secret: secret, //API_CLIENT_SECRET
     //reconnect: true
   })
 
@@ -32,5 +31,11 @@ Client.on('message', function (msg) {
 
   //parse/save msg to DB
 })
+
+//Example to unsubscribe a topic. Required: string or array of string
+setTimeout(() => {
+  Client.unsubscribe('CURRENCIES')
+  //Client.unsubscribe(['CURRENCIES', 'commodities'])
+}, 5000);
 
 //...

@@ -131,14 +131,38 @@ TEClient.prototype.subscribe = function(to){
 	return _this;
 };
 
+TEClient.prototype.unsubscribe = function(to) {
+  var _this = this;
+  if (Array.isArray(to)) {
+    to.forEach(function(topic) {
+      if (_this.subArr.indexOf(topic) < 0) {
+        _this.subArr.push(topic);
+      }
+      if (_this.ws && _this.ws.readyState === WebSocket.OPEN) {
+        _this.ws.send('{"topic": "unsubscribe", "to": "' + topic.toUpperCase() + '"}');
+        _this.ws.send('{"topic": "unsubscribe", "to": "' + topic.toLowerCase() + '"}');
+
+        console.log(`Unsubscribed to: ${topic}`);
+      }
+    });
+  } else if (typeof to === 'string') {
+    if (_this.subArr.indexOf(to) < 0) {
+      _this.subArr.push(to);
+    }
+    if (_this.ws && _this.ws.readyState === WebSocket.OPEN) {
+      _this.ws.send('{"topic": "unsubscribe", "to": "' + to.toLowerCase() + '"}');
+			_this.ws.send('{"topic": "unsubscribe", "to": "' + to.toUpperCase() + '"}');
+      console.log(`Unsubscribed to: ${to}`);
+    }
+  } else {
+    // Emit error for invalid argument type
+    console.error('Invalid argument type. Expected string or array of strings.');
+  }
+
+  return _this;
+};
 
 module.exports = TEClient;
-
-
-
-
-
-
 
 
 function buildWsUrl(options){
@@ -148,12 +172,6 @@ function buildWsUrl(options){
 
 	return url;
 }
-
-
-
-
-
-
 
 
 /**
