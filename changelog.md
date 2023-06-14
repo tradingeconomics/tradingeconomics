@@ -1,10 +1,27 @@
-#  Trading Economics API Change Log
+# **Change Log will be migrated to the new documentation**
 
+https://documentation.tradingeconomics.com/docs/change_log/
+
+#  Trading Economics API Change Log
 
 ### *Latest changes, improvements and bug fixes on the API:*
 
++ 2023/05
+
+    + __Added:__ /earnings-revenues/index/ endpoint.
+    + __Added:__ relationship column to markets/peers and markets/components endpoints
+
+---
+
++ 2023/03
+
+    + __Improved:__ /News and /Updates endpoints.
+
+---
+
 + 2023/02
 
+    + __Fixed:__ /fred pagination endpoint bug.
     + __Added:__ Unit column to /forecast for indicators endpoints.
 
 ---

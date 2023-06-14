@@ -71,15 +71,16 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
         ssl._create_default_https_context = _create_unverified_https_context
         
     
-    linkAPI = 'https://api.tradingeconomics.com/earnings/' 
+    # linkAPI = 'https://api.tradingeconomics.com/earnings/' 
+    linkAPI = 'https://api.tradingeconomics.com/earnings-revenues'
     if symbols:
-        linkAPI += 'symbol/'
+        linkAPI += '/symbol/'
         if type(symbols) is not str:
             linkAPI += quote(",".join(symbols), safe='')
         else:
             linkAPI += quote(symbols)
     elif country:
-        linkAPI += 'country/'
+        linkAPI += '/country/'
         if type(country) is not str:
             linkAPI += quote(",".join(country), safe='')
         else:
