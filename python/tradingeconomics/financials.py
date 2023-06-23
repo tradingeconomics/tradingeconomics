@@ -132,6 +132,7 @@ def getFinancialsCategoryList(output_type=None):
 
 
 def getFinancialsDataByCategory(category=None, output_type=None):
+
     """
     Returns financial data by categories.
     ==========================================================
@@ -176,3 +177,37 @@ def getFinancialsDataByCategory(category=None, output_type=None):
     api_url_request = "%s%s%s" % (d['url_base'], d['category'], d['key'])
 
     return fn.dataRequest(api_request=api_url_request, output_type=output_type)
+
+
+def getSectors(output_type=None):
+    """
+    Returns all sectors.
+    ==========================================================
+
+    Parameters:
+    -----------
+
+    output_type: string.
+             'dict'(default) for dictionary format output, 'df' for data frame,
+             'raw' for list of dictionaries directly from the web. 
+    
+    Example
+    -------
+    Get data by financial categories:
+            getSectors()
+
+    """
+
+    linkAPI = 'https://api.tradingeconomics.com/sectors/'
+
+    try:
+        linkAPI += '?c=' + glob.apikey
+    except AttributeError:
+        raise LoginError('You need to do login before making any request')
+        
+    linkAPI = fn.checkDates(linkAPI)
+    
+    try:
+        return fn.dataRequest(api_request=linkAPI, output_type=output_type)
+    except Exception as e:
+        print(e)

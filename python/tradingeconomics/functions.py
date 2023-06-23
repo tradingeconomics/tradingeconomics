@@ -232,3 +232,12 @@ def checkDates(baseLink, initDate=None, endDate=None):
     if initDate == None and (endDate is not None):
         raise DateError('initDate value is missing')
     return baseLink
+
+
+def isStringOrList(string_or_list):
+    if type(string_or_list) is str:
+        return quote(string_or_list)
+    elif type(string_or_list) is list:
+        return quote(",".join(string_or_list))
+    else:
+        raise ValueError('Invalid input type. Should be string or list of strings.')

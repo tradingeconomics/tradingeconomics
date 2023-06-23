@@ -24,7 +24,7 @@ if PY3: # Python 3+
     from .federalReserve import getFedRStates, getFedRSnaps, getFedRHistorical, getFedRCounty
     from .eurostat import getEurostatData,getEurostatCountries,getEurostatCategoryGroups
     from .historicalEurostat import getHistoricalEurostat
-    from .financials import getFinancialsData, getFinancialsCategoryList, getFinancialsDataByCategory
+    from .financials import getFinancialsData, getFinancialsCategoryList, getFinancialsDataByCategory, getSectors
     from .historicalFinancials import getFinancialsHistorical
     from .search import getSearch
 

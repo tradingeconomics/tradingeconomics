@@ -7,7 +7,7 @@ from . import glob
 import ssl
 from . import functions as fn
 from dateutil.relativedelta import relativedelta
-import time
+from typing import List
 
 PY3 = sys.version_info[0] == 3
 
@@ -34,35 +34,41 @@ class DateError(ValueError):
 class WebRequestError(ValueError):
     pass
 
-def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_type=None):
+def getEarnings(symbols: List[str]=None, country: List[str]=None, index: List[str]=None, sector: List[str] = None, initDate=None, endDate=None, output_type=None):
     """
-    Returns earnings calendar data.
+    Returns earnings and revenues calendar data.
     ==========================================================
 
     Parameters:
     -----------
-    symbols: string or list.
-             String to get data for symbol. List of strings to get data for
-             several symbols.
+    symbols: string or list of strings, optional
+            Get earnings and revenues for the symbol/s specified.
     
-    country: string or list.
-             String to get data for a specific country. List of strings to get data for
-             several countries.
+    country: string or list of strings, optional
+            Get earnings and revenues from stocks of specific countries.
 
+    index: string or list of strings, optional
+            Get earnings and revenues of stocks belonging to a specific indexes.
+
+    sector: string or list, optional
+            Get earnings and revenues of stocks belonging to a specific sectors.
+             
     initDate: string with format: YYYY-MM-DD.
-             For example: '2011-01-01' 
+            For example: '2022-01-01' 
 
     endDate: string with format: YYYY-MM-DD.
+            For example: '2023-01-01'
 
     output_type: string.
-             ''dict'(default) for dictionary format output, 'df' for data frame,
-             'raw' for list of dictionaries directly from the web.  
+            'dict'(default) for dictionary format output, 'df' for data frame,
+            'raw' for list of dictionaries directly from the web.  
 
     Example
     -------
     getEarnings(symbols = 'msft:us', initDate='2016-01-01', endDate='2017-12-31')
     getEarnings(country = 'united states')
     """
+
     try:
         _create_unverified_https_context = ssl._create_unverified_context
     except AttributeError:
@@ -71,29 +77,27 @@ def getEarnings(symbols=None, country=None, initDate=None, endDate=None, output_
         ssl._create_default_https_context = _create_unverified_https_context
         
     
-    # linkAPI = 'https://api.tradingeconomics.com/earnings/' 
     linkAPI = 'https://api.tradingeconomics.com/earnings-revenues'
-    if symbols:
-        linkAPI += '/symbol/'
-        if type(symbols) is not str:
-            linkAPI += quote(",".join(symbols), safe='')
-        else:
-            linkAPI += quote(symbols)
-    elif country:
-        linkAPI += '/country/'
-        if type(country) is not str:
-            linkAPI += quote(",".join(country), safe='')
-        else:
-            linkAPI += quote(country)
+    if symbols and fn.isStringOrList(symbols):
+        linkAPI += '/symbol/' + fn.stringOrList(symbols)
+
+    elif country and fn.isStringOrList(country):
+        linkAPI += '/country/' + fn.stringOrList(country)
+
+    elif index and fn.isStringOrList(index):
+        linkAPI += '/index/' + fn.stringOrList(index)
+
+    elif sector and fn.isStringOrList(sector):
+        linkAPI += '/sector/' + fn.stringOrList(sector)
+    
     try:
         linkAPI += '?c=' + glob.apikey
     except AttributeError:
         raise LoginError('You need to do login before making any request')
         
     linkAPI = fn.checkDates(linkAPI, initDate, endDate)
-    #print(linkAPI)
+    
     try:
-        #print(linkAPI)
         return fn.dataRequest(api_request=linkAPI, output_type=output_type)
     except Exception as e:
         print(e)
