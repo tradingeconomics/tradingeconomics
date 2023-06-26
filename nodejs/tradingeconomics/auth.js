@@ -17,7 +17,7 @@ function login(apikey = null) {
   }
   
   global.apikey = apikey;
-  return console.log("Logged with " + apikey.split(':')[0]);
+  // return console.log("Logged with " + apikey.split(':')[0]);
 }
 
 module.exports.login = login;

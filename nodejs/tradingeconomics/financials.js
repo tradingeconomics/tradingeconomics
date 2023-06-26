@@ -137,6 +137,17 @@ function getFinancialsDataByCategory(){
    
 }
 
+
+function getSectors(){
+    let linkAPI = `https://api.tradingeconomics.com/sectors?c=${apikey}`;
+    try {
+        return func.makeTheRequest(linkAPI)
+    }
+    catch (error) {
+        throw error
+    }
+}
 module.exports.getFinancialsData = getFinancialsData;
 module.exports.getFinancialsCategoryList = getFinancialsCategoryList;
 module.exports.getFinancialsDataByCategory = getFinancialsDataByCategory;
+module.exports.getSectors = getSectors;

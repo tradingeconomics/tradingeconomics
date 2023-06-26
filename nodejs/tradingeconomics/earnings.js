@@ -8,23 +8,6 @@ const https = require('https');
 
 
 
-//This function builds the path to get the API request:
-/******************************************************************************************* 
-  parameters:
-    String or list: symbol, country 
-    String: type, start_date, end_date
-        -> type can be:
-           earnings, ipo, dividends
-
-  example:
-    getEarnings();
-    getEarnings(start_date = '2018-02-02');
-    getEarnings(country = 'united states');
-    getEarnings(symbol ='CMCSA:US', start_date = '2018-02-02');
-    getEarnings(symbol ='FARM:US', start_date = '2018-02-01', end_date = '2018-03-01');         
-         
-*********************************************************************************************/
-
 // function getEarnings(){
 
 //     try {
@@ -152,12 +135,13 @@ function makeRequest(url) {
             const parsedData = JSON.parse(data);
             resolve(parsedData);
             } catch (error) {
+              if (data == "You must provide valid credentials. Please contact support@tradingeconomics.com"){
+                resolve(data);
+              }
             reject(error);
             }
         });
-        }).on('error', (error) => {
-        reject(error);
-        });
+        }).on('error', (error) => reject(error));
     });
 }
 
@@ -167,29 +151,62 @@ global.country = null;
 global.type = null;
 global.start_date = null;
 global.end_date = null;
+global.index = null;
+global.index = null;
   
 
-// function getEarnings(symbol = null, country=null, start_date=null, end_date=null){
+/******************************************************************************************* 
+  parameters:
+    String or list: symbol, country, index, sector
+    String: type, start_date, end_date
+        -> type can be:
+           earnings, ipo, dividends
+
+  example:
+    getEarnings();
+    getEarnings(start_date = '2018-02-02');
+    getEarnings(country = 'united states');
+    getEarnings(symbol ='CMCSA:US', start_date = '2018-02-02');
+    getEarnings(symbol ='FARM:US', start_date = '2018-02-01', end_date = '2018-03-01');         
+         
+*********************************************************************************************/
 function getEarnings(){
     try {
 
         let linkAPI = 'https://api.tradingeconomics.com/earnings-revenues';
 
         if (symbol) {
-            linkAPI += '/symbol/';
-            if (typeof symbol !== 'string') {
-              linkAPI += encodeURIComponent(symbol.join(','));
-            } else {
-              linkAPI += encodeURIComponent(symbol);
-            }
-          } else if (country) {
-            linkAPI += '/country/';
-            if (typeof country !== 'string') {
-              linkAPI += encodeURIComponent(country.join(','));
-            } else {
-              linkAPI += encodeURIComponent(country);
-            }
+          linkAPI += '/symbol/';
+          if (typeof symbol !== 'string') {
+            linkAPI += encodeURIComponent(symbol.join(','));
+          } else {
+            linkAPI += encodeURIComponent(symbol);
           }
+        } 
+        else if (country) {
+          linkAPI += '/country/';
+          if (typeof country !== 'string') {
+            linkAPI += encodeURIComponent(country.join(','));
+          } else {
+            linkAPI += encodeURIComponent(country);
+          }
+        }
+        else if (index) {
+          linkAPI += '/index/';
+          if (typeof index !== 'string') {
+            linkAPI += encodeURIComponent(index.join(','));
+          } else {
+            linkAPI += encodeURIComponent(index);
+          }
+        }
+        else if (sector){
+          linkAPI += '/sector/';
+          if (typeof sector !== 'string') {
+            linkAPI += encodeURIComponent(sector.join(','));
+          } else {
+            linkAPI += encodeURIComponent(sector);
+          }
+        }
           
 
         // var Data = '';
