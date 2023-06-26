@@ -246,14 +246,7 @@ function getEarnings(){
               throw err;
             }
           }
-          
-       
-        // if(url.includes('?')){
-        //     Data = url_base + url + '&c='+ apikey.replace (' ','%20');
-        // }else{
-        //     Data = url_base + url + '?c='+ apikey.replace (' ','%20');
-        // }
-        console.log(linkAPI);
+
         return makeRequest(linkAPI)
         // return func.makeTheRequest(linkAPI)
         // return fetch(Data)
