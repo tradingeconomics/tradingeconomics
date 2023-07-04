@@ -9,5 +9,5 @@ The Trading Economics API provides you with direct access to 300.000 economic in
 
 To integrate the Trading Economics API with Python, use the official Python package and explore examples in the tradingeconomics-python repository.
 
-GitHub: https://github.com/tradingeconomics/tradingeconomics-python
-Pypi: https://pypi.org/project/tradingeconomics/
+- GitHub: https://github.com/tradingeconomics/tradingeconomics-python
+- Pypi: https://pypi.org/project/tradingeconomics/

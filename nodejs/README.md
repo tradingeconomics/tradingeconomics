@@ -9,5 +9,5 @@ The Trading Economics API provides you with direct access to 300.000 economic in
 
 To integrate the Trading Economics API with NodeJs, use the official npm package and explore examples in the tradingeconomics-js repository.
 
-GitHub: https://github.com/tradingeconomics/tradingeconomics-js
-npm: https://www.npmjs.com/package/tradingeconomics
+- GitHub: https://github.com/tradingeconomics/tradingeconomics-js
+- npm: https://www.npmjs.com/package/tradingeconomics
