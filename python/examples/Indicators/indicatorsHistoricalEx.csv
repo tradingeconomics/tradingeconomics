@@ -1,4 +1,0 @@
-Country|Category|Title|LatestValueDate|LatestValue|Source|SourceURL|Unit|URL|CategoryGroup|Adjustment|Frequency|HistoricalDataSymbol|CreateDate|PreviousValue|PreviousValueDate
-China|Exports to European Union|China Exports to European Union|2020-02-29T00:00:00|45278100.0|China Customs||USD THO|/china/exports-to-european-union|Trade|Current prices NSA|Monthly|CHEXPERPA|2014-06-30T22:33:00|40132200.0|2019-12-31T00:00:00
-China|Economic Activity Index|China NBS General PMI|2021-10-31T00:00:00|50.8|National Bureau of Statistics of China||points|/china/economic-activity-index|GDP||Monthly|CHINAECOACTIND|2021-05-31T14:04:00|51.7|2021-09-30T00:00:00
-China|Coronavirus Recovered|China Coronavirus COVID-19 Recovered|2021-12-15T00:00:00|86689.0|World Health Organization||Persons|/china/coronavirus-recovered|Health||Daily|CNCOVIDRT|2020-03-11T13:48:00|86676.0|2021-06-29T00:00:00

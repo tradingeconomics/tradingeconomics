@@ -1,3 +1,0 @@
-Country|Category|Title|LatestValue|LatestValueDate|q1|q2|q3|q4|YearEnd|YearEnd2|YearEnd3|q1_date|q2_date|q3_date|q4_date|Frequency|HistoricalDataSymbol
-China|GDP|China GDP|17734.06|2021-12-31T00:00:00|16700.0|16700.0|16700.0|16700.0|16700.0|17400.0|17400.0|2022-09-30T00:00:00|2022-12-31T00:00:00|2023-03-31T00:00:00|2023-06-30T00:00:00|Yearly|WGDPCHIN
-United States|Unemployment Rate|United States Unemployment Rate|3.7|2022-08-31T00:00:00|3.5|3.5|3.4|3.5|3.5|3.6|3.8|2022-09-30T00:00:00|2022-12-31T00:00:00|2023-03-31T00:00:00|2023-06-30T00:00:00|Monthly|USURTOT
