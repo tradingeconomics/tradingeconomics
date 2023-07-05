@@ -3,7 +3,7 @@
 
     
 # Trading Economics - Excel
-![version](https://img.shields.io/badge/version-v1.23.03.29-green.svg)
+![version](https://img.shields.io/badge/version-v1.23.07.05-green.svg)
 
 The Trading Economics Application Programming Interface (API) provides direct access to our data. It allows you to download millions of rows of historical data, to query our real-time economic calendar and to subscribe to updates. Providing several request methods to query our databases, with samples available in different programming languages, it is the best way to export data in XML, CSV or JSON format. The API can be used to feed a custom developed application, a public website or just off-the-shelf software like Microsoft Excel. More at:
 
@@ -48,7 +48,7 @@ The Trading Economics Excel Add-In installer can be downloaded here:
 
 ## Documentation
 
-[https://docs.tradingeconomics.com/excel/](https://docs.tradingeconomics.com/excel/)
+[https://docs.tradingeconomics.com/docs/excel/get-started/](https://docs.tradingeconomics.com/docs/excel/get-started/)
 
 #
 
