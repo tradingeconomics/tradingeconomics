@@ -150,8 +150,21 @@ function openHtml() {
   }
 }
 
+function openSearch(){
+  try {
+    let html = HtmlService.createHtmlOutputFromFile('search.html')
+    html.setWidth(600)
+    html.setHeight(400)
+    SpreadsheetApp.getUi().showModalDialog(html, 'Search')
+  }
+  catch(e) {
+    Logger.log(e)
+  }
+}
+
 function onOpen(e) {
   try {
+    Logger.log('JS testing')
     var ui = SpreadsheetApp.getUi()
     ui.createMenu('TE')
     .addItem('Get Data', 'openHtml')
