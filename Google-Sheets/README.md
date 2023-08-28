@@ -46,3 +46,15 @@
 
 2. Ensure your spreadsheet has enough rows **(10,000+)** before making a request.
     - If you need more rows, scroll to the bottom and click "Add" to add more rows.
+
+<br>
+  
+## Documentation
+
+https://docs.tradingeconomics.com
+
+<br>
+
+## Learn More
+
+https://tradingeconomics.com/analytics/api.aspx
