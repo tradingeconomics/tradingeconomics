@@ -1,11 +1,48 @@
-To use TE Sheets Add-On:
-- Create a new Google Spreadsheet, rename it to TradingEconomics.
-- On the menu bar, select “Extensions” and click on the “Apps Script” item on the dropdown menu listed (the flow is Extensions → Apps Script).
-- A new tab is opened with a script editor, rename your project from “Untitled project” to “Trading Economics”. You can do so by clicking on “Untitled project” on the menu bar and a dialog box will appear where you will  input the new name. Then you click on “Rename”.
-- Copy code.gs  from the Git repository and paste it to the new code.gs  file.  Save the file (you can do so by using Ctrl + S).
-- Click on the “+” icon next to Files, select HTML file and name it index.html. Copy index.html from the Git repository and paste it to the new index.html file (Files → HTML → index.html). Save the file.
-- Close the Apps Script tab and refresh your spreadsheet. You will see a new menu after "Help", called "TE". Click TE → Get Data to start using the Add-On.
+# Instructions - TE Sheets Add-On:
 
-Important: 
-- Before the first use of the Add-On, it will give you an warning saying "This app isn't verified". Here you should click on "Advanced" and then click on "Go to ... (unsafe)" to continue to using our Add-On.
-- Our add-on requests can be up to 10 000 rows long. Make sure you have enough rows on you SpreadSheet before making a request. Otherwise it will take several minutes instead of just a few seconds. To add more rows scroll to the bottom of the SpreadSheet and click on "Add" (you should have 10 000+ rows available in total).
+<br>
+
+## Set Up the Add-On:
+
+1. Go to the menu bar, choose **"Extensions"** and then select **"Apps Script"** from the dropdown (Extensions → Apps Script).
+
+![a](https://github.com/tradingeconomics/tradingeconomics/assets/61524606/05680f02-fad5-4fea-bff1-75bb9f39382f)
+
+2. The script editor will open in a new tab.
+
+3. Copy the content of our **"Code.gs"** from the Git repository to the same file on script editor and save it.
+
+![b](https://github.com/tradingeconomics/tradingeconomics/assets/61524606/5964ee0f-b71b-42be-96b5-fcaf6e140282)
+
+4. Click the **"+"** icon next to **"Files"** choose **"HTML"** file, and name it "index"
+
+![c](https://github.com/tradingeconomics/tradingeconomics/assets/61524606/c9c3c5f2-04bd-487c-b3df-8c86e108f5e7)
+
+5. Copy the content of our **index.html** from the Git repository and paste it into the newly created index.html file.
+
+6. Save the file.
+
+![d](https://github.com/tradingeconomics/tradingeconomics/assets/61524606/e07e0caf-74a5-40e7-8196-9ce56f44dc20)
+
+<br>
+
+## Activate the Add-On:
+
+1. Refresh your spreadsheet.
+
+2. Look for a new menu called **"TE"** next to **"Help"**, it can take some seconds to appear on the google sheet
+
+3. Click on **"TE"** then select **"Get Data"** to start using the Add-On.
+
+![e](https://github.com/tradingeconomics/tradingeconomics/assets/61524606/ea594e02-d247-4c2e-a099-8ab8207c2ea3)
+
+<br>
+
+## Note:
+
+1. The first time you use the Add-On, a warning might appear stating "This app isn't verified."
+    - Click on **"Advanced"**
+    - Click on **"Go to ... (unsafe)"** to continue using our Add-On.
+
+2. Ensure your spreadsheet has enough rows **(10,000+)** before making a request.
+    - If you need more rows, scroll to the bottom and click "Add" to add more rows.
