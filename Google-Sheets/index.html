@@ -196,11 +196,27 @@
             100% { background-color: rgb(255,255,255,0.5); }
         }
 
+        #close {
+          float:right;
+          display:inline-block;
+          padding:2px 5px;
+          background:#ccc;
+          margin-top: 15px;
+        }
+
+        #close:hover {
+          float:right;
+          display:inline-block;
+          padding:2px 5px;
+          background:#ccc;
+          color:#fff;
+        }
+
     </style>
 </head>
 <body>
     <div id="wrapper">   
-        <div id="loading"></div>
+        <div id="loading"><span id="close" onclick="this.parentNode.style.visibility = 'hidden'; return false;">x</span></div>
         <div id="wr2">
             
             <div class="btn-group">
@@ -594,7 +610,7 @@
                 
                     <div id="apiKeyInputContainer">
                       <label for="apiKeyInput">API Key</label><br>
-                      <input type="text" class="form-control" id="apiKeyInput" placeholder="Insert Here">
+                      <input type="text" class="form-control" id="apiKeyInput" value="guest:guest"  oninput="checkKeys(this)">
                     </div>
 
                 </div>
@@ -606,13 +622,17 @@
           <hr>
           <p>
               Please <a href="https://developer.tradingeconomics.com" target="_blank">subscribe</a> to one of our plans if you do not have an API key yet.
-              <a href="https://documentation.tradingeconomics.com/" target="_blank">Link</a> to our documentation.
+              <a href="https://docs.tradingeconomics.com/" target="_blank">Link</a> to our documentation.
               Pick only one indicator, country, symbol (...) if the Add-On fails to display multiple ones.
               Should you have any questions please <a href="https://tradingeconomics.com/contact.aspx?subject=googleSheets" target="_blank">contact us</a>.
           </p>
         </footer>
     </div>
     <script>
+
+      function checkKeys(e){
+        e.value.includes(':') ? submitButton.style.backgroundColor = '#008142' : submitButton.style.backgroundColor = '#c5c5d3'
+      }
 
       function hideCleanInputFields() {
         //Hide Input Fields
@@ -649,13 +669,13 @@
         wbSymbolInputContainer.style.display = 'none'
         stateInputContainer.style.display = 'none'
         //Defaulting Input Fields
-        indicatorInput.value = 'GDP, Consumer Confidence, Unemployment Rate'
-        countryInput.value = 'United States, United Kingdom, Australia'
+        indicatorInput.value = 'GDP'
+        countryInput.value = 'Mexico'
         country2Input.value = 'Portugal'
         tickerInput.value = 'USURTOT'
         calendarIdInput.value = '174108, 160025, 160030'
         currencyISOInput.value = 'EUR'
-        marketSymbolInput.value = 'AAPL:US, INDU:IND, MSFT:US'
+        marketSymbolInput.value = 'AAPL:US'
         dateFromOneInput.value = '2023-03-01'
         dateFromInput.value = '2023-03-01'
         dateToInput.value = '2023-06-30'
@@ -669,7 +689,7 @@
         indexInput.value = 'ndx:ind'
         sectorInput.value = 'Materials'
         dateFromOneInputLabel.textContent = 'Starting From Date'
-        financialsSymbolInput.value = 'AAPL:US, MSFT:US'
+        financialsSymbolInput.value = 'AAPL:US'
         financialsCategoryInput.value = 'assets'
         comtradeSymbolInput.value = 'PRTESP24031, NORZWEXX991'
         comtradeCategoriesInput.value = 'Coffee, tea, mate and spices'
@@ -977,6 +997,8 @@
           else {
               apiCall = 'https://api.tradingeconomics.com' + urlObj.urlBase + '?f=json&c=' + urlObj.apiKey + '&' + urlObj.urlAfter + '&googleSheets'
           }
+
+          console.log(apiCall)
 
           //Loading Screen Appears
           loadingData('visible')
@@ -1533,7 +1555,7 @@
                 let invisibleButton = dailyButton.cloneNode(true)
                 invisibleButton.id = 'getMarketHistorical'
                 invisibleButton.innerHTML = 'Get Market Daily Data'
-                // console.log('symbol: ', symbol)
+
                 eachButtonSetup(invisibleButton, '','','','','','','','block', '','', '','','','','','','','','', 'inline-block', '','','','','', '', '')
               }
               else if (frequencySelected == 'Intraday'){
@@ -1557,10 +1579,10 @@
         
         function eachButtonSetup(thisButton, _indicatorInputContainer, _countryInputContainer, _tickerInputContainer, _calendarIdInputContainer, _currencyISOInputContainer, _marketSymbolInputContainer, _dateFromOneInputContainer, _dateFromToInputContainer, _earningsTypeInputContainer, _startIndexListSizeInputContainer, _articleIdInputContainer, _dateTimeInputContainer, _groupInputContainer, _categoryIndicatorInputContainer, _importanceInputContainer, _indexInputContainer, _sectorInputContainer, _financialsSymbolInputContainer, _financialsCategoryInputContainer, _frequencyButtonContainer, _radioBoxesContainer, _country2InputContainer, _checkBoxesContainer, _comtradeSymbolInputContainer, _searchResultsContainer, _searchInputContainer, _eurostatCategoryGroupContainer, _wbSymbolInputContainer, _stateInputContainer) {
 
-            console.log(thisButton, _indicatorInputContainer, _countryInputContainer, _tickerInputContainer, _calendarIdInputContainer, _currencyISOInputContainer, _marketSymbolInputContainer, _dateFromOneInputContainer, _dateFromToInputContainer, _earningsTypeInputContainer, _startIndexListSizeInputContainer, _articleIdInputContainer, _dateTimeInputContainer, _groupInputContainer, _categoryIndicatorInputContainer, _importanceInputContainer, _indexInputContainer, _sectorInputContainer, _financialsSymbolInputContainer, _financialsCategoryInputContainer, _frequencyButtonContainer, _radioBoxesContainer, _country2InputContainer, _checkBoxesContainer, _comtradeSymbolInputContainer, _searchResultsContainer, _searchInputContainer, _eurostatCategoryGroupContainer, _wbSymbolInputContainer, _stateInputContainer)
+            // console.log(thisButton, _indicatorInputContainer, _countryInputContainer, _tickerInputContainer, _calendarIdInputContainer, _currencyISOInputContainer, _marketSymbolInputContainer, _dateFromOneInputContainer, _dateFromToInputContainer, _earningsTypeInputContainer, _startIndexListSizeInputContainer, _articleIdInputContainer, _dateTimeInputContainer, _groupInputContainer, _categoryIndicatorInputContainer, _importanceInputContainer, _indexInputContainer, _sectorInputContainer, _financialsSymbolInputContainer, _financialsCategoryInputContainer, _frequencyButtonContainer, _radioBoxesContainer, _country2InputContainer, _checkBoxesContainer, _comtradeSymbolInputContainer, _searchResultsContainer, _searchInputContainer, _eurostatCategoryGroupContainer, _wbSymbolInputContainer, _stateInputContainer)
 
-            console.log(thisButton)
-            console.log('symbol: ', symbol)
+            // console.log(thisButton)
+            // console.log('symbol: ', symbol)
 
             hideCleanInputFields()
             gettingWhatHr.style.display = 'block'
@@ -1570,7 +1592,7 @@
             urlToBakeCode = thisButton.id
             thisButton.classList.add('pressedBtnGray')
 
-            console.log("eachButtonSetup: urlToBakeCode => ", urlToBakeCode)
+            // console.log("eachButtonSetup: urlToBakeCode => ", urlToBakeCode)
 
             if (_indicatorInputContainer != '') { 
               indicatorInputContainer.style.display = _indicatorInputContainer 
@@ -1584,7 +1606,7 @@
                   countryInput.value = 'United States'
                   break
                 case 'getCountryHistoricalRating':
-                  countryInput.value = 'Mexico'
+                  !country ? countryInput.value = 'Mexico' : countryInput.value = country
                   break
                 case 'getTradeBetweenCountries':
                   country_label.textContent = 'Country'
@@ -1690,7 +1712,7 @@
         }
 
         function searchFunction(url, canary){
-          console.log(document.getElementById('searchInput').value)
+          // console.log(document.getElementById('searchInput').value)
 
           let searchInput = document.getElementById('searchInput')
 
@@ -1708,7 +1730,7 @@
           searchResults.classList.add("chart-loading");
           let response = await fetch(url)
           results = await response.json()
-          console.log(results)
+          // console.log(results)
 
           fillSearchResults(results, canary)
         }
@@ -1846,12 +1868,13 @@
             if (selectedItem.category == 'Credit Rating'){
               country = selectedItem.country[0]
 
-              eachButtonSetup(getCountryHistoricalRating, '', 'block', '', '', '', '', '', 'block','','','','','','','','','','','','','','','','','','') 
+              eachButtonSetup(getCountryHistoricalRating, '', 'x', '', '', '', '', '', 'block','','','','','','','','','','','','','','','','','','') 
             }
             else {
               indicator = selectedItem.category
               Array.isArray(selectedItem.country) ? country = selectedItem.country[0] : country = selectedItem.country
-              eachButtonSetup(getSpecificCountriesAndIndicatorsFromDateToDate, '', '', '', '', '', '', '', 'block','','','','','','','','','','','','','','','','','','')
+              // console.log("selectedItem.country =>", selectedItem.country)
+              eachButtonSetup(getSpecificCountriesAndIndicatorsFromDateToDate, 'x', 'x', '', '', '', '', '', 'block','','','','','','','','','','','','','','','','','','')
             }
           }
         }
