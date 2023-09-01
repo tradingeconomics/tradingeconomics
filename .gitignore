@@ -260,6 +260,7 @@ python/**/*.pyc
 *.exe
 
 nodejs/test.js
+test.py
 
 python/tradingeconomics.egg-info/
 R/tradingeconomics/.RData
