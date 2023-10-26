@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const morgan = require('morgan');
+
 const { initialData } = require('./models/initialData.model')
 const { processHistoricalData } = require('./models/dataProcessor.model');
 const { availableCountry } = require('./models/availableCountry.model');
@@ -11,6 +13,7 @@ app.use(cors({
     
 }));
 
+app.use(morgan('combined'));
 app.use(express.json());
 
 app.get('/getInitialData', async (req, res) => {
