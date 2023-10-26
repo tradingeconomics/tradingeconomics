@@ -1,0 +1,24 @@
+.responsive-chart {
+    height: 260px;
+    width: 500px;
+  }
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 577px) {
+    .responsive-chart {
+        height: 200px;
+        width: 350px;
+      }
+}
+
+@media (max-width: 780px) and (min-width: 577px){
+    .responsive-chart {
+        height: 240px;
+        width: 400px;
+      }
+}

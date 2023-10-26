@@ -1,0 +1,33 @@
+.customCard {
+    margin: 24px 56px;
+}
+
+.card-title2 {
+    font-family: monospace;
+    font-size: xx-large;
+}
+
+.card-subtitle {
+    font-family: monospace;
+}
+
+@media (max-width: 577px) {
+    .customCard {
+        margin: 16px 8px;
+    }
+    .card-title2 {
+        font-size: x-large;
+    }
+    .card-subtitle {
+        font-size: small;
+    }
+}
+
+@media (max-width: 780px) and (min-width: 577px){
+    .customCard {
+        margin: 30px 30px;
+    }
+    .card-subtitle {
+        font-size: small;
+    }
+}
