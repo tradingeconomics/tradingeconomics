@@ -19,7 +19,7 @@ https://github.com/tradingeconomics/tradingeconomics
 
 **Python**
 
-[https://github.com/tradingeconomics/notebooks](https://github.com/tradingeconomics/tradingeconomics-python)
+[https://github.com/tradingeconomics/tradingeconomics-python](https://github.com/tradingeconomics/tradingeconomics-python)
 
 #
 
