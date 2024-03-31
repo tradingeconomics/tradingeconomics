@@ -6,13 +6,13 @@ import { Route, Routes } from 'react-router-dom';
 import { headerContext } from './hooks/HeaderContext';
 
 const App = () => {
-  const [title, setTitle] = useState('Credit Rating');
+  const [title, setTitle] = useState('Indicators');
 
   return (
     <headerContext.Provider value={{ title, setTitle }}>
-      <div className='flex'>
+      <div className='flex h-screen'>
         <Navbar />
-        <main className='flex flex-col grow'>
+        <main className='flex flex-col grow bg-gray'>
           <Header />
           <div className='grow'>
             <Routes>

@@ -1,22 +1,22 @@
 import { useState } from 'react';
 import MenuList from '../utils/Menu';
 import SidebarItem from './ui/SidebarItem';
-import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { IoIosArrowDropleftCircle } from "react-icons/io";
 
 const Navbar = () => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     return (
         <nav className={`h-screen relative flex flex-col bg-primary duration-300 ${open ? 'w-64' : 'w-20'}`} >
             <div className='absolute cursor-pointer -right-3 top-16 bg-primary rounded-full'>
-                <IoIosArrowDroprightCircle className={`text-gray w-7 h-7 ${!open && 'rotate-180'}`}
+                <IoIosArrowDropleftCircle className={`text-gray w-7 h-7 ${!open && 'rotate-180'}`}
                     onClick={() => setOpen(!open)} />
             </div>
             <div className='flex justify-center items-center h-16'>
                 <h1 className={`text-white font-medium text-xl ${open ? 'flex gap-x-1' : 'gap-y-0 w-8 font-bold'}`}>
                     <p className={`flex items-center justify-center ${!open && 'text-gray bg-primary-light'}`}>
                         <span>T</span>
-                        {open && <span>reading</span>}
+                        {open && <span>rading</span>}
                     </p>
                     <p className={`flex items-center justify-center ${!open && 'text-primary bg-gray'}`}>
                         <span>E</span>
