@@ -4,12 +4,13 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js"
   ],
+  darkMode: ['[data-mode="dark"]'],
   theme: {
     extend: {
       colors: {
-        gray: '#EEEEEE',
         primary: '#222831',
         secondary: '#76ABAE',
+        'gray-pure': '#EEEEEE',
         'primary-light': '#31363F'
       }
     },

@@ -4,7 +4,7 @@ const Header = () => {
     const header = useHeaderContext();
 
     return (
-        <header className='flex items-center h-16 bg-white p-5 text-2xl font-medium'>
+        <header className='flex items-center h-16 bg-primary-light p-5 text-2xl font-medium text-white'>
             {header.title}
         </header>
     );

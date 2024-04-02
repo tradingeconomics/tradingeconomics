@@ -17,12 +17,12 @@ const SidebarItem = ({ to, children, icon, open, ...props }: Props) => {
 
     return (
         <li className={`${props.className} ${isActive ? 'bg-secondary' : 'hover:border-secondary hover:bg-opacity-50'}`}
-            onClick={() => header.setTitle(children)}>
-            <div className='w-7 h-7'>
-                {icon}
-            </div>
-            <Link className={`${!open && 'hidden'} origin-left duration-200`} to={to}>
-                {children}
+            onClick={() => header.setTitle(children)} title={children}>
+            <Link className='flex gap-4' to={to}>
+                <div className='w-7 h-7'> {icon} </div>
+                <div className={`${!open && 'hidden'} origin-left duration-200`}>
+                    {children}
+                </div>
             </Link>
         </li >
     );

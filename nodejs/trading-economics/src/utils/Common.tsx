@@ -55,7 +55,20 @@ const formatDate = (date: Date | string) => {
     return `${year}-${month}-${day}`;
 };
 
+const AllowedCountriesList = ['Mexico', 'Thailand', 'Sweden'];
+
+const getYearsList = (startingYear: number) => {
+    let yearsOption = [];
+    const currentYear = new Date().getFullYear();
+
+    for (let i = startingYear; i <= currentYear; i++)
+        yearsOption.push(i.toString());
+    return yearsOption;
+};
+
 export {
     formatDate,
-    checkDatesValidity
+    getYearsList,
+    checkDatesValidity,
+    AllowedCountriesList
 };

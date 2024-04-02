@@ -1,8 +1,8 @@
-import Peers from '../pages/Peers';
 import CreditRating from '../pages/CreditRating';
+import HistoricalData from '../pages/HistoricalData';
 
 const RoutesList = [
-    { path: '/peers', element: <Peers /> },
+    { path: '/historical-data', element: <HistoricalData /> },
     { path: '/credit-rating', element: <CreditRating /> }
 ];
 
