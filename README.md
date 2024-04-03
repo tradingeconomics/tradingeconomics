@@ -17,7 +17,13 @@ https://github.com/tradingeconomics/tradingeconomics
 
 #
 
-**Python Jupyter Notebooks**
+**Python**
+
+[https://github.com/tradingeconomics/tradingeconomics-python](https://github.com/tradingeconomics/tradingeconomics-python)
+
+#
+
+**Jupyter Notebooks**
 
 https://github.com/tradingeconomics/notebooks
 
