@@ -17,6 +17,12 @@ const getBaseURL = (): string => {
     return url;
 };
 
+const getSearchURL = (): string => {
+    const url = process.env.REACT_APP_SEARCH_URL;
+    if (!url) throw new Error("Missing Search URL. Please set REACT_APP_SEARCH_URL.");
+    return url;
+};
+
 const prepareRatingURL = (endPoint: string, param?: RatingParams | HistoricalRatingParams) => {
     const apiKey = getKey();
     const baseUrl = getBaseURL();
@@ -136,8 +142,16 @@ const getAvailableIndicators = async (calendar?: boolean) => {
     return await response.json();
 };
 
+const searchData = async (searchParam: string) => {
+    const searchUrl = getSearchURL();
+    const url = `${searchUrl}&q=${searchParam}`;
+    const response = await fetch(url);
+    return await response.json();
+};
+
 export {
     getPeers,
+    searchData,
     getRatings,
     getAllCountries,
     getHistoricalData,
