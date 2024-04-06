@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import RoutesList from './utils/Routes';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 import { Route, Routes } from 'react-router-dom';
 import { headerContext } from './hooks/HeaderContext';
-import { RoutesList } from './utils/Routes';
 
 const App = () => {
   const [title, setTitle] = useState('Indicators');

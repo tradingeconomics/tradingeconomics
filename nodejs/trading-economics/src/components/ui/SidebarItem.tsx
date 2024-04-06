@@ -16,15 +16,15 @@ const SidebarItem = ({ to, children, icon, open, ...props }: Props) => {
     const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
     return (
-        <li className={`${props.className} ${isActive ? 'bg-secondary' : 'hover:border-secondary hover:bg-opacity-50'}`}
-            onClick={() => header.setTitle(children)} title={children}>
-            <Link className='flex gap-4' to={to}>
+        <Link className={`${props.className} ${isActive ? 'bg-secondary' : 'hover:border-secondary hover:bg-opacity-50'}`} to={to}>
+            <li className='flex gap-4'
+                onClick={() => header.setTitle(children)} title={children}>
                 <div className='w-7 h-7'> {icon} </div>
-                <div className={`${!open && 'hidden'} origin-left duration-200`}>
+                <div className={`${!open && 'hidden'} origin-left duration-300`}>
                     {children}
                 </div>
-            </Link>
-        </li >
+            </li >
+        </Link>
     );
 };
 
