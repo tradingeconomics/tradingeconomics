@@ -33,14 +33,12 @@ const getPaginationButtons = (totalPages: number, currentPage: number, handleCha
 };
 
 export default function Table({ data, header, config, pageSize = 12, ...props }: Props) {
-    const [pageData, setPageData] = useState<PageData>();
     const [currentPage, setCurrentPage] = useState(1);
+    const [pageData, setPageData] = useState<PageData>();
     const { rounded, borderless, pagination } = config ?? defaultConfig;
     const totalPages = Math.floor(data.length / pageSize) + (data.length % pageSize !== 0 ? 1 : 0);
 
-    const handleCurrentPage = (page: number) => {
-        setCurrentPage(page);
-    };
+    const handleCurrentPage = (page: number) => setCurrentPage(page);
 
     const handlePrevious = () => {
         if (currentPage !== 1) setCurrentPage(currentPage - 1);
@@ -58,10 +56,10 @@ export default function Table({ data, header, config, pageSize = 12, ...props }:
     useEffect(() => currentPageData(), [currentPage]);
 
     return (
-        <div className="px-4 grow sm:px-6 lg:px-8">
-            <div className="pt-2 flow-root">
-                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full align-middle sm:px-6 lg:px-8">
+        <div className="grow">
+            <div className="flow-root">
+                <div className="overflow-x-auto">
+                    <div className="inline-block min-w-full align-middle">
                         <div className={`${!borderless && 'border'} ${rounded && 'rounded-lg'} border-gray-200 overflow-hidden`}>
                             <table className={`min-w-full divide-y divide-gray-200 ${props.className}`}>
                                 <thead className='bg-gray-pure'>

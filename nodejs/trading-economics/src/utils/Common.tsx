@@ -1,5 +1,9 @@
 import { DateError } from './CustomErrors';
 
+const AllowedCountriesList = ['Mexico', 'Thailand', 'Sweden'];
+const AllAllowedCountriesList = [...AllowedCountriesList, 'New Zealand'];
+const MonthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 const checkDatesValidity = (baseLink: string, start_date: string | undefined, end_date: string | undefined) => {
     if (start_date && !end_date) {
         try {
@@ -46,7 +50,7 @@ const isValid = (date: string) => {
     }
 };
 
-const formatDate = (date: Date | string) => {
+const formatQueryDate = (date: Date | string) => {
     if (typeof date === 'string') date = new Date(date);
     const year = date.getFullYear();
     const day = String(date.getDate()).padStart(2, '0');
@@ -55,7 +59,18 @@ const formatDate = (date: Date | string) => {
     return `${year}-${month}-${day}`;
 };
 
-const AllowedCountriesList = ['Mexico', 'Thailand', 'Sweden'];
+const formatDate = (date: Date | string) => {
+    if (typeof date === 'string') date = new Date(date);
+
+    const hours = date.getHours();
+    const year = date.getFullYear();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours % 12 || 12}:${minutes}:${seconds} ${hours >= 12 ? 'PM' : 'AM'}`;
+};
 
 const getYearsList = (startingYear: number) => {
     let yearsOption = [];
@@ -67,8 +82,11 @@ const getYearsList = (startingYear: number) => {
 };
 
 export {
+    MonthList,
     formatDate,
     getYearsList,
+    formatQueryDate,
     checkDatesValidity,
-    AllowedCountriesList
+    AllowedCountriesList,
+    AllAllowedCountriesList
 };

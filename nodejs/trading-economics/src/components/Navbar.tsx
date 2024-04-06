@@ -7,7 +7,7 @@ const Navbar = () => {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className={`duration-300 ${open ? 'w-64' : 'w-20'}`}>
+        <div className={`duration-300 z-10 ${open ? 'w-64' : 'w-20'}`}>
             <nav className={`h-screen fixed flex flex-col bg-primary duration-300 ${open ? 'w-64' : 'w-20'}`} >
                 <div className='absolute cursor-pointer -right-3 top-16 bg-primary rounded-full'>
                     <IoIosArrowDropleftCircle className={`text-gray-pure w-7 h-7 ${!open && 'rotate-180'}`}

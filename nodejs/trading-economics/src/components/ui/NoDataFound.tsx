@@ -6,7 +6,7 @@ type Props = {
 
 const NoDataFound = ({ header }: Props) => {
     return (
-        <div className='flex grow flex-col sm:px-6 lg:px-8'>
+        <div className='flex grow flex-col'>
             <div className='flex w-full justify-between'>
                 {header.map((title, index) => (
                     <div className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-primary-light sm:min-w-24 lg:min-w-44"

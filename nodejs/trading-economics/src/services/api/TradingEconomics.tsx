@@ -1,5 +1,5 @@
-import { RatingsData } from '../../utils/Types';
 import { checkDatesValidity } from '../../utils/Common';
+import { HistoricalDataType, RatingsData } from '../../utils/Types';
 import { AllowedCountries, HistoricalParams, HistoricalRatingParams, PeersParams, RatingParams } from './TradingEconomics.types';
 
 const getKey = (): string => {
@@ -70,7 +70,7 @@ const getPeers = async (param: PeersParams) => {
     return await response.json();
 };
 
-const getHistoricalData = async (param: HistoricalParams) => {
+const getHistoricalData = async (param: HistoricalParams): Promise<HistoricalDataType[]> => {
     const apiKey = getKey();
     const baseUrl = getBaseURL();
     let url = `${baseUrl}/historical/country`;
