@@ -1,6 +1,9 @@
 import { checkDatesValidity } from '../../utils/Common';
-import { HistoricalDataType, RatingsData } from '../../utils/Types';
+import { HistoricalDataType, RatingsData, SearchedData } from '../../utils/Types';
 import { AllowedCountries, HistoricalParams, HistoricalRatingParams, PeersParams, RatingParams } from './TradingEconomics.types';
+
+const BaseURL = 'https://api.tradingeconomics.com';
+const SearchURL = 'https://brains.tradingeconomics.com/v2/search/wb,fred,comtrade?pp=50&p=0&_=15579343524&stance=2';
 
 const getKey = (): string => {
     let apiKey = process.env.REACT_APP_API_KEY;
@@ -11,22 +14,9 @@ const getKey = (): string => {
     return apiKey;
 };
 
-const getBaseURL = (): string => {
-    const url = process.env.REACT_APP_BASE_URL;
-    if (!url) throw new Error("Missing Base URL. Please set REACT_APP_BASE_URL.");
-    return url;
-};
-
-const getSearchURL = (): string => {
-    const url = process.env.REACT_APP_SEARCH_URL;
-    if (!url) throw new Error("Missing Search URL. Please set REACT_APP_SEARCH_URL.");
-    return url;
-};
-
 const prepareRatingURL = (endPoint: string, param?: RatingParams | HistoricalRatingParams) => {
     const apiKey = getKey();
-    const baseUrl = getBaseURL();
-    let url = `${baseUrl}/credit-ratings${endPoint}`;
+    let url = `${BaseURL}/credit-ratings${endPoint}`;
 
     if (param && param.country) {
         if (typeof param.country !== 'string')
@@ -60,9 +50,7 @@ const getHistoricalRatings = async (param: HistoricalRatingParams): Promise<Rati
 
 const getPeers = async (param: PeersParams) => {
     const apiKey = getKey();
-    const baseUrl = getBaseURL();
-
-    let url = `${baseUrl}`;
+    let url = `${BaseURL}`;
 
     if (typeof param === 'string')
         url += `/peers/${encodeURIComponent(param)}`;
@@ -78,8 +66,7 @@ const getPeers = async (param: PeersParams) => {
 
 const getHistoricalData = async (param: HistoricalParams): Promise<HistoricalDataType[]> => {
     const apiKey = getKey();
-    const baseUrl = getBaseURL();
-    let url = `${baseUrl}/historical/country`;
+    let url = `${BaseURL}/historical/country`;
 
     if (typeof param.country !== 'string')
         url += `/${encodeURIComponent(param.country.join(','))}`;
@@ -105,7 +92,6 @@ const getHistoricalData = async (param: HistoricalParams): Promise<HistoricalDat
 
 const getDiscontinuedIndicators = async (country?: AllowedCountries | AllowedCountries[]) => {
     const apiKey = getKey();
-    const baseUrl = getBaseURL();
     let countryList = '/all';
     if (country?.length) {
         if (typeof country !== 'string')
@@ -113,38 +99,34 @@ const getDiscontinuedIndicators = async (country?: AllowedCountries | AllowedCou
         else
             countryList = `/${encodeURIComponent(country)}`;
     }
-    const url = `${baseUrl}/country/${countryList}/discontinued?c=${apiKey}`;
+    const url = `${BaseURL}/country/${countryList}/discontinued?c=${apiKey}`;
     const response = await fetch(url);
     return await response.json();
 };
 
 const getHistoricalUpdates = async () => {
     const apiKey = getKey();
-    const baseUrl = getBaseURL();
-    const url = `${baseUrl}/historical/updates?c=${apiKey}`;
+    const url = `${BaseURL}/historical/updates?c=${apiKey}`;
     const response = await fetch(url);
     return await response.json();
 };
 
 const getAllCountries = async () => {
     const apiKey = getKey();
-    const baseUrl = getBaseURL();
-    const url = `${baseUrl}/country?c=${apiKey}`;
+    const url = `${BaseURL}/country?c=${apiKey}`;
     const response = await fetch(url);
     return await response.json();
 };
 
 const getAvailableIndicators = async (calendar?: boolean) => {
     const apiKey = getKey();
-    const baseUrl = getBaseURL();
-    const url = `${baseUrl}/indicators?c=${apiKey}${calendar ? '&calendar=1' : ''}`;
+    const url = `${BaseURL}/indicators?c=${apiKey}${calendar ? '&calendar=1' : ''}`;
     const response = await fetch(url);
     return await response.json();
 };
 
-const searchData = async (searchParam: string) => {
-    const searchUrl = getSearchURL();
-    const url = `${searchUrl}&q=${searchParam}`;
+const searchData = async (searchParam: string): Promise<SearchedData> => {
+    const url = `${SearchURL}&q=${searchParam}`;
     const response = await fetch(url);
     return await response.json();
 };

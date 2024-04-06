@@ -81,9 +81,14 @@ const getYearsList = (startingYear: number) => {
     return yearsOption;
 };
 
+const toTitleCase = (str: string) => {
+    return str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
+};
+
 export {
     MonthList,
     formatDate,
+    toTitleCase,
     getYearsList,
     formatQueryDate,
     checkDatesValidity,

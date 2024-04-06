@@ -33,3 +33,48 @@ export type HistoricalDataType = {
     LastUpdate: string,
     HistoricalDataSymbol: string;
 };
+
+export type SearchedData = {
+    stance: string,
+    info: SearchedInfoData,
+    hits: SearchedHitsData[];
+};
+
+type SearchedInfoData = {
+    facets: {
+        type: FacetsData[],
+        unit: FacetsData[],
+        group: FacetsData[],
+        country: FacetsData[],
+        category: FacetsData[],
+        currency: FacetsData[],
+        frequency: FacetsData[];
+    },
+    hits: {
+        value: string,
+        relation: string;
+    };
+    page: number;
+};
+
+type FacetsData = {
+    key: string,
+    doc_count: number;
+};
+
+type SearchedHitsData = {
+    s: string,
+    unit: any,
+    group: any,
+    url: string,
+    type: string,
+    iids: string,
+    esID: string,
+    name: string,
+    country: string,
+    category: string,
+    currency: string,
+    frequency: string,
+    importance: number,
+    pretty_name: string;
+};

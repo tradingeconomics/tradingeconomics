@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TableConfig } from '../../utils/Types';
+import { toTitleCase } from '../../utils/Common';
 
 type Props = {
     data: PageData;
@@ -56,7 +57,7 @@ export default function Table({ data, header, config, pageSize = 12, ...props }:
     useEffect(() => currentPageData(), [currentPage]);
 
     return (
-        <div className="grow">
+        <div className="grow overflow-auto max-w-[1374px]">
             <div className="flow-root">
                 <div className="overflow-x-auto">
                     <div className="inline-block min-w-full align-middle">
@@ -67,7 +68,7 @@ export default function Table({ data, header, config, pageSize = 12, ...props }:
                                         {header.map((title, index) => (
                                             <th className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-primary-light"
                                                 scope="col" key={index}>
-                                                {title}
+                                                {toTitleCase(title)}
                                             </th>
                                         ))}
                                     </tr>
@@ -77,7 +78,7 @@ export default function Table({ data, header, config, pageSize = 12, ...props }:
                                         <tr key={index} className='hover:bg-gray-pure'>
                                             {header.map((key, index) => (
                                                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-primary-light"
-                                                    key={index}>
+                                                    key={index} title={el[key]}>
                                                     {el[key]}
                                                 </td>
                                             ))}
