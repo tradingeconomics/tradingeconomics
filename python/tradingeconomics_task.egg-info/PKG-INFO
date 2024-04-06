@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: tradingeconomics-task
+Version: 0.0.1
+Summary: Trading Economics API
+Home-page: https://github.com/emabistar/tradingeconomics/tree/master/python
+Author: Emanuel Abiyo
+Author-email: emanuel@websky.dk
+License: MIT
+Keywords: tradingeconomics,data

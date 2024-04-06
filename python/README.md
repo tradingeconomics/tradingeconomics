@@ -11,3 +11,28 @@ To integrate the Trading Economics API with Python, use the official Python pack
 
 - GitHub: https://github.com/tradingeconomics/tradingeconomics-python
 - Pypi: https://pypi.org/project/tradingeconomics/
+
+# How To run My code
+# Run the setup.py if you are runing without env venv  to install the dependancy
+# Use  the apikey to run it  using terminal  to use it on local environment
+
+# You can also yu virtual environment venv
+# cd project/
+# virtualenv venv
+# source venv/bin/activate
+# And run python3 app.py
+
+# Task executed (QUESTION)
+#  5. http//:localhost:8000/term (on the same page fill the  term on the form) and submit the  table will show the data
+# 5.1  http//:localhost:8000    (show coutries indicator(GDP) with several contries,  select the country on the form and submit with redirect to a http://localhost:8000/plot to show compares countries)
+# On this page http://localhost:8000/plot click on http://localhost:8000/symbol
+# 5.2 http://localhost:8000/symbol  will show  a table with time serie and  time serie line chart unde the table
+# 5.3 http://localhost:8000/term fill up the  form and the page will show the inforamation on the table (see Q.4.1)
+# 5.4 http://localhost:8000/term  diplay info on the table
+
+# URLS( tasked executed)
+# http://localhost:8000
+# http://localhost:8000/term
+# http://localhost:8000/symbol
+# http://localhost:8000/plot
+

@@ -1,0 +1,7 @@
+README.md
+setup.py
+tradingeconomics_task.egg-info/PKG-INFO
+tradingeconomics_task.egg-info/SOURCES.txt
+tradingeconomics_task.egg-info/dependency_links.txt
+tradingeconomics_task.egg-info/requires.txt
+tradingeconomics_task.egg-info/top_level.txt

@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading Economy Indicator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container col-md-6 offset-3 flex items-center justify-center">
+    <h2 class="items-center text-center mt-5"> Time serie  Economie</h2>
+    <a href="/term"><button>Go to Quetion 5.3</button></a></h2>
+
+    <table class="table table-striped">
+       <thead>
+        <tr>
+          <th scope="col"> #</th>
+          <th scope="col">Date</th>
+          <th scope="col">Symbol </th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in  data %}
+            <tr>
+           <td>#</td>
+           <td>{{item.symbol }}</td>
+            <td>{{item.date.split('T')[0]}}</td>
+            <td>{{item.value }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+</div>
+
+   <div class="col-md-8 offset-2 mb-7 flex items-center justify-center">
+    <h2 class="items-center text-center mt-5">Time Series Plot</h2>
+    <img src="data:image/png;base64,{{ plot_data }}" alt="Time Series Plot">
+   </div>
+
+
+
+  
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>
+

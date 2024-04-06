@@ -1,0 +1,82 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading Economy Indicator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container flex items-center justify-center">
+    <h2 class="items-center text-center mt-5"> Countries and GDP Indicator</h2>
+    <table class="table table-striped">
+       <thead>
+        <tr>
+          <th scope="col">Country</th>
+          <th scope="col">LatestValueDate </th>
+          <th scope="col">Latest GDP (USD Billion)</th>
+          <th scope="col"> PreviousValueDate</th>
+          <th scope="col">Previous GDP (USD Billion)</th>
+          <th scope="col">Difference (USD Billion)</th>
+   
+         
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in data %}
+    <tr>
+      <td>{{ item.Country }}</td>
+      <td>{{ item.LatestValueDate.split('T')[0]}}</td>
+      <td>{{'%.6f' | format( item.LatestValue) }}</td>
+      <td>{{ '%.6f' | format(item.PreviousValue) }}</td>
+      <td>{{ item.PreviousValueDate.split('T')[0] }}</td>
+      <td>{{ '%.6f' | format(item.Change) }}</td>
+    
+     
+    </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <div class="items-center text-center"> 
+       <h2 class="flex items-center justify-center"> Plooting Chat base on  country</h2>
+
+       <div class="container mt-3">
+        <div class="row">
+        
+          <div class="col-md-6 offset-3">
+            <h2>Select a Country:</h2>
+            <form action="/plot"  method="post" mb-3>
+              <select name="country" class="form-select form-select-lg">
+                <option value="">-- Select Country --</option>
+                {% for country in data %}
+                <option value="{{ country}}">{{ country.Country}}</option>
+                {% endfor %}
+              </select>
+              <button type="submit" class="btn btn-primary mt-3">Show Chart</button>
+            </form>
+          </div>
+          {{error_message}}
+          <div class="col-md-6">
+            {% if chart %}
+            <img src="data:image/png;base64,{{ chart }}" class="img-fluid" alt="GDP Comparison Chart">
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    
+  
+    </div>
+        
+  </div>
+
+  
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
+</html>
+
