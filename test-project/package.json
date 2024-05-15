@@ -34,6 +34,7 @@
     "react-query": "^3.39.3",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "tradingeconomics": "^2.4.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

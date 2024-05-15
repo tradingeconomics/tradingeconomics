@@ -1,19 +1,8 @@
 "use client";
 import Link from "next/link";
-import {
-  Activity,
-  ArrowUpRight,
-  CircleUser,
-  CreditCard,
-  DollarSign,
-  Heading1,
-  Menu,
-  Package2,
-  Search,
-  Users,
-} from "lucide-react";
+
 import axios from "axios";
-import { Label } from "@/components/ui/label";
+
 import {
   Select,
   SelectContent,
@@ -31,59 +20,34 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { toast, useToast } from "@/components/ui/use-toast";
-
-
+import { useToast } from "@/components/ui/use-toast";
 
 import { useState } from "react";
-import LineChartForProjectOne from "@/components/LineChart";
+
 import LineChartForCountry from "@/components/LineChart";
+import LineChartForCountryComparison from "@/components/ChartTwoCountries";
 
 const formSchema = z.object({
-  firstCountry: z.string({
-    required_error: "Please select a country to display.",
-  }).min(1,{message:"Please select a country to display."}),
-  secondCountry: z.string({
-    required_error: "Please select a country to display.",
-  }).min(1,{message:"Please select a country to display."}),
+  firstCountry: z
+    .string({
+      required_error: "Please select a country to display.",
+    })
+    .min(1, { message: "Please select a country to display." }),
+  secondCountry: z
+    .string({
+      required_error: "Please select a country to display.",
+    })
+    .min(1, { message: "Please select a country to display." }),
 });
 
-
-
-
-export default function Dashboard() {
-  const { toast } = useToast()
+export default function ProjectOne() {
+  const { toast } = useToast();
 
   const [data, setData] = useState(null);
 
@@ -97,19 +61,21 @@ export default function Dashboard() {
   });
 
   async function onSubmit(input: z.infer<typeof formSchema>) {
-    if(input.firstCountry === '' || input.secondCountry === '') {
-      toast({title: "Please select a country"});
-      return 
+    if (input.firstCountry === "" || input.secondCountry === "") {
+      toast({ title: "Please select a country" });
+      return;
     }
 
-    const res = await axios.get(
-      `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
-    ).catch(()=>{
-      toast({
-        title: "Something went wrong while fetching the data",
-variant: "destructive",
+    const res = await axios
+      .get(
+        `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+      )
+      .catch(() => {
+        toast({
+          title: "Something went wrong while fetching the data",
+          variant: "destructive",
+        });
       });
-    });
 
     if (res) {
       setData(res.data);
@@ -125,14 +91,11 @@ variant: "destructive",
     } else {
       toast({
         title: "something went wrong ",
-       
       });
     }
   }
   return (
     <div className="flex min-h-screen w-full flex-col">
-
-
       <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
         <div className="flex items-center">
           <h1 className="text-lg font-semibold md:text-2xl">
@@ -208,43 +171,46 @@ variant: "destructive",
                   )}
                 />
                 <div>
-
-              <Button type="submit" size={"sm"} className="mt-8  px-10">
-                Compare
-              </Button>
+                  <Button type="submit" size={"sm"} className="mt-8  px-10">
+                    Compare
+                  </Button>
                 </div>
               </form>
             </Form>
           </CardContent>
         </Card>
-        <div
-          className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm p-20"
-          x-chunk="dashboard-02-chunk-1"
-        >
-          {data ? (
-<>
-<LineChartForCountry country={form.getValues('firstCountry')} rawData={data} />
-<LineChartForCountry country={form.getValues('secondCountry')} rawData={data} />
 
-</>
-
+        {data ? (
+          <div className="flex flex-col  items-center justify-center gap-10 rounded-lg border border-dashed shadow-sm p-20 ">
+            <LineChartForCountryComparison
+              country1={form.getValues("firstCountry")}
+              country2={form.getValues("secondCountry")}
+              rawData={data}
+            />
+            <LineChartForCountry
+              country={form.getValues("firstCountry")}
+              rawData={data}
+            />
+            <LineChartForCountry
+              country={form.getValues("secondCountry")}
+              rawData={data}
+            />
+          </div>
         ) : (
           <div
-          className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm p-20"
-          x-chunk="dashboard-02-chunk-1"
-        >
-          <div className="flex flex-col items-center gap-1 text-center">
-            <h3 className="text-2xl font-bold tracking-tight">
-            Graph will be diplayed here
-            </h3>
-            <p className="text-sm text-muted-foreground">
-            select both countries and click compare to show graph
-            </p>
+            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm p-20"
+            x-chunk="dashboard-02-chunk-1"
+          >
+            <div className="flex flex-col items-center gap-1 text-center">
+              <h3 className="text-2xl font-bold tracking-tight">
+                Graph will be diplayed here
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                select both countries and click compare to show graph
+              </p>
+            </div>
           </div>
-          </div>
-          )}
-          
-          </div>
+        )}
 
         <div className="mb-32 grid text-center place-self-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
           <a

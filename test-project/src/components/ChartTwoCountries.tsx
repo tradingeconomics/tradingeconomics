@@ -53,7 +53,8 @@ const LineChartForCountryComparison = ({ country1, country2, rawData }: Props) =
   };
 
   return (
-    <div style={{ width: "100%", height: "400px" }}>
+    <div style={{ width: "100%", height: "400px" }}
+    >
       <Line
         data={chartData}
         options={{
