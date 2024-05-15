@@ -62,12 +62,13 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { toast } from "@/components/ui/use-toast";
+import { toast, useToast } from "@/components/ui/use-toast";
 
 
 
 import { useState } from "react";
 import LineChartForProjectOne from "@/components/ui/LineChart";
+import LineChartForCountry from "@/components/ui/LineChart";
 
 const formSchema = z.object({
   firstCountry: z.string({
@@ -82,7 +83,8 @@ const formSchema = z.object({
 
 
 export default function Dashboard() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast()
+
   const [data, setData] = useState(null);
 
   // 1. Define your form.
@@ -96,21 +98,19 @@ export default function Dashboard() {
 
   async function onSubmit(input: z.infer<typeof formSchema>) {
     if(input.firstCountry === '' || input.secondCountry === '') {
-      toast({
-        title: "Please select both countries:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
-      });
+      toast({title: "Please select a country"});
       return 
     }
-    console.log('getting her')
+
     const res = await axios.get(
-      `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp,population/2015-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
-    );
-console.log(res)
+      `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+    ).catch(()=>{
+      toast({
+        title: "Something went wrong while fetching the data",
+variant: "destructive",
+      });
+    });
+
     if (res) {
       setData(res.data);
 
@@ -118,24 +118,20 @@ console.log(res)
         title: "You submitted the following values:",
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+            <code className="text-white">{`${input.firstCountry}, ${input.secondCountry}`}</code>
           </pre>
         ),
       });
     } else {
       toast({
         title: "something went wrong ",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
+       
       });
     }
   }
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <p> {isLoading}</p>
+
 
       <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
         <div className="flex items-center">
@@ -170,12 +166,12 @@ console.log(res)
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="mexico">Mexico</SelectItem>
-                          <SelectItem value="new zealand">
+                          <SelectItem value="Mexico">Mexico</SelectItem>
+                          <SelectItem value="New Zealand">
                             New Zealand
                           </SelectItem>
-                          <SelectItem value="sweden">Sweden</SelectItem>
-                          <SelectItem value="thailand">Thailand</SelectItem>
+                          <SelectItem value="Sweden">Sweden</SelectItem>
+                          <SelectItem value="Thailand">Thailand</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -199,12 +195,12 @@ console.log(res)
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="mexico">Mexico</SelectItem>
-                          <SelectItem value="new zealand">
+                          <SelectItem value="Mexico">Mexico</SelectItem>
+                          <SelectItem value="New Zealand">
                             New Zealand
                           </SelectItem>
-                          <SelectItem value="sweden">Sweden</SelectItem>
-                          <SelectItem value="thailand">Thailand</SelectItem>
+                          <SelectItem value="Sweden">Sweden</SelectItem>
+                          <SelectItem value="Thailand">Thailand</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -219,21 +215,29 @@ console.log(res)
           </CardContent>
         </Card>
         <div
-          className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
+          className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm p-20"
           x-chunk="dashboard-02-chunk-1"
         >
-          {data && (<LineChartForProjectOne firstCountry={form.getValues('firstCountry')} secondCountry={form.getValues('secondCountry')} rawData={data}/>) }
-          
+          {data ? (
+<>
+<LineChartForCountry country={form.getValues('firstCountry')} rawData={data} />
+<LineChartForCountry country={form.getValues('secondCountry')} rawData={data} />
+
+</>
+
+        ) : (
+
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">
-              You have no products
+            Graph will be diplayed here
             </h3>
             <p className="text-sm text-muted-foreground">
-              You can start selling as soon as you add a product.
+            select both countries and click compare to show graph
             </p>
-            <Button className="mt-4">Add Product</Button>
           </div>
-        </div>
+          )}
+          
+          </div>
 
         <div className="mb-32 grid text-center place-self-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
           <a
