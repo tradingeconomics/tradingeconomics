@@ -67,8 +67,8 @@ import { toast, useToast } from "@/components/ui/use-toast";
 
 
 import { useState } from "react";
-import LineChartForProjectOne from "@/components/ui/LineChart";
-import LineChartForCountry from "@/components/ui/LineChart";
+import LineChartForProjectOne from "@/components/LineChart";
+import LineChartForCountry from "@/components/LineChart";
 
 const formSchema = z.object({
   firstCountry: z.string({
@@ -207,9 +207,12 @@ variant: "destructive",
                     </FormItem>
                   )}
                 />
-              <Button type="submit" size={"sm"} className="mt-6 ">
+                <div>
+
+              <Button type="submit" size={"sm"} className="mt-8  px-10">
                 Compare
               </Button>
+                </div>
               </form>
             </Form>
           </CardContent>
@@ -226,7 +229,10 @@ variant: "destructive",
 </>
 
         ) : (
-
+          <div
+          className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm p-20"
+          x-chunk="dashboard-02-chunk-1"
+        >
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">
             Graph will be diplayed here
@@ -234,6 +240,7 @@ variant: "destructive",
             <p className="text-sm text-muted-foreground">
             select both countries and click compare to show graph
             </p>
+          </div>
           </div>
           )}
           
