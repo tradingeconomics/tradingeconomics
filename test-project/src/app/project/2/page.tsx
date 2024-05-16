@@ -34,19 +34,20 @@ import LineChartForCountry from "@/components/LineChart";
 import LineChartForCountryComparison from "@/components/ChartTwoCountries";
 
 const formSchema = z.object({
-  firstCountry: z
+  country: z
     .string({
       required_error: "Please select a country to display.",
     })
     .min(1, { message: "Please select a country to display." }),
-  secondCountry: z
+  indicator: z
     .string({
       required_error: "Please select a country to display.",
     })
     .min(1, { message: "Please select a country to display." }),
 });
-
-export default function ProjectTwo() {
+export default  function ProjectTwo() {
+  const [indicators, setIndicators] = useState({});
+  const [country, setCountry] = useState("");
   const { toast } = useToast();
 
   const [data, setData] = useState(null);
@@ -55,57 +56,58 @@ export default function ProjectTwo() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstCountry: "",
-      secondCountry: "",
+      country: "",
+      indicator: "",
     },
   });
 
   async function onSubmit(input: z.infer<typeof formSchema>) {
-    if (input.firstCountry === "" || input.secondCountry === "") {
-      toast({ title: "Please select a country" });
-      return;
-    }
+    // if (input.firstCountry === "" || input.secondCountry === "") {
+    //   toast({ title: "Please select a country" });
+    //   return;
+    // }
 
-    const res = await axios
-      .get(
-        `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
-      )
-      .catch(() => {
-        toast({
-          title: "Something went wrong while fetching the data",
-          variant: "destructive",
-        });
-      });
+    // const res = await axios
+    //   .get(
+    //     `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+    //   )
+    //   .catch(() => {
+    //     toast({
+    //       title: "Something went wrong while fetching the data",
+    //       variant: "destructive",
+    //     });
+    //   });
 
-    if (res) {
-      setData(res.data);
+    // if (res) {
+    //   setData(res.data);
 
-      toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{`${input.firstCountry}, ${input.secondCountry}`}</code>
-          </pre>
-        ),
-      });
-    } else {
-      toast({
-        title: "something went wrong ",
-      });
-    }
+    //   toast({
+    //     title: "You submitted the following values:",
+    //     description: (
+    //       <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+    //         <code className="text-white">{`${input.firstCountry}, ${input.secondCountry}`}</code>
+    //       </pre>
+    //     ),
+    //   });
+    // } else {
+    //   toast({
+    //     title: "something went wrong ",
+    //   });
+    // }
   }
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-        <div className="flex items-center">
-          <h1 className="text-lg font-semibold md:text-2xl">
-            5.1 : A website that compares GDP of two countries .
-          </h1>
-        </div>
+    <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+      <div className="flex items-center">
+        <h1 className="text-lg font-semibold md:text-2xl">
+          5.2 - Plotting charts after choosing a country - indicator pair.
+        </h1>
+      </div>
 
         <Card className="bg-muted">
           <CardHeader>
-            <CardTitle>Select both Countries </CardTitle>
+          <CardTitle>Select both Country and indicator </CardTitle>
+
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -115,17 +117,21 @@ export default function ProjectTwo() {
               >
                 <FormField
                   control={form.control}
-                  name="firstCountry"
+                  name="country"
                   render={({ field }) => (
                     <FormItem className="grid gap-3">
                       <FormLabel>First country</FormLabel>
                       <Select
-                        onValueChange={field.onChange}
+                        onValueChange={() => {
+                          setCountry(field.value);
+
+                          field.onChange;
+                        }}
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select a country to compare" />
+                            <SelectValue placeholder="Select a country" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -144,7 +150,7 @@ export default function ProjectTwo() {
 
                 <FormField
                   control={form.control}
-                  name="secondCountry"
+                  name="indicator"
                   render={({ field }) => (
                     <FormItem className="grid gap-3">
                       <FormLabel>second country</FormLabel>
@@ -153,8 +159,8 @@ export default function ProjectTwo() {
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a country to compare" />
+                          <SelectTrigger disabled={country === ""}>
+                            <SelectValue placeholder="Select an indicator" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -172,7 +178,7 @@ export default function ProjectTwo() {
                 />
                 <div>
                   <Button type="submit" size={"sm"} className="mt-8  px-10">
-                    Compare
+                    Fetch Data
                   </Button>
                 </div>
               </form>
