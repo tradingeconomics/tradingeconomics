@@ -1,7 +1,8 @@
-/* App.css */
-.table-container {
+.table-container{
   width: 80%;
-  margin: 20px auto; /* Centers the table on the page */
+  margin: 30px auto; /* Centers the table on the page */
+}
+.table-body {
   overflow-x: auto; /* Adds horizontal scroll bar */
   border-radius: 8px; 
 }
