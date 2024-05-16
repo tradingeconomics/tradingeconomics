@@ -28,7 +28,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useToast } from "@/components/ui/use-toast";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import LineChartForCountry from "@/components/LineChart";
 import LineChartForCountryComparison from "@/components/ChartTwoCountries";
@@ -45,9 +45,9 @@ const formSchema = z.object({
     })
     .min(1, { message: "Please select a country to display." }),
 });
-export default  function ProjectTwo() {
+export default function ProjectTwo() {
   const [indicators, setIndicators] = useState({});
-  const [country, setCountry] = useState("");
+
   const { toast } = useToast();
 
   const [data, setData] = useState(null);
@@ -60,13 +60,12 @@ export default  function ProjectTwo() {
       indicator: "",
     },
   });
-
+const country = form.watch('country')
   async function onSubmit(input: z.infer<typeof formSchema>) {
     // if (input.firstCountry === "" || input.secondCountry === "") {
     //   toast({ title: "Please select a country" });
     //   return;
     // }
-
     // const res = await axios
     //   .get(
     //     `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
@@ -77,10 +76,8 @@ export default  function ProjectTwo() {
     //       variant: "destructive",
     //     });
     //   });
-
     // if (res) {
     //   setData(res.data);
-
     //   toast({
     //     title: "You submitted the following values:",
     //     description: (
@@ -95,19 +92,35 @@ export default  function ProjectTwo() {
     //   });
     // }
   }
+  
+  const getIndicators =  useEffect(() => {
+    const fetchData = async () => {
+      try {
+if(!country ) return null
+
+        const response = await axios.get(`https://api.tradingeconomics.com/country/${country}?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`);
+
+        setIndicators(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [country]);
   return (
     <div className="flex min-h-screen w-full flex-col">
-    <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-      <div className="flex items-center">
-        <h1 className="text-lg font-semibold md:text-2xl">
-          5.2 - Plotting charts after choosing a country - indicator pair.
-        </h1>
-      </div>
+      <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+        <div className="flex items-center">
+          <h1 className="text-lg font-semibold md:text-2xl">
+            5.2 - Plotting charts after choosing a country - indicator pair.
+          </h1>
+
+        </div>
 
         <Card className="bg-muted">
           <CardHeader>
-          <CardTitle>Select both Country and indicator </CardTitle>
-
+            <CardTitle>Select both Country and indicator </CardTitle>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -122,11 +135,8 @@ export default  function ProjectTwo() {
                     <FormItem className="grid gap-3">
                       <FormLabel>First country</FormLabel>
                       <Select
-                        onValueChange={() => {
-                          setCountry(field.value);
-
-                          field.onChange;
-                        }}
+                      
+                        onValueChange={ field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -135,7 +145,7 @@ export default  function ProjectTwo() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="Mexico">Mexico</SelectItem>
+                          <SelectItem  value="Mexico">Mexico</SelectItem>
                           <SelectItem value="New Zealand">
                             New Zealand
                           </SelectItem>
@@ -155,7 +165,9 @@ export default  function ProjectTwo() {
                     <FormItem className="grid gap-3">
                       <FormLabel>second country</FormLabel>
                       <Select
-                        onValueChange={field.onChange}
+                        onValueChange={() => {
+                          field.onChange;
+                        }}
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -186,7 +198,7 @@ export default  function ProjectTwo() {
           </CardContent>
         </Card>
 
-        {data ? (
+        {/* {data ? (
           <div className="flex flex-col  items-center justify-center gap-10 rounded-lg border border-dashed shadow-sm p-20 ">
             <LineChartForCountryComparison
               country1={form.getValues("firstCountry")}
@@ -216,7 +228,7 @@ export default  function ProjectTwo() {
               </p>
             </div>
           </div>
-        )}
+        )} */}
 
         <div className="mb-32 grid text-center place-self-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
           <a
