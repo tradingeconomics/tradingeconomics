@@ -33,6 +33,25 @@ import { useEffect, useState } from "react";
 import LineChartForCountry from "@/components/LineChart";
 import LineChartForCountryComparison from "@/components/ChartTwoCountries";
 
+interface IndicatorData {
+  Country: string;
+  Category: string;
+  Title: string;
+  LatestValueDate: string;
+  LatestValue: number;
+  Source: string;
+  SourceURL: string;
+  Unit: string;
+  URL: string;
+  CategoryGroup: string;
+  Adjustment: string;
+  Frequency: string;
+  HistoricalDataSymbol: string;
+  CreateDate: string;
+  FirstValueDate: string;
+  PreviousValue: number;
+  PreviousValueDate: string;
+}
 const formSchema = z.object({
   country: z
     .string({
@@ -46,7 +65,7 @@ const formSchema = z.object({
     .min(1, { message: "Please select a country to display." }),
 });
 export default function ProjectTwo() {
-  const [indicators, setIndicators] = useState({});
+  const [indicators, setIndicators] = useState<IndicatorData[]>([]);
 
   const { toast } = useToast();
 
@@ -60,7 +79,7 @@ export default function ProjectTwo() {
       indicator: "",
     },
   });
-const country = form.watch('country')
+  const country = form.watch("country");
   async function onSubmit(input: z.infer<typeof formSchema>) {
     // if (input.firstCountry === "" || input.secondCountry === "") {
     //   toast({ title: "Please select a country" });
@@ -92,17 +111,19 @@ const country = form.watch('country')
     //   });
     // }
   }
-  
-  const getIndicators =  useEffect(() => {
+
+  const getIndicators = useEffect(() => {
     const fetchData = async () => {
       try {
-if(!country ) return null
+        if (!country) return null;
 
-        const response = await axios.get(`https://api.tradingeconomics.com/country/${country}?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`);
+        const response = await axios.get(
+          `https://api.tradingeconomics.com/country/${country}?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+        );
 
         setIndicators(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -115,7 +136,6 @@ if(!country ) return null
           <h1 className="text-lg font-semibold md:text-2xl">
             5.2 - Plotting charts after choosing a country - indicator pair.
           </h1>
-
         </div>
 
         <Card className="bg-muted">
@@ -135,8 +155,7 @@ if(!country ) return null
                     <FormItem className="grid gap-3">
                       <FormLabel>First country</FormLabel>
                       <Select
-                      
-                        onValueChange={ field.onChange}
+                        onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -145,7 +164,7 @@ if(!country ) return null
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem  value="Mexico">Mexico</SelectItem>
+                          <SelectItem value="Mexico">Mexico</SelectItem>
                           <SelectItem value="New Zealand">
                             New Zealand
                           </SelectItem>
@@ -176,12 +195,11 @@ if(!country ) return null
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="Mexico">Mexico</SelectItem>
-                          <SelectItem value="New Zealand">
-                            New Zealand
-                          </SelectItem>
-                          <SelectItem value="Sweden">Sweden</SelectItem>
-                          <SelectItem value="Thailand">Thailand</SelectItem>
+                          {indicators.map((item) => (
+                            <SelectItem key={item.Title} value={item.Title}>
+                              {item.Title}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage />
