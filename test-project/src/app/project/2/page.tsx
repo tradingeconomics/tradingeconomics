@@ -32,6 +32,7 @@ import { useEffect, useState } from "react";
 
 import LineChartForCountry from "@/components/LineChart";
 import LineChartForCountryComparison from "@/components/ChartTwoCountries";
+import { ArrowRight, Loader2Icon } from "lucide-react";
 
 interface IndicatorData {
   Country: string;
@@ -60,12 +61,13 @@ const formSchema = z.object({
     .min(1, { message: "Please select a country to display." }),
   indicator: z
     .string({
-      required_error: "Please select a country to display.",
+      required_error: "Please select an Indicator .",
     })
-    .min(1, { message: "Please select a country to display." }),
+    .min(1, { message: "Please select an indicator." }),
 });
 export default function ProjectTwo() {
   const [indicators, setIndicators] = useState<IndicatorData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { toast } = useToast();
 
@@ -81,35 +83,41 @@ export default function ProjectTwo() {
   });
   const country = form.watch("country");
   async function onSubmit(input: z.infer<typeof formSchema>) {
-    // if (input.firstCountry === "" || input.secondCountry === "") {
-    //   toast({ title: "Please select a country" });
-    //   return;
-    // }
-    // const res = await axios
-    //   .get(
-    //     `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
-    //   )
-    //   .catch(() => {
-    //     toast({
-    //       title: "Something went wrong while fetching the data",
-    //       variant: "destructive",
-    //     });
-    //   });
-    // if (res) {
-    //   setData(res.data);
-    //   toast({
-    //     title: "You submitted the following values:",
-    //     description: (
-    //       <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //         <code className="text-white">{`${input.firstCountry}, ${input.secondCountry}`}</code>
-    //       </pre>
-    //     ),
-    //   });
-    // } else {
-    //   toast({
-    //     title: "something went wrong ",
-    //   });
-    // }
+    try {
+      setIsLoading(true)
+      
+      const url = `https://api.tradingeconomics.com/historical/country/${input.country}/indicator/${input.indicator}/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+  
+      const res = await axios
+        .get(
+         url.replace(' ', '%20')
+        )
+        .catch(() => {
+          setIsLoading(false);
+          toast({
+            title: "Something went wrong while fetching the data",
+            variant: "destructive",
+          });
+        });
+      if (res) {
+        setData(res.data);
+        toast({
+          title: "You submitted the following values:",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">{`{country : ${input.country}, indicator: ${input.indicator}}`}</code>
+            </pre>
+          ),
+        });
+      } else {
+        toast({
+          title: "something went wrong ",
+        });
+      }
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+    }
   }
 
   const getIndicators = useEffect(() => {
@@ -182,11 +190,10 @@ export default function ProjectTwo() {
                   name="indicator"
                   render={({ field }) => (
                     <FormItem className="grid gap-3">
-                      <FormLabel>second country</FormLabel>
+                      <FormLabel>Indicator</FormLabel>
                       <Select
-                        onValueChange={() => {
-                          field.onChange;
-                        }}
+                        onValueChange={
+                          field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -196,7 +203,7 @@ export default function ProjectTwo() {
                         </FormControl>
                         <SelectContent>
                           {indicators.map((item) => (
-                            <SelectItem key={item.Title} value={item.Title}>
+                            <SelectItem key={item.Title} value={item.Category}>
                               {item.Title}
                             </SelectItem>
                           ))}
@@ -207,8 +214,14 @@ export default function ProjectTwo() {
                   )}
                 />
                 <div>
-                  <Button type="submit" size={"sm"} className="mt-8  px-10">
-                    Fetch Data
+        
+                  <Button disabled={isLoading} type="submit" size={"sm"} className="mt-8  px-10">
+                    Plot a chart
+                    {isLoading ? (
+                  <Loader2Icon className="ml-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                )}
                   </Button>
                 </div>
               </form>
@@ -216,9 +229,11 @@ export default function ProjectTwo() {
           </CardContent>
         </Card>
 
-        {/* {data ? (
+        {data ? (
           <div className="flex flex-col  items-center justify-center gap-10 rounded-lg border border-dashed shadow-sm p-20 ">
-            <LineChartForCountryComparison
+          
+{/* {console.log(data)} */}
+            {/* <LineChartForCountryComparison
               country1={form.getValues("firstCountry")}
               country2={form.getValues("secondCountry")}
               rawData={data}
@@ -230,7 +245,7 @@ export default function ProjectTwo() {
             <LineChartForCountry
               country={form.getValues("secondCountry")}
               rawData={data}
-            />
+            /> */}
           </div>
         ) : (
           <div
@@ -246,7 +261,7 @@ export default function ProjectTwo() {
               </p>
             </div>
           </div>
-        )} */}
+        )}
 
         <div className="mb-32 grid text-center place-self-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
           <a
