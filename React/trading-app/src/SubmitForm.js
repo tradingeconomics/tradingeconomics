@@ -6,7 +6,7 @@ import axios from "axios";
 import {ThreeDots} from 'react-loader-spinner';
 
 
-const API_KEY = "c0dfe034b45e4e3:antk3ey1aekcaqi";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 function MyForm({ sentDataToParent }) {
   const [countryName, setCountryName] = useState("");
