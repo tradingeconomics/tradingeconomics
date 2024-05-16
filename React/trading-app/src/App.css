@@ -6,18 +6,13 @@
   margin-bottom: 5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(8px + 2vmin);
   /*color: white;*/
 }
 
@@ -30,6 +25,21 @@
   text-align: center;
   margin: auto;
   margin-top: 20px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 820px) {
+  .form {
+    width: 320px;
+  }
+
+  input, select {
+    width: 50%;
+  }
+
+  .dateForm{
+    flex-direction: column;
+  }
 }
 
 fieldset {
