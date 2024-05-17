@@ -100,7 +100,7 @@ export default function ProjectOne() {
       <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
         <div className="flex items-center">
           <h1 className="text-lg font-semibold md:text-2xl">
-            5.1 : A website that compares GDP of two countries. {`${process.env.NEXT_PUBLIC_TE_API_KEY}`}
+            5.1 : A website that compares GDP of two countries. 
           </h1>
         </div>
 
