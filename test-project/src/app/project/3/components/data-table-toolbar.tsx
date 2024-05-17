@@ -10,43 +10,49 @@ import { roles, statuses } from "../data/data"
 import { Download } from "lucide-react"
 import { downloadToExcel } from "@/lib/xlsx"
 
+interface DataItem {
+  CategoryGroup: string;
+  // other properties as needed
+}
 
 
-
-interface DataTableToolbarProps<TData> {
+interface DataTableToolbarProps<TData extends DataItem> {
   table: Table<TData>
   data: TData[]
 }
+function createRoles(categoryGroups: string[]) {
+  return categoryGroups.map(group => ({
+    label: group,
+    value: group
 
-export function DataTableToolbar<TData>({
+  }));
+}
+
+export function DataTableToolbar<TData extends DataItem>({
   table,
   data
 }: DataTableToolbarProps<TData>) {
-  const isFiltered = table.getState().columnFilters.length > 0
+  const catArray = Array.from(new Set(data.map((item) => item.CategoryGroup)));
+  const categoryGroups = createRoles(catArray); 
+    const isFiltered = table.getState().columnFilters.length > 0
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder="Filter name..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          placeholder="Search & filter indicator..."
+          value={(table.getColumn("Title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn("Title")?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
-        {table.getColumn("isActive") && (
+       
+        {table.getColumn("CategoryGroup") && (
           <DataTableFacetedFilter
-            column={table.getColumn("isActive")}
-            title="Status"
-            options={statuses}
-          />
-        )}
-        {table.getColumn("role") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("role")}
-            title="Role"
-            options={roles}
+            column={table.getColumn("CategoryGroup")}
+            title="Sort Category"
+            options={categoryGroups}
           />
         )}
         {isFiltered && (

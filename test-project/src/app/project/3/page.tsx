@@ -117,7 +117,7 @@ export default function ProjectThree() {
 
         <Card className="bg-muted">
           <CardHeader>
-            <CardTitle>Select the Country</CardTitle>
+            <CardTitle>Select a Country</CardTitle>
          <CardDescription>A snapshot / overview will be shown after you selected the country</CardDescription>
          </CardHeader>
           <CardContent>
