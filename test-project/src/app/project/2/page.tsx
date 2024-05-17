@@ -86,21 +86,17 @@ export default function ProjectTwo() {
   const country = form.watch("country");
   async function onSubmit(input: z.infer<typeof formSchema>) {
     try {
-      setIsLoading(true)
-      
-      const url = `https://api.tradingeconomics.com/historical/country/${input.country}/indicator/${input.indicator}/2015-01-01/2023-12-31?c=${process.env.NEXT_PUBLIC_TE_API_KEY}`
-  
-      const res = await axios
-        .get(
-         url.replace(' ', '%20')
-        )
-        .catch(() => {
-          setIsLoading(false);
-          toast({
-            title: "Something went wrong while fetching the data",
-            variant: "destructive",
-          });
+      setIsLoading(true);
+
+      const url = `https://api.tradingeconomics.com/historical/country/${input.country}/indicator/${input.indicator}/2015-01-01/2023-12-31?c=${process.env.NEXT_PUBLIC_TE_API_KEY}`;
+
+      const res = await axios.get(url.replace(" ", "%20")).catch(() => {
+        setIsLoading(false);
+        toast({
+          title: "Something went wrong while fetching the data",
+          variant: "destructive",
         });
+      });
       if (res) {
         setData(res.data);
         toast({
@@ -116,9 +112,9 @@ export default function ProjectTwo() {
           title: "something went wrong ",
         });
       }
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   }
 
@@ -194,8 +190,7 @@ export default function ProjectTwo() {
                     <FormItem className="grid gap-3">
                       <FormLabel>Indicator</FormLabel>
                       <Select
-                        onValueChange={
-                          field.onChange}
+                        onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
@@ -216,14 +211,22 @@ export default function ProjectTwo() {
                   )}
                 />
                 <div>
-        
-                  <Button disabled={isLoading} type="submit" size={"sm"} className="mt-8  px-10">
-                    Plot a chart
+                  <Button
+                    disabled={isLoading}
+                    type="submit"
+                    size={"sm"}
+                    className="mt-8  px-10"
+                  >
+                    {" Plot a chart"}
                     {isLoading ? (
-                  <Loader2Icon className="ml-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                )}
+                      <>
+                      <Loader2Icon className="ml-2 h-4 w-4 animate-spin" />
+                      </>
+                    ) : (
+                      <>
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                      </>
+                    )}
                   </Button>
                 </div>
               </form>
@@ -233,15 +236,10 @@ export default function ProjectTwo() {
 
         {data ? (
           <div className="flex flex-col  items-center justify-center gap-10 rounded-lg border border-dashed shadow-sm p-20 ">
-          
-
-     
-     
             <LineChartForCountryIndicatorPair
               country={form.getValues("country")}
               rawData={data}
             />
-     
           </div>
         ) : (
           <div
@@ -263,7 +261,6 @@ export default function ProjectTwo() {
           <a
             href="/project/1"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -280,15 +277,13 @@ export default function ProjectTwo() {
           <Link
             href="/project/2"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-             
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
               5.2{" "}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none text-muted-foreground text-sm">
-                // You're here
+                {"// You're here"}
               </span>
-             
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
               Plotting charts after choosing a country - indicator pair.
@@ -298,7 +293,6 @@ export default function ProjectTwo() {
           <a
             href="/project/3"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-             
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -306,7 +300,6 @@ export default function ProjectTwo() {
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
-              
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
               Build a web page with a table that displays information.
@@ -320,7 +313,7 @@ export default function ProjectTwo() {
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
               <span className=" inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                <HomeIcon size={'23'} className="mr-2"/>
+                <HomeIcon size={"23"} className="mr-2" />
               </span>
               Home{" "}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">

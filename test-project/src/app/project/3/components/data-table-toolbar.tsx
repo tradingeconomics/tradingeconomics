@@ -13,10 +13,10 @@ import { downloadToExcel } from "@/lib/xlsx"
 interface DataItem {
   CategoryGroup: string;
   // other properties as needed
-}
+} 
 
 
-interface DataTableToolbarProps<TData extends DataItem> {
+interface DataTableToolbarProps<TData > {
   table: Table<TData>
   data: TData[]
 }
@@ -28,10 +28,11 @@ function createRoles(categoryGroups: string[]) {
   }));
 }
 
-export function DataTableToolbar<TData extends DataItem>({
+export function DataTableToolbar<TData>({
   table,
   data
 }: DataTableToolbarProps<TData>) {
+  // @ts-ignore
   const catArray = Array.from(new Set(data.map((item) => item.CategoryGroup)));
   const categoryGroups = createRoles(catArray); 
     const isFiltered = table.getState().columnFilters.length > 0
