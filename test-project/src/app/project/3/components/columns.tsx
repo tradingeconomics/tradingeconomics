@@ -1,78 +1,52 @@
 'use client'
-import { User } from '@/types/next-auth'
-import { Staff } from '@/types/types'
+import { CountrySnapshot } from '@/types/types'
 import {ColumnDef} from '@tanstack/react-table'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { roles } from '../data/data'
-import { DataTableRowActions } from './data-table-row-actions'
 
 
-export const columns : ColumnDef<Staff>[] = [
+export const columns : ColumnDef<CountrySnapshot>[] = [
   // {
   //   header: "ID",
   //   accessorKey : "id"
   // },
   {
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Email" />
+      <DataTableColumnHeader column={column} title="Indicator" />
     ),
-    accessorKey : "email"
+    accessorKey : "Title"
   },
   {
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Name" />
+      <DataTableColumnHeader column={column} title="Last" />
     ),
-    accessorKey : "name"
+    accessorKey : "LatestValue"
   },
   {
-    accessorKey: "role",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Role" />
+      <DataTableColumnHeader column={column} title="Previous" />
     ),
-    cell: ({ row }) => {
-      const role = roles.find(
-        (role) => role.value === row.getValue("role")
-      )
+    accessorKey : "PreviousValue"
+  },
+  {
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Unit" />
+    ),
+    accessorKey : "Unit",
 
-      if (!role) {
-        return null
-      }
-
-      return (
-        <div className="flex items-center">
-          {role.icon && (
-            <role.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-          )}
-          <span>{role.label}</span>
-        </div>
-      )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
-  },
-  {
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
-    ),
-    accessorKey : "isActive",
-    cell: ({row} ) =>{
-      if(!row.getValue('name')){
-        
-        return 'Invite Pending' 
-      }
-      const isActive = row.getValue('isActive')
-      const label = isActive === true ? 'Active' :   'InActive'
-      return label
-    },
     
+
+  },
+  {
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Category Group" />
+    ),
+    accessorKey: "CategoryGroup",
+ 
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
-  },
-  {
-    id: 'actions',
-    cell: ({ row }) => <DataTableRowActions row={row} />,
   }
+
   
 ]

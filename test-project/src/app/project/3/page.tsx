@@ -77,29 +77,36 @@ export default function ProjectThree() {
     },
   });
   const country = form.watch("country");
-  async function onSubmit(input: z.infer<typeof formSchema>) {
-    
-    
-  }
+
+
+
   const { data, isLoading, refetch } = useQuery({
     enabled: false, 
     refetchOnWindowFocus: false,
-    queryKey: ["Staff", form.getValues('country')],
+    queryKey: ["Staff", country],
     queryFn: async () => {
       
-      const response = await axios.get(`/api/gym/staff/`);
+      const response = await axios.get(`https://api.tradingeconomics.com/country/${country}?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`);
       return response.data;
     },
     onError: (error: any) => {
       error.response.data.errors.map((err: any) => {
-
+        
       });
     },
     onSuccess: (data) => {
       // toast.success(data[0].name);
     },
   });
-
+  
+  async function onSubmit(input: z.infer<typeof formSchema>) {
+    
+    try {
+      await refetch()
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
@@ -124,7 +131,7 @@ export default function ProjectThree() {
                   name="country"
                   render={({ field }) => (
                     <FormItem className="grid gap-3">
-                      <FormLabel>First country</FormLabel>
+                      <FormLabel>Country</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
@@ -185,10 +192,10 @@ export default function ProjectThree() {
           >
             <div className="flex flex-col items-center gap-1 text-center">
               <h3 className="text-2xl font-bold tracking-tight">
-                Graph will be diplayed here
+                Table will be diplayed here
               </h3>
               <p className="text-sm text-muted-foreground">
-                select both countries and click compare to show graph
+                select countries and press Submit to laod data
               </p>
             </div>
           </div>
