@@ -69,7 +69,7 @@ export default function ProjectOne() {
 
     const res = await axios
       .get(
-        `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+        `https://api.tradingeconomics.com/historical/country/${input.firstCountry},${input.secondCountry}/indicator/gdp/2005-01-01/2023-12-31?c=${process.env.NEXT_PUBLIC_TE_API_KEY}`
       )
       .catch(() => {
         toast({
@@ -100,7 +100,7 @@ export default function ProjectOne() {
       <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
         <div className="flex items-center">
           <h1 className="text-lg font-semibold md:text-2xl">
-            5.1 : A website that compares GDP of two countries .
+            5.1 : A website that compares GDP of two countries. {`${process.env.NEXT_PUBLIC_TE_API_KEY}`}
           </h1>
         </div>
 

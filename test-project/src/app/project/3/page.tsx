@@ -86,7 +86,7 @@ export default function ProjectThree() {
     queryKey: ["Staff", country],
     queryFn: async () => {
       
-      const response = await axios.get(`https://api.tradingeconomics.com/country/${country}?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`);
+      const response = await axios.get(`https://api.tradingeconomics.com/country/${country}?c=${process.env.NEXT_PUBLIC_TE_API_KEY}`);
       return response.data;
     },
     onError: (error: any) => {

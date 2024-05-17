@@ -88,7 +88,7 @@ export default function ProjectTwo() {
     try {
       setIsLoading(true)
       
-      const url = `https://api.tradingeconomics.com/historical/country/${input.country}/indicator/${input.indicator}/2015-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+      const url = `https://api.tradingeconomics.com/historical/country/${input.country}/indicator/${input.indicator}/2015-01-01/2023-12-31?c=${process.env.NEXT_PUBLIC_TE_API_KEY}`
   
       const res = await axios
         .get(
@@ -128,7 +128,7 @@ export default function ProjectTwo() {
         if (!country) return null;
 
         const response = await axios.get(
-          `https://api.tradingeconomics.com/country/${country}?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+          `https://api.tradingeconomics.com/country/${country}?c=${process.env.NEXT_PUBLIC_TE_API_KEY}`
         );
 
         setIndicators(response.data);
