@@ -180,7 +180,7 @@ export default function ProjectThree() {
         </Card>
 
         {data  ? (
-          <div className="flex flex-col  items-center justify-center rounded-lg border border-dashed shadow-sm  ">
+          <div className="flex flex-col  items-center justify-center rounded-lg border border-dashed shadow-sm py-20 ">
             {isLoading ? (
               <Loader2Icon className="ml-2 h-10 w-10 animate-spin" />
             ) : (
