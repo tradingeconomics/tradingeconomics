@@ -32,7 +32,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { useEffect, useState } from "react";
 
-import { ArrowRight, Loader2Icon } from "lucide-react";
+import { ArrowRight, HomeIcon, Loader2Icon } from "lucide-react";
 import { StaffDataTable } from "./components/data-table";
 
 interface IndicatorData {
@@ -82,7 +82,7 @@ export default function ProjectThree() {
 
   const { data, isLoading, refetch } = useQuery({
     enabled: false, 
-    refetchOnWindowFocus: false,
+
     queryKey: ["Staff", country],
     queryFn: async () => {
       
@@ -162,7 +162,11 @@ export default function ProjectThree() {
                     size={"sm"}
                     className="mt-8  px-10"
                   >
-                    Submit
+                     {isLoading ? (
+                  'Loading ..'  
+                  ) : (
+'Submit'
+                    )}
                     {isLoading ? (
                       <Loader2Icon className="ml-2 h-4 w-4 animate-spin" />
                     ) : (
@@ -175,7 +179,7 @@ export default function ProjectThree() {
           </CardContent>
         </Card>
 
-        {data ? (
+        {data  ? (
           <div className="flex flex-col  items-center justify-center gap-10 rounded-lg border border-dashed shadow-sm p-20 ">
             {isLoading ? (
               <Loader2Icon className="ml-2 h-10 w-10 animate-spin" />
@@ -192,10 +196,10 @@ export default function ProjectThree() {
           >
             <div className="flex flex-col items-center gap-1 text-center">
               <h3 className="text-2xl font-bold tracking-tight">
-                Table will be diplayed here
+                Table will be diplayed here!
               </h3>
               <p className="text-sm text-muted-foreground">
-                select countries and press Submit to laod data
+                select a country and click submit
               </p>
             </div>
           </div>
@@ -251,18 +255,21 @@ export default function ProjectThree() {
           </a>
 
           <a
-            href="/project/4"
+            href="/"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
-              5.4{" "}
+              <span className=" inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                <HomeIcon size={'23'} className="mr-2"/>
+              </span>
+              Home{" "}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-              still in mind ma
+              Go back to Home
             </p>
           </a>
         </div>

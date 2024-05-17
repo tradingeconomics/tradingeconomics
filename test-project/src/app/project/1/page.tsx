@@ -32,6 +32,7 @@ import { useState } from "react";
 
 import LineChartForCountry from "@/components/LineChart";
 import LineChartForCountryComparison from "@/components/ChartTwoCountries";
+import { HomeIcon } from "lucide-react";
 
 const formSchema = z.object({
   firstCountry: z
@@ -265,19 +266,21 @@ export default function ProjectOne() {
           </a>
 
           <a
-            href="/project/4"
+            href="/"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-              
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
-              5.4{" "}
+              <span className=" inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                <HomeIcon size={'23'} className="mr-2"/>
+              </span>
+              Home{" "}
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-              still in mind ma
+              Go back to Home
             </p>
           </a>
         </div>
