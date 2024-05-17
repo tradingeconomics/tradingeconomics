@@ -33,6 +33,8 @@ import { useEffect, useState } from "react";
 import LineChartForCountry from "@/components/LineChart";
 import LineChartForCountryComparison from "@/components/ChartTwoCountries";
 import { ArrowRight, Loader2Icon } from "lucide-react";
+import LineChartProjectTwo from "@/components/LineChart5-2";
+import LineChartForCountryIndicatorPair from "@/components/LineChart5-2";
 
 interface IndicatorData {
   Country: string;
@@ -86,7 +88,7 @@ export default function ProjectTwo() {
     try {
       setIsLoading(true)
       
-      const url = `https://api.tradingeconomics.com/historical/country/${input.country}/indicator/${input.indicator}/2005-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
+      const url = `https://api.tradingeconomics.com/historical/country/${input.country}/indicator/${input.indicator}/2015-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
   
       const res = await axios
         .get(
@@ -232,20 +234,14 @@ export default function ProjectTwo() {
         {data ? (
           <div className="flex flex-col  items-center justify-center gap-10 rounded-lg border border-dashed shadow-sm p-20 ">
           
-{/* {console.log(data)} */}
-            {/* <LineChartForCountryComparison
-              country1={form.getValues("firstCountry")}
-              country2={form.getValues("secondCountry")}
+
+     
+     
+            <LineChartForCountryIndicatorPair
+              country={form.getValues("country")}
               rawData={data}
             />
-            <LineChartForCountry
-              country={form.getValues("firstCountry")}
-              rawData={data}
-            />
-            <LineChartForCountry
-              country={form.getValues("secondCountry")}
-              rawData={data}
-            /> */}
+     
           </div>
         ) : (
           <div
@@ -267,13 +263,13 @@ export default function ProjectTwo() {
           <a
             href="/project/1"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
+
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
               5.1{"  "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none text-muted-foreground text-sm">
-                // You're here
+              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                -&gt;
               </span>
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
@@ -284,14 +280,15 @@ export default function ProjectTwo() {
           <Link
             href="/project/2"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-            target="_blank"
+             
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
               5.2{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
+              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none text-muted-foreground text-sm">
+                // You're here
               </span>
+             
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
               Plotting charts after choosing a country - indicator pair.
@@ -301,7 +298,7 @@ export default function ProjectTwo() {
           <a
             href="/project/3"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
+             
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -309,6 +306,7 @@ export default function ProjectTwo() {
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
+              
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
               Build a web page with a table that displays information.
@@ -318,7 +316,7 @@ export default function ProjectTwo() {
           <a
             href="/project/4"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
+             
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
