@@ -19,9 +19,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { columns } from "./components/columns";
+import { useQuery } from "react-query";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -30,11 +32,8 @@ import { useToast } from "@/components/ui/use-toast";
 
 import { useEffect, useState } from "react";
 
-import LineChartForCountry from "@/components/LineChart";
-import LineChartForCountryComparison from "@/components/ChartTwoCountries";
 import { ArrowRight, Loader2Icon } from "lucide-react";
-import LineChartProjectTwo from "@/components/LineChart5-2";
-import LineChartForCountryIndicatorPair from "@/components/LineChart5-2";
+import { StaffDataTable } from "./components/data-table";
 
 interface IndicatorData {
   Country: string;
@@ -58,100 +57,62 @@ interface IndicatorData {
 const formSchema = z.object({
   country: z
     .string({
-      required_error: "Please select a country to display.",
+      required_error: "Please select a country ",
     })
-    .min(1, { message: "Please select a country to display." }),
-  indicator: z
-    .string({
-      required_error: "Please select an Indicator .",
-    })
-    .min(1, { message: "Please select an indicator." }),
+    .min(1, { message: "Please select a country ." }),
+  
 });
 export default function ProjectThree() {
-  const [indicators, setIndicators] = useState<IndicatorData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const { toast } = useToast();
 
-  const [data, setData] = useState(null);
+  const [rawData, setData] = useState(null);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       country: "",
-      indicator: "",
+
     },
   });
   const country = form.watch("country");
   async function onSubmit(input: z.infer<typeof formSchema>) {
-    try {
-      setIsLoading(true)
-      
-      const url = `https://api.tradingeconomics.com/historical/country/${input.country}/indicator/${input.indicator}/2015-01-01/2023-12-31?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
-  
-      const res = await axios
-        .get(
-         url.replace(' ', '%20')
-        )
-        .catch(() => {
-          setIsLoading(false);
-          toast({
-            title: "Something went wrong while fetching the data",
-            variant: "destructive",
-          });
-        });
-      if (res) {
-        setData(res.data);
-        toast({
-          title: "You submitted the following values:",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">{`{country : ${input.country}, indicator: ${input.indicator}}`}</code>
-            </pre>
-          ),
-        });
-      } else {
-        toast({
-          title: "something went wrong ",
-        });
-      }
-      setIsLoading(false)
-    } catch (error) {
-      setIsLoading(false)
-    }
+    
+    
   }
+  const { data, isLoading, refetch } = useQuery({
+    enabled: false, 
+    refetchOnWindowFocus: false,
+    queryKey: ["Staff", form.getValues('country')],
+    queryFn: async () => {
+      
+      const response = await axios.get(`/api/gym/staff/`);
+      return response.data;
+    },
+    onError: (error: any) => {
+      error.response.data.errors.map((err: any) => {
 
-  const getIndicators = useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (!country) return null;
+      });
+    },
+    onSuccess: (data) => {
+      // toast.success(data[0].name);
+    },
+  });
 
-        const response = await axios.get(
-          `https://api.tradingeconomics.com/country/${country}?c=bdc47ca7d4134d0:s9ec8qqlsd8rp9t`
-        );
-
-        setIndicators(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [country]);
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
         <div className="flex items-center">
           <h1 className="text-lg font-semibold md:text-2xl">
-            5.2 - Plotting charts after choosing a country - indicator pair.
-          </h1>
+         5.3:  Build a web page with a table that displays information.</h1>
         </div>
 
         <Card className="bg-muted">
           <CardHeader>
-            <CardTitle>Select both Country and indicator </CardTitle>
-          </CardHeader>
+            <CardTitle>Select the Country</CardTitle>
+         <CardDescription>A snapshot / overview will be shown after you selected the country</CardDescription>
+         </CardHeader>
           <CardContent>
             <Form {...form}>
               <form
@@ -187,43 +148,19 @@ export default function ProjectThree() {
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="indicator"
-                  render={({ field }) => (
-                    <FormItem className="grid gap-3">
-                      <FormLabel>Indicator</FormLabel>
-                      <Select
-                        onValueChange={
-                          field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger disabled={country === ""}>
-                            <SelectValue placeholder="Select an indicator" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {indicators.map((item) => (
-                            <SelectItem key={item.Title} value={item.Category}>
-                              {item.Title}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 <div>
-        
-                  <Button disabled={isLoading} type="submit" size={"sm"} className="mt-8  px-10">
-                    Plot a chart
+                  <Button
+                    disabled={isLoading}
+                    type="submit"
+                    size={"sm"}
+                    className="mt-8  px-10"
+                  >
+                    Submit
                     {isLoading ? (
-                  <Loader2Icon className="ml-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                )}
+                      <Loader2Icon className="ml-2 h-4 w-4 animate-spin" />
+                    ) : (
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </form>
@@ -233,15 +170,13 @@ export default function ProjectThree() {
 
         {data ? (
           <div className="flex flex-col  items-center justify-center gap-10 rounded-lg border border-dashed shadow-sm p-20 ">
-          
-
-     
-     
-            <LineChartForCountryIndicatorPair
-              country={form.getValues("country")}
-              rawData={data}
-            />
-     
+            {isLoading ? (
+              <Loader2Icon className="ml-2 h-10 w-10 animate-spin" />
+            ) : (
+              <>
+                <StaffDataTable data={data} columns={columns} />
+              </>
+            )}
           </div>
         ) : (
           <div
@@ -263,7 +198,6 @@ export default function ProjectThree() {
           <a
             href="/project/1"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -271,7 +205,6 @@ export default function ProjectThree() {
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
-             
             </h2>
             <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
               A website that compares two countries or two indicators.
@@ -281,13 +214,10 @@ export default function ProjectThree() {
           <Link
             href="/project/2"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-
             rel="noopener noreferrer"
           >
-            
             <h2 className={`mb-3 text-2xl font-semibold`}>
               5.2{" "}
-          
               <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
                 -&gt;
               </span>
@@ -300,7 +230,6 @@ export default function ProjectThree() {
           <a
             href="/project/3"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-               
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -317,7 +246,6 @@ export default function ProjectThree() {
           <a
             href="/project/4"
             className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-               
             rel="noopener noreferrer"
           >
             <h2 className={`mb-3 text-2xl font-semibold`}>
