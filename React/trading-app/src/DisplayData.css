@@ -1,0 +1,53 @@
+.table-container{
+  width: 80%;
+  margin: 30px auto; /* Centers the table on the page */
+}
+.table-body {
+  overflow-x: auto; /* Adds horizontal scroll bar */
+  border-radius: 8px; 
+}
+
+table {
+  width: 100%; /* Adjust the width of the table to fit within the container */
+  margin: 20px 0; 
+  font-size: 16px;
+  text-align: left;
+  border-collapse: collapse;
+  border-spacing: 0; 
+  border-radius: 8px; 
+  overflow: hidden; /* Ensure content does not overflow the rounded corners */
+}
+
+th, td {
+  border: 1px solid #ddd; 
+  padding: 12px 15px;
+}
+
+th {
+  background-color: #f4f4f4; 
+  color: #333; 
+  position: sticky; /* Make header sticky */
+  top: 0; /* Stick to the top */
+  z-index: 1; /* Ensure it stays on top */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternate row colors */
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1; /* Light gray background on hover */
+}
+
+.table-container::-webkit-scrollbar {
+  height: 50px; /* Height of horizontal scrollbar */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #ccc; /* Color of the scrollbar thumb */
+  border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+}
