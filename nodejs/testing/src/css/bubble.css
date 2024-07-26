@@ -1,0 +1,59 @@
+
+.bubble {
+	width: 50vmin;
+	height: 50vmin;
+	background: hsl(0, 0%, 50%);
+	border: (50vmin * .09) solid hsl(240, 1%, 30%);
+	position: absolute;
+	top: calc(50% - (50vmin * .49));
+	left: calc(50% - (50vmin * .49));
+    display: flex;
+    justify-items: center;
+    align-items: center;
+	overflow: visible;
+	border-radius: 48% 40% 62% 47% /  61% 49% 64% 43%;
+	animation: rotate 10s infinite linear;
+	z-index: 1;
+}
+@keyframes rotate {
+	0% { transform: rotate(1turn); }
+}
+
+.bubble:before {
+	content: '';
+	position: absolute;
+	top: 50vmin * .1;
+	left: 50vmin * .1;
+	width: calc(100% - (50vmin * .3));
+	height: calc(100% - (50vmin * .3));
+	background: hsl(0, 0%, 20%);
+    display: flex;
+    justify-items: center;
+    align-items: center;
+	border: (50vmin * .065) solid hsl(276, 100%, 61%);
+	border-radius: 41% 40% 50% 55% /  49% 52% 51% 43%;
+	z-index: -2;
+	animation: rotateBefore 10s infinite linear;
+}
+@keyframes rotateBefore {
+	0% { transform: rotate(-2turn); }
+}
+
+.bubble:after {
+	content: '';
+	position: absolute;
+	top: 50vmin * .2;
+	left: 50vmin * .2;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+	width: calc(100% - (50vmin * .5));
+	height: calc(100% - (50vmin * .5));
+	background: hsl(0, 0%, 82%);
+	border: (50vmin * .05) solid hsl(0, 1%, 75%);
+	border-radius: 42% 63% 51% 60% / 47% 62% 42% 52%;
+	animation: rotateAfter 10s infinite linear;
+}
+@keyframes rotateAfter {
+	0% { transform: rotate(2turn); }
+}
