@@ -1,0 +1,40 @@
+.dataTables_filter input {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: transparent;
+    margin-left: 3px;
+}
+
+.dataTables_paginate {
+    font-size: 12px;
+    padding-top: 10px;
+}
+
+.dataTables_info {
+    font-size: 12px;
+    padding-top: 10px;
+}
+
+#table-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#pagination-info {
+    text-align: left;
+}
+
+#search-container {
+    text-align: right;
+}
+
+.dataTables_filter {
+    float: right;
+}
+
+.dataTables_filter input {
+    margin-left: 10px;
+}
