@@ -37,7 +37,7 @@ dotnet run
 **Run the Docker container:**
 
 ```sh
-    docker run -e TradingEconomics:ApiKey="your_api_key" -p 8080:8080 country-comparator-webapp
+    docker run --rm -e TradingEconomics__ApiKey="your_api_key" -p 8080:8080 country-comparator-webapp
 
 ```
 
