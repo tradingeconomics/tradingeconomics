@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 1rem;
+}
+
+.header__logo {
+    text-decoration: none;
+}
+
+.country-comparator-form {
+    margin: 0 auto;
+    max-width: 576px;
+}

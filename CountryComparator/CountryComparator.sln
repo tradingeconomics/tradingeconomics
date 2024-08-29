@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountryComparator.WebApp", "CountryComparator.WebApp\CountryComparator.WebApp.csproj", "{B550BA56-0A8A-4749-991A-D03B242386F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF2864C9-E45F-4514-978F-B9577570F789}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountryComparator.WebApp.UnitTests", "CountryComparator.WebApp.UnitTests\CountryComparator.WebApp.UnitTests.csproj", "{78EEA89E-DF25-4C93-A542-D24221E2C054}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B550BA56-0A8A-4749-991A-D03B242386F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B550BA56-0A8A-4749-991A-D03B242386F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B550BA56-0A8A-4749-991A-D03B242386F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B550BA56-0A8A-4749-991A-D03B242386F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78EEA89E-DF25-4C93-A542-D24221E2C054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78EEA89E-DF25-4C93-A542-D24221E2C054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78EEA89E-DF25-4C93-A542-D24221E2C054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78EEA89E-DF25-4C93-A542-D24221E2C054}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
