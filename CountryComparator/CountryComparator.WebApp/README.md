@@ -1,5 +1,7 @@
 # CountryComparator.WebApp
 
+This project compares two countries using economic and financial data retrieved from Trading Economics.
+
 ## How to Run the Project Locally
 
 **Set up the user secrets**
