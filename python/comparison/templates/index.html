@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Country and Indicator</title>
+</head>
+<body>
+    <h1>Select Country and Indicator</h1>
+    <form action="/" method="POST">
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required><br><br>
+
+        <label for="indicator">Indicator:</label>
+        <select id="indicator" name="indicator">
+            <option value="gdp">GDP</option>
+            <option value="inflation">Inflation</option>
+            <option value="employment">Employment</option>
+            <!-- Add more indicators if needed -->
+        </select><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

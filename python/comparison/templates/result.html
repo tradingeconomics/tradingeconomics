@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Result</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Results for {{ country }} - {{ indicator }}</h1>
+    <canvas id="dataChart" width="600" height="400"></canvas>
+
+    <script>
+        // Fetch data from the Flask endpoint
+        fetch(`/data/{{ country }}/{{ indicator }}`) 
+            .then(response => response.json())
+            .then(data => {
+                // Ensure data is not empty
+                if (data.length > 0) {
+                    // Process and plot data
+                    const labels = data.map(item => item.time);  // Change 'time' to the correct field name
+                    const values = data.map(item => item.value); // Change 'value' to the correct field name
+
+                    const ctx = document.getElementById('dataChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar', // Ensure the type is set to 'bar'
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: `Data for {{ indicator }}`,
+                                data: values,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                },
+                                x: {
+                                    // Configure the x-axis as 'category' if your labels are categorical
+                                    type: 'category',
+                                    labels: labels
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    console.error('No data available for the chart.');
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
