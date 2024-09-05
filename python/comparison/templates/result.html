@@ -3,55 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chart Result</title>
+    <title>GDP Comparison Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Results for {{ country }} - {{ indicator }}</h1>
-    <canvas id="dataChart" width="600" height="400"></canvas>
+    <div class="container">
+        <h1>GDP Comparison: {{ country1 }} vs {{ country2 }}</h1>
+
+        <canvas id="gdpChart"></canvas>
+
+        <a href="/">Go Back</a>
+    </div>
 
     <script>
-        // Fetch data from the Flask endpoint
-        fetch(`/data/{{ country }}/{{ indicator }}`) 
-            .then(response => response.json())
-            .then(data => {
-                // Ensure data is not empty
-                if (data.length > 0) {
-                    // Process and plot data
-                    const labels = data.map(item => item.time);  // Change 'time' to the correct field name
-                    const values = data.map(item => item.value); // Change 'value' to the correct field name
+        // Filter data for GDP
+        const filterGDPData = (data) => data.filter(item => item.Category === 'GDP');
 
-                    const ctx = document.getElementById('dataChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'bar', // Ensure the type is set to 'bar'
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: `Data for {{ indicator }}`,
-                                data: values,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                },
-                                x: {
-                                    // Configure the x-axis as 'category' if your labels are categorical
-                                    type: 'category',
-                                    labels: labels
-                                }
-                            }
+        // Extract only the time and value fields
+        const extractDataForChart = (data) => {
+            return data.map(item => ({
+                time: new Date(item.LatestValueDate).getFullYear(),
+                value: item.LatestValue
+            }));
+        };
+
+        // Get data for both countries
+        const country1Data = extractDataForChart(filterGDPData({{ data1 | tojson | safe }}));
+        const country2Data = extractDataForChart(filterGDPData({{ data2 | tojson | safe }}));
+
+        // Extract labels and values
+        const labels = country1Data.map(item => item.time);
+        const country1Values = country1Data.map(item => item.value);
+        const country2Values = country2Data.map(item => item.value);
+
+        // Chart configuration
+        const chartConfig = {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: `GDP of {{ country1 }}`,
+                        data: country1Values,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: `GDP of {{ country2 }}`,
+                        data: country2Values,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'GDP Value (in Billion USD)'
                         }
-                    });
-                } else {
-                    console.error('No data available for the chart.');
-                }
-            })
-            .catch(error => console.error('Error fetching data:', error));
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `GDP Comparison: {{ country1 }} vs {{ country2 }}`
+                    },
+                    tooltip: {
+                        enabled: true,
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        };
+
+        // Create the Chart.js chart
+        const ctx = document.getElementById('gdpChart').getContext('2d');
+        new Chart(ctx, chartConfig);
     </script>
 </body>
 </html>
