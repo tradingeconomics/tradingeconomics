@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="color-scheme" content="light" />
+    <title>@ViewData["Title"] - Country Comparator</title>
+    <link rel="stylesheet" href="~/lib/picocss/dist/css/pico.jade.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/CountryComparator.WebApp.styles.css" asp-append-version="true"/>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <a class="header__logo" asp-area="" asp-controller="Home" asp-action="Index">
+            <h1>Country Comparator</h1>
+        </a>
+    </header>
+</div>
+
+<main class="container">
+    @RenderBody()
+</main>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

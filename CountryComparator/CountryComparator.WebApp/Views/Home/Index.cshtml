@@ -1,0 +1,52 @@
+﻿@model CountryComparatorViewModel
+@{
+    ViewData["Title"] = "Home";
+
+    var indicatorsByIndicatorName = Model.Indicators
+        .GroupBy(indicator => indicator.Indicator)
+        .ToDictionary(group => group.Key, group => group.ToList());
+
+    var sortedIndicatorNames = indicatorsByIndicatorName.Keys.Order().ToList();
+}
+
+
+<form method="get" class="country-comparator-form">
+    <fieldset class="grid">
+        <select asp-for="CountryA" asp-items="@Model.CountryAOptions">
+            <option value="" disabled selected>Select a country</option>
+        </select>
+        <select asp-for="CountryB" asp-items="@Model.CountryBOptions">
+            <option value="" disabled selected>Select a country</option>
+        </select>
+    </fieldset>
+    <input type="submit" value="Compare"/>
+</form>
+
+@if (indicatorsByIndicatorName.Count > 0)
+{
+    <table class="striped">
+        <thead>
+            <tr>
+                <th cope="col">Indicator</th>
+                <th cope="col">@Model.CountryA</th>
+                <th cope="col">@Model.CountryB</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var indicatorName in sortedIndicatorNames)
+        {
+            <tr>
+                @{
+                    var countryAIndicator = indicatorsByIndicatorName[indicatorName].FirstOrDefault(indicator => indicator.Country == Model.CountryA);
+                    var countryBIndicator = indicatorsByIndicatorName[indicatorName].FirstOrDefault(indicator => indicator.Country == Model.CountryB);
+                    var valueForCountryA = $"{countryAIndicator?.LatestValue} {(countryAIndicator?.LatestValue != null ? countryAIndicator.Unit : null)}";
+                    var valueForCountryB = $"{countryBIndicator?.LatestValue} {(countryBIndicator?.LatestValue != null ? countryBIndicator.Unit : null)}";
+                }
+                <th scope="row">@indicatorName</th>
+                <td>@valueForCountryA</td>
+                <td>@valueForCountryB</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
