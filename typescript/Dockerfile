@@ -1,12 +1,17 @@
-FROM node:alpine
+FROM node:18-alpine
 WORKDIR /tradingeconomics
 COPY . .
-RUN npm install --production
+RUN npm ci
 
-# Please change this to your API Credentials
-ENV apikey='guest:guest'
+ENV NODE_ENV=production
 
-CMD ["node", "app.js"]
+ENV VITE_APP_TE_API_KEY=81cf36f83faa423:9ixj6r8pkqe11mv
+
+RUN npm run build
+
+EXPOSE 8080
+
+CMD ["npm", "run", "preview"]
 
 # NOTES
 
@@ -14,7 +19,7 @@ CMD ["node", "app.js"]
 # docker build -t tradingeconomics/typescript:latest  .
 
 # Run
-# docker run --rm -it --init --name te-typescript -e apikey='guest:guest' tradingeconomics/typescript:latest
+# docker run -p 8080:8080 --rm -it --init --name te-typescript -e VITE_APP_TE_API_KEY=81cf36f83faa423:9ixj6r8pkqe11mv tradingeconomics/typescript:latest
 
 # Push
 # docker push tradingeconomics/typescript:latest
