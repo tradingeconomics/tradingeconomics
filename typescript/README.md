@@ -1,107 +1,50 @@
-# Trading Economics - Typescript - Market Data Stream
+# React + TypeScript + Vite
 
-Trading Economics provides its users with economic indicators and quotes, delayed feeds and historical data for currencies, commodities, stock indexes, share prices and bond yields. 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-#
-## Example
+Currently, two official plugins are available:
 
-Create an app.ts file with the contents:
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
+## Expanding the ESLint configuration
 
-```typescript
-import { TEClient} from 'tradingeconomics-stream'
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-// Credentials
+- Configure the top-level `parserOptions` property like this:
 
-let key = 'guest'
-let secret = 'guest'
-
-if (process.env.apikey){
-  const apikey = process.env.apikey
-  if (apikey.includes(':')) {
-    key = apikey.split(':')[0]
-    secret = apikey.split(':')[1]
-  }
-}
-
-console.log("Credentials:", key)
-
-// Subscribing to Quotes
-
-const subscribe = (asset: string) => {
-  const client = new TEClient({
-    key: key,
-    secret: secret,
-  })
-
-  client.subscribe(asset)
-
-  client.on('message', msg => {
-    console.log(`Got price for asset ${asset}:`, msg.price)
-  })
-}
-
-subscribe('EURUSD:CUR')
-
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-#
-**Install Packages**
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```bash
-npm install 'tradingeconomics-stream'
-npm install -g typescript
-npm i --save-dev @types/node
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
+
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
 ```
-
-
-#
-**Compile Typescript**
-
-```bash
-tsc app.ts
-```
-
-**Run the app**
-
-Please change the keys to yours to remove guest limitations
-
-```bash
-export key=guest
-export secret=guest 
-node app.js
-```
-#
-
-**Docker**
-
-Please pass your keys as environmental variables
-
-```bash
-docker run --rm -it --init --name te-typescript -e key=guest -e secret=guest tradingeconomics/typescript:latest
-```
-#
-
-
-
-##
-
-**More examples in Javascript**
-
-
-https://github.com/tradingeconomics/tradingeconomics/tree/master/nodejs
-
-##
-
-#
-
-**Acknowledgements** 
-
-
-Jonas Hals
-
-
-https://github.com/boxhock/tradingeconomics-nodejs-stream
-
-
-
