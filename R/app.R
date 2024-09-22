@@ -89,19 +89,21 @@ ui <- dashboardPage(
                   "A higher GDP often indicates a more prosperous economy, suggesting greater wealth, better living standards, and higher levels of investment, including in government bonds."
                 ),
                 box(
-                  title = "GDP Data",
-                  status = "success",
-                  solidHeader = TRUE,
-                  dataTableOutput("gdp_table")
-                )
-              ),
-              fluidRow(
-                box(
                   title = "About The project",
                   status = "danger",
                   solidHeader =TRUE,
                   "This web application has been solely contributed by Elian Kim. The indicator used is in the category of GDP, from Trading Economics; This is a test demo.",
 
+                )
+
+              ),
+              fluidRow(
+                box(
+                  title = "GDP Data",
+                  status = "success",
+                  solidHeader = TRUE,
+                  width = '100%',
+                  dataTableOutput("gdp_table")
                 )
               )
       ),
