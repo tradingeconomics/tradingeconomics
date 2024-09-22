@@ -1,21 +1,14 @@
 library(shiny)
 library(shinydashboard)
-library(ggplot2)
+library(plotly)
 library(tradingeconomics)
 library(dplyr)
-library(knitr)  # For table formatting
+library(knitr)
 library(DT)
-library(maps)   # For map plotting
-
-# Step 1: Fetch GDP data for multiple countries
+library(maps)
 get_gdp_data <- function() {
-  # Authenticate with Trading Economics API
   login('ef07850540114d9:dk0wbmljy6g5mf0')
-
-  # Fetch GDP data for the specified countries
   gdp_data <- getIndicatorData(country = c('Mexico', 'Sweden', 'Thailand', 'New Zealand'), indicator = 'GDP', outType = 'df')
-
-  # Check if data was successfully retrieved
   if (nrow(gdp_data) > 0) {
     return(gdp_data)
   } else {
@@ -23,7 +16,6 @@ get_gdp_data <- function() {
   }
 }
 
-# Step 2: Add geolocation data for the countries
 add_geolocation <- function(gdp_data) {
   # Define coordinates for each country
   geolocation_data <- data.frame(
@@ -32,54 +24,48 @@ add_geolocation <- function(gdp_data) {
     Longitude = c(-102.5528, 18.6435, 100.9925, 174.8860)
   )
 
-  # Merge GDP data with geolocation data
   merged_data <- gdp_data %>%
     select(Country, LatestValue, Title) %>%
     inner_join(geolocation_data, by = "Country")
 
   return(merged_data)
 }
-
-# Step 4: Display GDP data in a structured format and rank by latest GDP value
 display_gdp_data <- function(gdp_data) {
-  # Create a structured table and rank by Latest Value
   gdp_table <- gdp_data %>%
     select(Country, Name = Title, Last = LatestValue) %>%
-    arrange(desc(Last)) %>%  # Sort by Latest Value in descending order
-    mutate(Rank = row_number())  # Add a rank column
-
-  # Print the formatted table
+    arrange(desc(Last)) %>%
+    mutate(Rank = row_number())
   print(kable(gdp_table, format = "pipe", digits = 2))
 }
 
-# Create map plot with merged dataframe and country markers
 create_map <- function(merged_data) {
-  # Base map of the world
-  world_map <- map_data("world")
-
-  # Create the plot
-  ggplot() +
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "lightgray") +
-    geom_point(data = merged_data, aes(x = Longitude, y = Latitude, size = LatestValue, color = LatestValue), alpha = 0.7) +
-    scale_color_gradient(low = "red", high = "green") +  # Color gradient from red (lowest) to green (highest)
-    labs(title = "GDP of Selected Countries",
-         x = "Longitude",
-         y = "Latitude",
-         color = "GDP (USD Billion)",
-         size = "GDP (USD Billion)") +
-    theme_minimal()
+  plot_geo(merged_data) %>%
+    add_markers(
+      x = ~Longitude,
+      y = ~Latitude,
+      size = ~LatestValue,
+      color = ~LatestValue,
+      hoverinfo = "text",
+      text = ~paste("Country: ", Country, "<br>GDP: ", LatestValue, " USD Billion")
+    ) %>%
+    layout(
+      title = 'GDP of Selected Countries',
+      geo = list(
+        scope = 'world',
+        projection = list(type = 'orthographic'),
+        showland = TRUE,
+        landcolor = 'rgb(217, 217, 217)',
+        subunitwidth = 1,
+        countrywidth = 1,
+        subunitcolor = 'rgb(255, 255, 255)',
+        countrycolor = 'rgb(255, 255, 255)'
+      )
+    )
 }
-
-# Fetch the GDP data for the specified countries
 gdp_data <- get_gdp_data()
-
-# Merge with geolocation data
 merged_data <- add_geolocation(gdp_data)
-
-# Display the GDP data for all countries
 display_gdp_data(merged_data)
 
-# Define UI
 ui <- dashboardPage(
   dashboardHeader(title = "GDP Dashboard"),
   dashboardSidebar(
@@ -91,7 +77,6 @@ ui <- dashboardPage(
   ),
   dashboardBody(
     tabItems(
-      # Dashboard tab
       tabItem(tabName = "dashboard",
               h2("Gross Domestic Product (GDP) Overview"),
               fluidRow(
@@ -104,15 +89,22 @@ ui <- dashboardPage(
                   "A higher GDP often indicates a more prosperous economy, suggesting greater wealth, better living standards, and higher levels of investment, including in government bonds."
                 ),
                 box(
-                  title = "Ranked GDP Data",
+                  title = "GDP Data",
                   status = "success",
                   solidHeader = TRUE,
                   dataTableOutput("gdp_table")
                 )
+              ),
+              fluidRow(
+                box(
+                  title = "About The project",
+                  status = "danger",
+                  solidHeader =TRUE,
+                  "This web application has been solely contributed by Elian Kim. The indicator used is in the category of GDP, from Trading Economics; This is a test demo.",
+
+                )
               )
       ),
-
-      # GDP Data tab
       tabItem(tabName = "gdp_data",
               h2("GDP Data Overview"),
               fluidRow(
@@ -123,14 +115,12 @@ ui <- dashboardPage(
                     width = 12)
               )
       ),
-
-      # Geolocation Plot tab
       tabItem(tabName = "geo_plot",
               h2("Geolocated GDP Representation"),
               fluidRow(
                 box(title = "GDP by Country",
                     status = "warning",
-                    plotOutput("geo_plot"),  # Use plotOutput for ggplot2
+                    plotlyOutput("geo_plot"),  # Use plotlyOutput for Plotly
                     width = 12)
               )
       )
@@ -138,19 +128,16 @@ ui <- dashboardPage(
   )
 )
 
-# Define server
+
 server <- function(input, output) {
 
-  # Fetch GDP data
+
   gdp_data <- get_gdp_data()
   if (is.null(gdp_data)) {
     stop("No data retrieved. Please check the API key or the indicator.")
   }
-
-  # Merge with geolocation data
   merged_data <- add_geolocation(gdp_data)
 
-  # Render ranked GDP data table
   output$gdp_rank_table <- renderDataTable({
     gdp_table <- gdp_data %>%
       select(Country, Name = Title, Last = LatestValue, Previous = PreviousValue, Unit, Date = LatestValueDate) %>%
@@ -165,10 +152,11 @@ server <- function(input, output) {
     datatable(gdp_data, options = list(pageLength = 5))
   })
 
-  # Render geolocation plot
-  output$geo_plot <- renderPlot({
+  # Render geolocation plot with Plotly
+  output$geo_plot <- renderPlotly({
     create_map(merged_data)
   })
+
 }
 
 # Run the Shiny app
