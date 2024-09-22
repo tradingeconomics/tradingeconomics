@@ -12,19 +12,19 @@ The application visualizes various data metrics using interactive `Plotly` graph
 
 The application displays a ranked data grid of the GDP data for several countries using the `DT` package. Here is a snapshot of the interactive data table generated:
 
-![GDP Data Table](./images/images(1).png)
+![GDP Data Table](./images/image%20(1).png)
 
 ### 3. GDP Comparison Plot
 
 One of the key visualizations is a `Plotly` chart that compares the GDP of Mexico, New Zealand, Sweden, and Thailand. The chart is fully interactive, allowing zooming, panning, and tooltip details.
 
-![GDP Comparison Plot](./images/image(2).png)
+![GDP Comparison Plot](./images/image%20(2).png)
 
 ### 4. Geospatial GDP Map
 
 The application also features a geolocated `Plotly` map that visualizes GDP data across different regions.
 
-![Geospatial GDP Map](./images/image(3).png)
+![Geospatial GDP Map](./images/image%20(3).png)
 
 These images represent just a few of the features of the `app.R` Shiny application. The app provides dynamic and interactive visualizations of GDP for insightful analysis.
 
