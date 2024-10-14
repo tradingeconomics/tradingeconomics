@@ -6,19 +6,28 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import teLogo from "./assets/tradingeconomics.svg";
-import { mexico_gdp_pop_data } from "./data";
 import "./App.css";
 
 function App() {
   const [country, setCountry] = useState("Mexico");
+  const [countryData, setCountryData] = useState([]);
 
-  let countryData = [];
-  countryData = getCountryInformation(country);
+  useEffect(() => {
+    async function fetchCountryData() {
+      const MY_API_KEY = import.meta.env.VITE_TE_API_KEY;
+      const res = await fetch(
+        `https://api.tradingeconomics.com/historical/country/Mexico/indicator/gdp,population?c=${MY_API_KEY}`
+      );
+      const data = await res.json();
+      setCountryData(getCountryInformation(data));
+    }
+    fetchCountryData();
+  }, []);
 
-  function getCountryInformation(country) {
+  function getCountryInformation(mexico_gdp_pop_data) {
     let mergedData = [];
     for (let i = 1; i < mexico_gdp_pop_data.length; i = i + 2) {
       let objGDP = mexico_gdp_pop_data[i - 1];
@@ -32,14 +41,15 @@ function App() {
         mergedData.push(objMerged);
       }
     }
+
+    mergedData.map((yearData) => {
+      const perCapitaGDP = yearData.gdp / yearData.pop;
+      yearData["GDPperCapita"] = Number(perCapitaGDP).toFixed(2);
+      return yearData;
+    });
+
     return mergedData;
   }
-
-  countryData.map((yearData) => {
-    const perCapitaGDP = yearData.gdp / yearData.pop;
-    yearData["GDPperCapita"] = Number(perCapitaGDP).toFixed(2);
-    return yearData;
-  });
 
   const CustomizedAxisTick = (...args) => {
     const { x, y, stroke, payload } = args[0];
