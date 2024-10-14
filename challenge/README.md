@@ -11,7 +11,7 @@ npm run dev
 
 My submission can then be viewed in the browser at `localhost:5173`.
 
-The data is pulled fro the following endpoint:
+The data is pulled from the following endpoint:
 
 ```
 https://api.tradingeconomics.com/historical/country/Mexico/indicator/gdp,population?c=<MY_API_KEY>
