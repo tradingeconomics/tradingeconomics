@@ -1,0 +1,32 @@
+{
+  "name": "trading-economics-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "css-loader": "^7.1.2",
+    "https-browserify": "^1.0.0",
+    "jquery": "^3.7.1",
+    "lodash": "^4.17.21",
+    "stream-http": "^3.2.0",
+    "style-loader": "^4.0.0",
+    "tradingeconomics": "^2.4.5",
+    "url": "^0.11.4"
+  },
+  "devDependencies": {
+    "sass": "^1.79.5",
+    "sass-loader": "^16.0.2",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  }
+}

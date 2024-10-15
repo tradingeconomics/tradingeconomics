@@ -1,0 +1,40 @@
+$body-color: #000000;
+$body-bg-color: #bf9947;
+$data-container-bg-color: #d4b165;
+$data-container-cell-color: #ffeeca;
+
+$font-family-1: tahoma;
+
+body {
+    color: $body-color;
+    background-color: $body-bg-color;
+    font-family: $font-family-1;
+
+    .headline {
+        text-align: center;
+    }
+
+    .data-container {
+        background-color: $data-container-bg-color;
+        margin: auto;
+        max-width: 500px;
+        padding: 12px;
+
+        table {
+            width: 100%;
+            margin: auto;
+
+            tr {
+                td {
+                    border: solid black 1px;
+                    padding: 2px;
+                    background-color: $data-container-cell-color;
+                }
+
+                &.title-row {
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}
