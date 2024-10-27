@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>News | Trading Economics</title>
+  <link rel="preconnect" href="https://rsms.me/" />
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/franken-ui/dist/css/core.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    const htmlElement = document.documentElement;
+
+    if (
+      localStorage.getItem("mode") === "dark" ||
+      (!("mode" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      htmlElement.classList.add("dark");
+    } else {
+      htmlElement.classList.remove("dark");
+    }
+
+    htmlElement.classList.add(
+      localStorage.getItem("theme") || "uk-theme-zinc"
+    );
+  </script>
+
+  <script type="module" src="https://unpkg.com/franken-ui/dist/js/core.iife.js"></script>
+  <script type="module" src="https://unpkg.com/franken-ui/dist/js/icon.iife.js"></script>
+
+  <script defer src="script.js"></script>
+  <style>
+    :root {
+      font-family: Inter, sans-serif;
+      font-feature-settings: "liga" 1, "calt" 1;
+      font-size: 16px;
+    }
+
+    @supports (font-variation-settings: normal) {
+      :root {
+        font-family: InterVariable, sans-serif;
+      }
+    }
+  </style>
+
+</head>
+
+<body class="bg-background font-geist-sans text-foreground antialiased md:block">
+  <div class="p-6 lg:p-10">
+    <div class="space-y-0.5">
+      <div class="flex gap-2 items-center">
+        <div class="w-10 h-10 rounded-full bg-yellow-400"></div>
+        <h2 class="text-2xl font-bold tracking-tight">TE News</h2>
+      </div>
+      <p class="text-muted-foreground ml-4">
+        Stay updated about Calendar releases and financial news related to
+        stocks, bonds, commodities and currencies.
+      </p>
+    </div>
+    <div class="my-6 border-t border-border"></div>
+    <div id="main" class="flex gap-x-12">
+      <aside class="w-1/5">
+        <ul id="nav" class="uk-nav uk-nav-secondary" uk-switcher="connect: #component-nav; animation: uk-animation-fade"
+          role="tablist" aria-orientation="vertical">
+          <li class="uk-active" role="presentation"> <a href="#" aria-selected="true" role="tab" id="uk-switcher-1"
+              aria-controls="uk-switcher-2">Home</a>
+          </li>
+          <li role="presentation"> <a href="#" aria-selected="false" tabindex="-1" role="tab" id="uk-switcher-2"
+              aria-controls="uk-switcher-2">Appearance</a>
+          </li>
+        </ul>
+      </aside>
+      <div class="flex-1">
+        <ul id="component-nav" class="uk-switcher max-w-2xl" role="presentation"
+          style="touch-action: pan-y pinch-zoom;">
+          <li class="uk-active space-y-6" id="uk-switcher-2" role="tabpanel" aria-labelledby="uk-switcher-1">
+            <div>
+              <h3 class="text-lg font-medium">Home</h3>
+              <p class="text-sm text-muted-foreground">
+                Start reading now! and stay on top of market news.
+              </p>
+            </div>
+            <div id="news-board" class="border-t border-border">
+              <!-- CONTENT INJECTED HERE -->
+              <span id="loading-indicator" class="mt-4" uk-spinner="ratio: 2"></span>
+            </div>
+          </li>
+          <li class="space-y-6" id="uk-switcher-2" role="tabpanel" aria-labelledby="uk-switcher-2">
+            <div>
+              <h3 class="text-lg font-medium">Appearance</h3>
+              <p class="text-sm text-muted-foreground">
+                Customize the appearance of the app. Automatically switch
+                between day and night themes.
+              </p>
+            </div>
+            <div class="border-t border-border"></div>
+            <div class="space-y-2"> <span class="uk-form-label">Theme</span>
+              <div class="uk-form-help text-muted-foreground">
+                Select the theme for the dashboard.
+              </div>
+              <div class="grid max-w-md grid-cols-2 gap-8"> <a
+                  class="block cursor-pointer items-center rounded-md border-2 border-muted p-1 ring-ring"
+                  id="theme-toggle-light">
+                  <div class="space-y-2 rounded-sm bg-[#ecedef] p-2">
+                    <div class="space-y-2 rounded-md bg-white p-2 shadow-sm">
+                      <div class="h-2 w-[80px] rounded-lg bg-[#ecedef]"></div>
+                      <div class="h-2 w-[100px] rounded-lg bg-[#ecedef]"></div>
+                    </div>
+                    <div class="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
+                      <div class="h-4 w-4 rounded-full bg-[#ecedef]"></div>
+                      <div class="h-2 w-[100px] rounded-lg bg-[#ecedef]"></div>
+                    </div>
+                    <div class="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
+                      <div class="h-4 w-4 rounded-full bg-[#ecedef]"></div>
+                      <div class="h-2 w-[100px] rounded-lg bg-[#ecedef]"></div>
+                    </div>
+                  </div>
+                </a> <a
+                  class="block cursor-pointer items-center rounded-md border-2 border-muted bg-popover p-1 ring-ring"
+                  id="theme-toggle-dark">
+                  <div class="space-y-2 rounded-sm bg-slate-950 p-2">
+                    <div class="space-y-2 rounded-md bg-slate-800 p-2 shadow-sm">
+                      <div class="h-2 w-[80px] rounded-lg bg-slate-400"></div>
+                      <div class="h-2 w-[100px] rounded-lg bg-slate-400"></div>
+                    </div>
+                    <div class="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
+                      <div class="h-4 w-4 rounded-full bg-slate-400"></div>
+                      <div class="h-2 w-[100px] rounded-lg bg-slate-400"></div>
+                    </div>
+                    <div class="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
+                      <div class="h-4 w-4 rounded-full bg-slate-400"></div>
+                      <div class="h-2 w-[100px] rounded-lg bg-slate-400"></div>
+                    </div>
+                  </div>
+                </a>
+                <script>
+                  const elm = document.documentElement;
+                  const light = document.getElementById("theme-toggle-light");
+                  const dark = document.getElementById("theme-toggle-dark");
+
+                  if (elm.classList.contains("dark")) {
+                    dark.classList.add("ring-2");
+                  } else {
+                    light.classList.add("ring-2");
+                  }
+
+                  light.addEventListener("click", () => {
+                    elm.classList.remove("dark");
+                    light.classList.add("ring-2");
+                    dark.classList.remove("ring-2");
+                  });
+
+                  dark.addEventListener("click", () => {
+                    elm.classList.add("dark");
+                    light.classList.remove("ring-2");
+                    dark.classList.add("ring-2");
+                  });
+                </script>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+</body>
+
+</html>
