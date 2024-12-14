@@ -15,9 +15,9 @@ public class AppConfig {
         return restTemplateBuilder.build();
     }
 
-    @Bean
-    public HttpComponentsClientHttpRequestFactory factory() {
-        return new HttpComponentsClientHttpRequestFactory();
-
-    }
+//    @Bean
+//    public HttpComponentsClientHttpRequestFactory factory() {
+//        return new HttpComponentsClientHttpRequestFactory();
+//
+//    }
 }

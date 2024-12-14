@@ -1,11 +1,12 @@
 package com.tradingeconomics.sprinbootapi.services.IndicatorsService;
 
-import com.tradingeconomics.sprinbootapi.models.indicators.IndicatorsResponse;
+import com.tradingeconomics.sprinbootapi.models.indicators.Indicators;
 
+import java.util.List;
 
 
 public interface IndicatorsService {
 
 
-    IndicatorsResponse handleRequest() throws Exception;
+    List<Indicators> handleRequest() throws Exception;
 }
