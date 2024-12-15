@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/")
 @CrossOrigin
-public class countriesController {
+public class CountriesController {
 
         @Autowired
         private CountryService countryService;
@@ -24,7 +24,7 @@ public class countriesController {
         @GetMapping(value = "/allcountries", produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<?> getAllCountries() {
 
-                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Now in fetchIndicator method in countriesController");
+                System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Now in getAllCountries method in CountriesController");
 
 
                 List<Country> countries =  countryService.handleRequest();

@@ -45,6 +45,8 @@ public class CountryServiceImpl implements CountryService{
 
             countriesResponse = new ObjectMapper().readValue(response, Country[].class);
 
+            logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>> countriesResponse :" + Arrays.asList(countriesResponse));
+
         } catch (JsonProcessingException e) {
 
             logger.info("Error fetching Countries "+e.getMessage());

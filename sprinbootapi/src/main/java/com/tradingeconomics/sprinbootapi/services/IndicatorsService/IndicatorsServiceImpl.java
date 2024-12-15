@@ -71,6 +71,9 @@ public class IndicatorsServiceImpl implements IndicatorsService{
 
             indicatorsArrayResponse = new ObjectMapper().readValue(response, Indicators[].class);
 
+            logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>> indicatorsArrayResponse : " + Arrays.asList(indicatorsArrayResponse));
+
+
 
 
         }
