@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tradingeconomics.sprinbootapi.models.countries.Country;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,9 +22,9 @@ public class CountryServiceImpl implements CountryService{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    String url ="https://api.tradingeconomics.com/country?c=fcd064d5d09047b:jnf0d1gr3121vpb";
 
-
+    @Value("${app.secret.key}")
+    String secretKey;
     String response;
 
     Country[] countriesResponse;
@@ -38,6 +39,8 @@ public class CountryServiceImpl implements CountryService{
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>> Now in handleRequest Method in CountryServiceImpl class");
 
         logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>> Now in handleRequest Method in CountryServiceImpl class");
+
+        String url ="https://api.tradingeconomics.com/country?c=" + secretKey;
 
         try {
 

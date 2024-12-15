@@ -4,6 +4,7 @@ import com.tradingeconomics.sprinbootapi.models.historical.Historical;
 import com.tradingeconomics.sprinbootapi.services.HistoricalService.HistoricalService;
 import com.tradingeconomics.sprinbootapi.services.HistoricalService.HistoricalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ public class HistoricalController {
     @Autowired
     HistoricalService historicalService;
 
+    @Value("${app.secret.key}")
+    String secretKey;
+
 
     @GetMapping(value = "historicalcategory", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<?> getCategoryHistoricalDataForCountry(@RequestParam String country,
@@ -37,7 +41,7 @@ public class HistoricalController {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Now in getCategoryHistoricalDataForCountry method in CountriesController");
 
         String url = String.format(
-                "https://api.tradingeconomics.com/historical/country/%s/indicator/%s/%s/%s?c=fcd064d5d09047b:jnf0d1gr3121vpb",
+                "https://api.tradingeconomics.com/historical/country/%s/indicator/%s/%s/%s?c="+secretKey,
                 country, indicator, startDate, endDate
         );
 
