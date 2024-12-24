@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-data-table',
@@ -20,19 +20,20 @@ import { CommonModule } from '@angular/common';
   imports: [
     // BrowserModule,
     // BrowserAnimationsModule,
+    NgFor,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css'],
 })
 export class DataTableComponent implements OnInit {
-  data: any[] = [];
+  datas: any[] = [];
   filteredData: any[] = [];
   countryFilter = new FormControl('');
   categoryFilter = new FormControl('');
@@ -58,29 +59,39 @@ export class DataTableComponent implements OnInit {
   ngOnInit(): void {
     // Fetch initial data
     this.dataService.getData().subscribe((data) => {
-      this.data = data;
+      this.datas = data;
       this.filteredData = data; // Start with all data
     });
 
-    // Listen for changes in filters
-    this.countryFilter.valueChanges.subscribe(() => this.applyFilters());
-    this.categoryFilter.valueChanges.subscribe(() => this.applyFilters());
-    this.dateRange.valueChanges.subscribe(() => this.applyFilters());
+
+
+
+
+
+
+  //   // Listen for changes in filters
+  //   this.countryFilter.valueChanges.subscribe(() => this.applyFilters());
+  //   this.categoryFilter.valueChanges.subscribe(() => this.applyFilters());
+  //   this.dateRange.valueChanges.subscribe(() => this.applyFilters());
+  // }
+
+  // applyFilters(): void {
+  //   const country = this.countryFilter.value?.toLowerCase();
+  //   const category = this.categoryFilter.value?.toLowerCase();
+  //   const { start, end } = this.dateRange.value || {};
+
+  //   this.filteredData = this.data.filter((item) => {
+  //     const itemDate = new Date(item.DateTime);
+  //     return (
+  //       (!country || item.Country.toLowerCase().includes(country)) &&
+  //       (!category || item.Category.toLowerCase().includes(category)) &&
+  //       (!start || itemDate >= new Date(start)) &&
+  //       (!end || itemDate <= new Date(end))
+  //     );
+  //   });
   }
 
-  applyFilters(): void {
-    const country = this.countryFilter.value?.toLowerCase();
-    const category = this.categoryFilter.value?.toLowerCase();
-    const { start, end } = this.dateRange.value || {};
 
-    this.filteredData = this.data.filter((item) => {
-      const itemDate = new Date(item.DateTime);
-      return (
-        (!country || item.Country.toLowerCase().includes(country)) &&
-        (!category || item.Category.toLowerCase().includes(category)) &&
-        (!start || itemDate >= new Date(start)) &&
-        (!end || itemDate <= new Date(end))
-      );
-    });
-  }
+
+
 }
