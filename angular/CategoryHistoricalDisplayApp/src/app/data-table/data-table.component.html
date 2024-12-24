@@ -1,0 +1,61 @@
+<div class="filters">
+  <mat-form-field appearance="fill">
+    <mat-label>Country</mat-label>
+    <input matInput [formControl]="countryFilter" placeholder="Enter country">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <input matInput [formControl]="categoryFilter" placeholder="Enter category">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date Range</mat-label>
+    <mat-date-range-input [formGroup]="dateRange">
+      <input matStartDate formControlName="start" placeholder="Start date">
+      <input matEndDate formControlName="end" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="filteredData" class="mat-elevation-z8">
+  <ng-container matColumnDef="Country">
+    <th mat-header-cell *matHeaderCellDef> Country </th>
+    <td mat-cell *matCellDef="let element"> {{ element.Country }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Category">
+    <th mat-header-cell *matHeaderCellDef> Category </th>
+    <td mat-cell *matCellDef="let element"> {{ element.Category }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="DateTime">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let element"> {{ element.DateTime | date }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Value">
+    <th mat-header-cell *matHeaderCellDef> Value </th>
+    <td mat-cell *matCellDef="let element"> {{ element.Value }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Frequency">
+    <th mat-header-cell *matHeaderCellDef> Frequency </th>
+    <td mat-cell *matCellDef="let element"> {{ element.Frequency }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="HistoricalDataSymbol">
+    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{ element.HistoricalDataSymbol }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="LastUpdate">
+    <th mat-header-cell *matHeaderCellDef> Last Update </th>
+    <td mat-cell *matCellDef="let element"> {{ element.LastUpdate | date }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
