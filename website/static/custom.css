@@ -1,0 +1,108 @@
+/* General styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(120deg, #74b9ff, #00cec9);
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    margin-top: 30px;
+    font-weight: bold;
+    text-shadow: 2px 2px #636e72;
+}
+
+/* Container */
+.container {
+    background-color: #ffffff;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    max-width: 900px;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #0984e3;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #74b9ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #636e72;
+    color: #ffffff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background-color: #b2bec3;
+    color: #2d3436;
+    transform: translateY(-2px);
+}
+
+/* Table */
+.table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    border: 1px solid #dfe6e9;
+    text-align: left;
+}
+
+.table th {
+    background-color: #0984e3;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f1f2f6;
+}
+
+/* Chart container */
+#forecast-chart {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form group */
+.form-group label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+select.form-control {
+    border-radius: 8px;
+    border: 1px solid #dfe6e9;
+    padding: 10px;
+}

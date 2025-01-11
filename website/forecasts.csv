@@ -1,0 +1,2 @@
+Country,Category,Title,LatestValue,LatestValueDate,q1,q2,q3,q4,YearEnd,YearEnd2,YearEnd3,q1_date,q2_date,q3_date,q4_date,Frequency,Unit,HistoricalDataSymbol
+Mexico,Unemployment Rate,Mexico Unemployment Rate,2.6,2024-11-30T00:00:00,2.4,2.9,2.8,2.9,2.9,3.0,3.0,2025-03-31T00:00:00,2025-06-30T00:00:00,2025-09-30T00:00:00,2025-12-31T00:00:00,Monthly,percent,MXUEUNSA
