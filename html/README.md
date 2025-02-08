@@ -1,25 +1,21 @@
-# Trading Economics - HTML - Market Data Stream
+# Trading Economics - HTML - News
+Stay updated about Calendar releases and financial news related to
+stocks, bonds, commodities and currencies.
 
-Trading Economics provides its users with real time quotes, delayed feeds and historical data for currencies, commodities, stock indexes, share prices and bond yields. 
+![TE News Screenshot](./screenshot.jpeg)
 
-#
 
-## Usage
+# How to run
+> [!NOTE]  
+> You can simply open the `index.html` in your browser, otherwise if that doesnt work follow the below steps.
 
-* The HTML file has by default the demo key, it has some restrictions on the symbol that you can get.
-* If you already have a client key replace the key and secret variables.
-* Then change the topic for the one desired
+## Prerequisites
+- NodeJs
+- Npm
+- `cd` into this folder (`./html`)
 
-```bash
-ws.send('{"topic": "subscribe", "to": "EURUSD:CUR"}');
-```
-
-* **Note:** If you don't have a client key, you can get your free key here: http://developer.tradingeconomics.com 
-
-#
-
-## Learn More
-
-https://tradingeconomics.com/analytics/api.aspx
-
+## Steps
+1. Then run `npx http-server .` in your terminal
+2. It will prompt you that it will install `http-server` just hit Enter.
+3. Next open the url it shows in the browser.
 
