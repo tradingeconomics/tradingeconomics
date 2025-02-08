@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "GDP Comparison";
+}
+
+<head>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+</head>
+
+<div class="d-flex align-items-center justify-content-center mt-5">
+    <div class="d-flex flex-column">
+        <h1 class="text-center">GDP Comparison</h1>
+        <hr />
+        <form class="row">
+            <div class="col">
+                <button type="submit" class="btn-primary btn w-100">GDP Comparison</button>
+            </div>
+        </form>
+        <div class="mt-5" id="chart-container">FusionCharts XT will load here!</div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    FusionCharts.ready(async function(){
+        const response = await fetch("https://localhost:7219/Examples/Examples");
+        const jsonResp = await response.json();
+        var chart = new FusionCharts({
+            type:'bar',
+            renderAt: 'chart-container',
+            width:'500',
+            height:'500',
+            dataFormat:'json',
+            dataSource: jsonResp
+        }).render();
+    })
+</script>
+}
