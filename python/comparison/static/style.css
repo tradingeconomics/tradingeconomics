@@ -1,0 +1,98 @@
+/* Page Background and Font Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eff2f5; 
+    margin: 0;
+    padding: 0;
+    color: #f4f4f4; 
+}
+
+/* Container Styling */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Title Styling */
+h1 {
+    color: #00274d; 
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+}
+
+label {
+    font-size: 16px;
+    color: #00274d; 
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9; 
+    color: #00274d; 
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff; 
+    background-color: #003366; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+button:hover {
+    background-color: #00274d; 
+}
+
+/* Chart Canvas Styling */
+canvas {
+    width: 100% !important; 
+    max-width: 600px; 
+    height: 400px !important; 
+    margin: 20px auto; 
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #003366;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
