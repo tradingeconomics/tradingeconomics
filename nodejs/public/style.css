@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    min-height: 100vh;
+    padding: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h2{
+    text-align: center;
+    margin: 0.25rem 0;
+}
+.error-displayer{
+    min-height: 1.3rem;
+    max-height: auto;
+    color: red;
+    text-align: center;
+}
+label{
+    display: block;
+    margin: 0.75rem 0 0.5rem 0;
+}
+select{
+    width: 100%;
+}
+button{
+    display: block;
+    margin: 0 auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: rgb(97, 97, 202);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    border: none;
+}
+
+.loading{
+    display: none;
+    text-align: center;
+}
+canvas{
+    margin: 0.5rem 0;
+}
+@media (min-width: 600px) {
+    select{
+        width: 25rem;
+    }
+    button{
+        margin: 0;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        
+    }
+    section{
+        width: 80%;
+    }
+  }
+  @media (min-width: 1024px) {
+    section{
+        width: 60%;
+    }
+  }
