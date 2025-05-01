@@ -1,31 +1,28 @@
 # 📊 Trading Economics Indicator Viewer
 
-> Trading Economics Indicator Viewer is a responsive dashboard built with Next.js that fetches and visualizes real-time economic indicators from the Trading Economics API. Users can filter indicators by country, view detailed metrics, and explore interactive bar and pie charts for economic data analysis.
+> Trading Economics Indicator Dashboard is a responsive dashboard built with Next.js that fetches and to Show real-time economic indicators of different countries from the Trading Economics API. Users can filter indicators by country, view detailed metrics, and explore interactive bar and pie charts for economic data analysis.
 
 ---
+## 🛠  Built With
 
-## 🛠 Built With
+## Tech Stack
 
-This app is built with **Next.js** and **TypeScript**.
-
-### Tech Stack
-
-- <a href="https://nextjs.org/">Next.js</a>
-- <a href="https://www.typescriptlang.org/">TypeScript</a>
-- <a href="https://recharts.org/en-US/">Recharts</a>
-- <a href="https://tradingeconomics.com/api/">Trading Economics API</a>
+- ![Next.js](https://nextjs.org/)
+- ![TypeScript](https://www.typescriptlang.org/)
+- ![Recharts](https://recharts.org/en-US/")
+- ![Trading Economics](https://tradingeconomics.com/api/)
 
 ---
 
 ### Key Features
 
-- 🌍 Filter and browse economic indicators by country
-- 📋 Interactive table view with sorting, filtering, and pagination
-- 📊 Bar chart visualizing selected indicators
-- 🥧 Pie chart breakdown of categories
-- 🧭 Real-time search and category exploration
-- 📱 Responsive design across desktop and mobile devices
-- 💡 Lightweight design using only essential dependencies
+- [🌍] Filter and browse economic indicators by country
+- [📋] Interactive table view with sorting, filtering, and pagination
+- [📊] Bar chart visualizing selected indicators
+- [🥧] Pie chart breakdown of categories
+- [🧭] Real-time search and category exploration
+- [📱] Responsive design across desktop and mobile devices
+- [💡] Lightweight design using only essential dependencies
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

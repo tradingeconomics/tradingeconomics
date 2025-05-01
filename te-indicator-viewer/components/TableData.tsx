@@ -1,8 +1,8 @@
-import { EconomicIndicator, TableDataProps } from '@/types';
-import React, { useMemo } from 'react';
+import { TableDataProps, EconomicIndicator } from '@/types';
+import { useMemo } from 'react';
   
 
-const TableData = ({data, sortConfig, setSortConfig, filter, setFilter, page, setPage,  pageSize }: TableDataProps) => {
+const TableData = ({ sortConfig, setSortConfig,data, page, setPage,  filter, setFilter, pageSize }: TableDataProps) => {
 
      // Sorting logic
   const sortedData = useMemo(() => {
@@ -52,8 +52,8 @@ const TableData = ({data, sortConfig, setSortConfig, filter, setFilter, page, se
 
 
   return (
-    <div className="bg-white p-4 rounded shadow">
-        <div className="mb-4">
+    <div className="rounded shadow bg-white p-5">
+        <div className="mb-5 ">
           <label className="mr-2">Filter by Category Group:</label>
           <select
             value={filter}
