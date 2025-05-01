@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { EconomicIndicator } from "../../types/index";
+import { EconomicIndicator } from "../../../types/index";
 
 
 const APIKEY = process.env.TE_API_KEY;

@@ -33,7 +33,7 @@ export default function Home() {
   const fetchData = async (country: string) => {
     try {
       setError(null);
-      const response = await fetch(`/api?country=${country}`);
+      const response = await fetch(`/api/indicators?country=${country}`);
       if (!response.ok) throw new Error("Loading data Failed");
       const json: EconomicIndicator[] = await response.json();
       setData(json);
