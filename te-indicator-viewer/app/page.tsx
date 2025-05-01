@@ -33,14 +33,14 @@ export default function Home() {
   const fetchData = async (country: string) => {
     try {
       setError(null);
-      const res = await fetch(`/api?country=${country}`);
-      if (!res.ok) throw new Error("Failed to fetch data");
-      const json: EconomicIndicator[] = await res.json();
+      const response = await fetch(`/api?country=${country}`);
+      if (!response.ok) throw new Error("Loading data Failed");
+      const json: EconomicIndicator[] = await response.json();
       setData(json);
       setSelectedIndicator(json[0] || {});
-    } catch (err) {
-      console.error("Fetch error:", err);
-      setError("Failed to load data. Please try again later.");
+    } catch (error) {
+      console.error("Load error:", error);
+      setError("Failed to fetch data. Please try again later.");
     }
   };
 
@@ -49,8 +49,8 @@ export default function Home() {
   }, [selectedCountry]);
 
   return (
-    <div className="w-full p-10 bg-gray-200 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-center">Trading Economics Indicators Dashboard</h1>
+    <div className="flex flex-col gap-4 p-12 bg-gray-200">
+      <h1 className="text-center font-bold  text-3xl">Trading Economics Indicators Dashboard</h1>
       {/* Dropdown */}
       <CountriesList 
         selectedCountry={selectedCountry}
@@ -59,7 +59,7 @@ export default function Home() {
         error={error}
       />
       {/* Charts Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div className=" gap-6 grid grid-cols-1 md:grid-cols-2">
         <PieCart data={data} />
         <BarData
           data={data}

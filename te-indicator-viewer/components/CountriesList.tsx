@@ -3,13 +3,13 @@ import { CountriesListProps } from "@/types"
 const CountriesList = ({selectedCountry, setSelectedCountry, countries, error}: CountriesListProps ) => {
   return (
     <div>
-       <div className="mb-6 text-center">
-        <label htmlFor="country-select" className="mr-2 font-medium">Select Country:</label>
+       <div className=" text-center mb-2">
+        <label htmlFor="country-select" className="mr-4">Select Country:</label>
         <select
           id="country-select"
           value={selectedCountry}
           onChange={(e) => setSelectedCountry(e.target.value)}
-          className="border px-3 py-2 rounded bg-white"
+          className=" px-3 bg-white py-2 border rounded "
         >
           {countries.map((country) => (
             <option key={country} value={country}>
@@ -18,11 +18,11 @@ const CountriesList = ({selectedCountry, setSelectedCountry, countries, error}: 
           ))}
         </select>
       </div>
-      <h1 className="text-3xl font-bold mb-6 text-center">
+      <h1 className="  text-center font-bold mb-6 text-3xl">
         {selectedCountry.charAt(0).toUpperCase() + selectedCountry.slice(1)} Economic Indicators
       </h1>
       {error && (
-        <div className="mb-4 p-4 bg-red-100 text-red-700 rounded">{error}</div>
+        <div className="bg-red-200  rounded p-4 text-red-900">{error}</div>
       )}
     </div>
   )
