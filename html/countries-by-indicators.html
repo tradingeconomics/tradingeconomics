@@ -63,7 +63,7 @@
         }
 
         (async () => {
-            const displayTableBody = document.querySelector("table body");
+            const displayTableBody = document.querySelector("table tbody");
             if (displayTableBody) {
                 const rows = [];
                 const entries = await getCountriesByIndicators();
@@ -79,7 +79,7 @@
                         <td>${entry.Source}</td>
                         <td><a href="${entry.SourceURL}" target="_blank">${entry.SourceURL}</a></td>
                         <td>${entry.Unit}</td>
-                        <td><a href="https://tradingeconomics.com/${entry.URL}" target="_blank">${entry.Title}</a></td>
+                        <td><a href="https://tradingeconomics.com${entry.URL}" target="_blank">${entry.Title}</a></td>
                         <td>${entry.CategoryGroup}</td>
                         <td>${entry.Adjustment}</td>
                         <td>${entry.Frequency}</td>
