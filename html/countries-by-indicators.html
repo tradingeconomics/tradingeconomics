@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries by Indicators</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Countries by Indicators</h1>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Country</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Latest Value Date</th>
+                        <th>Latest Value</th>
+                        <th>Source</th>
+                        <th>Source URL</th>
+                        <th>Unit</th>
+                        <th>URL</th>
+                        <th>Category Group</th>
+                        <th>Adjustment</th>
+                        <th>Frequency</th>
+                        <th>Historical Data Symbol</th>
+                        <th>Create Date</th>
+                        <th>First Value Date</th>
+                        <th>Previous Value</th>
+                        <th>Previous Value Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="20">No data to display yet</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script>
+        // On success return an array composed by indicators of countries. Otherwise returns false.
+        async function getCountriesByIndicators() {
+            // I put here just for example purpose only.
+            const keyParts = ['guest','guest'];
+            const url = `https://api.tradingeconomics.com/country/all/gdp?c=${keyParts.join(':')}`;
+            let result = false;
+
+            try {
+                const res = await fetch(url, {
+                    method: 'GET'
+                });
+                const data = await res.json();
+                result = data;
+            } catch (e) {
+                console.log(e);
+            }
+
+            return result;
+        }
+
+        (async () => {
+            const displayTableBody = document.querySelector("table tbody");
+            if (displayTableBody) {
+                const rows = [];
+                const entries = await getCountriesByIndicators();
+                if (Array.isArray(entries) && entries.length) {
+                    for (let entry of entries) {
+                        let row = document.createElement("tr");
+                        row.innerHTML = `
+                        <td>${entry.Country}</td>
+                        <td>${entry.Category}</td>
+                        <td>${entry.Title}</td>
+                        <td>${entry.LatestValueDate}</td>
+                        <td>${entry.LatestValue}</td>
+                        <td>${entry.Source}</td>
+                        <td><a href="${entry.SourceURL}" target="_blank">${entry.SourceURL}</a></td>
+                        <td>${entry.Unit}</td>
+                        <td><a href="https://tradingeconomics.com${entry.URL}" target="_blank">${entry.Title}</a></td>
+                        <td>${entry.CategoryGroup}</td>
+                        <td>${entry.Adjustment}</td>
+                        <td>${entry.Frequency}</td>
+                        <td>${entry.HistoricalDataSymbol}</td>
+                        <td>${entry.CreateDate}</td>
+                        <td>${entry.FirstValueDate}</td>
+                        <td>${entry.PreviousValue}</td>
+                        <td>${entry.PreviousValueDate}</td>`;
+                        rows.push(row);
+                    }
+                } else {
+                    let row = document.createElement("tr");
+                    row.innerHTML = '<td colspan="20">No record found. Please try again later!</td>'
+                    rows.push(row);
+                }
+                Array.from(displayTableBody.children).forEach((child) => {
+                    child.remove();
+                });
+                for (let row of rows) {
+                    displayTableBody.appendChild(row); 
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
