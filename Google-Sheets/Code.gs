@@ -3,6 +3,12 @@ function urlToJson(url) {
   
   try {
     Logger.log('Url: ' + url)
+
+    if (typeof url !== 'string' || !url.startsWith('https://api.tradingeconomics.com')) {
+      Logger.log('Invalid URL rejected: ' + url)
+      SpreadsheetApp.getUi().alert('An error occurred. Invalid request URL.')
+      return 'hidden'
+    }
     
     try {
       var _url = UrlFetchApp.fetch(url)
