@@ -39,97 +39,23 @@ function printData(json) {
     var app = SpreadsheetApp
     var ss = app.getActiveSpreadsheet()
     var activeSs = ss.getActiveSheet()
-    
-    
-    //Arrays Used to Separate Cell's Letters From Numbers
-    var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-    var checkIfIsNumber = [0,1,2,3,4,5,6,7,8,9]
-    
-    
+
     //Getting Current Selected Cell
-    var selectedCell = activeSs.getSelection().getCurrentCell().getA1Notation()
-    var selectedCellString = String(selectedCell)
-    
-    
-    //Getting Each Character of the Selected Cell String
-    i = 0
-    var characters = []
-    var runWhile = true
-    while(runWhile) {
-      if (selectedCellString.charAt(i)) {
-        characters[i] = selectedCellString.charAt(i)
-        Logger.log('Characters: ' + characters[i])
-        i++
-      }
-      else {
-        runWhile = false
-      }
-    }
-    
-    
-    //Storing Value of Selected Cell, Splitting the Aphabetical Part From the Numeric Part
-    var charToNumber = ''
-    var numToNum = []
-    for(var i in characters) {
-      
-      for(var j in alphabet) {
-        
-        if(alphabet[j] == characters[i]) {
-          Logger.log('Same Character: ' + alphabet[j])
-          charToNumber += alphabet[j]
-        } 
-        else if (checkIfIsNumber[j] == characters[i]) {
-          Logger.log('Same Number: ' + checkIfIsNumber[j])
-          numToNum[i] = checkIfIsNumber[j]
-        }
-      }
-    }
-    
-    
-    //Storing Letters of the Selected Cell
-    function letterToColumn(letter)
-    {
-      var column = 0, length = letter.length
-      for (var i = 0; i < length; i++)
-      {
-        column += (letter.charCodeAt(i) - 64) * Math.pow(26, length - i - 1)
-      }
-      return column
-    }
-    
-    var i1 = letterToColumn(charToNumber)
-    Logger.log('i1: ' + i1)
-    
-    for(var i in json) {
-      
-      //Storing Numeric Part of the Selected Cell
-      var i2 = ''
-      for(var num in numToNum) {
-        i2 += numToNum[num]
-      }
-      Logger.log('i2: ' + i2)
-      
-      //Printing Headers
-      Logger.log('Printing Headers')
-      for(var header in json[0]) {
-        
-        activeSs.getRange(i2, i1).setValue(header)
-        i1++
-      }
-      
-      //Printing Rows
-      Logger.log('Printing Rows')
-      for(var i in json)
-      {
-        var _i1 = letterToColumn(charToNumber)
-        i2++
-          for(var j in json[i]) {
-            activeSs.getRange(i2, _i1).setValue(json[i][j])
-            _i1++
-          }
-      }
-      return
-    }
+    var currentCell = activeSs.getSelection().getCurrentCell()
+    var startRow = currentCell.getRow()
+    var startCol = currentCell.getColumn()
+    Logger.log('Start row: ' + startRow + ', Start col: ' + startCol)
+
+    //Building headers and data rows
+    var headers = Object.keys(json[0])
+    var data = json.map(function(row) {
+      return headers.map(function(h) { return row[h] !== undefined ? row[h] : '' })
+    })
+
+    //Writing headers + data in a single batch call
+    var output = [headers].concat(data)
+    activeSs.getRange(startRow, startCol, output.length, headers.length).setValues(output)
+    Logger.log('Data written: ' + output.length + ' rows x ' + headers.length + ' columns')
   }
   catch(e) {
     Logger.log(e)
