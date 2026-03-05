@@ -811,13 +811,13 @@
           else if (urlToBakeCode == 'getMarketHistorical') { 
             _baseUrl = '/markets/historical/' + inputsSelected[5].value 
             if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter += '&d2=' + inputsSelected[8].value 
+            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
           }
           // else if (urlToBakeCode == 'getIntradayPricesByMarketSymbol') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value }
           else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolStartingFromDateAndHour') { 
             _baseUrl = '/markets/intraday/' + inputsSelected[5].value 
             if (inputsSelected[13].value) _urlAfter = 'd1=' + inputsSelected[13].value.replace('T', ' ')
-            if (inputsSelected[21].value) _urlAfter += '&d2=' + inputsSelected[21].value.replace('T', ' ')
+            if (inputsSelected[21].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[21].value.replace('T', ' ')
           }
           // else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolFromDateToDate') { 
           //   _baseUrl = '/markets/intraday/' + inputsSelected[5].value
@@ -833,17 +833,17 @@
             _baseUrl = '/earnings-revenues'
             if (inputsSelected[5].value) _baseUrl += '/symbol/' + inputsSelected[5].value
             if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value
-            if (inputsSelected[8].value) _urlAfter += '&d2=' + inputsSelected[8].value
+            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value
             }
           else if (urlToBakeCode == 'getEarningsByIndex') { 
             _baseUrl = '/earnings-revenues/index/' + inputsSelected[17].value
             if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter += '&d2=' + inputsSelected[8].value 
+            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
             }
           else if (urlToBakeCode == 'getEarningsBySector') { 
             _baseUrl = '/earnings-revenues/sector/' + inputsSelected[18].value
             if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter += '&d2=' + inputsSelected[8].value 
+            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
           }
           else if (urlToBakeCode == 'financialsHistorical') { 
             const symbols_array = inputsSelected[19].value.split(',')
@@ -853,12 +853,12 @@
             
             _baseUrl = '/financials/historical/' + symbols_category
             if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter += '&d2=' + inputsSelected[8].value 
+            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
             }
           else if (urlToBakeCode == 'getEarningsCalendarByCountry') { 
             _baseUrl = '/earnings-revenues/country/' + inputsSelected[1].value 
             if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter += '&d2=' + inputsSelected[8].value
+            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value
             }
           else if (urlToBakeCode == 'getCompanyList'){
             _baseUrl = '/financials/companies'
@@ -909,7 +909,7 @@
             _baseUrl += '/' + inputsSelected[22].value
 
             if (inputsSelected[20].value) _baseUrl += '/' + inputsSelected[20].value
-            importsRadiobox.checked ? _urlAfter += 'type=import' : _urlAfter += 'type=export'
+            _urlAfter = importsRadiobox.checked ? 'type=import' : 'type=export'
           }
           else if(urlToBakeCode == 'getTotalsByCountry') {
             _baseUrl = '/comtrade'
@@ -949,7 +949,7 @@
             _baseUrl = '/eurostat/historical/' + inputsSelected[23].value
 
             if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter += '&d2=' + inputsSelected[8].value
+            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value
           }
 
           // Worldbank
@@ -967,7 +967,7 @@
             _baseUrl = '/fred/historical/' + inputsSelected[26].value
 
             if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter += '&d2=' + inputsSelected[8].value 
+            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
           }
           else if (urlToBakeCode == 'getFedDataByCountry') _baseUrl = '/fred/snapshot/country/' + inputsSelected[22].value
           else if (urlToBakeCode == 'getFedDataBySymbol') _baseUrl = '/fred/snapshot/symbol/' + inputsSelected[23].value
