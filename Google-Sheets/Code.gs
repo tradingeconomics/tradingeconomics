@@ -94,6 +94,24 @@ function openSearch(){
   }
 }
 
+function saveApiKey(key) {
+  try {
+    PropertiesService.getUserProperties().setProperty('apiKey', key)
+    Logger.log('API key saved')
+  } catch(e) {
+    Logger.log(e)
+  }
+}
+
+function getApiKey() {
+  try {
+    return PropertiesService.getUserProperties().getProperty('apiKey') || 'guest:guest'
+  } catch(e) {
+    Logger.log(e)
+    return 'guest:guest'
+  }
+}
+
 function onOpen(e) {
   try {
     Logger.log('JS testing')

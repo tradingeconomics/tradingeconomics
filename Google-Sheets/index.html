@@ -12,6 +12,7 @@
             width: 90%;
             margin: auto auto;
             text-align: center;
+            position: relative;
         }
         
         #wr2 {
@@ -212,11 +213,90 @@
           color:#fff;
         }
 
+        #apiKeyToggle {
+            position: absolute;
+            top: 15px;
+            right: 0%;
+            background: transparent;
+            border: none;
+            width: auto;
+            padding: 2px 4px;
+            margin: 0;
+            font-size: 2rem;
+            line-height: 1;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 10;
+        }
+
+        #apiKeyToggle:hover, #apiKeyToggle.active {
+            color: #21a364;
+        }
+
+        #apiKeyPanel {
+            display: none;
+            position: absolute;
+            top: 48px;
+            right: 5%;
+            width: 230px;
+            background: #fff;
+            border: 1px solid #e0e0e8;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 10px 12px 8px;
+            z-index: 100;
+            text-align: left;
+        }
+
+        #apiKeyPanel label {
+            font-size: 1.3rem;
+            color: #999;
+            margin: 0 0 4px 0;
+            display: block;
+            text-align: center;
+        }
+
+        #apiKeyPanel input {
+            width: 100%;
+            font-size: 1.1rem;
+            padding: 4px 6px;
+            margin-bottom: 6px;
+        }
+
+        #apiKeyPanel button {
+            width: 100%;
+            margin: 0;
+            font-size: 1.2rem;
+            padding: 4px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #apiKeyStatus {
+            font-size: 0.85rem;
+            color: #21a364;
+            height: 1rem;
+            display: block;
+            text-align: center;
+            margin-top: 4px;
+        }
+
     </style>
 </head>
 <body>
     <div id="wrapper">   
         <div id="loading"><span id="close" onclick="this.parentNode.style.visibility = 'hidden'; return false;">x</span></div>
+        <button id="apiKeyToggle" title="API Key" onclick="toggleApiKeyPanel()">&#128273;</button>
+        <div id="apiKeyPanel">
+            <label for="apiKeyInput">API Key</label>
+            <input type="text" class="form-control" id="apiKeyInput" placeholder="your_key:your_key" oninput="checkKeys(this)">
+            <button type="button" id="saveKeyButton" class="_btn-default" onclick="saveApiKey()">Save Key</button>
+            <span id="apiKeyStatus"></span>
+        </div>
         <div id="wr2">
             
             <div class="btn-group">
@@ -608,11 +688,6 @@
                         <input type="text" class="form-control" id="wbSymbolInput">
                     </div>
                 
-                    <div id="apiKeyInputContainer">
-                      <label for="apiKeyInput">API Key</label><br>
-                      <input type="text" class="form-control" id="apiKeyInput" value="guest:guest"  oninput="checkKeys(this)">
-                    </div>
-
                 </div>
             </form>
             <button type="button" id="submitButton" class="_btn-primary center-block" style="margin-top: 20px;">Submit</button><br>
@@ -634,6 +709,27 @@
         e.value.includes(':') ? submitButton.style.backgroundColor = '#008142' : submitButton.style.backgroundColor = '#c5c5d3'
       }
 
+      function toggleApiKeyPanel() {
+        var panel = document.getElementById('apiKeyPanel')
+        var btn = document.getElementById('apiKeyToggle')
+        var visible = panel.style.display === 'block'
+        panel.style.display = visible ? 'none' : 'block'
+        btn.classList.toggle('active', !visible)
+      }
+
+      function saveApiKey() {
+        var key = document.getElementById('apiKeyInput').value.trim()
+        if (!key) return
+        google.script.run.saveApiKey(key)
+        var status = document.getElementById('apiKeyStatus')
+        status.textContent = 'Saved!'
+        setTimeout(function() {
+          status.textContent = ''
+          document.getElementById('apiKeyPanel').style.display = 'none'
+          document.getElementById('apiKeyToggle').classList.remove('active')
+        }, 1500)
+      }
+
       function hideCleanInputFields() {
         //Hide Input Fields
         gettingWhatHr.style.display = 'none'
@@ -651,7 +747,6 @@
         startIndexListSizeInputContainer.style.display = 'none'
         articleIdInputContainer.style.display = 'none'
         datetimeInputContainer.style.display = 'none'
-        apiKeyInputContainer.style.display = 'none'
         submitButton.style.display = 'none'
         groupInputContainer.style.display = 'none'
         categoryIndicatorInputContainer.style.display = 'none'
@@ -714,6 +809,24 @@
               $('#loading').css('visibility', hideShow)
           }
           loadingData('hidden')
+
+          // Pre-fill API key from saved user properties
+          google.script.run.withSuccessHandler(function(key) {
+            if (key) {
+              document.getElementById('apiKeyInput').value = key
+              checkKeys(document.getElementById('apiKeyInput'))
+            }
+          }).getApiKey()
+
+          // Close API key panel when clicking outside
+          document.addEventListener('click', function(e) {
+            var panel = document.getElementById('apiKeyPanel')
+            var toggle = document.getElementById('apiKeyToggle')
+            if (panel.style.display === 'block' && !panel.contains(e.target) && e.target !== toggle) {
+              panel.style.display = 'none'
+              toggle.classList.remove('active')
+            }
+          })
   
           var inputsID = ['indicatorInput', 'countryInput', 'tickerInput', 'calendarIdInput', 'currencyISOInput', 'marketSymbolInput', 'dateFromOneInput', 'dateFromInput', 'dateToInput', 'earningsTypeInput', 'startIndexInput', 'listSizeInput', 'articleIdInput', 'fromDateTimeInput', 'groupInput', 'categoryIndicatorInput', 'importanceInput', 'indexInput', 'sectorInput', 'financialsSymbolInput', 'financialsCategoryInput', 'toDateTimeInput', 'country2Input', 'comtradeSymbolInput', 'eurostatCategoryGroupInput', 'wbSymbolInput', 'stateInput']
           var inputsSelected = []
@@ -1130,7 +1243,6 @@
             var startIndexListSizeInputContainer = document.getElementById('startIndexListSizeInputContainer')
             var articleIdInputContainer = document.getElementById('articleIdInputContainer')
             var datetimeInputContainer = document.getElementById('datetimeInputContainer')
-            var apiKeyInputContainer = document.getElementById('apiKeyInputContainer')
             var groupInputContainer = document.getElementById('groupInputContainer')
             var categoryIndicatorInputContainer = document.getElementById('categoryIndicatorInputContainer')
     
@@ -1587,7 +1699,6 @@
             hideCleanInputFields()
             gettingWhatHr.style.display = 'block'
             gettingWhatTitle.textContent = thisButton.textContent
-            apiKeyInputContainer.style.display = 'block'
             submitButton.style.display = 'block'
             urlToBakeCode = thisButton.id
             thisButton.classList.add('pressedBtnGray')
