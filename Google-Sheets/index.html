@@ -828,12 +828,34 @@
             }
           })
   
-          var inputsID = ['indicatorInput', 'countryInput', 'tickerInput', 'calendarIdInput', 'currencyISOInput', 'marketSymbolInput', 'dateFromOneInput', 'dateFromInput', 'dateToInput', 'earningsTypeInput', 'startIndexInput', 'listSizeInput', 'articleIdInput', 'fromDateTimeInput', 'groupInput', 'categoryIndicatorInput', 'importanceInput', 'indexInput', 'sectorInput', 'financialsSymbolInput', 'financialsCategoryInput', 'toDateTimeInput', 'country2Input', 'comtradeSymbolInput', 'eurostatCategoryGroupInput', 'wbSymbolInput', 'stateInput']
-          var inputsSelected = []
-  
-          //Selecting Input Fields
-          for (var i in inputsID) {
-              inputsSelected[i] = document.getElementById(inputsID[i])
+          var inputs = {
+            indicator:             document.getElementById('indicatorInput'),
+            country:               document.getElementById('countryInput'),
+            ticker:                document.getElementById('tickerInput'),
+            calendarId:            document.getElementById('calendarIdInput'),
+            currencyISO:           document.getElementById('currencyISOInput'),
+            marketSymbol:          document.getElementById('marketSymbolInput'),
+            dateFromOne:           document.getElementById('dateFromOneInput'),
+            dateFrom:              document.getElementById('dateFromInput'),
+            dateTo:                document.getElementById('dateToInput'),
+            earningsType:          document.getElementById('earningsTypeInput'),
+            startIndex:            document.getElementById('startIndexInput'),
+            listSize:              document.getElementById('listSizeInput'),
+            articleId:             document.getElementById('articleIdInput'),
+            fromDateTime:          document.getElementById('fromDateTimeInput'),
+            group:                 document.getElementById('groupInput'),
+            categoryIndicator:     document.getElementById('categoryIndicatorInput'),
+            importance:            document.getElementById('importanceInput'),
+            index:                 document.getElementById('indexInput'),
+            sector:                document.getElementById('sectorInput'),
+            financialsSymbol:      document.getElementById('financialsSymbolInput'),
+            financialsCategory:    document.getElementById('financialsCategoryInput'),
+            toDateTime:            document.getElementById('toDateTimeInput'),
+            country2:              document.getElementById('country2Input'),
+            comtradeSymbol:        document.getElementById('comtradeSymbolInput'),
+            eurostatCategoryGroup: document.getElementById('eurostatCategoryGroupInput'),
+            wbSymbol:              document.getElementById('wbSymbolInput'),
+            state:                 document.getElementById('stateInput')
           }
     
           var submitButton = document.getElementById('submitButton')
@@ -842,170 +864,170 @@
           var _baseUrl = ''
           var _urlAfter = null
 
-          for(var i in inputsSelected) {
-              inputsSelected[i].value = inputsSelected[i].value.trim()
+          for (var key in inputs) {
+              inputs[key].value = inputs[key].value.trim()
           }
 
           //Creating the specific url's foreach case
           //Indicators
           if (urlToBakeCode == 'getEveryTeApiIndicatorName') { _baseUrl = '/indicators' }
-          else if (urlToBakeCode == 'getEveryIndicatorOfaCountry') _baseUrl = '/country/' + inputsSelected[1].value
-          else if (urlToBakeCode == 'getThatIndicatorForAllCountries') { _baseUrl = '/country/all/' + inputsSelected[0].value } 
-          else if (urlToBakeCode == 'getSpecificCountriesAndIndicators') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value }
-          else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsStartingFromaDate') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[6].value }
-          else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = '/historical/country/' + inputsSelected[1].value + '/indicator/' + inputsSelected[0].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
-          else if (urlToBakeCode == 'getDataByTicker') { _baseUrl = '/historical/ticker/' + inputsSelected[2].value + '/' + inputsSelected[6].value }
+          else if (urlToBakeCode == 'getEveryIndicatorOfaCountry') _baseUrl = '/country/' + inputs.country.value
+          else if (urlToBakeCode == 'getThatIndicatorForAllCountries') { _baseUrl = '/country/all/' + inputs.indicator.value } 
+          else if (urlToBakeCode == 'getSpecificCountriesAndIndicators') { _baseUrl = '/historical/country/' + inputs.country.value + '/indicator/' + inputs.indicator.value }
+          else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsStartingFromaDate') { _baseUrl = '/historical/country/' + inputs.country.value + '/indicator/' + inputs.indicator.value + '/' + inputs.dateFromOne.value }
+          else if (urlToBakeCode == 'getSpecificCountriesAndIndicatorsFromDateToDate') { _baseUrl = '/historical/country/' + inputs.country.value + '/indicator/' + inputs.indicator.value + '/' + inputs.dateFrom.value + '/' + inputs.dateTo.value }
+          else if (urlToBakeCode == 'getDataByTicker') { _baseUrl = '/historical/ticker/' + inputs.ticker.value + '/' + inputs.dateFromOne.value }
           else if (urlToBakeCode == 'getLatestRatingsForAllCountries') { _baseUrl = '/ratings' }
-          else if (urlToBakeCode == 'getCountryRating') { _baseUrl = '/ratings/' + inputsSelected[1].value }
-          else if (urlToBakeCode == 'getCountryHistoricalRating') { _baseUrl = '/ratings/historical/' + inputsSelected[1].value + '/' +  inputsSelected[7].value + '/' + inputsSelected[8].value}
+          else if (urlToBakeCode == 'getCountryRating') { _baseUrl = '/ratings/' + inputs.country.value }
+          else if (urlToBakeCode == 'getCountryHistoricalRating') { _baseUrl = '/ratings/historical/' + inputs.country.value + '/' + inputs.dateFrom.value + '/' + inputs.dateTo.value}
           else if (urlToBakeCode == 'getHistoricalRatingsForAllCountries') { _baseUrl = '/ratings/historical/all' }
           else if (urlToBakeCode == 'getAllUpdates') { _baseUrl = '/updates' }
-          else if (urlToBakeCode == 'getUpdatesStartingFromADate') { _baseUrl = '/updates/' + inputsSelected[6].value }
-          else if (urlToBakeCode == 'getIndicatorByTicker') {_baseUrl = '/country/ticker/' + inputsSelected[2].value }
-          else if (urlToBakeCode == 'getIndicatorsByCountryAndGroup') {_baseUrl = '/country/' + inputsSelected[1].value, _urlAfter = '&group=' +  inputsSelected[14].value }
-          else if (urlToBakeCode == 'getIndicatorPeersByTicker') {_baseUrl = '/peers/' + inputsSelected[2].value }
-          else if (urlToBakeCode == 'getIndicatorPeersByCountry') {_baseUrl = '/peers/country/' + inputsSelected[1].value}
-          else if (urlToBakeCode == 'getIndicatorPeersByCountryAndCategory') {_baseUrl = '/peers/country/' + inputsSelected[1].value + '/' + inputsSelected[15].value }
+          else if (urlToBakeCode == 'getUpdatesStartingFromADate') { _baseUrl = '/updates/' + inputs.dateFromOne.value }
+          else if (urlToBakeCode == 'getIndicatorByTicker') {_baseUrl = '/country/ticker/' + inputs.ticker.value }
+          else if (urlToBakeCode == 'getIndicatorsByCountryAndGroup') {_baseUrl = '/country/' + inputs.country.value, _urlAfter = '&group=' + inputs.group.value }
+          else if (urlToBakeCode == 'getIndicatorPeersByTicker') {_baseUrl = '/peers/' + inputs.ticker.value }
+          else if (urlToBakeCode == 'getIndicatorPeersByCountry') {_baseUrl = '/peers/country/' + inputs.country.value}
+          else if (urlToBakeCode == 'getIndicatorPeersByCountryAndCategory') {_baseUrl = '/peers/country/' + inputs.country.value + '/' + inputs.categoryIndicator.value }
           else if (urlToBakeCode == 'getLatestUpdates') {_baseUrl = '/historical/updates' }
-          else if (urlToBakeCode == 'getLatestUpdatesByCountry') {_baseUrl = '/updates/country/' + inputsSelected[1].value + '/' + inputsSelected[6].value }
+          else if (urlToBakeCode == 'getLatestUpdatesByCountry') {_baseUrl = '/updates/country/' + inputs.country.value + '/' + inputs.dateFromOne.value }
           //Calendar
           else if (urlToBakeCode == 'getAllCalendarEvents') { 
             _baseUrl = '/calendar'
-            if  (inputsSelected[16].value != '') _urlAfter = '&importance=' + inputsSelected[16].value
+            if  (inputs.importance.value != '') _urlAfter = '&importance=' + inputs.importance.value
             }
-          // else if (urlToBakeCode == 'getCalendarEventsFromDateToDate') { _baseUrl = '/calendar/country/All/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
-          else if (urlToBakeCode == 'getCalendarEventsForSpecificCountries') { _baseUrl = '/calendar/country/' + inputsSelected[1].value }
+          // else if (urlToBakeCode == 'getCalendarEventsFromDateToDate') { _baseUrl = '/calendar/country/All/' + inputs.dateFrom.value + '/' + inputs.dateTo.value }
+          else if (urlToBakeCode == 'getCalendarEventsForSpecificCountries') { _baseUrl = '/calendar/country/' + inputs.country.value }
           else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesFromDateToDate') { 
-            _baseUrl = '/calendar/country/' + inputsSelected[1].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value 
-            if  (inputsSelected[16].value != '') _urlAfter = '&importance=' + inputsSelected[16].value
+            _baseUrl = '/calendar/country/' + inputs.country.value + '/' + inputs.dateFrom.value + '/' + inputs.dateTo.value 
+            if  (inputs.importance.value != '') _urlAfter = '&importance=' + inputs.importance.value
             }
           else if (urlToBakeCode == 'getCalendarLatestUpdates') { _baseUrl = '/calendar/updates/' }
-          else if (urlToBakeCode == 'getCalendarEventsByTicker') { _baseUrl = '/calendar/ticker/' + inputsSelected[2].value + '/' + inputsSelected[7].value + '/' + inputsSelected[8].value }
+          else if (urlToBakeCode == 'getCalendarEventsByTicker') { _baseUrl = '/calendar/ticker/' + inputs.ticker.value + '/' + inputs.dateFrom.value + '/' + inputs.dateTo.value }
           else if (urlToBakeCode == 'getCalendarEventsForSpecificCountryAndGroup') { 
             _baseUrl = '/calendar'
 
-            if (inputsSelected[1].value) _baseUrl += '/country/' + inputsSelected[1].value 
-            if (inputsSelected[14].value) _baseUrl += '/group/' + inputsSelected[14].value
-            if (inputsSelected[7].value) _baseUrl += '/' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _baseUrl += '/' + inputsSelected[8].value 
+            if (inputs.country.value) _baseUrl += '/country/' + inputs.country.value 
+            if (inputs.group.value) _baseUrl += '/group/' + inputs.group.value
+            if (inputs.dateFrom.value) _baseUrl += '/' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _baseUrl += '/' + inputs.dateTo.value 
             }
           else if (urlToBakeCode == 'getCalendarEventsForSpecificCountriesAndIndicatorsFromDateToDate') { 
             _baseUrl = '/calendar'
-            if (inputsSelected[1].value) _baseUrl += '/country/' + inputsSelected[1].value
-            if (inputsSelected[0].value) _baseUrl += '/indicator/' + inputsSelected[0].value 
-            if (!inputsSelected[1].value && !inputsSelected[0].value) _baseUrl += '/country/All'
-            if (inputsSelected[7].value) _baseUrl += '/' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _baseUrl += '/' + inputsSelected[8].value 
-            if (inputsSelected[16].value) _urlAfter = '&importance=' + inputsSelected[16].value
+            if (inputs.country.value) _baseUrl += '/country/' + inputs.country.value
+            if (inputs.indicator.value) _baseUrl += '/indicator/' + inputs.indicator.value 
+            if (!inputs.country.value && !inputs.indicator.value) _baseUrl += '/country/All'
+            if (inputs.dateFrom.value) _baseUrl += '/' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _baseUrl += '/' + inputs.dateTo.value 
+            if (inputs.importance.value) _urlAfter = '&importance=' + inputs.importance.value
             }
-          else if (urlToBakeCode == 'getCalendarEventsByCalendarId') { _baseUrl = '/calendar/calendarid/' + inputsSelected[3].value }
+          else if (urlToBakeCode == 'getCalendarEventsByCalendarId') { _baseUrl = '/calendar/calendarid/' + inputs.calendarId.value }
           //Forecast
           
           else if (urlToBakeCode == 'getForecastsForCrypto') { _baseUrl = '/markets/forecasts/crypto' }
           else if (urlToBakeCode == 'getForecastsForCurrency') { _baseUrl = '/markets/forecasts/currency' }
           else if (urlToBakeCode == 'getForecastsForCommodities') { _baseUrl = '/markets/forecasts/commodity' }
           else if (urlToBakeCode == 'getForecastsForBonds') { _baseUrl = '/markets/forecasts/bond' }
-          else if (urlToBakeCode == 'getForecastsForSymbols') { _baseUrl = '/markets/forecasts/symbol/' +  inputsSelected[5].value}
+          else if (urlToBakeCode == 'getForecastsForSymbols') { _baseUrl = '/markets/forecasts/symbol/' + inputs.marketSymbol.value}
           else if (urlToBakeCode == 'getForecastsForIndex') { _baseUrl = '/markets/forecasts/index' }
-          else if (urlToBakeCode == 'getForecastsByTicker') _baseUrl = '/forecast/ticker/' + inputsSelected[2].value
+          else if (urlToBakeCode == 'getForecastsByTicker') _baseUrl = '/forecast/ticker/' + inputs.ticker.value
           else if (urlToBakeCode == 'getForecastsForSpecificCountriesAndIndicators') { 
             _baseUrl = '/forecast'
-            if (inputsSelected[1].value) _baseUrl += '/country/' + inputsSelected[1].value 
-            if (inputsSelected[0].value) _baseUrl += '/indicator/' + inputsSelected[0].value 
+            if (inputs.country.value) _baseUrl += '/country/' + inputs.country.value 
+            if (inputs.indicator.value) _baseUrl += '/indicator/' + inputs.indicator.value 
             }
           //Markets
           else if (urlToBakeCode == 'getCommodities') { _baseUrl = '/markets/commodities' }
           else if (urlToBakeCode == 'getMajorCurrencies') { _baseUrl = '/markets/currency' }
-          else if (urlToBakeCode == 'getCurrencyCrosses') {_baseUrl = '/markets/currency', _urlAfter = 'cross=' + inputsSelected[4].value }
+          else if (urlToBakeCode == 'getCurrencyCrosses') {_baseUrl = '/markets/currency', _urlAfter = 'cross=' + inputs.currencyISO.value }
           else if (urlToBakeCode == 'getCryptoCurrencies') {_baseUrl = '/markets/crypto' }
           else if (urlToBakeCode == 'getStockMarketIndexes') { _baseUrl = '/markets/index' }
           else if (urlToBakeCode == 'getGovernmentBonds') { _baseUrl = '/markets/bond' }
-          else if (urlToBakeCode == 'getSpecificMarketsBySymbol') { _baseUrl = '/markets/symbol/' + inputsSelected[5].value }
+          else if (urlToBakeCode == 'getSpecificMarketsBySymbol') { _baseUrl = '/markets/symbol/' + inputs.marketSymbol.value }
           else if (urlToBakeCode == 'getMarketHistorical') { 
-            _baseUrl = '/markets/historical/' + inputsSelected[5].value 
-            if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
+            _baseUrl = '/markets/historical/' + inputs.marketSymbol.value 
+            if (inputs.dateFrom.value) _urlAfter = 'd1=' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.dateTo.value 
           }
-          // else if (urlToBakeCode == 'getIntradayPricesByMarketSymbol') { _baseUrl = '/markets/intraday/' + inputsSelected[5].value }
+          // else if (urlToBakeCode == 'getIntradayPricesByMarketSymbol') { _baseUrl = '/markets/intraday/' + inputs.marketSymbol.value }
           else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolStartingFromDateAndHour') { 
-            _baseUrl = '/markets/intraday/' + inputsSelected[5].value 
-            if (inputsSelected[13].value) _urlAfter = 'd1=' + inputsSelected[13].value.replace('T', ' ')
-            if (inputsSelected[21].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[21].value.replace('T', ' ')
+            _baseUrl = '/markets/intraday/' + inputs.marketSymbol.value 
+            if (inputs.fromDateTime.value) _urlAfter = 'd1=' + inputs.fromDateTime.value.replace('T', ' ')
+            if (inputs.toDateTime.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.toDateTime.value.replace('T', ' ')
           }
           // else if (urlToBakeCode == 'getIntradayPricesByMarketSymbolFromDateToDate') { 
-          //   _baseUrl = '/markets/intraday/' + inputsSelected[5].value
-          //   if (inputsSelected[13].value) _urlAfter = 'd1=' + inputsSelected[13].value.replace('T', ' ')
-          //   if (inputsSelected[21].value) _urlAfter += '&d2=' + inputsSelected[21].value.replace('T', ' ')
+          //   _baseUrl = '/markets/intraday/' + inputs.marketSymbol.value
+          //   if (inputs.fromDateTime.value) _urlAfter = 'd1=' + inputs.fromDateTime.value.replace('T', ' ')
+          //   if (inputs.toDateTime.value) _urlAfter += '&d2=' + inputs.toDateTime.value.replace('T', ' ')
           // }
-          else if (urlToBakeCode == 'getLatestPeersPricesByMarketSymbol') { _baseUrl = '/markets/peers/' + inputsSelected[5].value }
-          else if (urlToBakeCode == 'getStockMarketsIndexComponentsbySymbol') { _baseUrl = '/markets/components/' + inputsSelected[5].value }
-          else if (urlToBakeCode == 'getStocksFromCountry') { _baseUrl = '/markets/country/' + inputsSelected[1].value }
+          else if (urlToBakeCode == 'getLatestPeersPricesByMarketSymbol') { _baseUrl = '/markets/peers/' + inputs.marketSymbol.value }
+          else if (urlToBakeCode == 'getStockMarketsIndexComponentsbySymbol') { _baseUrl = '/markets/components/' + inputs.marketSymbol.value }
+          else if (urlToBakeCode == 'getStocksFromCountry') { _baseUrl = '/markets/country/' + inputs.country.value }
           
           //Financials
           else if (urlToBakeCode == 'getDefaultEarningsCalendar') { 
             _baseUrl = '/earnings-revenues'
-            if (inputsSelected[5].value) _baseUrl += '/symbol/' + inputsSelected[5].value
-            if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value
-            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value
+            if (inputs.marketSymbol.value) _baseUrl += '/symbol/' + inputs.marketSymbol.value
+            if (inputs.dateFrom.value) _urlAfter = 'd1=' + inputs.dateFrom.value
+            if (inputs.dateTo.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.dateTo.value
             }
           else if (urlToBakeCode == 'getEarningsByIndex') { 
-            _baseUrl = '/earnings-revenues/index/' + inputsSelected[17].value
-            if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
+            _baseUrl = '/earnings-revenues/index/' + inputs.index.value
+            if (inputs.dateFrom.value) _urlAfter = 'd1=' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.dateTo.value 
             }
           else if (urlToBakeCode == 'getEarningsBySector') { 
-            _baseUrl = '/earnings-revenues/sector/' + inputsSelected[18].value
-            if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
+            _baseUrl = '/earnings-revenues/sector/' + inputs.sector.value
+            if (inputs.dateFrom.value) _urlAfter = 'd1=' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.dateTo.value 
           }
           else if (urlToBakeCode == 'financialsHistorical') { 
-            const symbols_array = inputsSelected[19].value.split(',')
-            const category_array  = inputsSelected[20].value.split(',')
+            const symbols_array = inputs.financialsSymbol.value.split(',')
+            const category_array  = inputs.financialsCategory.value.split(',')
 
             const symbols_category = symbols_array.flatMap(symbol => category_array.map(category => `${symbol.trim()}:${category.trim()}`));
             
             _baseUrl = '/financials/historical/' + symbols_category
-            if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
+            if (inputs.dateFrom.value) _urlAfter = 'd1=' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.dateTo.value 
             }
           else if (urlToBakeCode == 'getEarningsCalendarByCountry') { 
-            _baseUrl = '/earnings-revenues/country/' + inputsSelected[1].value 
-            if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value
+            _baseUrl = '/earnings-revenues/country/' + inputs.country.value 
+            if (inputs.dateFrom.value) _urlAfter = 'd1=' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.dateTo.value
             }
           else if (urlToBakeCode == 'getCompanyList'){
             _baseUrl = '/financials/companies'
-            if (inputsSelected[1].value) _baseUrl += '?country=' + inputsSelected[1].value
+            if (inputs.country.value) _baseUrl += '?country=' + inputs.country.value
           }
           else if (urlToBakeCode == 'getSectorList') _baseUrl = '/sectors'
           else if (urlToBakeCode == 'getCategoryList') _baseUrl = '/financials/categories'
           else if (urlToBakeCode == 'getFinancialsByCategory') {
-            let categories = inputsSelected[20].value.split(',')
+            let categories = inputs.financialsCategory.value.split(',')
             if (categories > 1) alert('1 category required')
-            else _baseUrl = '/financials/category/' + inputsSelected[20].value
+            else _baseUrl = '/financials/category/' + inputs.financialsCategory.value
             }
-          else if (urlToBakeCode == 'getFinancialsBySymbol') _baseUrl = '/financials/symbol/' + inputsSelected[19].value
+          else if (urlToBakeCode == 'getFinancialsBySymbol') _baseUrl = '/financials/symbol/' + inputs.financialsSymbol.value
           
           //News
           else if (urlToBakeCode == 'getLatestNews') { _baseUrl = '/news' }
-          // else if (urlToBakeCode == 'getNewsByCountry') { _baseUrl = '/news/country/' + inputsSelected[1].value }
-          // else if (urlToBakeCode == 'getNewsByIndicator') { _baseUrl = '/news/indicator/' + inputsSelected[0].value }
+          // else if (urlToBakeCode == 'getNewsByCountry') { _baseUrl = '/news/country/' + inputs.country.value }
+          // else if (urlToBakeCode == 'getNewsByIndicator') { _baseUrl = '/news/indicator/' + inputs.indicator.value }
           else if (urlToBakeCode == 'getNewsByCountryAndIndicator') { 
             _baseUrl = '/news/'
-            if (inputsSelected[1].value) _baseUrl += 'country/' + inputsSelected[1].value 
-            if (inputsSelected[0].value) _baseUrl += 'indicator/' + inputsSelected[0].value 
+            if (inputs.country.value) _baseUrl += 'country/' + inputs.country.value 
+            if (inputs.indicator.value) _baseUrl += 'indicator/' + inputs.indicator.value 
 
-            if (inputsSelected[1].value && inputsSelected[0].value) _baseUrl = '/news/country/' + inputsSelected[1].value + '/' + inputsSelected[0].value
-            if (inputsSelected[7].value || inputsSelected[8].value) _urlAfter = 'd1=' + inputsSelected[7].value + '&d2=' + inputsSelected[8].value
+            if (inputs.country.value && inputs.indicator.value) _baseUrl = '/news/country/' + inputs.country.value + '/' + inputs.indicator.value
+            if (inputs.dateFrom.value || inputs.dateTo.value) _urlAfter = 'd1=' + inputs.dateFrom.value + '&d2=' + inputs.dateTo.value
             }
-          else if (urlToBakeCode == 'getNewsListSpecifyingStartIndexAndListSize') { _baseUrl = '/news', _urlAfter = 'limit=' + inputsSelected[11].value + '&start=' + inputsSelected[10].value }
+          else if (urlToBakeCode == 'getNewsListSpecifyingStartIndexAndListSize') { _baseUrl = '/news', _urlAfter = 'limit=' + inputs.listSize.value + '&start=' + inputs.startIndex.value }
           
           // Comtrade
           else if (urlToBakeCode == 'getComtradeCategories') _baseUrl = '/comtrade/categories'
           else if (urlToBakeCode == 'getComtradeCountries') _baseUrl = '/comtrade/countries'
           else if (urlToBakeCode == 'getComtradeLatestUpdates') _baseUrl = '/comtrade/updates'
           else if (urlToBakeCode == 'getComtradeSnapshotByCountry') {
-            var countries = inputsSelected[22].value.split(',')
+            var countries = inputs.country2.value.split(',')
             _baseUrl = '/comtrade/country/'
             if (countries.length == 1) {
               _baseUrl += countries[0].trim() 
@@ -1019,9 +1041,9 @@
             let importsRadiobox = document.getElementById('importsRadiobox')
             importsRadiobox.checked ? _baseUrl += '/import' : _baseUrl += '/export'
 
-            _baseUrl += '/' + inputsSelected[22].value
+            _baseUrl += '/' + inputs.country2.value
 
-            if (inputsSelected[20].value) _baseUrl += '/' + inputsSelected[20].value
+            if (inputs.financialsCategory.value) _baseUrl += '/' + inputs.financialsCategory.value
             _urlAfter = importsRadiobox.checked ? 'type=import' : 'type=export'
           }
           else if(urlToBakeCode == 'getTotalsByCountry') {
@@ -1029,10 +1051,10 @@
             let importsRadiobox = document.getElementById('importsRadiobox')
             importsRadiobox.checked ? _baseUrl += '/import' : _baseUrl += '/export'
 
-            _baseUrl += '/' + inputsSelected[22].value + '/totals'
+            _baseUrl += '/' + inputs.country2.value + '/totals'
           }
           else if(urlToBakeCode == 'getTradeBetweenCountries') {
-            _baseUrl = '/comtrade/country/' + inputsSelected[1].value + '/' + inputsSelected[22].value
+            _baseUrl = '/comtrade/country/' + inputs.country.value + '/' + inputs.country2.value
 
             let importsCheckbox = document.getElementById('importsCheckbox')
             let exportsCheckbox = document.getElementById('exportsCheckbox')
@@ -1042,7 +1064,7 @@
 
           }
           else if (urlToBakeCode == 'getComtradeHistorical'){
-            _baseUrl = '/comtrade/historical/' + inputsSelected[23].value
+            _baseUrl = '/comtrade/historical/' + inputs.comtradeSymbol.value
           }
 
           // Eurostat
@@ -1050,43 +1072,43 @@
           else if (urlToBakeCode == 'getEurostatCategories') _baseUrl += '/eurostat/categories'
           else if (urlToBakeCode == 'getEurostatByCountryAndCategoryGroup') {
             _baseUrl = '/eurostat'
-            if (inputsSelected[22].value) _baseUrl += '/country/' + inputsSelected[22].value
-            if (inputsSelected[24].value) _urlAfter = '&category_group=' + inputsSelected[24].value
+            if (inputs.country2.value) _baseUrl += '/country/' + inputs.country2.value
+            if (inputs.eurostatCategoryGroup.value) _urlAfter = '&category_group=' + inputs.eurostatCategoryGroup.value
           }
           else if (urlToBakeCode == 'getEurostatByCountryAndCategory'){
             _baseUrl = '/eurostat'
-            if (inputsSelected[22].value) _baseUrl += '/country/' + inputsSelected[22].value
-            if (inputsSelected[20].value) _urlAfter = '&category=' + inputsSelected[20].value
+            if (inputs.country2.value) _baseUrl += '/country/' + inputs.country2.value
+            if (inputs.financialsCategory.value) _urlAfter = '&category=' + inputs.financialsCategory.value
           }
           else if (urlToBakeCode == 'getEurostatByIDAndDate'){
-            _baseUrl = '/eurostat/historical/' + inputsSelected[23].value
+            _baseUrl = '/eurostat/historical/' + inputs.comtradeSymbol.value
 
-            if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value
+            if (inputs.dateFrom.value) _urlAfter = 'd1=' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.dateTo.value
           }
 
           // Worldbank
           else if (urlToBakeCode == 'getMainCategories') _baseUrl = '/worldbank/categories'
-          else if (urlToBakeCode == 'getSeriesCodeByMainCategory') _baseUrl = '/worldbank/category/' + inputsSelected[20].value
-          else if (urlToBakeCode == 'getDataBySeriesCode') _baseUrl = '/worldbank/indicator', _urlAfter = 's=' + inputsSelected[25].value
-          else if (urlToBakeCode == 'getDataByURL') _baseUrl = '/worldbank/indicator', _urlAfter = 'url=' + inputsSelected[25].value
-          else if (urlToBakeCode == 'getDataByCountry') _baseUrl = '/worldbank/country/' + inputsSelected[22].value
-          else if (urlToBakeCode == 'getHistoricalDataBySeriesCode') _baseUrl = '/worldbank/historical', _urlAfter = 's=' + inputsSelected[25].value
+          else if (urlToBakeCode == 'getSeriesCodeByMainCategory') _baseUrl = '/worldbank/category/' + inputs.financialsCategory.value
+          else if (urlToBakeCode == 'getDataBySeriesCode') _baseUrl = '/worldbank/indicator', _urlAfter = 's=' + inputs.wbSymbol.value
+          else if (urlToBakeCode == 'getDataByURL') _baseUrl = '/worldbank/indicator', _urlAfter = 'url=' + inputs.wbSymbol.value
+          else if (urlToBakeCode == 'getDataByCountry') _baseUrl = '/worldbank/country/' + inputs.country2.value
+          else if (urlToBakeCode == 'getHistoricalDataBySeriesCode') _baseUrl = '/worldbank/historical', _urlAfter = 's=' + inputs.wbSymbol.value
 
           // Federal Reserve
           else if (urlToBakeCode == 'getStates') _baseUrl = '/fred/states'
-          else if (urlToBakeCode == 'getCounties') _baseUrl = '/fred/counties/' + inputsSelected[26].value
+          else if (urlToBakeCode == 'getCounties') _baseUrl = '/fred/counties/' + inputs.state.value
           else if (urlToBakeCode == 'getFederalReserveHistorical') {
-            _baseUrl = '/fred/historical/' + inputsSelected[26].value
+            _baseUrl = '/fred/historical/' + inputs.state.value
 
-            if (inputsSelected[7].value) _urlAfter = 'd1=' + inputsSelected[7].value 
-            if (inputsSelected[8].value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputsSelected[8].value 
+            if (inputs.dateFrom.value) _urlAfter = 'd1=' + inputs.dateFrom.value 
+            if (inputs.dateTo.value) _urlAfter = (_urlAfter ? _urlAfter + '&' : '') + 'd2=' + inputs.dateTo.value 
           }
-          else if (urlToBakeCode == 'getFedDataByCountry') _baseUrl = '/fred/snapshot/country/' + inputsSelected[22].value
-          else if (urlToBakeCode == 'getFedDataBySymbol') _baseUrl = '/fred/snapshot/symbol/' + inputsSelected[23].value
-          else if (urlToBakeCode == 'getFedDataByState') _baseUrl = '/fred/snapshot/state/' + inputsSelected[26].value
-          else if (urlToBakeCode == 'getFedDataByCounty') _baseUrl = '/fred/snapshot/county/' + inputsSelected[26].value
-          else if (urlToBakeCode == 'getFedDataByURL') _baseUrl = '/fred/snapshot/url', _urlAfter = 'url=/' + inputsSelected[25].value
+          else if (urlToBakeCode == 'getFedDataByCountry') _baseUrl = '/fred/snapshot/country/' + inputs.country2.value
+          else if (urlToBakeCode == 'getFedDataBySymbol') _baseUrl = '/fred/snapshot/symbol/' + inputs.comtradeSymbol.value
+          else if (urlToBakeCode == 'getFedDataByState') _baseUrl = '/fred/snapshot/state/' + inputs.state.value
+          else if (urlToBakeCode == 'getFedDataByCounty') _baseUrl = '/fred/snapshot/county/' + inputs.state.value
+          else if (urlToBakeCode == 'getFedDataByURL') _baseUrl = '/fred/snapshot/url', _urlAfter = 'url=/' + inputs.wbSymbol.value
 
 
           //This object will further complete the url with the API Key 
