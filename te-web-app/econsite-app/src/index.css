@@ -25,14 +25,18 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: clamp(2rem, 5vw, 3.2em);
   line-height: 1.1;
+  text-align: center;
 }
 
 button {
@@ -64,5 +68,80 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+.app-container {
+  padding: 2rem;
+  max-width: 90%;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+input[type="text"] {
+  padding: 0.6em 1em;
+  margin: 0.5em;
+  border: 1px solid #dcdde1;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 200px;
+  transition: border 0.3s;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border: 2px solid #273c75;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: white;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  overflow: hidden;
+}
+
+thead {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+thead th {
+  padding: 0.75rem;
+  text-align: left;
+}
+
+tbody td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #f1f2f6;
+  color: black;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f5f6fa;
+}
+
+@media (max-width: 600px) {
+  .chart-container, table {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  input[type="text"] {
+    max-width: 100%;
+    margin-right: 0;
   }
 }
