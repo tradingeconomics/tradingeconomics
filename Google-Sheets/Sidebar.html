@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 14px;
+      color: #333;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .section {
+      margin-bottom: 14px;
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    h2 {
+      margin: 0 0 12px 0;
+      font-size: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0 4px 0;
+      font-weight: 600;
+    }
+
+    input, select, button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    input, select {
+      border: 1px solid #ccc;
+    }
+
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear {
+      display: none;
+    }
+
+    .input-wrap {
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .input-wrap input {
+      margin-bottom: 0;
+      padding-right: 36px;
+    }
+
+    .eye-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 36px;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+    }
+
+    .eye-btn:hover {
+      color: #333;
+    }
+
+    button {
+      border: none;
+      background: #21a364;
+      color: white;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #f3f3f3;
+      color: #333;
+      border: 1px solid #ddd;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .country-dropdown-wrap {
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .country-search-input {
+      width: 100% !important;
+      box-sizing: border-box;
+      padding: 8px !important;
+      margin-bottom: 0 !important;
+      border-radius: 6px !important;
+      font-size: 14px !important;
+      border: 1px solid #ccc !important;
+    }
+
+    .country-dropdown-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .country-dropdown-list.active {
+      display: block;
+    }
+
+    .country-dropdown-item {
+      padding: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .country-dropdown-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .country-dropdown-item.selected {
+      background-color: #e8f5e9;
+      font-weight: 600;
+    }
+
+    .country-hidden-input {
+      display: none;
+    }
+
+    .spinner-overlay {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 4px solid #e0e0e0;
+      border-top-color: #21a364;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    footer {
+      margin-top: 16px;
+      padding: 14px 0 4px 0;
+      border-top: 1px solid #e6e6e6;
+      font-size: 12px;
+      color: #888;
+    }
+
+    footer .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    footer .footer-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    footer .footer-link svg {
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: #21a364;
+    }
+
+    footer a {
+      color: #21a364;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div id="spinnerView" class="spinner-overlay">
+  <div class="spinner"></div>
+</div>
+
+<div id="setupView" class="hidden">
+  <div class="section">
+    <label for="apiKeyInput">API Key</label>
+    <div class="input-wrap">
+      <input id="apiKeyInput" type="password" placeholder="Enter your API key">
+      <button type="button" class="eye-btn" id="toggleApiKeyBtn" aria-label="Toggle API key visibility">
+        <svg id="eyeIconSetup" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <button id="saveKeyBtn">Continue</button>
+  </div>
+</div>
+
+<div id="appView" class="hidden">
+  <div class="section">
+    <label for="categorySelect">Category</label>
+    <select id="categorySelect">
+      <option value="indicators">Indicators</option>
+      <option value="calendar">Calendar</option>
+      <option value="forecast">Forecast</option>
+      <option value="markets">Markets</option>
+      <option value="financials">Financials</option>
+      <option value="news">News</option>
+      <option value="comtrade">Comtrade</option>
+      <option value="eurostat">Eurostat</option>
+      <option value="worldbank">World Bank</option>
+      <option value="fred">Federal Reserve</option>
+    </select>
+
+    <label for="actionSelect">Action</label>
+    <select id="actionSelect"></select>
+  </div>
+
+  <div class="section">
+    <div id="fields"></div>
+    <button id="runBtn">Insert Data</button>
+  </div>
+</div>
+
+<div id="settingsView" class="hidden">
+  <h2>Settings</h2>
+  <div class="section">
+    <label for="newApiKeyInput">API Key</label>
+    <div class="input-wrap">
+      <input id="newApiKeyInput" type="password" placeholder="Enter new API key">
+      <button type="button" class="eye-btn" id="toggleNewApiKeyBtn" aria-label="Toggle API key visibility">
+        <svg id="eyeIconSettings" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <button id="updateKeyBtn">Save</button>
+    <button id="removeKeyBtn" class="secondary">Remove Key</button>
+  </div>
+</div>
+
+<script>
+const COUNTRIES = [
+  'Afghanistan', 'Albania', 'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Antigua and Barbuda',
+  'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain',
+  'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan',
+  'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso',
+  'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Central African Republic',
+  'Chad', 'Chile', 'China', 'Colombia', 'Commodity', 'Comoros', 'Congo', 'Costa Rica',
+  'Countries', 'Country List', 'Croatia', 'Cuba', 'Cyprus', 'Czech Repbulic', 'Czech Republic',
+  'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'East Timor', 'Ecuador', 'Egypt',
+  'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Eswatini', 'Ethiopia', 'Euro Area',
+  'European Union', 'Faroe Islands', 'Fiji', 'Finland', 'Forecast', 'France', 'French Polynesia',
+  'G20', 'G7', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Greenland',
+  'Grenada', 'Guam', 'Guatemala', 'Guinea', 'Guinea Bissau', 'Guyana', 'Haiti', 'Honduras',
+  'Hong Kong', 'Hungary', 'Iceland', 'IMF', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland',
+  'Isle Of Man', 'Israel', 'Italy', 'Ivory Coast', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan',
+  'Kenya', 'Kiribati', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon',
+  'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau',
+  'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta',
+  'Marshall Islands', 'Mauritania', 'Mauritius', 'Mayotte', 'Mexico', 'Micronesia',
+  'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar',
+  'Namibia', 'Nepal', 'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger',
+  'Nigeria', 'North Korea', 'Northern Mariana Islands', 'Norway', 'Oman', 'OPEC', 'Pakistan',
+  'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines',
+  'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Report', 'Republic of the Congo', 'Romania',
+  'Russia', 'Rwanda', 'Saint Lucia', 'Saint Vincent and The Grenadines', 'Samoa',
+  'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles',
+  'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia',
+  'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'St Kitts and Nevis',
+  'St Lucia', 'St Vicent and the Grenadines', 'St Vincent and the Grenadines', 'Sudan',
+  'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan',
+  'Tanzania', 'Thailand', 'Togo', 'Tonga', 'Trinidad & Tobago', 'Trinidad and Tobago',
+  'Tunisia', 'Turkey', 'Turkmenistan', 'Uganda', 'Ukraine', 'United Arab Emirates',
+  'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Venezuela',
+  'Vietnam', 'Virgin Islands', 'West Bank and Gaza', 'World', 'Yemen', 'Zambia', 'Zimbabwe'
+];
+
+const INDICATORS = `
+14-Day Reverse Repo Rate
+15 Year Mortgage Rate
+30 Year Mortgage Rate
+ADP Employment Change
+ADP Employment Change Large Firms
+ADP Employment Change Mid Sized Firms
+ADP Employment Change Small Firms
+ADP Employment Change Weekly
+Aluminum Production YoY
+ANZ Roy Morgan Consumer Confidence Index
+Apartment Permits
+API Crude Oil Stock Change
+API Cushing Number
+API Distillate Stocks
+API Gasoline Stocks
+Asylum Applications
+Auto Exports
+Average Annual Wages
+Average Earnings Excluding Bonus
+Average Equipment Rate
+Average Hourly Earnings
+Average Hourly Earnings YoY
+Average House Prices
+Average Mortgage Size
+Average Weekly Earnings
+Average Weekly Hours
+Baden Wuerttemberg CPI YoY
+Balance of Trade
+Balance of Trade (Yuan)
+Bank Bill Swap Rate
+Bank Lending Rate
+Bankruptcies
+Banks Balance Sheet
+Bavaria CPI YoY
+Brandenburg CPI YoY
+BRC Retail Sales Monitor YoY
+Building Capital Expenditure
+Building Permits
+Building Permits MoM
+Building Permits YoY
+Business Climate Indicator
+Business Conditions Index
+Business Confidence
+Business Inventories
+Business Survey Index Large Manufacturing Firms
+Capacity Utilization
+Capital Flows
+Car Loan Delinquency
+Car Production
+Car Registrations
+Case Shiller Home Price Index
+Case Shiller Home Price Index MoM
+Case Shiller Home Price Index YoY
+Cash Reserve Ratio
+Cbi Distributive Trades
+Cement Production
+Central Bank Balance Sheet
+Cereals Price Index
+CFNAI Employment Index
+CFNAI Personal Consumption and Housing Index
+CFNAI Production Index
+CFNAI Sales Orders and Inventories Index
+Chain Store Sales
+Challenger Job Cuts
+Changes in Inventories
+Chicago Fed Hiring Rate
+Chicago Fed Layoffs Rate
+Chicago Fed National Activity Index
+Chicago PMI
+Claimant Count Change
+CO2 Emissions
+Coal Production YoY
+Coincident Index
+Commodity
+Commodity Prices YoY
+Composite Leading Indicator
+Construction Orders
+Construction Output
+Construction Payrolls
+Construction PMI
+Construction Spending
+Consumer Confidence
+Consumer Confidence MoM
+Consumer Confidence Price Trends
+Consumer Credit
+Consumer Price Index CPI
+Consumer Price Index with fixed interest rate
+Consumer Spending
+Container Throughput
+Continued Jobless Claims - Federal Workers
+Continuing Jobless Claims
+Copper Production
+Core Consumer Prices
+Core Inflation Rate
+Core Inflation Rate MoM
+Core PCE Price Index
+Core PCE Price Index Annual Change
+Core PCE Price Index MoM
+Core PCE Prices QoQ
+Core Producer Prices
+Core Producer Prices MoM
+Core Producer Prices YoY
+CoreLogic Dwelling Prices MoM
+Corporate Profits
+Corporate Tax Rate
+Corruption Index
+Corruption Rank
+CPI Clothing
+CPI Core Core
+CPI Education
+CPI Food
+CPI Housing Utilities
+CPI Median
+CPI Recreation and Culture
+CPI Restaurants and Hotels
+CPI seasonally adjusted
+CPI Transportation
+CPI Trimmed-Mean
+CPI with fixed interest rate MoM
+CPI with fixed interest rate YoY
+CPI-Common
+Credit Card Accounts
+Credit Card Spending
+Credit Rating
+Crude Oil Imports
+Crude Oil Production
+Crude Oil Production YoY
+Crude Oil Rigs
+Crude Oil Stocks Change
+Crude Steel Production YoY
+Currency
+Current Account
+Current Account Goods
+Current Account Services
+Current Account to GDP
+Cushing Crude Oil Stocks
+Dairy Price Index
+Dallas Fed Manufacturing Employment Index
+Dallas Fed Manufacturing Index
+Dallas Fed Manufacturing New Orders Index
+Dallas Fed Manufacturing Prices Paid Index
+Dallas Fed Manufacturing Production Index
+Dallas Fed Manufacturing Shipments Index
+Dallas Fed Services Index
+Dallas Fed Services Revenues Index
+Debt Balance Auto Loans
+Debt Balance Credit Cards
+Debt Balance Mortgages
+Debt Balance Student Loans
+Debt Balance Total
+Deposit Growth
+Deposit Interest Rate
+Direct Investment Liabilities
+Disposable Personal Income
+Distillate Fuel Production
+Distillate Stocks
+DMP 1Y CPI Expectations
+DMP 3M Output Price Expectations
+Domestic Exports of Non Oil (nodx) (%yoy)
+Dry-Van Rate
+Dubai CPI
+Dubai Inflation Rate
+Dubai Inflation Rate MoM
+Durable Goods Orders
+Durable Goods Orders Ex Defense
+Durable Goods Orders Ex Transportation
+Earnings Growth Expectations
+Economic Optimism Index
+Economy Watchers Survey
+Economy Watchers Survey Outlook
+Effective Federal Funds Rate
+Electric Car Exports
+Electric Car Registrations
+Electricity Price
+Electricity Production
+Electricity Production YoY
+Employed Persons
+Employment Change
+Employment Change YoY
+Employment Cost Index
+Employment Cost Index Benefits
+Employment Cost Index Wages
+Employment Rate
+Energy Inflation
+Energy Prices
+Euro Short Term Rate
+Existing Home Sales
+Existing Home Sales MoM
+Export Prices
+Export Prices MoM
+Export Prices YoY
+Exports
+Exports of Non-oil Domestic Exports Of
+Exports YoY
+Exports Yuan
+External Debt
+External Debt to GDP
+Factory Orders
+Factory Orders Ex Transportation
+Fed Capital Account Surplus
+Federal Government Payrolls
+Filled Jobs
+Financial Activities Payrolls
+Fiscal Expenditure
+Fixed Asset Investment
+Food Inflation
+Food Price Index
+Foreign Bond Investment
+Foreign Direct Investment
+Foreign Direct Investment YoY
+Foreign Exchange Reserves
+Foreign Stock Investment
+Foreign Treasury Holdings
+Foreign Treasury Holdings Belgium
+Foreign Treasury Holdings Canada
+Foreign Treasury Holdings China
+Foreign Treasury Holdings Japan
+Foreign Treasury Holdings UK
+Freight Traffic
+Freight Traffic Civil Aviation
+Freight Traffic Highways
+Freight Traffic Railway
+Freight Traffic Waterways
+Full Time Employment
+Full Year GDP Growth
+Gasoline Prices
+Gasoline Production
+Gasoline Stocks Change
+GDP
+GDP Aggregate Demand QoQ
+GDP Aggregate Demand YoY
+GDP Annual Growth Rate
+GDP Chain Price Index
+GDP Constant Prices
+GDP Deflator
+GDP External Demand Contribution
+GDP from Agriculture
+GDP from Construction
+GDP from Manufacturing
+GDP from Mining
+GDP from Public Administration
+GDP from Services
+GDP from Transport
+GDP from Utilities
+GDP Growth Annualized
+GDP Growth Contribution Consumer Spending
+GDP Growth Contribution Exports
+GDP Growth Contribution Government
+GDP Growth Contribution Imports
+GDP Growth Contribution Investment
+GDP Growth Non Oil Sector
+GDP Growth Oil Sector
+GDP Growth Rate
+GDP per Capita
+GDP per Capita PPP
+GDP Sales QoQ
+Global Dairy Trade Price Index
+Gold Production
+Gold Reserves
+Goods Exports
+Goods Imports
+Goods Inflation
+Goods Trade Balance
+Goods Trade Balance Non-EU
+Government Bond 10Y
+Government Budget
+Government Budget Value
+Government Debt
+Government Debt to GDP
+Government Payrolls
+Government Revenues
+Government Spending
+Government Spending to GDP
+Grain Stocks Corn
+Grain Stocks Soy
+Grain Stocks Wheat
+Gross Average Monthly Wages
+Gross Debt to GDP
+Gross Fixed Capital Formation
+Gross National Product
+Harmonised Consumer Prices
+Harmonised Inflation Rate MoM
+Harmonised Inflation Rate YoY
+Harmonised Unemployment Rate
+Health Care Payrolls
+Heating Oil Stocks
+Hesse CPI YoY
+Hiring Plans Announcements
+Home Loans
+Home Ownership Rate
+Home Sales
+Hospital Beds
+Hospitals
+House Price Index MoM
+House Price Index YoY
+Household Spending
+Household Spending MoM
+Households Debt to GDP
+Households Debt to Income
+Houses Permits
+Housing Credit
+Housing Index
+Housing Starts
+Housing Starts MoM
+Housing Starts Multi Family
+Housing Starts Single Family
+Housing Starts YoY
+ICU Beds
+Ifo Current Conditions
+Ifo Expectations
+IGP-M Inflation MoM
+Import Prices
+Import Prices MoM
+Import Prices YoY
+Imports
+Imports YoY
+Imports Yuan
+Inactivity Rate
+Industrial Production
+Industrial Production Mom
+Industrial Sentiment
+Industry Index
+Industry Index Business Services
+Industry Index Construction
+Industry Index Manufacturing
+Inflation Expectations
+Inflation Expectations 3Y
+Inflation Expectations 5Y
+Inflation Rate
+Inflation Rate MoM
+Information Payrolls
+Initial Jobless Claims
+Input Producer Prices
+Interbank Rate
+Interest Payments on Government Debt
+Interest Rate
+Interest rate on new mortgages
+Interest Rate on Outstanding Mortgages
+Investment in Foreign Securities
+Investment Lending for Homes
+IPC-Fipe Inflation MoM
+ISM Manufacturing Backlog of Orders
+ISM Manufacturing Employment
+ISM Manufacturing Inventories
+ISM Manufacturing New Orders
+ISM Manufacturing Prices
+ISM Manufacturing Production
+ISM Manufacturing Supplier Deliveries
+ISM Non Manufacturing Business Activity
+ISM Non Manufacturing Employment
+ISM Non Manufacturing New Orders
+ISM Non Manufacturing Prices
+Job Advertisements
+Job Layoffs and Discharges
+Job Offers
+Job Quits
+Job Quits Rate
+Job Vacancies
+Job Vacancy Rate
+Jobless Claims - Federal Workers
+Jobless Claims 4-week Average
+Jobs To Applications Ratio
+Kansas Fed Composite Index
+Kansas Fed Employment Index
+Kansas Fed Manufacturing Index
+Kansas Fed New Orders Index
+Kansas Fed Prices Paid Index
+Kansas Fed Shipments Index
+Labor Force Participation Rate
+Labour Costs
+Leading Economic Index
+Leisure and Hospitality Payrolls
+Lending Rate
+Liquidity Injections Via MLF
+Liquidity Injections Via Reverse Repo
+LMI Inventory Costs
+LMI Logistics Managers Index
+LMI Logistics Managers Index Future
+LMI Transportation Prices
+LMI Warehouse Prices
+Loan Growth
+Loan Prime Rate 5Y
+Loans To Banks
+Loans to Private Sector
+Long Term Unemployment Rate
+Longer-Term Refinancing Operations
+Machine Tool Orders
+Machinery Orders
+Machinery Orders YoY
+Manufacturing Payrolls
+Manufacturing Production
+Manufacturing Production MoM
+Manufacturing Sales
+MBA Mortgage Market Index
+MBA Mortgage Refinance Index
+MBA Purchase Index
+Meat Price Index
+Medical Doctors
+MI Inflation Gauge MoM
+Michigan 5 Year Inflation Expectations
+Michigan Consumer Expectations
+Michigan Current Economic Conditions
+Michigan Inflation Expectations
+Mid-month Core Inflation Rate MoM
+Mid-month Core Inflation Rate YoY
+Mid-month Inflation Rate MoM
+Mid-month Inflation Rate YoY
+Military Expenditure
+Minimum Wages
+Mining and Energy Payrolls
+Mining Production
+Mining Production MoM
+Monetary Base
+Monetary Base YoY
+Money Supply M0
+Money Supply M1
+Money Supply M2
+Money Supply M3
+Money Supply M4
+Monthly GDP MoM
+Monthly GDP YoY
+Mortgage Applications
+Mortgage Approvals
+Mortgage Originations
+Mortgage Rate
+Motorbike Sales
+Nahb Housing Market Index
+National Home Price Index
+National Wealth Fund Assets
+National Wealth Fund Assets to GDP
+National Wealth Fund Liquid Assets
+Nationwide Housing Prices
+Nationwide Housing Prices MoM
+Nationwide Housing Prices YoY
+Natural Gas Imports
+Natural Gas Stocks Capacity
+Natural Gas Stocks Change
+Natural Gas Stocks Injection
+Natural Gas Stocks Inventory
+Natural Gas Stocks Withdrawal
+NBS General PMI
+Negotiated Wage Growth
+Net Lending to Individuals MoM
+Net Long-term TIC Flows
+New Bank Loans
+New Home Sales
+New Home Sales MoM
+New Home Sales YoY
+New Orders
+New Passenger Car Registrations YoY
+NFIB Business Optimism Index
+Nominal Effective Exchange Rate 18
+Nominal Effective Exchange Rate 41
+Non Defense Capital Goods Orders Ex Aircraft
+Non Farm Payrolls
+Non Manufacturing PMI
+Non Oil Exports
+Nonfarm Payrolls Private
+Nonfarm Productivity QoQ
+North Rhine Westphalia CPI YoY
+Nurses
+NY Empire State Employment Index
+NY Empire State Manufacturing Index
+NY Empire State New Orders Index
+NY Empire State Prices Paid Index
+NY Empire State Shipments Index
+NY Fed Services Activity Index
+Oil Exports
+Oils Price Index
+Outright Reverse Repo
+Overnight Interbank Average Rate
+Overtime Pay YoY
+Part Time Employment
+PCE Price Index
+PCE Price Index Annual Change
+PCE Price Index Monthly Change
+PCE Prices QoQ
+Pending Home Sales
+Pending Home Sales MoM
+Personal Income
+Personal Income Tax Rate
+Personal Savings
+Personal Spending
+Philadelphia Fed Manufacturing Index
+Philly Fed Business Conditions
+Philly Fed CAPEX Index
+Philly Fed Employment
+Philly Fed New Orders
+Philly Fed Prices Paid
+Plant Machinery Capital Expenditure
+Population
+PPI Ex Food Energy and Trade Services
+PPI Ex Food Energy and Trade Services MoM
+PPI Ex Food Energy and Trade Services YoY
+PPI Input
+PPI Input YoY
+Precipitation
+Price to Rent Ratio
+Private Debt to GDP
+Private House Approvals
+Private Investment
+Private Investment YoY
+Private Rental Prices
+Private Sector Credit
+Producer Price Inflation MoM
+Producer Prices
+Producer Prices Change
+Productivity
+Professional and Business Services Payrolls
+Property Investment
+Prospective Plantings Corn
+Prospective Plantings Cotton
+Prospective Plantings Soy
+Prospective Plantings Wheat
+Proxy Funds Rate
+Public Sector Net Borrowing
+Public Sector Net Debt to GDP
+Purchases of Government Bonds
+Quarterly CPI
+Quarterly Inflation Rate QoQ
+Quarterly Inflation Rate YoY
+Real Average Hourly Earnings MoM
+Real Average Hourly Earnings YoY
+Real Consumer Spending
+Real Earnings Excluding Bonuses
+Real Earnings Including Bonuses
+Real Personal Spending MoM
+Redbook Index
+Refinancing Operations
+Refinery Crude Runs
+Registered Jobless Rate
+Remittances
+Rent Inflation
+Repo Rate
+Residential Property Prices
+Retail Inventories Ex Autos
+Retail Monitor YoY
+Retail Price Index
+Retail Sales Control Group
+Retail Sales Ex Autos
+Retail Sales Ex Fuel
+Retail Sales Ex Gas and Autos MoM
+Retail Sales MoM
+Retail Sales YoY
+Retail Trade Payrolls
+Retirement Age Men
+Retirement Age Women
+Reuters Tankan Index
+Reverse Repo Rate
+Richmond Fed Manufacturing Index
+Richmond Fed Manufacturing Shipments
+Richmond Fed Services Index
+RICS House Price Balance
+Sales Tax Rate
+Saxony CPI YoY
+Secured Overnight Financing Rate
+Selling Price Expectations
+Services Inflation
+Services Sentiment
+Shop Price Inflation
+Single Family Home Prices
+Small Business Sentiment
+Social Assistance Payrolls
+Social Security Rate
+Social Security Rate For Companies
+Social Security Rate For Employees
+Steel Production
+Stock Market
+Strategic Petroleum Reserve Crude Oil Stocks
+Sugar Price Index
+Supply Chain Pressure Index
+Syntec Index
+Tankan Large All Industry Capex
+Tankan Large Manufacturing Outlook
+Tankan Non-Manufacturing Outlook
+Tax Revenue
+Temperature
+Terms of Trade
+Terrorism Index
+Tertiary Industry Index
+Tokyo Core CPI
+Tokyo CPI
+Tokyo CPI Ex Food and Energy
+Total Housing Inventory
+Total Rigs
+Total Social Financing
+Total Vehicle Sales
+Tourism Revenues
+Tourist Arrivals
+Transportation and Warehousing Payrolls
+Treasury Cash Balance
+Trimmed Mean CPI MoM
+Trimmed Mean CPI QoQ
+Trimmed Mean CPI YoY
+U6 Unemployment Rate
+Unemployed Persons
+Unemployment Change
+Unemployment Expectations
+Unemployment Rate
+Unit Labour Costs QoQ
+Used Car Prices MoM
+Used Car Prices YoY
+Wage Growth
+Wage Tracker
+Wages
+Wages in Manufacturing
+Weapons Sales
+Weekly Crude Oil Production
+Weekly Economic Index
+Weighted Median CPI QoQ
+Weighted Median CPI YoY
+Wholesale Inventories
+Wholesale Prices
+Wholesale Prices MoM
+Wholesale Prices YoY
+Wholesale Sales
+Wholesale Trade Payrolls
+Withholding Tax Rate
+WPI Food Index YoY
+WPI Fuel YoY
+WPI Manufacturing YoY
+Youth Unemployment Rate
+ZEW Current Conditions
+ZEW Economic Sentiment Index
+`
+  .split('\n')
+  .map(function (item) { return item.trim(); })
+  .filter(function (item) { return item && item !== 'Category'; });
+
+const INITIAL_STATE = <?!= JSON.stringify(initialState || {}) ?>;
+
+let hasApiKey = false;
+
+const ACTIONS = {
+  indicators: [
+    {
+      label: 'All Indicators',
+      fields: [],
+      build: function () {
+        return '/indicators';
+      }
+    },
+    {
+      label: 'By Country',
+      fields: ['country'],
+      build: function (v) {
+        return '/country/' + encodeURIComponent(v.country);
+      }
+    },
+    {
+      label: 'By Indicator',
+      fields: ['indicator'],
+      build: function (v) {
+        return '/country/all/' + encodeURIComponent(v.indicator);
+      }
+    },
+    {
+      label: 'By Ticker',
+      fields: ['ticker'],
+      build: function (v) {
+        return '/country/ticker/' + encodeURIComponent(v.ticker);
+      }
+    },
+    {
+      label: 'Historical',
+      fields: ['country', 'indicator', 'startDate', 'endDate'],
+      build: function (v) {
+        return '/historical/country/' + encodeURIComponent(v.country) +
+          '/indicator/' + encodeURIComponent(v.indicator) +
+          '/' + v.startDate + '/' + v.endDate;
+      }
+    },
+    {
+      label: 'Ratings',
+      fields: [],
+      build: function () {
+        return '/ratings';
+      }
+    },
+    {
+      label: 'Ratings by Country',
+      fields: ['country'],
+      build: function (v) {
+        return '/ratings/' + encodeURIComponent(v.country);
+      }
+    },
+    {
+      label: 'Updates',
+      fields: [],
+      build: function () {
+        return '/updates';
+      }
+    }
+  ],
+
+  calendar: [
+    {
+      label: 'Latest Events',
+      fields: [],
+      build: function () {
+        return '/calendar';
+      }
+    },
+    {
+      label: 'By Ticker',
+      fields: ['ticker', 'startDate', 'endDate'],
+      build: function (v) {
+        return '/calendar/ticker/' + encodeURIComponent(v.ticker) +
+          '/' + v.startDate + '/' + v.endDate;
+      }
+    },
+    {
+      label: 'By Country and Group',
+      fields: ['country', 'group', 'startDate', 'endDate'],
+      build: function (v) {
+        return '/calendar/country/' + encodeURIComponent(v.country) +
+          '/group/' + encodeURIComponent(v.group) +
+          '/' + v.startDate + '/' + v.endDate;
+      }
+    },
+    {
+      label: 'By Calendar ID',
+      fields: ['calendarId'],
+      build: function (v) {
+        return '/calendar/calendarid/' + encodeURIComponent(v.calendarId);
+      }
+    }
+  ],
+
+  forecast: [
+    {
+      label: 'By Ticker',
+      fields: ['ticker'],
+      build: function (v) {
+        return '/forecast/ticker/' + encodeURIComponent(v.ticker);
+      }
+    },
+    {
+      label: 'By Country and Indicator',
+      fields: ['country', 'indicator'],
+      build: function (v) {
+        return '/forecast/country/' + encodeURIComponent(v.country) +
+          '/indicator/' + encodeURIComponent(v.indicator);
+      }
+    },
+    {
+      label: 'Currencies',
+      fields: [],
+      build: function () {
+        return '/markets/forecasts/currency';
+      }
+    },
+    {
+      label: 'Commodities',
+      fields: [],
+      build: function () {
+        return '/markets/forecasts/commodity';
+      }
+    },
+    {
+      label: 'Bonds',
+      fields: [],
+      build: function () {
+        return '/markets/forecasts/bond';
+      }
+    },
+    {
+      label: 'Crypto',
+      fields: [],
+      build: function () {
+        return '/markets/forecasts/crypto';
+      }
+    },
+    {
+      label: 'Indexes',
+      fields: [],
+      build: function () {
+        return '/markets/forecasts/index';
+      }
+    }
+  ],
+
+  markets: [
+    {
+      label: 'Symbol Snapshot',
+      fields: ['symbol'],
+      build: function (v) {
+        return '/markets/symbol/' + encodeURIComponent(v.symbol);
+      }
+    },
+    {
+      label: 'Historical',
+      fields: ['symbol', 'startDate', 'endDate'],
+      build: function (v) {
+        return '/markets/historical/' + encodeURIComponent(v.symbol) +
+          '?d1=' + encodeURIComponent(v.startDate) +
+          '&d2=' + encodeURIComponent(v.endDate);
+      }
+    },
+    {
+      label: 'Intraday',
+      fields: ['symbol', 'fromDateTime', 'toDateTime'],
+      build: function (v) {
+        return '/markets/intraday/' + encodeURIComponent(v.symbol) +
+          '?d1=' + encodeURIComponent(v.fromDateTime.replace('T', ' ')) +
+          '&d2=' + encodeURIComponent(v.toDateTime.replace('T', ' '));
+      }
+    },
+    {
+      label: 'Commodities',
+      fields: [],
+      build: function () {
+        return '/markets/commodities';
+      }
+    },
+    {
+      label: 'Currencies',
+      fields: [],
+      build: function () {
+        return '/markets/currency';
+      }
+    },
+    {
+      label: 'Crypto',
+      fields: [],
+      build: function () {
+        return '/markets/crypto';
+      }
+    },
+    {
+      label: 'Indexes',
+      fields: [],
+      build: function () {
+        return '/markets/index';
+      }
+    },
+    {
+      label: 'Bonds',
+      fields: [],
+      build: function () {
+        return '/markets/bond';
+      }
+    },
+    {
+      label: 'Peers',
+      fields: ['symbol'],
+      build: function (v) {
+        return '/markets/peers/' + encodeURIComponent(v.symbol);
+      }
+    }
+  ],
+
+  financials: [
+    {
+      label: 'Companies',
+      fields: ['country'],
+      build: function (v) {
+        return '/financials/companies?country=' + encodeURIComponent(v.country);
+      }
+    },
+    {
+      label: 'By Symbol',
+      fields: ['symbol'],
+      build: function (v) {
+        return '/financials/symbol/' + encodeURIComponent(v.symbol);
+      }
+    },
+    {
+      label: 'By Category',
+      fields: ['category'],
+      build: function (v) {
+        return '/financials/category/' + encodeURIComponent(v.category);
+      }
+    },
+    {
+      label: 'Categories',
+      fields: [],
+      build: function () {
+        return '/financials/categories';
+      }
+    },
+    {
+      label: 'Sectors',
+      fields: [],
+      build: function () {
+        return '/sectors';
+      }
+    },
+    {
+      label: 'Earnings Calendar',
+      fields: ['startDate', 'endDate'],
+      build: function (v) {
+        return '/earnings-revenues?d1=' + encodeURIComponent(v.startDate) +
+          '&d2=' + encodeURIComponent(v.endDate);
+      }
+    },
+    {
+      label: 'Earnings by Country',
+      fields: ['country', 'startDate', 'endDate'],
+      build: function (v) {
+        return '/earnings-revenues/country/' + encodeURIComponent(v.country) +
+          '?d1=' + encodeURIComponent(v.startDate) +
+          '&d2=' + encodeURIComponent(v.endDate);
+      }
+    }
+  ],
+
+  news: [
+    {
+      label: 'Latest News',
+      fields: [],
+      build: function () {
+        return '/news';
+      }
+    },
+    {
+      label: 'By Country and Indicator',
+      fields: ['country', 'indicator', 'startDate', 'endDate'],
+      build: function (v) {
+        return '/news/country/' + encodeURIComponent(v.country) +
+          '/' + encodeURIComponent(v.indicator) +
+          '?d1=' + encodeURIComponent(v.startDate) +
+          '&d2=' + encodeURIComponent(v.endDate);
+      }
+    },
+    {
+      label: 'List',
+      fields: ['startIndex', 'listSize'],
+      build: function (v) {
+        return '/news?limit=' + encodeURIComponent(v.listSize) +
+          '&start=' + encodeURIComponent(v.startIndex);
+      }
+    }
+  ],
+
+  comtrade: [
+    {
+      label: 'Categories',
+      fields: [],
+      build: function () {
+        return '/comtrade/categories';
+      }
+    },
+    {
+      label: 'Countries',
+      fields: [],
+      build: function () {
+        return '/comtrade/countries';
+      }
+    },
+    {
+      label: 'Updates',
+      fields: [],
+      build: function () {
+        return '/comtrade/updates';
+      }
+    },
+    {
+      label: 'By Country',
+      fields: ['country'],
+      build: function (v) {
+        return '/comtrade/country/' + encodeURIComponent(v.country);
+      }
+    },
+    {
+      label: 'Historical',
+      fields: ['symbol'],
+      build: function (v) {
+        return '/comtrade/historical/' + encodeURIComponent(v.symbol);
+      }
+    }
+  ],
+
+  eurostat: [
+    {
+      label: 'Countries',
+      fields: [],
+      build: function () {
+        return '/eurostat/countries';
+      }
+    },
+    {
+      label: 'Categories',
+      fields: [],
+      build: function () {
+        return '/eurostat/categories';
+      }
+    },
+    {
+      label: 'By Country',
+      fields: ['country'],
+      build: function (v) {
+        return '/eurostat/country/' + encodeURIComponent(v.country);
+      }
+    },
+    {
+      label: 'Historical',
+      fields: ['symbol', 'startDate', 'endDate'],
+      build: function (v) {
+        return '/eurostat/historical/' + encodeURIComponent(v.symbol) +
+          '?d1=' + encodeURIComponent(v.startDate) +
+          '&d2=' + encodeURIComponent(v.endDate);
+      }
+    }
+  ],
+
+  worldbank: [
+    {
+      label: 'Categories',
+      fields: [],
+      build: function () {
+        return '/worldbank/categories';
+      }
+    },
+    {
+      label: 'By Country',
+      fields: ['country'],
+      build: function (v) {
+        return '/worldbank/country/' + encodeURIComponent(v.country);
+      }
+    },
+    {
+      label: 'By Series Code',
+      fields: ['seriesCode'],
+      build: function (v) {
+        return '/worldbank/indicator?s=' + encodeURIComponent(v.seriesCode);
+      }
+    },
+    {
+      label: 'Historical',
+      fields: ['seriesCode'],
+      build: function (v) {
+        return '/worldbank/historical?s=' + encodeURIComponent(v.seriesCode);
+      }
+    }
+  ],
+
+  fred: [
+    {
+      label: 'States',
+      fields: [],
+      build: function () {
+        return '/fred/states';
+      }
+    },
+    {
+      label: 'Counties',
+      fields: ['state'],
+      build: function (v) {
+        return '/fred/counties/' + encodeURIComponent(v.state);
+      }
+    },
+    {
+      label: 'Historical',
+      fields: ['state', 'startDate', 'endDate'],
+      build: function (v) {
+        return '/fred/historical/' + encodeURIComponent(v.state) +
+          '?d1=' + encodeURIComponent(v.startDate) +
+          '&d2=' + encodeURIComponent(v.endDate);
+      }
+    },
+    {
+      label: 'By Country',
+      fields: ['country'],
+      build: function (v) {
+        return '/fred/snapshot/country/' + encodeURIComponent(v.country);
+      }
+    },
+    {
+      label: 'By Symbol',
+      fields: ['symbol'],
+      build: function (v) {
+        return '/fred/snapshot/symbol/' + encodeURIComponent(v.symbol);
+      }
+    }
+  ]
+};
+
+const FIELD_LABELS = {
+  country: 'Country',
+  indicator: 'Indicator',
+  ticker: 'Ticker',
+  symbol: 'Symbol',
+  group: 'Group',
+  category: 'Category',
+  startDate: 'Start Date',
+  endDate: 'End Date',
+  fromDateTime: 'From Datetime',
+  toDateTime: 'To Datetime',
+  calendarId: 'Calendar ID',
+  startIndex: 'Start Index',
+  listSize: 'List Size',
+  seriesCode: 'Series Code',
+  state: 'State / Series'
+};
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+function showSpinner() {
+  $('spinnerView').classList.remove('hidden');
+  $('setupView').classList.add('hidden');
+  $('appView').classList.add('hidden');
+  $('settingsView').classList.add('hidden');
+}
+
+function hideSpinner() {
+  $('spinnerView').classList.add('hidden');
+}
+
+function show(viewId) {
+  hideSpinner();
+  $('setupView').classList.add('hidden');
+  $('appView').classList.add('hidden');
+  $('settingsView').classList.add('hidden');
+  $(viewId).classList.remove('hidden');
+}
+
+function showSettingsView() {
+  show('settingsView');
+  const input = $('newApiKeyInput');
+  input.value = hasApiKey ? '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022' : '';
+  input.addEventListener('focus', function onFocus() {
+    if (input.value.startsWith('\u2022')) input.value = '';
+    input.removeEventListener('focus', onFocus);
+  }, { once: true });
+}
+
+function renderActions() {
+  const category = $('categorySelect').value;
+  const actionSelect = $('actionSelect');
+  actionSelect.innerHTML = '';
+
+  ACTIONS[category].forEach(function (action, index) {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = action.label;
+    actionSelect.appendChild(option);
+  });
+
+  renderFields();
+}
+
+function createCountryDropdown() {
+  return createSearchDropdown('country', COUNTRIES, 'Search countries...');
+}
+
+function createIndicatorDropdown() {
+  return createSearchDropdown('indicator', INDICATORS, 'Search indicators...');
+}
+
+function createSearchDropdown(fieldName, options, placeholder) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'country-dropdown-wrap';
+  wrapper.id = fieldName + '-dropdown-wrap';
+
+  const searchInput = document.createElement('input');
+  searchInput.className = 'country-search-input';
+  searchInput.id = 'field_' + fieldName;
+  searchInput.type = 'text';
+  searchInput.placeholder = placeholder || 'Search...';
+  searchInput.autocomplete = 'off';
+
+  const dropdownList = document.createElement('div');
+  dropdownList.className = 'country-dropdown-list';
+  dropdownList.id = 'dropdown-list-' + fieldName;
+
+  wrapper.appendChild(searchInput);
+  wrapper.appendChild(dropdownList);
+
+  searchInput.addEventListener('focus', function () {
+    renderSearchDropdown(fieldName, options, '');
+    dropdownList.classList.add('active');
+  });
+
+  searchInput.addEventListener('input', function () {
+    renderSearchDropdown(fieldName, options, this.value);
+    dropdownList.classList.add('active');
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!wrapper.contains(e.target)) {
+      dropdownList.classList.remove('active');
+    }
+  });
+
+  return wrapper;
+}
+
+function renderSearchDropdown(fieldName, options, searchTerm) {
+  const dropdownList = $('dropdown-list-' + fieldName);
+  if (!dropdownList) return;
+
+  dropdownList.innerHTML = '';
+  const searchLower = searchTerm.toLowerCase();
+  const filtered = options.filter(function (item) {
+    return item.toLowerCase().includes(searchLower);
+  });
+
+  const currentInput = $('field_' + fieldName);
+  const currentValue = currentInput ? currentInput.value : '';
+
+  filtered.slice(0, 120).forEach(function (itemValue) {
+    const item = document.createElement('div');
+    item.className = 'country-dropdown-item';
+    if (itemValue.toLowerCase() === currentValue.toLowerCase()) {
+      item.classList.add('selected');
+    }
+    item.textContent = itemValue;
+    item.addEventListener('click', function () {
+      const input = $('field_' + fieldName);
+      if (input) input.value = itemValue;
+      dropdownList.classList.remove('active');
+    });
+    dropdownList.appendChild(item);
+  });
+
+  if (!filtered.length) {
+    const empty = document.createElement('div');
+    empty.className = 'country-dropdown-item';
+    empty.textContent = 'No matches found';
+    empty.style.color = '#888';
+    empty.style.cursor = 'default';
+    dropdownList.appendChild(empty);
+  }
+}
+
+function renderFields() {
+  const category = $('categorySelect').value;
+  const action = ACTIONS[category][$('actionSelect').value];
+  const fieldsDiv = $('fields');
+  fieldsDiv.innerHTML = '';
+
+  (action.fields || []).forEach(function (field) {
+    const label = document.createElement('label');
+    label.textContent = FIELD_LABELS[field] || field;
+    fieldsDiv.appendChild(label);
+
+    if (field === 'country') {
+      fieldsDiv.appendChild(createCountryDropdown());
+    } else if (field === 'indicator' && category === 'indicators' && action.label === 'By Indicator') {
+      fieldsDiv.appendChild(createIndicatorDropdown());
+    } else {
+      const input = document.createElement('input');
+      input.id = 'field_' + field;
+
+      if (field === 'startDate' || field === 'endDate') {
+        input.type = 'date';
+      } else if (field === 'fromDateTime' || field === 'toDateTime') {
+        input.type = 'datetime-local';
+      } else if (field === 'startIndex' || field === 'listSize') {
+        input.type = 'number';
+      } else {
+        input.type = 'text';
+      }
+
+      fieldsDiv.appendChild(input);
+    }
+  });
+}
+
+function getFieldValues() {
+  const category = $('categorySelect').value;
+  const action = ACTIONS[category][$('actionSelect').value];
+  const values = {};
+
+  (action.fields || []).forEach(function (field) {
+    values[field] = $('field_' + field).value.trim();
+  });
+
+  return values;
+}
+
+function runSelectedAction() {
+  const category = $('categorySelect').value;
+  const action = ACTIONS[category][$('actionSelect').value];
+  const values = getFieldValues();
+
+  if (action.fields) {
+    for (const f of action.fields) {
+      if (!values[f]) {
+        alert('Please fill: ' + FIELD_LABELS[f]);
+        return;
+      }
+    }
+  }
+
+  const path = action.build(values);
+  const btn = $('runBtn');
+  btn.disabled = true;
+  showSpinner();
+
+  google.script.run
+    .withSuccessHandler(function () {
+      btn.disabled = false;
+      show('appView');
+    })
+    .withFailureHandler(function (err) {
+      btn.disabled = false;
+      show('appView');
+      alert(err.message);
+    })
+    .runApiRequest(path);
+}
+
+function isApiKeyFormatValid(key) {
+  if (key === 'guest:guest') return true;
+  return /^[A-Za-z0-9]{8,64}:[A-Za-z0-9]{8,64}$/.test(key);
+}
+
+function saveFirstKey() {
+  const key = $('apiKeyInput').value.trim();
+  if (!isApiKeyFormatValid(key)) {
+    alert('Invalid API key format. Use guest:guest or a key in the format alphanumeric:alphanumeric (for example abc123def456ghi7:xyz987uvw654rst). Get an API key at https://developer.tradingeconomics.com/');
+    return;
+  }
+  showSpinner();
+
+  google.script.run
+    .withSuccessHandler(function () {
+      if (INITIAL_STATE.view === 'settings') {
+        showSettingsView();
+        return;
+      }
+
+      show('appView');
+      renderActions();
+
+      if (INITIAL_STATE.category && ACTIONS[INITIAL_STATE.category]) {
+        $('categorySelect').value = INITIAL_STATE.category;
+        renderActions();
+      }
+    })
+    .withFailureHandler(function (err) {
+      show('setupView');
+      alert(err.message);
+    })
+    .saveApiKey(key);
+}
+
+function updateKey() {
+  const key = $('newApiKeyInput').value.trim();
+  if (!isApiKeyFormatValid(key)) {
+    alert('Invalid API key format. Use guest:guest or a key in the format alphanumeric:alphanumeric (for example abc123def456ghi7:xyz987uvw654rst). Get an API key at https://developer.tradingeconomics.com/');
+    return;
+  }
+  showSpinner();
+
+  google.script.run
+    .withSuccessHandler(function () {
+      hasApiKey = true;
+      showSettingsView();
+    })
+    .withFailureHandler(function (err) {
+      showSettingsView();
+      alert(err.message);
+    })
+    .saveApiKey(key);
+}
+
+function removeKey() {
+  showSpinner();
+
+  google.script.run
+    .withSuccessHandler(function () {
+      show('setupView');
+    })
+    .withFailureHandler(function (err) {
+      showSettingsView();
+      alert(err.message);
+    })
+    .clearApiKey();
+}
+
+function initialize() {
+  showSpinner();
+
+  google.script.run
+    .withSuccessHandler(function (state) {
+      if (!state.hasApiKey) {
+        show('setupView');
+        return;
+      }
+
+      hasApiKey = true;
+
+      if (INITIAL_STATE.view === 'settings') {
+        showSettingsView();
+        return;
+      }
+
+      show('appView');
+      renderActions();
+
+      if (INITIAL_STATE.category && ACTIONS[INITIAL_STATE.category]) {
+        $('categorySelect').value = INITIAL_STATE.category;
+        renderActions();
+      }
+    })
+    .withFailureHandler(function (err) {
+      show('setupView');
+      alert(err.message);
+    })
+    .getAppState();
+}
+
+$('categorySelect').addEventListener('change', renderActions);
+$('actionSelect').addEventListener('change', renderFields);
+$('runBtn').addEventListener('click', runSelectedAction);
+$('saveKeyBtn').addEventListener('click', saveFirstKey);
+$('updateKeyBtn').addEventListener('click', updateKey);
+$('removeKeyBtn').addEventListener('click', removeKey);
+
+function toggleVisibility(inputId, btnId) {
+  const input = $(inputId);
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  $(btnId).querySelector('svg').style.opacity = isHidden ? '0.4' : '1';
+}
+
+$('toggleApiKeyBtn').addEventListener('click', function () {
+  toggleVisibility('apiKeyInput', 'toggleApiKeyBtn');
+});
+
+$('toggleNewApiKeyBtn').addEventListener('click', function () {
+  toggleVisibility('newApiKeyInput', 'toggleNewApiKeyBtn');
+});
+
+initialize();
+</script>
+
+<footer>
+  <div class="footer-links">
+    <div class="footer-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><a href="https://tradingeconomics.com/analytics/pricing.aspx?source=google-sheets" target="_blank">Subscribe</a> to a plan. Get <a href="https://developer.tradingeconomics.com/" target="_blank">API key</a> or use <strong>guest:guest</strong> to try it out with limited access.</span>
+    </div>
+    <div class="footer-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      <span>Read the <a href="https://docs.tradingeconomics.com/" target="_blank">API documentation</a> for available endpoints and parameters.</span>
+    </div>
+    <div class="footer-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span>For feedback, <a href="https://tradingeconomics.com/contact.aspx?subject=googleSheets" target="_blank">Contact us</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
