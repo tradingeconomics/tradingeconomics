@@ -31,9 +31,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  portfolio_manager_lib:
+    path: ../../../dart/examples/portfolio_manager_lib
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+
+  fl_chart: ^1.0.0
 
 dev_dependencies:
   flutter_test:
