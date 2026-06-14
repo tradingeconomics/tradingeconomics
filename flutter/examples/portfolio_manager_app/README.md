@@ -1,17 +1,30 @@
-# portfolio_manager_app
+# Portfolio Manager App
 
-A new Flutter project.
+This is an example of an Flutter app to manage portfolio a account.
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+* Flutter v3
+* Portfolio Manager back-end - [python/examples/portfolio_manager_backend](../../../python/examples/portfolio_manager_backend/README.md)
 
-A few resources to get you started if this is your first Flutter project:
+## Development
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Initialize project (Only run once):
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```shell
+flutter doctor # For initial sanity checks after Flutter installation
+cd flutter/examples/portfolio_manager_app
+flutter pub get # Install dependecies
+```
+
+Run app:
+
+```shell
+cd flutter/examples/portfolio_manager_app
+flutter run -d linux # Run w/ Linux device
+flutter run -d AAAAAAA0000000 # Run w/ Android device
+```
+
+## Support
+
+The project was initially created with `flutter create` CLI using Flutter v3.44.1 (Dart v3.12.1).
