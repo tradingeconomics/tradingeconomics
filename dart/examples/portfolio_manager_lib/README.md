@@ -1,39 +1,35 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Portfolio Manager Lib
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+This is an example of an Dart lib in order to help fetch and calculate the essential data for the app.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/tools/pub/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## Requirements
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+* Dart v3
+* Portfolio Manager back-end - [python/examples/portfolio_manager_backend](../../../python/examples/portfolio_manager_backend/README.md)
 
-## Features
+## Development
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Initialize project (Only run once):
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```shell
+cd dart/examples/portfolio_manager_lib
+dart pub get # Install dependecies
 ```
 
-## Additional information
+Run bare minimal healthcheck example:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```shell
+cd dart/examples/portfolio_manager_lib
+dart run example/portfolio_manager_lib_example.dart
+```
+
+Run all tests:
+
+```shell
+cd dart/examples/portfolio_manager_lib
+dart test
+```
+
+## Support
+
+The project was initially created with `dart create` CLI using Dart v3.12.1.
