@@ -3,14 +3,16 @@ import 'package:test/test.dart';
 
 void main() {
   group('A group of tests', () {
-    final awesome = Awesome();
+    late PortfolioManagerLib client;
 
-    setUp(() {
-      // Additional setup goes here.
+    setUp(() async {
+      client = PortfolioManagerLib();
+      await client.init();
     });
 
     test('First Test', () {
-      expect(awesome.isAwesome, isTrue);
+      expect(client.isReady, isTrue);
     });
   });
+
 }
