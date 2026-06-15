@@ -17,7 +17,7 @@ accounts: dict[int, dict[str, Any]] = {
         "risk_profile": "moderate",
         "country": "Portugal",
         "address": "Rua Augusta 120, Lisbon",
-        "created_at": "2023-06-15T10:22:31Z",
+        "created_at": "2025-09-23T11:21:01Z",
         "last_login_at": "2026-06-12T18:44:12Z",
         "is_premium": True,
     },
