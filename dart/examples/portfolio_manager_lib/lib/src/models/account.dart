@@ -2,6 +2,11 @@ class Account {
   final int accountId;
   final String owner;
   final String email;
+  final String phone;
+  final String country;
+  final String address;
+  final String creationDate;
+  final bool premium;
   final String currency;
   final List<Map<String, dynamic>> positions;
   final Map<String, double> cashBalances;
@@ -10,7 +15,12 @@ class Account {
     required this.accountId,
     required this.currency,
     required this.owner,
+    required this.premium,
     required this.email,
+    required this.creationDate,
+    required this.phone,
+    required this.country,
+    required this.address,
     required this.positions,
     required this.cashBalances,
   });
@@ -35,6 +45,11 @@ class Account {
       currency: account['currency'],
       owner: account['owner'],
       email: account['email'],
+      phone: account['phone'],
+      creationDate: account['created_at'],
+      premium: account['is_premium'],
+      country: account['country'],
+      address: account['address'],
       positions: positions,
       cashBalances: cashBalances,
     );
