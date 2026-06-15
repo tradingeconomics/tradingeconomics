@@ -62,6 +62,12 @@ class _PortfolioPageState extends State<PortfolioPage> {
   final client = PortfolioManagerLib();
 
   String? accountOwner;
+  String? accountPhone;
+  String? accountCountry;
+  String? accountAddress;
+  String? accountEmail;
+  String? accountCreationDate;
+  bool? accountIsPremium;
   bool? isReady;
   String displayCurrency = "USD";
 
@@ -108,7 +114,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
     } catch (e) {
       setState(() {
         isReady = false;
-        accountOwner = "Unknown";
       });
       return;
     }
@@ -117,12 +122,24 @@ class _PortfolioPageState extends State<PortfolioPage> {
       final account = await client.getAccount(1001);
       setState(() {
         accountOwner = account.owner;
+        accountPhone = account.phone;
+        accountCountry = account.country;
+        accountAddress = account.address;
+        accountEmail = account.email;
+        accountIsPremium = account.premium;
+        accountCreationDate = account.creationDate;
         assets = account.positions;
         cashBalances = Map<String, double>.from(account.cashBalances);
       });
     } catch (e) {
       setState(() {
         accountOwner = "Unknown";
+        accountPhone = "Unknown";
+        accountEmail = "Unknown";
+        accountCountry = "Unknown";
+        accountAddress = "Unknown";
+        accountCreationDate = "Unknown";
+        accountIsPremium = false;
       });
     }
   }
@@ -336,6 +353,12 @@ class _PortfolioPageState extends State<PortfolioPage> {
                       MaterialPageRoute(
                         builder: (_) => AccountPage(
                           accountOwner: accountOwner,
+                          accountIsPremium: accountIsPremium,
+                          accountCountry: accountCountry,
+                          accountAddress: accountAddress,
+                          accountEmail: accountEmail,
+                          accountPhone: accountPhone,
+                          accountCreationDate: accountCreationDate,
                           displayCurrency: displayCurrency,
                           onAddAsset: addAssetDialog,
                         ),
