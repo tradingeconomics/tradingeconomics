@@ -1,2 +1,2 @@
-fastapi[standard]
-tradingeconomics
+fastapi[standard]==0.137.0
+tradingeconomics==4.5.10
