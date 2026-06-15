@@ -6,7 +6,7 @@ import tradingeconomics as te
 
 from app.storage import BASE_PRICES_USD, RATES_TO
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("root")
 
 CACHE_TTL = 300
 
@@ -24,6 +24,7 @@ _rates_cache: tuple[float, dict[str, dict[str, float]]] | None = None
 def _login():
     api_key = os.environ.get("PMEXAMPLE_TRADINGECONOMICS_API_KEY")
     if api_key:
+        logger.debug("te.login(api_key=xxx)")
         te.login(api_key)
 
 
@@ -37,6 +38,7 @@ def get_prices() -> dict[str, float]:
     try:
         _login()
         symbols = list(SYMBOL_MAP.values())
+        logger.debug("te.getMarketsBySymbol(symbols=%s)", symbols)
         data = te.getMarketsBySymbol(symbols=symbols)
         symbol_to_internal = {v: k for k, v in SYMBOL_MAP.items()}
         prices = {}
@@ -80,6 +82,7 @@ def get_rates() -> dict[str, dict[str, float]]:
 
     try:
         _login()
+        logger.debug("te.getCurrencyCross(cross=USD)")
         data = te.getCurrencyCross(cross="USD")
         usd_rates: dict[str, float] = {}
         for entry in data:
