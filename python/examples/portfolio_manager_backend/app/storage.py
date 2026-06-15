@@ -2,7 +2,9 @@
 Mocked Storage
 """
 
-accounts = {
+from typing import Any
+
+accounts: dict[int, dict[str, Any]] = {
     1001: {
         "account_id": 1001,
         "owner": "Alexandre Ferreira",
@@ -77,7 +79,7 @@ portfolio_cash_balances = {
     1003: {"EUR": 0.0, "USD": 15291.79},
 }
 
-portfolio_positions = {
+portfolio_positions: dict[int, list[dict[str, Any]]] = {
     1001: [
         {"symbol": "AAPL", "quantity": 12.0},
         {"symbol": "TSLA", "quantity": 5.0},
@@ -93,4 +95,35 @@ portfolio_positions = {
         {"symbol": "AAPL", "quantity": 12.0},
         {"symbol": "TSLA", "quantity": 5.0},
     ],
+}
+
+# Mock data for stock prices and FX rates
+BASE_PRICES_USD = {
+    "AAPL": 190.50,
+    "TSLA": 284.25,
+    "GOOGL": 359.68,
+    "BTC": 67012.21,
+}
+
+# Mock FX rates for currency conversion
+RATES_TO = {
+    "USD": {"USD": 1.0, "EUR": 0.92, "GBP": 0.79, "JPY": 150.0},
+    "EUR": {
+        "USD": 1.0869565217391304,
+        "EUR": 1.0,
+        "GBP": 0.86,
+        "JPY": 163.04347826086956,
+    },
+    "GBP": {
+        "USD": 1.2658227848101267,
+        "EUR": 1.1627906976744187,
+        "GBP": 1.0,
+        "JPY": 189.873417721519,
+    },
+    "JPY": {
+        "USD": 0.006666666666666667,
+        "EUR": 0.006133333333333333,
+        "GBP": 0.005266666666666667,
+        "JPY": 1.0,
+    },
 }
