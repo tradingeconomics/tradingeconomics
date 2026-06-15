@@ -7,15 +7,15 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 from app.service import get_portfolio
 from app.schemas import AccountPortfolioResponse
-from app.storage import RATES_TO
+from app.te_provider import get_rates
 
 router = APIRouter(prefix="/api/v1")
 
 
 @router.get("/rates")
 def get_fx_rates():
-    """Return mock data"""
-    return RATES_TO
+    """Return exchange rates (TE or fallback)"""
+    return get_rates()
 
 
 @router.get("/accounts/{account_id}", response_model=AccountPortfolioResponse)

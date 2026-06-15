@@ -8,14 +8,13 @@ from app.storage import (
     accounts,
     portfolio_cash_balances,
     portfolio_positions,
-    BASE_PRICES_USD,
-    RATES_TO,
 )
+from app.te_provider import get_prices, get_rates
 
 
 def convert_price_from_usd(price_usd: float, target_currency: str) -> float:
     """Convert price from USD to target currency"""
-    return round(price_usd * RATES_TO["USD"][target_currency], 2)
+    return round(price_usd * get_rates()["USD"][target_currency], 2)
 
 
 def get_account(account_id: int) -> dict[str, Any] | None:
@@ -49,7 +48,7 @@ def get_portfolio(account_id: int) -> None | dict[str, Any]:
         }
         for position in get_positions(account_id)
         for price in [
-            convert_price_from_usd(BASE_PRICES_USD[position["symbol"]], currency)
+            convert_price_from_usd(get_prices()[position["symbol"]], currency)
         ]
     ]
 

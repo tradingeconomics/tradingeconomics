@@ -97,7 +97,7 @@ portfolio_positions: dict[int, list[dict[str, Any]]] = {
     ],
 }
 
-# Mock data for stock prices and FX rates
+# Fallback data for assets base prices
 BASE_PRICES_USD = {
     "AAPL": 190.50,
     "TSLA": 284.25,
@@ -105,7 +105,7 @@ BASE_PRICES_USD = {
     "BTC": 67012.21,
 }
 
-# Mock FX rates for currency conversion
+# Fallback rates for currency conversion
 RATES_TO = {
     "USD": {"USD": 1.0, "EUR": 0.92, "GBP": 0.79, "JPY": 150.0},
     "EUR": {
