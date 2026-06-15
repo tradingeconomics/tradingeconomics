@@ -16,18 +16,13 @@ cd dart/examples/portfolio_manager_lib
 dart pub get # Install dependecies
 ```
 
-Run bare minimal healthcheck example:
+Test:
 
 ```shell
 cd dart/examples/portfolio_manager_lib
-dart run example/portfolio_manager_lib_example.dart
-```
-
-Run all tests:
-
-```shell
-cd dart/examples/portfolio_manager_lib
-dart test
+dart analyze # Run static analysis
+dart run example/portfolio_manager_lib_example.dart # Run bare minimal healthcheck example
+dart test # Run all tests
 ```
 
 ## Support

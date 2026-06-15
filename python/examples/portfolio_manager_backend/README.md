@@ -14,18 +14,20 @@ Initialize project (Only run once):
 
 ```shell
 cd python/examples/portfolio_manager_backend
-python -m venv .venv # Create venv
-. .venv/bin/activate # Activate venv
-python -m pip install --upgrade pip # Upgrade pip
-python -m pip install -r requirements.txt # Install dependecies
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
 Run backend:
 
-> Before running, switch `xxx` with your Trading Economics API key. Use 0.0.0.0 for public host
+> Before run command, pass your Trading Economics API key as `xxx`.
 
 ```shell
-PMEXAMPLE_TRADINGECONOMICS_API_KEY="xxx" python -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+cd python/examples/portfolio_manager_backend
+. .venv/bin/activate
+PMEXAMPLE_TRADINGECONOMICS_API_KEY="xxx" python main.py
 ```
 
 URLs Available after run:

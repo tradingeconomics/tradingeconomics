@@ -25,6 +25,14 @@ flutter run -d linux # Run w/ Linux device
 flutter run -d AAAAAAA0000000 # Run w/ Android device
 ```
 
+Test app:
+
+```shell
+cd flutter/examples/portfolio_manager_app
+dart analyze # Run static analysis
+flutter test # Run all tests
+```
+
 ## Support
 
 The project was initially created with `flutter create` CLI using Flutter v3.44.1 (Dart v3.12.1).
