@@ -25,44 +25,44 @@ class AccountPage extends StatelessWidget {
     required this.onAddAsset,
   });
 
+  static String _getCreatedSince(String? accountCreationDate) {
+    if (accountCreationDate == null) return "Loading...";
+    final createdDate = DateTime.parse(accountCreationDate);
+    final now = DateTime.now();
+    final difference = now.difference(createdDate);
+
+    final years = difference.inDays ~/ 365;
+    if (years > 0) {
+      return years == 1 ? "1 year ago" : "$years years ago";
+    }
+    final months = difference.inDays ~/ 30;
+    if (months > 0) {
+      return months == 1 ? "1 month ago" : "$months months ago";
+    }
+    final weeks = difference.inDays ~/ 7;
+    if (weeks > 0) {
+      return weeks == 1 ? "1 week ago" : "$weeks weeks ago";
+    }
+    if (difference.inDays > 0) {
+      return difference.inDays == 1
+          ? "1 day ago"
+          : "${difference.inDays} days ago";
+    }
+    if (difference.inHours > 0) {
+      return difference.inHours == 1
+          ? "1 hour ago"
+          : "${difference.inHours} hours ago";
+    }
+    if (difference.inMinutes > 0) {
+      return difference.inMinutes == 1
+          ? "1 minute ago"
+          : "${difference.inMinutes} minutes ago";
+    }
+    return "Just now";
+  }
+
   @override
   Widget build(BuildContext context) {
-    String getCreatedSince(String? accountCreationDate) {
-      if (accountCreationDate == null) return "Loading...";
-      final createdDate = DateTime.parse(accountCreationDate);
-      final now = DateTime.now();
-      final difference = now.difference(createdDate);
-
-      final years = difference.inDays ~/ 365;
-      if (years > 0) {
-        return years == 1 ? "1 year ago" : "$years years ago";
-      }
-      final months = difference.inDays ~/ 30;
-      if (months > 0) {
-        return months == 1 ? "1 month ago" : "$months months ago";
-      }
-      final weeks = difference.inDays ~/ 7;
-      if (weeks > 0) {
-        return weeks == 1 ? "1 week ago" : "$weeks weeks ago";
-      }
-      if (difference.inDays > 0) {
-        return difference.inDays == 1
-            ? "1 day ago"
-            : "${difference.inDays} days ago";
-      }
-      if (difference.inHours > 0) {
-        return difference.inHours == 1
-            ? "1 hour ago"
-            : "${difference.inHours} hours ago";
-      }
-      if (difference.inMinutes > 0) {
-        return difference.inMinutes == 1
-            ? "1 minute ago"
-            : "${difference.inMinutes} minutes ago";
-      }
-      return "Just now";
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Account"),
@@ -181,7 +181,7 @@ class AccountPage extends StatelessWidget {
                       const Text("Created Since"),
                       Text(
                         accountCreationDate != null
-                            ? getCreatedSince(accountCreationDate)
+                            ? _getCreatedSince(accountCreationDate)
                             : "Loading...",
                         style: TextStyle(
                           fontSize: 18,

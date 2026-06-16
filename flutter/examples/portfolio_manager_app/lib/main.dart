@@ -59,7 +59,7 @@ class PortfolioPage extends StatefulWidget {
 }
 
 class _PortfolioPageState extends State<PortfolioPage> {
-  final client = PortfolioManagerLib();
+  final PortfolioManagerLib client = PortfolioManagerLib();
 
   String? accountOwner;
   String? accountPhone;
@@ -72,87 +72,74 @@ class _PortfolioPageState extends State<PortfolioPage> {
   String displayCurrency = "USD";
 
   List<Map<String, dynamic>> assets = [];
-  Map<String, double> cashBalances = {};
-  Map<String, Map<String, double>> fxTo = {};
+  Map<String, double> _cashBalances = {};
+  Map<String, Map<String, double>> _fxTo = {};
 
-  static const List<String> supportedCurrencies = ["USD", "EUR", "GBP", "JPY"];
+  static const List<String> _supportedCurrencies = ["USD", "EUR", "GBP", "JPY"];
 
   @override
   void initState() {
     super.initState();
-    _initialize();
+    _loadAll();
   }
 
-  Future<void> _retry() async {
-    setState(() {
-      isReady = null;
-    });
-    await _initialize();
-  }
-
-  Future<void> _initialize() async {
-    await Future.wait([_loadAccount(), _loadFxRates()]);
-  }
-
-  Future<void> _loadFxRates() async {
-    try {
-      final fx = await client.getFxRates();
-      setState(() {
-        fxTo = fx.rates;
-      });
-    } catch (e) {
-      debugPrint('Failed to load FX rates: $e');
-    }
-  }
-
-  Future<void> _loadAccount() async {
+  Future<void> _loadAll() async {
     try {
       await client.init();
-      setState(() {
-        isReady = client.isReady;
-      });
+
+      if (!client.isReady) {
+        setState(() => isReady = client.isReady);
+        return;
+      }
     } catch (e) {
-      setState(() {
-        isReady = false;
-      });
+      if (mounted) setState(() => isReady = false);
       return;
     }
 
+    Account? account;
     try {
-      final account = await client.getAccount(1001);
-      setState(() {
-        accountOwner = account.owner;
-        accountPhone = account.phone;
-        accountCountry = account.country;
-        accountAddress = account.address;
-        accountEmail = account.email;
-        accountIsPremium = account.premium;
-        accountCreationDate = account.creationDate;
-        assets = account.positions;
-        cashBalances = Map<String, double>.from(account.cashBalances);
-      });
+      account = await client.getAccount(1001);
     } catch (e) {
-      setState(() {
-        accountOwner = "Unknown";
-        accountPhone = "Unknown";
-        accountEmail = "Unknown";
-        accountCountry = "Unknown";
-        accountAddress = "Unknown";
-        accountCreationDate = "Unknown";
-        accountIsPremium = false;
-      });
+      debugPrint('Failed to load account: $e');
     }
+
+    FxRates? fxRates;
+    try {
+      fxRates = await client.getFxRates();
+    } catch (e) {
+      debugPrint('Failed to load FX rates: $e');
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      isReady = true;
+      accountOwner = account?.owner ?? "Unknown";
+      accountPhone = account?.phone ?? "Unknown";
+      accountCountry = account?.country ?? "Unknown";
+      accountAddress = account?.address ?? "Unknown";
+      accountEmail = account?.email ?? "Unknown";
+      accountCreationDate = account?.creationDate ?? "Unknown";
+      accountIsPremium = account?.premium ?? false;
+      assets = account?.positions ?? [];
+      _cashBalances = account != null
+          ? Map<String, double>.from(account.cashBalances)
+          : <String, double>{};
+      if (fxRates != null) {
+        _fxTo = fxRates.rates;
+      }
+    });
   }
 
   double convertCurrency(double amount, String from, String to) {
     if (from == to) return amount;
 
-    final directRate = fxTo[from]?[to];
+    final directRate = _fxTo[from]?[to];
     if (directRate != null) {
       return amount * directRate;
     }
 
-    final inverseRate = fxTo[to]?[from];
+    final inverseRate = _fxTo[to]?[from];
     if (inverseRate != null && inverseRate != 0) {
       return amount / inverseRate;
     }
@@ -164,7 +151,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
   }
 
   double get totalCashBalances {
-    return cashBalances.entries.fold(0.0, (sum, entry) {
+    return _cashBalances.entries.fold(0.0, (sum, entry) {
       return sum + convertCurrency(entry.value, entry.key, displayCurrency);
     });
   }
@@ -192,6 +179,8 @@ class _PortfolioPageState extends State<PortfolioPage> {
     final valueInFrom = quantity * price;
     return convertCurrency(valueInFrom, fromCurrency, toCurrency);
   }
+
+  String _money(double value) => "${value.toStringAsFixed(2)} $displayCurrency";
 
   Future<void> addAssetDialog() async {
     final symbolController = TextEditingController();
@@ -277,11 +266,14 @@ class _PortfolioPageState extends State<PortfolioPage> {
                       }
 
                       setState(() {
-                        assets.add({
-                          "symbol": symbol,
-                          "quantity": quantity,
-                          "price": price,
-                        });
+                        assets = [
+                          ...assets,
+                          {
+                            "symbol": symbol,
+                            "quantity": quantity,
+                            "price": price,
+                          },
+                        ];
                       });
 
                       Navigator.pop(context);
@@ -308,7 +300,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
         return SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: supportedCurrencies.map((currency) {
+            children: _supportedCurrencies.map((currency) {
               return ListTile(
                 title: Text(currency),
                 trailing: currency == displayCurrency
@@ -330,9 +322,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
 
   @override
   Widget build(BuildContext context) {
-    String money(double value) =>
-        "${value.toStringAsFixed(2)} $displayCurrency";
-
     return Scaffold(
       appBar: AppBar(
         actionsPadding: const EdgeInsets.symmetric(
@@ -389,18 +378,12 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         const SizedBox(width: 12),
                         const Flexible(
                           child: Text(
-                            "API not healthy/ready\n(Try again later)",
+                            "API not healthy/ready\n(Restart application, and try again)",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        IconButton(
-                          tooltip: "Retry",
-                          icon: const Icon(Icons.refresh),
-                          onPressed: _retry,
                         ),
                       ],
                     ),
@@ -428,7 +411,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                     ).textTheme.labelLarge,
                                   ),
                                   Text(
-                                    money(totalCashBalances),
+                                    _money(totalCashBalances),
                                     style: TextStyle(
                                       fontSize: 22,
                                       color: Theme.of(
@@ -445,7 +428,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                     ).textTheme.labelLarge,
                                   ),
                                   Text(
-                                    money(totalNetWorth),
+                                    _money(totalNetWorth),
                                     style: const TextStyle(
                                       fontSize: 28,
                                       fontWeight: FontWeight.bold,
@@ -460,7 +443,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                   tooltip: "Refresh account",
                                   icon: const Icon(Icons.refresh),
                                   onPressed: () async {
-                                    await _loadAccount();
+                                    await _loadAll();
                                   },
                                 ),
                               ),
@@ -481,7 +464,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     ),
 
                     Text(
-                      "Total: ${money(totalCashBalances)}",
+                      "Total: ${_money(totalCashBalances)}",
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -495,9 +478,9 @@ class _PortfolioPageState extends State<PortfolioPage> {
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: cashBalances.length,
+                        itemCount: _cashBalances.length,
                         itemBuilder: (context, index) {
-                          final entry = cashBalances.entries.elementAt(index);
+                          final entry = _cashBalances.entries.elementAt(index);
                           final convertedValue = convertCurrency(
                             entry.value,
                             entry.key,
@@ -514,7 +497,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                   )
                                 : null,
                             trailing: Text(
-                              money(convertedValue),
+                              _money(convertedValue),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.secondary,
@@ -536,7 +519,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     ),
 
                     Text(
-                      "Total: ${money(totalAssetsValue)}",
+                      "Total: ${_money(totalAssetsValue)}",
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -579,7 +562,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                               "${asset["quantity"]} shares @ \$${(asset["price"] as num).toStringAsFixed(2)}",
                             ),
                             trailing: Text(
-                              money(valueInDisplayCurrency),
+                              _money(valueInDisplayCurrency),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),

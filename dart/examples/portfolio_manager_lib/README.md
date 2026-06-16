@@ -13,7 +13,7 @@ Initialize project (Only run once):
 
 ```shell
 cd dart/examples/portfolio_manager_lib
-dart pub get # Install dependecies
+dart pub get # Install dependencies
 ```
 
 Test:

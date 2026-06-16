@@ -16,7 +16,10 @@ class PortfolioManagerLib {
     this.basePrefix = '/api/v1',
   });
 
-  Future<dynamic> _get(String path, [Map<String, String>? params]) async {
+  Future<Map<String, dynamic>> _get(
+    String path, [
+    Map<String, String>? params,
+  ]) async {
     final uri = Uri.parse(
       '$baseUrl$basePrefix$path',
     ).replace(queryParameters: params);
@@ -35,7 +38,7 @@ class PortfolioManagerLib {
         );
       }
 
-      return jsonDecode(body);
+      return jsonDecode(body) as Map<String, dynamic>;
     } finally {
       client.close();
     }
@@ -44,7 +47,7 @@ class PortfolioManagerLib {
   Future<bool> _healthCheck() async {
     try {
       final data = await _get('/health') as Map<String, dynamic>;
-      return data['status'] == 'ok';
+      return data['status'] == 'ok' || data['status'] == 'ok-offline';
     } catch (_) {
       return false;
     }

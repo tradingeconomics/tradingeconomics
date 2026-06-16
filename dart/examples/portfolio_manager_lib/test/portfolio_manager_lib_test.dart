@@ -14,5 +14,4 @@ void main() {
       expect(client.isReady, isTrue);
     });
   });
-
 }
