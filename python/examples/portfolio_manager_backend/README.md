@@ -6,13 +6,14 @@ The purpose it's to return the account's data, fetchs data from Trading Economic
 
 ## Requirements
 
-* [Trading Economics API Key](https://tradingeconomics.com/api/pricing.aspx)
+* Trading Economics API Key (Optional): https://tradingeconomics.com/api/pricing.aspx
 
-## Development
+## Getting Started
 
 Initialize project (Only run once):
 
 ```shell
+# git clone ...
 cd python/examples/portfolio_manager_backend
 python -m venv .venv
 . .venv/bin/activate
@@ -20,14 +21,15 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-Run backend:
+Run:
 
-> Before run command, pass your Trading Economics API key as `xxx`.
+> Before running the command, check your Trading Economics API key as `***`.
 
 ```shell
 cd python/examples/portfolio_manager_backend
 . .venv/bin/activate
-PMEXAMPLE_TRADINGECONOMICS_API_KEY="xxx" python main.py
+python main.py # Start back-end in offline-mode (Mock data)
+PMEXAMPLE_TRADINGECONOMICS_API_KEY="***" python main.py # Start back-end in online-mode (Trading Economics API)
 ```
 
 URLs Available after run:
