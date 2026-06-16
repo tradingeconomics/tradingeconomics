@@ -46,7 +46,7 @@ class PortfolioManagerLib {
 
   Future<bool> _healthCheck() async {
     try {
-      final data = await _get('/health') as Map<String, dynamic>;
+      final data = await _get('/health');
       return data['status'] == 'ok' || data['status'] == 'ok-offline';
     } catch (_) {
       return false;
@@ -58,12 +58,18 @@ class PortfolioManagerLib {
   }
 
   Future<FxRates> getFxRates() async {
-    return FxRates.fromJson(await _get('/rates') as Map<String, dynamic>);
+    return FxRates.fromJson(await _get('/rates'));
   }
 
   Future<Account> getAccount(int accountId) async {
-    return Account.fromJson(
-      await _get('/accounts/$accountId') as Map<String, dynamic>,
-    );
+    return Account.fromJson(await _get('/accounts/$accountId'));
+  }
+
+  Future<Map<String, dynamic>> getAssetDetails(String symbol) {
+    return _get('/market/$symbol');
+  }
+
+  Future<Map<String, dynamic>> getAssetHistory(String symbol) {
+    return _get('/history/$symbol');
   }
 }
