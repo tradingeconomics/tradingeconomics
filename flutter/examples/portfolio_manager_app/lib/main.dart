@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:portfolio_manager_app/constants/app_constants.dart';
 import 'package:portfolio_manager_app/pages/asset_detail_page.dart';
 import 'package:portfolio_manager_app/pages/account_page.dart';
@@ -183,10 +184,13 @@ class _PortfolioPageState extends State<PortfolioPage> {
   String _money(double value) => "${value.toStringAsFixed(2)} $displayCurrency";
 
   Future<void> addAssetDialog() async {
-    final symbolController = TextEditingController();
     final quantityController = TextEditingController();
     final priceController = TextEditingController();
+
     String? errorText;
+    String selectedSymbol = "TSLA";
+
+    const availableSymbols = ["AAPL", "TSLA", "GOOGL", "BTC"];
 
     try {
       await showDialog(
@@ -199,27 +203,54 @@ class _PortfolioPageState extends State<PortfolioPage> {
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    TextField(
-                      controller: symbolController,
+                    DropdownButtonFormField<String>(
+                      value: selectedSymbol,
                       decoration: const InputDecoration(labelText: "Symbol"),
-                      textCapitalization: TextCapitalization.characters,
+                      items: availableSymbols
+                          .map(
+                            (symbol) => DropdownMenuItem(
+                              value: symbol,
+                              child: Text(symbol),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          setDialogState(() {
+                            selectedSymbol = value;
+                          });
+                        }
+                      },
                     ),
+
                     TextField(
                       controller: quantityController,
                       keyboardType: const TextInputType.numberWithOptions(
                         decimal: true,
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d*\.?\d*$'),
+                        ),
+                      ],
                       decoration: const InputDecoration(labelText: "Quantity"),
                     ),
+
                     TextField(
                       controller: priceController,
                       keyboardType: const TextInputType.numberWithOptions(
                         decimal: true,
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d*\.?\d*$'),
+                        ),
+                      ],
                       decoration: const InputDecoration(
                         labelText: "Price (USD)",
                       ),
                     ),
+
                     if (errorText != null) ...[
                       const SizedBox(height: 8),
                       Text(
@@ -236,20 +267,13 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      final symbol = symbolController.text.trim().toUpperCase();
                       final quantity = double.tryParse(
                         quantityController.text.trim(),
                       );
+
                       final price = double.tryParse(
                         priceController.text.trim(),
                       );
-
-                      if (symbol.isEmpty) {
-                        setDialogState(() {
-                          errorText = "Symbol is required.";
-                        });
-                        return;
-                      }
 
                       if (quantity == null || quantity <= 0) {
                         setDialogState(() {
@@ -269,7 +293,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         assets = [
                           ...assets,
                           {
-                            "symbol": symbol,
+                            "symbol": selectedSymbol,
                             "quantity": quantity,
                             "price": price,
                           },
@@ -287,7 +311,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
         },
       );
     } finally {
-      symbolController.dispose();
       quantityController.dispose();
       priceController.dispose();
     }
@@ -552,8 +575,10 @@ class _PortfolioPageState extends State<PortfolioPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) =>
-                                      AssetDetailPage(symbol: asset["symbol"]),
+                                  builder: (_) => AssetDetailPage(
+                                    symbol: asset["symbol"],
+                                    client: client,
+                                  ),
                                 ),
                               );
                             },
