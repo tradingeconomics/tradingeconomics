@@ -1,9 +1,10 @@
 """
-Mocked Storage
+Mocked Storage.
 """
 
 from typing import Any
 
+# Portfolio accounts
 accounts: dict[int, dict[str, Any]] = {
     1001: {
         "account_id": 1001,
@@ -55,12 +56,14 @@ accounts: dict[int, dict[str, Any]] = {
     },
 }
 
+# Portfolio cash balances per account
 portfolio_cash_balances = {
     1001: {"EUR": 2512.12, "USD": 124.27},
     1002: {"EUR": 0.0, "USD": 15291.79},
     1003: {"EUR": 0.0, "USD": 15291.79},
 }
 
+# Portfolio positions per account
 portfolio_positions: dict[int, list[dict[str, Any]]] = {
     1001: [
         {"symbol": "AAPL", "quantity": 12.0},
@@ -79,7 +82,7 @@ portfolio_positions: dict[int, list[dict[str, Any]]] = {
     ],
 }
 
-# Fallback data for assets base prices
+# Fallback market data for assets base prices
 BASE_PRICES_USD = {
     "AAPL": 190.50,
     "TSLA": 284.25,
@@ -87,7 +90,43 @@ BASE_PRICES_USD = {
     "BTC": 67012.21,
 }
 
-# Fallback rates for currency conversion
+# Fallback market data for assets meta-information
+MARKET_FALLBACK: dict[str, dict[str, Any]] = {
+    "AAPL": {
+        "Ticker": "AAPL",
+        "Name": "Apple",
+        "MarketCap": 4099562400000.0,
+        "YTDPercentualChange": 7.09,
+        "WeeklyPercentualChange": -5.27,
+        "MonthlyPercentualChange": -2.59,
+    },
+    "TSLA": {
+        "Ticker": "TSLA",
+        "Name": "Tesla",
+        "MarketCap": 789000000000.0,
+        "YTDPercentualChange": -12.34,
+        "WeeklyPercentualChange": -3.21,
+        "MonthlyPercentualChange": 1.45,
+    },
+    "GOOGL": {
+        "Ticker": "GOOGL",
+        "Name": "Alphabet Inc.",
+        "YTDPercentualChange": 5.67,
+        "MarketCap": 1950000000000.0,
+        "WeeklyPercentualChange": 0.89,
+        "MonthlyPercentualChange": -1.23,
+    },
+    "BTC": {
+        "Ticker": "BTC",
+        "Name": "Bitcoin",
+        "MarketCap": 1320000000000.0,
+        "YTDPercentualChange": 45.21,
+        "WeeklyPercentualChange": 2.15,
+        "MonthlyPercentualChange": 8.73,
+    },
+}
+
+# Fallback rates data for currency conversion
 RATES_TO = {
     "USD": {"USD": 1.0, "EUR": 0.92, "GBP": 0.79, "JPY": 150.0},
     "EUR": {

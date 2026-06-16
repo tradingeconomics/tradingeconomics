@@ -8,16 +8,19 @@ import tradingeconomics as te
 import uvicorn
 import os
 import app.log as log
+from typing import AsyncGenerator
 from app.routes import router
 from app.schemas import AppState
 from app.service import init_service
-from app.te_provider import LoginError
+from app.te_provider import LoginTEProviderException
 
 logger = log.setup_custom_logger("root")
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    """Initialize application state and external Trading Economics authentication."""
+
     offline_mode = not os.environ.get("PMEXAMPLE_TRADINGECONOMICS_API_KEY")
     app.state.data = AppState(
         offline=offline_mode,
@@ -27,7 +30,7 @@ async def lifespan(app: FastAPI):
     if not offline_mode:
         try:
             app.state.data.is_auth = init_service()
-        except LoginError as e:
+        except LoginTEProviderException as e:
             if isinstance(e.__cause__, te.CredentialsError):
                 logger.error("%s - Root cause was a credentials error", e)
             else:
@@ -51,6 +54,8 @@ app.include_router(router)
 
 
 def main():
+    """Portfolio Manager Backend entry point. Run FastAPI app with Uvicorn."""
+
     uvicorn.run(
         "main:app",
         host="127.0.0.1",

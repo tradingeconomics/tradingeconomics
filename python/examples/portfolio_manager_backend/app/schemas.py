@@ -1,15 +1,16 @@
 """
-Object Schemas
+Object Schemas.
 """
 
 from dataclasses import dataclass
 from typing import Optional
-
 from pydantic import BaseModel
 
 
 @dataclass
 class AppState:
+    """Application state"""
+
     offline: bool
     is_auth: bool
     startup_complete: bool
