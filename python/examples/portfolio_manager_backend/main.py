@@ -2,14 +2,51 @@
 Main entry point.
 """
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
+import tradingeconomics as te
 import uvicorn
+import os
 import app.log as log
 from app.routes import router
+from app.schemas import AppState
+from app.service import init_service
+from app.te_provider import LoginError
 
 logger = log.setup_custom_logger("root")
 
-app = FastAPI(title="Portfolio Manager Back-End")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    offline_mode = not os.environ.get("PMEXAMPLE_TRADINGECONOMICS_API_KEY")
+    app.state.data = AppState(
+        offline=offline_mode,
+        is_auth=False,
+        startup_complete=False,
+    )
+    if not offline_mode:
+        try:
+            app.state.data.is_auth = init_service()
+        except LoginError as e:
+            if isinstance(e.__cause__, te.CredentialsError):
+                logger.error("%s - Root cause was a credentials error", e)
+            else:
+                logger.error(e)
+    else:
+        logger.warning(
+            "Trading Economics API Key is not present, mocked data will be used."
+        )
+    app.state.data.startup_complete = True
+    logger.info(
+        "Starting Portfolio Manager backend (PID=%s,offline=%s,is_auth=%s)",
+        os.getpid(),
+        app.state.data.offline,
+        app.state.data.is_auth,
+    )
+    yield
+
+
+app = FastAPI(title="Portfolio Manager Back-End", lifespan=lifespan)
 app.include_router(router)
 
 

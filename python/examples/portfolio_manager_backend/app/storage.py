@@ -55,24 +55,6 @@ accounts: dict[int, dict[str, Any]] = {
     },
 }
 
-bank_accounts = {
-    1001: {
-        "iban": "PT50000201231234567890154",
-        "swift": "TOTAPTPL",
-        "bank_name": "Demo Bank",
-    },
-    1002: {
-        "iban": "PT50000201239876543210987",
-        "swift": "CGDIPTPL",
-        "bank_name": "Demo Bank",
-    },
-    1003: {
-        "iban": "US12345678901234567890",
-        "swift": "BOFAUS3N",
-        "bank_name": "Demo Bank",
-    },
-}
-
 portfolio_cash_balances = {
     1001: {"EUR": 2512.12, "USD": 124.27},
     1002: {"EUR": 0.0, "USD": 15291.79},

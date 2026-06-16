@@ -6,7 +6,7 @@ import tradingeconomics as te
 
 from app.storage import BASE_PRICES_USD, RATES_TO
 
-logger = logging.getLogger("root")
+logger = logging.getLogger(__name__)
 
 CACHE_TTL = 300
 
@@ -17,18 +17,36 @@ SYMBOL_MAP = {
     "BTC": "BTCUSD:CUR",
 }
 
+LOG_ERROR_AUTH_FAILED = "Failed to authenticate on Trading Economics"
+
 _prices_cache: tuple[float, dict[str, float]] | None = None
 _rates_cache: tuple[float, dict[str, dict[str, float]]] | None = None
+
+
+class LoginError(Exception):
+    """Raised when login fails due to credential issues."""
+
+    pass
+
+
+def init():
+    try:
+        _login()
+        return True
+    except te.CredentialsError as e:
+        raise LoginError(LOG_ERROR_AUTH_FAILED) from e
+    except Exception as e:
+        raise LoginError("Unexpected authentication failure") from e
 
 
 def _login():
     api_key = os.environ.get("PMEXAMPLE_TRADINGECONOMICS_API_KEY")
     if api_key:
-        logger.debug("te.login(api_key=xxx)")
+        logger.debug("te.login(api_key=***)")
         te.login(api_key)
 
 
-def get_prices() -> dict[str, float]:
+def get_te_prices() -> dict[str, float]:
     global _prices_cache
 
     now = time.time()
@@ -73,7 +91,7 @@ def get_prices() -> dict[str, float]:
     return BASE_PRICES_USD
 
 
-def get_rates() -> dict[str, dict[str, float]]:
+def get_te_rates() -> dict[str, dict[str, float]]:
     global _rates_cache
 
     now = time.time()

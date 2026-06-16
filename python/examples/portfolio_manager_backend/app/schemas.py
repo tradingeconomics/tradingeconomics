@@ -2,9 +2,17 @@
 Object Schemas
 """
 
+from dataclasses import dataclass
 from typing import Optional
 
 from pydantic import BaseModel
+
+
+@dataclass
+class AppState:
+    offline: bool
+    is_auth: bool
+    startup_complete: bool
 
 
 class Position(BaseModel):
