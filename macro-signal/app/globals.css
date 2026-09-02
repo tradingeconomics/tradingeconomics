@@ -1,0 +1,201 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@source "../lib";
+@source "../components";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* App tokens */
+  --background: #f5f5f4;
+  --foreground: #1c1917;
+  --surface: #ffffff;
+  --surface-header: #f5f5f4;
+  --surface-muted: #fafaf9;
+  --border-subtle: #f5f5f4;
+  --text-muted: #78716c;
+  --subtle: #a8a29e;
+  --value: #1c1917;
+  --delta-up: #047857;
+  --delta-down: #be123c;
+  --spark-up-fill: #ecfdf5;
+  --spark-up-stroke: #059669;
+  --spark-up-dot: #047857;
+  --spark-down-fill: #fff1f2;
+  --spark-down-stroke: #e11d48;
+  --spark-down-dot: #be123c;
+  --spark-flat-fill: #f5f5f4;
+  --spark-flat-stroke: #a8a29e;
+  --spark-flat-dot: #78716c;
+
+  --toggle-active-bg: #e7e5e4;
+  --toggle-active-fg: #1c1917;
+  --toggle-inactive-fg: #737373;
+  --card: #ffffff;
+  --card-foreground: #1c1917;
+  --popover: #ffffff;
+  --popover-foreground: #1c1917;
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: #78716c;
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #e7e5e4;
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.25rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+:root.dark {
+  /* App tokens — TE palette */
+  --background: #121212;
+  --foreground: #ffffff;
+  --surface: #222222;
+  --surface-header: #333333;
+  --surface-muted: #1a1a1a;
+  --border-subtle: #2a2a2a;
+  --text-muted: #b0b0b0;
+  --subtle: #888888;
+  --value: #ffffff;
+  --delta-up: #81c784;
+  --delta-down: #ec7063;
+  --spark-up-fill: #1b2e1f;
+  --spark-up-stroke: #81c784;
+  --spark-up-dot: #a5d6a7;
+  --spark-down-fill: #2e1b1b;
+  --spark-down-stroke: #ec7063;
+  --spark-down-dot: #f5b7b1;
+  --spark-flat-fill: #2a2a2a;
+  --spark-flat-stroke: #666666;
+  --spark-flat-dot: #888888;
+
+  --toggle-active-bg: #333333;
+  --toggle-active-fg: #ffffff;
+  --toggle-inactive-fg: #757575;
+
+  /* shadcn/ui tokens — aligned to TE dark */
+  --card: #222222;
+  --card-foreground: #ffffff;
+  --popover: #222222;
+  --popover-foreground: #ffffff;
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: #333333;
+  --secondary-foreground: #ffffff;
+  --muted: #333333;
+  --muted-foreground: #b0b0b0;
+  --accent: #333333;
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #3a3a3a;
+  --input: #333333;
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: #222222;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #333333;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #3a3a3a;
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-header: var(--surface-header);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-value: var(--value);
+  --color-delta-up: var(--delta-up);
+  --color-delta-down: var(--delta-down);
+  --color-toggle-active-bg: var(--toggle-active-bg);
+  --color-toggle-active-fg: var(--toggle-active-fg);
+  --color-toggle-inactive-fg: var(--toggle-inactive-fg);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .text-delta-up {
+    color: var(--delta-up);
+  }
+
+  .text-delta-down {
+    color: var(--delta-down);
+  }
+}
