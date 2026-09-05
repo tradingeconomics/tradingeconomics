@@ -1,0 +1,27 @@
+.indicator-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.comparison-card {
+    transition: all 0.3s ease;
+}
+
+.comparison-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loading {
+    backdrop-filter: blur(3px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
