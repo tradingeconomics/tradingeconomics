@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDP Comparator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>GDP Comparator</h1>
+        <form action="/" method="post">
+            <label for="country1">Country 1:</label>
+            <select id="country1" name="country1" required>
+                <option value="Sweden">Sweden</option>
+                <option value="New Zealand">New Zealand</option>
+            </select>
+
+            <label for="country2">Country 2:</label>
+            <select id="country2" name="country2" required>
+                <option value="New Zealand">New Zealand</option>
+                <option value="Sweden">Sweden</option>
+            </select>
+
+            <button type="submit">Compare</button>
+        </form>
+    </div>
+</body>
+</html>
