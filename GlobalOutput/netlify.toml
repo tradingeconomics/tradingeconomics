@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+  functions = "pages/api"
+
+[functions]
+  included_files = ["public/**"]
