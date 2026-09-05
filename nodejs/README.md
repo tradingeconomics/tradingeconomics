@@ -11,3 +11,21 @@ To integrate the Trading Economics API with NodeJs, use the official npm package
 
 - GitHub: https://github.com/tradingeconomics/tradingeconomics-js
 - npm: https://www.npmjs.com/package/tradingeconomics
+
+#
+
+
+In this example app, we'll utilise the Trading Economics API to compare two countries' core inflation rates, employment rates, GDP, and unemployment rates.
+
+Dependecies used in this project are:
+<li>Expressjs for building the server</li>
+<li>Axios: for sending request</li>
+<li>dotenv for storing the API KEY</li>
+<li>chart.js for displaying the chart bar to the user.</li>
+
+#
+The app has three endpoints
+On **"/"** the app send the html file (the UI)
+On **"/api/v1/allcontries"** the app send json file of all supported country in tranding Economics
+On **"/api/v1/compare?firstCountry=mexico&secondCountry=sweden"**: In this endpoint the first country and
+sencond are from the req query params and the endpoint returns the data needed for comparing core inflation rates, employment rates, GDP, and unemployment rates.

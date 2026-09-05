@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h2>Compare two country economies</h2>
+        <p class="error-displayer"></p>
+        <form>
+            <div>
+                <label for="fist-country">Select first country</label>
+                <select name="fist-country" id="fist-country" required>
+                    <option value=""></option>
+                </select>
+            </div>
+            <div>
+                <label for="second-country">Select second country</label>
+                <select name="second-country" id="second-country" required>
+                    <option value=""></option>
+                </select>
+            </div>
+            <button>Compare</button>
+        </form>  
+        <p class="loading">Loading ...</p>
+        <section>
+            <canvas id="gpd"></canvas>
+            <canvas id="inflation-rate"></canvas>
+            <canvas id="employment-rate"></canvas>
+            <canvas id="unemployment-rate"></canvas>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
