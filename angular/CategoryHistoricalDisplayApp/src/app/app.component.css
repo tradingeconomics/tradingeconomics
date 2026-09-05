@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  .app-header {
+    background-color: #3f51b5;
+    color: #fff;
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .app-content {
+    padding: 16px;
+  }
+  
+  .app-footer {
+    background-color: #3f51b5;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+  

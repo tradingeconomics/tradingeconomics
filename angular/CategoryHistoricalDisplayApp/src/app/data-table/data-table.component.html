@@ -1,0 +1,9 @@
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let data of datas">
+    <button type="button">
+      <span class="badge">{{data.Country}}</span>
+      <span class="name">{{data.Category}}</span>
+    </button>
+  </li>
+</ul>
