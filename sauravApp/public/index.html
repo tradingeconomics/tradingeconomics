@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Analysis Dashboard</title>
+    <link rel="stylesheet" href="/js/sumoSelect/stylesheets/sumoselect.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/sumoSelect/javascripts/jquery.sumoselect.min.js"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Trading Economics Dashboard</h1>
+        <ul class="flex space-x-4">
+            <li><a href="#" class="hover:text-gray-300">Home</a></li>
+            <li><a href="#" class="hover:text-gray-300">Markets</a></li>
+            <li><a href="#" class="hover:text-gray-300">Portfolio</a></li>
+            <li><a href="#" class="hover:text-gray-300">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-5xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md relative">
+        <div class="flex justify-between items-center">
+            <h2 class=" text-2xl font-bold text-gray-800 mb-4">GDP Indicator Comparision</h2>
+
+            <!-- Select Options -->
+            <div class="flex">
+                <div class="mb-4 mr-4">
+                    <label for="tradingPairs" class="block text-gray-700 font-semibold mb-1">Select Trading
+                        Pairs:</label>
+                    <select id="tradingPairs" multiple="multiple" class="SlectBox country">
+                        <option selected value="Mexico">Mexico</option>
+                        <option selected value="Thailand">Thailand</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Sweden">Sweden</option>
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <label for="timeSeries" class="block text-gray-700 font-semibold mb-1">Select Time Series:</label>
+                    <select id="timeSeries" class="SlectBox years">
+                        <option selected value="2018-01-01 2025-01-01">Last 7 years</option>
+                        <option value="2015-01-01 2025-01-01">Last 10 years</option>
+                        <option value="2005-01-01 2025-01-01">Last 20 years</option>
+                        <option value="1995-01-01 2025-01-01">Last 30 years</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trading Chart -->
+        <div class="relative">
+            <div class="loader"></div>
+            <canvas id="tradingChart" class="mt-4"></canvas>
+        </div>
+
+        <!-- Stock Information Table -->
+        <h3 class="text-xl font-bold text-gray-800 mt-8">📊 Stock Market Data</h3>
+        <div class="overflow-x-auto mt-4">
+            <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 py-2 text-left border-b">Symbol</th>
+                        <th class="px-4 py-2 text-left border-b">Name</th>
+                        <th class="px-4 py-2 text-left border-b">Country</th>
+                        <th class="px-4 py-2 text-left border-b">Day High</th>
+                        <th class="px-4 py-2 text-left border-b">Day Low</th>
+                        <th class="px-4 py-2 text-left border-b">Date</th>
+                        <th class="px-4 py-2 text-left border-b">CLose At</th>
+                    </tr>
+                </thead>
+                <tbody id="stockTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+    <script src="js/chart.js"></script>
+    <script>
+        var mySelect = $('.SlectBox').SumoSelect();
+    </script>
+</body>
+
+</html>
