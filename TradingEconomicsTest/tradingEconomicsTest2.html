@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Compare Countries and Indicators</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="p-4">
+  <div class="container">
+    <h2 class="mb-4">Trading Economics: Compare Countries and Indicators</h2>
+
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <label for="country1">Country 1</label>
+        <select id="country1" class="form-select">
+<option value="mexico">Mexico</option>
+
+<option value="sweden">Sweden</option>
+          <option value="new Zealand">New Zealand</option>
+          <option value="thailand">Thailand</option>
+ 
+          <!-- Add more countries as needed -->
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="country2">Country 2</label>
+        <select id="country2" class="form-select">
+     <option value="sweden">Sweden</option>
+
+<option value="mexico">Mexico</option>
+          <option value="new Zealand">New Zealand</option>
+          <option value="thailand">Thailand</option>
+          <!-- Add more countries as needed -->
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="indicator">Indicator</label>
+        <select id="indicator" class="form-select">
+          <option value="gdp">GDP</option>
+          <option value="population">Population</option>
+          <option value="unemployment rate">Unemployment Rate</option>
+          <option value="inflation rate">Inflation Rate</option>
+          <!-- Add more indicators as needed -->
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <button class="btn btn-primary" onclick="compare()">Compare</button>
+    </div>
+
+    <h4>Comparison Chart</h4>
+    <canvas id="comparisonChart" height="100"></canvas>
+
+    <h4 class="mt-4">Selected Data Table</h4>
+    <table class="table table-bordered" id="dataTable">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Indicator</th>
+          <th>Date</th>
+          <th>Value</th>
+          <th>Frequency</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const apiKey = 'a1cc005c4874461:adcf5c6pcn9nupd'; // Replace with your Trading Economics API key
+
+    async function fetchHistoricalData(country, indicator) {
+      const url = `https://api.tradingeconomics.com/historical/country/${encodeURIComponent(country)}/indicator/${encodeURIComponent(indicator)}?c=${apiKey}&f=json`;
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    }
+
+    async function compare() {
+      const country1 = document.getElementById('country1').value;
+      const country2 = document.getElementById('country2').value;
+      const indicator = document.getElementById('indicator').value;
+
+      const [data1, data2] = await Promise.all([
+        fetchHistoricalData(country1, indicator),
+        fetchHistoricalData(country2, indicator)
+      ]);
+
+      // Process data for chart
+      const labels = data1.map(item => item.DateTime).reverse();
+      const values1 = data1.map(item => item.Value).reverse();
+      const values2 = data2.map(item => item.Value).reverse();
+
+      // Render chart
+      const ctx = document.getElementById('comparisonChart').getContext('2d');
+      if (window.compareChart) window.compareChart.destroy();
+      window.compareChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: `${country1} - ${indicator}`,
+              data: values1,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              fill: false
+            },
+            {
+              label: `${country2} - ${indicator}`,
+              data: values2,
+              borderColor: 'rgba(255, 99, 132, 1)',
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: {
+                display: true,
+                text: indicator
+              }
+            }
+          }
+        }
+      });
+
+      // Update table
+      const tbody = document.querySelector('#dataTable tbody');
+      tbody.innerHTML = '';
+      data1.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.Country}</td>
+          <td>${item.Category}</td>
+          <td>${item.DateTime}</td>
+          <td>${item.Value}</td>
+          <td>${item.Frequency}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      data2.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.Country}</td>
+          <td>${item.Category}</td>
+          <td>${item.DateTime}</td>
+          <td>${item.Value}</td>
+          <td>${item.Frequency}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>
