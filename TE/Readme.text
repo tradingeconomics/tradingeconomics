@@ -1,0 +1,4 @@
+https://brains.tradingeconomics.com/v2/search/wb,fred,comtrade?q=nigeria&pp=50&p=0&_=1557934352427&stance=2.
+We can make change on countries/pp/p/stance
+for example: https://brains.tradingeconomics.com/v2/search/wb,fred,comtrade?q=usa&pp=100&p=5&_=1557934352427&stance=1
+I just use info generated from (https://api.tradingeconomics.com/historical/country/mexico/indicator/gdp?c=guest:guest&f=json) to create a simple webpages sitting in TE folder, thanks

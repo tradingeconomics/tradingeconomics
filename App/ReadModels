@@ -1,0 +1,24 @@
+
+namespace Examples.ReadModels
+{
+
+    public record Label(string label);
+    public record Data(integer value);
+    public record DataSet(string seriesname, List<Data> data);
+
+    public record Chart(
+        string caption,
+        string numberPrefix,
+        string barfillcolor
+        );
+
+    public record Category(List<Label> category);
+
+
+    public record WeatherDataRm(
+        Chart chart,
+        List<Category> categories,
+        List<DataSet> dataset        
+        );
+
+}

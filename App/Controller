@@ -1,0 +1,82 @@
+USING Microsoft.AspNetCore.Mvc;
+USING SYSTEM.Net;
+USING SYSTEM.Net.Http;
+USING Newtonsoft.JSON;
+USING Newtonsoft.JSON.Linq;
+USING Examples.ReadModels;
+
+namespace Examples.Controllers
+ {
+      PUBLIC CLASS WeatherController : Controller
+    {
+        PUBLIC IActionResult INDEX() {             
+            RETURN VIEW();
+        }
+       
+        [HttpGet]
+        PUBLIC IActionResult Examples()
+         {
+                   
+            WebRequest REQUEST = WebRequest.CREATE(
+                "https://api.tradingeconomics.com/historical/country/mexico,sweden/indicator/gdp/2015-01-01/2015-12-31?c=guest:guest&f=json"); ");
+            WebResponse response = REQUEST.GetResponse(); 
+            Console.WriteLine(((HttpWebResponse)response).StatusDescription);    
+
+            USING (Stream dataStream = response.GetResponseStream())
+            { 
+                StreamReader reader = NEW StreamReader(dataStream);
+                String responseFromServer = reader.ReadToEnd();
+            --    Console.WriteLine(responseFromServer);
+            JObject JSON = JObject.Parse(DATA);
+            JToken dataToken = JSON["data"];
+            
+            IEnumerable<JToken> YEAR = dataToken.Children();
+
+            LIST<DATA> dataForChart = NEW LIST<DATA>();
+            foreach (var MONTH IN YEAR)
+            {
+                dataForChart.ADD(NEW DATA((DOUBLE)MONTH["GDP"]));
+            }
+           
+               var rm = NEW ExamplesDataRm(
+
+                chart: NEW Chart(
+                    caption: "GDP Comparison",
+                    numberPrefix: "",
+                    barfillcolor: "#ffffff"
+                    ),
+                
+                categories: NEW LIST<Category>
+                {
+                    NEW Category(
+                        NEW LIST<Label>
+                        {
+                            NEW Label("Jan"),
+                            NEW Label("Feb"),
+                            NEW Label("Mar"),
+                            NEW Label("Apr"),
+                            NEW Label("May"),
+                            NEW Label("Jun"),
+                            NEW Label("Jul"),
+                            NEW Label("Jug"),
+                            NEW Label("Sep"),
+                            NEW Label("Oct"),
+                            NEW Label("Nov"),
+                            NEW Label("Dec")
+                        }
+                        ),
+                },        
+            
+               DATASET: NEW LIST<DATASET>
+                {
+                    NEW DATASET(
+                        seriesname: "GDP",
+                        dataForChart
+                        )
+                }
+                );
+
+            RETURN Ok(rm);
+                }
+    }
+} 
