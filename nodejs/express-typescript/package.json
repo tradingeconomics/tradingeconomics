@@ -1,0 +1,40 @@
+{
+    "name": "thailand-vs-mexico-car-registrations",
+    "version": "1.0.0",
+    "main": "src/app.ts",
+    "scripts": {
+        "start": "ts-node -r tsconfig-paths/register src/app.ts",
+        "build": "tsc && tsc-alias",
+        "dev": "nodemon -r tsconfig-paths/register src/app.ts",
+        "prod": "npm run build && node -r module-alias/register dist/app.js"
+    },
+    "dependencies": {
+        "axios": "^1.6.0",
+        "compression": "^1.8.1",
+        "dotenv": "^17.2.1",
+        "ejs": "^3.1.10",
+        "express": "^4.18.2",
+        "module-alias": "^2.2.3",
+        "morgan": "^1.10.1",
+        "zod": "^4.0.17"
+    },
+    "devDependencies": {
+        "@types/compression": "^1.8.1",
+        "@types/express": "^4.17.21",
+        "@types/morgan": "^1.9.10",
+        "@types/node": "^20.8.7",
+        "nodemon": "^3.0.1",
+        "ts-node": "^10.9.1",
+        "tsc-alias": "^1.8.16",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "^5.2.2"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "_moduleAliases": {
+        "config": "dist/config",
+        "controllers": "dist/controllers",
+        "routes": "dist/routes"
+    }
+}

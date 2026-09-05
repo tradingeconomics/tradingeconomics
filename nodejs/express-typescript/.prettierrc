@@ -1,0 +1,12 @@
+{
+    "tabWidth": 4,
+    "printWidth": 120,
+    "overrides": [
+        {
+            "files": "*.ejs",
+            "options": {
+                "parser": "html"
+            }
+        }
+    ]
+}

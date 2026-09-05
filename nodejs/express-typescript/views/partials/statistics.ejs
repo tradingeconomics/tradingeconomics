@@ -1,0 +1,82 @@
+<div class="stats-container">
+    <h2 class="stats-title">Statistics (Selected Range)</h2>
+    <div class="stats-grid simple-stats-grid">
+        <div class="stats-card mexico-stats simple">
+            <h3 class="stats-card-title">🇲🇽 Mexico</h3>
+            <div class="metric-group basic-group">
+                <div class="group-grid basic-grid">
+                    <div class="metric" data-tip="Sum of all registrations in the selected date range."><span
+                            class="metric-label">Total</span><span class="metric-value" id="mexico-total">-</span></div>
+                    <div class="metric"
+                        data-tip="Average yearly registrations (total divided by span of years in range)."><span
+                            class="metric-label">Avg / Year</span><span class="metric-value"
+                            id="mexico-average">-</span></div>
+                    <div class="metric" data-tip="Maximum single month value within the selected range."><span
+                            class="metric-label">Highest</span><span class="metric-value" id="mexico-max">-</span>
+                        <div class="metric-sub" id="mexico-max-date">-</div>
+                    </div>
+                    <div class="metric"
+                        data-tip="Minimum month (excluding the most recent potentially incomplete month)."><span
+                            class="metric-label">Lowest*</span><span class="metric-value" id="mexico-min">-</span>
+                        <div class="metric-sub" id="mexico-min-date">-</div>
+                    </div>
+                    <div class="metric" data-tip="Percent growth from first to last month in range."><span
+                            class="metric-label">Growth %</span><span class="metric-value" id="mexico-growth">-</span>
+                    </div>
+                    <div class="metric" data-tip="Number of monthly data points in range."><span
+                            class="metric-label">Points</span><span class="metric-value" id="mexico-count">-</span>
+                    </div>
+                    <div class="metric"
+                        data-tip="Years where December registrations exceeded the following January (seasonal pattern count).">
+                        <span class="metric-label">Dec>Jan Years</span><span class="metric-value"
+                            id="mexico-seasonal-count">-</span></div>
+                    <div class="metric"
+                        data-tip="Average decrease from December to following January in years where December was higher.">
+                        <span class="metric-label">Avg Dec→Jan Δ</span><span class="metric-value"
+                            id="mexico-seasonal-change">-</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="stats-card thailand-stats simple">
+            <h3 class="stats-card-title">🇹🇭 Thailand</h3>
+            <div class="metric-group basic-group">
+                <div class="group-grid basic-grid">
+                    <div class="metric" data-tip="Sum of all registrations in the selected date range."><span
+                            class="metric-label">Total</span><span class="metric-value" id="thailand-total">-</span>
+                    </div>
+                    <div class="metric"
+                        data-tip="Average yearly registrations (total divided by span of years in range)."><span
+                            class="metric-label">Avg / Year</span><span class="metric-value"
+                            id="thailand-average">-</span></div>
+                    <div class="metric" data-tip="Maximum single month value within the selected range."><span
+                            class="metric-label">Highest</span><span class="metric-value" id="thailand-max">-</span>
+                        <div class="metric-sub" id="thailand-max-date">-</div>
+                    </div>
+                    <div class="metric"
+                        data-tip="Minimum month (excluding the most recent potentially incomplete month)."><span
+                            class="metric-label">Lowest*</span><span class="metric-value" id="thailand-min">-</span>
+                        <div class="metric-sub" id="thailand-min-date">-</div>
+                    </div>
+                    <div class="metric" data-tip="Percent growth from first to last month in range."><span
+                            class="metric-label">Growth %</span><span class="metric-value" id="thailand-growth">-</span>
+                    </div>
+                    <div class="metric" data-tip="Number of monthly data points in range."><span
+                            class="metric-label">Points</span><span class="metric-value" id="thailand-count">-</span>
+                    </div>
+                    <div class="metric"
+                        data-tip="Years where January registrations exceeded the preceding December (seasonal pattern count).">
+                        <span class="metric-label">Jan>Dec Years</span><span class="metric-value"
+                            id="thailand-seasonal-count">-</span></div>
+                    <div class="metric"
+                        data-tip="Average increase from December to following January in years where January was higher.">
+                        <span class="metric-label">Avg Dec→Jan Δ</span><span class="metric-value"
+                            id="thailand-seasonal-change">-</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="seasonal-insight" class="seasonal-insight-box">
+        <div class="seasonal-title">Seasonal Pattern Insight</div>
+        <div class="seasonal-body" id="seasonal-insight-body">Patterns will appear once data loads.</div>
+    </div>
+</div>

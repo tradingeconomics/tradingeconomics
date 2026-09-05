@@ -1,0 +1,42 @@
+<div class="filter-options">
+    <h3>Data Aggregation:</h3>
+    <input type="radio" id="monthly" name="aggregation" value="monthly" checked>
+    <label for="monthly">Monthly</label>
+
+    <input type="radio" id="quarterly" name="aggregation" value="quarterly">
+    <label for="quarterly">Quarterly</label>
+
+    <input type="radio" id="half-yearly" name="aggregation" value="half-yearly">
+    <label for="half-yearly">Half-Yearly</label>
+
+    <input type="radio" id="yearly" name="aggregation" value="yearly">
+    <label for="yearly">Yearly</label>
+</div>
+
+<div class="date-range-options">
+    <h3>Date Range:</h3>
+
+
+    <div class="preset-buttons">
+        <button class="preset-btn" data-range="1month">Last 1 Month</button>
+        <button class="preset-btn" data-range="6months">Last 6 Months</button>
+        <button class="preset-btn" data-range="1year">Last 1 Year</button>
+        <button class="preset-btn" data-range="3years">Last 3 Years</button>
+        <button class="preset-btn" data-range="5years">Last 5 Years</button>
+        <button class="preset-btn" data-range="10years">Last 10 Years</button>
+        <button class="preset-btn active" data-range="all">All Data</button>
+    </div>
+
+
+    <div class="date-inputs">
+        <label>
+            Start Date:
+            <input type="date" id="startDate" value="2000-01-01">
+        </label>
+        <label>
+            End Date:
+            <input type="date" id="endDate">
+        </label>
+        <button id="applyDateRange">Apply Custom Range</button>
+    </div>
+</div>

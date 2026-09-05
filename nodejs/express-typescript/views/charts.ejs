@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/charts.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>
+            <%= title %>
+        </h1>
+
+        <%- include('partials/chart-controls') %>
+
+            <div id="chartContainer">
+                <canvas id="myChart"></canvas>
+            </div>
+
+            <%- include('partials/statistics') %>
+
+                <div class="te-footer">
+                    Data source: Trading Economics | Mexico vs Thailand Car Registration Historical Data
+                </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+    <script src="/js/chart-config.js"></script>
+    <script src="/js/chart-app.js"></script>
+
+    <script type="application/json" id="mexico-data"><%- JSON.stringify(mexicoData || []) %></script>
+    <script type="application/json" id="thailand-data"><%- JSON.stringify(thailandData || []) %></script>
+    <% if (typeof error !=='undefined' && error) { %>
+        <script type="application/json" id="error-message"><%- JSON.stringify(error) %></script>
+        <% } %>
+
+            <script>
+                try {
+                    const mexicoData = JSON.parse(document.getElementById('mexico-data').textContent);
+                    const thailandData = JSON.parse(document.getElementById('thailand-data').textContent);
+                    const errorElement = document.getElementById('error-message');
+                    const errorMessage = errorElement ? JSON.parse(errorElement.textContent) : null;
+
+                    document.addEventListener('DOMContentLoaded', function () {
+                        if (errorMessage) {
+                            const container = document.getElementById('chartContainer');
+                            if (container) {
+                                container.innerHTML = `
+                                <div style="text-align: center; padding: 40px; color: #d32f2f; background: #ffeaea; border-radius: 8px; margin: 20px 0;">
+                                    <h3>Unable to Load Chart Data</h3>
+                                    <p>${errorMessage}</p>
+                                    <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 10px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                        Try Again
+                                    </button>
+                                </div>
+                            `;
+                            }
+                            return;
+                        }
+
+                        if (window.ChartApp) {
+                            ChartApp.init(mexicoData, thailandData);
+                        } else {
+                            console.error('ChartApp not available');
+                        }
+                    });
+                } catch (error) {
+                    console.error('Data initialization error:', error);
+                }
+            </script>
+</body>
+
+</html>
