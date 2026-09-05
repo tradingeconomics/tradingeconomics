@@ -1,0 +1,40 @@
+{
+  "name": "tradingeconomics-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "proxy": "node --loader ts-node/esm src/server/proxy.ts",
+    "dev": "vite",
+    "dev:all": "concurrently -n \"PROXY,VITE\" -c \"bgBlue.bold,bgGreen.bold\" \"npm run proxy\" \"npm run dev\""
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "chart.js": "^4.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "react": "^18.2.0",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.4",
+    "@types/react": "^18.2.56",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^9.2.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.8.3",
+    "vite": "^5.1.4"
+  }
+}
